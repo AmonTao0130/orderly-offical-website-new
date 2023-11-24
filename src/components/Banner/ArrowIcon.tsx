@@ -1,6 +1,10 @@
 import React from "react";
 
-const ArrowIcon: React.FC = () => {
+interface ArrowIconProps {
+  className?: string;
+}
+
+const ArrowIcon: React.FC<ArrowIconProps> = (props) => {
   return (
     <svg
       width="18"
@@ -8,6 +12,7 @@ const ArrowIcon: React.FC = () => {
       viewBox="0 0 18 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={props.className}
     >
       <mask
         id="mask0_1797_9745"

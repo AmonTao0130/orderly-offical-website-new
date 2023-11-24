@@ -3,15 +3,12 @@ import ArrowIcon from "./ArrowIcon";
 
 interface LearnMoreProps {
   url: string;
+  className?: string;
 }
 
 const LearnMore: React.FC<LearnMoreProps> = (props) => {
   return (
-    <a
-      href={props.url}
-      target="_blank"
-      className="inline-flex items-center pt-[2px]"
-    >
+    <a href={props.url} target="_blank" className={props.className}>
       <svg
         width="86"
         height="12"

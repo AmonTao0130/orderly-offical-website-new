@@ -4,7 +4,7 @@ import LearnMore from "./LearnMore";
 
 interface BannerProps {}
 
-const Banner: React.FC<BannerProps> = (props) => {
+const Banner: React.FC<BannerProps> = () => {
   const [visible, setVisible] = useState(true);
   const data = useMemo(
     () => ({
@@ -19,20 +19,18 @@ const Banner: React.FC<BannerProps> = (props) => {
   }
 
   return (
-    <div
-      style={{
-        background:
-          "linear-gradient(270.23deg, #34D4DE 0.04%, #6473FF 50.25%, #AD2BFE 99.64%)",
-      }}
-      className="flex justify-between items-center px-[24px] py-[16px] text-[16px]"
-    >
+    <div className="flex justify-between items-center px-[24px] py-[16px] text-[16px] [background:linear-gradient(270.23deg,#34D4DE_0.04%,#6473FF_50.25%,#AD2BFE_99.64%)]">
       <div className="flex flex-1 justify-center flex-wrap leading-[24px]">
         {/* TODO: 第二行文字左对齐 */}
         <span className="text-white font-semibold pr-[8px]">{data.title}</span>
-        <LearnMore url={data.url} />
+        <LearnMore
+          className="inline-flex items-center pt-[2px]"
+          url={data.url}
+        />
       </div>
 
       <CloseIcon
+        className="cursor-pointer"
         onClick={() => {
           setVisible(!visible);
         }}

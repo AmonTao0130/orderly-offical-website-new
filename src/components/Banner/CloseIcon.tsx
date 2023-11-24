@@ -2,6 +2,7 @@ import React from "react";
 
 interface CloseIconProps {
   onClick: () => void;
+  className?: string;
 }
 
 const CloseIcon: React.FC<CloseIconProps> = (props) => {
@@ -13,7 +14,7 @@ const CloseIcon: React.FC<CloseIconProps> = (props) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       onClick={props.onClick}
-      className="cursor-pointer"
+      className={props.className}
     >
       <mask
         id="mask0_1797_9748"
