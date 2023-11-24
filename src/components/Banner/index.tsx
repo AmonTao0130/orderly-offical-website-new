@@ -19,7 +19,7 @@ const Banner: React.FC<BannerProps> = () => {
   }
 
   return (
-    <div className="flex justify-between items-center px-[24px] py-[16px] text-[16px] [background:linear-gradient(270.23deg,#34D4DE_0.04%,#6473FF_50.25%,#AD2BFE_99.64%)]">
+    <div className="flex justify-between items-center px-[24px] py-[16px] text-base [background:linear-gradient(270.23deg,#34D4DE_0.04%,#6473FF_50.25%,#AD2BFE_99.64%)]">
       <div className="flex flex-1 justify-center flex-wrap leading-[24px]">
         {/* TODO: 第二行文字左对齐 */}
         <span className="text-white font-semibold pr-[8px]">{data.title}</span>
