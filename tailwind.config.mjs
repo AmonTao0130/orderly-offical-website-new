@@ -34,13 +34,24 @@ export default {
       "7xl": "72px",
       "8xl": "80px",
     },
-    extend: {},
+    extend: {
+      colors: {
+        primary: {
+          100: "rgba(255, 255, 255, 1)",
+          DEFAULT: "rgba(255, 255, 255, 0.98)",
+          85: "rgba(255, 255, 255, 0.85)",
+          80: "rgba(255, 255, 255, 0.80)",
+          54: "rgba(255, 255, 255, 0.54)",
+          50: "rgba(255, 255, 255, 0.50)",
+        },
+      },
+    },
   },
   plugins: [
     plugin(function ({ addBase }) {
       const baseCSS = {
         color: "white",
-        backgroundColor: "rgb(51, 51, 51)",
+        backgroundColor: "#1E1E1E",
         fontFamily: "system-ui",
         margin: 0,
       };
