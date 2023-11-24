@@ -4,7 +4,7 @@ import React, {
 } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@utils/index";
-import ArrowIcon from "./ArrowIcon";
+import ArrowRightTopIcon from "../../icons/ArrowRightTopIcon";
 
 const buttonVariants = cva(
   [
@@ -79,7 +79,7 @@ const Button: React.FC<ButtonProps & PropsWithChildren> = (props) => {
       disabled={disabled!}
     >
       {props.children}
-      {showArrow && <ArrowIcon className="pl-[4px]" />}
+      {showArrow && <ArrowRightTopIcon className="pl-[4px]" />}
     </button>
   );
 };

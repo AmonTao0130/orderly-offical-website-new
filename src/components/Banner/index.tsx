@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
-import CloseIcon from "./CloseIcon";
-import LearnMore from "./LearnMore";
+import CloseIcon from "@icons/CloseIcon";
+import LearnMoreIcon from "@icons/LearnMoreIcon";
 
 interface BannerProps {}
 
@@ -23,14 +23,17 @@ const Banner: React.FC<BannerProps> = () => {
       <div className="flex flex-1 justify-center flex-wrap leading-[24px]">
         {/* TODO: 第二行文字左对齐 */}
         <span className="text-white font-semibold pr-[8px]">{data.title}</span>
-        <LearnMore
-          className="inline-flex items-center pt-[2px]"
-          url={data.url}
-        />
+        <a
+          href={data.url}
+          target="_blank"
+          className="inline-flex items-center pt-[2px] text-[#8AEFF5]"
+        >
+          <LearnMoreIcon />
+        </a>
       </div>
 
       <CloseIcon
-        className="cursor-pointer"
+        className="cursor-pointer text-white"
         onClick={() => {
           setVisible(!visible);
         }}
