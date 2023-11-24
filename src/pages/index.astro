@@ -1,6 +1,7 @@
 ---
 // Component Imports
-import Banner from "../components/Banner/index";
+import Banner from "@components/Banner";
+import Button from "@components/Button";
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
@@ -19,13 +20,22 @@ import Banner from "../components/Banner/index";
         margin: 0;
       }
       body {
-        padding: 2rem;
+        /* padding: 2rem; */
+				background-color: rgb(51, 51, 51)
       }
     </style>
   </head>
   <body>
     <main>
       <Banner client:visible />
+			<div style="padding:20px">
+				<Button>Build with Orderly</Button>
+				<Button type="secondary">Next</Button>
+				<Button type="secondary" disabled>Next</Button>
+				<Button type="outlined">Trade on Orderly</Button>
+				<Button type="outlined" showArrow>Trade on Orderly</Button>
+				<Button type="outlined" showArrow disabled>Trade on Orderly</Button>
+			</div>     
     </main>
   </body>
 </html>
