@@ -26,7 +26,7 @@ const icons = [
 interface BottomProps {}
 const Bottom: React.FC<BottomProps> = (props) => {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between pt-[20px] pb-[30px] border-t-[1px] border-t-solid border-t-primary-20">
       <div className="text-sm text-[#8C8C8C]">© 2023 Orderly Network.</div>
       <div className="flex items-center">
         {icons.map((icon) => {

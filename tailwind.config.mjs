@@ -43,6 +43,8 @@ export default {
           80: "rgba(255, 255, 255, 0.80)",
           54: "rgba(255, 255, 255, 0.54)",
           50: "rgba(255, 255, 255, 0.50)",
+          20: "rgba(255, 255, 255, 0.20)",
+          8: "rgba(255, 255, 255, 0.08)",
         },
       },
     },
@@ -53,6 +55,7 @@ export default {
         color: "white",
         backgroundColor: "#1E1E1E",
         fontFamily: "system-ui",
+        fontWeight: "600",
         margin: 0,
       };
       addBase({
