@@ -26,7 +26,7 @@ const ArrowDownIcon: React.FC<SvgIconProps> = (props) => {
         <path
           d="M12.0001 15.6415L6.69238 10.3338L7.40008 9.6261L12.0001 14.2261L16.6001 9.6261L17.3078 10.3338L12.0001 15.6415Z"
           // fill="white"
-          fillOpacity="0.8"
+          // fillOpacity="0.8"
         />
       </g>
     </svg>
