@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { data } from "./data";
 import ArrowDownIcon from "@icons/ArrowDownIcon";
-import { cn } from "@utils/index";
 import NewIcon from "@icons/NewIcon";
+import { cn } from "@utils/index";
+import data from "./data";
 
 interface CollapseProps {
   className?: string;
@@ -11,10 +11,9 @@ interface CollapseProps {
 /** 手机端底部导航  */
 const Collapse: React.FC<CollapseProps> = (props) => {
   const [expandKey, setExpandKey] = useState("");
-  console.log("expandKey", expandKey);
   return (
     <div className={cn("select-none", props.className)}>
-      {data.map((item, index) => {
+      {data.map((item) => {
         const isExpand = expandKey === item.title;
         return (
           <div

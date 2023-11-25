@@ -30,7 +30,10 @@ interface SystemStatusProps {
 //   }
 // );
 
-/**  */
+/**
+ * 状态指示连这个api: https://docs-api-evm.orderly.network/?shell#restful-api-public-system-maintenance-status
+ * 维护中的时候不用动画，就纯静态就好
+ */
 const SystemStatus: React.FC<SystemStatusProps> = (props) => {
   const { isMaintenance } = props;
   const statusText = isMaintenance

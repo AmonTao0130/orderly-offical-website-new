@@ -1,7 +1,4 @@
-export const data: {
-  title: string;
-  children: { title: string; url: string; isNew?: boolean }[];
-}[] = [
+export default [
   {
     title: "Developers",
     children: [
@@ -80,4 +77,7 @@ export const data: {
       },
     ],
   },
-];
+] as {
+  title: string;
+  children: { title: string; url: string; isNew?: boolean }[];
+}[];

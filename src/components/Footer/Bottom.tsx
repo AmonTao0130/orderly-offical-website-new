@@ -33,7 +33,7 @@ const Bottom: React.FC<BottomProps> = (props) => {
           const Icon = icon.icon;
           return (
             <a
-              className="text-primary-54 pl-[16px]"
+              className="text-primary-54 hover:text-primary-100 pl-[16px]"
               href={icon.url}
               key={icon.url}
             >
