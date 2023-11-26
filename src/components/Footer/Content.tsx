@@ -1,10 +1,13 @@
 import React from "react";
 import data from "./data";
+import { cn } from "@utils/index";
 
-interface ContentProps {}
+interface ContentProps {
+  className?: string;
+}
 const Content: React.FC<ContentProps> = (props) => {
   return (
-    <div className="flex justify-between">
+    <div className={cn("flex justify-between", props.className)}>
       {data.map((item) => {
         return (
           <div key={item.title} className="text-sm">
@@ -15,7 +18,7 @@ const Content: React.FC<ContentProps> = (props) => {
                   <a
                     key={child.url}
                     href={child.url}
-                    className=" text-primary-54 hover:text-primary-100 py-[12px]"
+                    className=" text-primary-54 hover:text-primary-100 py-[10px]"
                   >
                     {child.title}
                   </a>
