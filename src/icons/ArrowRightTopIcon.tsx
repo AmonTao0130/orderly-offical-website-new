@@ -1,15 +1,20 @@
 import React from "react";
 import type { SvgIconProps } from "src/types";
 
-const ArrowRightTopIcon: React.FC<SvgIconProps> = (props) => {
+interface ArrowRightTopIconProps extends SvgIconProps {
+  size?: number;
+}
+
+const ArrowRightTopIcon: React.FC<ArrowRightTopIconProps> = (props) => {
+  const { size = 16, ...rest } = props;
   return (
     <svg
-      width="16"
-      height="16"
+      width={`${size}px`}
+      height={`${size}px`}
       viewBox="0 0 16 16"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}
+      {...rest}
     >
       <mask
         id="mask0_2191_7528"

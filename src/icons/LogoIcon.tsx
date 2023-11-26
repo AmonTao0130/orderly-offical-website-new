@@ -1,15 +1,20 @@
 import React from "react";
 import type { SvgIconProps } from "src/types";
 
-const LogoIcon: React.FC<SvgIconProps> = (props) => {
+interface LogoIconProps extends SvgIconProps {
+  size?: number;
+}
+
+const LogoIcon: React.FC<LogoIconProps> = (props) => {
+  const { size = 40, ...rest } = props;
   return (
     <svg
-      width="40"
-      height="40"
+      width={`${size}px`}
+      height={`${size}px`}
       viewBox="0 0 40 40"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}
+      {...rest}
     >
       <path
         fillRule="evenodd"
