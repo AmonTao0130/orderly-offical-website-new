@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ArrowDownIcon from "@icons/ArrowDownIcon";
+import ExpandIcon from "@icons/ExpandIconIcon";
 import NewIcon from "@icons/NewIcon";
 import { cn } from "@utils/index";
 import data from "./data";
@@ -32,7 +32,7 @@ const Collapse: React.FC<CollapseProps> = (props) => {
               }}
             >
               {item.title}
-              <ArrowDownIcon
+              <ExpandIcon
                 className={cn(
                   "transition duration-300",
                   isExpand ? "rotate-180" : "rotate-0"

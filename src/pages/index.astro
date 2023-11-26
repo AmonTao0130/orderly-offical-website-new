@@ -5,6 +5,7 @@ import Button from "@components/Button";
 import SmallFooter from "@components/Footer/SmallFooter";
 import MiddleFooter from "@components/Footer/MiddleFooter";
 import LargeFooter from "@components/Footer/LargeFooter";
+import MobileNavigation from "@components/Navigation/mobile";
 import Navigation from "@components/Navigation";
 
 // Full Astro Component Syntax:
@@ -36,10 +37,13 @@ import Navigation from "@components/Navigation";
         <Button type="outlined" showArrow>Trade on Orderly</Button>
         <Button type="outlined" showArrow disabled>Trade on Orderly</Button>
       </div>
+      <Navigation client:visible className="w-[1440px]" />
       <Navigation client:visible />
+      <MobileNavigation client:visible />
       <SmallFooter client:visible />
       <MiddleFooter client:visible />
       <LargeFooter client:visible />
     </main>
   </body>
 </html>
+ @components/Navigation/mobile
