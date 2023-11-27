@@ -2,23 +2,24 @@ import React from "react";
 import data from "./data";
 import { cn } from "@utils/index";
 
-interface ContentProps {
+interface MenuProps {
   className?: string;
 }
-const Content: React.FC<ContentProps> = (props) => {
+
+const Menu: React.FC<MenuProps> = (props) => {
   return (
     <div className={cn("flex justify-between", props.className)}>
       {data.map((item) => {
         return (
           <div key={item.title} className="text-sm">
             {item.title}
-            <div className="flex flex-col pt-[12px]">
+            <div className="flex flex-col mt-[8px]">
               {item.children.map((child) => {
                 return (
                   <a
-                    key={child.url}
+                    key={child.url || child.title}
                     href={child.url}
-                    className=" text-primary-54 hover:text-primary-100 py-[10px]"
+                    className="text-primary-54 hover:text-primary-100 my-[8px]"
                   >
                     {child.title}
                   </a>
@@ -32,4 +33,4 @@ const Content: React.FC<ContentProps> = (props) => {
   );
 };
 
-export default Content;
+export default Menu;

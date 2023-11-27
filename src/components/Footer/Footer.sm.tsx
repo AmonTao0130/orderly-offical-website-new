@@ -6,7 +6,7 @@ import Collapse from "./Collapse";
 interface SmallFooterProps {}
 const SmallFooter: React.FC<SmallFooterProps> = (props) => {
   return (
-    <div className="w-[375px] px-[20px] pt-[20px] border-t-[1px] border-t-solid border-t-primary-20">
+    <div className="px-[20px] pt-[20px] border-t-[1px] border-t-solid border-t-primary-20">
       <Top />
       <Collapse className="mt-[20px]" />
       <Bottom />

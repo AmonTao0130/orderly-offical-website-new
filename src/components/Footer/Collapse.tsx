@@ -44,7 +44,7 @@ const Collapse: React.FC<CollapseProps> = (props) => {
                 {item.children.map((child) => {
                   return (
                     <a
-                      key={child.url}
+                      key={child.url || child.title}
                       href={child.url}
                       target="_blank"
                       className="flex items-center py-[12px] first:pt-[24px] last:pb-[8px]"
