@@ -18,7 +18,7 @@ const Menu: React.FC<MenuProps> = (props) => {
               <div className="flex items-center group-hover:text-primary-100 text-lg">
                 {item.title}
                 {item.children?.length && (
-                  <ArrowDownIcon className="ml-[2px]" />
+                  <ArrowDownIcon className="ml-[2px] transition duration-300  group-hover:rotate-180" />
                 )}
                 {!item.children?.length && (
                   <CarnivalIcon className="ml-[4px]" />
