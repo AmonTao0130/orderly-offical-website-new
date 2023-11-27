@@ -13,8 +13,8 @@ const ArrowDownIcon: React.FC<SvgIconProps> = (props) => {
       {...props}
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M1.59155 4.90527L2.65221 3.84461L6.01097 7.20337L9.36973 3.84461L10.4304 4.90527L6.54158 8.79408L6.01097 9.32469L1.59155 4.90527Z"
         // fill="white"
         // fillOpacity="0.8"
