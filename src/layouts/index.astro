@@ -1,0 +1,19 @@
+---
+import Banner from "../components/Banner";
+import Navigation from "../components/Navigation";
+import Footer from "../components/Footer";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <Banner client:visible />
+    <Navigation client:load />
+    <slot />
+    <!-- 你的内容会被插入到这里 -->
+    <Footer client:idle />
+  </body>
+</html>
