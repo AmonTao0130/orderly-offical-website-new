@@ -54,7 +54,7 @@ export default {
       const baseCSS = {
         color: "white",
         backgroundColor: "#1E1E1E",
-        fontFamily: "system-ui",
+        fontFamily: "Manrope",
         fontWeight: "600",
         margin: 0,
       };
