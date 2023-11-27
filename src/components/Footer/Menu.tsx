@@ -1,6 +1,6 @@
 import React from "react";
 import data from "./data";
-import { cn } from "@utils/index";
+import { cn } from "@/utils/index";
 
 interface MenuProps {
   className?: string;

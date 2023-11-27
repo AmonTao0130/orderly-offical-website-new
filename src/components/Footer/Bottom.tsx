@@ -1,9 +1,9 @@
 import React from "react";
-import DiscordIcon from "@icons/DiscordIcon";
-import TwitterIcon from "@icons/TwitterIcon";
-import MediumIcon from "@icons/MediumIcon";
-import LinkedinIcon from "@icons/LinkedinIcon";
-import { cn } from "@utils/index";
+import DiscordIcon from "@/icons/DiscordIcon";
+import TwitterIcon from "@/icons/TwitterIcon";
+import MediumIcon from "@/icons/MediumIcon";
+import LinkedinIcon from "@/icons/LinkedinIcon";
+import { cn } from "@/utils/index";
 
 const icons = [
   {

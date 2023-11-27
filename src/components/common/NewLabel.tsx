@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "@utils/index";
+import { cn } from "@/utils/index";
 
 interface NewLabelProps {
   className?: string;

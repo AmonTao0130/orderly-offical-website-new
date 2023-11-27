@@ -2,7 +2,7 @@ import React from "react";
 import SmallNavigation from "./Navigation.sm";
 import LargeNavigation from "./Navigation.lg";
 import { useSize } from "@/hooks/useSize";
-import { Screen } from "@utils/constant";
+import { Screen } from "@/utils/constant";
 
 interface NavigationProps {
   width?: number;

@@ -3,7 +3,7 @@ import SmallFooter from "./Footer.sm";
 import MiddleFooter from "./Footer.md";
 import LargeFooter from "./Footer.lg";
 import { useSize } from "@/hooks/useSize";
-import { Screen } from "@utils/constant";
+import { Screen } from "@/utils/constant";
 
 interface FooterProps {
   width?: number;

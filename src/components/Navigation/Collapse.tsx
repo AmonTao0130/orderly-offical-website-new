@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import ExpandIcon from "@icons/ExpandIconIcon";
-import NewLabel from "@components/common/NewLabel";
-import { cn } from "@utils/index";
+import ExpandIcon from "@/icons/ExpandIconIcon";
+import NewLabel from "@/components/common/NewLabel";
+import { cn } from "@/utils/index";
 import data from "./data";
-import ArrowRightTopIcon from "@icons/ArrowRightTopIcon";
-import CarnivalIcon from "@icons/CarnivalIcon";
+import ArrowRightTopIcon from "@/icons/ArrowRightTopIcon";
+import CarnivalIcon from "@/icons/CarnivalIcon";
 
 interface CollapseProps {
   className?: string;

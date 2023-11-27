@@ -1,7 +1,7 @@
 import React from "react";
 import Menu from "./Menu";
-import LogoTextIcon from "@icons/LogoTextIcon";
-import { cn } from "@utils/index";
+import LogoTextIcon from "@/icons/LogoTextIcon";
+import { cn } from "@/utils/index";
 
 interface LargeNavigationProps {
   className?: string;

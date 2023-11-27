@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
-import CloseIcon from "@icons/CloseIcon";
-import LearnMoreIcon from "@icons/LearnMoreIcon";
+import CloseIcon from "@/icons/CloseIcon";
+import LearnMoreIcon from "@/icons/LearnMoreIcon";
 
 interface BannerProps {}
 

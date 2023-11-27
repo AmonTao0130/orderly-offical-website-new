@@ -1,9 +1,9 @@
 import React from "react";
 import data from "./data";
-import ArrowDownIcon from "@icons/ArrowDownIcon";
-import CarnivalIcon from "@icons/CarnivalIcon";
-import NewLabel from "@components/common/NewLabel";
-import ArrowRightTopIcon from "@icons/ArrowRightTopIcon";
+import ArrowDownIcon from "@/icons/ArrowDownIcon";
+import CarnivalIcon from "@/icons/CarnivalIcon";
+import NewLabel from "@/components/common/NewLabel";
+import ArrowRightTopIcon from "@/icons/ArrowRightTopIcon";
 
 interface MenuProps {}
 const Menu: React.FC<MenuProps> = (props) => {

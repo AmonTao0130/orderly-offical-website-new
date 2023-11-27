@@ -53,7 +53,8 @@ export default {
     plugin(function ({ addBase }) {
       const baseCSS = {
         color: "white",
-        backgroundColor: "#1E1E1E",
+        // backgroundColor: "#1E1E1E",
+        backgroundColor: "#000",
         fontFamily: "Manrope",
         fontWeight: "600",
         margin: 0,

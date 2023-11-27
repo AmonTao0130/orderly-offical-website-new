@@ -1,5 +1,5 @@
 import React from "react";
-import { cn } from "@utils/index";
+import { cn } from "@/utils/index";
 import { cx, cva, type VariantProps } from "class-variance-authority";
 
 interface SystemStatusProps {

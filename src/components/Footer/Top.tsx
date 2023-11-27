@@ -1,7 +1,7 @@
-import LogoIcon from "@icons/LogoIcon";
+import LogoIcon from "@/icons/LogoIcon";
 import React from "react";
 import SystemStatus from "./SystemStatus";
-import { cn } from "@utils/index";
+import { cn } from "@/utils/index";
 
 interface TopProps {
   className?: string;

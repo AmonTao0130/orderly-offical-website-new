@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import ExpandIcon from "@icons/ExpandIconIcon";
-import NewLabel from "@components/common/NewLabel";
-import { cn } from "@utils/index";
+import ExpandIcon from "@/icons/ExpandIconIcon";
+import NewLabel from "@/components/common/NewLabel";
+import { cn } from "@/utils/index";
 import data from "./data";
 
 interface CollapseProps {

@@ -1,8 +1,8 @@
 import React from "react";
-import LogoIcon from "@icons/LogoIcon";
-import CollapseIcon from "@icons/CollapseIcon";
-import CloseLargeIcon from "@icons/CloseLargeIcon";
-import LogoTextIcon from "@icons/LogoTextIcon";
+import LogoIcon from "@/icons/LogoIcon";
+import CollapseIcon from "@/icons/CollapseIcon";
+import CloseLargeIcon from "@/icons/CloseLargeIcon";
+import LogoTextIcon from "@/icons/LogoTextIcon";
 
 interface HeaderProps {
   expanded: boolean;
