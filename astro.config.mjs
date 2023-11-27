@@ -11,4 +11,6 @@ export default defineConfig({
   // adapter: node({
   //   mode: "standalone",
   // }),
+  /** 允许ip地址访问 */
+  server: { host: true },
 });
