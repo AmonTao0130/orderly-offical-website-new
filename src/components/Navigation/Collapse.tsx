@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ExpandIcon from "@icons/ExpandIconIcon";
 import NewLabel from "@components/common/NewLabel";
 import { cn } from "@utils/index";
-import data from "../data";
+import data from "./data";
 import ArrowRightTopIcon from "@icons/ArrowRightTopIcon";
 import CarnivalIcon from "@icons/CarnivalIcon";
 
@@ -54,7 +54,7 @@ const Collapse: React.FC<CollapseProps> = (props) => {
                 {item.children.map((child) => {
                   return (
                     <a
-                      key={child.url}
+                      key={child.url || child.title}
                       href={child.url}
                       target="_blank"
                       className="flex items-center px-[16px] py-[12px] first:pt-[24px] last:pb-[8px]"

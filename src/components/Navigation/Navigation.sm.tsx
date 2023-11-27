@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Header from "./Header";
 import Collapse from "./Collapse";
 
-interface NavigationProps {}
-const MobileNavigation: React.FC<NavigationProps> = (props) => {
+interface SmallNavigationProps {}
+const SmallNavigation: React.FC<SmallNavigationProps> = (props) => {
   const [expanded, setExpanded] = useState(true);
 
   const toggleExpanded = () => {
@@ -18,4 +18,4 @@ const MobileNavigation: React.FC<NavigationProps> = (props) => {
   );
 };
 
-export default MobileNavigation;
+export default SmallNavigation;

@@ -1,25 +1,27 @@
 import React from "react";
-import Menu from "./Menu";
-import LogoTextIcon from "@icons/LogoTextIcon";
-import { cn } from "@utils/index";
+import SmallNavigation from "./Navigation.sm";
+import LargeNavigation from "./Navigation.lg";
+import { useSize } from "@/hooks/useSize";
+import { Screen } from "@utils/constant";
 
 interface NavigationProps {
-  className?: string;
+  width?: number;
 }
+
 const Navigation: React.FC<NavigationProps> = (props) => {
-  return (
-    <div
-      className={cn(
-        "px-[60px] xl:px-[80px] py-[25px] [background:linear-gradient(180deg,#261249_0%,rgba(38,18,73,0)_100%)]",
-        props.className
-      )}
-    >
-      <div className="flex justify-between items-center max-w-[1440px] m-auto">
-        <LogoTextIcon />
-        <Menu />
-      </div>
-    </div>
-  );
+  const { width } = useSize();
+
+  const w = props.width || width;
+
+  if (w >= Screen.xl) {
+    return <LargeNavigation />;
+  }
+
+  if (w >= Screen.sm) {
+    return <SmallNavigation />;
+  }
+
+  return null;
 };
 
 export default Navigation;

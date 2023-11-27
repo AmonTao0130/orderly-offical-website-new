@@ -20,24 +20,23 @@ const Menu: React.FC<MenuProps> = (props) => {
             <div className="group">
               <div className="flex items-center group-hover:text-primary-100 text-lg">
                 {item.title}
-                {item.children?.length && (
+                {item.children?.length ? (
                   <ArrowDownIcon className="ml-[2px] transition duration-300  group-hover:rotate-180" />
-                )}
-                {!item.children?.length && (
+                ) : (
                   <CarnivalIcon className="ml-[4px]" />
                 )}
               </div>
 
               {item.children?.length && (
                 <div className="hidden hover:block group-hover:block absolute top-[20px] left-[-20px] z-[1]">
-                  <div className="mt-[16px] rounded-[12px] [background:linear-gradient(180deg,rgba(38,18,73,0.3)_0%,rgba(111,69,184,0.3)_100%)] border-[1px] border-solid [border-image-source:linear-gradient(152.55deg,rgba(255,255,255,0)_17.09%,rgba(47,0,146,0.474)_54.56%,#CE7DFF_104.83%)]">
+                  <div className="mt-[16px] rounded-[12px] [background:linear-gradient(180deg,rgba(38,18,73,0.3)_0%,rgba(111,69,184,0.3)_100%)] border-[1px] border-solid border-[rgba(206,125,255,0.5)]">
                     {item.children.map((child) => {
                       return (
                         <a
-                          key={child.url}
+                          key={child.url || child.title}
                           href={child.url}
                           target="_blank"
-                          className="flex items-center text-base hover:text-primary-100 px-[20px] my-[12px] first:pt-[10px] last:pb-[10px]"
+                          className="flex items-center text-base hover:text-primary-100 px-[20px] my-[24px] first:mt-[20px] last:mb-[20px]"
                         >
                           {child.title}
                           {child.isNew && <NewLabel className="ml-[4px]" />}
