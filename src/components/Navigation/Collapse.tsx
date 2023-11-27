@@ -10,17 +10,23 @@ interface CollapseProps {
   className?: string;
 }
 
+/** TODO：展开折叠的时候，有可能会误解到下的菜单打开新的页面 */
 const Collapse: React.FC<CollapseProps> = (props) => {
   const [expandKey, setExpandKey] = useState("");
   return (
-    <div className={cn("select-none", props.className)}>
+    <div
+      className={cn(
+        "flex flex-col select-none px-[20px] md:px-[40px]",
+        props.className
+      )}
+    >
       {data.map((item, index) => {
         const isExpand = expandKey === item.title;
         return (
           <div
             key={item.title}
             className={cn(
-              "text-primary-80 text-sm py-[24px] cursor-pointer border-t-[1px] border-t-solid border-t-primary-8",
+              "text-primary-80 text-sm md:text-base py-[24px] cursor-pointer border-t-[1px] border-t-solid border-t-primary-8",
               data.length === index + 1 &&
                 "border-b-[1px] border-b-solid border-b-primary-8"
             )}

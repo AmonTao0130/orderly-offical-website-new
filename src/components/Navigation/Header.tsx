@@ -10,7 +10,7 @@ interface HeaderProps {
 }
 const Header: React.FC<HeaderProps> = (props) => {
   return (
-    <div className="flex justify-between items-center py-[20px]">
+    <div className="flex justify-between items-center py-[20px] px-[20px] md:px-[40px]">
       {/* 375时显示 logo */}
       <LogoIcon size={32} className="md:hidden" />
       {/* 768时显示文字 */}

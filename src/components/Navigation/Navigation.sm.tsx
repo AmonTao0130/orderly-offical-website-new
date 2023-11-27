@@ -1,17 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "./Header";
 import Collapse from "./Collapse";
+import { cn } from "@/utils";
+import { useStore } from "@nanostores/react";
+import { bannerHeight, navigationExpanded } from "@/store";
 
 interface SmallNavigationProps {}
 const SmallNavigation: React.FC<SmallNavigationProps> = (props) => {
-  const [expanded, setExpanded] = useState(true);
+  const height = useStore(bannerHeight);
+  const expanded = useStore(navigationExpanded);
 
   const toggleExpanded = () => {
-    setExpanded(!expanded);
+    navigationExpanded.set(!expanded);
   };
 
+  if (!expanded) {
+    return <Header expanded={expanded} toggleExpanded={toggleExpanded} />;
+  }
+
   return (
-    <div className=" h-[600px] px-[20px] lg:px-[40px] bg-[rgba(0,0,0,0.6)] backdrop-blur-[10px]">
+    <div
+      style={{ top: height }}
+      className={cn("absolute w-full h-full z-[1] backdrop-blur-[10px]")}
+    >
       <Header expanded={expanded} toggleExpanded={toggleExpanded} />
       {expanded && <Collapse className="mt-[57px]" />}
     </div>

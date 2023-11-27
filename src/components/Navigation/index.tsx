@@ -13,11 +13,11 @@ const Navigation: React.FC<NavigationProps> = (props) => {
 
   const w = props.width || width;
 
-  if (w >= Screen.xl) {
+  if (w >= Screen.lg) {
     return <LargeNavigation />;
   }
 
-  if (w >= Screen.sm) {
+  if (w >= Screen.sm || w > 0) {
     return <SmallNavigation />;
   }
 

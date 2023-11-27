@@ -22,7 +22,7 @@ const Footer: React.FC<FooterProps> = (props) => {
     return <MiddleFooter />;
   }
 
-  if (w >= Screen.sm) {
+  if (w >= Screen.sm || w > 0) {
     return <SmallFooter />;
   }
 
