@@ -24,15 +24,15 @@ const Collapse: React.FC<CollapseProps> = (props) => {
               data.length === index + 1 &&
                 "border-b-[1px] border-b-solid border-b-primary-8"
             )}
+            onClick={() => {
+              setExpandKey(isExpand ? "" : item.title);
+            }}
           >
             <div
               className={cn(
                 "flex justify-between items-center px-[24px]",
                 isExpand && "text-white"
               )}
-              onClick={() => {
-                setExpandKey(isExpand ? "" : item.title);
-              }}
             >
               <div className="flex items-center">
                 {item.title}
