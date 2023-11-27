@@ -1,11 +1,14 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import CloseIcon from "@/icons/CloseIcon";
 import LearnMoreIcon from "@/icons/LearnMoreIcon";
+import { useStore } from "@nanostores/react";
+import { bannerVisible } from "@/store";
 
 interface BannerProps {}
 
-const Banner: React.FC<BannerProps> = () => {
-  const [visible, setVisible] = useState(true);
+const Banner: React.FC<BannerProps> = (props) => {
+  const $bannerVisible = useStore(bannerVisible);
+
   const data = useMemo(
     () => ({
       title: "Orderly Ambassador Program",
@@ -14,7 +17,7 @@ const Banner: React.FC<BannerProps> = () => {
     []
   );
 
-  if (!visible) {
+  if (!$bannerVisible) {
     return null;
   }
 
@@ -35,7 +38,7 @@ const Banner: React.FC<BannerProps> = () => {
       <CloseIcon
         className="cursor-pointer text-white"
         onClick={() => {
-          setVisible(!visible);
+          bannerVisible.set(false);
         }}
       />
     </div>
