@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ExpandIcon from "@icons/ExpandIconIcon";
-import NewIcon from "@icons/NewIcon";
+import NewLabel from "@components/common/NewLabel";
 import { cn } from "@utils/index";
 import data from "../data";
 import ArrowRightTopIcon from "@icons/ArrowRightTopIcon";
@@ -60,7 +60,7 @@ const Collapse: React.FC<CollapseProps> = (props) => {
                       className="flex items-center px-[16px] py-[12px] first:pt-[24px] last:pb-[8px]"
                     >
                       {child.title}
-                      {child.isNew && <NewIcon className="ml-[4px]" />}
+                      {child.isNew && <NewLabel className="ml-[4px]" />}
                       {child.showArrow && (
                         <ArrowRightTopIcon size={14} className="ml-[4px]" />
                       )}
