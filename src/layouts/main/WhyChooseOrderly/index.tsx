@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import Button from "../../../components/Button/index.tsx";
-import Content from "../../../components/Content/index.tsx";
+import React from "react";
+import Button from "@/components/Button/index.tsx";
+import Content from "@/components/Content/index.tsx";
 import maximize from "./icons/maximize.svg";
 import multichain from "./icons/multichain.svg";
 import liquidity from "./icons/liquidity.svg";
 import performance from "./icons/performance.svg";
 import decentralize from "./icons/decentralize.svg";
 import security from "./icons/security.svg";
-import { cn } from "../../../utils/index.ts";
+import { cn } from "@/utils/index.ts";
 import { useStore } from "@nanostores/react";
 import { whyChooseOrderlyExpandKey } from "@/store";
 
