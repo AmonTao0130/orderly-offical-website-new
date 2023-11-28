@@ -1,5 +1,21 @@
 ---
-import Layout from "../layouts/index.astro";
+import Layout from "@/layouts/index.astro";
+import Block1 from "@/layouts/main/block1.astro";
+import Background from "@/layouts/main/background.astro";
+import Investors from "@/layouts/main/investors.astro";
+import { cn } from "@/utils";
 ---
 
-<Layout>Content</Layout>
+<Layout>
+  <div class="relative pb-[100px] bg-[#080116]">
+    <!-- <Background /> -->
+    <Block1 />
+    <Investors />
+  </div>
+  <!-- <div class="absolute w-full bg-[url('/top.png')] z-[1]"></div> -->
+  <!-- <img class="w-full" src="/mask.png" /> -->
+  <!-- <img src="/top.png" />
+    <div class="h-[300px]"></div>
+    <img src="/bottom.png" /> -->
+  <!-- Content -->
+</Layout>
