@@ -24,6 +24,7 @@ import Newman from "./investors/Newman.svg";
 import LaserDigital from "./investors/LaserDigital.svg";
 import CoinDCX from "./investors/CoinDCX.svg";
 import { cn } from "@/utils";
+import Content from "../../../components/Content/index.tsx";
 
 const imgs = [
   Pantera,
@@ -53,18 +54,10 @@ const imgs = [
 ];
 ---
 
-<div
-  class={cn(
-    "flex overflow-hidden mt-[200px] mx-auto",
-    // "[background:linear-gradient(270deg,rgba(217,217,217,0)_0%,#FFFFFF_6.25%,#FFFFFF_93.65%,rgba(217,217,217,0)_100%)]",
-    /** 375 */
-    "w-[335px]",
-    /** 768 */
-    "md:w-[688px]",
-    /** 1024 */
-    "lg:w-[904px]",
-    /** 1440 */
-    "xl:w-[1280px]"
+<Content
+  className={cn(
+    "flex overflow-hidden mt-[100px]"
+    // "[background:linear-gradient(270deg,rgba(217,217,217,0)_0%,#FFFFFF_6.25%,#FFFFFF_93.65%,rgba(217,217,217,0)_100%)]"
   )}
 >
   {
@@ -72,4 +65,4 @@ const imgs = [
       return <img class="mr-[20px]" src={item.src} alt="Pantera" />;
     })
   }
-</div>
+</Content>
