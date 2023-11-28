@@ -1,16 +1,20 @@
 ---
 import Layout from "@/layouts/index.astro";
-import Block1 from "@/layouts/main/block1.astro";
-import Background from "@/layouts/main/background.astro";
-import Investors from "@/layouts/main/investors.astro";
+import BuildAndTrade from "@/layouts/main/BuildAndTrade/index.astro";
+import Investors from "@/layouts/main/BuildAndTrade/investors.astro";
+import WhyChooseOrderly from "@/layouts/main/WhyChooseOrderly/index.tsx";
+// import Background from "@/layouts/main/WhyChooseOrderly/background.astro";
 import { cn } from "@/utils";
 ---
 
 <Layout>
-  <div class="relative pb-[100px] bg-[#080116]">
-    <!-- <Background /> -->
-    <Block1 />
-    <Investors />
+  <div class="mb-[100px]">
+    <div class="relative bg-[#080116]">
+      <!-- <Background /> -->
+      <BuildAndTrade />
+      <Investors />
+    </div>
+    <WhyChooseOrderly client:visible />
   </div>
   <!-- <div class="absolute w-full bg-[url('/top.png')] z-[1]"></div> -->
   <!-- <img class="w-full" src="/mask.png" /> -->
@@ -19,3 +23,4 @@ import { cn } from "@/utils";
     <img src="/bottom.png" /> -->
   <!-- Content -->
 </Layout>
+ @/layouts/main/WhyChooseOrderly
