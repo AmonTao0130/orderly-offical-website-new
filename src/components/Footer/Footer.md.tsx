@@ -7,9 +7,11 @@ interface MiddleFooterProps {}
 const MiddleFooter: React.FC<MiddleFooterProps> = (props) => {
   return (
     <div className="px-[40px] pt-[40px] lg:px-[60px] lg:pt-[60px] border-t-[1px] border-t-solid border-t-primary-20">
-      <Top />
-      <Menu className="mt-[60px]" />
-      <Bottom className="mt-[48px] lg:mt-[68px]" />
+      <div className="md:max-w-[688px] lg:max-w-[904px] m-auto">
+        <Top />
+        <Menu className="mt-[60px]" />
+        <Bottom className="mt-[48px] lg:mt-[68px]" />
+      </div>
     </div>
   );
 };

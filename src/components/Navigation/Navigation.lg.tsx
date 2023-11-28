@@ -14,7 +14,7 @@ const LargeNavigation: React.FC<LargeNavigationProps> = (props) => {
         props.className
       )}
     >
-      <div className="flex justify-between items-center h-[100px] max-w-[1280px] m-auto">
+      <div className="flex justify-between items-center h-[100px] lg:max-w-[904px] xl:max-w-[1280px] m-auto">
         <LogoTextIcon />
         <Menu />
       </div>
