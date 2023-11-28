@@ -3,18 +3,22 @@ import Layout from "@/layouts/index.astro";
 import BuildAndTrade from "@/layouts/main/BuildAndTrade/index.astro";
 import Investors from "@/layouts/main/BuildAndTrade/investors.astro";
 import WhyChooseOrderly from "@/layouts/main/WhyChooseOrderly/index.tsx";
+import ExploreEcosystem from "@/layouts/main/ExploreEcosystem/index.tsx";
 // import Background from "@/layouts/main/WhyChooseOrderly/background.astro";
 import { cn } from "@/utils";
 ---
 
 <Layout>
-  <div class="mb-[100px]">
+  <div>
     <div class="relative bg-[#080116]">
       <!-- <Background /> -->
       <BuildAndTrade />
       <Investors />
     </div>
     <WhyChooseOrderly client:visible />
+    <div class="my-[100px]">
+      <ExploreEcosystem client:visible />
+    </div>
   </div>
   <!-- <div class="absolute w-full bg-[url('/top.png')] z-[1]"></div> -->
   <!-- <img class="w-full" src="/mask.png" /> -->

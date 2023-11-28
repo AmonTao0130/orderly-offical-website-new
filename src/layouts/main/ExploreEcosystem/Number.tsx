@@ -1,0 +1,53 @@
+import React from "react";
+import { cn } from "@/utils";
+
+interface NumberLabelProps {
+  label: string;
+  number: string;
+  className?: string;
+}
+
+// TODO: 375尺寸下字体调整为白色
+const numberStyle = {
+  background:
+    "linear-gradient(360deg, #9975FF -30.75%, rgba(155, 249, 255, 0) 103.38%), linear-gradient(0deg, #FFFFFF, #FFFFFF)",
+  backgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  WebkitBackgroundClip: "text",
+};
+
+const NumberLabel: React.FC<NumberLabelProps> = (props) => {
+  return (
+    <div className={props.className}>
+      <div
+        className={cn(
+          /** 375 */
+          "text-sm leading-[14px]",
+          /** 768 */
+          "md:text-base md:leading-[16px]",
+          /** 1024 */
+          "lg:text-xl lg:leading-[20px]"
+        )}
+      >
+        {props.label}
+      </div>
+      <div
+        style={numberStyle}
+        className={cn(
+          /** 375 */
+          "text-[32px] leading-[32px] font-semibold mt-[8px]",
+          /** 768 */
+          "md:text-6xl md:leading-[64px] md:font-bold md:mt-[16px]",
+          /** 1024 */
+          "lg:text-7xl lg:leading-[98px]",
+          /** 1440 */
+          "xl:text-8xl xl:leading-[108px]"
+        )}
+      >
+        {props.number}
+      </div>
+    </div>
+  );
+};
+
+export default NumberLabel;
