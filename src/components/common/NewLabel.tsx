@@ -1,11 +1,8 @@
 import React from "react";
 import { cn } from "@/utils/index";
+import type { PropsWithClassName } from "@/types";
 
-interface NewLabelProps {
-  className?: string;
-}
-
-const NewLabel: React.FC<NewLabelProps> = (props) => {
+const NewLabel: React.FC<PropsWithClassName> = (props) => {
   return (
     <div
       className={cn(

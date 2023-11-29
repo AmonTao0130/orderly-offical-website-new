@@ -1,11 +1,8 @@
 import React, { type PropsWithChildren } from "react";
 import { cn } from "../../utils";
+import type { PropsWithClassName } from "@/types";
 
-interface ContentProps {
-  className?: string;
-}
-
-const Content: React.FC<ContentProps & PropsWithChildren> = (props) => {
+const Content: React.FC<PropsWithClassName & PropsWithChildren> = (props) => {
   return (
     <div
       className={cn(

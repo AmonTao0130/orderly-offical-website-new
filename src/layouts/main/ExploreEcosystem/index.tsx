@@ -3,11 +3,12 @@ import Content from "@/components/Content";
 import Button from "@/components/Button";
 import { cn } from "@/utils";
 import NumberLabel from "./Number";
+import type { PropsWithClassName } from "@/types";
 
-interface ExploreEcosystemProps {}
-const ExploreEcosystem: React.FC<ExploreEcosystemProps> = (props) => {
+
+const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
   return (
-    <Content>
+    <Content className={props.className}>
       <div className="flex flex-col justify-between lg:flex-row">
         <div
           className={cn(

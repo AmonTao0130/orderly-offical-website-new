@@ -3,13 +3,10 @@ import ExpandIcon from "@/icons/ExpandIconIcon";
 import NewLabel from "@/components/common/NewLabel";
 import { cn } from "@/utils/index";
 import data from "./data";
-
-interface CollapseProps {
-  className?: string;
-}
+import type { PropsWithClassName } from "@/types";
 
 /** 手机端底部导航  */
-const Collapse: React.FC<CollapseProps> = (props) => {
+const Collapse: React.FC<PropsWithClassName> = (props) => {
   const [expandKey, setExpandKey] = useState("");
   return (
     <div className={cn("select-none", props.className)}>

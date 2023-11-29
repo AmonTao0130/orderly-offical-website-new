@@ -15,6 +15,7 @@ import Logx from "./icons/Logx.png";
 import Empyreal from "./icons/Empyreal.png";
 import Btse from "./icons/Btse.png";
 import { cn } from "@/utils";
+import type { PropsWithClassName } from "@/types";
 
 const icons = [
   Arbitrum,
@@ -31,14 +32,14 @@ const icons = [
   Btse,
 ];
 
-interface BrandProps {}
-const Brand: React.FC<BrandProps> = (props) => {
+const Brand: React.FC<PropsWithClassName> = (props) => {
   return (
-    <Content>
+    <Content className={props.className}>
       <div className="flex flex-wrap justify-center">
         {icons.map((icon) => {
           return (
             <img
+              key={icon.src}
               className={cn(
                 /** 375 */
                 "w-[113px] mt-[16px]",

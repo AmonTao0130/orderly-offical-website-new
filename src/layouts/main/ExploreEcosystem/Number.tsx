@@ -1,10 +1,10 @@
 import React from "react";
 import { cn } from "@/utils";
+import type { PropsWithClassName } from "@/types";
 
 interface NumberLabelProps {
   label: string;
   number: string;
-  className?: string;
 }
 
 // TODO: 375尺寸下字体调整为白色
@@ -16,7 +16,9 @@ const numberStyle = {
   WebkitBackgroundClip: "text",
 };
 
-const NumberLabel: React.FC<NumberLabelProps> = (props) => {
+const NumberLabel: React.FC<NumberLabelProps & PropsWithClassName> = (
+  props
+) => {
   return (
     <div className={props.className}>
       <div

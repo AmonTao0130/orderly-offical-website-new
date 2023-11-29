@@ -4,13 +4,13 @@ import CollapseIcon from "@/icons/CollapseIcon";
 import CloseLargeIcon from "@/icons/CloseLargeIcon";
 import LogoTextIcon from "@/icons/LogoTextIcon";
 import { cn } from "@/utils";
+import type { PropsWithClassName } from "@/types";
 
 interface HeaderProps {
-  className?: string;
   expanded: boolean;
   toggleExpanded: () => void;
 }
-const Header: React.FC<HeaderProps> = (props) => {
+const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
   return (
     <div className={cn("py-[20px] px-[20px] md:px-[40px]", props.className)}>
       <div className="flex justify-between items-center md:max-w-[688px] m-auto">

@@ -4,6 +4,7 @@ import TwitterIcon from "@/icons/TwitterIcon";
 import MediumIcon from "@/icons/MediumIcon";
 import LinkedinIcon from "@/icons/LinkedinIcon";
 import { cn } from "@/utils/index";
+import type { PropsWithClassName } from "@/types";
 
 const icons = [
   {
@@ -24,10 +25,7 @@ const icons = [
   },
 ];
 
-interface BottomProps {
-  className?: string;
-}
-const Bottom: React.FC<BottomProps> = (props) => {
+const Bottom: React.FC<PropsWithClassName> = (props) => {
   return (
     <div
       className={cn(

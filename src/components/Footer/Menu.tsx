@@ -1,12 +1,9 @@
 import React from "react";
 import data from "./data";
 import { cn } from "@/utils/index";
+import type { PropsWithClassName } from "@/types";
 
-interface MenuProps {
-  className?: string;
-}
-
-const Menu: React.FC<MenuProps> = (props) => {
+const Menu: React.FC<PropsWithClassName> = (props) => {
   return (
     <div className={cn("flex justify-between", props.className)}>
       {data.map((item) => {

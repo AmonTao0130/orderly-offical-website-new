@@ -24,6 +24,7 @@ import Newman from "./investors/Newman.svg";
 import LaserDigital from "./investors/LaserDigital.svg";
 import CoinDCX from "./investors/CoinDCX.svg";
 import Content from "../../../components/Content/index.tsx";
+import type { PropsWithClassName } from "@/types";
 
 const imgs = [
   Pantera,
@@ -51,10 +52,14 @@ const imgs = [
   LaserDigital,
   CoinDCX,
 ];
+
+type Props = PropsWithClassName;
+
+const { className } = Astro.props;
 ---
 
 <!-- 左右两边的阴影也可用下面的 css 实现 --><!-- box-shadow: inset 80px 0 30px -30px var(--color-grey-8),inset -80px 0 30px -30px var(--color-grey-8); -->
-<Content>
+<Content className={className}>
   <div class={"relative overflow-hidden"}>
     <div
       class="absolute top-0 left-0 z-[1] w-[50px] h-full [mask-image:linear-gradient(to_right,#000,transparent)] bg-[#000]"
@@ -64,7 +69,7 @@ const imgs = [
       class="absolute top-0 right-0 z-[1] w-[50px] h-full [mask-image:linear-gradient(to_right,transparent,#000)] bg-[#000]"
     >
     </div>
-    <div class={"flex animate-investors  "}>
+    <div class={"flex animate-investors"}>
       {
         imgs.map((item) => {
           return <img class="mr-[20px]" src={item.src} alt="Pantera" />;

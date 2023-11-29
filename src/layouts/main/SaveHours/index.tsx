@@ -2,11 +2,11 @@ import React from "react";
 import Content from "@/components/Content";
 import HoursSvg from "./200.svg";
 import { cn } from "@/utils";
+import type { PropsWithClassName } from "@/types";
 
-interface SaveHoursProps {}
-const SaveHours: React.FC<SaveHoursProps> = (props) => {
+const SaveHours: React.FC<PropsWithClassName> = (props) => {
   return (
-    <Content>
+    <Content className={props.className}>
       <div
         className={cn(
           "relative flex flex-col mx-auto",

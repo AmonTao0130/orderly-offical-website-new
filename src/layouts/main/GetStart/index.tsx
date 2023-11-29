@@ -1,11 +1,11 @@
-import Button from "@/components/Button";
-import { cn } from "@/utils";
 import React from "react";
+import Button from "@/components/Button";
+import type { PropsWithClassName } from "@/types";
+import { cn } from "@/utils";
 
-interface GetStartProps {}
-const GetStart: React.FC<GetStartProps> = (props) => {
+const GetStart: React.FC<PropsWithClassName> = (props) => {
   return (
-    <div className="text-center">
+    <div className={cn("text-center", props.className)}>
       <div
         className={cn(
           /** 375 */

@@ -1,9 +1,13 @@
 ---
 import Button from "@/components/Button";
+import type { PropsWithClassName } from "@/types";
 import { cn } from "@/utils";
+type Props = PropsWithClassName;
+
+const { className } = Astro.props;
 ---
 
-<div class="text-center z-[9] overflow-visible bg-transparent">
+<div class={cn("text-center z-[9] overflow-visible bg-transparent", className)}>
   <div
     class={cn(
       "text-primary-100 ",

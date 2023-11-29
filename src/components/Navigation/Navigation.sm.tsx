@@ -4,11 +4,9 @@ import Collapse from "./Collapse";
 import { cn } from "@/utils";
 import { useStore } from "@nanostores/react";
 import { bannerHeight, navigationExpanded } from "@/store";
+import type { PropsWithClassName } from "@/types";
 
-interface SmallNavigationProps {
-  className?: string;
-}
-const SmallNavigation: React.FC<SmallNavigationProps> = (props) => {
+const SmallNavigation: React.FC<PropsWithClassName> = (props) => {
   const height = useStore(bannerHeight);
   const expanded = useStore(navigationExpanded);
 

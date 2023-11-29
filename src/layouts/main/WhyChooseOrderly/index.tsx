@@ -10,6 +10,7 @@ import security from "./icons/security.svg";
 import { cn } from "@/utils/index.ts";
 import { useStore } from "@nanostores/react";
 import { whyChooseOrderlyExpandKey } from "@/store";
+import type { PropsWithClassName } from "@/types";
 
 const data = [
   {
@@ -49,12 +50,11 @@ const data = [
   },
 ];
 
-interface WhyChooseOrderlyProps {}
-const WhyChooseOrderly: React.FC<WhyChooseOrderlyProps> = (props) => {
+const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
   const expandKey = useStore(whyChooseOrderlyExpandKey) || data[0]?.title;
 
   return (
-    <Content className="mt-[285px]">
+    <Content className={props.className}>
       <div className={"lg:flex lg:justify-between"}>
         <div className="lg:max-w-[430px] xl:max-w-[677px] flex justify-between flex-col w-[677px]">
           <div

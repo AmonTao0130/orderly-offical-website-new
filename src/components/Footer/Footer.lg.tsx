@@ -3,12 +3,9 @@ import Bottom from "./Bottom";
 import Top from "./Top";
 import Menu from "./Menu";
 import { cn } from "@/utils";
+import type { PropsWithClassName } from "@/types";
 
-interface LargeFooterProps {
-  className?: string;
-}
-
-const LargeFooter: React.FC<LargeFooterProps> = (props) => {
+const LargeFooter: React.FC<PropsWithClassName> = (props) => {
   return (
     <div
       className={cn(

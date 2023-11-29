@@ -3,12 +3,9 @@ import Bottom from "./Bottom";
 import Top from "./Top";
 import Collapse from "./Collapse";
 import { cn } from "@/utils";
+import type { PropsWithClassName } from "@/types";
 
-interface SmallFooterProps {
-  className?: string;
-}
-
-const SmallFooter: React.FC<SmallFooterProps> = (props) => {
+const SmallFooter: React.FC<PropsWithClassName> = (props) => {
   return (
     <div
       className={cn(

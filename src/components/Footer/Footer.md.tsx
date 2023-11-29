@@ -3,12 +3,9 @@ import Bottom from "./Bottom";
 import Top from "./Top";
 import Menu from "./Menu";
 import { cn } from "@/utils";
+import type { PropsWithClassName } from "@/types";
 
-interface MiddleFooterProps {
-  className?: string;
-}
-
-const MiddleFooter: React.FC<MiddleFooterProps> = (props) => {
+const MiddleFooter: React.FC<PropsWithClassName> = (props) => {
   return (
     <div
       className={cn(

@@ -2,11 +2,9 @@ import React from "react";
 import Menu from "./Menu";
 import LogoTextIcon from "@/icons/LogoTextIcon";
 import { cn } from "@/utils/index";
+import type { PropsWithClassName } from "@/types";
 
-interface LargeNavigationProps {
-  className?: string;
-}
-const LargeNavigation: React.FC<LargeNavigationProps> = (props) => {
+const LargeNavigation: React.FC<PropsWithClassName> = (props) => {
   return (
     <div
       className={cn(

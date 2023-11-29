@@ -6,6 +6,7 @@ import Content from "@/components/Content";
 import { cn } from "@/utils";
 import Button from "@/components/Button";
 import UseCasesBg from "./usecases-bg.png";
+import type { PropsWithClassName } from "@/types";
 
 const data = [
   {
@@ -48,12 +49,11 @@ const data = [
 const titles = data.map((item) => item.title);
 const contents = data.map((item) => item.content);
 
-interface UseCasesProps {}
-const UseCases: React.FC<UseCasesProps> = (props) => {
+const UseCases: React.FC<PropsWithClassName> = (props) => {
   const expandKey = useStore(useCasesExpandKey) || 0;
 
   return (
-    <Content>
+    <Content className={props.className}>
       <BlockTitle>Use Cases</BlockTitle>
       <div
         className={cn(

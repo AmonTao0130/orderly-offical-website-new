@@ -5,13 +5,10 @@ import { cn } from "@/utils/index";
 import data from "./data";
 import ArrowRightTopIcon from "@/icons/ArrowRightTopIcon";
 import CarnivalIcon from "@/icons/CarnivalIcon";
-
-interface CollapseProps {
-  className?: string;
-}
+import type { PropsWithClassName } from "@/types";
 
 /** TODO：展开折叠的时候，有可能会误解到下的菜单打开新的页面 */
-const Collapse: React.FC<CollapseProps> = (props) => {
+const Collapse: React.FC<PropsWithClassName> = (props) => {
   const [expandKey, setExpandKey] = useState("");
   return (
     <div
