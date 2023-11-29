@@ -2,31 +2,19 @@ import React from "react";
 import SmallFooter from "./Footer.sm";
 import MiddleFooter from "./Footer.md";
 import LargeFooter from "./Footer.lg";
-import { useSize } from "@/hooks/useSize";
-import { Screen } from "@/utils/constant";
 
 interface FooterProps {
-  width?: number;
+  className?: string;
 }
 
 const Footer: React.FC<FooterProps> = (props) => {
-  const { width } = useSize();
-
-  const w = props.width || width;
-
-  if (w >= Screen.xl) {
-    return <LargeFooter />;
-  }
-
-  if (w >= Screen.md) {
-    return <MiddleFooter />;
-  }
-
-  if (w >= Screen.sm || w > 0) {
-    return <SmallFooter />;
-  }
-
-  return null;
+  return (
+    <div className={props.className}>
+      <SmallFooter className="md:hidden" />
+      <MiddleFooter className="hidden xl:hidden md:block " />
+      <LargeFooter className="hidden xl:block" />
+    </div>
+  );
 };
 
 export default Footer;

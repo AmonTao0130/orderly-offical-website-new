@@ -5,7 +5,9 @@ import { cn } from "@/utils";
 import { useStore } from "@nanostores/react";
 import { bannerHeight, navigationExpanded } from "@/store";
 
-interface SmallNavigationProps {}
+interface SmallNavigationProps {
+  className?: string;
+}
 const SmallNavigation: React.FC<SmallNavigationProps> = (props) => {
   const height = useStore(bannerHeight);
   const expanded = useStore(navigationExpanded);
@@ -15,13 +17,22 @@ const SmallNavigation: React.FC<SmallNavigationProps> = (props) => {
   };
 
   if (!expanded) {
-    return <Header expanded={expanded} toggleExpanded={toggleExpanded} />;
+    return (
+      <Header
+        expanded={expanded}
+        toggleExpanded={toggleExpanded}
+        className={props.className}
+      />
+    );
   }
 
   return (
     <div
       style={{ top: height }}
-      className={cn("absolute w-full h-full z-[1] backdrop-blur-[10px]")}
+      className={cn(
+        "absolute w-full h-full z-[1] backdrop-blur-[10px]",
+        props.className
+      )}
     >
       <Header expanded={expanded} toggleExpanded={toggleExpanded} />
       {expanded && <Collapse className="mt-[57px]" />}

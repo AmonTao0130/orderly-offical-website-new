@@ -12,15 +12,18 @@ import Footer from "../components/Footer";
       html,
       body {
         /** 去掉移动端点击显示阴影的问题 */
-        -webkit-tap-highlight-color:transparent
+        -webkit-tap-highlight-color: transparent;
       }
-      </style>
+    </style>
   </head>
   <body>
     <Banner client:visible />
-    <Navigation client:load />
-    <slot />
+
+    <Navigation client:visible />
+
     <!-- 你的内容会被插入到这里 -->
-    <Footer client:idle />
+    <slot />
+
+    <Footer client:visible />
   </body>
 </html>
