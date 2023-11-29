@@ -55,7 +55,7 @@ export default {
         },
       },
       animation: {
-        investors: "investors 15s linear infinite",
+        investors: "investors 70s linear infinite",
       },
     },
   },
