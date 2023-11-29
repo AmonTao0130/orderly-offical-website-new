@@ -1,30 +1,123 @@
 ---
 import Layout from "@/layouts/index.astro";
 import BuildAndTrade from "@/layouts/main/BuildAndTrade/index.astro";
+// import Background from "@/layouts/main/WhyChooseOrderly/background.astro";
 import Investors from "@/layouts/main/BuildAndTrade/investors.astro";
 import WhyChooseOrderly from "@/layouts/main/WhyChooseOrderly/index.tsx";
 import ExploreEcosystem from "@/layouts/main/ExploreEcosystem/index.tsx";
-// import Background from "@/layouts/main/WhyChooseOrderly/background.astro";
+import Brand from "@/layouts/main/Brand/index.tsx";
+import IntegrateSDK from "@/layouts/main/IntegrateSDK/index.tsx";
+import UseCases from "@/layouts/main/UseCases/index.tsx";
+import SaveHours from "@/layouts/main/SaveHours/index.tsx";
+import GetStart from "@/layouts/main/GetStart/index.tsx";
 import { cn } from "@/utils";
 ---
 
 <Layout>
   <div>
-    <div class="relative bg-[#080116]">
-      <!-- <Background /> -->
-      <BuildAndTrade />
-      <Investors />
-    </div>
-    <WhyChooseOrderly client:visible />
-    <div class="my-[100px]">
-      <ExploreEcosystem client:visible />
-    </div>
+    <BuildAndTrade />
+    <Investors
+      className={cn(
+        /** 375 */
+        "mt-[126px]",
+        /** 768 */
+        "md:mt-[139px]",
+        /** 1024 */
+        "lg:mt-[246px]"
+      )}
+    />
+    <WhyChooseOrderly
+      className={cn(
+        /** 375 */
+        "mt-[94px]",
+        /** 768 */
+        "md:mt-[138px]",
+        /** 1024 */
+        "lg:mt-[147px]",
+        /** 1440 */
+        "xl:mt-[285px]"
+      )}
+      client:visible
+    />
+    <ExploreEcosystem
+      className={cn(
+        /** 375 */
+        "mt-[110px]",
+        /** 768 */
+        "md:mt-[216px]",
+        /** 1024 */
+        "lg:mt-[208px]",
+        /** 1440 */
+        "xl:mt-[279px]"
+      )}
+      client:visible
+    />
+    <Brand
+      className={cn(
+        /** 375 */
+        "mt-[82px]",
+        /** 768 */
+        "md:mt-[131px]",
+        /** 1024 */
+        "lg:mt-[175px]",
+        /** 1440 */
+        "xl:mt-[202px]"
+      )}
+    />
+    <IntegrateSDK
+      className={cn(
+        /** 375 */
+        "mt-[174px]",
+        /** 768 */
+        "md:mt-[215.92px]",
+        /** 1024 */
+        "lg:mt-[315.81px]",
+        /** 1440 */
+        "xl:mt-[343.3px]"
+      )}
+    />
+    <UseCases
+      className={cn(
+        /** 375 */
+        "mt-[148px]",
+        /** 768 */
+        "md:mt-[195.08px]",
+        /** 1024 */
+        "lg:mt-[315.62px]",
+        /** 1440 */
+        "xl:mt-[194.16px]",
+        /** 1920 */
+        "2xl:mt-[264.16px]"
+      )}
+      client:visible
+    />
+    <SaveHours
+      className={cn(
+        /** 375 */
+        "mt-[151.03px]",
+        /** 768 */
+        "md:mt-[203px]",
+        /** 1024 */
+        "lg:mt-[300px]",
+        /** 1440 */
+        "xl:mt-[290.02px]",
+        /** 1920 */
+        "2xl:mt-[220.02px]"
+      )}
+    />
+    <GetStart
+      className={cn(
+        /** 375 */
+        "mt-[151px] mb-[113px]",
+        /** 768 */
+        "md:mt-[202.74px] md:mb-[109px]",
+        /** 1024 */
+        "lg:mt-[221.48px] lg:mb-[132px]",
+        /** 1440 */
+        "xl:mt-[318.87px] xl:mb-[150px]",
+        /** 1920 */
+        "2xl:mt-[214.77px] 2xl:mb-[128px]"
+      )}
+    />
   </div>
-  <!-- <div class="absolute w-full bg-[url('/top.png')] z-[1]"></div> -->
-  <!-- <img class="w-full" src="/mask.png" /> -->
-  <!-- <img src="/top.png" />
-    <div class="h-[300px]"></div>
-    <img src="/bottom.png" /> -->
-  <!-- Content -->
 </Layout>
- @/layouts/main/WhyChooseOrderly
