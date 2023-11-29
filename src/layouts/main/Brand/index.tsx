@@ -34,29 +34,27 @@ const icons = [
 interface BrandProps {}
 const Brand: React.FC<BrandProps> = (props) => {
   return (
-    <div>
-      <Content>
-        <div className="flex flex-wrap justify-center">
-          {icons.map((icon) => {
-            return (
-              <img
-                className={cn(
-                  /** 375 */
-                  "w-[113px] mt-[16px]",
-                  /** 768 */
-                  "md:w-[172px]",
-                  /** 1024 */
-                  "lg:w-[150px] lg:mt-[20px]",
-                  /** 1024 */
-                  "xl:w-[213px] xl:mt-[19px]"
-                )}
-                src={icon.src}
-              />
-            );
-          })}
-        </div>
-      </Content>
-    </div>
+    <Content>
+      <div className="flex flex-wrap justify-center">
+        {icons.map((icon) => {
+          return (
+            <img
+              className={cn(
+                /** 375 */
+                "w-[113px] mt-[16px]",
+                /** 768 */
+                "md:w-[172px]",
+                /** 1024 */
+                "lg:w-[150px] lg:mt-[20px]",
+                /** 1024 */
+                "xl:w-[213px] xl:mt-[19px]"
+              )}
+              src={icon.src}
+            />
+          );
+        })}
+      </div>
+    </Content>
   );
 };
 
