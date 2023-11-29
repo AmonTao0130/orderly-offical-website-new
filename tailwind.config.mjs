@@ -48,6 +48,15 @@ export default {
           8: "rgba(255, 255, 255, 0.08)",
         },
       },
+      keyframes: {
+        investors: {
+          "0%": { transform: "translateZ(0)" },
+          "100%": { transform: "translate3d(-1894px,0,0)" },
+        },
+      },
+      animation: {
+        investors: "investors 15s linear infinite",
+      },
     },
   },
   plugins: [
