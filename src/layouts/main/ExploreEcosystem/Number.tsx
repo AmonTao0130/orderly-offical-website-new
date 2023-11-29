@@ -37,11 +37,11 @@ const NumberLabel: React.FC<NumberLabelProps & PropsWithClassName> = (
         style={numberStyle}
         className={cn(
           /** 375 */
-          "text-[32px] leading-[32px] font-semibold mt-[8px]",
+          "text-[32px] leading-[32px] font-semibold mt-[12px]",
           /** 768 */
-          "md:text-6xl md:leading-[64px] md:font-bold md:mt-[16px]",
+          "md:text-6xl md:leading-[64px] md:font-bold md:mt-[12px]",
           /** 1024 */
-          "lg:text-7xl lg:leading-[98px]",
+          "lg:text-7xl lg:leading-[98px] lg:mt-0",
           /** 1440 */
           "xl:text-8xl xl:leading-[108px]"
         )}

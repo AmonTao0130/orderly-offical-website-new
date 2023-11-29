@@ -5,7 +5,6 @@ import { cn } from "@/utils";
 import NumberLabel from "./Number";
 import type { PropsWithClassName } from "@/types";
 
-
 const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
   return (
     <Content className={props.className}>
@@ -58,7 +57,7 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
                 /** 375 */
                 "mt-[16px]",
                 /** 1024 */
-                "lg:mt-[24px]"
+                "md:mt-[24px]"
               )}
             >
               View more
@@ -87,11 +86,11 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
               /** 768 */
               "ml-[107px]",
               /** 1024 */
-              "lg:ml-0 lg:mt-[53px]",
+              "lg:ml-0 lg:mt-[23px]",
               /** 1440 */
-              "xl:mt-[43px]",
+              "xl:mt-[8px]",
               /** 1920 */
-              "2xl:mt-[47px]"
+              "2xl:mt-[17px]"
             )}
           />
         </div>
