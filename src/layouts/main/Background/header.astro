@@ -2,25 +2,10 @@
 import { cn } from "@/utils";
 import Top from "./imgs/top.png";
 import Bottom from "./imgs/bottom.png";
-import Content from "@/components/Content";
 ---
 
 <div class="absolute top-0 left-0 w-full bg-[#080116]">
-  <div
-    class={cn(
-      "flex flex-col",
-      /** 375 */
-      "",
-      /** 768 */
-      "md:",
-      /** 1024 */
-      "lg:",
-      /** 1440 */
-      "xl:",
-      /** 1440 */
-      "2xl:"
-    )}
-  >
+  <div class={cn("flex flex-col")}>
     <img
       src={Top.src}
       class={cn(

@@ -56,7 +56,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
   return (
     <Content className={props.className}>
       <div className={"lg:flex lg:justify-between"}>
-        <div className="lg:max-w-[430px] xl:max-w-[677px] flex justify-between flex-col w-[677px]">
+        <div className="max-w-[677px] lg:max-w-[430px] xl:max-w-[677px] flex justify-between flex-col">
           <div
             className={cn(
               /** 375 */

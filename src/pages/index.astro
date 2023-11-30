@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/index.astro";
 import Navigation from "@/components/Navigation";
-import Background from "@/layouts/main/Background/index.astro";
+import HeaderBackground from "@/layouts/main/Background/header.astro";
 import BuildAndTrade from "@/layouts/main/BuildAndTrade/index.astro";
 import Investors from "@/layouts/main/BuildAndTrade/investors.astro";
 import WhyChooseOrderly from "@/layouts/main/WhyChooseOrderly/index.tsx";
@@ -11,13 +11,15 @@ import IntegrateSDK from "@/layouts/main/IntegrateSDK/index.tsx";
 import UseCases from "@/layouts/main/UseCases/index.tsx";
 import SaveHours from "@/layouts/main/SaveHours/index.tsx";
 import GetStart from "@/layouts/main/GetStart/index.tsx";
+import Footer from "@/components/Footer";
+import FooterBackground from "@/layouts/main/Background/footer.astro";
 import { cn } from "@/utils";
 ---
 
 <Layout>
   <div>
     <div class="relative">
-      <Background />
+      <HeaderBackground />
       <div class="relative">
         <Navigation className="" client:visible />
         <BuildAndTrade
@@ -130,20 +132,25 @@ import { cn } from "@/utils";
         "2xl:mt-[220.02px]"
       )}
     />
-
-    <GetStart
-      className={cn(
-        /** 375 */
-        "mt-[151px] mb-[113px]",
-        /** 768 */
-        "md:mt-[202.74px] md:mb-[109px]",
-        /** 1024 */
-        "lg:mt-[221.48px] lg:mb-[132px]",
-        /** 1440 */
-        "xl:mt-[318.87px] xl:mb-[150px]",
-        /** 1920 */
-        "2xl:mt-[214.77px] 2xl:mb-[128px]"
-      )}
-    />
+    <div class="relative">
+      <FooterBackground />
+      <div class="relative">
+        <GetStart
+          className={cn(
+            /** 375 */
+            "mt-[151px] mb-[113px]",
+            /** 768 */
+            "md:mt-[202.74px] md:mb-[109px]",
+            /** 1024 */
+            "lg:mt-[221.48px] lg:mb-[132px]",
+            /** 1440 */
+            "xl:mt-[318.87px] xl:mb-[150px]",
+            /** 1920 */
+            "2xl:mt-[214.77px] 2xl:mb-[128px]"
+          )}
+        />
+        <Footer client:visible />
+      </div>
+    </div>
   </div>
 </Layout>
