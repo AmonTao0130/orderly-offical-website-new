@@ -13,7 +13,7 @@ const { className } = Astro.props;
     class={cn(
       "text-primary-100",
       /** 375 */
-      "text-[32px] leading-[38.4xp]]",
+      "text-[32px] leading-[38.4xp]",
       /** 768 */
       "md:text-4xl md:leading-[48px]",
       /** 1024 */
@@ -29,7 +29,7 @@ const { className } = Astro.props;
 
   <div
     class={cn(
-      " text-primary-80",
+      " text-primary-80 ",
       /** 375 */
       "text-[13px] leading-[19.5px] mt-[16px]",
       /** 768 */
@@ -38,7 +38,9 @@ const { className } = Astro.props;
       "lg:text-xl lg:leading-[36px] lg:mt-[12px]"
     )}
   >
-    <div>Powerful SDK, seamless integration for builders.</div>
+    <div class="tracking-[0.36px]">
+      Powerful SDK, seamless integration for builders.
+    </div>
     <div>Unified liquidity, superior performance for traders.</div>
   </div>
 
