@@ -50,7 +50,7 @@ export default {
       },
       keyframes: {
         investors: {
-          "0%": { transform: "translate3d(100px,0,0)" },
+          "0%": { transform: "translate3d(50px,0,0)" },
           "100%": { transform: "translate3d(-1894px,0,0)" },
         },
       },
