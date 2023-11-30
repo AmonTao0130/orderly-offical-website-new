@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Collapse from "./Collapse";
 import { cn } from "@/utils";
@@ -7,11 +7,13 @@ import { bannerHeight, navigationExpanded } from "@/store";
 import type { PropsWithClassName } from "@/types";
 
 const SmallNavigation: React.FC<PropsWithClassName> = (props) => {
-  const height = useStore(bannerHeight);
+  const $bannerHeight = useStore(bannerHeight);
   const expanded = useStore(navigationExpanded);
+  const [modalHeight, setModalHeight] = useState<number>();
 
   const toggleExpanded = () => {
     navigationExpanded.set(!expanded);
+    setModalHeight(window.innerHeight - $bannerHeight);
   };
 
   if (!expanded) {
@@ -25,15 +27,20 @@ const SmallNavigation: React.FC<PropsWithClassName> = (props) => {
   }
 
   return (
-    <div
-      style={{ top: height }}
-      className={cn(
-        "absolute w-full h-full z-[1] backdrop-blur-[10px]",
-        props.className
+    <div className={cn(props.className)}>
+      <Header
+        expanded={expanded}
+        toggleExpanded={toggleExpanded}
+        className={cn(expanded && "backdrop-blur-[10px]")}
+      />
+      {expanded && (
+        <div
+          style={{ height: modalHeight }}
+          className="absolute w-full backdrop-blur-[10px] z-[1]"
+        >
+          <Collapse className="mt-[57px]" />
+        </div>
       )}
-    >
-      <Header expanded={expanded} toggleExpanded={toggleExpanded} />
-      {expanded && <Collapse className="mt-[57px]" />}
     </div>
   );
 };
