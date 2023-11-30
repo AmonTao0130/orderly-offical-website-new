@@ -1,7 +1,8 @@
 ---
 import Layout from "@/layouts/index.astro";
+import Navigation from "@/components/Navigation";
+import Background from "@/layouts/main/Background/index.astro";
 import BuildAndTrade from "@/layouts/main/BuildAndTrade/index.astro";
-// import Background from "@/layouts/main/WhyChooseOrderly/background.astro";
 import Investors from "@/layouts/main/BuildAndTrade/investors.astro";
 import WhyChooseOrderly from "@/layouts/main/WhyChooseOrderly/index.tsx";
 import ExploreEcosystem from "@/layouts/main/ExploreEcosystem/index.tsx";
@@ -15,17 +16,36 @@ import { cn } from "@/utils";
 
 <Layout>
   <div>
-    <BuildAndTrade />
+    <div class="relative">
+      <Background />
+      <div class="mix-blend-screen">
+        <Navigation client:visible />
+        <BuildAndTrade
+          className={cn(
+            /** 375 */
+            "mt-[74px]",
+            /** 768 */
+            "md:mt-[97px]",
+            /** 1024 */
+            "lg:mt-[119px]"
+          )}
+        />
+      </div>
+    </div>
+
     <Investors
       className={cn(
         /** 375 */
         "mt-[126px]",
         /** 768 */
-        "md:mt-[139px]",
+        "md:mt-[189px]",
         /** 1024 */
-        "lg:mt-[246px]"
+        "lg:mt-[246px]",
+        /** 1024 */
+        "2xl:mt-[276px]"
       )}
     />
+
     <WhyChooseOrderly
       className={cn(
         /** 375 */
@@ -39,6 +59,7 @@ import { cn } from "@/utils";
       )}
       client:visible
     />
+
     <ExploreEcosystem
       className={cn(
         /** 375 */
@@ -52,6 +73,7 @@ import { cn } from "@/utils";
       )}
       client:visible
     />
+
     <Brand
       className={cn(
         /** 375 */
@@ -64,6 +86,7 @@ import { cn } from "@/utils";
         "xl:mt-[202px]"
       )}
     />
+
     <IntegrateSDK
       className={cn(
         /** 375 */
@@ -76,6 +99,7 @@ import { cn } from "@/utils";
         "xl:mt-[343.3px]"
       )}
     />
+
     <UseCases
       className={cn(
         /** 375 */
@@ -91,6 +115,7 @@ import { cn } from "@/utils";
       )}
       client:visible
     />
+
     <SaveHours
       className={cn(
         /** 375 */
@@ -105,6 +130,7 @@ import { cn } from "@/utils";
         "2xl:mt-[220.02px]"
       )}
     />
+
     <GetStart
       className={cn(
         /** 375 */

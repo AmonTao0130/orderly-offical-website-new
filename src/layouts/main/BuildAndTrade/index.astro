@@ -1,22 +1,23 @@
 ---
 import Button from "@/components/Button";
-import type { PropsWithClassName } from "@/types";
 import { cn } from "@/utils";
+import type { PropsWithClassName } from "@/types";
+
 type Props = PropsWithClassName;
 
 const { className } = Astro.props;
 ---
 
-<div class={cn("text-center z-[9] overflow-visible bg-transparent", className)}>
+<div class={cn("text-center", className)}>
   <div
     class={cn(
-      "text-primary-100 ",
+      "text-primary-100",
       /** 375 */
-      "text-[32px] leading-[38.4xp] pt-[16px]",
+      "text-[32px] leading-[38.4xp]]",
       /** 768 */
-      "md:text-4xl md:leading-[48px] md:pt-[12px]",
+      "md:text-4xl md:leading-[48px]",
       /** 1024 */
-      "lg:text-6xl lg:leading-[76.8px] lg:pt-[119px]"
+      "lg:text-6xl lg:leading-[76.8px] "
     )}
   >
     <div>

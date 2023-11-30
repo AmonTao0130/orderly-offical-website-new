@@ -1,0 +1,51 @@
+---
+import { cn } from "@/utils";
+import Top from "./imgs/top.png";
+import Bottom from "./imgs/bottom.png";
+import Content from "@/components/Content";
+---
+
+<div class="absolute top-0 left-0 w-full bg-[#080116]">
+  <div
+    class={cn(
+      "flex flex-col",
+      /** 375 */
+      "",
+      /** 768 */
+      "md:",
+      /** 1024 */
+      "lg:",
+      /** 1440 */
+      "xl:",
+      /** 1440 */
+      "2xl:"
+    )}
+  >
+    <img
+      src={Top.src}
+      class={cn(
+        "object-cover",
+        /** 375 */
+        "sm:h-[169px]",
+        /** 768 */
+        "md:h-[213px]",
+        /** 1024 */
+        "lg:h-[314px]"
+      )}
+    />
+    <img
+      src={Bottom.src}
+      class={cn(
+        "object-cover",
+        /** 375 */
+        "h-[162px] mt-[220px]",
+        /** 768 */
+        "md:h-[203px] md:mt-[120px]",
+        /** 1024 */
+        "lg:h-[300px] md:mt-[170px]",
+        /** 1440 */
+        ""
+      )}
+    />
+  </div>
+</div>
