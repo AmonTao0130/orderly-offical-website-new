@@ -68,6 +68,10 @@ export default {
         fontFamily: "Manrope",
         fontWeight: "600",
         margin: 0,
+        "::selection": {
+          background: "#D196FF",
+          color: "#000",
+        },
       };
       addBase({
         html: baseCSS,
