@@ -29,7 +29,7 @@ const Menu: React.FC<MenuProps> = (props) => {
 
               {item.children?.length && (
                 <div className="hidden hover:block group-hover:block absolute top-[20px] left-[-20px] z-[1]">
-                  <div className="mt-[16px] rounded-[12px] [background:linear-gradient(180deg,rgba(38,18,73,0.3)_0%,rgba(111,69,184,0.3)_100%)] border-[1px] border-solid border-[rgba(206,125,255,0.5)]">
+                  <div className="mt-[16px] rounded-[12px] [background:linear-gradient(180deg,rgba(38,18,73,0.3)_0%,rgba(111,69,184,0.3)_100%)] border-[1px] border-solid border-[rgba(206,125,255,0.5)] backdrop-blur-[15px]">
                     {item.children.map((child) => {
                       return (
                         <a
