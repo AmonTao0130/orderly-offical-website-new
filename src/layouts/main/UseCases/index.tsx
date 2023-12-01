@@ -57,11 +57,13 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
       <BlockTitle>Use Cases</BlockTitle>
       <div
         className={cn(
-          "flex justify-center",
+          "flex overflow-hidden",
           /** 375 */
-          "mt-[12px]",
+          "mt-[12px] ",
           /** 768 */
-          "mt-[24px]"
+          "md:mt-[24px]",
+          /** 1024 */
+          "lg:justify-center"
         )}
       >
         {/* TODO: */}
@@ -71,13 +73,15 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
             <div
               key={title}
               className={cn(
-                "flex justify-center items-center h-[52px] rounded-full mx-[2px] whitespace-nowrap",
+                "flex justify-center items-center h-[52px] mx-[2px] rounded-full whitespace-nowrap ",
+                // index === 0 && "ml-[8px]",
+                // title.length === index + 1 && "mr-0",
                 expanded ? "text-[#000]" : "text-primary-54",
                 expanded ? "bg-[rgba(209,150,255,1)]" : "bg-[#272627]",
                 /** 375 */
                 "text-xs leading-[12px] px-[12px]",
-                /** 768 */
-                "md:text-sm md:leading-[14px] md:px-[24px]"
+                /** 768, 这里px本来是 24，调为 23，不然宽度会不够 */
+                "md:text-sm md:leading-[14px] md:px-[23px]"
               )}
               onClick={() => {
                 useCasesExpandKey.set(index);
@@ -105,7 +109,7 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
       >
         <img
           className={cn(
-            "absolute right-0 bottom-0 w-[400px] rounded-[24px] mix-blend-screen",
+            "absolute right-0 bottom-0 rounded-[24px] mix-blend-screen",
             /** 375 */
             "w-[220px]",
             /** 768 */
