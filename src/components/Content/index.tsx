@@ -2,15 +2,22 @@ import React, { type PropsWithChildren } from "react";
 import { cn } from "../../utils";
 import type { PropsWithClassName } from "@/types";
 
-const Content: React.FC<PropsWithClassName & PropsWithChildren> = (props) => {
+interface Content {
+  id?: string;
+}
+
+const Content: React.FC<Content & PropsWithClassName & PropsWithChildren> = (
+  props
+) => {
   return (
     <div
+      id={props.id}
       className={cn(
-        "mx-auto ",
+        "mx-auto",
         /** 375 w-[335px] 手机端px-[20px] */
         "w-[calc(100%_-_40px)]",
         /** 768 */
-        "md:w-[688px] ",
+        "md:w-[688px]",
         /** 1024 */
         "lg:w-[904px]",
         /** 1440 */
