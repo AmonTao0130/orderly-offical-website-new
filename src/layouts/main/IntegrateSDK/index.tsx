@@ -9,7 +9,7 @@ import type { PropsWithClassName } from "@/types";
 
 const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
   return (
-    <Content className={props.className}>
+    <Content id="IntegrateSDK" className={props.className}>
       <BlockTitle>Integrate with Orderly SDK</BlockTitle>
       <div
         className={cn(
@@ -52,9 +52,8 @@ const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
             )}
           >
             Implement components and pages <br className="md:hidden" /> without
-            <br className="sm:hidden md:hidden" />
-            needing to fuss with data, APIs, <br className="md:hidden" /> or
-            business logic.
+            <br className="sm:hidden md:hidden" /> needing to fuss with data,
+            APIs, <br className="md:hidden" /> or business logic.
           </div>
         </div>
         <div
@@ -71,10 +70,11 @@ const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
           )}
         >
           <img
+            id="IntegrateSDKBg"
             className={cn(
               "[backdrop-filter:blur(12.5475px)] overflow-hidden",
               "[box-shadow:20px_31px_147px_rgba(118,42,215,0.5)]",
-              "[transform:matrix(0.99,0.1,-0.29,0.96,0,0)]",
+              "[transform:matrix(0.99,0.1,-0.29,0.96,0,0)_translateY(-100px)]",
               /** 375 */
               "w-[267.2px] h-[194px] rounded-[10.7px]",
               /** 1024 */
@@ -85,8 +85,9 @@ const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
             src={bg.src}
           />
           <img
+            id="IntegrateSDKOrderBook"
             className={cn(
-              "absolute ",
+              "absolute",
               "[box-shadow:15px_16.73px_25px_0px_rgba(0,0,0,0.3)]",
               "[backdrop-filter:blur(25.88px)]",
               "[transform:matrix(0.99,0.1,-0.29,0.96,0,0)]",
@@ -100,6 +101,7 @@ const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
             src={orderbook1.src}
           />
           <img
+            id="IntegrateSDKOrderEntry"
             className={cn(
               "absolute",
               "[box-shadow:15px_16.73px_25px_0px_rgba(0,0,0,0.3)]",

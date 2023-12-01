@@ -14,6 +14,7 @@ import GetStart from "@/layouts/main/GetStart/index.tsx";
 import Footer from "@/components/Footer";
 import FooterBackground from "@/layouts/main/Background/footer.astro";
 import { cn } from "@/utils";
+// import "@/styles/index.css";
 ---
 
 <Layout>
@@ -34,6 +35,21 @@ import { cn } from "@/utils";
         />
       </div>
     </div>
+
+    <!-- <div class="mt-[600px]">
+      <IntegrateSDK
+        className={cn(
+          /** 375 */
+          "mt-[174px]",
+          /** 768 */
+          "md:mt-[215.92px]",
+          /** 1024 */
+          "lg:mt-[315.81px]",
+          /** 1440 */
+          "xl:mt-[343.3px]"
+        )}
+      />
+    </div> -->
 
     <Investors
       className={cn(
@@ -154,3 +170,62 @@ import { cn } from "@/utils";
     </div>
   </div>
 </Layout>
+
+<script>
+  import { gsap } from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.set("#IntegrateSDKBg", { opacity: 0 });
+  gsap.to("#IntegrateSDKBg", {
+    scrollTrigger: {
+      trigger: "#IntegrateSDK",
+      start: "top 50%",
+      end: "top 30%",
+      scrub: 1.5,
+      // markers: {
+      //   startColor: "red",
+      //   endColor: "red",
+      // },
+    },
+    y: 0,
+    opacity: 1,
+    // duration: 1.5,
+    // ease: "power1.out",
+  });
+
+  gsap.set("#IntegrateSDKOrderBook", { opacity: 0, top: -200 });
+  gsap.to("#IntegrateSDKOrderBook", {
+    scrollTrigger: {
+      trigger: "#IntegrateSDK",
+      start: "top 45%",
+      end: "top 30%",
+      scrub: 1.5,
+      // markers: {
+      //   startColor: "green",
+      //   endColor: "green",
+      //   indent: 150,
+      // },
+    },
+    top: -45,
+    opacity: 1,
+    duration: 10,
+  });
+
+  gsap.set("#IntegrateSDKOrderEntry", { opacity: 0, top: -150 });
+  gsap.to("#IntegrateSDKOrderEntry", {
+    scrollTrigger: {
+      trigger: "#IntegrateSDK",
+      start: "top 40%",
+      end: "top 30%",
+      scrub: 1.5,
+      // markers: {
+      //   startColor: "white",
+      //   endColor: "white",
+      //   indent: 300,
+      // },
+    },
+    top: -12,
+    opacity: 1,
+  });
+</script>
