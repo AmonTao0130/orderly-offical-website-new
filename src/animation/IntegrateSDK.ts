@@ -61,6 +61,7 @@ function main() {
 
   initPosition();
 
+  // TODO：在滚到 IntegrateSDK的位置刷新时，布局不会居中
   const tl = gsap.timeline();
   tl.add([getTl1(orderBookTop, orderEntryTop), getTl2()]);
 
