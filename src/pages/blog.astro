@@ -1,0 +1,42 @@
+---
+import Layout from "@/layouts/index.astro";
+import Navigation from "@/components/Navigation";
+import HeaderBg from "@/layouts/blog/HeaderBg";
+import HeaderText from "@/layouts/blog/HeaderText";
+import Footer from "@/components/Footer";
+import { cn } from "@/utils";
+---
+
+<!-- 
+  class={cn(
+  "relative",
+  /** 375 */
+  "",
+  /** 768 */
+  "md:",
+  /** 1024 */
+  "lg:",
+  /** 1440 */
+  "xl:",
+  /** 1440 */
+  "2xl:"
+)} 
+-->
+<Layout>
+  <div
+    class={cn(
+      "relative",
+      /** 375 */
+      "h-[360px]",
+      /** 768 */
+      "md:h-[400px]"
+    )}
+  >
+    <HeaderBg />
+    <div class="relative">
+      <Navigation client:visible />
+      <HeaderText />
+    </div>
+  </div>
+  <Footer />
+</Layout>
