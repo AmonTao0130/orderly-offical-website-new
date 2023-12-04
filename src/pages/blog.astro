@@ -3,6 +3,7 @@ import Layout from "@/layouts/index.astro";
 import Navigation from "@/components/Navigation";
 import HeaderBg from "@/layouts/blog/HeaderBg";
 import HeaderText from "@/layouts/blog/HeaderText";
+import BlogTab from "@/layouts/blog/BlogTab";
 import Footer from "@/components/Footer";
 import { cn } from "@/utils";
 ---
@@ -38,5 +39,6 @@ import { cn } from "@/utils";
       <HeaderText />
     </div>
   </div>
+  <BlogTab client:visible />
   <Footer />
 </Layout>
