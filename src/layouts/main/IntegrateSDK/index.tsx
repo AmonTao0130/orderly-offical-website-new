@@ -10,6 +10,9 @@ const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
   return (
     <Content id="IntegrateSDK" className={props.className}>
       <BlockTitle>Integrate with Orderly SDK</BlockTitle>
+      {/* <div id="IntegrateSDKTrigger" className="absolute top-[300px]">
+        Trigger
+      </div> */}
       <div
         className={cn(
           /** 375 */
