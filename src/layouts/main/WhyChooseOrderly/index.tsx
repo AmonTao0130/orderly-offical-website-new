@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@/components/Button/index.tsx";
 import Content from "@/components/Content/index.tsx";
 import maximize from "./icons/maximize.svg";
@@ -40,7 +40,8 @@ const data = [
   {
     icon: decentralize.src,
     title: "Complete decentralization",
-    content: "Permissionless, Transparent, and Community-driven.",
+    content:
+      "Collaborative ecosystem powered by permissionless innovation, total transparency, and passionate community.",
   },
   {
     icon: security.src,
@@ -54,10 +55,21 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
   const expandKey = useStore(whyChooseOrderlyExpandKey) || data[0]?.title;
 
   return (
-    <Content className={props.className}>
-      <div className={"lg:flex lg:justify-between"}>
-        <div className="max-w-[677px] lg:max-w-[430px] xl:max-w-[677px] flex justify-between flex-col">
+    <Content id="WhyChooseOrderly" className={cn("relative", props.className)}>
+      <div className="lg:flex lg:justify-between">
+        <div
+          className={cn(
+            "flex justify-between flex-col",
+            /** 375 */
+            "max-w-[677px]",
+            /** 1024 */
+            "lg:max-w-[430px]",
+            /** 1440 */
+            "xl:max-w-[677px]"
+          )}
+        >
           <div
+            id="WhyChooseOrderlyTitle"
             className={cn(
               /** 375 */
               "text-2xl leading-[28.8px]",
