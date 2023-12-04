@@ -71,7 +71,7 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
       <BlockTitle>Use Cases</BlockTitle>
       <div
         className={cn(
-          "flex overflow-hidden",
+          "flex overflow-hidden overflow-x-auto",
           /** 375 */
           "mt-[12px] ",
           /** 768 */
@@ -80,7 +80,6 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
           "lg:justify-center"
         )}
       >
-        {/* TODO: 移动端不能横向滚动 */}
         {titles.map((title, index) => {
           const expanded = expandKey === index;
           return (
