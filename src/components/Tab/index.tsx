@@ -2,10 +2,15 @@ import React from "react";
 import type { PropsWithClassName } from "@/types";
 import { cn } from "@/utils";
 
+export type TabData = {
+  title: string;
+  key: string;
+};
+
 interface TabProps {
-  data: { title: string; key: string }[];
+  data: TabData[];
   expandKey?: string | number;
-  onExpand?: (key: string, index: number) => void;
+  onExpand?: (item: any, index: number) => void;
 }
 
 const Tab: React.FC<TabProps & PropsWithClassName> = (props) => {

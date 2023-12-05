@@ -2,16 +2,19 @@ import React from "react";
 import type { PropsWithClassName } from "@/types";
 import { cn } from "@/utils";
 import Button from "@/components/Button";
+import type { Article } from "@/strapi/type";
 
 export type TBlogIem = {
   title: string;
   description: string;
   img: string;
-  time: string;
+  createdAt: string;
   url: string;
+  slug: string;
 };
 
-const BlogItem: React.FC<TBlogIem & PropsWithClassName> = (props) => {
+const BlogItem: React.FC<Article & PropsWithClassName> = (props) => {
+  const { attributes } = props;
   return (
     <div
       className={cn(
@@ -30,13 +33,13 @@ const BlogItem: React.FC<TBlogIem & PropsWithClassName> = (props) => {
     >
       <img
         className={cn(
-          "w-full h-[162px]",
+          "w-full h-[162px] object-cover",
           /** 375 */
           "rounded-t-[16px]",
           /** 768 */
           "md:rounded-t-[32px]"
         )}
-        src={props.img}
+        src={attributes.cover.data.attributes.formats.small.url}
       />
       <div
         className={cn(
@@ -49,16 +52,22 @@ const BlogItem: React.FC<TBlogIem & PropsWithClassName> = (props) => {
         )}
       >
         <div className="text-base leading-[24px] text-primary-80">
-          {props.time}
+          {attributes.createdAt}
         </div>
         {/* TODO: 添加Articulat CF字体文件 */}
-        <div className="text-xl text-primary leading-[24px] mt-[8px] font-extrabold font-['Articulat_CF']">
-          {props.title}
+        <div className="text-xl text-primary leading-[24px] mt-[8px] font-extrabold font-['Articulat_CF'] min-h-[96px]">
+          {attributes.title}
         </div>
-        <div className="text-base eading-[24px] font-medium text-primary-80 mt-[8px]">
-          {props.description}
+        <div className="text-base eading-[24px] font-medium text-primary-80 mt-[8px] min-h-[72px]">
+          {attributes.description}
         </div>
-        <Button className="mt-[24px]" type="outlined">
+        <Button
+          className="mt-[24px]"
+          type="outlined"
+          onClick={() => {
+            window.open(`/blog/${attributes.slug}`);
+          }}
+        >
           View more
         </Button>
       </div>

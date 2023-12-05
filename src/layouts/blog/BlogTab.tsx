@@ -1,23 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type { PropsWithClassName } from "@/types";
-import Tab from "@/components/Tab";
+import Tab, { type TabData } from "@/components/Tab";
 import { cn } from "@/utils";
 import { blogExpandKey } from "@/store";
 import { useStore } from "@nanostores/react";
+import { getCategories } from "@/strapi/services";
 
-const titles = [
-  "All",
-  "Product updates",
-  "Educational",
-  "Announcements",
-  "Guides",
-  "Research",
-];
+// const titles = [
+//   "All",
+//   "Product updates",
+//   "Educational",
+//   "Announcements",
+//   "Guides",
+//   "Research",
+// ];
 
-const tabData = titles.map((title) => ({ title, key: title }));
+// const tabData = titles.map((title) => ({ title, key: title }));
 
 const BlogTab: React.FC<PropsWithClassName> = (props) => {
-  const expandKey = useStore(blogExpandKey) || titles[0];
+  const expandKey = useStore(blogExpandKey) || "All";
+  const [tabData, setTabData] = useState<TabData[]>([]);
+
+  const getData = async () => {
+    const categories = await getCategories();
+    const list = categories
+      .map((category) => {
+        const { name, slug } = category.attributes;
+        return {
+          title: name,
+          key: slug,
+        };
+      })
+      .filter((item) => !!item.key);
+    setTabData([{ title: "All", key: "All" }, ...list]);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div id="blogTab" className="overflow-hidden">
@@ -32,7 +52,7 @@ const BlogTab: React.FC<PropsWithClassName> = (props) => {
         )}
         data={tabData}
         expandKey={expandKey}
-        onExpand={(key) => {
+        onExpand={(key: string) => {
           blogExpandKey.set(key);
         }}
       />
