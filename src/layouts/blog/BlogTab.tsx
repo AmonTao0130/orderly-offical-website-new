@@ -4,7 +4,6 @@ import Tab from "@/components/Tab";
 import { cn } from "@/utils";
 import { blogExpandKey } from "@/store";
 import { useStore } from "@nanostores/react";
-import Content from "@/components/Content";
 
 const titles = [
   "All",
@@ -21,7 +20,7 @@ const BlogTab: React.FC<PropsWithClassName> = (props) => {
   const expandKey = useStore(blogExpandKey) || titles[0];
 
   return (
-    <Content id="blogTab" className="overflow-hidden">
+    <div id="blogTab" className="overflow-hidden">
       <Tab
         className={cn(
           /** 375 */
@@ -37,7 +36,7 @@ const BlogTab: React.FC<PropsWithClassName> = (props) => {
           blogExpandKey.set(key);
         }}
       />
-    </Content>
+    </div>
   );
 };
 

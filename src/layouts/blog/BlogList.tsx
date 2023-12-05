@@ -1,8 +1,8 @@
 import React from "react";
 import type { PropsWithClassName } from "@/types";
-import Content from "@/components/Content";
 import BlogItem, { type TBlogIem } from "./BlogItem";
-import Pagination from "./Pagination";
+import SmallPagination from "./Pagination.sm";
+import MiddlePagination from "./Pagination.md";
 import Bg from "./imgs/header-bg.png";
 import { cn } from "@/utils";
 
@@ -23,15 +23,16 @@ for (let i = 0; i < 10; i++) {
 
 const BlogList: React.FC<PropsWithClassName> = (props) => {
   return (
-    <Content>
-      <div className={cn("flex flex-wrap mx-[-10px]")}>
+    <div>
+      <div className={cn("flex flex-wrap mx-[-10px]", props.className)}>
         {data.map((item, index) => {
           return <BlogItem key={index} {...item} />;
         })}
       </div>
 
-      <Pagination />
-    </Content>
+      <SmallPagination className="md:hidden mt-[20px]" />
+      <MiddlePagination className="hidden md:flex mt-[40px]" />
+    </div>
   );
 };
 
