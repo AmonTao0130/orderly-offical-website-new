@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import { cn } from "@/utils";
 import BlogList from "@/layouts/blog/BlogList";
 import "../style/index.css";
+import Content from "@/components/Content";
 ---
 
 <!-- 
@@ -41,7 +42,20 @@ import "../style/index.css";
       <HeaderText />
     </div>
   </div>
-  <BlogTab client:visible />
-  <BlogList client:visible />
-  <Footer />
+
+  <Content>
+    <BlogTab client:visible />
+    <BlogList client:visible />
+  </Content>
+
+  <Footer
+    className={cn(
+      /** 375 */
+      "mt-[40px]",
+      /** 768 */
+      "md:mt-[72px]",
+      /** 1024 */
+      "lg:mt-[60px]"
+    )}
+  />
 </Layout>
