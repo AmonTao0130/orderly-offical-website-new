@@ -6,6 +6,8 @@ import HeaderText from "@/layouts/blog/HeaderText";
 import BlogTab from "@/layouts/blog/BlogTab";
 import Footer from "@/components/Footer";
 import { cn } from "@/utils";
+import BlogList from "@/layouts/blog/BlogList";
+import "../style/index.css";
 ---
 
 <!-- 
@@ -40,5 +42,6 @@ import { cn } from "@/utils";
     </div>
   </div>
   <BlogTab client:visible />
+  <BlogList client:visible />
   <Footer />
 </Layout>
