@@ -10,7 +10,13 @@ interface TabProps {
 
 const Tab: React.FC<TabProps & PropsWithClassName> = (props) => {
   return (
-    <div className={cn("flex overflow-x-auto", props.className)}>
+    <div
+      id="tabItem"
+      className={cn(
+        "flex overflow-x-auto invisible-scrollbar cursor-pointer select-none",
+        props.className
+      )}
+    >
       {props.data.map((item, index) => {
         const expanded = props.expandKey === item.key;
         return (

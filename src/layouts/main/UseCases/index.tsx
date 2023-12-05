@@ -71,7 +71,7 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
       <BlockTitle>Use Cases</BlockTitle>
       <div
         className={cn(
-          "flex overflow-hidden overflow-x-auto",
+          "flex overflow-hidden overflow-x-auto invisible-scrollbar cursor-pointer select-none",
           /** 375 */
           "mt-[12px] ",
           /** 768 */

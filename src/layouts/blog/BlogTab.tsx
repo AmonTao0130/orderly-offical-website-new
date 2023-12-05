@@ -21,13 +21,13 @@ const BlogTab: React.FC<PropsWithClassName> = (props) => {
   const expandKey = useStore(blogExpandKey) || titles[0];
 
   return (
-    <Content className="overflow-hidden">
+    <Content id="blogTab" className="overflow-hidden">
       <Tab
         className={cn(
           /** 375 */
-          "my-[20px]",
+          "mt-[20px]",
           /** 768 */
-          "md:my-[40px]",
+          "md:mt-[40px]",
           /** 1024 */
           "lg:justify-center"
         )}
