@@ -10,8 +10,10 @@ import { array2Map, cn } from "@/utils";
 import { getArticles, getUploadFiles } from "@/strapi/services";
 import type { Article, Block, TFile } from "@/strapi/type";
 import { marked } from "marked";
+import "@/layouts/blog/detail/index.css";
 
 marked.use({
+  // breaks: true, // 不生效，使用正则代替
   pedantic: false,
   gfm: true,
 });
@@ -22,9 +24,10 @@ export async function getStaticPaths() {
   const mapFiles: Record<string, TFile> = array2Map(files);
   return articles.map((article) => {
     const blocks = article.attributes.blocks.map((block) => {
+      const html = marked.parse(block.body || "") as string;
       return {
         ...block,
-        html: marked.parse(block.body || ""),
+        html: html?.replace(/\n/g, "<br />"), // 将\n转为换行元素
         url:
           block.__component === "shared.media"
             ? mapFiles[block.id]?.url
@@ -53,12 +56,15 @@ const { articles, article, blocks } = Astro.props;
   <Header article={article} />
   <Content className="flex justify-center">
     <div
+      id="blogDetail"
       class={cn(
         "flex flex-col justify-center",
+        /** 375 */
+        "text-base leading-[28.8px] font-normal mt-[40px]",
         /** 768 */
         "md:w-[688px]",
         /** 1024 */
-        "lg:w-[904px]"
+        "lg:w-[904px] lg:text-xl lg:leading-[36px] lg:mt-[80px]"
       )}
     >
       {

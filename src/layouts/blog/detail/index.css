@@ -1,0 +1,23 @@
+#blogDetail h2 { 
+  font-weight: 700;
+}
+
+@media (min-width: 375px) {
+  #blogDetail h2 {
+    font-size: 20px;
+    line-height: 36px;  
+  }
+}
+
+@media (min-width: 768px) {
+  #blogDetail h2 {
+    font-size: 20px;
+    line-height: 24px;  
+  }
+}
+@media (min-width: 1024px) {
+  #blogDetail h2 {
+    font-size: 32px;
+    line-height: 57.6px;  
+  }
+}
