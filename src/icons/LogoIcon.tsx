@@ -1,11 +1,7 @@
 import React from "react";
 import type { SvgIconProps } from "src/types";
 
-interface LogoIconProps extends SvgIconProps {
-  size?: number;
-}
-
-const LogoIcon: React.FC<LogoIconProps> = (props) => {
+const LogoIcon: React.FC<SvgIconProps> = (props) => {
   const { size = 40, ...rest } = props;
   return (
     <svg

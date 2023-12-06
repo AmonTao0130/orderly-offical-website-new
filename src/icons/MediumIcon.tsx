@@ -2,14 +2,16 @@ import React from "react";
 import type { SvgIconProps } from "src/types";
 
 const MediumIcon: React.FC<SvgIconProps> = (props) => {
+  const { size = 16, ...rest } = props;
+
   return (
     <svg
-      width="16"
-      height="17"
+      width={`${size}px`}
+      height={`${size}px`}
       viewBox="0 0 16 17"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}
+      {...rest}
     >
       <g clipPath="url(#clip0_2191_6106)">
         <path

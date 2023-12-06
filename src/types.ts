@@ -1,4 +1,6 @@
-export type SvgIconProps = React.SVGProps<SVGSVGElement>;
+export type SvgIconProps = React.SVGProps<SVGSVGElement> & {
+  size?: number;
+};
 export type PropsWithClassName = {
   className?: string;
 };
