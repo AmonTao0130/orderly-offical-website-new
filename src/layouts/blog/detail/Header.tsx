@@ -10,7 +10,12 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
+  if (!props.article) {
+    return null;
+  }
+
   const { attributes } = props.article || {};
+
   return (
     <div
       style={{

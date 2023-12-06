@@ -26,6 +26,10 @@ const MoreBlog: React.FC<MoreBlogProps & PropsWithClassName> = (props) => {
     return props.data;
   }, [props.data, width]);
 
+  if (!props.data) {
+    return null;
+  }
+
   return (
     <>
       <div className="text-center my-[40px] md:hidden">
