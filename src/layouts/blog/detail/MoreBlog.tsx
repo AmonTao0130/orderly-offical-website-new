@@ -27,41 +27,55 @@ const MoreBlog: React.FC<MoreBlogProps & PropsWithClassName> = (props) => {
   }, [props.data, width]);
 
   return (
-    <div
-      className={cn(
-        "border-t-[1px] border-t-solid border-t-primary-20",
-        props.className
-      )}
-    >
-      <Content className="my-[60px]">
-        <div className="flex justify-between items-center">
-          <div
-            className={cn(
-              "font-bold text-primary-100",
-              /** 768px */
-              "md:text-2xl md:leading-[43.2px]",
-              /** 1024 */
-              "lg:text-[32px] lg:leading-[57.6px]"
-            )}
-          >
-            More blog posts
+    <>
+      <div className="text-center my-[40px] md:hidden">
+        <Button
+          type="outlined"
+          onClick={() => {
+            window.open("/blog");
+          }}
+        >
+          View all blog posts
+        </Button>
+      </div>
+
+      <div
+        className={cn(
+          "hidden md:block",
+          "border-t-[1px] border-t-solid border-t-primary-20",
+          props.className
+        )}
+      >
+        <Content className="my-[60px]">
+          <div className="flex justify-between items-center">
+            <div
+              className={cn(
+                "font-bold text-primary-100",
+                /** 768px */
+                "md:text-2xl md:leading-[43.2px]",
+                /** 1024 */
+                "lg:text-[32px] lg:leading-[57.6px]"
+              )}
+            >
+              More blog posts
+            </div>
+            <Button
+              type="outlined"
+              onClick={() => {
+                window.open("/blog");
+              }}
+            >
+              View all blog posts
+            </Button>
           </div>
-          <Button
-            type="outlined"
-            onClick={() => {
-              window.open("/blog");
-            }}
-          >
-            View all blog posts
-          </Button>
-        </div>
-        <div className="flex flex-wrap">
-          {data.map((item, index) => {
-            return <BlogItem key={item.id} {...item} />;
-          })}
-        </div>
-      </Content>
-    </div>
+          <div className="flex flex-wrap">
+            {data.map((item, index) => {
+              return <BlogItem key={item.id} {...item} />;
+            })}
+          </div>
+        </Content>
+      </div>
+    </>
   );
 };
 
