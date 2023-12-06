@@ -1,0 +1,80 @@
+---
+import Layout from "@/layouts/index.astro";
+import Content from "@/components/Content";
+import Navigation from "@/components/Navigation";
+import Header from "@/layouts/blog/detail/Header";
+import MoreBlog from "@/layouts/blog/detail/MoreBlog";
+import Footer from "@/components/Footer";
+import { array2Map, cn } from "@/utils";
+import { getArticles, getUploadFiles } from "@/strapi/services";
+import type { Article, Block, TFile } from "@/strapi/type";
+import { marked } from "marked";
+
+marked.use({
+  pedantic: false,
+  gfm: true,
+});
+
+export async function getStaticPaths() {
+  const articles = await getArticles();
+  const files = await getUploadFiles();
+  const mapFiles: Record<string, TFile> = array2Map(files);
+  return articles.map((article) => {
+    const blocks = article.attributes.blocks.map((block) => {
+      return {
+        ...block,
+        html: marked.parse(block.body || ""),
+        url:
+          block.__component === "shared.media"
+            ? mapFiles[block.id]?.url
+            : undefined,
+      };
+    });
+    return {
+      params: { slug: article.attributes.slug },
+      props: { articles, article, blocks, files },
+    };
+  });
+}
+
+type Props = {
+  articles: Article[];
+  article: Article;
+  blocks: Block[];
+};
+
+const { articles, article, blocks } = Astro.props;
+---
+
+<Layout>
+  <Navigation client:visible />
+  <Header article={article} />
+  <Content className="flex justify-center">
+    <div
+      class={cn(
+        "flex flex-col justify-center",
+        /** 768 */
+        "md:w-[688px]",
+        /** 1024 */
+        "lg:w-[904px]"
+      )}
+    >
+      {
+        blocks.map((block) => {
+          if (block.url) {
+            return <img class="py-[48px]" src={block.url} />;
+          }
+          return <div class="mt-[30px]" set:html={block.html} />;
+        })
+      }
+    </div>
+  </Content>
+
+  <MoreBlog
+    className={cn("mt-[80px]")}
+    data={articles.slice(0, 3)}
+    client:visible
+  />
+
+  <Footer />
+</Layout>

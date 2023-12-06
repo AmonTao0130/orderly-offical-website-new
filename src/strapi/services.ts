@@ -1,5 +1,5 @@
 import fetchApi from "@/strapi";
-import type { Article, Categorg, Meta } from "@/strapi/type";
+import type { Article, Categorg, Meta, TFile } from "@/strapi/type";
 
 export async function getCategories() {
   return await fetchApi<Categorg[]>({
@@ -14,9 +14,11 @@ export async function getArticles() {
     endpoint: "articles",
     wrappedByKey: "data",
     query: {
-      "populate[0]": "cover",
-      "populate[1]": "category",
       // populate: "*",
+      populate: ["cover", "category", "blocks"],
+      pagination: {
+        pageSize: 1000,
+      },
     },
   });
 }
@@ -27,7 +29,7 @@ export async function getArticlesData() {
     meta: Meta;
   }>({
     endpoint: "articles",
-    wrappedByKey: "",
+    wrappedByKey: "data",
     query: {
       populate: "*",
       // "populate[0]": "cover",
@@ -39,11 +41,15 @@ export async function getArticlesData() {
 export async function getArticleBySlug(slug: string = "") {
   return await fetchApi<Article[]>({
     endpoint: "articles",
-    wrappedByKey: "data",
-    wrappedByList: true,
     query: {
       "populate[0]": "cover",
       "filters[slug][$eq]": slug,
     },
+  });
+}
+
+export async function getUploadFiles() {
+  return await fetchApi<TFile[]>({
+    endpoint: "upload/files",
   });
 }

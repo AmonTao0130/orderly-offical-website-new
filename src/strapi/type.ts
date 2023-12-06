@@ -46,8 +46,23 @@ export type Article = {
         };
       };
     };
-    blocks: { id: number; body?: string }[];
+    Author: {
+      id: number;
+      attributes: {
+        name: string;
+        email: string;
+      };
+    };
+    blocks: Block[];
   };
+};
+
+export type Block = {
+  id: number;
+  __component: string;
+  body?: string;
+  url?: string;
+  html?: string;
 };
 
 export type Categorg = {
@@ -70,4 +85,12 @@ export type TPagination = {
 
 export type Meta = {
   pagination: TPagination;
+};
+
+export type TFile = {
+  id: number;
+  url: string;
+  name: string;
+  width: number;
+  height: number;
 };

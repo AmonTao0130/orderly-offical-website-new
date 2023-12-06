@@ -1,15 +1,21 @@
 import React from "react";
 import type { PropsWithClassName } from "@/types";
-import { cn } from "@/utils";
-import Bg from "../imgs/header-bg.png";
+import { cn, formatDate } from "@/utils";
 import Content from "@/components/Content";
+import type { Article } from "@/strapi/type";
+import { format } from "date-fns";
 
-const Header: React.FC<PropsWithClassName> = (props) => {
+interface HeaderProps {
+  article: Article;
+}
+
+const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
+  const { attributes } = props.article || {};
   return (
     <div
       style={{
         background:
-          "radial-gradient(53.11% 53.11% at 50% 100%, rgba(84, 0, 190, 0.8) 0%, rgba(77, 8, 165, 0) 100%), #0A0A0A;",
+          "radial-gradient(53.11% 53.11% at 50% 100%, rgba(84, 0, 190, 0.8) 0%, rgba(77, 8, 165, 0) 100%), #0A0A0A",
       }}
     >
       <Content
@@ -46,7 +52,7 @@ const Header: React.FC<PropsWithClassName> = (props) => {
                 "md:text-xl md:leading-[30px]"
               )}
             >
-              Aug 25, 2023
+              {formatDate(attributes.createdAt)}
             </div>
             <div
               className={cn(
@@ -55,7 +61,7 @@ const Header: React.FC<PropsWithClassName> = (props) => {
                 "border-[1px] border-solid border-primary-50 rounded-full"
               )}
             >
-              Product update
+              {attributes.category.data.attributes.name}
             </div>
           </div>
           {/* TODO: 添加Articulat CF字体文件 */}
@@ -71,8 +77,7 @@ const Header: React.FC<PropsWithClassName> = (props) => {
               "xl:text-[48px] xl:leading-[57.6px]"
             )}
           >
-            Introducing Orderly App Chain — Powering Orderly Omnichain
-            Settlement Layer
+            {attributes.title}
           </div>
           <div
             className={cn(
@@ -97,7 +102,7 @@ const Header: React.FC<PropsWithClassName> = (props) => {
             /** 1440 */
             "xl:w-[620px] xl:h-[348.75px] xl:rounded-[24px]"
           )}
-          src={Bg.src}
+          src={attributes.cover.data.attributes.formats.small.url}
         />
       </Content>
     </div>

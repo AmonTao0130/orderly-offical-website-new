@@ -1,6 +1,6 @@
 import React from "react";
 import type { PropsWithClassName } from "@/types";
-import { cn } from "@/utils";
+import { cn, formatDate } from "@/utils";
 import Button from "@/components/Button";
 import type { Article } from "@/strapi/type";
 
@@ -18,7 +18,7 @@ const BlogItem: React.FC<Article & PropsWithClassName> = (props) => {
   return (
     <div
       className={cn(
-        " mx-[10px] rounded-[32px]",
+        "mx-[10px] rounded-[32px]",
         /** 375 */
         "w-full mt-[20px]",
         /** 768 */
@@ -54,7 +54,7 @@ const BlogItem: React.FC<Article & PropsWithClassName> = (props) => {
         )}
       >
         <div className="text-base leading-[24px] text-primary-80">
-          {attributes.createdAt}
+          {formatDate(attributes.createdAt)}
         </div>
         <div className="h-[152px]">
           {/* TODO: 添加Articulat CF字体文件 */}

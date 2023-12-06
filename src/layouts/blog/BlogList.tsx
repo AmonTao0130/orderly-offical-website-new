@@ -1,11 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import type { PropsWithClassName } from "@/types";
 import BlogItem, { type TBlogIem } from "./BlogItem";
-import Bg from "./imgs/header-bg.png";
 import { cn } from "@/utils";
 import fetchApi from "@/strapi";
 import { type Article, type TPagination } from "@/strapi/type";
-import { getArticlesData } from "@/strapi/services";
+import { getArticles, getArticlesData } from "@/strapi/services";
 import { useStore } from "@nanostores/react";
 import { blogExpandKey } from "@/store";
 import Pagination, { type PaginationProps } from "./Pagination";
@@ -76,9 +75,7 @@ const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
   }, [articles, pageIndex]);
 
   // const getData = async () => {
-  //   const res = await getArticlesData();
-  //   setArticles(res.data);
-  //   setPagination(res.meta.pagination);
+  //   const res = await getArticles();
   // };
 
   // useEffect(() => {
@@ -89,7 +86,7 @@ const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
     <div>
       <div className={cn("flex flex-wrap mx-[-10px]", props.className)}>
         {pageIndexData.map((item, index) => {
-          return <BlogItem key={index} {...item} />;
+          return <BlogItem key={item.id} {...item} />;
         })}
       </div>
 
