@@ -17,27 +17,31 @@ import { getCategories } from "@/strapi/services";
 
 // const tabData = titles.map((title) => ({ title, key: title }));
 
-const BlogTab: React.FC<PropsWithClassName> = (props) => {
+interface BlogTabProps {
+  data: TabData[];
+}
+
+const BlogTab: React.FC<BlogTabProps & PropsWithClassName> = (props) => {
   const expandKey = useStore(blogExpandKey) || "All";
-  const [tabData, setTabData] = useState<TabData[]>([]);
+  // const [tabData, setTabData] = useState<TabData[]>([]);
 
-  const getData = async () => {
-    const categories = await getCategories();
-    const list = categories
-      .map((category) => {
-        const { name, slug } = category.attributes;
-        return {
-          title: name,
-          key: slug,
-        };
-      })
-      .filter((item) => !!item.key);
-    setTabData([{ title: "All", key: "All" }, ...list]);
-  };
+  // const getData = async () => {
+  //   const categories = await getCategories();
+  //   const list = categories
+  //     .map((category) => {
+  //       const { name, slug } = category.attributes;
+  //       return {
+  //         title: name,
+  //         key: slug,
+  //       };
+  //     })
+  //     .filter((item) => !!item.key);
+  //   setTabData([{ title: "All", key: "All" }, ...list]);
+  // };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   return (
     <div id="blogTab" className="overflow-hidden">
@@ -50,7 +54,7 @@ const BlogTab: React.FC<PropsWithClassName> = (props) => {
           /** 1024 */
           "lg:justify-center"
         )}
-        data={tabData}
+        data={props.data}
         expandKey={expandKey}
         onExpand={(key: string) => {
           blogExpandKey.set(key);

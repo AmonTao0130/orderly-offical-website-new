@@ -33,11 +33,13 @@ const BlogItem: React.FC<Article & PropsWithClassName> = (props) => {
     >
       <img
         className={cn(
-          "w-full h-[162px] object-cover",
+          "w-full object-cover",
           /** 375 */
-          "rounded-t-[16px]",
+          "h-[162px] rounded-t-[16px]",
           /** 768 */
-          "md:rounded-t-[32px]"
+          "md:rounded-t-[32px]",
+          /** 1440 */
+          "xl:h-[225px]"
         )}
         src={attributes.cover.data.attributes.formats.small.url}
       />
@@ -54,13 +56,16 @@ const BlogItem: React.FC<Article & PropsWithClassName> = (props) => {
         <div className="text-base leading-[24px] text-primary-80">
           {attributes.createdAt}
         </div>
-        {/* TODO: 添加Articulat CF字体文件 */}
-        <div className="text-xl text-primary leading-[24px] mt-[8px] font-extrabold font-['Articulat_CF'] min-h-[96px]">
-          {attributes.title}
+        <div className="h-[152px]">
+          {/* TODO: 添加Articulat CF字体文件 */}
+          <div className="text-xl text-primary leading-[24px] mt-[8px] font-extrabold font-['Articulat_CF'] max-h-[72px] text-ellipsis line-clamp-3">
+            {attributes.title}
+          </div>
+          <div className="text-base eading-[24px] font-medium text-primary-80 mt-[8px] max-h-[72px] text-ellipsis line-clamp-3">
+            {attributes.description}
+          </div>
         </div>
-        <div className="text-base eading-[24px] font-medium text-primary-80 mt-[8px] min-h-[72px]">
-          {attributes.description}
-        </div>
+
         <Button
           className="mt-[24px]"
           type="outlined"

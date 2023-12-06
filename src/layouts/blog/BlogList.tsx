@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import type { PropsWithClassName } from "@/types";
 import BlogItem, { type TBlogIem } from "./BlogItem";
-import SmallPagination from "./Pagination.sm";
-import MiddlePagination from "./Pagination.md";
 import Bg from "./imgs/header-bg.png";
 import { cn } from "@/utils";
 import fetchApi from "@/strapi";
-import { type Article, type Pagination } from "@/strapi/type";
+import { type Article, type TPagination } from "@/strapi/type";
 import { getArticlesData } from "@/strapi/services";
 import { useStore } from "@nanostores/react";
 import { blogExpandKey } from "@/store";
+import Pagination, { type PaginationProps } from "./Pagination";
+import { useSize } from "@/hooks/useSize";
+import { getPageData } from "@/utils/strapi";
 
 // const item = {
 //   title:
@@ -26,31 +27,73 @@ import { blogExpandKey } from "@/store";
 //   data.push(item);
 // }
 
-const BlogList: React.FC<PropsWithClassName> = (props) => {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [pagination, setPagination] = useState<Pagination>();
-  const expandKey = useStore(blogExpandKey) || "All";
+interface BlogListProps {
+  data: Article[];
+}
 
-  const getData = async () => {
-    const res = await getArticlesData();
-    setArticles(res.data);
-    setPagination(res.meta.pagination);
-  };
+const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
+  const [articles, setArticles] = useState<Article[]>(props.data);
+  const [pageIndex, setPageIndex] = useState(1);
+  // const [pagination, setPagination] = useState<Pagination>();
+  const expandKey = useStore(blogExpandKey) || "All";
+  // const { width } = useSize();
 
   useEffect(() => {
-    getData();
-  }, [expandKey]);
+    const filteredArticles =
+      expandKey === "All"
+        ? props.data
+        : props.data.filter(
+            (article) =>
+              article.attributes.category.data.attributes.slug === expandKey
+          );
+    setArticles(filteredArticles);
+  }, [props.data, expandKey]);
+
+  const { pageIndexData, pagination } = useMemo(() => {
+    const pageSize = 6;
+    const pageData = getPageData(articles, pageSize, pageIndex);
+    const pageCount = pageData.length;
+    const pageIndexData = pageData[pageIndex - 1];
+    return {
+      pageIndexData,
+      pagination: {
+        pageIndex,
+        pageSize,
+        rangePage:
+          pageIndexData.length === 1 ? "1" : `1-${pageIndexData.length}`,
+        pageCount,
+        total: articles.length,
+        hasPrevious: pageIndex > 1,
+        hasNext: pageIndex < pageCount,
+        onPrevious: () => {
+          setPageIndex(pageIndex - 1);
+        },
+        onNext: () => {
+          setPageIndex(pageIndex + 1);
+        },
+      } as PaginationProps,
+    };
+  }, [articles, pageIndex]);
+
+  // const getData = async () => {
+  //   const res = await getArticlesData();
+  //   setArticles(res.data);
+  //   setPagination(res.meta.pagination);
+  // };
+
+  // useEffect(() => {
+  //   getData();
+  // }, [expandKey]);
 
   return (
     <div>
       <div className={cn("flex flex-wrap mx-[-10px]", props.className)}>
-        {articles.map((item, index) => {
+        {pageIndexData.map((item, index) => {
           return <BlogItem key={index} {...item} />;
         })}
       </div>
 
-      <SmallPagination className="md:hidden mt-[20px]" />
-      <MiddlePagination className="hidden md:flex mt-[40px]" />
+      <Pagination {...pagination} />
     </div>
   );
 };

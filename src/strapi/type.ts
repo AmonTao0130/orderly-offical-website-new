@@ -46,6 +46,7 @@ export type Article = {
         };
       };
     };
+    blocks: { id: number; body?: string }[];
   };
 };
 
@@ -60,7 +61,7 @@ export type Categorg = {
   };
 };
 
-export type Pagination = {
+export type TPagination = {
   page: number;
   pageSize: number;
   pageCount: number;
@@ -68,5 +69,5 @@ export type Pagination = {
 };
 
 export type Meta = {
-  pagination: Pagination;
+  pagination: TPagination;
 };

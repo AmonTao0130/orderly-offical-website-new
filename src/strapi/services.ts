@@ -29,9 +29,21 @@ export async function getArticlesData() {
     endpoint: "articles",
     wrappedByKey: "",
     query: {
-      // populate: "*",
+      populate: "*",
+      // "populate[0]": "cover",
+      // "populate[1]": "category",
+    },
+  });
+}
+
+export async function getArticleBySlug(slug: string = "") {
+  return await fetchApi<Article[]>({
+    endpoint: "articles",
+    wrappedByKey: "data",
+    wrappedByList: true,
+    query: {
       "populate[0]": "cover",
-      "populate[1]": "categories",
+      "filters[slug][$eq]": slug,
     },
   });
 }
