@@ -4,6 +4,7 @@ import Content from "@/components/Content";
 import Navigation from "@/components/Navigation";
 import Header from "@/layouts/blog/detail/Header";
 import MoreBlog from "@/layouts/blog/detail/MoreBlog";
+import DetailFooter from "@/layouts/blog/detail/Footer";
 import Footer from "@/components/Footer";
 import { array2Map, cn } from "@/utils";
 import { getArticles, getUploadFiles } from "@/strapi/services";
@@ -35,6 +36,7 @@ export async function getStaticPaths() {
       props: { articles, article, blocks, files },
     };
   });
+  // return [{ params: { slug: "orderly-network-partners-here-wallet" } }];
 }
 
 type Props = {
@@ -60,19 +62,20 @@ const { articles, article, blocks } = Astro.props;
       )}
     >
       {
-        blocks.map((block) => {
+        blocks?.map((block) => {
           if (block.url) {
             return <img class="py-[48px]" src={block.url} />;
           }
           return <div class="mt-[30px]" set:html={block.html} />;
         })
       }
+      <DetailFooter />
     </div>
   </Content>
 
   <MoreBlog
     className={cn("mt-[80px]")}
-    data={articles.slice(0, 3)}
+    data={articles?.slice(0, 3)}
     client:visible
   />
 
