@@ -55,7 +55,7 @@ const HeaderBg: React.FC<PropsWithClassName> = (props) => {
       />
       <div
         className={cn(
-          "bg-[#2B0089] blur-[200px] rotate-[14.57deg] overflow-hidden",
+          "hidden bg-[#2B0089] blur-[200px] rotate-[14.57deg] overflow-hidden",
           "absolute top-[60px] left-[-570px]",
           /** 375 */
           "w-[388px] h-[353px]",
@@ -71,7 +71,7 @@ const HeaderBg: React.FC<PropsWithClassName> = (props) => {
       ></div>
       <div
         className={cn(
-          "bg-[#2B0089] blur-[200px] rotate-[14.57deg] overflow-hidden",
+          "hidden bg-[#2B0089] blur-[200px] rotate-[14.57deg] overflow-hidden",
           "absolute top-[-57px] right-[-430px]",
           /** 375 */
           "w-[476px] h-[432px]",

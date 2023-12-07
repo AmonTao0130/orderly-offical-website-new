@@ -8,6 +8,8 @@ import Statistics from "@/layouts/ecosystem/Statistics";
 import EcosystemTab from "@/layouts/ecosystem/EcosystemTab";
 import Footer from "@/components/Footer";
 import { cn } from "@/utils";
+import CardList from "@/layouts/ecosystem/CardList";
+import CardBg from "@/layouts/ecosystem/CardBg";
 ---
 
 <Layout title="orderly.network/ecosystem">
@@ -33,7 +35,27 @@ import { cn } from "@/utils";
       </Content>
     </div>
   </div>
-  <EcosystemTab />
-</Layout>
+  <div class="relative">
+    <!-- <CardBg /> -->
+    <div>
+      <Content>
+        <EcosystemTab client:visible />
+        <CardList client:visible />
+      </Content>
 
-<Footer client:visible />
+      <Footer
+        className={cn(
+          /** 375 */
+          "mt-[40px]",
+          /** 768 */
+          "md:mt-[60px]",
+          /** 1024 */
+          "lg",
+          /** 1440 */
+          "xl"
+        )}
+        client:visible
+      />
+    </div>
+  </div>
+</Layout>
