@@ -11,7 +11,7 @@ const { className } = Astro.props;
 <div class={cn("text-center", className)}>
   <div
     class={cn(
-      "text-primary-100",
+      "font-title font-bold text-primary-100",
       /** 375 */
       "text-[32px] leading-[38.4xp]",
       /** 768 */
@@ -20,16 +20,14 @@ const { className } = Astro.props;
       "lg:text-6xl lg:leading-[76.8px] "
     )}
   >
-    <div>
-      The permissionless <br class="md:hidden" />liquidity <br
-        class="hidden md:inline"
-      />layer for <br class="md:hidden" />Web3 trading
-    </div>
+    The permissionless <br class="md:hidden" />liquidity <br
+      class="hidden md:inline"
+    />layer for <br class="md:hidden" />Web3 trading
   </div>
 
   <div
     class={cn(
-      " text-primary-80 ",
+      "text-primary-80 ",
       /** 375 */
       "text-[13px] leading-[19.5px] mt-[16px]",
       /** 768 */

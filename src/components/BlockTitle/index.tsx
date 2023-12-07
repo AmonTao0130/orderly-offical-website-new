@@ -5,7 +5,7 @@ const BlockTitle: React.FC<PropsWithChildren> = (props) => {
   return (
     <div
       className={cn(
-        "text-center",
+        "font-title text-center",
         /** 375 */
         "text-2xl leading-[24px]",
         /** 768 */

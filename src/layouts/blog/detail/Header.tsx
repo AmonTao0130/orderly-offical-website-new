@@ -69,11 +69,10 @@ const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
               {attributes.category.data.attributes.name}
             </div>
           </div>
-          {/* TODO: 添加Articulat CF字体文件 */}
           <div
             className={cn(
               /** 375 */
-              "text-2xl leading-[28.8px] text-primary font-bold font-['Articulat_CF'] mt-[20px]",
+              "text-2xl leading-[28.8px] text-primary font-bold font-title mt-[20px]",
               /** 768 */
               "md:text-[32px] md:leading-[38.4px]",
               /** 1024 */

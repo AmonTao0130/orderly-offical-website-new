@@ -9,7 +9,7 @@ const GetStart: React.FC<PropsWithClassName> = (props) => {
       <div
         className={cn(
           /** 375 */
-          "text-[22px] leading-[26px]",
+          "font-title text-[22px] leading-[26px]",
           /** 768 */
           "md:text-4xl leading-[48px]",
           /** 1024 */

@@ -139,7 +139,7 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
         {/* <div className="absolute top-0 left-0 z-10 w-full h-full rounded-[24px]"></div> */}
         <div
           className={cn(
-            "text-primay",
+            "font-title text-primay",
             /** 375 */
             "text-2xl leading-[28.8px]",
             /** 768 */

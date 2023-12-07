@@ -72,7 +72,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
             id="WhyChooseOrderlyTitle"
             className={cn(
               /** 375 */
-              "text-2xl leading-[28.8px]",
+              "text-2xl leading-[28.8px] font-title",
               /** 768 */
               "md:text-4xl md:leading-[48px]",
               /** 1024 */
@@ -97,7 +97,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
             return (
               <div
                 className={cn(
-                  "text-primary-100",
+                  "font-title text-primary-100",
                   /** 375 */
                   "py-[24px]",
                   /** 768 */

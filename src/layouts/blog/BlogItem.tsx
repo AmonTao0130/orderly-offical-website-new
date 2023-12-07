@@ -57,8 +57,7 @@ const BlogItem: React.FC<Article & PropsWithClassName> = (props) => {
           {formatDate(attributes.createdAt)}
         </div>
         <div className="h-[152px]">
-          {/* TODO: 添加Articulat CF字体文件 */}
-          <div className="text-xl text-primary leading-[24px] mt-[8px] font-extrabold font-['Articulat_CF'] max-h-[72px] text-ellipsis line-clamp-3">
+          <div className="text-xl text-primary leading-[24px] mt-[8px] font-extrabold font-title max-h-[72px] text-ellipsis line-clamp-3">
             {attributes.title}
           </div>
           <div className="text-base eading-[24px] font-medium text-primary-80 mt-[8px] max-h-[72px] text-ellipsis line-clamp-3">

@@ -35,6 +35,9 @@ export default {
       "8xl": "80px",
     },
     extend: {
+      fontFamily: {
+        title: "'Articulat CF', sans-serif",
+      },
       colors: {
         primary: {
           100: "rgba(255, 255, 255, 1)",
@@ -63,9 +66,8 @@ export default {
     plugin(function ({ addBase }) {
       const baseCSS = {
         color: "white",
-        // backgroundColor: "#1E1E1E",
         backgroundColor: "#000",
-        fontFamily: "Manrope",
+        fontFamily: "'Manrope', sans-serif",
         fontWeight: "600",
         margin: 0,
         "::selection": {
