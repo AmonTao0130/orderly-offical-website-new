@@ -51,7 +51,7 @@ type Props = {
 const { articles, article, blocks } = Astro.props;
 ---
 
-<Layout>
+<Layout title={`orderly.network/blog/${article.attributes.title}`}>
   <Navigation client:visible />
   <Header article={article} />
   <Content className="flex justify-center">
