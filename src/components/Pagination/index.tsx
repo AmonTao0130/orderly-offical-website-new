@@ -2,6 +2,7 @@ import React from "react";
 import type { PropsWithClassName } from "@/types";
 import SmallPagination from "./Pagination.sm";
 import MiddlePagination from "./Pagination.md";
+import { cn } from "@/utils";
 
 export interface PaginationProps {
   pageData: number;
@@ -19,10 +20,10 @@ export interface PaginationProps {
 
 const Pagination: React.FC<PaginationProps & PropsWithClassName> = (props) => {
   return (
-    <>
+    <div className={props.className}>
       <SmallPagination className="md:hidden mt-[20px]" {...props} />
       <MiddlePagination className="hidden md:flex mt-[40px]" {...props} />
-    </>
+    </div>
   );
 };
 

@@ -7,7 +7,7 @@ import { type Article, type TPagination } from "@/strapi/type";
 import { getArticles, getArticlesData } from "@/strapi/services";
 import { useStore } from "@nanostores/react";
 import { blogExpandKey } from "@/store";
-import Pagination, { type PaginationProps } from "./Pagination";
+import Pagination, { type PaginationProps } from "../../components/Pagination";
 import { useSize } from "@/hooks/useSize";
 import { getPageData } from "@/utils/strapi";
 
