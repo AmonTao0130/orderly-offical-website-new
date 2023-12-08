@@ -24,7 +24,7 @@ const CardList: React.FC<PropsWithClassName> = (props) => {
   }, [expandKey]);
 
   const { pageIndexData, pagination } = useMemo(() => {
-    const pageSize = 6;
+    const pageSize = 12;
     const pageData = getPageData(list, pageSize, pageIndex);
     const pageCount = pageData.length;
     const pageIndexData = pageData[pageIndex - 1];
