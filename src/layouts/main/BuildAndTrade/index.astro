@@ -2,6 +2,7 @@
 import Button from "@/components/Button";
 import { cn } from "@/utils";
 import type { PropsWithClassName } from "@/types";
+import { Hyperlink } from "@/utils/constant";
 
 type Props = PropsWithClassName;
 
@@ -50,8 +51,10 @@ const { className } = Astro.props;
       "md:mt-[24px]"
     )}
   >
-    <Button>Build with Orderly</Button>
+    <Button href={Hyperlink.Main.BuildWithOrderly}>Build with Orderly</Button>
+
     <Button
+      href={Hyperlink.Main.TradeOnOrderly}
       type="outlined"
       className={cn(
         /** 375 */

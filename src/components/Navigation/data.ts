@@ -1,3 +1,4 @@
+import { Hyperlink } from "@/utils/constant";
 import type { HTMLAttributeAnchorTarget } from "react";
 
 export default [
@@ -6,19 +7,19 @@ export default [
     children: [
       {
         title: "Documentation",
-        url: "https://orderly.network/docs/getting-started/what-is-orderly-network",
+        url: Hyperlink.Developers.Documentation,
         target: "_blank",
         showArrow: true,
       },
       {
         title: "GitHub",
-        url: "https://github.com/OrderlyNetwork",
+        url: Hyperlink.Developers.GitHub,
         target: "_blank",
         showArrow: true,
       },
       {
         title: "Orderly SDK",
-        url: "https://sdk.orderly.network/docs/hooks/overview",
+        url: Hyperlink.Developers.OrderlySDK,
         target: "_blank",
         isNew: true,
         showArrow: true,
@@ -30,11 +31,11 @@ export default [
     children: [
       {
         title: "Trading dApps",
-        url: "/docs/trade-on-orderly/trading-guis",
+        url: Hyperlink.Traders.TradingdApps,
       },
       {
         title: "API Trading",
-        url: "https://orderly.network/docs/trade-on-orderly/trade-on-orderly",
+        url: Hyperlink.Traders.APITrading,
         target: "_blank",
         showArrow: true,
       },
@@ -45,15 +46,15 @@ export default [
     children: [
       {
         title: "Partners",
-        url: "/partners",
+        url: Hyperlink.Ecosystem.Partners,
       },
       {
         title: "Blog",
-        url: "/blog",
+        url: Hyperlink.Ecosystem.Blog,
       },
       {
         title: "Radiance Ventures",
-        url: "https://radianceventures.io/",
+        url: Hyperlink.Ecosystem.RadianceVentures,
         target: "_blank",
         showArrow: true,
       },
@@ -64,17 +65,17 @@ export default [
     children: [
       {
         title: "Team",
-        url: "/team",
+        url: Hyperlink.About.Team,
       },
       {
         title: "Press Kit",
-        url: "https://drive.google.com/drive/u/0/folders/1Nn3iwYqYxqIFGZbnu-mfUvaTVHrY5G1T",
+        url: Hyperlink.About.PressKit,
         target: "_blank",
         showArrow: true,
       },
       {
         title: "Careers",
-        url: "https://boards.greenhouse.io/orderlynetwork",
+        url: Hyperlink.About.Careers,
         target: "_blank",
         showArrow: true,
       },
@@ -87,15 +88,15 @@ export default [
     children: [
       {
         title: "Social Quest",
-        url: "https://orderly.network/carnival",
+        url: Hyperlink.SocialCarnival.SocialQuest,
       },
       {
         title: "Lottery",
-        url: "https://lottery.orderly.network",
+        url: Hyperlink.SocialCarnival.Lottery,
       },
       {
         title: "Referral",
-        url: "https://referral.orderly.network",
+        url: Hyperlink.SocialCarnival.Referral,
       },
     ],
   },

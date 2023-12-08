@@ -11,6 +11,7 @@ import { cn } from "@/utils/index.ts";
 import { useStore } from "@nanostores/react";
 import { whyChooseOrderlyExpandKey } from "@/store";
 import type { PropsWithClassName } from "@/types";
+import { Hyperlink } from "@/utils/constant";
 
 const data = [
   {
@@ -82,10 +83,15 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
             Discover why builders <br className="lg:hidden" /> choose Orderly
           </div>
           <div className="mt-[16px] md:mt-[18px] lg:mt-0">
-            <Button type="outlined" showArrow>
+            <Button type="outlined" showArrow href={Hyperlink.Main.ExploreDocs}>
               Explore docs
             </Button>
-            <Button className="ml-[8px] md:ml-[12px]" type="outlined" showArrow>
+            <Button
+              className="ml-[8px] md:ml-[12px]"
+              type="outlined"
+              showArrow
+              href={Hyperlink.Main.ViewAuditReports}
+            >
               View audit reports
             </Button>
           </div>

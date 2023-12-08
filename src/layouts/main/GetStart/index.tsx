@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@/components/Button";
 import type { PropsWithClassName } from "@/types";
 import { cn } from "@/utils";
+import { Hyperlink } from "@/utils/constant";
 
 const GetStart: React.FC<PropsWithClassName> = (props) => {
   return (
@@ -21,6 +22,7 @@ const GetStart: React.FC<PropsWithClassName> = (props) => {
         Get started with Orderly
       </div>
       <Button
+        href={Hyperlink.Main.DropUsALine}
         className={cn(
           /** 375 */
           "mt-[16px]",

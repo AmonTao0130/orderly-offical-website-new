@@ -13,6 +13,7 @@ import TradingBots from "./imgs/TradingBots.png";
 import Hedging from "./imgs/Hedging.png";
 import GamesdApps from "./imgs/GamesdApps.png";
 import type { PropsWithClassName } from "@/types";
+import { Hyperlink } from "@/utils/constant";
 
 const data = [
   {
@@ -168,6 +169,7 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
             /** 768 */
             "md:mt-[40px]"
           )}
+          href={Hyperlink.Main.StartBuildingNow}
         >
           Start building now
         </Button>

@@ -1,5 +1,6 @@
 import React, {
   type ButtonHTMLAttributes,
+  type HTMLAttributeAnchorTarget,
   type PropsWithChildren,
 } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -9,6 +10,7 @@ import ArrowRightTopIcon from "../../icons/ArrowRightTopIcon";
 const buttonVariants = cva(
   [
     "inline-flex justify-center items-center text-white font-bold text-sm lg:text-base px-[20px] lg:px-[24px] h-[40px] lg:h-[52px] rounded-full cursor-pointer",
+    "transition-all duration-300",
   ],
   {
     variants: {
@@ -56,31 +58,35 @@ export interface ButtonProps
     >,
     VariantProps<typeof buttonVariants> {
   showArrow?: boolean;
+  href?: string;
+  target?: HTMLAttributeAnchorTarget;
 }
 
 const Button: React.FC<ButtonProps & PropsWithChildren> = (props) => {
-  const { type, showArrow, disabled, className } = props;
+  const { type, showArrow, disabled, className, href, target } = props;
 
   return (
-    <button
-      className={cn(
-        buttonVariants({ type }),
-        disabled &&
-          "text-white/[0.5] hover:text-white/[0.5] cursor-not-allowed",
-        type === "secondary" &&
+    <a href={href} target={target}>
+      <button
+        className={cn(
+          buttonVariants({ type }),
           disabled &&
-          "border-white/[0.4] hover:bg-white/[0.08] ",
-        type === "outlined" &&
-          disabled &&
-          "border-white/[0.2]  hover:bg-transparent",
-        className
-      )}
-      onClick={props.onClick}
-      disabled={disabled!}
-    >
-      {props.children}
-      {showArrow && <ArrowRightTopIcon className="pl-[4px]" />}
-    </button>
+            "text-white/[0.5] hover:text-white/[0.5] cursor-not-allowed",
+          type === "secondary" &&
+            disabled &&
+            "border-white/[0.4] hover:bg-white/[0.08] ",
+          type === "outlined" &&
+            disabled &&
+            "border-white/[0.2]  hover:bg-transparent",
+          className
+        )}
+        onClick={props.onClick}
+        disabled={disabled!}
+      >
+        {props.children}
+        {showArrow && <ArrowRightTopIcon className="pl-[4px]" />}
+      </button>
+    </a>
   );
 };
 

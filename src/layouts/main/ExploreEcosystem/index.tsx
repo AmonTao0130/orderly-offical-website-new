@@ -4,6 +4,7 @@ import Button from "@/components/Button";
 import { cn } from "@/utils";
 import NumberLabel from "./Number";
 import type { PropsWithClassName } from "@/types";
+import { Hyperlink } from "@/utils/constant";
 
 const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
   return (
@@ -59,6 +60,7 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
                 /** 1024 */
                 "md:mt-[24px]"
               )}
+              href={Hyperlink.Main.ViewMore}
             >
               View more
             </Button>

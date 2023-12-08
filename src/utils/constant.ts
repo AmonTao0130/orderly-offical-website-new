@@ -10,3 +10,49 @@ export const Screen = {
   /** 1920 */
   "2xl": 1920,
 };
+
+export const Hyperlink = {
+  Developers: {
+    Documentation:
+      "https://orderly.network/docs/getting-started/what-is-orderly-network",
+    GitHub: "https://github.com/OrderlyNetwork",
+    OrderlySDK: "https://sdk.orderly.network/docs/hooks/overview",
+  },
+  Traders: {
+    TradingdApps: "https://orderly.network/docs/trade-on-orderly/trading-guis",
+    APITrading:
+      "https://orderly.network/docs/trade-on-orderly/trade-on-orderly",
+  },
+  Ecosystem: {
+    Partners: "/partners",
+    Blog: "/blog",
+    RadianceVentures: "https://radianceventures.io/",
+  },
+  About: {
+    Team: "/team",
+    PressKit:
+      "https://drive.google.com/drive/u/0/folders/1Nn3iwYqYxqIFGZbnu-mfUvaTVHrY5G1T",
+    Careers: "https://boards.greenhouse.io/orderlynetwork ",
+  },
+  SocialCarnival: {
+    SocialQuest: "/carnival",
+    Lottery: "lottery.orderly.network",
+    Referral: "referral.orderly.network",
+  },
+  Legal: {
+    PrivacyPolicy: "https://orderly.network/docs/privacy-policy",
+    TermsOfService: "https://orderly.network/docs/terms-of-service",
+  },
+  Main: {
+    BuildWithOrderly:
+      "https://orderly.network/docs/getting-started/what-is-orderly-network",
+    TradeOnOrderly:
+      "https://orderly.network/docs/trade-on-orderly/trading-guis",
+    ExploreDocs: "https://orderly.network/docs/build-on-evm/building-on-evm",
+    ViewAuditReports: "https://github.com/OrderlyNetwork/Audits",
+    ViewMore: "orderly.network/partners",
+    StartBuildingNow:
+      "https://orderly.network/docs/build-on-evm/building-on-evm",
+    DropUsALine: "mailto:hello@orderly.network",
+  },
+};
