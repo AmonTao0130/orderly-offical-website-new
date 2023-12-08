@@ -34,3 +34,15 @@ const { title } = Astro.props;
     <!-- <Footer client:visible /> -->
   </body>
 </html>
+<script>
+  import { navigationOpen } from "@/store";
+
+  // 侦听导航菜单弹窗是否打开
+  navigationOpen.subscribe((open) => {
+    if (open) {
+      document.body.style.position = "fixed";
+    } else {
+      document.body.style.position = "relative";
+    }
+  });
+</script>

@@ -2,7 +2,7 @@ import { atom } from "nanostores";
 
 export const bannerVisible = atom(true);
 export const bannerHeight = atom(50);
-export const navigationExpanded = atom(false);
+export const navigationOpen = atom(false);
 export const whyChooseOrderlyExpandKey = atom("");
 export const useCasesExpandKey = atom(0);
 export const blogExpandKey = atom("");
