@@ -88,11 +88,11 @@ const Visionaries: React.FC<PropsWithClassName> = (props) => {
               <div
                 className={cn(
                   /** 375 */
-                  "text-[15px] leading-[18px] text-primary mt-[5.33px]",
+                  "text-[15px] leading-[18px] text-primary mt-[9px]",
                   /** 768 */
-                  "md:text-xl md:leading-[24px]",
+                  "md:text-xl md:leading-[24px] md:mt-[14.45px]",
                   /** 1024 */
-                  "lg:text-2xl lg:leading-[28.8px]",
+                  "lg:text-2xl lg:leading-[28.8px] md:mt-[20px]",
                   /** 1440 */
                   "xl"
                 )}
@@ -102,13 +102,11 @@ const Visionaries: React.FC<PropsWithClassName> = (props) => {
               <div
                 className={cn(
                   /** 375 */
-                  "text-[10.5px] leading-[12.6px] font-title font-normal mt-[6px]",
+                  "text-[10.5px] leading-[12.6px] font-title font-normal mt-[5.33px]",
                   /** 768 */
-                  "md:text-sm md:leading-[16.8px]",
+                  "md:text-sm md:leading-[16.8px] md:mt-[5.78px]",
                   /** 1024 */
-                  "lg:text-base lg:leading-[19.2px]",
-                  /** 1440 */
-                  "xl"
+                  "lg:text-base lg:leading-[19.2px] lg:mt-[8px]"
                 )}
               >
                 {item.title}
@@ -117,7 +115,7 @@ const Visionaries: React.FC<PropsWithClassName> = (props) => {
                 className={cn(
                   "flex justify-center items-center",
                   "transition-[background] duration-300",
-                  "texbgt-primary-12 group-hover:bg-[#D196FF] rounded-full",
+                  "bg-primary-12 group-hover:bg-[#D196FF] rounded-full",
                   /** 375 */
                   "w-[18px] h-[18px] mt-[6px]",
                   /** 768 */
