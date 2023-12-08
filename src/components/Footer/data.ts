@@ -41,7 +41,7 @@ export default [
     title: "Ecosystem",
     children: [
       {
-        title: "Ecosystem Partners",
+        title: "Partners",
         url: Hyperlink.Ecosystem.Partners,
       },
       {
