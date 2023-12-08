@@ -44,11 +44,14 @@ const SystemStatus: React.FC<SystemStatusProps> = (props) => {
     <div
       className={cn(
         "inline-flex items-center h-[35px] px-[12px] text-white text-sm font-semibold rounded-full",
+        "border-[1px] border-solid",
         isMaintenance
-          ? "bg-[rgb(209,150,255,0.06)]"
+          ? "bg-[rgb(209,150,255,0.06)] border-[#D196FF33]"
           : cx(
               "[background:linear-gradient(90deg,rgba(51,243,255,0.06)_-2.56%,rgba(0,220,154,0.06)_100%)]",
-              "border-[1px] border-solid [border-image:linear-gradient(116.21deg,#20BB8C_1.99%,rgba(66,255,221,0.05)_46.7%)]"
+              " border-[rgba(66,255,221,0.05)]"
+              // border-image样式不生效
+              // "[border-image:linear-gradient(116.21deg,#20BB8C_1.99%,rgba(66,255,221,0.05)_46.7%)]"
             )
       )}
     >
