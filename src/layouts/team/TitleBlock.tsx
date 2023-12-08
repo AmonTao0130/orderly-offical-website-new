@@ -14,7 +14,7 @@ const TitleBlock: React.FC<PropsWithChildren & PropsWithClassName> = (
         /** 768 */
         "md:text-[32px] leading-[38.4px]",
         /** 1024 */
-        "lg:text-4xl lg:leading-[57.6px ]",
+        "lg:text-4xl lg:leading-[57.6px]",
         props.className
       )}
     >
