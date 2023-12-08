@@ -6,3 +6,4 @@ export const navigationExpanded = atom(false);
 export const whyChooseOrderlyExpandKey = atom("");
 export const useCasesExpandKey = atom(0);
 export const blogExpandKey = atom("");
+export const ecosystemTabExpandKey = atom("");

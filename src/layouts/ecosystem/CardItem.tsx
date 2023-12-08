@@ -12,7 +12,8 @@ const CardItem: React.FC<CardItemProps & CardItemProps> = (props) => {
   return (
     <div
       className={cn(
-        "relative p-[32px] rounded-[32px] border-[1px] border-solid border-primary-20",
+        "relative p-[32px] bg-[rgba(0,0,0,0.3)] overflow-hidden",
+        "border-[1px] border-solid border-primary-20 rounded-[32px]",
         /** 375 */
         "m-[20px]",
         /** 768 */
@@ -21,10 +22,10 @@ const CardItem: React.FC<CardItemProps & CardItemProps> = (props) => {
         "lg:w-[calc((100%_-_120px)_/_3)]  "
       )}
     >
-      {/* <img
-        className="absolute top-0 left-0 w-full h-full blur-[75px]"
+      <img
+        className="absolute top-0 left-0 w-full h-full blur-[75px] opacity-[0.3]"
         src={data.icon}
-      /> */}
+      />
       <div className=" relative ">
         <div className="flex justify-between">
           <img className="w-[100px] h-[100px]" src={data.icon} />
