@@ -7,7 +7,9 @@ import type { PropsWithClassName } from "@/types";
 const Top: React.FC<PropsWithClassName> = (props) => {
   return (
     <div className={cn("flex justify-between items-center", props.className)}>
-      <LogoIcon className="text-white" />
+      <a href="/">
+        <LogoIcon className="text-white" />
+      </a>
       <SystemStatus isMaintenance={false} />
     </div>
   );
