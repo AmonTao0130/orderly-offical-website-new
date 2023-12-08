@@ -40,7 +40,7 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "WOOFi Pro",
     description:
-      "Delivering best liquidity, low fees, and superior execution to boost DeFi trading experiences",
+      "Delivering best liquidity, low fees, and superior execution to boost DeFi trading experiences.",
     url: "https://dex.woo.org/",
   },
   {
