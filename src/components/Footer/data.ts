@@ -62,13 +62,15 @@ export default [
         url: "/team",
       },
       {
+        title: "Press Kit",
+        url: "https://drive.google.com/drive/u/0/folders/1Nn3iwYqYxqIFGZbnu-mfUvaTVHrY5G1T",
+        target: "_blank",
+        showArrow: true,
+      },
+      {
         title: "Careers",
         url: "https://drive.google.com/drive/u/0/folders/1Nn3iwYqYxqIFGZbnu-mfUvaTVHrY5G1T",
         target: "_blank",
-      },
-      {
-        title: "Contact",
-        url: "mailto:hello@orderly.network",
       },
     ],
   },
