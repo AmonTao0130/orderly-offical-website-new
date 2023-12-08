@@ -16,6 +16,7 @@ const Menu: React.FC<PropsWithClassName> = (props) => {
                   <a
                     key={child.url || child.title}
                     href={child.url}
+                    target={child.target}
                     className="text-primary-54 hover:text-primary-100 my-[8px]"
                   >
                     {child.title}

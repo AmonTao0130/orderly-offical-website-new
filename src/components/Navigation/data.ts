@@ -1,20 +1,25 @@
+import type { HTMLAttributeAnchorTarget } from "react";
+
 export default [
   {
     title: "Developers",
     children: [
       {
         title: "Documentation",
-        url: "",
+        url: "https://orderly.network/docs/getting-started/what-is-orderly-network",
+        target: "_blank",
         showArrow: true,
       },
       {
         title: "GitHub",
-        url: "",
+        url: "https://github.com/OrderlyNetwork",
+        target: "_blank",
         showArrow: true,
       },
       {
         title: "Orderly SDK",
-        url: "",
+        url: "https://sdk.orderly.network/docs/hooks/overview",
+        target: "_blank",
         isNew: true,
         showArrow: true,
       },
@@ -25,11 +30,12 @@ export default [
     children: [
       {
         title: "Trading dApps",
-        url: "",
+        url: "/docs/trade-on-orderly/trading-guis",
       },
       {
         title: "API Trading",
-        url: "",
+        url: "https://orderly.network/docs/trade-on-orderly/trade-on-orderly",
+        target: "_blank",
         showArrow: true,
       },
     ],
@@ -39,15 +45,16 @@ export default [
     children: [
       {
         title: "Partners",
-        url: "",
+        url: "/partners",
       },
       {
         title: "Blog",
-        url: "",
+        url: "/blog",
       },
       {
         title: "Radiance Ventures",
-        url: "",
+        url: "https://radianceventures.io/",
+        target: "_blank",
         showArrow: true,
       },
     ],
@@ -57,30 +64,49 @@ export default [
     children: [
       {
         title: "Team",
-        url: "",
+        url: "/team",
       },
       {
         title: "Press Kit",
-        url: "",
+        url: "https://drive.google.com/drive/u/0/folders/1Nn3iwYqYxqIFGZbnu-mfUvaTVHrY5G1T",
+        target: "_blank",
         showArrow: true,
       },
       {
         title: "Careers",
-        url: "",
+        url: "https://boards.greenhouse.io/orderlynetwork",
+        target: "_blank",
         showArrow: true,
       },
     ],
   },
   {
     title: "Social Carnival",
-    url: "",
+    url: "/carnival",
+    showHot: true,
+    children: [
+      {
+        title: "Social Quest",
+        url: "https://orderly.network/carnival",
+      },
+      {
+        title: "Lottery",
+        url: "https://lottery.orderly.network",
+      },
+      {
+        title: "Referral",
+        url: "https://referral.orderly.network",
+      },
+    ],
   },
 ] as {
   title: string;
+  showHot?: boolean;
   children: {
     title: string;
     url: string;
     isNew?: boolean;
     showArrow?: boolean;
+    target?: HTMLAttributeAnchorTarget;
   }[];
 }[];

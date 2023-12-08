@@ -1,18 +1,23 @@
+import type { HTMLAttributeAnchorTarget } from "react";
+
 export default [
   {
     title: "Developers",
     children: [
       {
         title: "Documentation",
-        url: "",
+        url: "https://orderly.network/docs/getting-started/what-is-orderly-network",
+        target: "_blank",
       },
       {
         title: "GitHub",
-        url: "",
+        url: "https://github.com/OrderlyNetwork",
+        target: "_blank",
       },
       {
         title: "Orderly SDK",
-        url: "",
+        url: "https://sdk.orderly.network/docs/hooks/overview",
+        target: "_blank",
         isNew: true,
       },
     ],
@@ -22,11 +27,12 @@ export default [
     children: [
       {
         title: "Trading dApps",
-        url: "",
+        url: "/docs/trade-on-orderly/trading-guis",
       },
       {
         title: "API Trading",
-        url: "",
+        url: "https://orderly.network/docs/trade-on-orderly/trade-on-orderly",
+        target: "_blank",
       },
     ],
   },
@@ -35,15 +41,16 @@ export default [
     children: [
       {
         title: "Ecosystem Partners",
-        url: "",
+        url: "/partners",
       },
       {
         title: "Blog",
-        url: "",
+        url: "/blog",
       },
       {
         title: "Radiance Ventures",
-        url: "",
+        url: "https://radianceventures.io/",
+        target: "_blank",
       },
     ],
   },
@@ -52,11 +59,12 @@ export default [
     children: [
       {
         title: "Team",
-        url: "",
+        url: "/team",
       },
       {
         title: "Careers",
-        url: "",
+        url: "https://drive.google.com/drive/u/0/folders/1Nn3iwYqYxqIFGZbnu-mfUvaTVHrY5G1T",
+        target: "_blank",
       },
       {
         title: "Contact",
@@ -69,15 +77,20 @@ export default [
     children: [
       {
         title: "Privacy Policy",
-        url: "",
+        url: "/docs/privacy-policy",
       },
       {
         title: "Terms of Service",
-        url: "",
+        url: "/docs/terms-of-service",
       },
     ],
   },
 ] as {
   title: string;
-  children: { title: string; url: string; isNew?: boolean }[];
+  children: {
+    title: string;
+    url: string;
+    isNew?: boolean;
+    target?: HTMLAttributeAnchorTarget;
+  }[];
 }[];

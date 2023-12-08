@@ -19,11 +19,10 @@ const Menu: React.FC<MenuProps> = (props) => {
           >
             <div className="group">
               <div className="flex items-center group-hover:text-primary-100 text-lg">
+                {item.showHot && <CarnivalIcon className="mr-[4px]" />}
                 {item.title}
-                {item.children?.length ? (
+                {item.children?.length && (
                   <ArrowDownIcon className="ml-[2px] transition duration-300  group-hover:rotate-180" />
-                ) : (
-                  <CarnivalIcon className="ml-[4px]" />
                 )}
               </div>
 
@@ -35,7 +34,7 @@ const Menu: React.FC<MenuProps> = (props) => {
                         <a
                           key={child.url || child.title}
                           href={child.url}
-                          target="_blank"
+                          target={child.target}
                           className="flex items-center text-base hover:text-primary-100 px-[20px] my-[24px] first:mt-[20px] last:mb-[20px]"
                         >
                           {child.title}
