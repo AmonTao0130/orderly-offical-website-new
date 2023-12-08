@@ -68,7 +68,7 @@ export default [
       },
       {
         title: "Contact",
-        url: "",
+        url: "mailto:hello@orderly.network",
       },
     ],
   },
