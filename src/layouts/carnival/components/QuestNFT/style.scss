@@ -1,0 +1,56 @@
+.AppCarnival .QuestNFT {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 166px;
+
+    h2 {
+        color: #9A5BFF;
+        text-align: center;
+        text-shadow: 0px 0px 62px #B552F2, 0px 0px 3px rgba(181, 82, 242, 0.20);
+        font-family: Manrope;
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 125%; /* 60px */
+
+        @media (max-width: 700px) {
+            font-size: 24px;
+        }
+
+        @media (min-width: 701px) and (max-width: 1023px) {
+            font-size: 30px;
+        }
+    }
+
+    &__label {
+        color: #BABABA;
+        text-align: center;
+        font-family: Manrope;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 125%;
+
+        @media (max-width: 700px) {
+            font-size: 12px;
+        }
+
+        @media (min-width: 701px) and (max-width: 1023px) {
+            font-size: 14px;
+        }
+    }
+
+    &__list {
+        margin-top: 66px;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        @media (max-width: 700px) {
+            width: 100%;
+        }
+    }
+}

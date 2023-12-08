@@ -1,0 +1,93 @@
+.AppCarnival .Phase1Element2 {
+    display: flex;
+    justify-content: center;
+    padding-top: 115px;
+    padding-bottom: 214px;
+
+    @media (max-width: 700px) {
+        flex-direction: column;
+        max-width: 90%;
+        padding-bottom: 0;
+        align-items: center;
+    }
+
+    @media (min-width: 701px) and (max-width: 1023px) {
+        flex-direction: column;
+        max-width: 90%;
+        padding-bottom: 0;
+        align-items: center;
+    }
+
+    &__left {
+        padding-right: 164px;
+
+        @media (max-width: 700px) {
+            padding-right: 0;
+            padding-bottom: 100px;
+        }
+
+        @media (min-width: 701px) and (max-width: 1023px) {
+            padding-right: 0;
+        }
+    }
+
+    &__left, &__right {
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        text-align: left;
+
+        @media (max-width: 700px) {
+            text-align: center;
+        }
+
+        @media (min-width: 701px) and (max-width: 1023px) {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            color: #9A5BFF;
+            text-align: center;
+            text-shadow: 0px 0px 62px #B552F2, 0px 0px 3px rgba(181, 82, 242, 0.20);
+            font-family: Manrope;
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: 125%; /* 60px */
+            padding-bottom: 47px;
+            text-align: left;
+
+            @media (max-width: 700px) {
+                font-size: 24px;
+                text-align: center;
+            }
+
+            @media (min-width: 701px) and (max-width: 1023px) {
+                font-size: 30px;
+                padding-bottom: 33px;
+                text-align: center;
+            }
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.98);
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            font-family: Manrope;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 168%;
+            max-width: 492px;
+
+            @media (max-width: 700px) {
+                font-size: 13px;
+            }
+
+            @media (min-width: 701px) and (max-width: 1023px) {
+                font-size: 14px;
+                max-width: 639px;
+            }
+        }
+    }
+}

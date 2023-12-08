@@ -1,0 +1,159 @@
+.AppCarnival .Trade {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px;
+    background: linear-gradient(316deg, rgba(71, 7, 121, 0.20) 0%, rgba(229, 194, 255, 0.20) 100%);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    max-width: 523px;
+    padding: 32px;
+    width: 100%;
+    margin: 0 13px 30px;
+    position: relative;
+
+    @media (max-width: 1023px) {
+        border-radius: 14px;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 24px;
+        padding: 1px; 
+        background: linear-gradient(340deg, #4807799c, #E5C2FF);
+        -webkit-mask: 
+            linear-gradient(#fff 0 0) content-box, 
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+                mask-composite: exclude;
+        pointer-events: none;
+
+        @media (max-width: 1023px) {
+            border-radius: 14px;
+        }
+    }
+
+    &__header {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        align-items: center;
+        padding-bottom: 37px;
+
+        @media (max-width: 1023px) {
+            padding-bottom: 16px;
+        }
+
+        img {
+            @media (max-width: 1023px) {
+                max-width: 117px;
+                max-height: 25px;
+            } 
+        }
+
+        &--link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 11px 16px;
+            border-radius: 8px;
+            border: 1px solid #FBFBFB;
+            cursor: pointer;
+
+            &:hover {
+                background: linear-gradient(270.23deg, #FF9B3F -12.06%, #933EFF 103.65%);
+                border: 0px solid;
+            }
+
+            @media (max-width: 1023px) {
+                padding: 4px 8px;
+                border-radius: 5px;
+            }
+
+            span {
+                color: rgba(255, 255, 255, 0.98);
+                leading-trim: both;
+                text-edge: cap;
+                font-family: Manrope;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 1023;
+                line-height: 125%; /* 25px */
+
+                @media (max-width: 1023px) {
+                    font-size: 12px;
+                }
+            }
+
+            svg {
+                padding-left: 6px;
+
+                @media (max-width: 1023px) {
+                    width: 12px;
+                    height: 12px;
+                }
+            }
+        }
+    }
+
+    &__footer {
+        display: flex;
+        width: 100%;
+        margin-top: 32px;
+
+        @media (max-width: 1023px) {
+            margin-top: 17px;
+        }
+
+        &--right {
+            padding-left: 24px;
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+
+            @media (max-width: 1023px) {
+                padding-left: 14px;
+            }
+        }
+
+        &--left, &--right {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+
+            &__title {
+                color: rgba(255, 255, 255, 0.54);
+                leading-trim: both;
+                text-edge: cap;
+                font-family: Manrope;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 1023;
+                line-height: 125%; /* 22.5px */
+
+                @media (max-width: 1023px) {
+                    font-size: 14px;
+                }
+            }
+
+            &__value {
+                color: rgba(255, 255, 255, 0.54);
+                leading-trim: both;
+                text-edge: cap;
+                font-family: Manrope;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 125%; /* 30px */
+                margin-top: 26px;
+
+                @media (max-width: 1023px) {
+                    font-size: 14px;
+                    margin-top: 6px;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

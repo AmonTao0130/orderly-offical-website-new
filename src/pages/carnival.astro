@@ -1,0 +1,15 @@
+---
+import AppCarnival from "@/layouts/carnival/App";
+import Layout from "@/layouts/index.astro";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+---
+
+
+<Layout title="orderly.network/carnival">
+  <Navigation className=" absolute w-full" client:visible />
+
+  <AppCarnival client:visible />
+  <Footer client:visible />
+
+</Layout>
