@@ -35,3 +35,8 @@
 .invisible-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
