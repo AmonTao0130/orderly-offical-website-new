@@ -1,0 +1,35 @@
+---
+import Layout from "@/layouts/index.astro";
+import Content from "@/components/Content";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import { cn } from "@/utils";
+import Header from "@/layouts/team/Header";
+import Main from "@/layouts/team/Main";
+import Investors from "@/layouts/team/Investors";
+---
+
+<Layout title="orderly.network/team">
+  <div>
+    <Navigation client:visible />
+    <Header />
+  </div>
+
+  <Main />
+  <Investors />
+</Layout>
+
+<Footer
+  className={cn(
+    /** 375 */
+    "mt-[118px]",
+    /** 768 */
+    "md:mt-[249px]",
+    /** 1024 */
+    "lg:mt-[132px]",
+    /** 1440 */
+    "xl:mt-[120px]"
+  )}
+  client:visible
+/>
+ @/layouts/team/Header

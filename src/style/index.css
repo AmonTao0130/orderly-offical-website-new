@@ -2,6 +2,14 @@
 
 @font-face {
   font-family: 'Articulat CF';
+  src: url('/fonts/ArticulatCF-Normal') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Articulat CF';
   src: url('/fonts/ArticulatCF-DemiBold') format('opentype');
   font-weight: 600;
   font-style: normal;
