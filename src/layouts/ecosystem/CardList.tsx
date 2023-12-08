@@ -5,7 +5,7 @@ import { cardData, type TCardData } from "./cardData";
 import CardItem from "./CardItem";
 import { useStore } from "@nanostores/react";
 import { ecosystemTabExpandKey } from "@/store";
-import { getPageData } from "@/utils/strapi";
+import { getPageData, getRangePage } from "@/utils/strapi";
 import type { PaginationProps } from "@/components/Pagination";
 import Pagination from "@/components/Pagination";
 
@@ -33,8 +33,7 @@ const CardList: React.FC<PropsWithClassName> = (props) => {
       pagination: {
         pageIndex,
         pageSize,
-        rangePage:
-          pageIndexData.length === 1 ? "1" : `1-${pageIndexData.length}`,
+        rangePage: getRangePage(pageIndexData?.length, pageSize, pageIndex),
         pageCount,
         total: list.length,
         hasPrevious: pageIndex > 1,

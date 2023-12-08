@@ -9,7 +9,7 @@ import { useStore } from "@nanostores/react";
 import { blogExpandKey } from "@/store";
 import Pagination, { type PaginationProps } from "../../components/Pagination";
 import { useSize } from "@/hooks/useSize";
-import { getPageData } from "@/utils/strapi";
+import { getPageData, getRangePage } from "@/utils/strapi";
 
 // const item = {
 //   title:
@@ -58,8 +58,7 @@ const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
       pagination: {
         pageIndex,
         pageSize,
-        rangePage:
-          pageIndexData.length === 1 ? "1" : `1-${pageIndexData.length}`,
+        rangePage: getRangePage(pageIndexData?.length, pageSize, pageIndex),
         pageCount,
         total: articles.length,
         hasPrevious: pageIndex > 1,

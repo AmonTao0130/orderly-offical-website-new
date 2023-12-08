@@ -26,3 +26,22 @@ export function getPageData(list: any[], pageSize: number, pageIndex: number) {
   }
   return pageData;
 }
+
+export function getRangePage(
+  curPageTotal: number = 0,
+  pageSize: number,
+  pageIndex: number
+) {
+  console.log(curPageTotal, pageSize, pageIndex);
+  if (pageIndex == 1 && curPageTotal === 1) {
+    return "1";
+  }
+
+  if (pageIndex == 1) {
+    return `1-${curPageTotal}`;
+  }
+
+  const start = pageSize * (pageIndex - 1) + 1;
+
+  return `${start}-${start + curPageTotal - 1}`;
+}
