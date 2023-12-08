@@ -12,5 +12,5 @@ export default defineConfig({
   //   mode: "standalone",
   // }),
   /** 允许ip地址访问 */
-  // server: { host: true },
+  server: { host: true },
 });
