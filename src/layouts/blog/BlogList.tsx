@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import type { PropsWithClassName } from "@/types";
-import BlogItem, { type TBlogIem } from "./BlogItem";
+import BlogItem from "./BlogItem";
 import { cn } from "@/utils";
 import fetchApi from "@/strapi";
-import { type Article, type TPagination } from "@/strapi/type";
+import { type Article } from "@/strapi/type";
 import { getArticles, getArticlesData } from "@/strapi/services";
 import { useStore } from "@nanostores/react";
 import { blogExpandKey } from "@/store";

@@ -4,15 +4,6 @@ import { cn, formatDate } from "@/utils";
 import Button from "@/components/Button";
 import type { Article } from "@/strapi/type";
 
-export type TBlogIem = {
-  title: string;
-  description: string;
-  img: string;
-  createdAt: string;
-  url: string;
-  slug: string;
-};
-
 const BlogItem: React.FC<Article & PropsWithClassName> = (props) => {
   const { attributes } = props;
   return (
@@ -54,7 +45,7 @@ const BlogItem: React.FC<Article & PropsWithClassName> = (props) => {
         )}
       >
         <div className="text-base leading-[24px] text-primary-80">
-          {formatDate(attributes.createdAt)}
+          {formatDate(attributes.publishedAt)}
         </div>
         <div className="h-[152px]">
           <div className="text-xl text-primary leading-[24px] mt-[8px] font-extrabold font-title max-h-[72px] text-ellipsis line-clamp-3">
