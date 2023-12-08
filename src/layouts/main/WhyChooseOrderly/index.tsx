@@ -90,7 +90,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
             </Button>
           </div>
         </div>
-        <div className="lg:w-[465px] mt-[32px] md:mt-[42px] lg:mt-0">
+        <div className="lg:w-[465px] mt-[32px] md:mt-[42px] lg:mt-0 cursor-pointer">
           {data.map((item, index) => {
             const expanded = expandKey === item.title;
 
@@ -134,7 +134,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
                       /** 375 */
                       "text-lg leading-[18px]",
                       /** 768 */
-                      "md:text-2xl md:leading-[24px]"
+                      "md:text-2xl md:leading-[28px]"
                       // "[background:linear-gradient(84.32deg,#FFFFFF_-1.85%,#D196FF_105.08%)] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent]"
                     )}
                   >
