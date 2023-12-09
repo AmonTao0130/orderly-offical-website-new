@@ -1,8 +1,8 @@
 include:
   - project: 'orderlynetwork/orderly-devops/orderly-common/common-ci'
     ref: main
-    file: '/common-orderly-network-testnet.yaml'
+    file: '/common-orderly-network-dev-v2.yaml'
 
 variables:
-  SERVICE_NAME: landing
+  SERVICE_NAME: official-website
   IMAGE_NAME: official-website
