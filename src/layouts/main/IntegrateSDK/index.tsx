@@ -10,15 +10,12 @@ const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
   return (
     <Content id="IntegrateSDK" className={props.className}>
       <BlockTitle>Integrate with Orderly SDK</BlockTitle>
-      {/* <div id="IntegrateSDKTrigger" className="absolute top-[300px]">
-        Trigger
-      </div> */}
       <div
         className={cn(
           /** 375 */
-          "flex felx-col flex-col-reverse mt-[85px]",
+          "flex felx-col flex-col-reverse items-center mt-[85px]",
           /** 768 */
-          "md:flex-row md:justify-between md:mt-[78px]",
+          "md:flex-row md:justify-between md:items-start md:mt-[78px]",
           /** 1024 */
           "lg:mt-[87px]",
           /** 1440 */
@@ -36,7 +33,7 @@ const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
             }
             content={
               <>
-                Implement components and pages <br className="md:hidden" />{" "}
+                Implement components and pages <br className="md:hidden" />
                 without
                 <br className="sm:hidden md:hidden" /> needing to fuss with
                 data, APIs, <br className="md:hidden" /> or business logic.
@@ -55,7 +52,7 @@ const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
             }
             content={
               <>
-                Implement components and pages <br className="md:hidden" />{" "}
+                Implement components and pages <br className="md:hidden" />
                 without
                 <br className="sm:hidden md:hidden" /> needing to fuss with
                 data, APIs, <br className="md:hidden" /> or business logic.
@@ -64,7 +61,19 @@ const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
           />
         </div>
 
-        <div className="relative">
+        <div
+          className={cn(
+            "relative",
+            /** 375 */
+            "",
+            /** 768 */
+            "md:right-[30px]",
+            /** 1024 */
+            "lg:right-[20px]",
+            /** 1440 */
+            "xl:right-[60px]"
+          )}
+        >
           <SDKImage id="IntegrateSDKImage1" order="first" className="" />
           <div id="IntegrateSDKImage2" className="absolute top-0 left-0">
             <SDKImage order="second" />

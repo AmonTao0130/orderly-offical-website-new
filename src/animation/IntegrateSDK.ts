@@ -1,6 +1,9 @@
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { Screen } from "@/utils/constant";
 gsap.registerPlugin(ScrollTrigger);
+
+const screenWidth = window.innerWidth;
 
 main();
 
@@ -17,15 +20,12 @@ function getTl1(orderBookTop: string | number, orderEntryTop: string | number) {
   });
 
   tl1
-    .to("#IntegrateSDKBg", {
-      y: 0,
-      opacity: 1,
-      // keyframes: [
-      //   { y: -90, opacity: 0.1 },
-      //   { y: 0, opacity: 1 },
-      // ],
-    })
-    .to("#IntegrateSDKText", { y: 0, opacity: 1 }, "<")
+    .to("#IntegrateSDKBg", { y: 0, opacity: 1 })
+    .to(
+      "#IntegrateSDKText",
+      screenWidth < Screen.md ? { x: 0, opacity: 1 } : { y: 0, opacity: 1 },
+      "<"
+    )
 
     .to("#IntegrateSDKOrderBook", { top: orderBookTop, opacity: 1 }, "<25%")
     .to("#IntegrateSDKOrderEntry", { top: orderEntryTop, opacity: 1 }, "<25%");
@@ -47,11 +47,21 @@ function getTl2() {
 
   tl2
     .to("#IntegrateSDKImage2", {
-      clipPath: "polygon(-20% -15%, 120% 0%, 120% 120%, -20% 120%)",
+      clipPath: "polygon(-20% -15%, 120% 0%, 135% 135%, -20% 120%)",
     })
-    .to("#IntegrateSDKText", { y: -200, opacity: 0 }, "<")
+    .to(
+      "#IntegrateSDKText",
+      screenWidth < Screen.md
+        ? { x: -200, opacity: 0 }
+        : { y: -200, opacity: 0 },
+      "<"
+    )
 
-    .to("#IntegrateSDKText2", { top: 0, opacity: 1 }, "<");
+    .to(
+      "#IntegrateSDKText2",
+      screenWidth < Screen.md ? { x: 0, opacity: 1 } : { top: 0, opacity: 1 },
+      "<"
+    );
 
   return tl2;
 }
@@ -64,6 +74,7 @@ function main() {
   // TODO：在滚到 IntegrateSDK的位置刷新时，布局不会居中
   const tl = gsap.timeline();
   tl.add([getTl1(orderBookTop, orderEntryTop), getTl2()]);
+  // tl.add([getTl1(orderBookTop, orderEntryTop)]);
 
   // tl.add(getTl1(orderBookTop, orderEntryTop));
   // tl.add(getTl2());
@@ -103,10 +114,18 @@ function initPosition() {
   gsap.set("#IntegrateSDKBg", { opacity: 0, y: -100 });
   gsap.set("#IntegrateSDKOrderBook", { opacity: 0, top: -200 });
   gsap.set("#IntegrateSDKOrderEntry", { opacity: 0, top: -150 });
-  gsap.set("#IntegrateSDKText", { opacity: 0, y: 100 });
-  gsap.set("#IntegrateSDKText2", { opacity: 0, bottom: -100 });
+  gsap.set(
+    "#IntegrateSDKText",
+    screenWidth < Screen.md ? { opacity: 0, x: 100 } : { opacity: 0, y: 100 }
+  );
+  gsap.set(
+    "#IntegrateSDKText2",
+    screenWidth < Screen.md
+      ? { opacity: 0, x: 100 }
+      : { opacity: 0, bottom: -100 }
+  );
   gsap.set("#IntegrateSDKImage2", {
-    clipPath: "polygon(120% -15%, 120% 0%, 120% 120%, 120% 120%)",
+    clipPath: "polygon(120% -15%, 120% 0%, 135% 135%, 120% 120%)",
   });
 }
 
