@@ -65,7 +65,7 @@ const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
           className={cn(
             "relative",
             /** 375 */
-            "",
+            "right-[0px]",
             /** 768 */
             "md:right-[30px]",
             /** 1024 */
