@@ -17,6 +17,7 @@ import week4 from "./assets/ntf4.jpg";
 import week5 from "./assets/ntf5.jpg";
 import week6 from "./assets/ntf6.jpg";
 import week7 from "./assets/ntf7.jpg";
+import week8 from "./assets/ntf8.jpg";
 
 const response = {
   data: {
@@ -110,9 +111,10 @@ const quests = [
   },
   {
     name: "Week 8",
-    ongoing: false,
+    ongoing: true,
     company1: "Orderly Network & Ref finance",
-    externalLink: "/",
+    externalLink: "https://galxe.com/orderlynetwork/campaign/GCrQwttKie",
+    img: week8.src,
   },
 ];
 

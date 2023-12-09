@@ -33,6 +33,7 @@ const SaveHours: React.FC<PropsWithClassName> = (props) => {
             WebkitBackgroundClip: "text",
           }}
           className={cn(
+            "select-none",
             "w-full h-full flex justify-center items-center text-center",
             /** 375 */
             "text-[22px] font-title leading-[26.4px] mt-[11.7px]",

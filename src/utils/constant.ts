@@ -36,8 +36,8 @@ export const Hyperlink = {
   },
   SocialCarnival: {
     SocialQuest: "/carnival",
-    Lottery: "lottery.orderly.network",
-    Referral: "referral.orderly.network",
+    Lottery: "https://lottery.orderly.network",
+    Referral: "https://referral.orderly.network",
   },
   Legal: {
     PrivacyPolicy: "https://orderly.network/docs/privacy-policy",
@@ -50,7 +50,7 @@ export const Hyperlink = {
       "https://orderly.network/docs/trade-on-orderly/trading-guis",
     ExploreDocs: "https://orderly.network/docs/build-on-evm/building-on-evm",
     ViewAuditReports: "https://github.com/OrderlyNetwork/Audits",
-    ViewMore: "orderly.network/partners",
+    ViewMore: "/partners",
     StartBuildingNow:
       "https://orderly.network/docs/build-on-evm/building-on-evm",
     DropUsALine: "mailto:hello@orderly.network",

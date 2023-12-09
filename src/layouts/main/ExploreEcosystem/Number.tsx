@@ -36,6 +36,7 @@ const NumberLabel: React.FC<NumberLabelProps & PropsWithClassName> = (
       <div
         style={numberStyle}
         className={cn(
+          "select-none",
           /** 375 */
           "text-[32px] leading-[32px] font-semibold mt-[12px]",
           /** 768 */
