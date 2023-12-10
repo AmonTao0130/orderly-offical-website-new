@@ -12,26 +12,35 @@ import UseCases from "@/layouts/main/UseCases/index.tsx";
 import SaveHours from "@/layouts/main/SaveHours/index.tsx";
 import GetStart from "@/layouts/main/GetStart/index.tsx";
 import Footer from "@/components/Footer";
-import FooterBackground from "@/layouts/main/Background/footer.astro";
+import FooterBg from "@/layouts/main/Background/footer.astro";
 import { cn } from "@/utils";
+import SaveHoursGradient from "@/layouts/main/Background/gradient/SaveHours";
+import HeaderGradient from "@/layouts/main/Background/gradient/Header";
+import FooterGradient from "@/layouts/main/Background/gradient/Footer";
+import WhyChooseOrderlyGradient from "@/layouts/main/Background/gradient/WhyChooseOrderly";
+import BrandGradient from "@/layouts/main/Background/gradient/Brand";
+import IntegrateSDKGradient from "@/layouts/main/Background/gradient/IntegrateSDK";
 ---
 
 <Layout title="Orderly Network">
   <div>
     <div class="relative">
-      <HeaderBackground />
-      <div class="relative">
-        <Navigation className="" client:visible />
-        <BuildAndTrade
-          className={cn(
-            /** 375 */
-            "mt-[74px]",
-            /** 768 */
-            "md:mt-[97px]",
-            /** 1024 */
-            "lg:mt-[119px]"
-          )}
-        />
+      <HeaderGradient />
+      <div class="relative z-[1] mix-blend-screen">
+        <HeaderBackground />
+        <div class="relative">
+          <Navigation client:visible />
+          <BuildAndTrade
+            className={cn(
+              /** 375 */
+              "mt-[74px]",
+              /** 768 */
+              "md:mt-[97px]",
+              /** 1024 */
+              "lg:mt-[119px]"
+            )}
+          />
+        </div>
       </div>
     </div>
 
@@ -47,20 +56,22 @@ import { cn } from "@/utils";
         "2xl:mt-[276px]"
       )}
     />
-
-    <WhyChooseOrderly
-      className={cn(
-        /** 375 */
-        "mt-[94px]",
-        /** 768 */
-        "md:mt-[138px]",
-        /** 1024 */
-        "lg:mt-[147px]",
-        /** 1440 */
-        "xl:mt-[285px]"
-      )}
-      client:visible
-    />
+    <div class="relative">
+      <WhyChooseOrderlyGradient />
+      <WhyChooseOrderly
+        className={cn(
+          /** 375 */
+          "mt-[94px]",
+          /** 768 */
+          "md:mt-[138px]",
+          /** 1024 */
+          "lg:mt-[147px]",
+          /** 1440 */
+          "xl:mt-[285px]"
+        )}
+        client:visible
+      />
+    </div>
 
     <ExploreEcosystem
       className={cn(
@@ -76,31 +87,37 @@ import { cn } from "@/utils";
       client:visible
     />
 
-    <Brand
-      className={cn(
-        /** 375 */
-        "mt-[82px]",
-        /** 768 */
-        "md:mt-[131px]",
-        /** 1024 */
-        "lg:mt-[175px]",
-        /** 1440 */
-        "xl:mt-[202px]"
-      )}
-    />
+    <div class="relative">
+      <BrandGradient />
+      <Brand
+        className={cn(
+          /** 375 */
+          "mt-[82px]",
+          /** 768 */
+          "md:mt-[131px]",
+          /** 1024 */
+          "lg:mt-[175px]",
+          /** 1440 */
+          "xl:mt-[202px]"
+        )}
+      />
+    </div>
 
-    <IntegrateSDK
-      className={cn(
-        /** 375 */
-        "mt-[174px]",
-        /** 768 */
-        "md:mt-[215.92px]",
-        /** 1024 */
-        "lg:mt-[315.81px]",
-        /** 1440 */
-        "xl:mt-[343.3px]"
-      )}
-    />
+    <div class="relative">
+      <IntegrateSDKGradient />
+      <IntegrateSDK
+        className={cn(
+          /** 375 */
+          "mt-[174px]",
+          /** 768 */
+          "md:mt-[215.92px]",
+          /** 1024 */
+          "lg:mt-[315.81px]",
+          /** 1440 */
+          "xl:mt-[343.3px]"
+        )}
+      />
+    </div>
 
     <UseCases
       className={cn(
@@ -118,41 +135,50 @@ import { cn } from "@/utils";
       client:visible
     />
 
-    <SaveHours
-      className={cn(
-        /** 375 */
-        "mt-[151.03px]",
-        /** 768 */
-        "md:mt-[203px]",
-        /** 1024 */
-        "lg:mt-[300px]",
-        /** 1440 */
-        "xl:mt-[290.02px]",
-        /** 1920 */
-        "2xl:mt-[220.02px]"
-      )}
-    />
     <div class="relative">
-      <FooterBackground />
-      <div class="relative">
-        <GetStart
-          className={cn(
-            /** 375 */
-            "mt-[151px] mb-[113px]",
-            /** 768 */
-            "md:mt-[202.74px] md:mb-[109px]",
-            /** 1024 */
-            "lg:mt-[221.48px] lg:mb-[132px]",
-            /** 1440 */
-            "xl:mt-[318.87px] xl:mb-[150px]",
-            /** 1920 */
-            "2xl:mt-[214.77px] 2xl:mb-[128px]"
-          )}
-        />
-        <Footer client:visible />
+      <SaveHours
+        className={cn(
+          "relative",
+          /** 375 */
+          "mt-[151.03px]",
+          /** 768 */
+          "md:mt-[203px]",
+          /** 1024 */
+          "lg:mt-[300px]",
+          /** 1440 */
+          "xl:mt-[290.02px]",
+          /** 1920 */
+          "2xl:mt-[220.02px]"
+        )}
+      />
+      <SaveHoursGradient />
+    </div>
+
+    <div class="relative overflow-hidden">
+      <FooterGradient />
+
+      <div class="relative mix-blend-screen">
+        <FooterBg />
+        <div class="relative">
+          <GetStart
+            className={cn(
+              /** 375 */
+              "mt-[151px] mb-[113px]",
+              /** 768 */
+              "md:mt-[202.74px] md:mb-[109px]",
+              /** 1024 */
+              "lg:mt-[221.48px] lg:mb-[132px]",
+              /** 1440 */
+              "xl:mt-[318.87px] xl:mb-[150px]",
+              /** 1920 */
+              "2xl:mt-[214.77px] 2xl:mb-[128px]"
+            )}
+          />
+          <Footer client:visible />
+        </div>
       </div>
     </div>
   </div>
-</Layout>
 
-<script src="../animation/index"></script>
+  <script src="../animation/index"></script>
+</Layout>
