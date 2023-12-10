@@ -26,25 +26,24 @@ function gsapMedia() {
     (context) => {
       let { isDesktop, isMobile } = context.conditions as any;
       initPosition(isMobile);
-      timeline(isMobile);
+      // const tl = gsap.timeline();
+      // tl.add([firstTimeline(isMobile), timeline(isMobile)]);
+      quarterTimeline(isMobile);
+      restTimeline(isMobile);
     }
   );
 }
 
-function timeline(isMobile: boolean) {
+function restTimeline(isMobile: boolean) {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: "#IntegrateSDK",
       scrub: 1,
       // 距离顶部 20% 的时候开始触发动画
       start: "top 20%",
-      // start: (self) => {
-      //   console.log("sele,", self);
-      //   return "top 20%";
-      // },
       // 距离开始位置滚动 2000px 才停止
       end: "+=2000",
-      markers: true,
+      // markers: true,
       pin: true,
       fastScrollEnd: true,
     },
@@ -99,17 +98,68 @@ function timeline(isMobile: boolean) {
       "<"
     )
     .to("#IntegrateSDKText2", { duration: 0.5 });
+  return tl;
+}
+
+// 走完整个动画的四分之一
+function quarterTimeline(isMobile: boolean) {
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#IntegrateSDK",
+      scrub: 1,
+      start: "top 100%",
+      end: "top 20%",
+      // markers: true,
+    },
+    ease: "power1.out",
+  });
+
+  tl.to("#IntegrateSDKBg", {
+    y: -75, // [-100, 0]
+    opacity: 0.25,
+  })
+    .to(
+      "#IntegrateSDKText",
+      isMobile
+        ? {
+            x: 75, // [100, 0]
+            opacity: 0.25,
+          }
+        : {
+            y: 75, // [100, 0]
+            opacity: 0.25,
+          },
+      "<"
+    )
+    .to(
+      "#IntegrateSDKOrderBook",
+      {
+        top: -200 - (-200 - orderBookTop) / 4, // [-200, orderBookTop(-50)]  -200-((-200-(-50))/4)
+        opacity: 0.25,
+      },
+      "<25%"
+    );
+  // .to(
+  //   "#IntegrateSDKOrderEntry",
+  //   {
+  //     top: -150 - (-150 - orderEntryTop) / 4, // [-150, orderEntryTop(-22)]
+  //     opacity: 0.25,
+  //   },
+  //   "<25%"
+  // );
+  return tl;
 }
 
 /** 设置动画的初始位置 */
 function initPosition(isMobile: boolean) {
   gsap.set("#IntegrateSDKBg", { opacity: 0, y: -100 });
-  gsap.set("#IntegrateSDKOrderBook", { opacity: 0, top: -200 });
-  gsap.set("#IntegrateSDKOrderEntry", { opacity: 0, top: -150 });
   gsap.set(
     "#IntegrateSDKText",
     isMobile ? { opacity: 0, x: 100 } : { opacity: 0, y: 100 }
   );
+  gsap.set("#IntegrateSDKOrderBook", { opacity: 0, top: -200 });
+  gsap.set("#IntegrateSDKOrderEntry", { opacity: 0, top: -150 });
+
   gsap.set(
     "#IntegrateSDKText2",
     isMobile ? { opacity: 0, x: 100 } : { opacity: 0, bottom: -100 }
