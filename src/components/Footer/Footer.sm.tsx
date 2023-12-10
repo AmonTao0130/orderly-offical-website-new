@@ -9,13 +9,18 @@ const SmallFooter: React.FC<PropsWithClassName> = (props) => {
   return (
     <div
       className={cn(
-        "px-[20px] pt-[20px] border-t-[1px] border-t-solid border-t-primary-20",
+        "pt-[20px] border-t-[1px] border-t-solid border-t-primary-20",
         props.className
       )}
     >
-      <Top />
-      <Collapse className="mt-[20px]" />
-      <Bottom />
+      <div className="px-[20px]">
+        <Top />
+        <Collapse className="mt-[20px]" />
+      </div>
+
+      <div className="border-t-[1px] border-t-solid border-t-primary-20">
+        <Bottom className="px-[20px]" />
+      </div>
     </div>
   );
 };

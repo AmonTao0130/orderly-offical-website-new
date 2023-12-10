@@ -9,7 +9,7 @@ const LargeFooter: React.FC<PropsWithClassName> = (props) => {
   return (
     <div
       className={cn(
-        "flex flex-1 flex-col  pt-[60px] mx-auto border-t-[1px] border-t-solid border-t-primary-20",
+        "flex flex-1 flex-col pt-[60px] mx-auto border-t-[1px] border-t-solid border-t-primary-20",
         props.className
       )}
     >
@@ -18,7 +18,9 @@ const LargeFooter: React.FC<PropsWithClassName> = (props) => {
         <Menu className="w-[950px]" />
       </div>
 
-      <Bottom className="max-w-[1280px] w-full mt-[68px] mx-auto" />
+      <div className="mt-[68px] border-t-[1px] border-t-solid border-t-primary-20">
+        <Bottom className="max-w-[1280px] w-full mx-auto" />
+      </div>
     </div>
   );
 };

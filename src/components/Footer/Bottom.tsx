@@ -29,7 +29,7 @@ const Bottom: React.FC<PropsWithClassName> = (props) => {
   return (
     <div
       className={cn(
-        "flex justify-between pt-[20px] pb-[30px] border-t-[1px] border-t-solid border-t-primary-20",
+        "flex justify-between pt-[20px] pb-[30px]",
         props.className
       )}
     >
