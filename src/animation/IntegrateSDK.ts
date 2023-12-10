@@ -1,18 +1,47 @@
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { Screen } from "@/utils/constant";
 gsap.registerPlugin(ScrollTrigger);
 
-const screenWidth = window.innerWidth;
+const { orderBookTop, orderEntryTop } = getTops();
 
 main();
 
-function timeline(orderBookTop: number, orderEntryTop: number) {
+function main() {
+  gsapMedia();
+}
+
+function gsapMedia() {
+  // https://gsap.com/docs/v3/GSAP/gsap.matchMedia()
+  const mm = gsap.matchMedia();
+  const breakPoint = 768;
+
+  mm.add(
+    {
+      // set up any number of conditions. The function below will be called when ANY of them match.
+      isDesktop: `(min-width: ${breakPoint}px) and (prefers-reduced-motion: no-preference)`,
+      isMobile: `(max-width: ${
+        breakPoint - 1
+      }px) and (prefers-reduced-motion: no-preference)`,
+    },
+    (context) => {
+      let { isDesktop, isMobile } = context.conditions as any;
+      initPosition(isMobile);
+      timeline(isMobile);
+    }
+  );
+}
+
+function timeline(isMobile: boolean) {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: "#IntegrateSDK",
       scrub: 1,
+      // 距离顶部 20% 的时候开始触发动画
       start: "top 20%",
+      // start: (self) => {
+      //   console.log("sele,", self);
+      //   return "top 20%";
+      // },
       // 距离开始位置滚动 2000px 才停止
       end: "+=2000",
       markers: true,
@@ -25,7 +54,7 @@ function timeline(orderBookTop: number, orderEntryTop: number) {
   tl.to("#IntegrateSDKBg", { y: 0, opacity: 1, duration: 2 })
     .to(
       "#IntegrateSDKText",
-      screenWidth < Screen.md
+      isMobile
         ? { x: 0, opacity: 1, duration: 2 }
         : { y: 0, opacity: 1, duration: 2 },
       "<"
@@ -56,7 +85,7 @@ function timeline(orderBookTop: number, orderEntryTop: number) {
     )
     .to(
       "#IntegrateSDKText",
-      screenWidth < Screen.md
+      isMobile
         ? { x: -200, opacity: 0, duration: 1 }
         : { y: -200, opacity: 0, duration: 1 },
       "<"
@@ -64,7 +93,7 @@ function timeline(orderBookTop: number, orderEntryTop: number) {
 
     .to(
       "#IntegrateSDKText2",
-      screenWidth < Screen.md
+      isMobile
         ? { x: 0, opacity: 1, duration: 1 }
         : { top: 0, opacity: 1, duration: 1 },
       "<"
@@ -72,64 +101,18 @@ function timeline(orderBookTop: number, orderEntryTop: number) {
     .to("#IntegrateSDKText2", { duration: 0.5 });
 }
 
-function main() {
-  const { orderBookTop, orderEntryTop } = getTops();
-  console.log("orderBookTop", orderBookTop);
-
-  initPosition();
-  timeline(orderBookTop, orderEntryTop);
-
-  // TODO：在滚到 IntegrateSDK的位置刷新时，布局不会居中
-  // const tl = gsap.timeline();
-  // tl.add([getTl1(orderBookTop, orderEntryTop), getTl2()]);
-
-  // tl.add(getTl1(orderBookTop, orderEntryTop));
-  // tl.add(getTl2());
-
-  // const tl = gsap.timeline({
-  //   scrollTrigger: {
-  //     trigger: "#IntegrateSDK",
-  //     scrub: 1,
-  //     // pin: true,
-  //     start: "top center",
-  //     end: "bottom top",
-  //     markers: true,
-  //   },
-  //   ease: "power1.out",
-  //   paused: true,
-  // });
-
-  // tl.to("#IntegrateSDKBg", { y: 0, opacity: 1 });
-  // tl.to("#IntegrateSDKText", { y: 0, opacity: 1 }, "<");
-
-  // tl.to("#IntegrateSDKOrderBook", { top: orderBookTop, opacity: 1 }, "<25%");
-  // tl.to("#IntegrateSDKOrderEntry", { top: orderEntryTop, opacity: 1 }, "<25%");
-  // tl.to("#IntegrateSDKImage2", {
-  //   clipPath: "polygon(-20% -15%, 120% 0%, 120% 120%, -20% 120%)",
-  //   scrollTrigger: {
-  //     pin: true,
-  //   },
-  // });
-
-  // tl.to("#IntegrateSDKText", { y: -200, opacity: 0 }, "<");
-
-  // tl.to("#IntegrateSDKText2", { top: 0, opacity: 1 }, "<");
-}
-
 /** 设置动画的初始位置 */
-function initPosition() {
+function initPosition(isMobile: boolean) {
   gsap.set("#IntegrateSDKBg", { opacity: 0, y: -100 });
   gsap.set("#IntegrateSDKOrderBook", { opacity: 0, top: -200 });
   gsap.set("#IntegrateSDKOrderEntry", { opacity: 0, top: -150 });
   gsap.set(
     "#IntegrateSDKText",
-    screenWidth < Screen.md ? { opacity: 0, x: 100 } : { opacity: 0, y: 100 }
+    isMobile ? { opacity: 0, x: 100 } : { opacity: 0, y: 100 }
   );
   gsap.set(
     "#IntegrateSDKText2",
-    screenWidth < Screen.md
-      ? { opacity: 0, x: 100 }
-      : { opacity: 0, bottom: -100 }
+    isMobile ? { opacity: 0, x: 100 } : { opacity: 0, bottom: -100 }
   );
   gsap.set("#IntegrateSDKImage2", {
     clipPath: "polygon(120% -20%, 120% 0%, 135% 135%, 120% 120%)",
@@ -158,82 +141,82 @@ function getTops() {
   return { orderBookTop, orderEntryTop };
 }
 
-function getTl1(orderBookTop: number, orderEntryTop: number) {
-  const tl1 = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#IntegrateSDK",
-      scrub: 1.5,
-      start: "top 20%",
-      // 距离开始 2000px 距离才停止
-      end: "+=2000",
-      markers: true,
-      pin: true,
-    },
-    ease: "power1.out",
-  });
+// function getTl1(orderBookTop: number, orderEntryTop: number) {
+//   const tl1 = gsap.timeline({
+//     scrollTrigger: {
+//       trigger: "#IntegrateSDK",
+//       scrub: 1.5,
+//       start: "top 20%",
+//       // 距离开始 2000px 距离才停止
+//       end: "+=2000",
+//       markers: true,
+//       pin: true,
+//     },
+//     ease: "power1.out",
+//   });
 
-  tl1
-    .to("#IntegrateSDKBg", { y: 0, opacity: 1, duration: 100 })
-    .to(
-      "#IntegrateSDKText",
-      screenWidth < Screen.md
-        ? { x: 0, opacity: 1, duration: 100 }
-        : { y: 0, opacity: 1, duration: 100 },
-      "<"
-    )
+//   tl1
+//     .to("#IntegrateSDKBg", { y: 0, opacity: 1, duration: 100 })
+//     .to(
+//       "#IntegrateSDKText",
+//       screenWidth < Screen.md
+//         ? { x: 0, opacity: 1, duration: 100 }
+//         : { y: 0, opacity: 1, duration: 100 },
+//       "<"
+//     )
 
-    .to(
-      "#IntegrateSDKOrderBook",
-      { top: orderBookTop, opacity: 1, duration: 200 },
-      "<25%"
-    )
-    .to(
-      "#IntegrateSDKOrderEntry",
-      {
-        top: orderEntryTop,
-        opacity: 1,
-        duration: 200,
-      },
-      "<25%"
-    );
-  return tl1;
-}
+//     .to(
+//       "#IntegrateSDKOrderBook",
+//       { top: orderBookTop, opacity: 1, duration: 200 },
+//       "<25%"
+//     )
+//     .to(
+//       "#IntegrateSDKOrderEntry",
+//       {
+//         top: orderEntryTop,
+//         opacity: 1,
+//         duration: 200,
+//       },
+//       "<25%"
+//     );
+//   return tl1;
+// }
 
-function getTl2() {
-  const tl2 = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#IntegrateSDK",
-      scrub: 1.5,
-      // pin: true,
-      // start: "top 20%",
-      start: (self: any) => self.previous().end,
-      end: "top 5%",
-      // invalidateOnRefresh: true,
-      // markers: true,
-    },
-    ease: "power1.out",
-  });
+// function getTl2() {
+//   const tl2 = gsap.timeline({
+//     scrollTrigger: {
+//       trigger: "#IntegrateSDK",
+//       scrub: 1.5,
+//       // pin: true,
+//       // start: "top 20%",
+//       start: (self: any) => self.previous().end,
+//       end: "top 5%",
+//       // invalidateOnRefresh: true,
+//       // markers: true,
+//     },
+//     ease: "power1.out",
+//   });
 
-  tl2
-    .to("#IntegrateSDKImage2", {
-      clipPath: "polygon(-20% -15%, 120% 0%, 135% 135%, -20% 120%)",
-    })
-    .to(
-      "#IntegrateSDKText",
-      screenWidth < Screen.md
-        ? { x: -200, opacity: 0 }
-        : { y: -200, opacity: 0 },
-      "<"
-    )
+//   tl2
+//     .to("#IntegrateSDKImage2", {
+//       clipPath: "polygon(-20% -15%, 120% 0%, 135% 135%, -20% 120%)",
+//     })
+//     .to(
+//       "#IntegrateSDKText",
+//       screenWidth < Screen.md
+//         ? { x: -200, opacity: 0 }
+//         : { y: -200, opacity: 0 },
+//       "<"
+//     )
 
-    .to(
-      "#IntegrateSDKText2",
-      screenWidth < Screen.md ? { x: 0, opacity: 1 } : { top: 0, opacity: 1 },
-      "<"
-    );
+//     .to(
+//       "#IntegrateSDKText2",
+//       screenWidth < Screen.md ? { x: 0, opacity: 1 } : { top: 0, opacity: 1 },
+//       "<"
+//     );
 
-  return tl2;
-}
+//   return tl2;
+// }
 
 // animateBg();
 // animateOrderBook(orderBookTop);
