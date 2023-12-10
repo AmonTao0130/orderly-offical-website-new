@@ -32,7 +32,6 @@ export function getRangePage(
   pageSize: number,
   pageIndex: number
 ) {
-  console.log(curPageTotal, pageSize, pageIndex);
   if (pageIndex == 1 && curPageTotal === 1) {
     return "1";
   }
