@@ -137,6 +137,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
                     //    background-clip: text;
                     //    text-fill-color: transparent;"
                     className={cn(
+                      "select-none",
                       /** 375 */
                       "text-lg leading-[18px]",
                       /** 768 */
