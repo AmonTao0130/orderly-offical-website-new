@@ -40,7 +40,7 @@ function restTimeline(isMobile: boolean) {
       trigger: "#IntegrateSDK",
       scrub: 1,
       // 距离顶部 20% 的时候开始触发动画
-      start: "top 20%",
+      start: "top 15%",
       // 距离开始位置滚动 2000px 才停止
       end: "+=2000",
       // markers: true,
@@ -108,7 +108,7 @@ function quarterTimeline(isMobile: boolean) {
       trigger: "#IntegrateSDK",
       scrub: 1,
       start: "top 100%",
-      end: "top 20%",
+      end: "top 15%",
       // markers: true,
     },
     ease: "power1.out",
