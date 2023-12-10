@@ -48,6 +48,7 @@ function restTimeline(isMobile: boolean) {
       fastScrollEnd: true,
     },
     ease: "power1.out",
+    // ease: "linear",
   });
 
   tl.to("#IntegrateSDKBg", { y: 0, opacity: 1, duration: 2 })
@@ -62,7 +63,7 @@ function restTimeline(isMobile: boolean) {
     .to(
       "#IntegrateSDKOrderBook",
       { top: orderBookTop, opacity: 1, duration: 2 },
-      "<25%"
+      "<"
     )
     .to(
       "#IntegrateSDKOrderEntry",
@@ -111,12 +112,14 @@ function quarterTimeline(isMobile: boolean) {
       end: "top 15%",
       // markers: true,
     },
-    ease: "power1.out",
+    // ease: "power1.out",
+    ease: "linear",
   });
 
   tl.to("#IntegrateSDKBg", {
     y: -75, // [-100, 0]
     opacity: 0.25,
+    duration: 2,
   })
     .to(
       "#IntegrateSDKText",
@@ -124,18 +127,21 @@ function quarterTimeline(isMobile: boolean) {
         ? {
             x: 75, // [100, 0]
             opacity: 0.25,
+            duration: 2,
           }
         : {
             y: 75, // [100, 0]
             opacity: 0.25,
+            duration: 2,
           },
       "<"
     )
     .to(
       "#IntegrateSDKOrderBook",
       {
-        top: -200 - (-200 - orderBookTop) / 4, // [-200, orderBookTop(-50)]  -200-((-200-(-50))/4)
+        top: -250 - (-250 - orderBookTop) / 2, // [-200, orderBookTop(-50)]  -200-((-200-(-50))/4)
         opacity: 0.25,
+        duration: 2,
       },
       "<25%"
     );
@@ -157,7 +163,7 @@ function initPosition(isMobile: boolean) {
     "#IntegrateSDKText",
     isMobile ? { opacity: 0, x: 100 } : { opacity: 0, y: 100 }
   );
-  gsap.set("#IntegrateSDKOrderBook", { opacity: 0, top: -200 });
+  gsap.set("#IntegrateSDKOrderBook", { opacity: 0, top: -250 });
   gsap.set("#IntegrateSDKOrderEntry", { opacity: 0, top: -150 });
 
   gsap.set(
