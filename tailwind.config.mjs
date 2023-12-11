@@ -57,9 +57,20 @@ export default {
           "0%": { transform: "translate3d(50px,0,0)" },
           "100%": { transform: "translate3d(-1894px,0,0)" },
         },
+        appear: {
+          "0%": { transform: "translate3d(0,-200px,0)", opacity: 0 },
+          "100%": { transform: "translate3d(0,0,0)", opacity: 1 },
+        },
+        appearAfter: {
+          "0%": { transform: "translate3d(0,-200px,0)", opacity: 0 },
+          "50%": { transform: "translate3d(0,-200px,0)", opacity: 0 },
+          "100%": { transform: "translate3d(0,0,0)", opacity: 1 },
+        },
       },
       animation: {
         investors: "investors 70s linear infinite",
+        appear: "appear 800ms ease-out",
+        appearAfter: "appear 800ms ease-out",
       },
     },
   },

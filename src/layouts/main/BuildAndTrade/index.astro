@@ -9,7 +9,7 @@ type Props = PropsWithClassName;
 const { className } = Astro.props;
 ---
 
-<div class={cn("text-center", className)}>
+<div class={cn("text-center animate-appear", className)}>
   <div
     class={cn(
       "font-title font-bold text-primary-100",
