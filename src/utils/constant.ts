@@ -55,4 +55,10 @@ export const Hyperlink = {
       "https://orderly.network/docs/build-on-evm/building-on-evm",
     DropUsALine: "mailto:hello@orderly.network",
   },
+  Community: {
+    Discord: "https://discord.com/invite/orderlynetwork",
+    Twitter: "https://twitter.com/OrderlyNetwork",
+    Medium: "https://medium.com/@orderlynetwork",
+    Linkedin: "https://www.linkedin.com/company/orderly-network",
+  },
 };

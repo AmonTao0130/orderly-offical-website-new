@@ -5,23 +5,24 @@ import MediumIcon from "@/icons/MediumIcon";
 import LinkedinIcon from "@/icons/LinkedinIcon";
 import { cn } from "@/utils/index";
 import type { PropsWithClassName } from "@/types";
+import { Hyperlink } from "@/utils/constant";
 
 const icons = [
   {
     icon: DiscordIcon,
-    url: "https://discord.com/invite/orderlynetwork",
+    url: Hyperlink.Community.Discord,
   },
   {
     icon: TwitterIcon,
-    url: "https://twitter.com/OrderlyNetwork",
+    url: Hyperlink.Community.Twitter,
   },
   {
     icon: MediumIcon,
-    url: "https://medium.com/@orderlynetwork",
+    url: Hyperlink.Community.Medium,
   },
   {
     icon: LinkedinIcon,
-    url: "https://www.linkedin.com/company/orderly-network",
+    url: Hyperlink.Community.Linkedin,
   },
 ];
 
