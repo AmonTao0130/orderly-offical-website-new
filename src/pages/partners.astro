@@ -9,40 +9,51 @@ import EcosystemTab from "@/layouts/ecosystem/EcosystemTab";
 import Footer from "@/components/Footer";
 import { cn } from "@/utils";
 import CardList from "@/layouts/ecosystem/CardList";
-import CardBg from "@/layouts/ecosystem/CardBg";
+import HeaderGradient from "@/layouts/ecosystem/Gradient/Header";
+import FooterGradient from "@/layouts/ecosystem/Gradient/Footer";
+import BodyGradient from "@/layouts/ecosystem/Gradient/Body";
 ---
 
 <!-- ecosystem url有冲突，这里将 url 改成 partners -->
 <Layout title="orderly.network/ecosystem">
-  <div
-    class={cn(
-      "relative",
-      /** 375 */
-      "pb-[35px]",
-      /** 768 */
-      "md:pb-[172px]",
-      /** 1024 */
-      "lg:pb-[86px]",
-      /** 1440 */
-      "xl:pb-[124px]"
-    )}
-  >
-    <HeaderBg />
-    <div class="relative">
-      <Navigation client:visible />
-      <Content>
-        <HeaderText />
-        <Statistics />
-      </Content>
+  <div class="relative">
+    <HeaderGradient />
+    <div
+      class={cn(
+        "relative",
+        /** 375 */
+        "pb-[35px]",
+        /** 768 */
+        "md:pb-[172px]",
+        /** 1024 */
+        "lg:pb-[86px]",
+        /** 1440 */
+        "xl:pb-[124px]"
+      )}
+    >
+      <HeaderBg />
+      <div class="relative">
+        <Navigation client:visible />
+        <Content>
+          <HeaderText />
+          <Statistics />
+        </Content>
+      </div>
     </div>
   </div>
-  <div class="relative">
-    <!-- <CardBg /> -->
-    <div>
+
+  <div class="relative overflow-hidden">
+    <FooterGradient />
+    <div class="relative">
       <Content>
         <EcosystemTab client:visible />
-        <CardList client:visible />
       </Content>
+      <div class="relative">
+        <BodyGradient />
+        <Content className="relative">
+          <CardList client:visible />
+        </Content>
+      </div>
 
       <Footer
         className={cn(

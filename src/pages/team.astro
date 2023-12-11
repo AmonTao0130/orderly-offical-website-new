@@ -4,6 +4,8 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { cn } from "@/utils";
 import Header from "@/layouts/team/Header";
+import FooterGradient from "@/layouts/team/Gradient/Footer";
+import BodyGradient from "@/layouts/team/Gradient/Body";
 import Main from "@/layouts/team/Main";
 import Investors from "@/layouts/team/Investors";
 ---
@@ -14,20 +16,29 @@ import Investors from "@/layouts/team/Investors";
     <Header />
   </div>
 
-  <Main />
-  <Investors />
-</Layout>
+  <div class="relative">
+    <BodyGradient />
+    <div class="relative"><Main /></div>
+  </div>
 
-<Footer
-  className={cn(
-    /** 375 */
-    "mt-[118px]",
-    /** 768 */
-    "md:mt-[249px]",
-    /** 1024 */
-    "lg:mt-[132px]",
-    /** 1440 */
-    "xl:mt-[120px]"
-  )}
-  client:visible
-/>
+  <div class="relative overflow-hidden">
+    <FooterGradient />
+    <div class="relative">
+      <Investors />
+
+      <Footer
+        className={cn(
+          /** 375 */
+          "mt-[118px]",
+          /** 768 */
+          "md:mt-[249px]",
+          /** 1024 */
+          "lg:mt-[132px]",
+          /** 1440 */
+          "xl:mt-[120px]"
+        )}
+        client:visible
+      />
+    </div>
+  </div>
+</Layout>
