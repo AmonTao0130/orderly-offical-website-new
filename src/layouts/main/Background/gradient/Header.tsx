@@ -8,9 +8,9 @@ const HeaderGradient: React.FC = (props) => {
     <>
       <img
         className={cn(
-          "absolute",
+          "absolute bg-transparent",
           /** 375 */
-          "w-[659px] h-[697px] left-[-150px] top-[0px]",
+          "w-[659px] h-[697px] left-[-150px] top-[-100px]",
           /** 768 */
           "md:w-[659px] md:h-[697px] md:left-[-250px] md:top-[0px]",
           /** 1024 */
@@ -26,7 +26,7 @@ const HeaderGradient: React.FC = (props) => {
         className={cn(
           "absolute",
           /** 375 */
-          "w-[659px] h-[697px] right-[-150px] top-[0px]",
+          "w-[659px] h-[697px] right-[-150px] top-[-100px]",
           /** 768 */
           "md:w-[659px] md:h-[697px] md:right-[-250px] md:top-[0px]",
           /** 1024 */
