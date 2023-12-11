@@ -40,6 +40,13 @@ const { title } = Astro.props;
 <script>
   import { navigationOpen } from "@/store";
 
+  window.onload = () => {
+    if (history?.scrollRestoration) {
+      // 禁止记录滚动位置
+      history.scrollRestoration = "manual";
+    }
+  };
+
   // 侦听导航菜单弹窗是否打开
   navigationOpen.subscribe((open) => {
     if (open) {
