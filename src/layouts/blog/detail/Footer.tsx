@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import type { PropsWithClassName } from "@/types";
 import { cn } from "@/utils";
 import LinkIcon from "@/icons/LinkIcon";
@@ -7,8 +7,20 @@ import FacebookIcon from "@/icons/FacebookIcon";
 import LinkedinIcon from "@/icons/LinkedinIcon";
 import DiscordIcon from "@/icons/DiscordIcon";
 import MediumIcon from "@/icons/MediumIcon";
+import { Hyperlink } from "@/utils/constant";
+import { copyContent } from "@/utils";
 
 const Footer: React.FC<PropsWithClassName> = (props) => {
+  const [copy, setCopy] = useState(false);
+  const [hover, setHover] = useState(false);
+
+  async function onLink() {
+    try {
+      await copyContent(window.location.href);
+      setCopy(true);
+    } catch (err) {}
+  }
+
   return (
     <div
       className={cn(
@@ -32,11 +44,24 @@ const Footer: React.FC<PropsWithClassName> = (props) => {
           )}
         >
           <div className="text-xl leading-[27.32px]">Share this</div>
-          <div className="w-[168px] flex justify-between items-center text-primary-50 mt-[12px]">
-            <LinkIcon />
-            <TwitterIcon size={24} />
+          <div className="flex justify-between items-center text-primary-50 mt-[12px] cursor-pointer">
+            <LinkIcon
+              className={cn(
+                " transition-[color] duration-300",
+                hover && copy ? "text-[#24AD8F]" : "text-primary-50"
+              )}
+              onMouseEnter={() => {
+                setHover(true);
+              }}
+              onMouseLeave={() => {
+                setCopy(false);
+                setHover(false);
+              }}
+              onClick={onLink}
+            />
+            {/* <TwitterIcon size={24} />
             <FacebookIcon />
-            <LinkedinIcon size={24} />
+            <LinkedinIcon size={24} /> */}
           </div>
         </div>
 
@@ -45,10 +70,18 @@ const Footer: React.FC<PropsWithClassName> = (props) => {
             Join the Orderly community
           </div>
           <div className="w-[168px] flex justify-between items-center text-primary-50 mt-[12px]">
-            <DiscordIcon size={24} />
-            <TwitterIcon size={24} />
-            <MediumIcon size={24} />
-            <LinkedinIcon size={24} />
+            <a href={Hyperlink.Community.Discord}>
+              <DiscordIcon size={24} />
+            </a>
+            <a href={Hyperlink.Community.Twitter}>
+              <TwitterIcon size={24} />
+            </a>
+            <a href={Hyperlink.Community.Medium}>
+              <MediumIcon size={24} />
+            </a>
+            <a href={Hyperlink.Community.Linkedin}>
+              <LinkedinIcon size={24} />
+            </a>
           </div>
         </div>
       </div>

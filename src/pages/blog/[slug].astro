@@ -75,7 +75,7 @@ const { articles, article, blocks } = Astro.props;
           return <div class="mt-[30px]" set:html={block.html} />;
         })
       }
-      <DetailFooter />
+      <DetailFooter client:visible />
     </div>
   </Content>
 
