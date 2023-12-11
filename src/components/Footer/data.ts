@@ -31,7 +31,7 @@ export default [
         url: Hyperlink.Traders.TradingdApps,
       },
       {
-        title: "API Trading",
+        title: "API Docs",
         url: Hyperlink.Traders.APITrading,
         target: "_blank",
       },

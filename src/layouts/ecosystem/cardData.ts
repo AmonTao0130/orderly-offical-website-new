@@ -125,7 +125,7 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "Unidex",
     description:
-      "BTSE is a leading digital asset exchange that offers a simple and secure way to trade cryptocurrencies.",
+      "Swaps & Perps aggregator dedicated to connecting all things trading into one place.",
     url: "https://www.unidex.exchange/",
   },
   {
