@@ -84,7 +84,7 @@ const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
   return (
     <div>
       <div className={cn("flex flex-wrap mx-[-10px]", props.className)}>
-        {pageIndexData.map((item, index) => {
+        {pageIndexData?.map((item, index) => {
           return <BlogItem key={item.id} {...item} />;
         })}
       </div>
