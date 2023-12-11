@@ -32,7 +32,6 @@ export type TCardData = {
   description: string;
   url: string;
 };
-const titles = ["All", "Builder", "Product", "Ecosystem"];
 
 export const cardData: TCardData[] = [
   {
@@ -40,14 +39,15 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "WOOFi Pro",
     description:
-      "Delivering best liquidity, low fees, and superior execution to boost DeFi trading experiences.",
+      "One DEX to rule all chains. Trade and earn like royalty with unmatched execution, cross-chain swaps, and single-sided yields.",
     url: "https://dex.woo.org/",
   },
   {
     icon: LayerZero.src,
     category: "Product",
     title: "LayerZero",
-    description: "Trustless, omnichain interoperability protocol.",
+    description:
+      "LayerZero is an omnichain interoperability protocol designed for lightweight message passing across chains.",
     url: "https://layerzero.network/",
   },
   {
@@ -55,7 +55,7 @@ export const cardData: TCardData[] = [
     category: "Ecosystem",
     title: "NEAR Protocol",
     description:
-      "Robust ecosystem of developers, founders, and contributors of innovative DeFi protocols building the open web together.",
+      "NEAR is a user-friendly and carbon-neutral blockchain, built from the ground up to be performant, secure, and infinitely scalable.",
     url: "https://near.org/",
   },
   {
@@ -71,7 +71,7 @@ export const cardData: TCardData[] = [
     category: "Ecosystem",
     title: "Arbitrum",
     description:
-      "EVM L2 scaling solution with a vibrant ecosystem of dApps, wallets, tools, and developers.",
+      "Arbitrum is the leading L2 technology empowering builders to explore the largest L1 ecosystem - Ethereum.",
     url: "https://arbitrum.io/",
   },
   {
@@ -79,7 +79,7 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "BTSE",
     description:
-      "BTSE is a leading digital asset exchange that offers a simple and secure way to trade cryptocurrencies.",
+      "BTSE is a crypto exchange, offering simple, secure and efficient cryptocurrency trading.",
     url: "https://dex.btse.com/trade/",
   },
   {
@@ -87,21 +87,23 @@ export const cardData: TCardData[] = [
     category: "Product",
     title: "Elixir",
     description:
-      "Innovative decentralized DPoS network enabling liquid markets for orderbook-based crypto exchanges.",
+      "Elixir Protocol is a high-throughput DPoS consensus network that enables anyone to supply liquidity to orderbooks.",
     url: "https://elixir.finance/",
   },
   {
     icon: RageTrade.src,
     category: "Builder",
     title: "Rage Trade",
-    description: "Prime brokerage for perps.",
+    description:
+      "Perp Aggregator. Best prices, aggregated liquidity, multichain.",
     url: "https://www.rage.trade/",
   },
   {
     icon: LogX.src,
     category: "Builder",
     title: "LogX",
-    description: "Perps aggregator with cross-chain routing.",
+    description:
+      "LogX is a Decentralised Exchange for perps trading with aggregated liquidity.",
     url: "https://www.logx.trade/",
   },
   {
@@ -109,7 +111,7 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "Empyreal",
     description:
-      "Simplifying Web3 development to amplify your creative vision.",
+      "Empyreal is an innovative development toolkit that aims to bridge the gap between the growing Web3 landscape and traditional developers.",
     url: "https://empyrealsdk.com/",
   },
   {
@@ -117,7 +119,7 @@ export const cardData: TCardData[] = [
     category: "Ecosystem",
     title: "Polygon",
     description:
-      "Robust multi-chain protocol for building and connecting EVM-compatible blockchain networks.",
+      "Polygon is the value layer of the internet that allows anyone to create and exchange value, powered by zero-knowledge technology.",
     url: "https://polygon.technology/",
   },
   {
@@ -125,14 +127,15 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "Unidex",
     description:
-      "Swaps & Perps aggregator dedicated to connecting all things trading into one place.",
+      "UniDex is a DeFi platform that aims to provide a hub for traders to access the best rates for their trades within the ecosystem",
     url: "https://www.unidex.exchange/",
   },
   {
     icon: PrimeProtocol.src,
     category: "Builder",
     title: "Prime Protocol",
-    description: "Prime is the first natively cross-chain prime brokerage.",
+    description:
+      "Prime Protocol is a one-stop shop where investors can deposit all their digital assets across chains into a single protocol and receive credit anywhere.",
     url: "https://app.primeprotocol.xyz/",
   },
   {
@@ -140,7 +143,7 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "SWEAT",
     description:
-      "Sweat is building an open economy of movement where people earn cryptos for physical activity.",
+      "SWEAT is building an open economy of movement where people earn cryptos for physical activity.",
     url: "https://sweateconomy.com/",
   },
   {
@@ -148,7 +151,7 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "REF Finance",
     description:
-      "Open-source, community-led, and multi-purpose DeFi protocol built on the NEAR network.",
+      "Ref Finance is a community-led, multi-purpose DeFi platform built on the NEAR Protocol with a leading AMM & a synchronous DeFi Shard.",
     url: "https://app.ref.finance/orderbook/perps",
   },
   {
@@ -156,7 +159,7 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "TangleSwap",
     description:
-      "Multi-chain DeFi with seven integrated applications in one platform.",
+      "TangleSwap combines the best DeFi solutions for users to seamlessly manage and grow their digital assets.",
     url: "https://www.tangleswap.exchange/",
   },
   {
@@ -164,7 +167,7 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "JUMP DeFi",
     description:
-      "Lowering the barrier of entry to DeFi for users and developers.",
+      "Jump DeFi is a one-stop platform serving multiple blockchain ecosystems; lowering the barrier of entry to DeFI for users and builders.",
     url: "https://swap.jumpdefi.xyz/",
   },
   {
@@ -172,7 +175,7 @@ export const cardData: TCardData[] = [
     category: "Product",
     title: "Moonpay",
     description:
-      "All-in-one solution for managing multiple crypto wallets and buying crypto on the go.",
+      "Moonpay is an all-in-one solution for managing multiple crypto wallets and buying crypto on the go.",
     url: "https://www.moonpay.com/",
   },
   {
@@ -180,7 +183,7 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "ZkAutomate",
     description:
-      "No-code Automated Trading Bot & Smart Contract Automation platform for EVM & Non-EVM Developers.",
+      "zkAutomate is the world’s first automation algo using zero-knowledge proof for trading bots and DeFi management.",
     url: "https://zkautomate.com/",
   },
   {
@@ -188,7 +191,7 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "Here Wallet",
     description:
-      "User-friendly and multifunctional mobile wallet for NEAR Protocol.",
+      "HERE Wallet is a universal hub to connect your Binance, onchain and hardware wallets.",
     url: "https://www.herewallet.app/",
   },
   {
@@ -196,7 +199,7 @@ export const cardData: TCardData[] = [
     category: "Product",
     title: "Google Cloud",
     description:
-      "Build and scale faster with simple, secure tools and infrastructure for Web3.",
+      "Google Cloud is a giant cloud-service provider enabling simple, secure tools, and infrastructure for Web3 builders.",
     url: "https://cloud.google.com/",
   },
   {
@@ -204,7 +207,10 @@ export const cardData: TCardData[] = [
     category: "Ecosystem",
     title: "Avalanche",
     description:
-      "Developer-friendly L1 Smart contracts platform that scales infinitely and regularly finalizes transactions in less than one second.",
+      "Avalanche is a smart contracts platform that scales infinitely and regularly finalizes transactions in less than one second.",
+    // description:
+    //   "Avalanche is a smart contracts platform that scales infinitely and regularly finalizes transactions in less than one second. Build anything you want, any way you want, on the eco-friendly blockchain designed for Web3 devs.",
+
     url: "https://www.avax.network/",
   },
   {
@@ -212,7 +218,7 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "VOOI",
     description:
-      "EVM-based protocol facilitating capital efficient stableswaps for L2s.",
+      "VOOI is a capital-efficient, low-slippage, and multi-stablecoin liquidity pool designed for various DeFi platforms and individuals.",
     url: "https://vooi.io/",
   },
   {
@@ -220,14 +226,15 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "Sender",
     description:
-      "Multi-chain digital asset management platform providing a one-stop solution for secure and convenient asset management.",
+      "Sender Wallet is a Web3 wallet compatible with Ethereum and NEAR, allowing you to control your cryptocurrency, NFTs, DeFi activities, and digital assets.",
     url: "https://sender.org/",
   },
   {
     icon: Scroll.src,
     category: "Ecosystem",
     title: "Scroll",
-    description: "Native zkEVM powering the scaling of EVM-based dApps. ",
+    description:
+      "Scroll is the L2 network built to seamlessly extend Ethereum’s capabilities through zero knowledge tech and EVM compatibility. ",
     url: "https://scroll.io/",
   },
   {
@@ -235,7 +242,7 @@ export const cardData: TCardData[] = [
     category: "Ecosystem",
     title: "Linea",
     description:
-      "zkEVM protocol enabling the next generation of Ethereum builders.",
+      "Linea is a developer-ready zk rollup for scaling Ethereum dApps. ",
     url: "https://linea.build/",
   },
 ];

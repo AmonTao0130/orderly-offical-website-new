@@ -69,11 +69,13 @@ const CardItem: React.FC<CardItemProps & CardItemProps> = (props) => {
             " text-primary-80 font-medium pt-[28px]",
             "border-t-[1px] border-t-solid border-t-primary-36",
             /** 375 */
-            "h-[96px] text-sm leading-[21px] mt-[16px]",
+            "h-[120px] text-sm leading-[21px] mt-[16px]",
             /** 768 */
-            "md:mt-[28px] md:text-base md:leading-[24px] md:h-[144px]",
+            "md:mt-[28px] md:text-base md:leading-[24px] md:h-[168px]",
             /** 1024 */
-            ""
+            "lg:h-[192px]",
+            /** 1440 */
+            "xl:h-[120px]"
           )}
         >
           {data.description}
