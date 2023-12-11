@@ -49,6 +49,7 @@ const StatisticsItem: React.FC<StatisticsItemProps & PropsWithClassName> = (
           WebkitBackgroundClip: "text",
         }}
         className={cn(
+          "select-none",
           /** 375 */
           "text-2xl leading-[24px] font-bold mt-[8px]",
           /** 768 */
