@@ -168,7 +168,10 @@ function initPosition(isMobile: boolean) {
 
   gsap.set(
     "#IntegrateSDKText2",
-    isMobile ? { opacity: 0, x: 100 } : { opacity: 0, bottom: -100 }
+    isMobile
+      ? // 这里的 top默认值 不能设置在 dom 元素上，因为会跟bottom冲突
+        { opacity: 0, x: 100, top: 0 }
+      : { opacity: 0, top: undefined, bottom: -100 }
   );
   gsap.set("#IntegrateSDKImage2", {
     clipPath: "polygon(120% -20%, 120% 0%, 135% 135%, 120% 120%)",

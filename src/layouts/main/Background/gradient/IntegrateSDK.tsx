@@ -9,7 +9,7 @@ const IntegrateSDKGradient: React.FC = (props) => {
         className={cn(
           "absolute",
           /** 375 */
-          "w-[378px] h-[568px] left-[-150px] top-[-250px]",
+          "w-[378px] h-[568px] left-[-100px] top-[-250px]",
           /** 768 */
           "md:w-[453px] md:h-[681px] md:left-[-50px] md:top-[-200px]",
           /** 1024 */

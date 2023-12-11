@@ -26,7 +26,7 @@ import IntegrateSDKGradient from "@/layouts/main/Background/gradient/IntegrateSD
   <div>
     <div class="relative">
       <HeaderGradient />
-      <div class="relative z-[1] mix-blend-screen">
+      <div class="relative mix-blend-screen">
         <HeaderBackground />
         <div class="relative">
           <Navigation client:visible />
@@ -91,6 +91,7 @@ import IntegrateSDKGradient from "@/layouts/main/Background/gradient/IntegrateSD
       <BrandGradient />
       <Brand
         className={cn(
+          "mix-blend-screen",
           /** 375 */
           "mt-[82px]",
           /** 768 */
@@ -103,20 +104,22 @@ import IntegrateSDKGradient from "@/layouts/main/Background/gradient/IntegrateSD
       />
     </div>
 
-    <div class="relative">
+    <div
+      id="IntegrateSDK"
+      class={cn(
+        "relative mix-blend-screen",
+        /** 375 */
+        "mt-[174px]",
+        /** 768 */
+        "md:mt-[215.92px]",
+        /** 1024 */
+        "lg:mt-[315.81px]",
+        /** 1440 */
+        "xl:mt-[343.3px]"
+      )}
+    >
       <IntegrateSDKGradient />
-      <IntegrateSDK
-        className={cn(
-          /** 375 */
-          "mt-[174px]",
-          /** 768 */
-          "md:mt-[215.92px]",
-          /** 1024 */
-          "lg:mt-[315.81px]",
-          /** 1440 */
-          "xl:mt-[343.3px]"
-        )}
-      />
+      <IntegrateSDK className="relative" />
     </div>
 
     <UseCases
@@ -158,27 +161,29 @@ import IntegrateSDKGradient from "@/layouts/main/Background/gradient/IntegrateSD
       <FooterGradient />
 
       <div class="relative mix-blend-screen">
-        <FooterBg />
         <div class="relative">
-          <GetStart
-            className={cn(
-              /** 375 */
-              "mt-[151px] mb-[113px]",
-              /** 768 */
-              "md:mt-[202.74px] md:mb-[109px]",
-              /** 1024 */
-              "lg:mt-[221.48px] lg:mb-[132px]",
-              /** 1440 */
-              "xl:mt-[318.87px] xl:mb-[150px]",
-              /** 1920 */
-              "2xl:mt-[214.77px] 2xl:mb-[128px]"
-            )}
-          />
-          <Footer client:visible />
+          <FooterBg />
+          <div class="relative">
+            <GetStart
+              className={cn(
+                /** 375 */
+                "mt-[151px] mb-[113px]",
+                /** 768 */
+                "md:mt-[202.74px] md:mb-[109px]",
+                /** 1024 */
+                "lg:mt-[221.48px] lg:mb-[132px]",
+                /** 1440 */
+                "xl:mt-[318.87px] xl:mb-[150px]",
+                /** 1920 */
+                "2xl:mt-[214.77px] 2xl:mb-[128px]"
+              )}
+            />
+            <Footer client:visible />
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src="../animation/index"></script>
+    <script src="../animation/index"></script>
+  </div>
 </Layout>

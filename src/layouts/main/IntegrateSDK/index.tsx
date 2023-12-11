@@ -8,7 +8,7 @@ import SDKText from "./SDKText";
 
 const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
   return (
-    <Content id="IntegrateSDK" className={props.className}>
+    <Content className={props.className}>
       <BlockTitle>Integrate with Orderly SDK</BlockTitle>
       <div
         className={cn(
@@ -44,18 +44,13 @@ const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
           <SDKText
             order="first"
             id="IntegrateSDKText2"
-            className="absolute bottom-0 opacity-0"
-            title={
-              <>
-                Build independent UI <br /> components and pages
-              </>
-            }
+            className="absolute opacity-0"
+            title={<>Bring your own brand(B.Y.O.B).</>}
             content={
               <>
-                Implement components and pages <br className="md:hidden" />
-                without
-                <br className="sm:hidden md:hidden" /> needing to fuss with
-                data, APIs, <br className="md:hidden" /> or business logic.
+                Design a ready-to-market trading{" "}
+                <br className="hidden xl:inline" /> front-end suited to your
+                brand.
               </>
             }
           />
