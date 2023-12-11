@@ -50,7 +50,7 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
                 /** 768 */
                 "md:w-[393px] md:text-base md:leading-[24px] md:mt-[12px]",
                 /** 1024 */
-                "lg:w-[520px]"
+                "lg:w-[530px]"
               )}
             >
               An expansive ecosystem, featuring CEXs, DEXs, aggregators,
@@ -85,10 +85,10 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
             "lg:flex-col lg:mt-0"
           )}
         >
-          <NumberLabel label="Total trading volume" number="$256M+" />
+          <NumberLabel label="Total trading volume" number="$500M+" />
           <NumberLabel
-            label="Total value locked"
-            number="$256M+"
+            label="Traders"
+            number="73K+"
             className={cn(
               /** 375 */
               "ml-[43px]",
@@ -97,9 +97,7 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
               /** 1024 */
               "lg:ml-0 lg:mt-[23px]",
               /** 1440 */
-              "xl:mt-[8px]",
-              /** 1920 */
-              "2xl:mt-[17px]"
+              "xl:mt-[20px]"
             )}
           />
         </div>

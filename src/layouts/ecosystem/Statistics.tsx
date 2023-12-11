@@ -97,8 +97,8 @@ const Statistics: React.FC<PropsWithClassName> = (props) => {
           "xl"
         )}
       >
-        <StatisticsItem label="Total trading volume" value="$256M+" border />
-        <StatisticsItem label="Traders" value="12,646" border />
+        <StatisticsItem label="Total trading volume" value="$500M+" border />
+        <StatisticsItem label="Traders" value="73K+" border />
         <StatisticsItem label="Ecosystem partners" value="26" />
       </div>
     </div>
