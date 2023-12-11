@@ -32,7 +32,7 @@ const BlogItem: React.FC<Article & PropsWithClassName> = (props) => {
           /** 1440 */
           "xl:h-[225px]"
         )}
-        src={attributes.cover.data.attributes.formats.small.url}
+        src={attributes.cover?.data?.attributes?.formats?.small?.url}
       />
       <div
         className={cn(

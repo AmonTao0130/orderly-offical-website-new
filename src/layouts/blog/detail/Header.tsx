@@ -106,7 +106,7 @@ const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
             /** 1440 */
             "xl:w-[620px] xl:h-[348.75px] xl:rounded-[24px]"
           )}
-          src={attributes.cover.data.attributes.formats.small.url}
+          src={attributes.cover?.data?.attributes?.formats?.small?.url}
         />
       </Content>
     </div>
