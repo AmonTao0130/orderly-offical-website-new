@@ -53,8 +53,9 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
                 "lg:w-[520px]"
               )}
             >
-              Iaculis eu non diam phasellus vestibulum lorem. Consequat ac felis
-              donec et odio pellentesque diam volutpat commodo.
+              An expansive ecosystem, featuring CEXs, DEXs, aggregators,
+              wallets, and more, all powered by Orderly’s permissionless
+              liquidity layer.
             </div>
           </div>
           {/* 这里加一层 div，button才不会填充整行 */}
