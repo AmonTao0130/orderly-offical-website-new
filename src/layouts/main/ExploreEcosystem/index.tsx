@@ -9,7 +9,14 @@ import { Hyperlink } from "@/utils/constant";
 const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
   return (
     <Content className={props.className}>
-      <div className="flex flex-col justify-between lg:flex-row">
+      <div
+        className={cn(
+          /** 375 */
+          "flex flex-col justify-start",
+          /** 1024 */
+          "lg:flex-row lg:justify-between"
+        )}
+      >
         <div
           className={cn(
             "flex",
@@ -69,9 +76,8 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
 
         <div
           className={cn(
-            "flex",
             /** 375 */
-            "flex-row mt-[88px]",
+            "flex flex-row mt-[88px]",
             /** 768 */
             "mt-[120px]",
             /** 1024 */
@@ -86,7 +92,7 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
               /** 375 */
               "ml-[43px]",
               /** 768 */
-              "ml-[107px]",
+              "md:ml-[107px]",
               /** 1024 */
               "lg:ml-0 lg:mt-[23px]",
               /** 1440 */

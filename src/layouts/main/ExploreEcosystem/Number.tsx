@@ -24,7 +24,7 @@ const NumberLabel: React.FC<NumberLabelProps & PropsWithClassName> = (
       <div
         className={cn(
           /** 375 */
-          "text-sm leading-[14px]",
+          "text-sm leading-[14px] whitespace-nowrap",
           /** 768 */
           "md:text-base md:leading-[16px]",
           /** 1024 */
