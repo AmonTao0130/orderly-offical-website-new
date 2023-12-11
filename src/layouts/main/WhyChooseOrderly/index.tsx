@@ -15,22 +15,10 @@ import { Hyperlink } from "@/utils/constant";
 
 const data = [
   {
-    icon: maximize.src,
-    title: "Maximize your dApp’s potential",
+    icon: security.src,
+    title: "Total security",
     content:
-      "Reduce go-to-market time to just a few days. Gain back weeks of time. Concentrate on addressing larger challenges.",
-  },
-  {
-    icon: multichain.src,
-    title: "Multichain trading, reimagined",
-    content:
-      "Omnichain orderbook. Unified liquidity across blockchains. No need for bridges.",
-  },
-  {
-    icon: liquidity.src,
-    title: "End the hunt for liquidity",
-    content:
-      "Deep liquidity driven by top market makers. Offering steady spreads, ample depth, and reliable uptime for users.",
+      "Put security on auto-pilot as you inherit Orderly’s secure trading infrastructure, affirmed by renowned auditing firms.",
   },
   {
     icon: performance.src,
@@ -39,16 +27,28 @@ const data = [
       "<200ms latency suitable for HFT. On-chain Orders, Self-Custody &Transparency maintained.",
   },
   {
+    icon: liquidity.src,
+    title: "End the hunt for liquidity",
+    content:
+      "Deep liquidity driven by top market makers. Offering steady spreads, ample depth, and reliable uptime for users.",
+  },
+  {
     icon: decentralize.src,
     title: "Complete decentralization",
     content:
-      "Collaborative ecosystem powered by permissionless innovation, total transparency, and passionate community.",
+      "Community-driven collaborative ecosystem underpinned by permissionless innovation and full transparency.",
   },
   {
-    icon: security.src,
-    title: "Total security",
+    icon: multichain.src,
+    title: "Reimagine Omnichain Trading",
     content:
-      "Put security on auto-pilot as you inherit Orderly’s security. No more wrapped assets, no more bridges.",
+      "Omnichain orderbook. Unified liquidity across blockchains. No need for bridges.",
+  },
+  {
+    icon: maximize.src,
+    title: "Maximize your dApp’s potential",
+    content:
+      "Reduce go-to-market time to just a few days. Gain back weeks of time. Concentrate on addressing larger challenges.",
   },
 ];
 
@@ -82,7 +82,10 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
           >
             Discover why builders <br className="lg:hidden" /> choose Orderly
           </div>
-          <div className="mt-[16px] md:mt-[18px] lg:mt-0">
+          <div
+            id="WhyChooseOrderlyButton"
+            className="mt-[16px] md:mt-[18px] lg:mt-0"
+          >
             <Button type="outlined" showArrow href={Hyperlink.Main.ExploreDocs}>
               Explore docs
             </Button>
@@ -96,7 +99,10 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
             </Button>
           </div>
         </div>
-        <div className="lg:w-[465px] mt-[32px] md:mt-[42px] lg:mt-0 cursor-pointer">
+        <div
+          id="WhyChooseOrderlyContent"
+          className="lg:w-[465px] mt-[32px] md:mt-[42px] lg:mt-0 cursor-pointer"
+        >
           {data.map((item, index) => {
             const expanded = expandKey === item.title;
 
