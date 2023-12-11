@@ -19,9 +19,9 @@ const SDKText: React.FC<SDKTextProps & PropsWithClassName> = (props) => {
           /** 768 */
           "md:mt-[15px]",
           /** 1024 */
-          "lg:text-[26px] lg:leading-[34px] lg:mt-[67px]",
+          "lg:text-[26px] lg:leading-[34px] lg:mt-[27px]",
           /** 1440 */
-          "xl:text-4xl xl:leading-[56px] xl:mt-[104px]"
+          "xl:text-4xl xl:leading-[56px] xl:mt-[40px]"
         )}
       >
         {props.title}
