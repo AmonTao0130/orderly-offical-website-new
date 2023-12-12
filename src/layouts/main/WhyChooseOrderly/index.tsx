@@ -24,7 +24,7 @@ const data = [
     icon: performance.src,
     title: "CEX-Level Performance",
     content:
-      "<200ms latency perfect for high-frequency trading —with the added intrinsic benefits of DeFi.",
+      "<200ms latency for high-frequency trading —with the  benefits of DeFi - self-custody, on-chain orders, and full transparency.",
   },
   {
     icon: liquidity.src,
