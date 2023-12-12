@@ -78,21 +78,19 @@ export const BlogPublishedTime: Record<string, string> = {
   "orderly-funniest-memeber-announcing-the-orderly-meme-campaign": "10/3/2023",
   "amms-vs-order-books-in-crypto": "8/23/2023",
   "orderly-network-partners-with-moonpay": "6/9/2022",
-  "starting-a-crypto-company": "8/17/2023",
+  "starting-a-crypto-company": "8/18/2023",
   "orderly-network-partners-here-wallet": "9/6/2023",
   "launching-on-chain-swap-the-easy-token-swapping-tool-for-developers":
     "4/24/2023",
-  "lorderly-network-raises-us-20-million-to-build-defi-infrastructure":
-    "6/9/2023",
-  "the-orderly-ornaments-counting-contest": "12/13/2023",
+  "orderly-network-raises-us-20-million-to-build-defi-infrastructure":
+    "6/9/2022",
+  "the-orderly-ornaments-counting-contest": "12/13/2022",
   "how-blockchain-oracles-mitigate-market-manipulation-on-de-xs": "7/25/2023",
-  "orderly-network-receives-strategic-investment-from-laser-digita":
+  "orderly-network-receives-strategic-investment-from-laser-digital":
     "11/1/2022",
   "12-days-of-orderly-giveaway": "12/19/2022",
   "understanding-mainnet-and-testnet-a-brief-history-and-practical-guide-for-blockchain-development":
     "8/1/2023",
-  "orderly-network-raises-us-20-million-to-build-defi-infrastructure":
-    "11/25/2022",
   "a-year-in-order": "12/30/2022",
   "what-can-i-expect-when-using-a-market-maker-for-my-d-app": "8/11/2023",
   "orderly-network-secures-funding-from-india-s-coin-dcx-ventures": "3/28/2023",
@@ -107,7 +105,7 @@ export const BlogPublishedTime: Record<string, string> = {
   "what-is-ethereum-virtual-machine-evm-in-blockchain": "9/8/2023",
   "catch-up-on-orderly-network-s-collaborative-venture-with-learn-web3":
     "10/19/2023",
-  "new-listing-ref-finance": "11/12/2023",
+  "new-listing-ref-finance": "3/22/2023",
   "layer-2-vs-sharding-which-is-the-better-scaling-solution": "10/9/2023",
   "orderly-network-enters-strategic-alliance-with-slash-fintech-to-advance-asian-market-web3-footprints":
     "12/5/23",
@@ -135,7 +133,7 @@ export const BlogPublishedTime: Record<string, string> = {
   "announcing-orderly-lottery-and-referral-program-join-the-excitement-and-win-big":
     "12/8/2023",
 
-  "orderly-app-chain-for-orderly-omnichain-settlement-layer": "9/9/2023",
+  "orderly-app-chain-for-orderly-omnichain-settlement-layer": "11/9/2023",
   "how-orderly-is-unfragmenting-liquidity": "10/17/2023",
   "orderly-network-hybrid-solution-amid-cex-challenges": "9/21/2023",
   "orderly-omnichain-now-live-on-mainnet": "11/2/2023",
@@ -156,4 +154,6 @@ export const BlogPublishedTime: Record<string, string> = {
     "11/30/2023",
   "orderly-network-liquidation-engine-a-deep-dive-": "12/4/2023",
   "introducing-the-orderly-omnichain-sdk": "12/6/2023",
+  "orderly-network-co-funds-a-10-m-pool-for-de-fi-solutions-on-near":
+    "11/25/2022",
 };

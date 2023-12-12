@@ -11,6 +11,7 @@ import Content from "@/components/Content";
 import { getCategories, getArticles } from "@/strapi/services";
 import { getTabData, sortByPublishedTime } from "@/utils/strapi";
 import "../../style/index.css";
+// import { BlogPublishedTime } from "@/utils/constant";
 
 const categories = await getCategories();
 const tabData = getTabData(categories);
@@ -19,7 +20,15 @@ const articleList = await getArticles();
 
 const articles = sortByPublishedTime(articleList);
 
-// console.log(articles.map((article) => article.attributes.publishedAt));
+// 检测哪些slug的发布日期没有被hardcode
+// console.log(
+//   articles
+//     .map((article) => {
+//       const slug = article.attributes.slug;
+//       return BlogPublishedTime[slug] ? false : slug;
+//     })
+//     .filter((item) => !!item)
+// );
 
 // export async function getStaticPaths({ paginate }) {
 // const categories = await getCategories();
