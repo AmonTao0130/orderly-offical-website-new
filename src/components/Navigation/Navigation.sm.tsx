@@ -28,25 +28,17 @@ const SmallNavigation: React.FC<PropsWithClassName> = (props) => {
 
   return (
     <div
-      className={cn(props.className)}
-      onTouchMove={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      }}
-    >
-      <Header
-        expanded={open}
-        toggleExpanded={toggleExpanded}
-        className={cn(open && "backdrop-blur-[10px]")}
-      />
-      {open && (
-        <div
-          style={{ height: modalHeight }}
-          className="absolute w-full backdrop-blur-[10px] z-[1]"
-        >
-          <Collapse className="mt-[57px]" />
-        </div>
+      style={{ width: window.innerWidth, height: modalHeight }}
+      className={cn(
+        "relative bg-[rgba(0,0,0,0.6)] backdrop-blur-[10px] overflow-hidden",
+        props.className
       )}
+    >
+      <Header expanded={open} toggleExpanded={toggleExpanded} />
+
+      <div className="w-full">
+        <Collapse className="mt-[57px]" />
+      </div>
     </div>
   );
 };
