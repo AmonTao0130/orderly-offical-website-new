@@ -134,4 +134,26 @@ export const BlogPublishedTime: Record<string, string> = {
     "12/7/2023",
   "announcing-orderly-lottery-and-referral-program-join-the-excitement-and-win-big":
     "12/8/2023",
+
+  "orderly-app-chain-for-orderly-omnichain-settlement-layer": "9/9/2023",
+  "how-orderly-is-unfragmenting-liquidity": "10/17/2023",
+  "orderly-network-hybrid-solution-amid-cex-challenges": "9/21/2023",
+  "orderly-omnichain-now-live-on-mainnet": "11/2/2023",
+  "orderly-omnichain-testnet-launch": "9/13/2023",
+  "an-introduction-to-orderly-network": "5/27/2022",
+  "orderly-building-the-most-advanced-defi-infrastructure": "8/12/2022",
+  "orderly-network-comes-to-mainnet": "10/11/2022",
+  "mannet-and-beyond": "10/19/2022",
+  "building-on-orderly-network": "11/10/2022",
+  "introducing-the-orderly-network-sdk": "4/17/2023",
+  "orderly-network-for-perpetual-futures-trading": "8/10/2023",
+  "how-to-use-orderly-on-the-near-protocol": "10/26/2023",
+  "orderly-omnichain-transition-for-defi-builders": "10/31/2023",
+  "orderly-omnichain-mainnet-launch-for-defi-builders": "11/6/2023",
+  "orderly-omnichain-mainnet-launch-eradicates-cross-chain-asset-loss":
+    "11/21/2023",
+  "orderly-s-innovative-security-approach-a-game-changer-in-asset-security":
+    "11/30/2023",
+  "orderly-network-liquidation-engine-a-deep-dive-": "12/4/2023",
+  "introducing-the-orderly-omnichain-sdk": "12/6/2023",
 };
