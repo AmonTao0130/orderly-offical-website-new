@@ -62,3 +62,76 @@ export const Hyperlink = {
     Linkedin: "https://www.linkedin.com/company/orderly-network",
   },
 };
+
+/**
+ * 硬编码博客实际上的发布时间
+ * https://docs.google.com/spreadsheets/d/1gcKc-6qMi_TB51lsEhL88rOiDU4BHpJPxXNc4kUL6jw/edit#gid=0
+ */
+export const BlogPublishedTime: Record<string, string> = {
+  "october-discord-rumble-announcing": "10/4/2023",
+  "what-is-an-evm-compatible-chain": "9/29/2023",
+  "orderly-network-partners-google-cloud-for-defi-adoption": "9/14/2023",
+  "traders-guide-to-hindsight-humility-in-crypto": "11/16/2023",
+  "crypto-prime-brokerage-decoded": "8/25/2023",
+  "orderly-network-omnichain-perpetual-futures-orderbook-for-developers":
+    "9/12/2023",
+  "orderly-funniest-memeber-announcing-the-orderly-meme-campaign": "10/3/2023",
+  "amms-vs-order-books-in-crypto": "8/23/2023",
+  "orderly-network-partners-with-moonpay": "6/9/2022",
+  "starting-a-crypto-company": "8/17/2023",
+  "orderly-network-partners-here-wallet": "9/6/2023",
+  "launching-on-chain-swap-the-easy-token-swapping-tool-for-developers":
+    "4/24/2023",
+  "lorderly-network-raises-us-20-million-to-build-defi-infrastructure":
+    "6/9/2023",
+  "the-orderly-ornaments-counting-contest": "12/13/2023",
+  "how-blockchain-oracles-mitigate-market-manipulation-on-de-xs": "7/25/2023",
+  "orderly-network-receives-strategic-investment-from-laser-digita":
+    "11/1/2022",
+  "12-days-of-orderly-giveaway": "12/19/2022",
+  "understanding-mainnet-and-testnet-a-brief-history-and-practical-guide-for-blockchain-development":
+    "8/1/2023",
+  "orderly-network-raises-us-20-million-to-build-defi-infrastructure":
+    "11/25/2022",
+  "a-year-in-order": "12/30/2022",
+  "what-can-i-expect-when-using-a-market-maker-for-my-d-app": "8/11/2023",
+  "orderly-network-secures-funding-from-india-s-coin-dcx-ventures": "3/28/2023",
+  "orderly-networks-golden-rabbit-race": "1/20/2023",
+  "what-is-an-order-book-in-a-cryptocurrency-exchange": "8/16/2023",
+  "orderly-network-partners-moonpay-for-fiat-onramp": "9/19/2023",
+  "new-listing-sweat-economy": "2/2/2023",
+  "should-my-dapp-have-a-token": "8/31/2023",
+  "orderly-network-partners-with-sweat-economy-to-integrate-seamless-crypto-trading-feature-in-sweat-wallet":
+    "10/3/2023",
+  "march-monday-mania-discord-quiz": "3/5/2023",
+  "what-is-ethereum-virtual-machine-evm-in-blockchain": "9/8/2023",
+  "catch-up-on-orderly-network-s-collaborative-venture-with-learn-web3":
+    "10/19/2023",
+  "new-listing-ref-finance": "11/12/2023",
+  "layer-2-vs-sharding-which-is-the-better-scaling-solution": "10/9/2023",
+  "orderly-network-enters-strategic-alliance-with-slash-fintech-to-advance-asian-market-web3-footprints":
+    "12/5/23",
+  "ref-finance-and-orderly-network-twitter-campaign": "3/30/2023",
+  "what-is-omnichain-in-crypto-a-beginner-s-guide": "10/24/2023",
+  "new-listing-tether": "4/18/2023",
+  "liquidation-engine-for-derivatives-trading-a-guide-for-beginners":
+    "11/23/2023",
+  "Jump-defi-orderly-network-twitter-campaign": "5/3/2023",
+  "understanding-crypto-matching-engine-what-is-it-and-how-does-it-work":
+    "11/27/2023",
+  "orderly-network-1-year-anniversary-twitter-campaign-may-3-17": "5/3/2023",
+  "orderly-network-meme-contest-let-the-memes-begin": "5/19/2023",
+  "celebrating-orderly-networks-first-anniversary-a-team-journey": "5/31/2023",
+  "orderly-discord-gaming-contest": "8/4/2023",
+  "announcing-the-brokers-perp-mainnet-warm-up-campaign": "9/11/2023",
+  "orderly-omnichain-spotlight-campaign": "9/18/2023",
+  "introducing-the-orderly-network-ambassador-program": "9/26/2023",
+  "announcing-the-orderly-social-carnival-a-fusion-of-nf-ts-rewards-and-community-spirit":
+    "10/18/2023",
+  "introducing-the-orderly-network-community-incentive-program": "10/25/2023",
+  "introducing-orderly-zealy-sprint-round-1": "11/14/2023",
+  "orderly-zealy-sprint-2-stay-engaged-unlock-the-potential-of-the-orderly-omnichain-sdk":
+    "12/7/2023",
+  "announcing-orderly-lottery-and-referral-program-join-the-excitement-and-win-big":
+    "12/8/2023",
+};

@@ -16,6 +16,7 @@ export async function getArticles() {
     query: {
       // populate: "*",
       populate: ["cover", "category", "blocks"],
+      sort: "publishedAt:desc",
       pagination: {
         pageSize: 1000,
       },

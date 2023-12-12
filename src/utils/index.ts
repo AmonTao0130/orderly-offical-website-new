@@ -6,8 +6,12 @@ export function cn(...args: any[]) {
   return twMerge(cx(...args));
 }
 
-export function formatDate(date: string) {
-  return format(new Date(date), "MMM dd, yyyy");
+export function formatDate(date: string | Date) {
+  if (typeof date === "string") {
+    return format(new Date(date), "MMM dd, yyyy");
+  }
+
+  return format(date, "MMM dd, yyyy");
 }
 
 export function array2Map(array: any[]) {

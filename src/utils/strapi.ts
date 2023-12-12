@@ -1,4 +1,5 @@
-import type { Categorg } from "@/strapi/type";
+import type { Article, Categorg } from "@/strapi/type";
+import { BlogPublishedTime } from "./constant";
 
 export function getTabData(categories: Categorg[]) {
   const list = categories
@@ -43,4 +44,26 @@ export function getRangePage(
   const start = pageSize * (pageIndex - 1) + 1;
 
   return `${start}-${start + curPageTotal - 1}`;
+}
+
+export function sortByPublishedTime(articles: Article[]) {
+  const list = articles.map((article) => {
+    const { attributes } = article;
+    const publishedTime = BlogPublishedTime[attributes?.slug];
+    return {
+      ...article,
+      attributes: {
+        ...attributes,
+        publishedAt: publishedTime
+          ? new Date(publishedTime)
+          : new Date(attributes?.publishedAt),
+      },
+    };
+  });
+
+  list.sort(function (a, b) {
+    return a.attributes?.publishedAt < b.attributes?.publishedAt ? 1 : -1;
+  });
+
+  return list;
 }

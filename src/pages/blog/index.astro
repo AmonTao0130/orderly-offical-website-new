@@ -9,13 +9,17 @@ import { cn } from "@/utils";
 import BlogList from "@/layouts/blog/BlogList";
 import Content from "@/components/Content";
 import { getCategories, getArticles } from "@/strapi/services";
-import { getTabData } from "@/utils/strapi";
+import { getTabData, sortByPublishedTime } from "@/utils/strapi";
 import "../../style/index.css";
 
 const categories = await getCategories();
 const tabData = getTabData(categories);
 
-const articles = await getArticles();
+const articleList = await getArticles();
+
+const articles = sortByPublishedTime(articleList);
+
+// console.log(articles.map((article) => article.attributes.publishedAt));
 
 // export async function getStaticPaths({ paginate }) {
 // const categories = await getCategories();

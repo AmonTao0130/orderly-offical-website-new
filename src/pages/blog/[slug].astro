@@ -11,6 +11,7 @@ import { getArticles, getUploadFiles } from "@/strapi/services";
 import type { Article, Block, TFile } from "@/strapi/type";
 import { marked } from "marked";
 import "@/layouts/blog/detail/index.css";
+import { sortByPublishedTime } from "@/utils/strapi";
 
 marked.use({
   // breaks: true, // 不生效，使用正则代替
@@ -19,7 +20,8 @@ marked.use({
 });
 
 export async function getStaticPaths() {
-  const articles = await getArticles();
+  const articleList = await getArticles();
+  const articles = sortByPublishedTime(articleList);
   const files = await getUploadFiles();
   const mapFiles: Record<string, TFile> = array2Map(files);
   return articles.map((article) => {
