@@ -33,10 +33,8 @@ const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
             }
             content={
               <>
-                Implement components and pages <br className="md:hidden" />
-                without
-                <br className="sm:hidden md:hidden" /> needing to fuss with
-                data, APIs, <br className="md:hidden" /> or business logic.
+                Implement components and pages without needing to fuss with
+                data, APIs, or business logic.
               </>
             }
           />
