@@ -78,7 +78,7 @@ const Header: React.FC<PropsWithClassName> = (props) => {
             "lg:w-[825px] lg:text-xl lg:leading-[36px] lg:mt-[12px]"
           )}
         >
-          We empower web3 teams with comprehensive dApp tools and liquidity
+          We empower Web3 teams with comprehensive dApp tools and liquidity
           needed to rapidly deploy sophisticated omnichain trading apps. Our
           infrastructure provides a unified trading order book connected to
           every leading blockchain.
