@@ -69,8 +69,8 @@ export default {
       },
       animation: {
         investors: "investors 70s linear infinite",
-        fadeInUp: "fadeInUp 600ms ease-out 50ms",
-        fadeInUpDelay: "fadeInUpDelay 900ms ease-out",
+        fadeInUp: "fadeInUp 600ms ease-out 100ms",
+        fadeInUpDelay: "fadeInUpDelay 900ms ease-out 100ms",
       },
     },
   },

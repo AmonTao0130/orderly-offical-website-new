@@ -73,13 +73,17 @@
   font-display: swap;
 }
 
-/* 首屏用到该字体，所以在字体还未加载完成时，不使用备用字体代替，否则文本会闪一下 */
+/* 
+* 首屏用到该字体，所以在字体还未加载完成时，不使用备用字体代替，否则文本会闪一下 
+* 这里font-display不能改成block，不然文字一开始会显示不出来
+* 通过在动画里加延时解决这个问题
+*/
 @font-face {
   font-family: 'Articulat CF';
   src: url('/fonts/ArticulatCF/ArticulatCF-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
-  font-display: block;
+  font-display: swap;
 }
 
 
