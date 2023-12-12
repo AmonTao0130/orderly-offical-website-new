@@ -30,11 +30,11 @@ const SDKText: React.FC<SDKTextProps & PropsWithClassName> = (props) => {
         className={cn(
           "text-primary-80 mt-[12px]",
           /** 375 */
-          "text-sm leading-[21px]",
+          "w-[250px] text-sm leading-[21px] ",
           /** 768 */
           "md:w-[300px] md:text-base md:leading-[24px]",
           /** 1024 */
-          "lg:w-[365px] lg:text-xl lg:leading-[30px]",
+          "lg:w-[365px] lg:text-xl lg:leading-[30px] lg:pr-[20px]",
           /** 1440 */
           "xl:w-[534px]"
         )}

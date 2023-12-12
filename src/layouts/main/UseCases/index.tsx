@@ -35,7 +35,8 @@ const data = [
     img: WalletsCustodians.src,
   },
   {
-    title: "HFT",
+    title: "High-Frequency Trading",
+    abbr: "HFT",
     content:
       "HFT Use our API and enjoy a CEX-level trading experience thanks to our low-latency orderbook.",
     img: HFT.src,
@@ -101,7 +102,7 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
                 useCasesExpandKey.set(index);
               }}
             >
-              {title}
+              {data[index].abbr || title}
             </div>
           );
         })}

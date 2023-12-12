@@ -45,12 +45,12 @@ const IntegrateSDK: React.FC<PropsWithClassName> = (props) => {
             order="first"
             id="IntegrateSDKText2"
             className="absolute opacity-0"
-            title={<>Bring your own brand(B.Y.O.B).</>}
+            title={<>Fully Customizable</>}
             content={
               <>
-                Design a ready-to-market trading{" "}
-                <br className="hidden xl:inline" /> front-end suited to your
-                brand.
+                Tailor-Made Flexibility. Craft a ready-to-market trading
+                front-end that fully aligns with your brand identity and exact
+                user needs.
               </>
             }
           />

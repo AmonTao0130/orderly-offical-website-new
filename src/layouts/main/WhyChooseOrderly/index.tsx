@@ -16,25 +16,25 @@ import { Hyperlink } from "@/utils/constant";
 const data = [
   {
     icon: security.src,
-    title: "Total security",
+    title: "Total Security",
     content:
       "Put security on auto-pilot as you inherit Orderly’s secure trading infrastructure, affirmed by renowned auditing firms.",
   },
   {
     icon: performance.src,
-    title: "CEX-level performance",
+    title: "CEX-Level Performance",
     content:
-      "<200ms latency suitable for HFT. On-chain Orders, Self-Custody &Transparency maintained.",
+      "<200ms latency perfect for high-frequency trading —with the added intrinsic benefits of DeFi.",
   },
   {
     icon: liquidity.src,
-    title: "End the hunt for liquidity",
+    title: "End the Hunt for Liquidity",
     content:
       "Deep liquidity driven by top market makers. Offering steady spreads, ample depth, and reliable uptime for users.",
   },
   {
     icon: decentralize.src,
-    title: "Complete decentralization",
+    title: "Complete Decentralization",
     content:
       "Community-driven collaborative ecosystem underpinned by permissionless innovation and full transparency.",
   },
@@ -46,7 +46,7 @@ const data = [
   },
   {
     icon: maximize.src,
-    title: "Maximize your dApp’s potential",
+    title: "Maximize Your DApp’s Potential",
     content:
       "Reduce go-to-market time to just a few days. Gain back weeks of time. Concentrate on addressing larger challenges.",
   },
