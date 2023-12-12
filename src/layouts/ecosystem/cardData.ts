@@ -125,7 +125,7 @@ export const cardData: TCardData[] = [
   {
     icon: Unidex.src,
     category: "Builder",
-    title: "Unidex",
+    title: "UniDex",
     description:
       "UniDex is a DeFi platform that aims to provide a hub for traders to access the best rates for their trades within the ecosystem",
     url: "https://www.unidex.exchange/",
@@ -167,7 +167,7 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "JUMP DeFi",
     description:
-      "Jump DeFi is a one-stop platform serving multiple blockchain ecosystems; lowering the barrier of entry to DeFI for users and builders.",
+      "Jump DeFi is a one-stop platform serving multiple blockchain ecosystems; lowering the barrier of entry to DeFi for users and builders.",
     url: "https://swap.jumpdefi.xyz/",
   },
   {
@@ -181,7 +181,7 @@ export const cardData: TCardData[] = [
   {
     icon: ZkAutomate.src,
     category: "Builder",
-    title: "ZkAutomate",
+    title: "zkAutomate",
     description:
       "zkAutomate is the world’s first automation algo using zero-knowledge proof for trading bots and DeFi management.",
     url: "https://zkautomate.com/",
