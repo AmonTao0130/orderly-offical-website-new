@@ -48,12 +48,12 @@ const Main: React.FC<PropsWithClassName> = (props) => {
           We are Orderly Network, the ultimate destination for decentralized
           trading platforms. We are not satisfied with the limitations of
           centralized exchanges or the complexities of building decentralized
-          order books.We aim to make trading easy, fast, and secure for
+          order books. We aim to make trading easy, fast, and secure for
           everyone. How? By fusing the simplicity of CeFi with the power of
           DeFi.
           <br /> <br />
           At the heart of the issue lies “liquidity”. Builders often grapple
-          with a paradox: traders need liquidity, but liquidity demands traders.
+          with a paradox; traders need liquidity, but liquidity demands traders.
           Our solution is simple as is bold –
           <span className="text-primary-100 font-semibold">
             concentrate all liquidity into one order book. One order book that
@@ -87,7 +87,7 @@ const Main: React.FC<PropsWithClassName> = (props) => {
           decentralized trading.
           <br /> <br />
           The crux of the challenge? Liquidity. Builders often find themselves
-          caught in a cycle: no traders without liquidity and no liquidity
+          caught in a cycle; no traders without liquidity and no liquidity
           without traders. Our solution is bold: concentrate all liquidity into
           one order book.
           <br /> <br />
