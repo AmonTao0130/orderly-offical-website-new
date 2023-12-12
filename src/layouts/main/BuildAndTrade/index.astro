@@ -9,9 +9,10 @@ type Props = PropsWithClassName;
 const { className } = Astro.props;
 ---
 
-<div class={cn("text-center animate-appear", className)}>
+<div class={cn("text-center", className)}>
   <div
     class={cn(
+      "animate-fadeInUp",
       "font-title font-bold text-primary-100",
       /** 375 */
       "text-[32px] leading-[38.4xp]",
@@ -28,7 +29,8 @@ const { className } = Astro.props;
 
   <div
     class={cn(
-      "text-primary-80 ",
+      "animate-fadeInUpDelay",
+      "text-primary-80 font-bold",
       /** 375 */
       "text-[13px] leading-[19.5px] mt-[16px]",
       /** 768 */
@@ -45,6 +47,7 @@ const { className } = Astro.props;
 
   <div
     class={cn(
+      "animate-fadeInUpDelay",
       /** 375 */
       "mt-[45px]",
       /** 768 */
