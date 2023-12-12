@@ -43,7 +43,7 @@ const Collapse: React.FC<PropsWithClassName> = (props) => {
                     <a
                       key={child.url || child.title}
                       href={child.url}
-                      target="_blank"
+                      target={child.target}
                       className="flex items-center py-[12px] first:pt-[24px] last:pb-[8px]"
                     >
                       {child.title}
