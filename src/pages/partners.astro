@@ -18,6 +18,7 @@ import BodyGradient from "@/layouts/ecosystem/Gradient/Body";
 <Layout title="orderly.network/ecosystem">
   <div class="relative">
     <HeaderGradient />
+    <HeaderBg />
     <div
       class={cn(
         "relative",
@@ -31,40 +32,29 @@ import BodyGradient from "@/layouts/ecosystem/Gradient/Body";
         "xl:pb-[124px]"
       )}
     >
-      <HeaderBg />
-      <div class="relative">
-        <Navigation client:visible />
-        <Content>
-          <HeaderText />
-          <Statistics />
-        </Content>
-      </div>
+      <Navigation client:visible />
+      <Content>
+        <HeaderText />
+        <Statistics />
+      </Content>
     </div>
   </div>
 
-  <div class="relative overflow-hidden">
+  <div class="relative">
+    <BodyGradient />
     <FooterGradient />
     <div class="relative">
       <Content>
         <EcosystemTab client:visible />
+        <CardList client:visible />
       </Content>
-      <div class="relative">
-        <BodyGradient />
-        <Content className="relative">
-          <CardList client:visible />
-        </Content>
-      </div>
 
       <Footer
         className={cn(
           /** 375 */
           "mt-[40px]",
           /** 768 */
-          "md:mt-[60px]",
-          /** 1024 */
-          "lg",
-          /** 1440 */
-          "xl"
+          "md:mt-[60px]"
         )}
         client:visible
       />
