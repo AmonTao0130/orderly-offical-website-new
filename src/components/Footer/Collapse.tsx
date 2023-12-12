@@ -18,15 +18,15 @@ const Collapse: React.FC<PropsWithClassName> = (props) => {
             className={cn(
               "text-primary-80 text-sm py-[24px] cursor-pointer border-t-[1px] border-t-solid border-t-primary-8"
             )}
-            onClick={() => {
-              setExpandKey(isExpand ? "" : item.title);
-            }}
           >
             <div
               className={cn(
                 "flex justify-between items-center",
                 isExpand && "text-white"
               )}
+              onClick={() => {
+                setExpandKey(isExpand ? "" : item.title);
+              }}
             >
               {item.title}
               <ExpandIcon
