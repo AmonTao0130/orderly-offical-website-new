@@ -15,15 +15,11 @@ const StatisticsItem: React.FC<StatisticsItemProps & PropsWithClassName> = (
     <div
       className={cn(
         "flex flex-1 flex-col",
-        props.border && "border-r-[1px] border-r-solid border-r-primary-20",
         /** 375 */
-        "",
+        props.border &&
+          "md:border-r-[1px] md:border-r-solid md:border-r-primary-20",
         /** 768 */
-        "md",
-        /** 1024 */
-        "lg",
-        /** 1440 */
-        "xl"
+        "md"
       )}
     >
       <div
@@ -33,9 +29,7 @@ const StatisticsItem: React.FC<StatisticsItemProps & PropsWithClassName> = (
           /** 768 */
           "md:text-base md:leading-[16.32px]",
           /** 1024 */
-          "lg:text-xl lg:leading-[20.4px]",
-          /** 1440 */
-          "xl"
+          "lg:text-xl lg:leading-[20.4px]"
         )}
       >
         {props.label}
@@ -84,19 +78,7 @@ const Statistics: React.FC<PropsWithClassName> = (props) => {
         "xl:mt-[74px]"
       )}
     >
-      <div
-        className={cn(
-          "flex",
-          /** 375 */
-          " ",
-          /** 768 */
-          "md",
-          /** 1024 */
-          "lg",
-          /** 1440 */
-          "xl"
-        )}
-      >
+      <div className="flex">
         <StatisticsItem label="Total trading volume" value="$500M+" border />
         <StatisticsItem label="Traders" value="73K+" border />
         <StatisticsItem label="Ecosystem partners" value="26" />
