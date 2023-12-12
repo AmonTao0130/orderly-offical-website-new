@@ -10,13 +10,13 @@ const FooterGradient: React.FC = (props) => {
         className={cn(
           "absolute",
           /** 375 */
-          "w-[400px] left-[-150px] bottom-[350px]",
+          "w-[400px] left-[-150px] top-[0px]",
           /** 768 */
-          "md:w-[565px] md:left-[-150px] md:bottom-[100px]",
+          "md:w-[565px] md:left-[-150px] md:top-[-100px]",
           /** 1024 */
-          "lg:w-[733px] lg:left-[-150px] lg:bottom-[100px]",
+          "lg:w-[733px] lg:left-[-150px] lg:top-[-300px]",
           /** 1440 */
-          "xl:w-[989px] xl:left-[-200px] xl:bottom-[-200px]"
+          "xl:w-[989px] xl:left-[-250px] xl:top-[-400px]"
         )}
         src={FooterLeft.src}
       />
