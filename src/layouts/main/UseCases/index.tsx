@@ -38,7 +38,7 @@ const data = [
     title: "High-Frequency Trading",
     abbr: "HFT",
     content:
-      "HFT Use our API and enjoy a CEX-level trading experience thanks to our low-latency orderbook.",
+      "Use our API and enjoy a CEX-level trading experience thanks to our low-latency orderbook.",
     img: HFT.src,
   },
   {
@@ -165,6 +165,7 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
         </div>
         <Button
           className={cn(
+            "relative",
             /** 375 */
             "mt-[16px]",
             /** 768 */
