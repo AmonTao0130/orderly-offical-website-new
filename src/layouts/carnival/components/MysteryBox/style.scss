@@ -134,23 +134,37 @@
                 font-style: normal;
                 font-weight: 800;
                 position: relative;
-                padding: 19px;
+                padding: 10px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 cursor: pointer;
+
+                svg {
+                    padding-left: 6px;
+                    width: 26px;
+                    height: 26px;
+                }
 
                 @media (max-width: 700px) {
                     width: 173px;
                     font-size: 18px;
                     padding: 13px;
                     margin: 38px auto;
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                    }
                 }
 
                 @media (min-width: 701px) and (max-width: 1023px) {
                     width: 173px;
                     font-size: 18px;
                     padding: 13px;
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                    }
                 }
 
                 &:hover {
@@ -166,9 +180,7 @@
                     }
                 }
     
-                svg {
-                    padding-left: 6px;
-                }
+                
     
                 &::before {
                     content: "";
