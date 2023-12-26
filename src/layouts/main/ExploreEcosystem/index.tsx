@@ -66,7 +66,11 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
                 /** 375 */
                 "mt-[16px]",
                 /** 1024 */
-                "md:mt-[24px]"
+                "md:mt-[24px]",
+                /** 1024 */
+                "lg:text-sm lg:px-[20px] lg:h-[40px]",
+                /** 1440 */
+                "xl:text-base xl:px-[24px] xl:h-[52px]"
               )}
               href={Hyperlink.Main.ViewMore}
             >

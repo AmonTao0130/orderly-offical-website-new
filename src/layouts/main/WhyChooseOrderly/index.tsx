@@ -7,6 +7,7 @@ import liquidity from "./icons/liquidity.svg";
 import performance from "./icons/performance.svg";
 import decentralize from "./icons/decentralize.svg";
 import security from "./icons/security.svg";
+import zellic from "./icons/zellic.png";
 import { cn } from "@/utils/index.ts";
 import { useStore } from "@nanostores/react";
 import { whyChooseOrderlyExpandKey } from "@/store";
@@ -55,6 +56,34 @@ const data = [
 const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
   const expandKey = useStore(whyChooseOrderlyExpandKey) || data[0]?.title;
 
+  const zellicLogo = (
+    <div className="text-center">
+      <div
+        className={cn(
+          "fontbold text-primary-80 leading-[0.1]",
+          /** 375 */
+          "text-xs leading-[12px]",
+          /** 768 */
+          "xl:text-sm xl:leading-[14px]"
+          /** 1440 */
+        )}
+      >
+        Audited by
+      </div>
+      <img
+        src={zellic.src}
+        className={cn(
+          /** 375 */
+          "w-[63px] mt-[6px]",
+          /** 768 */
+          "md:w-[72px] md:mt-[8px]",
+          /** 1440 */
+          "xl:w-[86.4px]"
+        )}
+      />
+    </div>
+  );
+
   return (
     <Content id="WhyChooseOrderly" className={cn("relative", props.className)}>
       <div className="lg:flex lg:justify-between">
@@ -72,31 +101,75 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
           <div
             id="WhyChooseOrderlyTitle"
             className={cn(
+              "flex items-center",
               /** 375 */
-              "text-2xl leading-[28.8px] font-title",
+              "text-[22px] leading-[28.8px] font-title",
               /** 768 */
               "md:text-4xl md:leading-[48px]",
               /** 1024 */
               "lg:text-5xl lg:leading-[72px]"
             )}
           >
-            Discover why builders <br className="lg:hidden" /> choose Orderly
+            <div>
+              Discover why builders <br className="lg:hidden" /> choose Orderly
+            </div>
+
+            <div
+              className={cn(
+                /** 375 */
+                "ml-[48px]",
+                /** 768 */
+                "md:hidden",
+                /** 1440 */
+                "xl:ml-[16px]"
+              )}
+            >
+              {zellicLogo}
+            </div>
           </div>
           <div
             id="WhyChooseOrderlyButton"
-            className="mt-[16px] md:mt-[18px] lg:mt-0"
+            className="flex items-center mt-[16px] md:mt-[18px] lg:mt-0"
           >
-            <Button type="outlined" showArrow href={Hyperlink.Main.ExploreDocs}>
+            <Button
+              className={cn(
+                /** 1024 */
+                "lg:text-sm lg:px-[20px] lg:h-[40px]",
+                /** 1440 */
+                "xl:text-base xl:px-[24px] xl:h-[52px]"
+              )}
+              type="outlined"
+              showArrow
+              href={Hyperlink.Main.ExploreDocs}
+            >
               Explore docs
             </Button>
             <Button
-              className="ml-[8px] md:ml-[12px]"
+              className={cn(
+                "ml-[8px] md:ml-[12px]",
+                /** 1024 */
+                "lg:text-sm lg:px-[20px] lg:h-[40px]",
+                /** 1440 */
+                "xl:text-base xl:px-[24px] xl:h-[52px]"
+              )}
               type="outlined"
               showArrow
               href={Hyperlink.Main.ViewAuditReports}
             >
               View audit reports
             </Button>
+            <div
+              className={cn(
+                /** 375 */
+                "ml-[12px] hidden",
+                /** 768 */
+                "md:block",
+                /** 1440 */
+                "xl:ml-[16px]"
+              )}
+            >
+              {zellicLogo}
+            </div>
           </div>
         </div>
         <div
