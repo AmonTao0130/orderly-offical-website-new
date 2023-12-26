@@ -15,11 +15,9 @@ const StatisticsItem: React.FC<StatisticsItemProps & PropsWithClassName> = (
     <div
       className={cn(
         "flex flex-1 flex-col",
-        /** 375 */
-        props.border &&
-          "md:border-r-[1px] md:border-r-solid md:border-r-primary-20",
         /** 768 */
-        "md"
+        props.border &&
+          "md:border-r-[1px] md:border-r-solid md:border-r-primary-20"
       )}
     >
       <div
