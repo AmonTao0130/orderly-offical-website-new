@@ -101,7 +101,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
           <div
             id="WhyChooseOrderlyTitle"
             className={cn(
-              "flex items-center",
+              "flex justify-between items-center",
               /** 375 */
               "text-[22px] leading-[28.8px] font-title",
               /** 768 */
@@ -116,12 +116,8 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
 
             <div
               className={cn(
-                /** 375 */
-                "ml-[48px]",
                 /** 768 */
-                "md:hidden",
-                /** 1440 */
-                "xl:ml-[16px]"
+                "md:hidden"
               )}
             >
               {zellicLogo}
@@ -174,7 +170,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
         </div>
         <div
           id="WhyChooseOrderlyContent"
-          className="lg:w-[465px] mt-[32px] md:mt-[42px] lg:mt-0 cursor-pointer"
+          className="lg:w-[430px] mt-[32px] md:mt-[42px] lg:mt-0 cursor-pointer"
         >
           {data.map((item, index) => {
             const expanded = expandKey === item.title;
