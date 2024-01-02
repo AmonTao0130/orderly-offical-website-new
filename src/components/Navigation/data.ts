@@ -81,25 +81,25 @@ export default [
       },
     ],
   },
-  {
-    title: "Social Carnival",
-    url: "/carnival",
-    showHot: true,
-    children: [
-      {
-        title: "Social Quest",
-        url: Hyperlink.SocialCarnival.SocialQuest,
-      },
-      {
-        title: "Lottery",
-        url: Hyperlink.SocialCarnival.Lottery,
-      },
-      {
-        title: "Referral",
-        url: Hyperlink.SocialCarnival.Referral,
-      },
-    ],
-  },
+  // {
+  //   title: "Social Carnival",
+  //   url: "/carnival",
+  //   showHot: true,
+  //   children: [
+  //     {
+  //       title: "Social Quest",
+  //       url: Hyperlink.SocialCarnival.SocialQuest,
+  //     },
+  //     {
+  //       title: "Lottery",
+  //       url: Hyperlink.SocialCarnival.Lottery,
+  //     },
+  //     {
+  //       title: "Referral",
+  //       url: Hyperlink.SocialCarnival.Referral,
+  //     },
+  //   ],
+  // },
 ] as {
   title: string;
   showHot?: boolean;
