@@ -45,7 +45,7 @@ const SaveHours: React.FC<PropsWithClassName> = (props) => {
             "xl:text-5xl xl:leading-[67.2px]"
           )}
         >
-          Orderly saves teams over <br />
+          Orderly Network saves teams over <br />
           200 hours on each integration.
         </div>
       </div>
