@@ -53,7 +53,7 @@ const Header: React.FC<PropsWithClassName> = (props) => {
         >
           OUR MISSION
         </div>
-        <div
+        <h1
           className={cn(
             /** 375 */
             "w-[310px] text-[32px] leading-[38.4px] font-title font-bold mt-[8px]",
@@ -67,7 +67,7 @@ const Header: React.FC<PropsWithClassName> = (props) => {
         >
           Institutional-Grade Infrastructure with Shared Liquidity for CeFi &
           DeFi
-        </div>
+        </h1>
         <div
           className={cn(
             /** 375 */

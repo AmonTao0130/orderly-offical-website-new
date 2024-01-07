@@ -12,7 +12,7 @@ interface SDKTextProps {
 const SDKText: React.FC<SDKTextProps & PropsWithClassName> = (props) => {
   return (
     <div id={props.id} className={cn("mx-auto", props.className)}>
-      <div
+      <h3
         className={cn(
           /** 375 */
           "text-primary text-xl leading-[24px] mt-[61px]",
@@ -25,7 +25,7 @@ const SDKText: React.FC<SDKTextProps & PropsWithClassName> = (props) => {
         )}
       >
         {props.title}
-      </div>
+      </h3>
       <div
         className={cn(
           "text-primary-80 mt-[12px]",

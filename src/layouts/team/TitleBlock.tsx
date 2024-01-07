@@ -6,7 +6,7 @@ const TitleBlock: React.FC<PropsWithChildren & PropsWithClassName> = (
   props
 ) => {
   return (
-    <div
+    <h2
       className={cn(
         "font-title font-bold text-primary text-center",
         /** 375 */
@@ -19,7 +19,7 @@ const TitleBlock: React.FC<PropsWithChildren & PropsWithClassName> = (
       )}
     >
       {props.children}
-    </div>
+    </h2>
   );
 };
 

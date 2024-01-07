@@ -5,7 +5,7 @@ import { cn } from "@/utils";
 const HeaderText: React.FC<PropsWithClassName> = (props) => {
   return (
     <div className="text-center">
-      <div
+      <h1
         className={cn(
           "text-primary font-bold font-title",
           /** 375 */
@@ -17,7 +17,7 @@ const HeaderText: React.FC<PropsWithClassName> = (props) => {
         )}
       >
         Explore Orderly’s <br /> Unified Ecosystem
-      </div>
+      </h1>
       <div
         className={cn(
           /** 375 */

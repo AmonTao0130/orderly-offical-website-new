@@ -3,7 +3,7 @@ import React, { type PropsWithChildren } from "react";
 
 const BlockTitle: React.FC<PropsWithChildren> = (props) => {
   return (
-    <div
+    <h2
       className={cn(
         "font-title text-center",
         /** 375 */
@@ -15,7 +15,7 @@ const BlockTitle: React.FC<PropsWithChildren> = (props) => {
       )}
     >
       {props.children}
-    </div>
+    </h2>
   );
 };
 

@@ -50,7 +50,7 @@ const CardItem: React.FC<CardItemProps & CardItemProps> = (props) => {
             {data.category}
           </div>
         </div>
-        <div
+        <h2
           className={cn(
             " text-primary font-title font-extrabold",
             /** 375 */
@@ -62,7 +62,7 @@ const CardItem: React.FC<CardItemProps & CardItemProps> = (props) => {
           )}
         >
           {data.title}
-        </div>
+        </h2>
 
         <div
           className={cn(

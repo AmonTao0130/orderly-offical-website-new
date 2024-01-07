@@ -110,10 +110,10 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
               "lg:text-5xl lg:leading-[72px]"
             )}
           >
-            <div>
+            <h2>
               Discover why builders <br className="lg:hidden" /> choose Orderly
               Network
-            </div>
+            </h2>
 
             <div
               className={cn(
@@ -195,7 +195,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
                 <div className="flex items-center ">
                   <img className="mr-[8px]" src={item.icon} />
                   {/* 字体渐变颜色使用tailwind写会显示错误，暂时使用 style 代替 */}
-                  <span
+                  <h3
                     style={
                       expanded
                         ? {
@@ -222,7 +222,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
                     )}
                   >
                     {item.title}
-                  </span>
+                  </h3>
                 </div>
                 {expanded && (
                   <div
