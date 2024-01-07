@@ -9,13 +9,40 @@ export async function getCategories() {
   });
 }
 
-export async function getArticles() {
+export async function getArticles(isDetail?: boolean) {
+  const populate: any = {
+    cover: {
+      populate: "*",
+    },
+    category: {
+      populate: "*",
+    },
+  };
+
+  if (isDetail) {
+    populate.blocks = {
+      populate: "*",
+    };
+  }
+
   return await fetchApi<Article[]>({
     endpoint: "articles",
     wrappedByKey: "data",
     query: {
       // populate: "*",
-      populate: ["cover", "category", "blocks"],
+      // populate: ["cover", "category", "blocks"],
+      // populate: {
+      //   cover: {
+      //     populate: "*",
+      //   },
+      //   category: {
+      //     populate: "*",
+      //   },
+      //   blocks: {
+      //     populate: "*",
+      //   },
+      // },
+      populate,
       sort: "publishedAt:desc",
       pagination: {
         pageSize: 1000,

@@ -66,7 +66,7 @@ const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
                 "border-[1px] border-solid border-primary-50 rounded-full"
               )}
             >
-              {attributes.category.data.attributes.name}
+              {attributes.category?.data?.attributes?.name}
             </div>
           </div>
           <div

@@ -11,27 +11,7 @@ export type Article = {
     cover: {
       data: {
         id: string;
-        attributes: {
-          name: string;
-          url: string;
-          formats: {
-            small: {
-              ext: string;
-              url: string;
-              name: string;
-            };
-            medium: {
-              ext: string;
-              url: string;
-              name: string;
-            };
-            thumbnail: {
-              ext: string;
-              url: string;
-              name: string;
-            };
-          };
-        };
+        attributes: ShareMedia;
       };
     };
     category: {
@@ -61,8 +41,14 @@ export type Block = {
   id: number;
   __component: string;
   body?: string;
-  url?: string;
+  image?: string;
   html?: string;
+  file?: {
+    data: {
+      id: string;
+      attributes: ShareMedia;
+    };
+  };
 };
 
 export type Categorg = {
@@ -93,4 +79,26 @@ export type TFile = {
   name: string;
   width: number;
   height: number;
+};
+
+export type ShareMedia = {
+  name: string;
+  url: string;
+  formats: {
+    small: {
+      ext: string;
+      url: string;
+      name: string;
+    };
+    medium: {
+      ext: string;
+      url: string;
+      name: string;
+    };
+    thumbnail: {
+      ext: string;
+      url: string;
+      name: string;
+    };
+  };
 };

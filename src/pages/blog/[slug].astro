@@ -6,9 +6,9 @@ import Header from "@/layouts/blog/detail/Header";
 import MoreBlog from "@/layouts/blog/detail/MoreBlog";
 import DetailFooter from "@/layouts/blog/detail/Footer";
 import Footer from "@/components/Footer";
-import { array2Map, cn } from "@/utils";
-import { getArticles, getUploadFiles } from "@/strapi/services";
-import type { Article, Block, TFile } from "@/strapi/type";
+import { cn } from "@/utils";
+import { getArticles } from "@/strapi/services";
+import type { Article, Block } from "@/strapi/type";
 import { marked } from "marked";
 import "@/layouts/blog/detail/index.css";
 import { sortByPublishedTime } from "@/utils/strapi";
@@ -20,25 +20,29 @@ marked.use({
 });
 
 export async function getStaticPaths() {
-  const articleList = await getArticles();
+  const articleList = await getArticles(true);
   const articles = sortByPublishedTime(articleList);
-  const files = await getUploadFiles();
-  const mapFiles: Record<string, TFile> = array2Map(files);
   return articles.map((article) => {
     const blocks = article.attributes.blocks.map((block) => {
-      const html = marked.parse(block.body || "") as string;
-      return {
-        ...block,
-        html: html?.replace(/\n/g, "<br />"), // 将\n转为换行元素
-        url:
-          block.__component === "shared.media"
-            ? mapFiles[block.id]?.url
-            : undefined,
-      };
+      if (block.__component === "shared.rich-text") {
+        const html = marked.parse(block.body || "") as string;
+        return {
+          ...block,
+          html: html?.replace(/\n/g, "<br />"), // 将\n转为换行元素
+        };
+      }
+
+      if (block.__component === "shared.media") {
+        return {
+          ...block,
+          image: block.file?.data?.attributes?.url,
+        };
+      }
+      return block;
     });
     return {
       params: { slug: article.attributes.slug },
-      props: { articles, article, blocks, files },
+      props: { articles, article, blocks },
     };
   });
   // return [{ params: { slug: "orderly-network-partners-here-wallet" } }];
@@ -54,7 +58,7 @@ const { articles, article, blocks } = Astro.props;
 ---
 
 <Layout
-  title={`orderly.network/blog/${article.attributes.title}`}
+  title={`Orderly Network | ${article.attributes.title}`}
   metaDescription={article.attributes.description}
 >
   <Navigation client:visible />
@@ -74,8 +78,8 @@ const { articles, article, blocks } = Astro.props;
     >
       {
         blocks?.map((block) => {
-          if (block.url) {
-            return <img class="py-[48px]" src={block.url} />;
+          if (block.image) {
+            return <img class="py-[48px]" src={block.image} />;
           }
           return <div class="mt-[30px]" set:html={block.html} />;
         })
