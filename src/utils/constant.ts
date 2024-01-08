@@ -68,6 +68,9 @@ export const Hyperlink = {
  * https://docs.google.com/spreadsheets/d/1gcKc-6qMi_TB51lsEhL88rOiDU4BHpJPxXNc4kUL6jw/edit#gid=0
  */
 export const BlogPublishedTime: Record<string, string> = {
+  "orderly-network-yearly-roundup-2023": "12/29/2023",
+  "orderly-network-and-log-x-a-landmark-alliance-in-the-world-of-perp-trading":
+    "12/28/2023",
   "october-discord-rumble-announcing": "10/4/2023",
   "what-is-an-evm-compatible-chain": "9/29/2023",
   "orderly-network-partners-google-cloud-for-defi-adoption": "9/14/2023",
