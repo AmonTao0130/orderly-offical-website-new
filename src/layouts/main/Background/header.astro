@@ -7,7 +7,6 @@ import Bottom from "./imgs/bottom.png";
 <div class="absolute top-0 left-0 w-full bg-[#080116]">
   <div class={cn("flex flex-col")}>
     <img
-      src={Top.src}
       class={cn(
         "object-cover",
         /** 375 */
@@ -17,9 +16,10 @@ import Bottom from "./imgs/bottom.png";
         /** 1024 */
         "lg:h-[314px]"
       )}
+      src={Top.src}
+      alt="orderly-network-main-header-top-background"
     />
     <img
-      src={Bottom.src}
       class={cn(
         "object-cover",
         /** 375 */
@@ -31,6 +31,8 @@ import Bottom from "./imgs/bottom.png";
         /** 1440 */
         ""
       )}
+      src={Bottom.src}
+      alt="orderly-network-main-header-bottom-background"
     />
   </div>
 </div>

@@ -137,6 +137,7 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
             "xl:h-[400px]"
           )}
           src={imgs[expandKey]}
+          alt={titles[expandKey]}
         />
         {/* <div className="absolute top-0 left-0 z-10 w-full h-full rounded-[24px]"></div> */}
         <div

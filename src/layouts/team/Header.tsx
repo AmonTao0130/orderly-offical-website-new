@@ -22,6 +22,7 @@ const Header: React.FC<PropsWithClassName> = (props) => {
           "2xl:h-[446px]"
         )}
         src={Bg.src}
+        alt="orderly-network-team-header-background"
       />
       <Content
         className={cn(

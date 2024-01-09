@@ -20,6 +20,7 @@ const WhyChooseOrderlyGradient: React.FC = (props) => {
           "2xl:w-[833px] 2xl:left-[-0px] 2xl:top-[-250px]"
         )}
         src={WhyChooseOrderly.src}
+        alt="orderly-network-main-why-choose-orderly-background"
       />
     </>
   );

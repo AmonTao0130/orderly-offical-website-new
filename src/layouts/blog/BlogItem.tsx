@@ -32,6 +32,7 @@ const BlogItem: React.FC<Article & PropsWithClassName> = (props) => {
           /** 1440 */
           "xl:h-[225px]"
         )}
+        alt={attributes.cover?.data?.attributes?.alternativeText}
         src={attributes.cover?.data?.attributes?.formats?.small?.url}
       />
       <div

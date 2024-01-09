@@ -13,6 +13,7 @@ const HeaderBg: React.FC<PropsWithClassName> = (props) => {
         /** 768 */
         "md:h-[400px]"
       )}
+      alt="orderly-network-blog-header-background"
       src={Bg.src}
     />
   );

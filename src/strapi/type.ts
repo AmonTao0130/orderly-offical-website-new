@@ -84,6 +84,7 @@ export type TFile = {
 export type ShareMedia = {
   name: string;
   url: string;
+  alternativeText: string;
   formats: {
     small: {
       ext: string;

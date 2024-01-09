@@ -25,6 +25,7 @@ const CardItem: React.FC<CardItemProps & CardItemProps> = (props) => {
       <img
         className="absolute top-0 left-0 w-full h-full blur-[75px] opacity-[0.3]"
         src={data.icon}
+        alt={`${data.title.replace(" ", "-")}-gradient-background`}
       />
       <div className="relative w-full">
         <div className="flex justify-between">
@@ -38,6 +39,7 @@ const CardItem: React.FC<CardItemProps & CardItemProps> = (props) => {
               "lg:w-[100px] lg:h-[100px]"
             )}
             src={data.icon}
+            alt={data.title}
           />
           <div
             className={cn(

@@ -29,30 +29,30 @@ import TitleBlock from "./TitleBlock";
 import Content from "@/components/Content";
 
 const data = [
-  Pantera,
-  GSR,
-  LaserDigital,
-  DragonflyCapital,
-  jump,
-  CryptocomCapital,
-  SequoiaCapital,
-  Primitive,
-  Metaweb,
-  SevenX,
-  CoinDCX,
-  Kronos,
-  Raydium,
-  Amber,
-  AGBuild,
-  CoboVentures,
-  GateVentures,
-  Mirana,
-  PuzzleVentures,
-  IOSG,
-  WOO,
-  Subzero,
-  DIVentures,
-  Newman,
+  { name: "Pantera", src: Pantera.src },
+  { name: "GSR", src: GSR.src },
+  { name: "LaserDigital", src: LaserDigital.src },
+  { name: "DragonflyCapital", src: DragonflyCapital.src },
+  { name: "jump", src: jump.src },
+  { name: "CryptocomCapital", src: CryptocomCapital.src },
+  { name: "SequoiaCapital", src: SequoiaCapital.src },
+  { name: "Primitive", src: Primitive.src },
+  { name: "Metaweb", src: Metaweb.src },
+  { name: "SevenX", src: SevenX.src },
+  { name: "CoinDCX", src: CoinDCX.src },
+  { name: "Kronos", src: Kronos.src },
+  { name: "Raydium", src: Raydium.src },
+  { name: "Amber", src: Amber.src },
+  { name: "AGBuild", src: AGBuild.src },
+  { name: "CoboVentures", src: CoboVentures.src },
+  { name: "GateVentures", src: GateVentures.src },
+  { name: "Mirana", src: Mirana.src },
+  { name: "PuzzleVentures", src: PuzzleVentures.src },
+  { name: "IOSG", src: IOSG.src },
+  { name: "WOO", src: WOO.src },
+  { name: "Subzero", src: Subzero.src },
+  { name: "DIVentures", src: DIVentures.src },
+  { name: "Newman", src: Newman.src },
 ];
 
 const Investors: React.FC<PropsWithClassName> = (props) => {
@@ -110,6 +110,7 @@ const Investors: React.FC<PropsWithClassName> = (props) => {
                 "xl:w-[calc((100%_-_160px)_/_5)] xl:h-[120px] xl:mt-[36px]"
               )}
               src={item.src}
+              alt={item.name}
             />
           );
         })}

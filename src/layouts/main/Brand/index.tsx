@@ -18,18 +18,18 @@ import { cn } from "@/utils";
 import type { PropsWithClassName } from "@/types";
 
 const icons = [
-  Arbitrum,
-  Optimism,
-  LayerZero,
-  Near,
-  Polygon,
-  Elixir,
-  RageTrade,
-  WOOFiPro,
-  Unidex,
-  Logx,
-  Empyreal,
-  Btse,
+  { name: "Arbitrum", src: Arbitrum.src },
+  { name: "Optimism", src: Optimism.src },
+  { name: "LayerZero", src: LayerZero.src },
+  { name: "Near", src: Near.src },
+  { name: "Polygon", src: Polygon.src },
+  { name: "Elixir", src: Elixir.src },
+  { name: "RageTrade", src: RageTrade.src },
+  { name: "WOOFiPro", src: WOOFiPro.src },
+  { name: "Unidex", src: Unidex.src },
+  { name: "Logx", src: Logx.src },
+  { name: "Empyreal", src: Empyreal.src },
+  { name: "Btse", src: Btse.src },
 ];
 
 const Brand: React.FC<PropsWithClassName> = (props) => {
@@ -39,7 +39,7 @@ const Brand: React.FC<PropsWithClassName> = (props) => {
         {icons.map((icon) => {
           return (
             <img
-              key={icon.src}
+              key={icon.name}
               className={cn(
                 /** 375 */
                 "w-[113px] mt-[16px]",
@@ -51,6 +51,7 @@ const Brand: React.FC<PropsWithClassName> = (props) => {
                 "xl:w-[213px] xl:mt-[19px]"
               )}
               src={icon.src}
+              alt={icon.name}
             />
           );
         })}

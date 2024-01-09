@@ -20,6 +20,7 @@ const FooterGradient: React.FC = (props) => {
           "2xl:w-[961px] 2xl:right-[-100px] 2xl:bottom-[0px]"
         )}
         src={Footer.src}
+        alt="orderly-network-ecosystem-footer-background"
       />
     </>
   );

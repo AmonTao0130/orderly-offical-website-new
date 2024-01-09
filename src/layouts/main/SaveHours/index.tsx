@@ -23,6 +23,7 @@ const SaveHours: React.FC<PropsWithClassName> = (props) => {
         <img
           className="drop-shadow-[0px_0px_50px_rgba(108,25,244,0.5)]"
           src={HoursSvg.src}
+          alt="orderly-network-main-save-hours-200"
         />
         <div
           style={{

@@ -64,6 +64,9 @@ const SDKImage: React.FC<SDKImageProps & PropsWithClassName> = (props) => {
               ]
         )}
         src={isFirst ? bg1.src : bg2.src}
+        alt={`"orderly-network-main-integrate-sdk-orderbook-${
+          isFirst ? "background1" : "background2"
+        }"`}
       />
       <img
         id="IntegrateSDKOrderBook"
@@ -80,6 +83,9 @@ const SDKImage: React.FC<SDKImageProps & PropsWithClassName> = (props) => {
           "xl:w-[258.4px] xl:h-[412.25px] xl:top-[-50px] xl:left-[-10px] xl:rounded-[24.74px] xl:[backdrop-filter:blur(12.9393px)]"
         )}
         src={isFirst ? orderbook1.src : orderbook2.src}
+        alt={`"orderly-network-main-integrate-sdk-${
+          isFirst ? "orderbook1" : "orderbook2"
+        }"`}
       />
       <img
         id="IntegrateSDKOrderEntry"
@@ -96,6 +102,9 @@ const SDKImage: React.FC<SDKImageProps & PropsWithClassName> = (props) => {
           "xl:w-[292.4px] xl:h-[412.25px] xl:top-[-22px] xl:right-[30px] xl:rounded-[24.74px] xl:[backdrop-filter:blur(12.9393px)]"
         )}
         src={isFirst ? orderentry1.src : orderentry2.src}
+        alt={`"orderly-network-main-integrate-sdk-${
+          isFirst ? "orderentry1" : "orderentry2"
+        }"`}
       />
     </div>
   );

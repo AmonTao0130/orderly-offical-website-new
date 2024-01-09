@@ -84,6 +84,7 @@ const Visionaries: React.FC<PropsWithClassName> = (props) => {
                   "lg:w-[180px] lg:h-[180px]"
                 )}
                 src={item.icon}
+                alt={item.name}
               />
               <div
                 className={cn(

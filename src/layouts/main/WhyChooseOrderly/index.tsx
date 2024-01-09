@@ -71,7 +71,6 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
         Audited by
       </div>
       <img
-        src={zellic.src}
         className={cn(
           /** 375 */
           "w-[63px] mt-[6px]",
@@ -80,6 +79,8 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
           /** 1440 */
           "xl:w-[86.4px]"
         )}
+        src={zellic.src}
+        alt="orderly-network-main-why-coose-orderly-zellic"
       />
     </div>
   );
@@ -193,7 +194,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
                 }}
               >
                 <div className="flex items-center ">
-                  <img className="mr-[8px]" src={item.icon} />
+                  <img className="mr-[8px]" src={item.icon} alt={item.title} />
                   {/* 字体渐变颜色使用tailwind写会显示错误，暂时使用 style 代替 */}
                   <h3
                     style={

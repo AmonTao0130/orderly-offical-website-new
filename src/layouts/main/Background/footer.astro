@@ -25,7 +25,6 @@ const { className } = Astro.props;
   )}
 >
   <img
-    src={FooterBg.src}
     class={cn(
       "w-full object-cover",
       /** 375 */
@@ -39,5 +38,7 @@ const { className } = Astro.props;
       /** 1920 */
       "2xl:h-[620px]"
     )}
+    src={FooterBg.src}
+    alt="orderly-network-main-footer-background"
   />
 </div>

@@ -19,6 +19,7 @@ const FooterGradient: React.FC = (props) => {
           "xl:w-[989px] xl:left-[-250px] xl:top-[-400px]"
         )}
         src={FooterLeft.src}
+        alt="orderly-network-main-footer-left-background"
       />
       <img
         className={cn(
@@ -33,6 +34,7 @@ const FooterGradient: React.FC = (props) => {
           "xl:w-[989px] xl:right-[-150px] xl:bottom-[0px]"
         )}
         src={FooterRight.src}
+        alt="orderly-network-main-footer-right-background"
       />
     </>
   );

@@ -21,6 +21,7 @@ const BodyGradient: React.FC = (props) => {
           "2xl:w-[989px] 2xl:left-[0px] 2xl:top-[0px]"
         )}
         src={Body.src}
+        alt="orderly-network-team-body-background"
       />
 
       <img
@@ -32,6 +33,7 @@ const BodyGradient: React.FC = (props) => {
           "md:hidden"
         )}
         src={Body375.src}
+        alt="orderly-network-team-body-mobile-background"
       />
     </>
   );

@@ -21,6 +21,7 @@ const HeaderGradient: React.FC = (props) => {
           "2xl:w-[659px] 2xl:h-[697px] 2xl:left-[-50px] 2xl:top-[0px]"
         )}
         src={HeaderLeft.src}
+        alt="orderly-network-main-header-left-background"
       />
       <img
         className={cn(
@@ -37,6 +38,7 @@ const HeaderGradient: React.FC = (props) => {
           "2xl:w-[659px] 2xl:h-[697px] 2xl:right-[-50px] 2xl:top-[0px]"
         )}
         src={HeaderRight.src}
+        alt="orderly-network-main-header-right-background"
       />
     </>
   );

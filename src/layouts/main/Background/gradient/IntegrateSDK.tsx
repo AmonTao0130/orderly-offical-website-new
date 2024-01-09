@@ -20,6 +20,7 @@ const IntegrateSDKGradient: React.FC = (props) => {
           "2xl:w-[756px] 2xl:h-[1136px] 2xl:left-[-50px] 2xl:top-[-250px]"
         )}
         src={IntegrateSDK.src}
+        alt="orderly-network-main-integrate-sdk-background"
       />
     </>
   );

@@ -38,6 +38,7 @@ const HeaderBg: React.FC<PropsWithClassName> = (props) => {
           "xl:h-[561px]"
         )}
         src={left.src}
+        alt="orderly-network-ecosystem-header-left-background"
       />
       <img
         className={cn(
@@ -52,6 +53,7 @@ const HeaderBg: React.FC<PropsWithClassName> = (props) => {
           "xl:h-[471px]"
         )}
         src={right.src}
+        alt="orderly-network-ecosystem-header-right-background"
       />
       <div
         className={cn(

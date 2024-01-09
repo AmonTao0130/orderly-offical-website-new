@@ -79,7 +79,13 @@ const { articles, article, blocks } = Astro.props;
       {
         blocks?.map((block) => {
           if (block.image) {
-            return <img class="py-[48px]" src={block.image} />;
+            return (
+              <img
+                class="py-[48px]"
+                alt={block.file?.data?.attributes?.alternativeText}
+                src={block.image}
+              />
+            );
           }
           return <div class="mt-[30px]" set:html={block.html} />;
         })

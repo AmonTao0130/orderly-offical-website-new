@@ -19,6 +19,7 @@ const SaveHoursGradient: React.FC = (props) => {
           "xl:w-[913px] xl:left-[-100px] xl:top-[-700px]"
         )}
         src={SaveHoursLeft.src}
+        alt="orderly-network-main-save-hours-left-background"
       />
       <img
         className={cn(
@@ -33,6 +34,7 @@ const SaveHoursGradient: React.FC = (props) => {
           "xl:w-[909px] xl:right-[-50px] xl:top-[-600px]"
         )}
         src={SaveHoursRight.src}
+        alt="orderly-network-main-save-hours-right-background"
       />
     </>
   );

@@ -20,6 +20,7 @@ const BrandGradient: React.FC = (props) => {
           "2xl:w-[813px] 2xl:h-[604px] 2xl:right-[-100px] 2xl:top-[-250px]"
         )}
         src={Brand.src}
+        alt="orderly-network-main-brand-background"
       />
     </>
   );
