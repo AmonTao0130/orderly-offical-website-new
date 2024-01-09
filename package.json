@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro check && astro build && pnpm renameSitemap",
     "preview": "astro preview",
+    "renameSitemap": "node ./script/renameSitemap.js",
     "astro": "astro"
   },
   "dependencies": {
