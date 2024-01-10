@@ -7,7 +7,7 @@ const HeaderText: React.FC<PropsWithClassName> = (props) => {
   return (
     <Content>
       <div className="text-center">
-        <div
+        <h1
           className={cn(
             /** 375 */
             "font-title text-[32px] leading-[32.64px] mt-[88px]",
@@ -22,7 +22,7 @@ const HeaderText: React.FC<PropsWithClassName> = (props) => {
           )}
         >
           Orderly Network Blog
-        </div>
+        </h1>
         <div
           className={cn(
             /** 375 */
