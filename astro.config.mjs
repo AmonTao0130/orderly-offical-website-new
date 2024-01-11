@@ -7,7 +7,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://www.orderly.network",
+  site: "https://orderly.network",
   // Enable React to support React JSX components.
   integrations: [react(), tailwind(), sitemap()],
   // output: "hybrid",
