@@ -7,6 +7,7 @@ interface Props {
 }
 
 const { title, metaDescription } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <html lang="en">
@@ -34,6 +35,7 @@ const { title, metaDescription } = Astro.props;
     />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="sitemap" href="/sitemap.xml" />
+    <link rel="canonical" href={canonicalURL} />
     <meta name="description" content={metaDescription} />
     <!-- <link rel="preload" href="/index.css" as="style" /> -->
 
