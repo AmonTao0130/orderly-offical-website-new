@@ -12,19 +12,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 <html lang="en">
   <head>
+    <!-- dev id: G-7LT3JJYV55 -->
+    <!-- prod id: G-SNRR8JX208 -->
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SNRR8JX208"
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7LT3JJYV55"
     ></script>
     <script>
       // @ts-ignore
       window.dataLayer = window.dataLayer || [];
-      function gtag(...args: any[]) {
+      function gtag() {
         // @ts-ignore
-        dataLayer.push(args);
+        dataLayer.push(arguments);
       }
+      // @ts-ignore
       gtag("js", new Date());
-
-      gtag("config", "G-SNRR8JX208");
+      // @ts-ignore
+      gtag("config", "G-7LT3JJYV55");
     </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
