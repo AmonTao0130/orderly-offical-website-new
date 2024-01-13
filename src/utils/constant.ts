@@ -68,6 +68,9 @@ export const Hyperlink = {
  * https://docs.google.com/spreadsheets/d/1gcKc-6qMi_TB51lsEhL88rOiDU4BHpJPxXNc4kUL6jw/edit#gid=0
  */
 export const BlogPublishedTime: Record<string, string> = {
+  "what-are-bitcoin-layer-2-solutions-the-innovative-layer-with-broader-implications-for-de-fi":
+    "1/10/2024",
+  "hoax-or-no-t-what-bitcoin-etf-approval-means-for-de-fi": "1/12/2024",
   "orderly-network-yearly-roundup-2023": "12/29/2023",
   "orderly-network-and-log-x-a-landmark-alliance-in-the-world-of-perp-trading":
     "12/28/2023",
