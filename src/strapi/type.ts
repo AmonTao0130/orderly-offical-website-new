@@ -43,6 +43,7 @@ export type Block = {
   body?: string;
   image?: string;
   html?: string;
+  caption?: string;
   file?: {
     data: {
       id: string;
@@ -85,6 +86,7 @@ export type ShareMedia = {
   name: string;
   url: string;
   alternativeText: string;
+  caption: string;
   formats: {
     small: {
       ext: string;
