@@ -4,10 +4,12 @@ import "@/style/index.css";
 interface Props {
   title: string;
   metaDescription: string;
+  image?: string;
 }
 
-const { title, metaDescription } = Astro.props;
+const { title, metaDescription, image } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const thumbnailURL = `${Astro.site}/thumbnail.jpg`;
 ---
 
 <html lang="en">
@@ -41,6 +43,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="canonical" href={canonicalURL} />
     <meta name="description" content={metaDescription} />
     <!-- <link rel="preload" href="/index.css" as="style" /> -->
+
+    <!-- OpenGraph Tags -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:image" content={image || thumbnailURL} />
+    <meta property="og:url" content={canonicalURL} />
+
+    <!-- Twitter Tags -->
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={metaDescription} />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:image" content={image || thumbnailURL} />
 
     <title>{title}</title>
     <style>
