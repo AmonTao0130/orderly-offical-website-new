@@ -60,6 +60,7 @@ const { articles, article, blocks } = Astro.props;
 <Layout
   title={`Orderly Network | ${article.attributes.title}`}
   metaDescription={article.attributes.description}
+  image={article?.attributes?.cover?.data?.attributes?.formats?.small?.url}
 >
   <Navigation client:visible />
   <Header article={article} />
