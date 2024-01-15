@@ -49,6 +49,8 @@ const thumbnailURL = `${Astro.site}/thumbnail.jpg`;
     <meta property="og:description" content={metaDescription} />
     <meta property="og:image" content={image || thumbnailURL} />
     <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="Orderly Network" />
+    <meta property="og:type" content={image ? "article" : "website"} />
 
     <!-- Twitter Tags -->
     <meta name="twitter:title" content={title} />
