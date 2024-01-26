@@ -68,6 +68,12 @@ export const Hyperlink = {
  * https://docs.google.com/spreadsheets/d/1gcKc-6qMi_TB51lsEhL88rOiDU4BHpJPxXNc4kUL6jw/edit#gid=0
  */
 export const BlogPublishedTime: Record<string, string> = {
+  "redefining-defi-with-the-orderly-chain-a-closer-look-at-the-orderly-settlement-layer":
+    "1/24/2024",
+  "orderly-network-launches-optimism-vault": "1/22/2024",
+  "log-x-integrates-orderly-network-to-revolutionize-de-fi-perps-trading":
+    "1/17/2024",
+  "orderly-believe-in-chain-abstraction": "1/15/2024",
   "what-are-bitcoin-layer-2-solutions-the-innovative-layer-with-broader-implications-for-de-fi":
     "1/10/2024",
   "hoax-or-no-t-what-bitcoin-etf-approval-means-for-de-fi": "1/12/2024",
