@@ -83,8 +83,9 @@ const { articles, article, blocks } = Astro.props;
           blocks?.map((block) => {
             if (block.image) {
               return (
-                <div class="m-[48px]">
+                <div class="mt-[18px] mb-[48px]">
                   <img
+                    class="mx-auto"
                     alt={block.file?.data?.attributes?.alternativeText}
                     src={block.image}
                   />
