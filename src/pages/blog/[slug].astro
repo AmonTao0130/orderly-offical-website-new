@@ -26,9 +26,15 @@ export async function getStaticPaths() {
     const blocks = article.attributes.blocks.map((block) => {
       if (block.__component === "shared.rich-text") {
         const html = marked.parse(block.body || "") as string;
+        // if (article.id === 90) {
+        //   console.log("body ==>\n", block.body);
+        //   console.log("html ==>\n", html);
+        // }
         return {
           ...block,
-          html: html?.replace(/\n/g, "<br />"), // 将\n转为换行元素
+          html: html
+            ?.replace(/<br>/g, "<br /><br />") // 将\n转为换行元素
+            ?.replace(/\n\n/g, "<br />"), // 将\n转为换行元素
         };
       }
 
@@ -83,7 +89,7 @@ const { articles, article, blocks } = Astro.props;
           blocks?.map((block) => {
             if (block.image) {
               return (
-                <div class="mt-[18px] mb-[48px]">
+                <div class="my-[48px]">
                   <img
                     class="mx-auto"
                     alt={block.file?.data?.attributes?.alternativeText}
