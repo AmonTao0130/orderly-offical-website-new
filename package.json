@@ -25,6 +25,7 @@
     "class-variance-authority": "^0.7.0",
     "date-fns": "^2.30.0",
     "gsap": "^3.12.3",
+    "less": "^4.2.0",
     "marked": "^11.0.0",
     "nanostores": "^0.9.5",
     "qs": "^6.11.2",

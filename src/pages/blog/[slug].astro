@@ -10,8 +10,8 @@ import { cn } from "@/utils";
 import { getArticles } from "@/strapi/services";
 import type { Article, Block } from "@/strapi/type";
 import { marked } from "marked";
-import "@/layouts/blog/detail/index.css";
 import { sortByPublishedTime } from "@/utils/strapi";
+import "@/layouts/blog/detail/index.less";
 
 marked.use({
   // breaks: true, // 不生效，使用正则代替
