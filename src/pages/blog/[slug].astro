@@ -12,11 +12,15 @@ import type { Article, Block } from "@/strapi/type";
 import { marked } from "marked";
 import { sortByPublishedTime } from "@/utils/strapi";
 import "@/layouts/blog/detail/index.less";
+import { link } from "@/utils/marked";
 
 marked.use({
   // breaks: true, // 不生效，使用正则代替
   pedantic: false,
   gfm: true,
+  renderer: {
+    link,
+  },
 });
 
 export async function getStaticPaths() {
@@ -118,3 +122,4 @@ const { articles, article, blocks } = Astro.props;
 
   <Footer />
 </Layout>
+@/utils/marked
