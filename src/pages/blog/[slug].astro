@@ -19,7 +19,8 @@ marked.use({
   pedantic: false,
   gfm: true,
   renderer: {
-    link,
+    // 这里不能简写为 link ，否则会有问题
+    link: link,
   },
 });
 
@@ -122,4 +123,3 @@ const { articles, article, blocks } = Astro.props;
 
   <Footer />
 </Layout>
-@/utils/marked
