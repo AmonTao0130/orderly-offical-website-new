@@ -18,6 +18,13 @@ marked.use({
   // breaks: true, // 不生效，使用正则代替
   pedantic: false,
   gfm: true,
+  /**
+   * 自定义 renderer不能在这里写，否则下面的 marked.parse 可能会不生效
+   * 在每个使用 marked.parse 的地方传入自定义的 renderer 才能确保生效
+   * */
+  // renderer: {
+  //   link
+  // }
 });
 
 export async function getStaticPaths() {

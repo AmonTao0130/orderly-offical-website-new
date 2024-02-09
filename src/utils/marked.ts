@@ -24,7 +24,6 @@ export function link(
     out += ' title="' + title + '"';
   }
   out += ">" + text + "</a>";
-  console.log("link", out);
   return out;
 }
 
