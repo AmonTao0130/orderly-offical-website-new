@@ -1,3 +1,5 @@
+import { Renderer } from "marked";
+
 export function cleanUrl(href: string) {
   try {
     href = encodeURI(href).replace(/%25/g, "%");
@@ -22,5 +24,12 @@ export function link(
     out += ' title="' + title + '"';
   }
   out += ">" + text + "</a>";
+  console.log("link", out);
   return out;
+}
+
+export function getRenderer() {
+  const renderer = new Renderer();
+  renderer.link = link;
+  return renderer;
 }

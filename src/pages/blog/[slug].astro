@@ -10,27 +10,26 @@ import { cn } from "@/utils";
 import { getArticles } from "@/strapi/services";
 import type { Article, Block } from "@/strapi/type";
 import { marked } from "marked";
+import { getRenderer } from "@/utils/marked";
 import { sortByPublishedTime } from "@/utils/strapi";
 import "@/layouts/blog/detail/index.less";
-import { link } from "@/utils/marked";
 
 marked.use({
   // breaks: true, // 不生效，使用正则代替
   pedantic: false,
   gfm: true,
-  renderer: {
-    // 这里不能简写为 link ，否则会有问题
-    link: link,
-  },
 });
 
 export async function getStaticPaths() {
   const articleList = await getArticles(true);
   const articles = sortByPublishedTime(articleList);
+  const renderer = getRenderer();
   return articles.map((article) => {
     const blocks = article.attributes.blocks.map((block) => {
       if (block.__component === "shared.rich-text") {
-        const html = marked.parse(block.body || "") as string;
+        const html = marked.parse(block.body || "", {
+          renderer,
+        }) as string;
         // if (article.id === 90) {
         //   console.log("body ==>\n", block.body);
         //   console.log("html ==>\n", html);
@@ -48,7 +47,7 @@ export async function getStaticPaths() {
         return {
           ...block,
           image: block.file?.data?.attributes?.url,
-          caption: marked.parse(caption || ""),
+          caption: marked.parse(caption || "", { renderer }),
         };
       }
       return block;
