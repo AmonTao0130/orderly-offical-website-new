@@ -68,6 +68,9 @@ export const Hyperlink = {
  * https://docs.google.com/spreadsheets/d/1gcKc-6qMi_TB51lsEhL88rOiDU4BHpJPxXNc4kUL6jw/edit#gid=0
  */
 export const BlogPublishedTime: Record<string, string> = {
+  "what-s-on-order-at-orderly-our-2024-roadmap-1": "2/9/2024",
+  "mev-olution-ensuring-fairness-with-orderly-s-unique-orderbook-model":
+    "1/30/2024",
   "redefining-defi-with-the-orderly-chain-a-closer-look-at-the-orderly-settlement-layer":
     "1/24/2024",
   "orderly-network-launches-optimism-vault": "1/22/2024",
