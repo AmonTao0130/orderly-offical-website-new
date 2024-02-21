@@ -89,10 +89,10 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
             "lg:flex-col lg:mt-0"
           )}
         >
-          <NumberLabel label="Total trading volume" number="1B+" />
+          <NumberLabel label="Total trading volume" number="3B+" />
           <NumberLabel
             label="Traders"
-            number="113K+"
+            number="200K+"
             className={cn(
               /** 375 */
               "ml-[43px]",
