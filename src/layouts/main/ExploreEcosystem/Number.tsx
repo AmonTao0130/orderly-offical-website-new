@@ -14,6 +14,7 @@ const numberStyle = {
   backgroundClip: "text",
   WebkitTextFillColor: "transparent",
   WebkitBackgroundClip: "text",
+  fontVariantLigatures: "none",
 };
 
 const NumberLabel: React.FC<NumberLabelProps & PropsWithClassName> = (

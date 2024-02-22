@@ -1,6 +1,7 @@
 import React from "react";
 import type { PropsWithClassName } from "@/types";
 import { cn } from "@/utils";
+import { useVolume } from "../hooks/useVolume";
 
 interface StatisticsItemProps {
   label: string;
@@ -39,6 +40,7 @@ const StatisticsItem: React.FC<StatisticsItemProps & PropsWithClassName> = (
           backgroundClip: "text",
           WebkitTextFillColor: "transparent",
           WebkitBackgroundClip: "text",
+          fontVariantLigatures: "none",
         }}
         className={cn(
           "select-none",
@@ -57,6 +59,8 @@ const StatisticsItem: React.FC<StatisticsItemProps & PropsWithClassName> = (
 };
 
 const Statistics: React.FC<PropsWithClassName> = (props) => {
+  const volume = useVolume();
+
   return (
     <div
       style={{
@@ -77,7 +81,11 @@ const Statistics: React.FC<PropsWithClassName> = (props) => {
       )}
     >
       <div className="flex">
-        <StatisticsItem label="Total trading volume" value="3B+" border />
+        <StatisticsItem
+          label="Total trading volume"
+          value={`$${volume}`}
+          border
+        />
         <StatisticsItem label="Traders" value="200K+" border />
         <StatisticsItem label="Ecosystem partners" value="26" />
       </div>

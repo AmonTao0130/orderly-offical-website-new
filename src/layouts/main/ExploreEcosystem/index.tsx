@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Content from "@/components/Content";
 import Button from "@/components/Button";
 import { cn } from "@/utils";
 import NumberLabel from "./Number";
 import type { PropsWithClassName } from "@/types";
 import { Hyperlink } from "@/utils/constant";
+import { getTotalVolume } from "@/net/volume";
+import { useVolume } from "@/layouts/hooks/useVolume";
 
 const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
+  const volume = useVolume();
+
   return (
     <Content className={props.className}>
       <div
@@ -89,7 +93,7 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
             "lg:flex-col lg:mt-0"
           )}
         >
-          <NumberLabel label="Total trading volume" number="3B+" />
+          <NumberLabel label="Total trading volume" number={`$${volume}`} />
           <NumberLabel
             label="Traders"
             number="200K+"
