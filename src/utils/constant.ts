@@ -68,6 +68,7 @@ export const Hyperlink = {
  * https://docs.google.com/spreadsheets/d/1gcKc-6qMi_TB51lsEhL88rOiDU4BHpJPxXNc4kUL6jw/edit#gid=0
  */
 export const BlogPublishedTime: Record<string, string> = {
+  "understanding-vaults-your-key-to-de-fi": "2/23/2024",
   "what-s-on-order-at-orderly-our-2024-roadmap-1": "2/9/2024",
   "mev-olution-ensuring-fairness-with-orderly-s-unique-orderbook-model":
     "1/30/2024",
