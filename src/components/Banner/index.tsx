@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import CloseIcon from "@/icons/CloseIcon";
-import LearnMoreIcon from "@/icons/LearnMoreIcon";
 import { useStore } from "@nanostores/react";
 import { bannerVisible, bannerHeight } from "@/store";
 import { useSize } from "@/hooks/useSize";
+import ArrowForwardIcon from "@/icons/ArrowForwardIcon";
 
 interface BannerProps {}
 
@@ -14,8 +14,8 @@ const Banner: React.FC<BannerProps> = (props) => {
 
   const data = useMemo(
     () => ({
-      title: "Orderly Ambassador Program",
-      url: "https://medium.com/@orderlynetwork/introducing-the-orderly-network-ambassador-program-7f05e291e2f2",
+      title: "Earn 2x rewards on Orderly & LogX campaign!",
+      url: "https://galxe.com/orderlynetwork/campaign/GCY29twLYB",
     }),
     []
   );
@@ -32,18 +32,19 @@ const Banner: React.FC<BannerProps> = (props) => {
 
   return (
     <div
-      className="flex justify-between items-center px-[24px] py-[16px] text-base [background:linear-gradient(270.23deg,#34D4DE_0.04%,#6473FF_50.25%,#AD2BFE_99.64%)]"
+      className="relative flex justify-between items-center px-[24px] py-[16px] text-base [background:linear-gradient(270.23deg,#34D4DE_0.04%,#6473FF_50.25%,#AD2BFE_99.64%)] z-10"
       ref={ref}
     >
-      <div className="flex flex-1 justify-center flex-wrap leading-[24px]">
+      <div className="flex flex-1 items-center flex-wrap leading-[24px] md:justify-center">
         {/* TODO: 第二行文字左对齐 */}
-        <span className="text-white font-semibold pr-[8px]">{data.title}</span>
+        <span className="text-white font-semibold pr-[12px]">{data.title}</span>
         <a
           href={data.url}
           target="_blank"
-          className="inline-flex items-center pt-[2px] text-[#8AEFF5]"
+          className="inline-flex items-center text-[#8AEFF5] font-bold text-sm"
         >
-          <LearnMoreIcon />
+          <div>GET STARTED</div>
+          <ArrowForwardIcon />
         </a>
       </div>
 

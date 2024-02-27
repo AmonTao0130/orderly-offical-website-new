@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Collapse from "./Collapse";
 import { cn } from "@/utils";
@@ -15,6 +15,10 @@ const SmallNavigation: React.FC<PropsWithClassName> = (props) => {
     navigationOpen.set(!open);
     setModalHeight(window.innerHeight - $bannerHeight);
   };
+
+  useEffect(() => {
+    setModalHeight(window.innerHeight - $bannerHeight);
+  }, [$bannerHeight]);
 
   if (!open) {
     return (

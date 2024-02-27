@@ -1,4 +1,5 @@
 ---
+import Banner from "@/components/Banner";
 import "@/style/index.css";
 
 interface Props {
@@ -70,6 +71,7 @@ const thumbnailURL = new URL("thumbnail.jpg", Astro.site);
     </style>
   </head>
   <body>
+    <Banner client:visible />
     <slot />
   </body>
 </html>
