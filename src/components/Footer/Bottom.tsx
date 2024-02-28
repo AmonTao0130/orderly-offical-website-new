@@ -34,7 +34,7 @@ const Bottom: React.FC<PropsWithClassName> = (props) => {
         props.className
       )}
     >
-      <div className="text-sm text-[#8C8C8C]">© 2023 Orderly Network.</div>
+      <div className="text-sm text-[#8C8C8C]">© 2024 Orderly Network.</div>
       <div className="flex items-center">
         {icons.map((icon) => {
           const Icon = icon.icon;
