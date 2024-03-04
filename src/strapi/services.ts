@@ -67,13 +67,30 @@ export async function getArticlesData() {
 }
 
 export async function getArticleBySlug(slug: string = "") {
-  return await fetchApi<Article[]>({
+  const populate: any = {
+    cover: {
+      populate: "*",
+    },
+    category: {
+      populate: "*",
+    },
+    blocks: {
+      populate: "*",
+    },
+  };
+
+  const res: any = await fetchApi({
     endpoint: "articles",
     query: {
-      "populate[0]": "cover",
-      "filters[slug][$eq]": slug,
+      populate,
+      filters: {
+        slug: {
+          $eq: slug,
+        },
+      },
     },
   });
+  return res?.data?.[0] as Article;
 }
 
 export async function getUploadFiles() {
