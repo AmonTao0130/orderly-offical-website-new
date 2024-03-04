@@ -1,64 +1,22 @@
 ---
 import Layout from "@/layouts/index.astro";
-import Content from "@/components/Content";
 import Navigation from "@/components/Navigation";
 import Header from "@/layouts/blog/detail/Header";
 import MoreBlog from "@/layouts/blog/detail/MoreBlog";
-import DetailFooter from "@/layouts/blog/detail/Footer";
+import BlogDetail from "@/layouts/blog/detail/BlogDetail";
 import Footer from "@/components/Footer";
 import { cn } from "@/utils";
 import { getArticles } from "@/strapi/services";
 import type { Article, Block } from "@/strapi/type";
-import { marked } from "marked";
-import { getRenderer } from "@/utils/marked";
 import { sortByPublishedTime } from "@/utils/strapi";
+import { parseBlocks } from "@/utils/blog";
 import "@/layouts/blog/detail/index.less";
-
-marked.use({
-  // breaks: true, // 不生效，使用正则代替
-  pedantic: false,
-  gfm: true,
-  /**
-   * 自定义 renderer不能在这里写，否则下面的 marked.parse 可能会不生效
-   * 在每个使用 marked.parse 的地方传入自定义的 renderer 才能确保生效
-   * */
-  // renderer: {
-  //   link
-  // }
-});
 
 export async function getStaticPaths() {
   const articleList = await getArticles(true);
   const articles = sortByPublishedTime(articleList);
-  const renderer = getRenderer();
   return articles.map((article) => {
-    const blocks = article.attributes.blocks.map((block) => {
-      if (block.__component === "shared.rich-text") {
-        const html = marked.parse(block.body || "", {
-          renderer,
-        }) as string;
-        // if (article.id === 90) {
-        //   console.log("body ==>\n", block.body);
-        //   console.log("html ==>\n", html);
-        // }
-        return {
-          ...block,
-          html: html
-            ?.replace(/<br>/g, "<br /><br />") // 将\n转为换行元素
-            ?.replace(/\n\n/g, "<br />"), // 将\n转为换行元素
-        };
-      }
-
-      if (block.__component === "shared.media") {
-        const caption = block.file?.data?.attributes?.caption!;
-        return {
-          ...block,
-          image: block.file?.data?.attributes?.url,
-          caption: marked.parse(caption || "", { renderer }),
-        };
-      }
-      return block;
-    });
+    const blocks = parseBlocks(article.attributes.blocks);
     return {
       params: { slug: article.attributes.slug },
       props: { articles, article, blocks },
@@ -83,43 +41,7 @@ const { articles, article, blocks } = Astro.props;
 >
   <Navigation client:visible />
   <Header article={article} />
-  <Content className="flex justify-center">
-    <div
-      class={cn(
-        "flex flex-col justify-center",
-        /** 375 */
-        "text-base leading-[28.8px] font-normal mt-[40px]",
-        /** 768 */
-        "md:w-[688px]",
-        /** 1024 */
-        "lg:w-[904px] lg:text-xl lg:leading-[36px] lg:mt-[80px]"
-      )}
-    >
-      <div id="blogDetail">
-        {
-          blocks?.map((block) => {
-            if (block.image) {
-              return (
-                <div class="my-[48px]">
-                  <img
-                    class="mx-auto"
-                    alt={block.file?.data?.attributes?.alternativeText}
-                    src={block.image}
-                  />
-                  <div
-                    class="text-center text-xs text-primary-54 mt-[12px]"
-                    set:html={block.caption}
-                  />
-                </div>
-              );
-            }
-            return <div class="mt-[30px]" set:html={block.html} />;
-          })
-        }
-      </div>
-      <DetailFooter client:visible />
-    </div>
-  </Content>
+  <BlogDetail client:visible blocks={blocks} />
 
   <MoreBlog
     className={cn("mt-[80px]")}
