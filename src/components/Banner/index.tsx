@@ -14,8 +14,8 @@ const Banner: React.FC<BannerProps> = (props) => {
 
   const data = useMemo(
     () => ({
-      title: "Earn 2x rewards on Orderly & LogX campaign!",
-      url: "https://galxe.com/orderlynetwork/campaign/GCY29twLYB",
+      title: "Earn Underwater NFTs on Orderly & WOOFi campaign!",
+      url: "https://galxe.com/orderlynetwork/campaign/GCcdEt4UAm",
     }),
     []
   );
