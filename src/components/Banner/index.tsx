@@ -60,7 +60,7 @@ const Banner: React.FC<BannerProps> = (props) => {
               <a
                 href={item.url}
                 target="_blank"
-                className="inline-flex items-center text-[#8AEFF5] font-bold text-sm leading-[24px]"
+                className="inline-flex items-center text-[#8AEFF5] font-bold text-sm leading-[32px]"
               >
                 <div>{item.moreText}</div>
                 <ArrowForwardIcon />
