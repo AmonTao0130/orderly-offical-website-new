@@ -25,7 +25,7 @@ const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
         </a>
 
         <div className="flex items-center">
-          <LaunchApp className="mr-[16px]" />
+          {/* <LaunchApp className="mr-[16px]" /> */}
           <div onClick={props.toggleExpanded}>
             {props.expanded ? (
               <CloseLargeIcon />
