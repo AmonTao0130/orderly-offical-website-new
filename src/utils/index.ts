@@ -30,3 +30,9 @@ export async function copyContent(content: string) {
     console.error("Failed to copy: ", err);
   }
 }
+
+export function isTestEnv() {
+  return ["localhost", "dev-v2.orderly.network"].includes(
+    window.location.hostname
+  );
+}

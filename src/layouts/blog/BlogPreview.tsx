@@ -7,6 +7,7 @@ import { parse } from "qs";
 import Header from "@/layouts/blog/detail/Header";
 import BlogDetail from "@/layouts/blog/detail/BlogDetail";
 import Footer from "@/components/Footer";
+import { isTestEnv } from "@/utils";
 
 interface BlogPreviewProps {}
 const BlogPreview: React.FC<BlogPreviewProps> = (props) => {
@@ -26,9 +27,7 @@ const BlogPreview: React.FC<BlogPreviewProps> = (props) => {
   }
 
   useEffect(() => {
-    if (
-      ["localhost", "dev-v2.orderly.network"].includes(window.location.hostname)
-    ) {
+    if (isTestEnv()) {
       getData();
     } else {
       // 如果在生产环境，进入预览界面则自动跳到首页

@@ -3,6 +3,7 @@ import Menu from "./Menu";
 import LogoTextIcon from "@/icons/LogoTextIcon";
 import { cn } from "@/utils/index";
 import type { PropsWithClassName } from "@/types";
+import LaunchApp from "./LaunchApp";
 
 const LargeNavigation: React.FC<PropsWithClassName> = (props) => {
   return (
@@ -16,7 +17,10 @@ const LargeNavigation: React.FC<PropsWithClassName> = (props) => {
         <a href="/">
           <LogoTextIcon />
         </a>
-        <Menu />
+        <div className="flex items-center">
+          <Menu />
+          <LaunchApp className="ml-[32px]" />
+        </div>
       </div>
     </div>
   );

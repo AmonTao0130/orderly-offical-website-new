@@ -5,6 +5,7 @@ import CloseLargeIcon from "@/icons/CloseLargeIcon";
 import LogoTextIcon from "@/icons/LogoTextIcon";
 import { cn } from "@/utils";
 import type { PropsWithClassName } from "@/types";
+import LaunchApp from "./LaunchApp";
 
 interface HeaderProps {
   expanded: boolean;
@@ -23,12 +24,15 @@ const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
           <LogoTextIcon />
         </a>
 
-        <div onClick={props.toggleExpanded}>
-          {props.expanded ? (
-            <CloseLargeIcon />
-          ) : (
-            <CollapseIcon className="text-white" />
-          )}
+        <div className="flex items-center">
+          <LaunchApp className="mr-[16px]" />
+          <div onClick={props.toggleExpanded}>
+            {props.expanded ? (
+              <CloseLargeIcon />
+            ) : (
+              <CollapseIcon className="text-white" />
+            )}
+          </div>
         </div>
       </div>
     </div>
