@@ -98,7 +98,7 @@ export default {
         color: "white",
         backgroundColor: "#000",
         fontFamily: "'Manrope', sans-serif",
-        fontWeight: "600",
+        fontWeight: "500",
         margin: 0,
         "::selection": {
           background: "#D196FF",
