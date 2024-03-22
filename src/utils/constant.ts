@@ -31,7 +31,7 @@ export const Hyperlink = {
   About: {
     Team: "/team",
     PressKit:
-      "https://drive.google.com/drive/folders/1iFFFquS_5DnQWrAuz8q_5tfcs_Wf8i3s?usp=sharing",
+      "https://coral-shark-13c.notion.site/Orderly-Network-Media-Kit-bbc1f6513c26439c90dda117b83e063e?pvs=4",
     Careers: "https://boards.greenhouse.io/orderlynetwork ",
   },
   SocialCarnival: {
