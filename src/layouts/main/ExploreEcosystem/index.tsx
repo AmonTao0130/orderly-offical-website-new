@@ -35,7 +35,7 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
           <div>
             <div
               className={cn(
-                "font-title text-primary",
+                "font-title font-semibold text-primary",
                 /** 375 */
                 "text-2xl leading-[28.8px]",
                 /** 768 */

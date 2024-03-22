@@ -24,7 +24,7 @@ const StatisticsItem: React.FC<StatisticsItemProps & PropsWithClassName> = (
       <div
         className={cn(
           /** 375 */
-          "text-[10px] leading-[10.2px] font-title text-primary-100 ",
+          "text-[10px] leading-[10.2px] font-title font-semibold text-primary-100 ",
           /** 768 */
           "md:text-base md:leading-[16.32px]",
           /** 1024 */
