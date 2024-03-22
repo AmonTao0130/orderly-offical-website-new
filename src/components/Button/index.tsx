@@ -9,7 +9,7 @@ import ArrowRightTopIcon from "../../icons/ArrowRightTopIcon";
 
 const buttonVariants = cva(
   [
-    "inline-flex justify-center items-center text-white font-bold text-sm lg:text-base px-[20px] lg:px-[24px] h-[40px] lg:h-[52px] rounded-full cursor-pointer",
+    "inline-flex justify-center items-center text-white font-semibold text-sm lg:text-base px-[20px] lg:px-[24px] h-[40px] lg:h-[52px] rounded-full cursor-pointer",
     "transition-all duration-300",
   ],
   {
