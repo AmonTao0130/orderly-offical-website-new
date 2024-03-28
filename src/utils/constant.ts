@@ -68,6 +68,7 @@ export const Hyperlink = {
  * https://docs.google.com/spreadsheets/d/1gcKc-6qMi_TB51lsEhL88rOiDU4BHpJPxXNc4kUL6jw/edit#gid=0
  */
 export const BlogPublishedTime: Record<string, string> = {
+  "meet-dovey-rug-the-fiat-wan-orderly-network-investor": "3/29/2024",
   "ecosystem-spotlight-woofi-pro-s-integration-with-orderly-network":
     "3/4/2024",
   "orderly-network-teams-up-with-emdx-to-introduce-perps-to-emerging-markets":
