@@ -15,10 +15,15 @@ const bannerData = [
     moreText: "GET STARTED",
   },
   {
-    title: "Earn 100k $LOGX and NFTs on Orderly & LogX campaign!",
-    url: "https://galxe.com/orderlynetwork/campaign/GCYnAt4USf",
-    moreText: "GET STARTED",
+    title: "Check token eligibility for Orderly Network early supporters",
+    url: "https://app.orderly.network/",
+    moreText: "LEARN MORE",
   },
+  // {
+  //   title: "Earn 100k $LOGX and NFTs on Orderly & LogX campaign!",
+  //   url: "https://galxe.com/orderlynetwork/campaign/GCYnAt4USf",
+  //   moreText: "GET STARTED",
+  // },
 ];
 
 const Banner: React.FC<BannerProps> = (props) => {
