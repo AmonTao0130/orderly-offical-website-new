@@ -8,7 +8,7 @@ import { cn } from "@/utils";
 
 interface BannerProps {}
 
-const bannerData = [
+const banners = [
   {
     title: "Earn Underwater NFTs on Orderly & WOOFi campaign!",
     url: "https://galxe.com/orderlynetwork/campaign/GCcdEt4UAm",
@@ -16,6 +16,11 @@ const bannerData = [
   },
   {
     title: "Check token eligibility for Orderly Network early supporters",
+    url: "https://app.orderly.network/first-riders",
+    moreText: "LEARN MORE",
+  },
+  {
+    title: "Earn Orderly Merits to boost your share of the airdrop!",
     url: "https://app.orderly.network/",
     moreText: "LEARN MORE",
   },
@@ -41,21 +46,38 @@ const Banner: React.FC<BannerProps> = (props) => {
     return null;
   }
 
+  const isAnimate = banners.length > 1;
+
   return (
     <div
-      className="relative flex justify-between items-center px-[24px] py-[16px] text-base [background:linear-gradient(270.23deg,#34D4DE_0.04%,#6473FF_50.25%,#AD2BFE_99.64%)] z-10  overflow-hidden"
+      className={cn(
+        "relative flex justify-between items-center",
+        "px-[24px] py-[16px] text-base z-10 overflow-hidden",
+        "[background:linear-gradient(270.23deg,#34D4DE_0.04%,#6473FF_50.25%,#AD2BFE_99.64%)]"
+      )}
       ref={ref}
     >
       <div className="flex flex-col justify-center items-center w-full">
-        {bannerData.map((item, index) => {
+        {banners.map((item, index) => {
+          const idx = index + 1;
           return (
             <div
+              key={item.title}
               className={cn(
                 "flex items-center flex-wrap md:justify-center",
-                "transition-all",
-                index === 0
-                  ? "animate-bannerOut opacity-0"
-                  : "animate-bannerIn opacity-0 absolute left-[24px] right-[24px]"
+                isAnimate &&
+                  cn(
+                    "opacity-0",
+                    idx !== 1 && "absolute left-[24px] right-[24px]",
+                    idx === 1 && "animate-banner1",
+                    idx === 2 && "animate-banner2",
+                    idx === 3 && "animate-banner3"
+                  )
+                // cn(
+                //   index !== 0 &&
+                //     "absolute left-[24px] right-[24px] translate-y-[100%]",
+                //   bannerIndex === index && "animate-bannerInOut"
+                // )
               )}
             >
               {/* TODO: 第二行文字左对齐 */}
