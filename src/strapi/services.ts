@@ -1,5 +1,5 @@
 import fetchApi from "@/strapi";
-import type { Article, Categorg, Meta, TFile } from "@/strapi/type";
+import type { Article, Categorg, Meta, Pagination, TFile } from "@/strapi/type";
 
 export async function getCategories() {
   return await fetchApi<Categorg[]>({
@@ -9,7 +9,10 @@ export async function getCategories() {
   });
 }
 
-export async function getArticles(isDetail?: boolean) {
+export async function getArticles(params?: {
+  isDetail?: boolean;
+  pagination?: Pagination;
+}) {
   const populate: any = {
     cover: {
       populate: "*",
@@ -19,7 +22,7 @@ export async function getArticles(isDetail?: boolean) {
     },
   };
 
-  if (isDetail) {
+  if (params?.isDetail) {
     populate.blocks = {
       populate: "*",
     };
@@ -46,6 +49,7 @@ export async function getArticles(isDetail?: boolean) {
       sort: "publishedAt:desc",
       pagination: {
         pageSize: 1000,
+        ...params?.pagination,
       },
     },
   });
@@ -90,6 +94,7 @@ export async function getArticleBySlug(slug: string = "") {
       },
     },
   });
+
   return res?.data?.[0] as Article;
 }
 

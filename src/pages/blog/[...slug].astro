@@ -1,0 +1,65 @@
+---
+export const prerender = false;
+import Layout from "@/layouts/index.astro";
+import Navigation from "@/components/Navigation";
+import Header from "@/layouts/blog/detail/Header";
+import MoreBlog from "@/layouts/blog/detail/MoreBlog";
+import BlogDetail from "@/layouts/blog/detail/BlogDetail";
+import Footer from "@/components/Footer";
+import { cn } from "@/utils";
+import { getArticleBySlug, getArticles } from "@/strapi/services";
+import { parseBlocks } from "@/utils/blog";
+import "@/layouts/blog/detail/index.less";
+
+async function getData(slug: string) {
+  try {
+    const article = await getArticleBySlug(slug);
+
+    if (!article) {
+      return null;
+    }
+
+    const blocks = parseBlocks(article.attributes?.blocks);
+    const artitlces = await getArticles({ pagination: { pageSize: 3 } });
+
+    return { artitlces, article, blocks };
+  } catch (err) {
+    console.log("getData", err);
+    return null;
+  }
+}
+
+const { slug } = Astro.params;
+const { article, blocks, artitlces } = (await getData(slug!)) || {};
+---
+
+<Layout
+  title={`Orderly Network | ${article?.attributes.title || "404"}`}
+  metaDescription={article?.attributes.description! || "Page not found"}
+  image={article?.attributes?.cover?.data?.attributes?.formats?.small?.url}
+>
+  <Navigation client:visible />
+
+  {
+    article ? (
+      <>
+        <Header article={article!} />
+        <BlogDetail client:visible blocks={blocks as any} />
+        <MoreBlog
+          className={cn("mt-[80px]")}
+          data={artitlces!}
+          client:visible
+        />
+        <Footer />
+      </>
+    ) : (
+      <div>
+        <div class="my-[100px] text-center">
+          <div class="text-xl">404</div>
+          <div class="text-lg">Page not found</div>
+        </div>
+        <Footer className="fixed bottom-0 left-0 right-0" />
+      </div>
+    )
+  }
+</Layout>

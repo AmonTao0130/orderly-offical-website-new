@@ -11,7 +11,6 @@ import Content from "@/components/Content";
 import { getCategories, getArticles } from "@/strapi/services";
 import { getTabData, sortByPublishedTime } from "@/utils/strapi";
 import "../../style/index.css";
-// import { BlogPublishedTime } from "@/utils/constant";
 
 const categories = await getCategories();
 const tabData = getTabData(categories);
@@ -20,21 +19,6 @@ const articleList = await getArticles();
 
 const articles = sortByPublishedTime(articleList);
 
-// 检测哪些slug的发布日期没有被hardcode
-// console.log(
-//   articles
-//     .map((article) => {
-//       const slug = article.attributes.slug;
-//       return BlogPublishedTime[slug] ? false : slug;
-//     })
-//     .filter((item) => !!item)
-// );
-
-// export async function getStaticPaths({ paginate }) {
-// const categories = await getCategories();
-// const articles = await getArticles();
-// console.log("categories", categories);
-// console.log("articles", articles);
 
 // 返回包含分页的所有帖子的路由集合
 // return paginate(articles, { pageSize: 6 });

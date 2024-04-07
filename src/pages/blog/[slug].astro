@@ -1,4 +1,5 @@
 ---
+export const prerender = true;
 import Layout from "@/layouts/index.astro";
 import Navigation from "@/components/Navigation";
 import Header from "@/layouts/blog/detail/Header";
@@ -13,7 +14,7 @@ import { parseBlocks } from "@/utils/blog";
 import "@/layouts/blog/detail/index.less";
 
 export async function getStaticPaths() {
-  const articleList = await getArticles(true);
+  const articleList = await getArticles({ isDetail: true });
   const articles = sortByPublishedTime(articleList);
   return articles.map((article) => {
     const blocks = parseBlocks(article.attributes.blocks);

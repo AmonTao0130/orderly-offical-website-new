@@ -105,3 +105,9 @@ export type ShareMedia = {
     };
   };
 };
+
+export type Pagination = {
+  page?: number;
+  pageSize?: number;
+  withCount?: boolean;
+};

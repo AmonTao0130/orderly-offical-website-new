@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // 替换为实际的 dist 目录路径
-const distPath = path.join(__dirname, "../dist");
+const distPath = path.join(__dirname, "../dist/client");
 console.log("distPath", distPath);
 
 const sourceFileName = "sitemap-index.xml";

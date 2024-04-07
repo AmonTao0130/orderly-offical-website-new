@@ -2,29 +2,11 @@ import React, { useEffect, useMemo, useState } from "react";
 import type { PropsWithClassName } from "@/types";
 import BlogItem from "./BlogItem";
 import { cn } from "@/utils";
-import fetchApi from "@/strapi";
 import { type Article } from "@/strapi/type";
-import { getArticles, getArticlesData } from "@/strapi/services";
 import { useStore } from "@nanostores/react";
 import { blogExpandKey } from "@/store";
 import Pagination, { type PaginationProps } from "../../components/Pagination";
-import { useSize } from "@/hooks/useSize";
 import { getPageData, getRangePage } from "@/utils/strapi";
-
-// const item = {
-//   title:
-//     "Introducing Orderly App Chain — Powering Orderly Omnichain Settlement Layer",
-//   description:
-//     "Excepteur sint occaecat cupidatat non proident, unt in culpa qui officia deserunt mollit anim ide...",
-//   img: Bg.src,
-//   time: "Aug 25, 2023",
-//   url: "",
-// };
-
-// const data: TBlogIem[] = [];
-// for (let i = 0; i < 10; i++) {
-//   data.push(item);
-// }
 
 interface BlogListProps {
   data: Article[];
@@ -33,9 +15,7 @@ interface BlogListProps {
 const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
   const [articles, setArticles] = useState<Article[]>(props.data);
   const [pageIndex, setPageIndex] = useState(1);
-  // const [pagination, setPagination] = useState<Pagination>();
   const expandKey = useStore(blogExpandKey) || "All";
-  // const { width } = useSize();
 
   useEffect(() => {
     const filteredArticles =
@@ -72,14 +52,6 @@ const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
       } as PaginationProps,
     };
   }, [articles, pageIndex]);
-
-  // const getData = async () => {
-  //   const res = await getArticles();
-  // };
-
-  // useEffect(() => {
-  //   getData();
-  // }, [expandKey]);
 
   return (
     <div>

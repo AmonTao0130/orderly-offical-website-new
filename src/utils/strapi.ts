@@ -67,3 +67,13 @@ export function sortByPublishedTime(articles: Article[]) {
 
   return list;
 }
+
+/** 检测哪些slug的发布日期没有被hardcode */
+export function checkSlugNotHardcoded(articles: Article[]) {
+  return articles
+    .map((article) => {
+      const slug = article.attributes.slug;
+      return BlogPublishedTime[slug] ? false : slug;
+    })
+    .filter((item) => !!item);
+}
