@@ -10,10 +10,10 @@ export default defineConfig({
   site: "https://orderly.network",
   // Enable React to support React JSX components.
   integrations: [react(), tailwind(), sitemap()],
-  // output: "hybrid",
-  output: "server",
+  output: "hybrid",
+  // output: "server",
   adapter: node({
-    mode: "standalone",
+    mode: "middleware",
   }),
   /** 允许ip地址访问 */
   // server: {

@@ -8,7 +8,9 @@
     "build": "astro check && astro build && pnpm renameSitemap",
     "preview": "astro preview",
     "renameSitemap": "node ./script/renameSitemap.js",
-    "astro": "astro"
+    "astro": "astro",
+    "server": "node ./dist/server/entry.mjs",
+    "express": "node ./server/index.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.3.1",
@@ -24,6 +26,7 @@
     "axios": "^1.6.2",
     "class-variance-authority": "^0.7.0",
     "date-fns": "^2.30.0",
+    "express": "^4.19.2",
     "gsap": "^3.12.3",
     "less": "^4.2.0",
     "marked": "^11.0.0",
