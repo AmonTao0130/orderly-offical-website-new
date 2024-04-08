@@ -99,6 +99,15 @@ export function checkSlugNotHardcoded(articles: Article[]) {
     .filter((item) => !!item);
 }
 
+/** 获取封面图片 */
 export function getArticleCoverImage(article?: Article) {
   return article?.attributes?.cover?.data?.attributes?.formats?.small?.url;
+}
+
+/** 获取封面图片描述文本 */
+export function getArticleCoverAlt(article?: Article) {
+  return (
+    article?.attributes?.cover?.data?.attributes?.alternativeText ||
+    article?.attributes?.title
+  );
 }

@@ -3,7 +3,7 @@ import type { PropsWithClassName } from "@/types";
 import { cn, formatDate } from "@/utils";
 import Button from "@/components/Button";
 import type { Article } from "@/strapi/type";
-import { getArticleCoverImage } from "@/utils/strapi";
+import { getArticleCoverAlt, getArticleCoverImage } from "@/utils/strapi";
 
 type BlogItemProps = PropsWithClassName & {
   article: Article;
@@ -37,7 +37,7 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
           /** 1440 */
           "xl:h-[225px]"
         )}
-        alt={attributes?.cover?.data?.attributes?.alternativeText}
+        alt={getArticleCoverAlt(props.article)}
         src={getArticleCoverImage(props.article)}
       />
       <div

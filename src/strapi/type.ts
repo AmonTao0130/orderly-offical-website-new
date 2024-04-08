@@ -106,6 +106,7 @@ export type ShareMedia = {
       name: string;
     };
   };
+  related?: any[];
 };
 
 export type Pagination = {
