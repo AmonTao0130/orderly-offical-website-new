@@ -31,8 +31,6 @@ export async function copyContent(content: string) {
   }
 }
 
-export function isTestEnv() {
-  return ["localhost", "dev-v2.orderly.network"].includes(
-    window.location.hostname
-  );
+export function isDev(hostname: string) {
+  return ["localhost", "dev-v2.orderly.network"].includes(hostname);
 }

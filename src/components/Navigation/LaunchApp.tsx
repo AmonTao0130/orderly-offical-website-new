@@ -1,5 +1,5 @@
 import React from "react";
-import { cn, isTestEnv } from "@/utils";
+import { cn, isDev } from "@/utils";
 import type { PropsWithClassName } from "@/types";
 
 const LaunchApp: React.FC<PropsWithClassName> = (props) => {
@@ -13,7 +13,7 @@ const LaunchApp: React.FC<PropsWithClassName> = (props) => {
         props.className
       )}
       onClick={() => {
-        const url = isTestEnv()
+        const url = isDev(window.location.hostname)
           ? "https://dev-app.orderly.network/"
           : "https://app.orderly.network/";
         window.open(url, "_self");

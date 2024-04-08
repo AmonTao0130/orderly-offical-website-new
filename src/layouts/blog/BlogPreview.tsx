@@ -27,7 +27,7 @@ const BlogPreview: React.FC<BlogPreviewProps> = (props) => {
   }
 
   useEffect(() => {
-    if (isTestEnv()) {
+    if (isDev(window.location.hostname)) {
       getData();
     } else {
       // 如果在生产环境，进入预览界面则自动跳到首页
