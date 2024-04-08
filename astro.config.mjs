@@ -15,8 +15,8 @@ export default defineConfig({
   adapter: node({
     mode: "middleware",
   }),
-  /** 允许ip地址访问 */
-  // server: {
-  //   host: true,
-  // },
+  /** 允许开发时使用ip地址访问 */
+  server: {
+    host: true,
+  },
 });
