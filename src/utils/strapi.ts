@@ -1,5 +1,30 @@
-import type { Article, Categorg } from "@/strapi/type";
+import type {
+  Article,
+  Categorg,
+  Pagination,
+  PublicationState,
+} from "@/strapi/type";
 import { BlogPublishedTime } from "./constant";
+import { getArticleBySlug, getArticles } from "@/strapi/services";
+
+export async function getArticlesSortByDisplayTime(params?: {
+  isDetail?: boolean;
+  pagination?: Pagination;
+  publicationState?: PublicationState;
+}) {
+  const articles = await getArticles(params);
+  return sortByDisplayTime(articles);
+}
+
+export async function getArticleWithDisplayTimeBySlug(
+  slug: string = "",
+  params?: {
+    publicationState?: PublicationState;
+  }
+) {
+  const article = await getArticleBySlug(slug, params);
+  return wrapWithDisplayTime(article);
+}
 
 export function getTabData(categories: Categorg[]) {
   const list = categories
@@ -49,9 +74,10 @@ export function getRangePage(
 /** 获取文章的显示时间 */
 export function getDisplayTime(article: Article) {
   const { attributes } = article || {};
-  const { publishedAt, postedTime } = attributes || {};
+  const { createdAt, publishedAt, postedTime } = attributes || {};
   const hardcodePublishedTime = BlogPublishedTime[attributes?.slug];
-  const displayTime = postedTime || hardcodePublishedTime || publishedAt;
+  const displayTime =
+    postedTime || hardcodePublishedTime || publishedAt || createdAt;
   return new Date(displayTime);
 }
 
@@ -70,7 +96,7 @@ export function wrapWithDisplayTime(article: Article) {
   };
 }
 
-export function sortByPublishedTime(articles: Article[]) {
+export function sortByDisplayTime(articles: Article[]) {
   const list = articles.map((article) => {
     const { attributes } = article || {};
     return {

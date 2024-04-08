@@ -114,3 +114,5 @@ export type Pagination = {
   pageSize?: number;
   withCount?: boolean;
 };
+
+export type PublicationState = "live" | "preview";

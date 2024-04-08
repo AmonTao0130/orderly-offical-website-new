@@ -1,54 +1,71 @@
 ---
-export const prerender = true;
+export const prerender = false;
 import Layout from "@/layouts/index.astro";
 import Navigation from "@/components/Navigation";
 import Header from "@/layouts/blog/detail/Header";
 import MoreBlog from "@/layouts/blog/detail/MoreBlog";
 import BlogDetail from "@/layouts/blog/detail/BlogDetail";
 import Footer from "@/components/Footer";
-import { cn } from "@/utils";
-import { getArticles } from "@/strapi/services";
-import type { Article, Block } from "@/strapi/type";
-import { getArticleCoverImage, sortByPublishedTime } from "@/utils/strapi";
-import { parseBlocks } from "@/utils/blog";
+import { cn, isDev } from "@/utils";
 import "@/layouts/blog/detail/index.less";
+import {
+  getArticleCoverImage,
+  getArticleWithDisplayTimeBySlug,
+  getArticlesSortByDisplayTime,
+} from "@/utils/strapi";
 
-export async function getStaticPaths() {
-  const articleList = await getArticles({ isDetail: true });
-  const articles = sortByPublishedTime(articleList);
-  return articles.map((article) => {
-    const blocks = parseBlocks(article.attributes.blocks);
-    return {
-      params: { slug: article.attributes.slug },
-      props: { articles, article, blocks },
-    };
-  });
-  // return [{ params: { slug: "orderly-network-partners-here-wallet" } }];
+/** 动态渲染博客文章详情页 */
+async function getData(slug: string) {
+  try {
+    const publicationState = isDev(Astro.url.hostname) ? "preview" : "live";
+    const article = await getArticleWithDisplayTimeBySlug(slug, {
+      publicationState,
+    });
+
+    if (!article) {
+      return null;
+    }
+
+    const articles = await getArticlesSortByDisplayTime({
+      pagination: { pageSize: 3 },
+      publicationState,
+    });
+
+    return { articles, article };
+  } catch (err) {
+    console.log("getData", err);
+    return null;
+  }
 }
 
-type Props = {
-  articles: Article[];
-  article: Article;
-  blocks: Block[];
-};
-
-const { articles, article, blocks } = Astro.props;
+const { slug } = Astro.params;
+const data = await getData(slug!);
+const { article, articles } = data || {};
 ---
 
 <Layout
-  title={`Orderly Network | ${article.attributes.title}`}
-  metaDescription={article.attributes.description}
+  title={`Orderly Network | ${article?.attributes.title || "404"}`}
+  metaDescription={article?.attributes.description! || "Page not found"}
   image={getArticleCoverImage(article)}
 >
   <Navigation client:visible />
-  <Header article={article} />
-  <BlogDetail client:visible blocks={blocks} />
 
-  <MoreBlog
-    className={cn("mt-[80px]")}
-    data={articles?.slice(0, 3)}
-    client:visible
-  />
-
-  <Footer />
+  {
+    article ? (
+      <>
+        <Header article={article!} />
+        <BlogDetail article={article} client:visible />
+        <MoreBlog className={cn("mt-[80px]")} data={articles!} client:visible />
+        <Footer />
+      </>
+    ) : (
+      <div>
+        <div class="my-[100px] text-center">
+          <div class="text-xl">404</div>
+          <div class="text-lg">Page not found</div>
+        </div>
+        <Footer className="fixed bottom-0 left-0 right-0" />
+      </div>
+    )
+  }
 </Layout>

@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "@/components/Navigation";
 import { getArticleBySlug } from "@/strapi/services";
-import { parseBlocks } from "@/utils/blog";
-import type { Article, Block } from "@/strapi/type";
+import type { Article } from "@/strapi/type";
 import { parse } from "qs";
 import Header from "@/layouts/blog/detail/Header";
 import BlogDetail from "@/layouts/blog/detail/BlogDetail";
 import Footer from "@/components/Footer";
-import { isTestEnv } from "@/utils";
+import { isDev } from "@/utils";
 
 interface BlogPreviewProps {}
 const BlogPreview: React.FC<BlogPreviewProps> = (props) => {
   const [article, setArticle] = useState<Article>();
-  const [blocks, setBlocks] = useState<Block[]>([]);
   const [loading, setLoading] = useState(false);
 
   async function getData() {
@@ -20,9 +18,7 @@ const BlogPreview: React.FC<BlogPreviewProps> = (props) => {
     const search = window.location.search?.replace("?", "");
     const { slug } = parse(search);
     const article = await getArticleBySlug(slug as string);
-    const blocks = parseBlocks(article?.attributes?.blocks);
     setArticle(article);
-    setBlocks(blocks as any);
     setLoading(false);
   }
 
@@ -44,7 +40,7 @@ const BlogPreview: React.FC<BlogPreviewProps> = (props) => {
         <>
           <Header article={article!} />
           <div className="mb-[80px]">
-            <BlogDetail blocks={blocks} />
+            <BlogDetail article={article!} />
           </div>
         </>
       )}

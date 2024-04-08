@@ -2,14 +2,15 @@ import React from "react";
 import Content from "@/components/Content";
 import DetailFooter from "@/layouts/blog/detail/Footer";
 import { cn } from "@/utils";
-import type { Block } from "@/strapi/type";
+import type { Article } from "@/strapi/type";
+import { parseBlocks } from "@/utils/blog";
 
 interface BlogDetailProps {
-  blocks: Block[];
+  article: Article;
 }
 
 const BlogDetail: React.FC<BlogDetailProps> = (props) => {
-  const { blocks } = props || {};
+  const blocks = parseBlocks(props.article.attributes?.blocks);
 
   const blocksHtml = blocks?.map((block) => {
     if (block.image) {

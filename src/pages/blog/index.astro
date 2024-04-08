@@ -7,19 +7,21 @@ import HeaderBg from "@/layouts/blog/HeaderBg";
 import HeaderText from "@/layouts/blog/HeaderText";
 import BlogTab from "@/layouts/blog/BlogTab";
 import Footer from "@/components/Footer";
-import { cn } from "@/utils";
+import { cn, isDev } from "@/utils";
 import BlogList from "@/layouts/blog/BlogList";
 import Content from "@/components/Content";
-import { getCategories, getArticles } from "@/strapi/services";
-import { getTabData, sortByPublishedTime } from "@/utils/strapi";
+import { getCategories } from "@/strapi/services";
+import { getTabData, getArticlesSortByDisplayTime } from "@/utils/strapi";
 import "../../style/index.css";
 
 const categories = await getCategories();
 const tabData = getTabData(categories);
 
-const articleList = await getArticles();
+// 如果是 dev 环境，获取草稿里的文章
+const publicationState = isDev(Astro.url.hostname) ? "preview" : "live";
 
-const articles = sortByPublishedTime(articleList);
+// 如果是 dev 环境，获取草稿里的文章
+const articles = await getArticlesSortByDisplayTime({ publicationState });
 
 // 返回包含分页的所有帖子的路由集合
 // return paginate(articles, { pageSize: 6 });
