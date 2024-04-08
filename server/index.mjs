@@ -25,3 +25,4 @@ app.use(
 app.use(ssrHandler);
 
 app.listen(8080);
+app.listen(80);
