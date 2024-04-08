@@ -19,7 +19,7 @@ COPY --from=build /app/dist ./dist
 COPY /server ./server
 
 ENV HOST=0.0.0.0
-ENV PORT=8080
-EXPOSE 8080
+ENV PORT=80
+EXPOSE 80
 CMD node ./server/index.mjs
 
