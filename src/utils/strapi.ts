@@ -98,3 +98,7 @@ export function checkSlugNotHardcoded(articles: Article[]) {
     })
     .filter((item) => !!item);
 }
+
+export function getArticleCoverImage(article?: Article) {
+  return article?.attributes?.cover?.data?.attributes?.formats?.small?.url;
+}

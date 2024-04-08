@@ -3,9 +3,14 @@ import type { PropsWithClassName } from "@/types";
 import { cn, formatDate } from "@/utils";
 import Button from "@/components/Button";
 import type { Article } from "@/strapi/type";
+import { getArticleCoverImage } from "@/utils/strapi";
 
-const BlogItem: React.FC<Article & PropsWithClassName> = (props) => {
-  const { attributes } = props;
+type BlogItemProps = PropsWithClassName & {
+  article: Article;
+};
+
+const BlogItem: React.FC<BlogItemProps> = (props) => {
+  const { attributes } = props.article || {};
   return (
     <div
       className={cn(
@@ -32,8 +37,8 @@ const BlogItem: React.FC<Article & PropsWithClassName> = (props) => {
           /** 1440 */
           "xl:h-[225px]"
         )}
-        alt={attributes.cover?.data?.attributes?.alternativeText}
-        src={attributes.cover?.data?.attributes?.formats?.small?.url}
+        alt={attributes?.cover?.data?.attributes?.alternativeText}
+        src={getArticleCoverImage(props.article)}
       />
       <div
         className={cn(

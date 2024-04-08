@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import type { PropsWithClassName } from "@/types";
 import Content from "@/components/Content";
 import { cn } from "@/utils";
@@ -74,7 +74,7 @@ const MoreBlog: React.FC<MoreBlogProps & PropsWithClassName> = (props) => {
           </div>
           <div className="flex flex-wrap">
             {data.map((item, index) => {
-              return <BlogItem key={item.id} {...item} />;
+              return <BlogItem key={item.id} article={item} />;
             })}
           </div>
         </Content>

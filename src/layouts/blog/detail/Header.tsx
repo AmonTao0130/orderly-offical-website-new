@@ -4,6 +4,7 @@ import { cn, formatDate } from "@/utils";
 import Content from "@/components/Content";
 import type { Article } from "@/strapi/type";
 import { format } from "date-fns";
+import { getArticleCoverImage } from "@/utils/strapi";
 
 interface HeaderProps {
   article: Article;
@@ -107,7 +108,7 @@ const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
             "xl:w-[620px] xl:h-[348.75px] xl:rounded-[24px]"
           )}
           alt={attributes.cover?.data?.attributes?.alternativeText}
-          src={attributes.cover?.data?.attributes?.formats?.small?.url}
+          src={getArticleCoverImage(props.article)}
         />
       </Content>
     </div>

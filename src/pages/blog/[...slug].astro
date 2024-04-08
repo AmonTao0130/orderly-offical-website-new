@@ -10,7 +10,7 @@ import { cn } from "@/utils";
 import { getArticleBySlug, getArticles } from "@/strapi/services";
 import { parseBlocks } from "@/utils/blog";
 import "@/layouts/blog/detail/index.less";
-import { wrapWithDisplayTime } from "@/utils/strapi";
+import { getArticleCoverImage, wrapWithDisplayTime } from "@/utils/strapi";
 
 async function getData(slug: string) {
   try {
@@ -37,7 +37,7 @@ const { article, blocks, artitlces } = (await getData(slug!)) || {};
 <Layout
   title={`Orderly Network | ${article?.attributes.title || "404"}`}
   metaDescription={article?.attributes.description! || "Page not found"}
-  image={article?.attributes?.cover?.data?.attributes?.formats?.small?.url}
+  image={getArticleCoverImage(article)}
 >
   <Navigation client:visible />
 
