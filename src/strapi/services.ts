@@ -15,10 +15,14 @@ export async function getArticles(params?: {
 }) {
   const populate: any = {
     cover: {
-      populate: "*",
+      // populate: "*",
+      // 文章的封面只需要 alternativeText 和 formats 字段值即可
+      fields: ["name", "alternativeText", "url", "formats"],
     },
     category: {
-      populate: "*",
+      // populate: "*",
+      // 文章的分类只需要 name 和 slug 字段值即可
+      fields: ["name", "slug"], // description、createdAt、updatedAt、articles
     },
   };
 
