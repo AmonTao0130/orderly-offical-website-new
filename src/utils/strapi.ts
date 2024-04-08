@@ -46,23 +46,44 @@ export function getRangePage(
   return `${start}-${start + curPageTotal - 1}`;
 }
 
+/** 获取文章的显示时间 */
+export function getDisplayTime(article: Article) {
+  const { attributes } = article || {};
+  const { publishedAt, postedTime } = attributes || {};
+  const hardcodePublishedTime = BlogPublishedTime[attributes?.slug];
+  const displayTime = postedTime || hardcodePublishedTime || publishedAt;
+  return new Date(displayTime);
+}
+
+export function wrapWithDisplayTime(article: Article) {
+  if (!article) {
+    return null;
+  }
+
+  const { attributes } = article;
+  return {
+    ...article,
+    attributes: {
+      ...attributes,
+      displayTime: getDisplayTime(article),
+    },
+  };
+}
+
 export function sortByPublishedTime(articles: Article[]) {
   const list = articles.map((article) => {
-    const { attributes } = article;
-    const publishedTime = BlogPublishedTime[attributes?.slug];
+    const { attributes } = article || {};
     return {
       ...article,
       attributes: {
         ...attributes,
-        publishedAt: publishedTime
-          ? new Date(publishedTime)
-          : new Date(attributes?.publishedAt),
+        displayTime: getDisplayTime(article),
       },
     };
   });
 
   list.sort(function (a, b) {
-    return a.attributes?.publishedAt < b.attributes?.publishedAt ? 1 : -1;
+    return a.attributes?.displayTime < b.attributes?.displayTime ? 1 : -1;
   });
 
   return list;

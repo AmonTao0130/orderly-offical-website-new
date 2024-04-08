@@ -26,6 +26,7 @@ export default async function fetchApi<T>({
   const _query = stringify(query, { encodeValuesOnly: true });
 
   const url = `${STRAPI_URL}/api/${endpoint}?${_query}`;
+  // console.log("url", url);
 
   const res = await fetch(url.toString(), {
     headers: { Authorization: `bearer ${API_TOKEN}` },

@@ -10,10 +10,11 @@ import { cn } from "@/utils";
 import { getArticleBySlug, getArticles } from "@/strapi/services";
 import { parseBlocks } from "@/utils/blog";
 import "@/layouts/blog/detail/index.less";
+import { wrapWithDisplayTime } from "@/utils/strapi";
 
 async function getData(slug: string) {
   try {
-    const article = await getArticleBySlug(slug);
+    const article = wrapWithDisplayTime(await getArticleBySlug(slug));
 
     if (!article) {
       return null;

@@ -57,7 +57,7 @@ const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
                 "md:text-xl md:leading-[30px]"
               )}
             >
-              {formatDate(attributes.publishedAt)}
+              {formatDate(attributes.displayTime)}
             </div>
             <div
               className={cn(

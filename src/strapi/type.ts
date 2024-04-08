@@ -7,7 +7,9 @@ export type Article = {
     slug: string;
     createdAt: string;
     updatedAt: string;
-    publishedAt: string | Date;
+    publishedAt: string;
+    postedTime: string;
+    displayTime: Date;
     cover: {
       data: {
         id: string;
