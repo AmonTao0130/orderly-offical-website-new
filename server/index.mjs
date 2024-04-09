@@ -8,13 +8,6 @@ const app = express();
 const base = "/";
 app.use(base, express.static("dist/client/"));
 
-const pathFilter = function (path, req) {
-  if (path === "/") {
-    return true;
-  }
-  return false;
-};
-
 // 添加/docs代理转发到/docs/getting-started/what-is-orderly-network，否则/docs会导致
 app.use(
   "/docs",
@@ -22,7 +15,7 @@ app.use(
     target:
       "https://orderly.mintlify.dev/docs/getting-started/what-is-orderly-network",
     changeOrigin: true,
-    pathFilter: pathFilter,
+    pathFilter: (path, req) => path === "/",
   })
 );
 
