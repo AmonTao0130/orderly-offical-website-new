@@ -10,7 +10,8 @@ import Elixir from "./icons/Elixir.png";
 
 import RageTrade from "./icons/RageTrade.png";
 import WOOFiPro from "./icons/WOOFiPro.png";
-import Unidex from "./icons/Unidex.png";
+import Base from "./icons/Base.png";
+// import Unidex from "./icons/Unidex.png";
 import Logx from "./icons/Logx.png";
 import Empyreal from "./icons/Empyreal.png";
 import Btse from "./icons/Btse.png";
@@ -23,10 +24,11 @@ const icons = [
   { name: "LayerZero", src: LayerZero.src },
   { name: "Near", src: Near.src },
   { name: "Polygon", src: Polygon.src },
-  { name: "Elixir", src: Elixir.src },
+  { name: "Base", src: Base.src },
   { name: "RageTrade", src: RageTrade.src },
   { name: "WOOFiPro", src: WOOFiPro.src },
-  { name: "Unidex", src: Unidex.src },
+  // { name: "Unidex", src: Unidex.src },
+  { name: "Elixir", src: Elixir.src },
   { name: "Logx", src: Logx.src },
   { name: "Empyreal", src: Empyreal.src },
   { name: "Btse", src: Btse.src },
