@@ -3,12 +3,13 @@ import LayerZero from "./imgs/LayerZero.png";
 import NEARProtocol from "./imgs/NEARProtocol.png";
 import Optimism from "./imgs/Optimism.png";
 import Arbitrum from "./imgs/Arbitrum.png";
-import BTSE from "./imgs/BTSE.png";
+import BASE from "./imgs/BASE.png";
 import Elixir from "./imgs/Elixir.png";
 import RageTrade from "./imgs/RageTrade.png";
 import LogX from "./imgs/LogX.png";
 import Empyreal from "./imgs/Empyreal.png";
 import Polygon from "./imgs/Polygon.png";
+import BTSE from "./imgs/BTSE.png";
 import Unidex from "./imgs/Unidex.png";
 import PrimeProtocol from "./imgs/PrimeProtocol.png";
 import SWEAT from "./imgs/SWEAT.png";
@@ -24,6 +25,10 @@ import VOOI from "./imgs/VOOI.png";
 import Sender from "./imgs/Sender.png";
 import Scroll from "./imgs/Scroll.png";
 import Linea from "./imgs/Linea.png";
+import AscendEX from "./imgs/AscendEX.png";
+import EMDX from "./imgs/EMDX.png";
+import Bitoro from "./imgs/Bitoro.png";
+import IBX from "./imgs/IBX.png";
 
 export type TCardData = {
   icon: string;
@@ -75,12 +80,12 @@ export const cardData: TCardData[] = [
     url: "https://arbitrum.io/",
   },
   {
-    icon: BTSE.src,
-    category: "Builder",
-    title: "BTSE",
+    icon: BASE.src,
+    category: "Ecosystem",
+    title: "BASE",
     description:
-      "BTSE is a crypto exchange, offering simple, secure and efficient cryptocurrency trading.",
-    url: "https://dex.btse.com/trade/",
+      "Base is a secure, low-cost, builder-friendly Ethereum L2 built to bring the next billion users onchain.",
+    url: "https://www.base.org/",
   },
   {
     icon: Elixir.src,
@@ -121,6 +126,46 @@ export const cardData: TCardData[] = [
     description:
       "Polygon is the value layer of the internet that allows anyone to create and exchange value, powered by zero-knowledge technology.",
     url: "https://polygon.technology/",
+  },
+  {
+    icon: BTSE.src,
+    category: "Builder",
+    title: "BTSE",
+    description:
+      "BTSE is a crypto exchange, offering simple, secure and efficient cryptocurrency trading.",
+    url: "https://dex.btse.com/trade/",
+  },
+  {
+    icon: AscendEX.src,
+    category: "Builder",
+    title: "AscendEX",
+    description:
+      "AscendEX is a full-stack crypto platform that offers simple solutions for investing, trading, managing, and earning to help users maximize returns on their portfolio.",
+    url: "https://ascendex.com/en/global-digital-asset-platform",
+  },
+  {
+    icon: EMDX.src,
+    category: "Builder",
+    title: "EMDX",
+    description:
+      "EMDX is a decentralized derivatives exchange bringing traditional assets into the web3 environment and enhancing cross-fi liquidity.",
+    url: "https://emdx.io/",
+  },
+  {
+    icon: Bitoro.src,
+    category: "Builder",
+    title: "Bitoro",
+    description:
+      "Bitoro is a perp DEX aggregator delivering the ultimate hub for on-chain",
+    url: "https://bitoro.network/",
+  },
+  {
+    icon: IBX.src,
+    category: "Builder",
+    title: "IBX",
+    description:
+      "IBX is a decentralized exchange that focuses on orderbook-based trading, offering secure crypto trades powered by Orderly.",
+    url: "https://twitter.com/IBXtrade",
   },
   {
     icon: Unidex.src,
