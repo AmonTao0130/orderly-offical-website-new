@@ -20,6 +20,7 @@ export const Hyperlink = {
   },
   Traders: {
     TradingdApps: "https://orderly.network/docs/trade-on-orderly/trading-guis",
+    OderlyExplorer: "https://explorer.orderly.network/",
     APITrading:
       "https://orderly.network/docs/trade-on-orderly/trade-on-orderly",
   },

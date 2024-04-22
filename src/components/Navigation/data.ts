@@ -34,6 +34,13 @@ export default [
         url: Hyperlink.Traders.TradingdApps,
       },
       {
+        title: "Orderly Explorer",
+        url: Hyperlink.Traders.OderlyExplorer,
+        target: "_blank",
+        showArrow: true,
+      },
+
+      {
         title: "API Docs",
         url: Hyperlink.Traders.APITrading,
         target: "_blank",
