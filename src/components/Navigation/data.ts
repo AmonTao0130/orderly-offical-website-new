@@ -42,7 +42,7 @@ export default [
 
       {
         title: "API Docs",
-        url: Hyperlink.Traders.APITrading,
+        url: Hyperlink.Traders.APIDocs,
         target: "_blank",
         showArrow: true,
       },

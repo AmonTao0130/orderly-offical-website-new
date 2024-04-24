@@ -19,10 +19,10 @@ export const Hyperlink = {
     OrderlySDK: "https://sdk.orderly.network/docs/hooks/overview",
   },
   Traders: {
-    TradingdApps: "https://orderly.network/docs/trade-on-orderly/trading-guis",
+    TradingdApps:
+      "https://orderly.network/docs/introduction/trade-on-orderly/trading-guis",
     OderlyExplorer: "https://explorer.orderly.network/",
-    APITrading:
-      "https://orderly.network/docs/trade-on-orderly/trade-on-orderly",
+    APIDocs: "https://orderly.network/docs/build-on-evm/evm-api/introduction",
   },
   Ecosystem: {
     Partners: "/partners",
@@ -46,9 +46,9 @@ export const Hyperlink = {
   },
   Main: {
     BuildWithOrderly:
-      "https://orderly.network/docs/getting-started/what-is-orderly-network",
+      "https://orderly.network/docs/introduction/getting-started/what-is-orderly-network",
     TradeOnOrderly:
-      "https://orderly.network/docs/trade-on-orderly/trading-guis",
+      "https://orderly.network/docs/introduction/trade-on-orderly/trading-guis",
     ExploreDocs: "https://orderly.network/docs/build-on-evm/building-on-evm",
     ViewAuditReports: "https://github.com/OrderlyNetwork/Audits",
     ViewMore: "/partners",
