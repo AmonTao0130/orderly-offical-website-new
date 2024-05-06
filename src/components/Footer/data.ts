@@ -27,8 +27,8 @@ export default [
     title: "Traders",
     children: [
       {
-        title: "Trading dApps",
-        url: Hyperlink.Traders.TradingdApps,
+        title: "Brokers",
+        url: Hyperlink.Traders.Brokers,
       },
       {
         title: "API Docs",
