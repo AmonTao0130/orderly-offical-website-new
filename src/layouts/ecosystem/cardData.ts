@@ -141,7 +141,7 @@ export const cardData: TCardData[] = [
     title: "AscendEX",
     description:
       "AscendEX is a full-stack crypto platform that offers simple solutions for investing, trading, managing, and earning to help users maximize returns on their portfolio.",
-    url: "https://ascendex.com/en/global-digital-asset-platform",
+    url: "https://dex.ascendex.com/",
   },
   {
     icon: EMDX.src,
