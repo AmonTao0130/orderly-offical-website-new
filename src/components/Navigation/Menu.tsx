@@ -44,7 +44,14 @@ const Menu: React.FC<MenuProps> = (props) => {
                         target={child.target}
                         className="flex items-center text-base hover:text-primary-100 px-[20px] my-[24px] first:mt-[20px] last:mb-[20px]"
                       >
-                        {child.title}
+                        {/* {child.title} */}
+                        <div
+                          className={cn(
+                            item.title === "Ecosystem" && "pr-[40px]"
+                          )}
+                        >
+                          {child.title}
+                        </div>
                         {child.isNew && <NewLabel className="ml-[4px]" />}
                         {child.showArrow && (
                           <ArrowRightTopIcon size={14} className="ml-[4px]" />
