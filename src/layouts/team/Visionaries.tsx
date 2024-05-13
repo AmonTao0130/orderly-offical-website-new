@@ -27,12 +27,12 @@ const data = [
     icon: ArjunArora.src,
     twitter: "https://x.com/0x_Arjun",
   },
-  {
-    name: "Audrey Yang",
-    title: "CGO ",
-    icon: AudreyYang.src,
-    twitter: "https://x.com/Audrey_Orderly",
-  },
+  // {
+  //   name: "Audrey Yang",
+  //   title: "CGO ",
+  //   icon: AudreyYang.src,
+  //   twitter: "https://x.com/Audrey_Orderly",
+  // },
 ];
 
 const Visionaries: React.FC<PropsWithClassName> = (props) => {
@@ -52,7 +52,7 @@ const Visionaries: React.FC<PropsWithClassName> = (props) => {
       </TitleBlock>
       <div
         className={cn(
-          "flex flex-wrap justify-between",
+          "flex justify-center flex-wrap gap-x-[16px] md:gap-x-[40px]",
           "md:mt-[85px]",
           /** 1024 */
           "lg:mt-[80px]"
@@ -64,12 +64,13 @@ const Visionaries: React.FC<PropsWithClassName> = (props) => {
               key={item.name}
               className={cn(
                 "group flex flex-wrap flex-col items-center",
-                /** 375 */
-                "w-[calc((100%_-_20px)_/_2)] mt-[32px]",
-                /** 768 */
-                "md:w-[calc((100%_-_48px)_/_4)] md:mt-0",
-                /** 1024 */
-                "lg:w-[calc((100%_-_120px)_/_4)]"
+                "mt-[32px] md:mt-0"
+                // /** 375 */
+                // "w-[calc((100%_-_20px)_/_2)]",
+                // /** 768 */
+                // "md:w-[calc((100%_-_48px)_/_4)]",
+                // /** 1024 */
+                // "lg:w-[calc((100%_-_120px)_/_4)]"
               )}
               href={item.twitter}
               target="_blank"
@@ -77,7 +78,7 @@ const Visionaries: React.FC<PropsWithClassName> = (props) => {
               <img
                 className={cn(
                   /** 375 */
-                  "w-[120px] h-[120px] mt-[9px]",
+                  "w-[100px] h-[100px] mt-[9px]",
                   /** 768 */
                   "md:w-[130px] md:h-[130px]",
                   /** 1024 */
