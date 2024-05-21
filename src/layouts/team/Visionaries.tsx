@@ -11,13 +11,13 @@ import TwitterIcon from "@/icons/TwitterIcon";
 const data = [
   {
     name: "Ran Yi",
-    title: "Co-founder & CEO",
+    title: "Co-founder",
     icon: RanYi.src,
     twitter: "https://x.com/ranyi1115",
   },
   {
     name: "Terence Ng",
-    title: "Co-founder & CTO",
+    title: "Co-founder",
     icon: TerenceNg.src,
     twitter: "https://x.com/TerenceTheNg",
   },
