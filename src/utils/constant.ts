@@ -27,7 +27,7 @@ export const Hyperlink = {
   Ecosystem: {
     Partners: "/partners",
     Blog: "/blog",
-    RadianceVentures: "https://radianceventures.io/",
+    // RadianceVentures: "https://radianceventures.io/",
   },
   About: {
     Team: "/team",
