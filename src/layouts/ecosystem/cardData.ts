@@ -143,7 +143,7 @@ export const cardData: TCardData[] = [
     title: "QuickSwap",
     description:
       "QuickSwap is a next-gen DEX offering lightning-fast trades, near-zero gas fees, and perps with up to 50x leverage.",
-    url: "https://quickswap.exchange/#/",
+    url: "https://quickswap.exchange/#/falkor",
   },
   {
     icon: CoolWallet.src,
