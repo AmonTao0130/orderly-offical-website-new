@@ -29,6 +29,8 @@ import AscendEX from "./imgs/AscendEX.png";
 import EMDX from "./imgs/EMDX.png";
 import Bitoro from "./imgs/Bitoro.png";
 import IBX from "./imgs/IBX.png";
+import QuickSwap from "./imgs/QuickSwap.png";
+import CoolWallet from "./imgs/CoolWallet.png";
 
 export type TCardData = {
   icon: string;
@@ -134,6 +136,22 @@ export const cardData: TCardData[] = [
     description:
       "BTSE is a crypto exchange, offering simple, secure and efficient cryptocurrency trading.",
     url: "https://dex.btse.com/trade/",
+  },
+  {
+    icon: QuickSwap.src,
+    category: "Builder",
+    title: "QuickSwap",
+    description:
+      "QuickSwap is a next-gen DEX offering lightning-fast trades, near-zero gas fees, and perps with up to 50x leverage.",
+    url: "https://quickswap.exchange/#/",
+  },
+  {
+    icon: CoolWallet.src,
+    category: "Builder",
+    title: "CoolWallet",
+    description:
+      "CoolWallet is a self-custodial, multi-chain supported wallet that seamlessly integrates hardware and software with a mobile-first approach.",
+    url: "https://perp.coolwallet.io",
   },
   {
     icon: AscendEX.src,
