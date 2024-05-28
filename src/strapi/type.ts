@@ -43,8 +43,9 @@ export type Block = {
   id: number;
   __component: string;
   body?: string;
-  image?: string;
+  url?: string;
   html?: string;
+  ext?: string;
   caption?: string;
   file?: {
     data: {
@@ -107,6 +108,8 @@ export type ShareMedia = {
     };
   };
   related?: any[];
+  ext: string;
+  mime: string;
 };
 
 export type Pagination = {

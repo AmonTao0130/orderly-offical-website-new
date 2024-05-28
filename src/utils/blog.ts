@@ -31,10 +31,11 @@ export function parseBlocks(blocks: Block[]) {
     }
 
     if (block.__component === "shared.media") {
-      const caption = block.file?.data?.attributes?.caption!;
+      const { caption, url, ext } = block.file?.data?.attributes || {};
       return {
         ...block,
-        image: block.file?.data?.attributes?.url,
+        url,
+        ext,
         caption: marked.parse(caption || "", { renderer }),
       };
     }

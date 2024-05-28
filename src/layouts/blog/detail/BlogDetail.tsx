@@ -13,14 +13,20 @@ const BlogDetail: React.FC<BlogDetailProps> = (props) => {
   const blocks = parseBlocks(props.article.attributes?.blocks);
 
   const blocksHtml = blocks?.map((block) => {
-    if (block.image) {
+    if (block.url) {
       return (
         <div className="my-[48px]" key={block?.id}>
-          <img
-            className="mx-auto"
-            alt={block.file?.data?.attributes?.alternativeText}
-            src={block.image}
-          />
+          {[".mp4"].includes(block.ext!) ? (
+            <video className="w-full h-[500px]" controls>
+              <source src={block.url} type="video/mp4" />
+            </video>
+          ) : (
+            <img
+              className="mx-auto"
+              alt={block.file?.data?.attributes?.alternativeText}
+              src={block.url}
+            />
+          )}
           <div
             className="text-center text-xs text-primary-54 mt-[12px]"
             dangerouslySetInnerHTML={{ __html: block.caption! }}
