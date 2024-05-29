@@ -17,7 +17,13 @@ const BlogDetail: React.FC<BlogDetailProps> = (props) => {
       return (
         <div className="my-[48px]" key={block?.id}>
           {[".mp4"].includes(block.ext!) ? (
-            <video className="w-full h-[500px]" controls>
+            <video
+              className={cn(
+                "w-full min-h-[300px]",
+                "border border-[rgba(255,255,255,0.12)] rounded-[8px]"
+              )}
+              controls
+            >
               <source src={block.url} type="video/mp4" />
             </video>
           ) : (
