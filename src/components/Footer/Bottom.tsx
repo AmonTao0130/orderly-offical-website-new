@@ -6,11 +6,17 @@ import LinkedinIcon from "@/icons/LinkedinIcon";
 import { cn } from "@/utils/index";
 import type { PropsWithClassName } from "@/types";
 import { Hyperlink } from "@/utils/constant";
+import TelegramIcon from "@/icons/TelegramIcon";
 
 const icons = [
   {
     icon: DiscordIcon,
     url: Hyperlink.Community.Discord,
+  },
+  {
+    icon: TelegramIcon,
+    url: Hyperlink.Community.Telegram,
+    target: "_blank",
   },
   {
     icon: TwitterIcon,
@@ -42,6 +48,7 @@ const Bottom: React.FC<PropsWithClassName> = (props) => {
             <a
               className="text-primary-54 hover:text-primary-100 pl-[16px]"
               href={icon.url}
+              target={icon.target}
               key={icon.url}
             >
               <Icon />
