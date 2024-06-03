@@ -96,7 +96,7 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
           <NumberLabel label="Total trading volume" number={`$${volume}`} />
           <NumberLabel
             label="Traders"
-            number="200K+"
+            number="400K+"
             className={cn(
               /** 375 */
               "ml-[43px]",

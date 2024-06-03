@@ -2,10 +2,11 @@ import React from "react";
 import type { PropsWithClassName } from "@/types";
 import { cn } from "@/utils";
 import { useVolume } from "../hooks/useVolume";
+import { cardData } from "./cardData";
 
 interface StatisticsItemProps {
   label: string;
-  value: string;
+  value: string | number;
   border?: boolean;
 }
 
@@ -86,8 +87,8 @@ const Statistics: React.FC<PropsWithClassName> = (props) => {
           value={`$${volume}`}
           border
         />
-        <StatisticsItem label="Traders" value="200K+" border />
-        <StatisticsItem label="Ecosystem partners" value="26" />
+        <StatisticsItem label="Traders" value="400K+" border />
+        <StatisticsItem label="Ecosystem partners" value={cardData.length} />
       </div>
     </div>
   );
