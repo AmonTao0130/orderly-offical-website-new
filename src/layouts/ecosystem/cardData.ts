@@ -31,6 +31,8 @@ import Bitoro from "./imgs/Bitoro.png";
 import IBX from "./imgs/IBX.png";
 import QuickSwap from "./imgs/QuickSwap.png";
 import CoolWallet from "./imgs/CoolWallet.png";
+import FusionX from "./imgs/FusionX.png";
+import Xade from "./imgs/Xade.png";
 
 export type TCardData = {
   icon: string;
@@ -152,6 +154,21 @@ export const cardData: TCardData[] = [
     description:
       "CoolWallet is a self-custodial, multi-chain supported wallet that seamlessly integrates hardware and software with a mobile-first approach.",
     url: "https://perp.coolwallet.io",
+  },
+  {
+    icon: FusionX.src,
+    category: "Builder",
+    title: "FusionX",
+    description: "FuxionX is the one-stop DeFi ecosystem on Mantle Network.",
+    url: "https://pro.fusionx.finance/perp/PERP_BTC_USDC",
+  },
+  {
+    icon: Xade.src,
+    category: "Builder",
+    title: "Xade",
+    description:
+      "Xade is the ultimate trading app with over 100k+ spot and futures markets, including stocks, crypto, commodities, and forex.",
+    url: "https://trade.xade.finance",
   },
   {
     icon: AscendEX.src,
