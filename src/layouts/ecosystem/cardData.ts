@@ -216,7 +216,7 @@ export const cardData: TCardData[] = [
     title: "Prime Protocol",
     description:
       "Prime Protocol is a one-stop shop where investors can deposit all their digital assets across chains into a single protocol and receive credit anywhere.",
-    url: "https://app.primeprotocol.xyz/",
+    url: "https://app.primeprotocol.xyz/trading/PERP_ETH_USDC",
   },
   {
     icon: SWEAT.src,
