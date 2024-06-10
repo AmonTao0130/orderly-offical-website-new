@@ -190,8 +190,7 @@ export const cardData: TCardData[] = [
     icon: Bitoro.src,
     category: "Builder",
     title: "Bitoro",
-    description:
-      "Bitoro is a perp DEX aggregator delivering the ultimate hub for on-chain",
+    description: "The Ultimate Hub for On-Chain Perpetual Futures Trading.",
     url: "https://bitoro.network/",
   },
   {
