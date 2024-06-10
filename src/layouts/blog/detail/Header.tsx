@@ -17,8 +17,6 @@ const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
 
   const { attributes } = props.article || {};
 
-  console.log("attributes.Author", attributes.author);
-
   return (
     <div
       style={{
