@@ -28,11 +28,13 @@ export type Article = {
         };
       };
     };
-    Author: {
-      id: number;
-      attributes: {
-        name: string;
-        email: string;
+    author: {
+      data: {
+        id: number;
+        attributes: {
+          name: string;
+          email: string;
+        };
       };
     };
     blocks: Block[];

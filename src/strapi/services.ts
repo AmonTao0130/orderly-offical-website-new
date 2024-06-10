@@ -19,6 +19,9 @@ const commonArticlePopulate = {
     // 文章的分类只需要 name 和 slug 字段值即可
     fields: ["name", "slug"], // description、createdAt、updatedAt、articles
   },
+  author: {
+    populate: "*",
+  },
   //   blocks: {
   //     populate: "*",
   //   },

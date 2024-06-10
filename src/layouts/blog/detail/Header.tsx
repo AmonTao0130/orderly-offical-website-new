@@ -17,6 +17,8 @@ const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
 
   const { attributes } = props.article || {};
 
+  console.log("attributes.Author", attributes.author);
+
   return (
     <div
       style={{
@@ -92,7 +94,7 @@ const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
               "md:text-xl leading-[30px]"
             )}
           >
-            by Orderly Network
+            by {attributes.author?.data?.attributes?.name || "Orderly Network"}
           </div>
         </div>
 
