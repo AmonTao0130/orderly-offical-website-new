@@ -14,10 +14,15 @@ const banners = [
     url: "https://galxe.com/orderlynetwork/campaign/GCcdEt4UAm",
     moreText: "GET STARTED",
   },
+  // {
+  //   title: "Check token eligibility for Orderly Network early supporters",
+  //   url: "https://app.orderly.network/first-riders",
+  //   moreText: "LEARN MORE",
+  // },
   {
-    title: "Check token eligibility for Orderly Network early supporters",
-    url: "https://app.orderly.network/first-riders",
-    moreText: "LEARN MORE",
+    title: "Check your ORDER allocation",
+    url: "https://airdrop.orderly.network",
+    moreText: "CHECK NOW",
   },
   {
     title: "Earn Orderly Merits to boost your share of the airdrop!",
