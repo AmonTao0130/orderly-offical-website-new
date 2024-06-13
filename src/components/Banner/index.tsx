@@ -20,7 +20,7 @@ const banners = [
   //   moreText: "LEARN MORE",
   // },
   {
-    title: "Check your ORDER allocation",
+    title: "Check your $ORDER allocation",
     url: "https://airdrop.orderly.network",
     moreText: "CHECK NOW",
   },
