@@ -41,8 +41,9 @@ export const Hyperlink = {
     Referral: "https://referral.orderly.network",
   },
   Legal: {
-    PrivacyPolicy: "https://orderly.network/docs/privacy-policy",
-    TermsOfService: "https://orderly.network/docs/terms-of-service",
+    PrivacyPolicy: "https://orderly.network/docs/introduction/privacy-policy",
+    TermsOfService:
+      "https://orderly.network/docs/introduction/terms-of-service",
   },
   Main: {
     BuildWithOrderly:
