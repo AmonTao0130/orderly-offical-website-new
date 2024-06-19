@@ -31,6 +31,11 @@ export default [
         url: Hyperlink.Traders.Builders,
       },
       {
+        title: "Orderly Explorer",
+        url: Hyperlink.Traders.OderlyExplorer,
+        target: "_blank",
+      },
+      {
         title: "API Docs",
         url: Hyperlink.Traders.APIDocs,
         target: "_blank",
