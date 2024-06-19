@@ -30,8 +30,8 @@ export default [
     title: "Traders",
     children: [
       {
-        title: "Brokers",
-        url: Hyperlink.Traders.Brokers,
+        title: "Trade on Builders",
+        url: Hyperlink.Traders.Builders,
       },
       {
         title: "Orderly Explorer",

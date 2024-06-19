@@ -19,7 +19,7 @@ export const Hyperlink = {
     OrderlySDK: "https://sdk.orderly.network/docs/hooks/overview",
   },
   Traders: {
-    Brokers:
+    Builders:
       "https://orderly.network/docs/introduction/trade-on-orderly/brokers",
     OderlyExplorer: "https://explorer.orderly.network/",
     APIDocs: "https://orderly.network/docs/build-on-evm/evm-api/introduction",
