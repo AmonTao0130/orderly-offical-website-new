@@ -17,7 +17,7 @@ import { Hyperlink } from "@/utils/constant";
 
 const data = [
   {
-    title: "Brokers",
+    title: "DEX Builders",
     content:
       "Create your own Spot or Perps DEX effortlessly on NEAR, and Perps DEX on EVM. Benefit from our professional trading infrastructure and deep liquidity.",
     img: Brokers.src,
