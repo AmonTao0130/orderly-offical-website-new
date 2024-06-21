@@ -29,6 +29,10 @@ import AscendEX from "./imgs/AscendEX.png";
 import EMDX from "./imgs/EMDX.png";
 import Bitoro from "./imgs/Bitoro.png";
 import IBX from "./imgs/IBX.png";
+import Dfyn from "./imgs/Dfyn.png";
+import SharpeAI from "./imgs/SharpeAI.png";
+import Alertatron from "./imgs/Alertatron.png";
+import Unibot from "./imgs/Unibot.png";
 import QuickSwap from "./imgs/QuickSwap.png";
 import CoolWallet from "./imgs/CoolWallet.png";
 import FusionX from "./imgs/FusionX.png";
@@ -200,6 +204,38 @@ export const cardData: TCardData[] = [
     description:
       "IBX is a decentralized exchange that focuses on orderbook-based trading, offering secure crypto trades powered by Orderly.",
     url: "https://twitter.com/IBXtrade",
+  },
+  {
+    icon: Dfyn.src,
+    category: "Builder",
+    title: "Dfyn",
+    description:
+      "Dfyn is the world's first on-chain limit order DEX combining RFQ matching with a concentrated liquidity AMM.",
+    url: "https://exchange.dfyn.network/perp",
+  },
+  {
+    icon: SharpeAI.src,
+    category: "Builder",
+    title: "SharpeAI",
+    description:
+      "SharpeAI is an AI-powered crypto super-app designed for professional traders, offering a unified platform for intelligence, investing, and automating digital assets.",
+    url: "https://trade.sharpe.ai/",
+  },
+  {
+    icon: Alertatron.src,
+    category: "Builder",
+    title: "Alertatron",
+    description:
+      "Alertatron is an automated algorithmic trading platform designed for digital asset markets and utilizes user trading strategies.",
+    url: "https://alertatron.com/",
+  },
+  {
+    icon: Unibot.src,
+    category: "Builder",
+    title: "Unibot",
+    description:
+      "Unibot is the fastest on-chain trading terminal and telegram DEX trading bot.",
+    url: "https://perps.unibot.app/",
   },
   {
     icon: Unidex.src,
