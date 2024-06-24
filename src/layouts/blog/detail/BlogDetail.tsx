@@ -4,10 +4,26 @@ import DetailFooter from "@/layouts/blog/detail/Footer";
 import { cn } from "@/utils";
 import type { Article } from "@/strapi/type";
 import { parseBlocks } from "@/utils/blog";
+import QuoteLeft from "../imgs/quote_left.png";
+import QuoteRight from "../imgs/quote_right.png";
 
 interface BlogDetailProps {
   article: Article;
 }
+
+const Video: React.FC<{ url: string }> = (props) => {
+  return (
+    <video
+      className={cn(
+        "w-full min-h-[300px]",
+        "border border-[rgba(255,255,255,0.12)] rounded-[8px]"
+      )}
+      controls
+    >
+      <source src={props.url} type="video/mp4" />
+    </video>
+  );
+};
 
 const BlogDetail: React.FC<BlogDetailProps> = (props) => {
   const blocks = parseBlocks(props.article.attributes?.blocks);
@@ -17,15 +33,7 @@ const BlogDetail: React.FC<BlogDetailProps> = (props) => {
       return (
         <div className="my-[48px]" key={block?.id}>
           {[".mp4"].includes(block.ext!) ? (
-            <video
-              className={cn(
-                "w-full min-h-[300px]",
-                "border border-[rgba(255,255,255,0.12)] rounded-[8px]"
-              )}
-              controls
-            >
-              <source src={block.url} type="video/mp4" />
-            </video>
+            <Video url={block.url} />
           ) : (
             <img
               className="mx-auto"
@@ -40,13 +48,38 @@ const BlogDetail: React.FC<BlogDetailProps> = (props) => {
         </div>
       );
     }
-    return (
-      <div
-        key={block?.id}
-        className="mt-[30px]"
-        dangerouslySetInnerHTML={{ __html: block.html! }}
-      />
-    );
+
+    if (block.html) {
+      return (
+        <div
+          key={block?.id}
+          className="mt-[30px]"
+          dangerouslySetInnerHTML={{ __html: block.html! }}
+        />
+      );
+    }
+
+    if (block.__component == "shared.quote") {
+      return (
+        <div key={block?.id} className=" relative text-center px-[80px]">
+          <img
+            className={cn("absolute top-0 left-[20px]", "w-[40px] h-[40px]")}
+            src={QuoteLeft.src}
+          />
+          <img
+            className={cn("absolute top-0 right-[20px]", "w-[40px] h-[40px]")}
+            src={QuoteRight.src}
+          />
+          <div className="text-xl leading-[36px] text-primary-100">
+            {block.body}
+          </div>
+          <div className="text-base leading-[28.8px] text-primary-50 mt-[10px]">
+            – {block.title}
+          </div>
+        </div>
+      );
+    }
+    return null;
   });
 
   return (
@@ -62,7 +95,7 @@ const BlogDetail: React.FC<BlogDetailProps> = (props) => {
           "lg:w-[904px] lg:text-xl lg:leading-[36px] lg:mt-[80px]"
         )}
       >
-        <div id="blogDetail">{blocksHtml}</div>
+        <div id="blogDetail">{blocksHtml.filter((item) => !!item)}</div>
         <DetailFooter />
       </div>
     </Content>

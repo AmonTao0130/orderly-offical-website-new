@@ -44,6 +44,7 @@ export type Article = {
 export type Block = {
   id: number;
   __component: string;
+  title?: string;
   body?: string;
   url?: string;
   html?: string;
