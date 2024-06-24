@@ -31,6 +31,7 @@ import Bitoro from "./imgs/Bitoro.png";
 import IBX from "./imgs/IBX.png";
 import Dfyn from "./imgs/Dfyn.png";
 import SharpeAI from "./imgs/SharpeAI.png";
+import SableFinance from "./imgs/SableFinance.png";
 import Alertatron from "./imgs/Alertatron.png";
 import Unibot from "./imgs/Unibot.png";
 import QuickSwap from "./imgs/QuickSwap.png";
@@ -220,6 +221,14 @@ export const cardData: TCardData[] = [
     description:
       "SharpeAI is an AI-powered crypto super-app designed for professional traders, offering a unified platform for intelligence, investing, and automating digital assets.",
     url: "https://trade.sharpe.ai/",
+  },
+  {
+    icon: SableFinance.src,
+    category: "Builder",
+    title: "Sable Finance",
+    description:
+      "Sable Finance is a pioneering decentralized multichain stablecoin protocol backed by liquid staking derivatives (LSD).",
+    url: "https://trade.sable.finance/",
   },
   {
     icon: Alertatron.src,
