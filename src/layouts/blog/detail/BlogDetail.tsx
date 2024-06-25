@@ -2,7 +2,7 @@ import React from "react";
 import Content from "@/components/Content";
 import DetailFooter from "@/layouts/blog/detail/Footer";
 import { cn } from "@/utils";
-import type { Article } from "@/strapi/type";
+import type { Article, Block } from "@/strapi/type";
 import { parseBlocks } from "@/utils/blog";
 import QuoteLeft from "../imgs/quote_left.png";
 import QuoteRight from "../imgs/quote_right.png";
@@ -22,6 +22,27 @@ const Video: React.FC<{ url: string }> = (props) => {
     >
       <source src={props.url} type="video/mp4" />
     </video>
+  );
+};
+
+const Quote: React.FC<{ title?: string; body?: string }> = (props) => {
+  return (
+    <div className=" relative text-center px-[80px]">
+      <img
+        className={cn("absolute top-0 left-[20px]", "w-[40px] h-[40px]")}
+        src={QuoteLeft.src}
+      />
+      <img
+        className={cn("absolute top-0 right-[20px]", "w-[40px] h-[40px]")}
+        src={QuoteRight.src}
+      />
+      <div className="text-xl leading-[36px] text-primary-100 italic font-extralight">
+        {props.body}
+      </div>
+      <div className="text-base leading-[28.8px] text-primary-50 mt-[10px]">
+        – {props.title}
+      </div>
+    </div>
   );
 };
 
@@ -60,24 +81,7 @@ const BlogDetail: React.FC<BlogDetailProps> = (props) => {
     }
 
     if (block.__component == "shared.quote") {
-      return (
-        <div key={block?.id} className=" relative text-center px-[80px]">
-          <img
-            className={cn("absolute top-0 left-[20px]", "w-[40px] h-[40px]")}
-            src={QuoteLeft.src}
-          />
-          <img
-            className={cn("absolute top-0 right-[20px]", "w-[40px] h-[40px]")}
-            src={QuoteRight.src}
-          />
-          <div className="text-xl leading-[36px] text-primary-100">
-            {block.body}
-          </div>
-          <div className="text-base leading-[28.8px] text-primary-50 mt-[10px]">
-            – {block.title}
-          </div>
-        </div>
-      );
+      return <Quote key={block?.id} title={block.title} body={block.body} />;
     }
     return null;
   });
