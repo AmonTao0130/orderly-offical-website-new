@@ -32,6 +32,7 @@ import IBX from "./imgs/IBX.png";
 import Dfyn from "./imgs/Dfyn.png";
 import SharpeAI from "./imgs/SharpeAI.png";
 import SableFinance from "./imgs/SableFinance.png";
+import OXMarkets from "./imgs/OXMarkets.png";
 import Alertatron from "./imgs/Alertatron.png";
 import Unibot from "./imgs/Unibot.png";
 import QuickSwap from "./imgs/QuickSwap.png";
@@ -229,6 +230,14 @@ export const cardData: TCardData[] = [
     description:
       "Sable Finance is a pioneering decentralized multichain stablecoin protocol backed by liquid staking derivatives (LSD).",
     url: "https://trade.sable.finance/",
+  },
+  {
+    icon: OXMarkets.src,
+    category: "Builder",
+    title: "OX.Markets",
+    description:
+      "Ox.Markets is a perpetual futures trading platform with the execution of a CEX and self-custody of a DEX.",
+    url: "https://ox.markets/perp/PERP_ETH_USDC",
   },
   {
     icon: Alertatron.src,
