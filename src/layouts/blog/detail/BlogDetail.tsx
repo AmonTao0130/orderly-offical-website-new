@@ -27,19 +27,35 @@ const Video: React.FC<{ url: string }> = (props) => {
 
 const Quote: React.FC<{ title?: string; body?: string }> = (props) => {
   return (
-    <div className=" relative text-center px-[80px]">
+    <div className=" relative text-center px-[36px] md:px-[80px]">
       <img
-        className={cn("absolute top-0 left-[20px]", "w-[40px] h-[40px]")}
+        className={cn(
+          "absolute top-0 left-[8px] md:left-[20px]",
+          "w-[20px] h-[20px] md:w-[40px] md:h-[40px]"
+        )}
         src={QuoteLeft.src}
       />
       <img
-        className={cn("absolute top-0 right-[20px]", "w-[40px] h-[40px]")}
+        className={cn(
+          "absolute top-0 right-[8px] md:right-[20px]",
+          "w-[20px] h-[20px] md:w-[40px] md:h-[40px]"
+        )}
         src={QuoteRight.src}
       />
-      <div className="text-xl leading-[36px] text-primary-100 italic font-extralight">
+      <div
+        className={cn(
+          "text-sm leading-[21px] md:text-xl md:leading-[36px]",
+          "text-primary-100 italic font-extralight"
+        )}
+      >
         {props.body}
       </div>
-      <div className="text-base leading-[28.8px] text-primary-50 mt-[10px]">
+      <div
+        className={cn(
+          "text-xs leading-[21.6px] md:text-base md:leading-[28.8px]",
+          "text-primary-50 mt-[10px]"
+        )}
+      >
         – {props.title}
       </div>
     </div>
