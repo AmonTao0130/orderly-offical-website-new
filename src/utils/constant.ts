@@ -20,7 +20,7 @@ export const Hyperlink = {
   },
   Traders: {
     Builders:
-      "https://orderly.network/docs/introduction/trade-on-orderly/brokers",
+      "https://orderly.network/docs/introduction/trade-on-orderly/builders",
     OderlyExplorer: "https://explorer.orderly.network/",
     APIDocs: "https://orderly.network/docs/build-on-evm/evm-api/introduction",
   },
@@ -49,7 +49,7 @@ export const Hyperlink = {
     BuildWithOrderly:
       "https://orderly.network/docs/introduction/getting-started/what-is-orderly-network",
     TradeOnOrderly:
-      "https://orderly.network/docs/introduction/trade-on-orderly/brokers",
+      "https://orderly.network/docs/introduction/trade-on-orderly/builders",
     ExploreDocs: "https://orderly.network/docs/build-on-evm/building-on-evm",
     ViewAuditReports: "https://github.com/OrderlyNetwork/Audits",
     ViewMore: "/partners",
