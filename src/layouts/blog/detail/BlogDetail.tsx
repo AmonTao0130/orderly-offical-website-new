@@ -27,7 +27,7 @@ const Video: React.FC<{ url: string }> = (props) => {
 
 const Quote: React.FC<{ title?: string; body?: string }> = (props) => {
   return (
-    <div className=" relative text-center px-[36px] md:px-[80px]">
+    <div className="share-quote relative text-center px-[36px] md:px-[80px]">
       <img
         className={cn(
           "absolute top-0 left-[8px] md:left-[20px]",
@@ -42,21 +42,23 @@ const Quote: React.FC<{ title?: string; body?: string }> = (props) => {
         )}
         src={QuoteRight.src}
       />
+
       <div
         className={cn(
           "text-sm leading-[21px] md:text-xl md:leading-[36px]",
           "text-primary-100 italic font-extralight"
         )}
-      >
-        {props.body}
-      </div>
+        dangerouslySetInnerHTML={{ __html: props.body! }}
+      />
       <div
         className={cn(
+          "flex justify-center items-center",
           "text-xs leading-[21.6px] md:text-base md:leading-[28.8px]",
           "text-primary-50 mt-[10px]"
         )}
       >
-        – {props.title}
+        <div className="mr-[4px]">-</div>
+        <div dangerouslySetInnerHTML={{ __html: props.title! }} />
       </div>
     </div>
   );
@@ -97,6 +99,7 @@ const BlogDetail: React.FC<BlogDetailProps> = (props) => {
     }
 
     if (block.__component == "shared.quote") {
+      console.log("quote", block);
       return <Quote key={block?.id} title={block.title} body={block.body} />;
     }
     return null;

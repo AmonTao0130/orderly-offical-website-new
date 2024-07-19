@@ -39,6 +39,18 @@ export function parseBlocks(blocks: Block[]) {
         caption: marked.parse(caption || "", { renderer }),
       };
     }
+
+    if (block.__component === "shared.quote") {
+      const { title, body } = block || {};
+      return {
+        ...block,
+        title: marked.parse(title || "", {
+          renderer,
+        }) as string,
+        body: marked.parse(body || "", { renderer }) as string,
+      };
+    }
+
     return block;
   });
 }
