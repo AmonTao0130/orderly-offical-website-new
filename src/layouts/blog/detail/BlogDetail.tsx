@@ -99,7 +99,6 @@ const BlogDetail: React.FC<BlogDetailProps> = (props) => {
     }
 
     if (block.__component == "shared.quote") {
-      console.log("quote", block);
       return <Quote key={block?.id} title={block.title} body={block.body} />;
     }
     return null;
