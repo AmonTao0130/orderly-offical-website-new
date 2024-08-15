@@ -1,4 +1,4 @@
-import WOOFiPro from "./imgs/WOOFiPro.png";
+import WOOFiPro from "./imgs/WOOFi.png";
 import LayerZero from "./imgs/LayerZero.png";
 import NEARProtocol from "./imgs/NEARProtocol.png";
 import Optimism from "./imgs/Optimism.png";
@@ -53,8 +53,7 @@ export const cardData: TCardData[] = [
     icon: WOOFiPro.src,
     category: "Builder",
     title: "WOOFi Pro",
-    description:
-      "One DEX to rule all chains. Trade and earn like royalty with unmatched execution, cross-chain swaps, and single-sided yields.",
+    description: "All the tools you need, in one place.",
     url: "https://dex.woo.org/",
   },
   {
