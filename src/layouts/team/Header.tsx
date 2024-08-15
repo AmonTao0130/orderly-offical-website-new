@@ -59,7 +59,7 @@ const Header: React.FC<PropsWithClassName> = (props) => {
             /** 375 */
             "w-[310px] text-[32px] leading-[38.4px] font-title font-bold mt-[8px]",
             /** 768 */
-            "md:w-[546px] md:text-4xl leading-[48px] md:mt-[12px]",
+            "md:w-[546px] md:text-4xl md:leading-[48px] md:mt-[12px]",
             /** 1024 */
             "lg:w-[860px] lg:text-[48px] lg:leading-[57.6px] lg:mt-[8px]",
             /** 1440 */
