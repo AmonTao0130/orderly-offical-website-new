@@ -23,9 +23,11 @@ const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
         ? props.data
         : props.data.filter(
             (article) =>
-              article.attributes.category.data.attributes.slug === expandKey
+              article?.attributes?.category?.data?.attributes?.slug ===
+              expandKey
           );
     setArticles(filteredArticles);
+    setPageIndex(1);
   }, [props.data, expandKey]);
 
   const { pageIndexData, pagination } = useMemo(() => {
