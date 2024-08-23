@@ -9,11 +9,11 @@ import { cn } from "@/utils";
 interface BannerProps {}
 
 const banners = [
-  {
-    title: "Earn Underwater NFTs on Orderly & WOOFi campaign!",
-    url: "https://galxe.com/orderlynetwork/campaign/GCcdEt4UAm",
-    moreText: "GET STARTED",
-  },
+  // {
+  //   title: "Earn Underwater NFTs on Orderly & WOOFi campaign!",
+  //   url: "https://galxe.com/orderlynetwork/campaign/GCcdEt4UAm",
+  //   moreText: "GET STARTED",
+  // },
   // {
   //   title: "Check token eligibility for Orderly Network early supporters",
   //   url: "https://app.orderly.network/first-riders",
@@ -24,16 +24,21 @@ const banners = [
     url: "https://airdrop.orderly.network",
     moreText: "CHECK NOW",
   },
-  {
-    title: "Earn Orderly Merits to boost your share of the airdrop!",
-    url: "https://app.orderly.network/",
-    moreText: "LEARN MORE",
-  },
+  // {
+  //   title: "Earn Orderly Merits to boost your share of the airdrop!",
+  //   url: "https://app.orderly.network/",
+  //   moreText: "LEARN MORE",
+  // },
   // {
   //   title: "Earn 100k $LOGX and NFTs on Orderly & LogX campaign!",
   //   url: "https://galxe.com/orderlynetwork/campaign/GCYnAt4USf",
   //   moreText: "GET STARTED",
   // },
+  {
+    title: "Unlock 50K $ZRO giveaway on Orderly & LayerZero campaign!",
+    url: "https://app.galxe.com/quest/orderlynetwork/GC9jhtxnna",
+    moreText: "GET STARTED",
+  },
 ];
 
 const Banner: React.FC<BannerProps> = (props) => {
@@ -64,25 +69,24 @@ const Banner: React.FC<BannerProps> = (props) => {
     >
       <div className="flex flex-col justify-center items-center w-full">
         {banners.map((item, index) => {
-          const idx = index + 1;
           return (
             <div
               key={item.title}
               className={cn(
                 "flex items-center flex-wrap md:justify-center",
+                "transition-all",
                 isAnimate &&
-                  cn(
-                    "opacity-0",
-                    idx !== 1 && "absolute left-[24px] right-[24px]",
-                    idx === 1 && "animate-banner1",
-                    idx === 2 && "animate-banner2",
-                    idx === 3 && "animate-banner3"
-                  )
-                // cn(
-                //   index !== 0 &&
-                //     "absolute left-[24px] right-[24px] translate-y-[100%]",
-                //   bannerIndex === index && "animate-bannerInOut"
-                // )
+                  (index === 0
+                    ? "animate-bannerOut opacity-0"
+                    : "animate-bannerIn opacity-0 absolute left-[24px] right-[24px]")
+                // isAnimate &&
+                //   cn(
+                //     "opacity-0",
+                //     idx !== 1 && "absolute left-[24px] right-[24px]",
+                //     idx === 1 && "animate-banner1",
+                //     idx === 2 && "animate-banner2",
+                //     idx === 3 && "animate-banner3"
+                //   ),
               )}
             >
               {/* TODO: 第二行文字左对齐 */}
