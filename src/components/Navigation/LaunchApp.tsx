@@ -14,8 +14,8 @@ const LaunchApp: React.FC<PropsWithClassName> = (props) => {
       )}
       onClick={() => {
         const url = isDev(window.location.hostname)
-          ? "https://dev-app.orderly.network/"
-          : "https://app.orderly.network/";
+          ? "https://dev-app.orderly.network/staking"
+          : "https://app.orderly.network/staking";
         window.open(url, "_self");
       }}
     >
