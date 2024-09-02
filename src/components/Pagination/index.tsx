@@ -2,10 +2,8 @@ import React from "react";
 import type { PropsWithClassName } from "@/types";
 import SmallPagination from "./Pagination.sm";
 import MiddlePagination from "./Pagination.md";
-import { cn } from "@/utils";
 
 export interface PaginationProps {
-  pageData: number;
   pageSize: number;
   /** 当前页码的范围 */
   rangePage: string;

@@ -2,69 +2,91 @@ import React, { useEffect, useMemo, useState } from "react";
 import type { PropsWithClassName } from "@/types";
 import BlogItem from "./BlogItem";
 import { cn } from "@/utils";
-import { type Article } from "@/strapi/type";
+import {
+  type Article,
+  type PublicationState,
+  type TPagination,
+} from "@/strapi/type";
+import Pagination from "../../components/Pagination";
+import { getRangePage } from "@/utils/strapi";
+import useSWR from "swr";
 import { useStore } from "@nanostores/react";
 import { blogExpandKey } from "@/store";
-import Pagination, { type PaginationProps } from "../../components/Pagination";
-import { getPageData, getRangePage } from "@/utils/strapi";
 
 interface BlogListProps {
-  data: Article[];
+  publicationState: PublicationState;
 }
 
+const fetcher: any = (resource: any, init: any) =>
+  fetch(resource, init).then((res) => res.json());
+
 const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
-  const [articles, setArticles] = useState<Article[]>(props.data);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [pagination, setPagination] = useState({} as TPagination);
+
   const [pageIndex, setPageIndex] = useState(1);
   const expandKey = useStore(blogExpandKey) || "All";
+  const category = expandKey === "All" ? "" : expandKey;
+
+  const { data, isLoading } = useSWR(
+    `/api/articles?page=${pageIndex}&category=${category}&publicationState=${props.publicationState}`,
+    fetcher
+  );
 
   useEffect(() => {
-    const filteredArticles =
-      expandKey === "All"
-        ? props.data
-        : props.data.filter(
-            (article) =>
-              article?.attributes?.category?.data?.attributes?.slug ===
-              expandKey
-          );
-    setArticles(filteredArticles);
+    if (!data) {
+      return;
+    }
+    setArticles(data.data);
+    setPagination(data.meta?.pagination);
+  }, [data]);
+
+  useEffect(() => {
     setPageIndex(1);
-  }, [props.data, expandKey]);
+  }, [expandKey]);
 
-  const { pageIndexData, pagination } = useMemo(() => {
-    const pageSize = 6;
-    const pageData = getPageData(articles, pageSize, pageIndex);
-    const pageCount = pageData.length;
-    const pageIndexData = pageData[pageIndex - 1];
+  const { page, pageSize, pageCount, total } = pagination || {};
+
+  const pageParams = useMemo(() => {
     return {
-      pageIndexData,
-      pagination: {
-        pageIndex,
-        pageSize,
-        rangePage: getRangePage(pageIndexData?.length, pageSize, pageIndex),
-        pageCount,
-        total: articles.length,
-        hasPrevious: pageIndex > 1,
-        hasNext: pageIndex < pageCount,
-        onPrevious: () => {
-          setPageIndex(pageIndex - 1);
-        },
-        onNext: () => {
-          setPageIndex(pageIndex + 1);
-        },
-      } as PaginationProps,
+      rangePage: getRangePage(articles?.length, pageSize, page),
+      hasPrevious: page > 1,
+      hasNext: page < pageCount,
+      onPrevious: () => {
+        setPageIndex(pageIndex - 1);
+      },
+      onNext: () => {
+        setPageIndex(pageIndex + 1);
+      },
     };
-  }, [articles, pageIndex]);
+  }, [articles, page, pageSize, pageCount]);
 
+  if (isLoading) {
+    return (
+      <div className="flex justify-center my-[100px]">
+        <img
+          src="/pageloading.gif"
+          className="w-[80px] h-[80px] md:w-[120px] md:h-[120px]"
+        />
+      </div>
+    );
+  }
   return (
-    <div>
+    <>
       <div className={cn("flex flex-wrap mx-[-10px]", props.className)}>
-        {pageIndexData?.map((item, index) => {
+        {articles?.map((item) => {
           return <BlogItem key={item.id} article={item} />;
         })}
       </div>
 
-      <Pagination {...pagination} />
-    </div>
+      <Pagination
+        pageIndex={page}
+        pageSize={pageSize}
+        pageCount={pageCount}
+        total={total}
+        {...pageParams}
+      />
+    </>
   );
 };
 

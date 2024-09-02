@@ -10,8 +10,9 @@ import Footer from "@/components/Footer";
 import { cn, isDev } from "@/utils";
 import BlogList from "@/layouts/blog/BlogList";
 import Content from "@/components/Content";
-import { getCategories } from "@/strapi/services";
-import { getTabData, getArticlesSortByDisplayTime } from "@/utils/strapi";
+import { getArticles, getCategories } from "@/strapi/services";
+import { getTabData } from "@/utils/strapi";
+
 import "../../style/index.css";
 
 const categories = await getCategories();
@@ -21,7 +22,7 @@ const tabData = getTabData(categories);
 const publicationState = isDev(Astro.url.hostname) ? "preview" : "live";
 
 // 如果是 dev 环境，获取草稿里的文章
-const articles = await getArticlesSortByDisplayTime({ publicationState });
+// const articlesPrimise = getArticles({ publicationState });
 
 // 返回包含分页的所有帖子的路由集合
 // return paginate(articles, { pageSize: 6 });
@@ -63,7 +64,10 @@ const articles = await getArticlesSortByDisplayTime({ publicationState });
 
   <Content>
     <BlogTab data={tabData} client:visible />
-    <BlogList data={articles} client:visible />
+    <BlogList
+      publicationState={publicationState}
+      client:visible
+    />
   </Content>
 
   <Footer
