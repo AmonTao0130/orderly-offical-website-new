@@ -1,8 +1,11 @@
 import { stringify } from "qs";
+import MockData from "./mock";
 interface Props {
   endpoint: string;
   query?: Record<string, any>;
   wrappedByKey?: string;
+  /** 为节省页面显示时间，部分 api 支持使用 mock 数据 */
+  mock?: boolean;
 }
 
 const STRAPI_URL = "https://exuberant-sparkle-dc686d5c20.strapiapp.com";
@@ -20,18 +23,27 @@ export default async function fetchApi<T>({
   endpoint,
   query,
   wrappedByKey,
+  mock,
 }: Props): Promise<T> {
   // const url = new URL(`${import.meta.env.STRAPI_URL}/api/${endpoint}`);
 
   const _query = stringify(query, { encodeValuesOnly: true });
+  const path = `/api/${endpoint}?${_query}`;
 
-  const url = `${STRAPI_URL}/api/${endpoint}?${_query}`;
+  const url = `${STRAPI_URL}${path}`;
   // console.log("url", url);
 
-  const res = await fetch(url.toString(), {
-    headers: { Authorization: `bearer ${API_TOKEN}` },
-  });
-  let data = await res.json();
+  let data: any;
+
+  if (mock) {
+    data = MockData[path];
+  } else {
+    const res = await fetch(url.toString(), {
+      headers: { Authorization: `bearer ${API_TOKEN}` },
+    });
+
+    data = await res.json();
+  }
 
   if (wrappedByKey) {
     data = data[wrappedByKey];
