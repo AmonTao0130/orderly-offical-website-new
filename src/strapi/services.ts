@@ -5,6 +5,7 @@ import type {
   Meta,
   Pagination,
   PublicationState,
+  ResponstList,
   TFile,
 } from "@/strapi/type";
 
@@ -32,37 +33,59 @@ export async function getCategories() {
     endpoint: "categories",
     wrappedByKey: "data",
     query: { sort: "id" },
+    mock: true,
   });
 }
 
-export async function getArticles(params?: {
+export type GetArticlesOptions = {
   isDetail?: boolean;
   pagination?: Pagination;
   publicationState?: PublicationState;
-}) {
+  category?: string;
+};
+
+export async function getArticles(Options?: GetArticlesOptions) {
+  const {
+    isDetail,
+    pagination,
+    publicationState = "live",
+    category,
+  } = Options || {};
+
   const populate: any = {
     ...commonArticlePopulate,
   };
 
-  if (params?.isDetail) {
+  const filters = {} as any;
+
+  if (isDetail) {
     populate.blocks = {
       populate: "*",
     };
   }
 
-  return await fetchApi<Article[]>({
+  if (category) {
+    filters.category = {
+      slug: {
+        $eq: category,
+      },
+    };
+  }
+
+  return await fetchApi<ResponstList<Article[]>>({
     endpoint: "articles",
-    wrappedByKey: "data",
+    // wrappedByKey: "data",
     query: {
       // populate: "*",
       // populate: ["cover", "category", "blocks"],
       populate,
-      sort: "publishedAt:desc",
-      publicationState: params?.publicationState || "live",
+      sort: "postedTime:desc",
+      publicationState,
       pagination: {
-        pageSize: 1000,
-        ...params?.pagination,
+        pageSize: 6,
+        ...pagination,
       },
+      filters,
     },
   });
 }

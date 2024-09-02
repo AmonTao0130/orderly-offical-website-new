@@ -122,3 +122,8 @@ export type Pagination = {
 };
 
 export type PublicationState = "live" | "preview";
+
+export type ResponstList<T> = {
+  data: T;
+  meta: { pagination: TPagination };
+};
