@@ -8,6 +8,7 @@ import type {
   ResponstList,
   TFile,
 } from "@/strapi/type";
+import { options } from "marked";
 
 const commonArticlePopulate = {
   cover: {
@@ -20,9 +21,9 @@ const commonArticlePopulate = {
     // 文章的分类只需要 name 和 slug 字段值即可
     fields: ["name", "slug"], // description、createdAt、updatedAt、articles
   },
-  author: {
-    populate: "*",
-  },
+  // author: {
+  //   fields: ["name", "slug"],
+  // },
   //   blocks: {
   //     populate: "*",
   //   },
@@ -42,15 +43,16 @@ export type GetArticlesOptions = {
   pagination?: Pagination;
   publicationState?: PublicationState;
   category?: string;
+  filters?: Record<string, any>;
 };
 
-export async function getArticles(Options?: GetArticlesOptions) {
+export async function getArticles(options?: GetArticlesOptions) {
   const {
     isDetail,
     pagination,
     publicationState = "live",
     category,
-  } = Options || {};
+  } = options || {};
 
   const populate: any = {
     ...commonArticlePopulate,
@@ -61,6 +63,9 @@ export async function getArticles(Options?: GetArticlesOptions) {
   if (isDetail) {
     populate.blocks = {
       populate: "*",
+    };
+    populate.author = {
+      fields: ["name", "slug"],
     };
   }
 
@@ -85,7 +90,7 @@ export async function getArticles(Options?: GetArticlesOptions) {
         pageSize: 6,
         ...pagination,
       },
-      filters,
+      filters: options?.filters || filters,
     },
   });
 }
