@@ -14,6 +14,7 @@ import { getArticles, getCategories } from "@/strapi/services";
 import { getTabData } from "@/utils/strapi";
 
 import "../../style/index.css";
+import BlogBanner from "@/layouts/blog/banner";
 
 const categories = await getCategories();
 const tabData = getTabData(categories);
@@ -22,7 +23,7 @@ const tabData = getTabData(categories);
 const publicationState = isDev(Astro.url.hostname) ? "preview" : "live";
 
 // 如果是 dev 环境，获取草稿里的文章
-// const articlesPrimise = getArticles({ publicationState });
+// const articles = getArticles({ publicationState });
 
 // 返回包含分页的所有帖子的路由集合
 // return paginate(articles, { pageSize: 6 });
@@ -46,28 +47,13 @@ const publicationState = isDev(Astro.url.hostname) ? "preview" : "live";
   title="Orderly Network | Blog"
   metaDescription="Orderly Network is a forward-moving protocol. Catch up on the latest updates and developments from us."
 >
-  <div
-    class={cn(
-      "relative",
-      /** 375 */
-      "h-[360px]",
-      /** 768 */
-      "md:h-[400px]"
-    )}
-  >
-    <HeaderBg />
-    <div class="relative">
-      <Navigation client:visible />
-      <HeaderText />
-    </div>
-  </div>
+  <Navigation client:visible />
 
   <Content>
+    <BlogBanner client:visible />
+
     <BlogTab data={tabData} client:visible />
-    <BlogList
-      publicationState={publicationState}
-      client:visible
-    />
+    <!-- <BlogList publicationState={publicationState} client:visible /> -->
   </Content>
 
   <Footer
