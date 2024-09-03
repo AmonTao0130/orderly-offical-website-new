@@ -12,7 +12,7 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = (props) => {
 
   const list = useMemo(() => {
     const arr = [];
-    for (let i = 0; i <= props.total; i++) {
+    for (let i = 1; i <= props.total; i++) {
       arr.push(i);
     }
     return arr;
