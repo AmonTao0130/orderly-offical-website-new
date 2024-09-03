@@ -16,8 +16,16 @@ import { getArticles } from "@/strapi/services";
 /** 静态渲染博客文章详情页 */
 export async function getStaticPaths() {
   // 静态渲染获取已发布的文章列表
-  const res = await getArticles({ isDetail: true });
-  const articles = res.data;
+  const res1 = await getArticles({
+    isDetail: true,
+    pagination: { page: 1, pageSize: 100 },
+  });
+  const res2 = await getArticles({
+    isDetail: true,
+    pagination: { page: 2, pageSize: 100 },
+  });
+
+  const articles = [...res1?.data, ...res2?.data];
 
   return articles.map((article) => {
     return {
