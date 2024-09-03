@@ -8,7 +8,7 @@ const TitleBlock: React.FC<PropsWithChildren & PropsWithClassName> = (
   return (
     <h2
       className={cn(
-        "font-title font-bold text-primary text-center",
+        "font-title font-extrabold text-primary text-center",
         /** 375 */
         "text-2xl leading-[28.8px]",
         /** 768 */

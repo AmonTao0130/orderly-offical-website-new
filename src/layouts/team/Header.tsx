@@ -43,7 +43,7 @@ const Header: React.FC<PropsWithClassName> = (props) => {
         <div
           className={cn(
             /** 375 */
-            "text-base leading-[19.2px] font-title font-normal tracking-[0.2em] mt-[46px]",
+            "text-base leading-[19.2px] font-title tracking-[0.2em] mt-[46px]",
             /** 768 */
             "md:text-xl md:leading-[24px] md:mt-[73px]",
             /** 1024 */
@@ -57,7 +57,7 @@ const Header: React.FC<PropsWithClassName> = (props) => {
         <h1
           className={cn(
             /** 375 */
-            "w-[310px] text-[32px] leading-[38.4px] font-title font-bold mt-[8px]",
+            "w-[310px] text-[32px] leading-[38.4px] font-title font-extrabold mt-[8px]",
             /** 768 */
             "md:w-[546px] md:text-4xl md:leading-[48px] md:mt-[12px]",
             /** 1024 */

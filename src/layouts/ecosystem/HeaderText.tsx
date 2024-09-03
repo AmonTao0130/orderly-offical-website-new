@@ -7,7 +7,7 @@ const HeaderText: React.FC<PropsWithClassName> = (props) => {
     <div className="text-center">
       <h1
         className={cn(
-          "text-primary font-bold font-title",
+          "text-primary font-extrabold font-title",
           /** 375 */
           "text-[32px] leading-[38.4px] mt-[88px]",
           /** 768 */

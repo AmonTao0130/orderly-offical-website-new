@@ -10,7 +10,7 @@ const HeaderText: React.FC<PropsWithClassName> = (props) => {
         <h1
           className={cn(
             /** 375 */
-            "font-title font-semibold text-[32px] leading-[32.64px] mt-[88px]",
+            "font-title font-bold text-[32px] leading-[32.64px] mt-[88px]",
             /** 768 */
             "md:text-[40px] md:leading-[40.8px] md:mt-[99px]",
             /** 1024 */

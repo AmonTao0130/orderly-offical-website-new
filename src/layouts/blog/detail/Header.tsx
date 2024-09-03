@@ -73,7 +73,7 @@ const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
           <div
             className={cn(
               /** 375 */
-              "text-2xl leading-[28.8px] text-primary font-bold font-title mt-[20px]",
+              "text-2xl leading-[28.8px] text-primary font-extrabold font-title mt-[20px]",
               /** 768 */
               "md:text-[32px] md:leading-[38.4px]",
               /** 1024 */
