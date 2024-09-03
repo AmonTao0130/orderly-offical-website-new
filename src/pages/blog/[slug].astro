@@ -9,16 +9,15 @@ import BlogDetail from "@/layouts/blog/detail/BlogDetail";
 import Footer from "@/components/Footer";
 import { cn } from "@/utils";
 import type { Article } from "@/strapi/type";
-import {
-  getArticleCoverImage,
-  getArticlesSortByDisplayTime,
-} from "@/utils/strapi";
+import { getArticleCoverImage } from "@/utils/strapi";
 import "@/layouts/blog/detail/index.less";
+import { getArticles } from "@/strapi/services";
 
 /** 静态渲染博客文章详情页 */
 export async function getStaticPaths() {
   // 静态渲染获取已发布的文章列表
-  const articles = await getArticlesSortByDisplayTime({ isDetail: true });
+  const res = await getArticles({ isDetail: true });
+  const articles = res.data;
 
   return articles.map((article) => {
     return {
@@ -26,7 +25,6 @@ export async function getStaticPaths() {
       props: { article, articles: articles?.slice(0, 3) },
     };
   });
-  // return [{ params: { slug: "orderly-network-partners-here-wallet" } }];
 }
 
 type Props = {

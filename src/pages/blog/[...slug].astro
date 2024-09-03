@@ -8,17 +8,14 @@ import BlogDetail from "@/layouts/blog/detail/BlogDetail";
 import Footer from "@/components/Footer";
 import { cn, isDev } from "@/utils";
 import "@/layouts/blog/detail/index.less";
-import {
-  getArticleCoverImage,
-  getArticleWithDisplayTimeBySlug,
-  getArticlesSortByDisplayTime,
-} from "@/utils/strapi";
+import { getArticleCoverImage } from "@/utils/strapi";
+import { getArticleBySlug, getArticles } from "@/strapi/services";
 
 /** 动态渲染博客文章详情页 */
 async function getData(slug: string) {
   try {
     const publicationState = isDev(Astro.url.hostname) ? "preview" : "live";
-    const article = await getArticleWithDisplayTimeBySlug(slug, {
+    const article = await getArticleBySlug(slug, {
       publicationState,
     });
 
@@ -26,10 +23,12 @@ async function getData(slug: string) {
       return null;
     }
 
-    const articles = await getArticlesSortByDisplayTime({
+    const res = await getArticles({
       pagination: { pageSize: 3 },
       publicationState,
     });
+
+    const articles = res.data;
 
     return { articles, article };
   } catch (err) {

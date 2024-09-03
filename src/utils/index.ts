@@ -7,6 +7,9 @@ export function cn(...args: any[]) {
 }
 
 export function formatDate(date: string | Date) {
+  if (!date) {
+    return "";
+  }
   if (typeof date === "string") {
     return format(new Date(date), "MMM dd, yyyy");
   }
@@ -34,3 +37,6 @@ export async function copyContent(content: string) {
 export function isDev(hostname: string) {
   return ["localhost", "dev-v2.orderly.network"].includes(hostname);
 }
+
+export const fetcher: any = (url: string, init: RequestInit) =>
+  fetch(url, init).then((res) => res.json());

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import type { PropsWithClassName } from "@/types";
 import BlogItem from "./BlogItem";
-import { cn } from "@/utils";
+import { cn, fetcher } from "@/utils";
 import {
   type Article,
   type PublicationState,
@@ -16,9 +16,6 @@ import { blogExpandKey } from "@/store";
 interface BlogListProps {
   publicationState: PublicationState;
 }
-
-const fetcher: any = (resource: any, init: any) =>
-  fetch(resource, init).then((res) => res.json());
 
 const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
   const [articles, setArticles] = useState<Article[]>([]);
