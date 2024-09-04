@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
 import { cn } from "@/utils";
+import type { PropsWithClassName } from "@/types";
 
-interface ScrollIndicatorProps {
+interface ScrollIndicatorProps extends PropsWithClassName {
   scrollIndex: number;
   total: number;
   scrollTo?: (index: number, jump?: boolean) => void;
@@ -19,7 +20,12 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = (props) => {
   }, [props.total]);
 
   return (
-    <div className="flex justify-center mt-[20px] gap-x-[8px]">
+    <div
+      className={cn(
+        "flex justify-center mt-[20px] gap-x-[8px]",
+        props.className
+      )}
+    >
       {list.map((item, index) => (
         <div
           className={cn(

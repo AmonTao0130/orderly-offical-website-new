@@ -1,3 +1,5 @@
+@import './tailwind.css';
+
 /* 直接从 url 加载字体，添加动画效果的时候，动画完成之后，字体会动一下 */
 /* @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap'); */
 

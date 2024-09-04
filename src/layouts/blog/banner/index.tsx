@@ -1,7 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+  type FC,
+  type SVGProps,
+} from "react";
 import spark from "../imgs/spark.svg";
-import back from "../imgs/arrow_back.svg";
-import forward from "../imgs/arrow_forward.svg";
 import { cn, fetcher } from "@/utils";
 import BannerItem from "./BannerItem";
 import { data } from "./data";
@@ -49,6 +53,8 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
     });
   }, [emblaApi]);
 
+  const hideIndicator = articles?.length <= 1;
+
   const renderBanner = () => {
     // if (isLoading) {
     //   return (
@@ -66,13 +72,17 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
           className={cn(
             "hidden md:flex",
             "items-center justify-center cursor-pointer",
-            "w-[40px] h-[40px] rounded-full bg-primary-8"
+            "w-[40px] h-[40px] rounded-full",
+            !hideIndicator &&
+              "hover:bg-[rgba(209,150,255,1)] hover:text-[rgb(0,0,0)]",
+            hideIndicator && "cursor-not-allowed opacity-50"
           )}
           onClick={() => {
             emblaApi?.scrollPrev();
           }}
         >
-          <img src={back.src} className="w-[12px] h-[12px]" />
+          <BackIcon className="w-[12px] h-[12px]" />
+          {/* <img src={back.src} className="w-[12px] h-[12px]" /> */}
         </div>
 
         <div className="flex-1 overflow-hidden mt-[24px]" ref={emblaRef}>
@@ -89,6 +99,7 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
             scrollIndex={scrollIndex}
             total={articles.length}
             scrollTo={emblaApi?.scrollTo}
+            className={cn(hideIndicator && "opacity-0")}
           />
         </div>
 
@@ -96,13 +107,16 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
           className={cn(
             "hidden md:flex",
             "items-center justify-center cursor-pointer",
-            "w-[40px] h-[40px] rounded-full bg-primary-8"
+            "w-[40px] h-[40px] rounded-full bg-primary-8",
+            !hideIndicator &&
+              "hover:bg-[rgba(209,150,255,1)] hover:text-[rgb(0,0,0)]",
+            hideIndicator && "cursor-not-allowed opacity-50"
           )}
           onClick={() => {
             emblaApi?.scrollNext();
           }}
         >
-          <img src={forward.src} className="w-[12px] h-[12px]" />
+          <ForwardIcon className="w-[12px] h-[12px]" />
         </div>
       </div>
     );
@@ -110,10 +124,9 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
 
   return (
     <div
-      className="bg-red-600"
       style={{
         background:
-          "linear-gradient(0deg, #0A0A0A, #0A0A0A),radial-gradient(53.11% 53.11% at 50% 100%, rgba(84, 0, 190, 0.8) 0%, rgba(77, 8, 165, 0) 100%)",
+          "radial-gradient(53.11% 53.11% at 50% 100%, rgba(84, 0, 190, 0.80) 0%, rgba(77, 8, 165, 0.00) 100%), #0A0A0A",
       }}
     >
       <Content>
@@ -141,3 +154,29 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
 };
 
 export default BlogBanner;
+
+export const BackIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    width="12"
+    height="12"
+    viewBox="0 0 12 12"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path d="M2.49835 6.54166L6.76606 10.8094L6.00002 11.5833L0.416687 5.99999L6.00002 0.416656L6.76606 1.19062L2.49835 5.45832H11.5834V6.54166H2.49835Z" />
+  </svg>
+);
+
+export const ForwardIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    width="13"
+    height="12"
+    viewBox="0 0 13 12"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path d="M9.96848 6.54166H0.883484V5.45832H9.96848L5.70078 1.19062L6.46682 0.416656L12.0502 5.99999L6.46682 11.5833L5.70078 10.8094L9.96848 6.54166Z" />
+  </svg>
+);

@@ -13,18 +13,20 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
   const { attributes } = props.article || {};
   return (
     <div
+      // 直接写tailwind样式没有生效 改为写在 tailwind utilities里了
+      // style={{
+      //   background:
+      //     "radial-gradient(114.23% 114.23% at 50% 108.86%, #903EF8 0%, rgba(0, 0, 0, 0.00) 100%), #0A0A0A",
+      // }}
       className={cn(
-        "mx-[10px] rounded-[32px]",
+        "mx-[10px] rounded-[32px] cursor-pointer",
         /** 375 */
         "w-full mt-[20px]",
         /** 768 */
         "md:w-[calc((100%_-_40px)_/_2)] md:mt-[40px]",
         /** 1024 */
         "lg:w-[calc((100%_-_60px)_/_3)]",
-        /** 1440 */
-        "xl:",
-        /** 1440 */
-        "2xl:"
+        "hover:blog-item-hover"
       )}
     >
       <img
@@ -41,13 +43,16 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
         src={getArticleCoverImage(props.article)}
       />
       <div
+        style={{}}
         className={cn(
           "p-[32px]",
           "border-[1px] border-t-0 border-solid border-primary-20 border-t-none",
           /** 375 */
           "rounded-b-[16px]",
           /** 768 */
-          "md:rounded-b-[32px]"
+          "md:rounded-b-[32px]",
+          "!bg-red"
+          // "hover:!bg-[linear-gradient(0deg,#0A0A0A,#0A0A0A),radial-gradient(114.23%_114.23%_at_50%_108.86%,#903EF8_0%)]"
         )}
       >
         <div className="text-base leading-[24px] text-primary-80">
