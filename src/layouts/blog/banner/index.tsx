@@ -72,17 +72,16 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
           className={cn(
             "hidden md:flex",
             "items-center justify-center cursor-pointer",
-            "w-[40px] h-[40px] rounded-full",
-            !hideIndicator &&
-              "hover:bg-[rgba(209,150,255,1)] hover:text-[rgb(0,0,0)]",
-            hideIndicator && "cursor-not-allowed opacity-50"
+            "w-[40px] h-[40px] rounded-full bg-primary-8 ",
+            hideIndicator
+              ? "cursor-not-allowed opacity-50"
+              : "hover:bg-[rgba(209,150,255,1)] hover:text-[rgb(0,0,0)]"
           )}
           onClick={() => {
             emblaApi?.scrollPrev();
           }}
         >
           <BackIcon className="w-[12px] h-[12px]" />
-          {/* <img src={back.src} className="w-[12px] h-[12px]" /> */}
         </div>
 
         <div className="flex-1 overflow-hidden mt-[24px]" ref={emblaRef}>
@@ -107,10 +106,10 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
           className={cn(
             "hidden md:flex",
             "items-center justify-center cursor-pointer",
-            "w-[40px] h-[40px] rounded-full bg-primary-8",
-            !hideIndicator &&
-              "hover:bg-[rgba(209,150,255,1)] hover:text-[rgb(0,0,0)]",
-            hideIndicator && "cursor-not-allowed opacity-50"
+            "w-[40px] h-[40px] rounded-full bg-primary-8 ",
+            hideIndicator
+              ? "cursor-not-allowed opacity-50"
+              : "hover:bg-[rgba(209,150,255,1)] hover:text-[rgb(0,0,0)]"
           )}
           onClick={() => {
             emblaApi?.scrollNext();
