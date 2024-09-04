@@ -10,14 +10,16 @@ import ScrollIndicator from "./ScrollIndicator";
 import Autoplay from "embla-carousel-autoplay";
 import useSWR from "swr";
 import type { Article, PublicationState } from "@/strapi/type";
+import Content from "@/components/Content";
 
 type BlogBannerProps = {
+  articles?: Article[];
   publicationState: PublicationState;
 };
 
 const BlogBanner: React.FC<BlogBannerProps> = (props) => {
   const [scrollIndex, setScrollIndex] = useState(0);
-  const [articles, setArticles] = useState<Article[]>([]);
+  const [articles, setArticles] = useState<Article[]>(props.articles || []);
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -48,16 +50,16 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
   }, [emblaApi]);
 
   const renderBanner = () => {
-    if (isLoading) {
-      return (
-        <div className="flex justify-center my-[100px]">
-          <img
-            src="/pageloading.gif"
-            className="w-[80px] h-[80px] md:w-[120px] md:h-[120px]"
-          />
-        </div>
-      );
-    }
+    // if (isLoading) {
+    //   return (
+    //     <div className="flex justify-center my-[100px]">
+    //       <img
+    //         src="/pageloading.gif"
+    //         className="w-[80px] h-[80px] md:w-[120px] md:h-[120px]"
+    //       />
+    //     </div>
+    //   );
+    // }
     return (
       <div className="flex md:items-center md:gap-x-[16px]">
         <div
@@ -107,20 +109,33 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
   };
 
   return (
-    <div style={{ lineHeight: 1.2 }} className="font-title">
-      <div className="flex items-center gap-x-[8px] mt-[20px]">
-        <img src={spark.src} className="w-[24px] h-[24px]" />
+    <div
+      className="bg-red-600"
+      style={{
+        background:
+          "linear-gradient(0deg, #0A0A0A, #0A0A0A),radial-gradient(53.11% 53.11% at 50% 100%, rgba(84, 0, 190, 0.8) 0%, rgba(77, 8, 165, 0) 100%)",
+      }}
+    >
+      <Content>
         <div
-          className={cn(
-            "font-extrabold",
-            "text-xl leading-[20px]",
-            "md:text-2xl md:leading-[24px]"
-          )}
+          style={{ lineHeight: 1.2 }}
+          className="font-title pt-[20px] pb-[40px]"
         >
-          Featured posts
+          <div className="flex items-center gap-x-[8px]">
+            <img src={spark.src} className="w-[24px] h-[24px]" />
+            <div
+              className={cn(
+                "font-extrabold",
+                "text-xl leading-[20px]",
+                "md:text-2xl md:leading-[24px]"
+              )}
+            >
+              Featured posts
+            </div>
+          </div>
+          {renderBanner()}
         </div>
-      </div>
-      {renderBanner()}
+      </Content>
     </div>
   );
 };

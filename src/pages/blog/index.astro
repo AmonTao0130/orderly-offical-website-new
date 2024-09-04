@@ -1,10 +1,8 @@
 ---
-export const prerender = false;
+export const prerender = true;
 
 import Layout from "@/layouts/index.astro";
 import Navigation from "@/components/Navigation";
-import HeaderBg from "@/layouts/blog/HeaderBg";
-import HeaderText from "@/layouts/blog/HeaderText";
 import BlogTab from "@/layouts/blog/BlogTab";
 import Footer from "@/components/Footer";
 import { cn, isDev } from "@/utils";
@@ -12,9 +10,9 @@ import BlogList from "@/layouts/blog/BlogList";
 import Content from "@/components/Content";
 import { getArticles, getCategories } from "@/strapi/services";
 import { getTabData } from "@/utils/strapi";
+import BlogBanner from "@/layouts/blog/banner";
 
 import "../../style/index.css";
-import BlogBanner from "@/layouts/blog/banner";
 
 const categories = await getCategories();
 const tabData = getTabData(categories);
@@ -22,8 +20,38 @@ const tabData = getTabData(categories);
 // 如果是 dev 环境，获取草稿里的文章
 const publicationState = isDev(Astro.url.hostname) ? "preview" : "live";
 
+const pinArticlesRes = await getArticles({
+  pagination: {
+    page: 1,
+    pageSize: 20,
+  },
+  publicationState,
+  filters: {
+    pin: {
+      $eq: true,
+    },
+  },
+});
+
+const pinArticles = pinArticlesRes?.data || [];
+
 // 如果是 dev 环境，获取草稿里的文章
-// const articles = getArticles({ publicationState });
+const articlesRes = await getArticles({
+  pagination: {
+    page: 1,
+    pageSize: 6,
+  },
+  publicationState,
+});
+
+// const articles = await getArticles({
+//   publicationState,
+//   filters: {
+//     publishedAt: {
+//       $gt: "2024-08-26T09:53:16.764Z",
+//     },
+//   },
+// });
 
 // 返回包含分页的所有帖子的路由集合
 // return paginate(articles, { pageSize: 6 });
@@ -49,11 +77,20 @@ const publicationState = isDev(Astro.url.hostname) ? "preview" : "live";
 >
   <Navigation client:visible />
 
-  <Content>
-    <BlogBanner client:visible />
+  <BlogBanner
+    articles={pinArticles}
+    publicationState={publicationState}
+    client:visible
+  />
 
+  <Content>
     <BlogTab data={tabData} client:visible />
-    <!-- <BlogList publicationState={publicationState} client:visible /> -->
+    <BlogList
+      articles={articlesRes?.data}
+      pagination={articlesRes?.meta?.pagination}
+      publicationState={publicationState}
+      client:visible
+    />
   </Content>
 
   <Footer

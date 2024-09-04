@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import type { PropsWithClassName } from "@/types";
 import BlogItem from "./BlogItem";
 import { cn, fetcher } from "@/utils";
@@ -14,12 +14,15 @@ import { useStore } from "@nanostores/react";
 import { blogExpandKey } from "@/store";
 
 interface BlogListProps {
+  articles: Article[];
+  pagination: TPagination;
   publicationState: PublicationState;
 }
 
 const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
-  const [articles, setArticles] = useState<Article[]>([]);
-  const [pagination, setPagination] = useState({} as TPagination);
+  const [articles, setArticles] = useState<Article[]>(props.articles);
+  const [pagination, setPagination] = useState(props.pagination);
+  const firstLoad = useRef(true);
 
   const [pageIndex, setPageIndex] = useState(1);
   const expandKey = useStore(blogExpandKey) || "All";
@@ -34,6 +37,7 @@ const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
     if (!data) {
       return;
     }
+    firstLoad.current = false;
     setArticles(data.data);
     setPagination(data.meta?.pagination);
   }, [data]);
@@ -58,7 +62,7 @@ const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
     };
   }, [articles, page, pageSize, pageCount]);
 
-  if (isLoading) {
+  if (!firstLoad.current && isLoading) {
     return (
       <div className="flex justify-center my-[100px]">
         <img
@@ -68,6 +72,7 @@ const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
       </div>
     );
   }
+
   return (
     <>
       <div className={cn("flex flex-wrap mx-[-10px]", props.className)}>

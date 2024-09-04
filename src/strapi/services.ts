@@ -87,6 +87,7 @@ export async function getArticles(options?: GetArticlesOptions) {
       sort: "postedTime:desc",
       publicationState,
       pagination: {
+        // 一次最多请求 100 条
         pageSize: 6,
         ...pagination,
       },

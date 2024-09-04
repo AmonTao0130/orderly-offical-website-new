@@ -10,8 +10,8 @@ import Footer from "@/components/Footer";
 import { cn } from "@/utils";
 import type { Article } from "@/strapi/type";
 import { getArticleCoverImage } from "@/utils/strapi";
-import "@/layouts/blog/detail/index.less";
 import { getArticles } from "@/strapi/services";
+import "@/layouts/blog/detail/index.less";
 
 /** 静态渲染博客文章详情页 */
 export async function getStaticPaths() {

@@ -8,6 +8,7 @@ export const GET: APIRoute = async (data) => {
   const res = await getArticles({
     pagination: {
       page: params.get("page") ? parseInt(params.get("page")!) : 1,
+      pageSize: 6,
     },
     category: params.get("category")!,
     publicationState: params.get("publicationState") as PublicationState,
