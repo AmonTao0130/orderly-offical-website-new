@@ -20,6 +20,11 @@ const banners = [
   //   moreText: "LEARN MORE",
   // },
   {
+    title: "Unlock 50K $ZRO giveaway on Orderly & LayerZero campaign!",
+    url: "https://app.galxe.com/quest/orderlynetwork/GC9jhtxnna",
+    moreText: "GET STARTED",
+  },
+  {
     title: "Claim your $ORDER",
     url: "https://airdrop.orderly.network",
     moreText: "CLAIM NOW",
@@ -34,11 +39,6 @@ const banners = [
   //   url: "https://galxe.com/orderlynetwork/campaign/GCYnAt4USf",
   //   moreText: "GET STARTED",
   // },
-  {
-    title: "Unlock 50K $ZRO giveaway on Orderly & LayerZero campaign!",
-    url: "https://app.galxe.com/quest/orderlynetwork/GC9jhtxnna",
-    moreText: "GET STARTED",
-  },
 ];
 
 const Banner: React.FC<BannerProps> = (props) => {
@@ -73,7 +73,8 @@ const Banner: React.FC<BannerProps> = (props) => {
             <div
               key={item.title}
               className={cn(
-                "flex items-center flex-wrap md:justify-center",
+                "flex flex-wrap flex-col items-start",
+                "md:flex-row md:items-center md:justify-center",
                 "transition-all",
                 isAnimate &&
                   (index === 0
@@ -96,7 +97,10 @@ const Banner: React.FC<BannerProps> = (props) => {
               <a
                 href={item.url}
                 target="_blank"
-                className="inline-flex items-center text-[#8AEFF5] font-bold text-sm leading-[32px]"
+                className={cn(
+                  "inline-flex",
+                  "items-center text-[#8AEFF5] font-bold text-sm leading-[32px]"
+                )}
               >
                 <div>{item.moreText}</div>
                 <ArrowForwardIcon />
