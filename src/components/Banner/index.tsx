@@ -25,7 +25,7 @@ const banners = [
     moreText: "GET STARTED",
   },
   {
-    title: "Claim your $ORDER",
+    title: "$ORDER claiming and staking are now LIVE.",
     url: "https://airdrop.orderly.network",
     moreText: "CLAIM NOW",
   },
@@ -61,13 +61,13 @@ const Banner: React.FC<BannerProps> = (props) => {
   return (
     <div
       className={cn(
-        "relative flex justify-between items-center",
+        "relative flex justify-between items-center gap-x-[16px]",
         "px-[24px] py-[16px] text-base z-10 overflow-hidden",
         "[background:linear-gradient(270.23deg,#34D4DE_0.04%,#6473FF_50.25%,#AD2BFE_99.64%)]"
       )}
       ref={ref}
     >
-      <div className="flex flex-col justify-center items-center w-full">
+      <div className="flex flex-col justify-center items-center flex-1">
         {banners.map((item, index) => {
           return (
             <div
@@ -79,7 +79,8 @@ const Banner: React.FC<BannerProps> = (props) => {
                 isAnimate &&
                   (index === 0
                     ? "animate-bannerOut opacity-0"
-                    : "animate-bannerIn opacity-0 absolute left-[24px] right-[24px]")
+                    : "animate-bannerIn opacity-0 absolute left-[24px] right-[24px]"),
+                index == 1 && "mr-[8px]"
                 // isAnimate &&
                 //   cn(
                 //     "opacity-0",
@@ -111,7 +112,7 @@ const Banner: React.FC<BannerProps> = (props) => {
       </div>
 
       <CloseIcon
-        className="cursor-pointer text-white z-[1]"
+        className="w-[24px] h-[24px] cursor-pointer text-white z-[1]"
         onClick={() => {
           bannerVisible.set(false);
           bannerHeight.set(0);
