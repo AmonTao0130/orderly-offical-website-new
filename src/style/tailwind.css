@@ -4,7 +4,7 @@
 
 @layer utilities {
   .blog-item-hover {
-    background:radial-gradient(114.23% 114.23% at 50% 108.86%, #903EF8 0%, rgba(0, 0, 0, 0.00) 100%), #0A0A0A
+    background:radial-gradient(114.23% 114.23% at 50% 108.86%, #903EF8 0%, rgba(0, 0, 0, 0.00) 100%), #0A0A0A;
   }
 }
 
