@@ -15,17 +15,24 @@ import "@/layouts/blog/detail/index.less";
 
 /** 静态渲染博客文章详情页 */
 export async function getStaticPaths() {
+  let articles: Article[] = [];
   // 静态渲染获取已发布的文章列表
   const res1 = await getArticles({
     isDetail: true,
     pagination: { page: 1, pageSize: 100 },
   });
-  const res2 = await getArticles({
-    isDetail: true,
-    pagination: { page: 2, pageSize: 100 },
-  });
 
-  const articles = [...res1?.data, ...res2?.data];
+  articles = [...articles, ...res1?.data];
+
+  const pageCount = res1?.meta?.pagination?.pageCount || 1;
+
+  for (let page = 2; page <= pageCount; page++) {
+    const res2 = await getArticles({
+      isDetail: true,
+      pagination: { page, pageSize: 100 },
+    });
+    articles = [...articles, ...res2?.data];
+  }
 
   return articles.map((article) => {
     return {
