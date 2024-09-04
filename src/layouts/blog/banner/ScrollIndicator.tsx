@@ -29,7 +29,7 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = (props) => {
       {list.map((item, index) => (
         <div
           className={cn(
-            "group",
+            "group cursor-pointer",
             "flex justify-center items-center",
             "h-[16px] w-[16px]"
           )}
