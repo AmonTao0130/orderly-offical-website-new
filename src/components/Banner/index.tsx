@@ -20,9 +20,9 @@ const banners = [
   //   moreText: "LEARN MORE",
   // },
   {
-    title: "Check your $ORDER allocation",
+    title: "Claim your $ORDER",
     url: "https://airdrop.orderly.network",
-    moreText: "CHECK NOW",
+    moreText: "CLAIM NOW",
   },
   // {
   //   title: "Earn Orderly Merits to boost your share of the airdrop!",
