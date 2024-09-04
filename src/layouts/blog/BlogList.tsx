@@ -77,7 +77,7 @@ const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
 
   if (!firstLoad.current && isLoading) {
     return (
-      <div className="flex justify-center my-[100px]">
+      <div className={cn("flex justify-center items-center", "h-[550px]")}>
         <img
           src="/pageloading.gif"
           className="w-[80px] h-[80px] md:w-[120px] md:h-[120px]"
