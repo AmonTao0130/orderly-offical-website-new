@@ -1,3 +1,5 @@
+export const prerender = false;
+
 import type { APIRoute } from "astro";
 import { getArticles } from "@/strapi/services";
 import type { PublicationState } from "@/strapi/type";
