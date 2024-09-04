@@ -31,7 +31,7 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
   );
 
   const { data, isLoading } = useSWR(
-    `/api/articles/pin?&publicationState=${props.publicationState}`,
+    `/api/pinArticles?&publicationState=${props.publicationState}`,
     fetcher
   );
 
