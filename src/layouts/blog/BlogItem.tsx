@@ -20,7 +20,7 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
       // }}
       className={cn(
         "group",
-        "mx-[10px] rounded-[32px] cursor-pointer",
+        "mx-[10px] rounded-[32px]",
         /** 375 */
         "w-full mt-[20px]",
         /** 768 */
