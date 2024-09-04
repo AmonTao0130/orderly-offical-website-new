@@ -19,6 +19,19 @@ interface BlogListProps {
   publicationState: PublicationState;
 }
 
+/** 提前预加载下一页的数据 */
+const NextPage: React.FC<{
+  publicationState: PublicationState;
+  category: string;
+  pageIndex: number;
+}> = ({ pageIndex, category, publicationState }) => {
+  const { data } = useSWR(
+    `/api/articles?page=${pageIndex}&category=${category}&publicationState=${publicationState}`,
+    fetcher
+  );
+  return null;
+};
+
 const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
   const [articles, setArticles] = useState<Article[]>(props.articles);
   const [pagination, setPagination] = useState(props.pagination);
@@ -88,6 +101,14 @@ const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
         total={total}
         {...pageParams}
       />
+
+      {pageParams.hasNext && (
+        <NextPage
+          category={category}
+          publicationState={props.publicationState}
+          pageIndex={pageIndex + 1}
+        />
+      )}
     </>
   );
 };
