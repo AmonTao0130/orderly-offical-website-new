@@ -38,7 +38,7 @@ const BannerItem: React.FC<BannerItemProps> = (props) => {
         alt={getArticleCoverAlt(props.article)}
         src={getArticleCoverImage(props.article)}
       />
-      <div className="w-full md:w-[50%] ">
+      <div className="w-full md:w-[50%]">
         <div
           className={cn(
             "text-sm leading-[21px] text-primary-80 font-semibold",
@@ -47,7 +47,7 @@ const BannerItem: React.FC<BannerItemProps> = (props) => {
         >
           {formatDate(attributes.postedTime || attributes.publishedAt)}
         </div>
-        <div className="h-[152px]">
+        <div>
           <div
             className={cn(
               "text-2xl lg:text-[28px] xl:text-[36px]",
@@ -59,7 +59,7 @@ const BannerItem: React.FC<BannerItemProps> = (props) => {
           </div>
           <div
             className={cn(
-              "text-base leading-[24px] text-primary-80 mt-[8px] ",
+              "text-base leading-[24px] text-primary-80 mt-[8px]",
               "xl:text-xl xl:leading-[30px]",
               "text-ellipsis line-clamp-3"
             )}
