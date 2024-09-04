@@ -29,6 +29,7 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = (props) => {
           onClick={() => {
             props.scrollTo?.(index);
           }}
+          key={index}
         >
           <div
             key={item}
