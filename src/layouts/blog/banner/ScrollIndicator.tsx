@@ -29,6 +29,7 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = (props) => {
       {list.map((item, index) => (
         <div
           className={cn(
+            "group",
             "flex justify-center items-center",
             "h-[16px] w-[16px]"
           )}
@@ -41,7 +42,7 @@ const ScrollIndicator: React.FC<ScrollIndicatorProps> = (props) => {
             key={item}
             className={cn(
               "w-[8px] h-[8px] rounded-full",
-              "transition-all duration-300",
+              "transition-all duration-300 group-hover:bg-[rgba(209,150,255,1)]",
               scrollIndex === index ? "bg-primary-100" : "bg-primary-36"
             )}
           />

@@ -50,9 +50,7 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
           /** 375 */
           "rounded-b-[16px]",
           /** 768 */
-          "md:rounded-b-[32px]",
-          "!bg-red"
-          // "hover:!bg-[linear-gradient(0deg,#0A0A0A,#0A0A0A),radial-gradient(114.23%_114.23%_at_50%_108.86%,#903EF8_0%)]"
+          "md:rounded-b-[32px]"
         )}
       >
         <div className="text-base leading-[24px] text-primary-80">
