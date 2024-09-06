@@ -94,7 +94,7 @@ const Banner: React.FC = () => {
   return (
     <div
       className={cn(
-        "flex items-center z-10 gap-x-[16px] px-[24px] text-base",
+        "relative flex items-center z-10 gap-x-[16px] px-[24px] text-base",
         "[background:linear-gradient(270.23deg,#34D4DE_0.04%,#6473FF_50.25%,#AD2BFE_99.64%)]"
       )}
     >
