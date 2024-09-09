@@ -1,14 +1,7 @@
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-  type FC,
-  type SVGProps,
-} from "react";
+import React, { useEffect, useState, type FC, type SVGProps } from "react";
 import spark from "../imgs/spark.svg";
 import { cn, fetcher } from "@/utils";
 import BannerItem from "./BannerItem";
-import { data } from "./data";
 import useEmblaCarousel from "embla-carousel-react";
 import ScrollIndicator from "./ScrollIndicator";
 import Autoplay from "embla-carousel-autoplay";
