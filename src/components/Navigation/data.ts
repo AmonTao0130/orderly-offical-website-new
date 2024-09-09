@@ -18,7 +18,7 @@ export default [
         showArrow: true,
       },
       {
-        title: "Orderly SDK",
+        title: "Orderly SDKs",
         url: Hyperlink.Developers.OrderlySDK,
         target: "_blank",
         isNew: true,

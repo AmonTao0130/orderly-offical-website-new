@@ -16,7 +16,7 @@ export const Hyperlink = {
     Documentation:
       "https://orderly.network/docs/getting-started/what-is-orderly-network",
     GitHub: "https://github.com/OrderlyNetwork",
-    OrderlySDK: "https://sdk.orderly.network/docs/hooks/overview",
+    OrderlySDK: "https://orderly.network/docs/sdks/overview",
   },
   Traders: {
     Builders:
