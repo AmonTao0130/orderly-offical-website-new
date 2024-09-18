@@ -17,6 +17,11 @@ type Banner = {
 
 const banners: Banner[] = [
   {
+    title: "Orderly Network’s NEAR instance winds down on Sept. 18.",
+    url: "https://app.orderly.network/near",
+    moreText: "WITHDRAW ASSETS",
+  },
+  {
     title: "Unlock 50K $ZRO giveaway on Orderly & LayerZero campaign!",
     url: "https://app.galxe.com/quest/orderlynetwork/GC9jhtxnna",
     moreText: "GET STARTED",
