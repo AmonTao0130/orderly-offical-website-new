@@ -17,10 +17,14 @@ export async function getNearVolumeLtd() {
 
 // Total trading volume = EVM (perp_volume_ltd) + NEAR (spot_volume_ltd + perp_volume_ltd)
 export async function getTotalVolume() {
-  return Promise.all([getEvmVolumeLtd(), getNearVolumeLtd()]).then((res) => {
-    const [evmVolume, nearVolume] = res || [0, 0];
-    return evmVolume + nearVolume;
+  return getEvmVolumeLtd().then((evmVolume) => {
+    return evmVolume || 0;
   });
+  // remove near volume for now
+  // return Promise.all([getEvmVolumeLtd(), getNearVolumeLtd()]).then((res) => {
+  //   const [evmVolume, nearVolume] = res || [0, 0];
+  //   return evmVolume + nearVolume;
+  // });
   // const evmVolume = await getEvmVolumeLtd();
   // const nearVolume = await getNearVolumeLtd();
   // return evmVolume + nearVolume;
