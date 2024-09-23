@@ -64,14 +64,14 @@ export const cardData: TCardData[] = [
       "LayerZero is an omnichain interoperability protocol designed for lightweight message passing across chains.",
     url: "https://layerzero.network/",
   },
-  {
-    icon: NEARProtocol.src,
-    category: "Ecosystem",
-    title: "NEAR Protocol",
-    description:
-      "NEAR is a user-friendly and carbon-neutral blockchain, built from the ground up to be performant, secure, and infinitely scalable.",
-    url: "https://near.org/",
-  },
+  // {
+  //   icon: NEARProtocol.src,
+  //   category: "Ecosystem",
+  //   title: "NEAR Protocol",
+  //   description:
+  //     "NEAR is a user-friendly and carbon-neutral blockchain, built from the ground up to be performant, secure, and infinitely scalable.",
+  //   url: "https://near.org/",
+  // },
   {
     icon: Optimism.src,
     category: "Ecosystem",
@@ -270,22 +270,22 @@ export const cardData: TCardData[] = [
       "Prime Protocol is a one-stop shop where investors can deposit all their digital assets across chains into a single protocol and receive credit anywhere.",
     url: "https://app.primeprotocol.xyz/trading/PERP_ETH_USDC",
   },
-  {
-    icon: SWEAT.src,
-    category: "Builder",
-    title: "SWEAT",
-    description:
-      "SWEAT is building an open economy of movement where people earn cryptos for physical activity.",
-    url: "https://sweateconomy.com/",
-  },
-  {
-    icon: REFFinance.src,
-    category: "Builder",
-    title: "REF Finance",
-    description:
-      "Ref Finance is a community-led, multi-purpose DeFi platform built on the NEAR Protocol with a leading AMM & a synchronous DeFi Shard.",
-    url: "https://app.ref.finance/orderbook/perps",
-  },
+  // {
+  //   icon: SWEAT.src,
+  //   category: "Builder",
+  //   title: "SWEAT",
+  //   description:
+  //     "SWEAT is building an open economy of movement where people earn cryptos for physical activity.",
+  //   url: "https://sweateconomy.com/",
+  // },
+  // {
+  //   icon: REFFinance.src,
+  //   category: "Builder",
+  //   title: "REF Finance",
+  //   description:
+  //     "Ref Finance is a community-led, multi-purpose DeFi platform built on the NEAR Protocol with a leading AMM & a synchronous DeFi Shard.",
+  //   url: "https://app.ref.finance/orderbook/perps",
+  // },
   {
     icon: TangleSwap.src,
     category: "Builder",
@@ -294,14 +294,14 @@ export const cardData: TCardData[] = [
       "TangleSwap combines the best DeFi solutions for users to seamlessly manage and grow their digital assets.",
     url: "https://www.tangleswap.exchange/",
   },
-  {
-    icon: JUMPDeFi.src,
-    category: "Builder",
-    title: "JUMP DeFi",
-    description:
-      "Jump DeFi is a one-stop platform serving multiple blockchain ecosystems; lowering the barrier of entry to DeFi for users and builders.",
-    url: "https://swap.jumpdefi.xyz/",
-  },
+  // {
+  //   icon: JUMPDeFi.src,
+  //   category: "Builder",
+  //   title: "JUMP DeFi",
+  //   description:
+  //     "Jump DeFi is a one-stop platform serving multiple blockchain ecosystems; lowering the barrier of entry to DeFi for users and builders.",
+  //   url: "https://swap.jumpdefi.xyz/",
+  // },
   {
     icon: Moonpay.src,
     category: "Product",
@@ -318,14 +318,14 @@ export const cardData: TCardData[] = [
       "zkAutomate is the world’s first automation algo using zero-knowledge proof for trading bots and DeFi management.",
     url: "https://zkautomate.com/",
   },
-  {
-    icon: HereWallet.src,
-    category: "Builder",
-    title: "Here Wallet",
-    description:
-      "HERE Wallet is a universal hub to connect your Binance, onchain and hardware wallets.",
-    url: "https://www.herewallet.app/",
-  },
+  // {
+  //   icon: HereWallet.src,
+  //   category: "Builder",
+  //   title: "Here Wallet",
+  //   description:
+  //     "HERE Wallet is a universal hub to connect your Binance, onchain and hardware wallets.",
+  //   url: "https://www.herewallet.app/",
+  // },
   {
     icon: GoogleCloud.src,
     category: "Product",
@@ -334,17 +334,16 @@ export const cardData: TCardData[] = [
       "Google Cloud is a giant cloud-service provider enabling simple, secure tools, and infrastructure for Web3 builders.",
     url: "https://cloud.google.com/",
   },
-  {
-    icon: Avalanche.src,
-    category: "Ecosystem",
-    title: "Avalanche",
-    description:
-      "Avalanche is a smart contracts platform that scales infinitely and regularly finalizes transactions in less than one second.",
-    // description:
-    //   "Avalanche is a smart contracts platform that scales infinitely and regularly finalizes transactions in less than one second. Build anything you want, any way you want, on the eco-friendly blockchain designed for Web3 devs.",
-
-    url: "https://www.avax.network/",
-  },
+  // {
+  //   icon: Avalanche.src,
+  //   category: "Ecosystem",
+  //   title: "Avalanche",
+  //   description:
+  //     "Avalanche is a smart contracts platform that scales infinitely and regularly finalizes transactions in less than one second.",
+  //   // description:
+  //   //   "Avalanche is a smart contracts platform that scales infinitely and regularly finalizes transactions in less than one second. Build anything you want, any way you want, on the eco-friendly blockchain designed for Web3 devs.",
+  //   url: "https://www.avax.network/",
+  // },
   {
     icon: VOOI.src,
     category: "Builder",
@@ -353,28 +352,28 @@ export const cardData: TCardData[] = [
       "VOOI is a capital-efficient, low-slippage, and multi-stablecoin liquidity pool designed for various DeFi platforms and individuals.",
     url: "https://vooi.io/",
   },
-  {
-    icon: Sender.src,
-    category: "Builder",
-    title: "Sender",
-    description:
-      "Sender Wallet is a Web3 wallet compatible with Ethereum and NEAR, allowing you to control your cryptocurrency, NFTs, DeFi activities, and digital assets.",
-    url: "https://sender.org/",
-  },
-  {
-    icon: Scroll.src,
-    category: "Ecosystem",
-    title: "Scroll",
-    description:
-      "Scroll is the L2 network built to seamlessly extend Ethereum’s capabilities through zero knowledge tech and EVM compatibility. ",
-    url: "https://scroll.io/",
-  },
-  {
-    icon: Linea.src,
-    category: "Ecosystem",
-    title: "Linea",
-    description:
-      "Linea is a developer-ready zk rollup for scaling Ethereum dApps. ",
-    url: "https://linea.build/",
-  },
+  // {
+  //   icon: Sender.src,
+  //   category: "Builder",
+  //   title: "Sender",
+  //   description:
+  //     "Sender Wallet is a Web3 wallet compatible with Ethereum and NEAR, allowing you to control your cryptocurrency, NFTs, DeFi activities, and digital assets.",
+  //   url: "https://sender.org/",
+  // },
+  // {
+  //   icon: Scroll.src,
+  //   category: "Ecosystem",
+  //   title: "Scroll",
+  //   description:
+  //     "Scroll is the L2 network built to seamlessly extend Ethereum’s capabilities through zero knowledge tech and EVM compatibility. ",
+  //   url: "https://scroll.io/",
+  // },
+  // {
+  //   icon: Linea.src,
+  //   category: "Ecosystem",
+  //   title: "Linea",
+  //   description:
+  //     "Linea is a developer-ready zk rollup for scaling Ethereum dApps. ",
+  //   url: "https://linea.build/",
+  // },
 ];
