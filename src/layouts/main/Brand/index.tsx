@@ -4,7 +4,6 @@ import Content from "@/components/Content";
 import Arbitrum from "./icons/Arbitrum.png";
 import Optimism from "./icons/Optimism.png";
 import LayerZero from "./icons/LayerZero.png";
-import Near from "./icons/Near.png";
 import Ethereum from "./icons/Ethereum.png";
 import Polygon from "./icons/Polygon.png";
 import Elixir from "./icons/Elixir.png";
@@ -23,7 +22,6 @@ const icons = [
   { name: "Arbitrum", src: Arbitrum.src },
   { name: "Optimism", src: Optimism.src },
   { name: "LayerZero", src: LayerZero.src },
-  { name: "Near", src: Near.src },
   { name: "Ethereum", src: Ethereum.src },
   { name: "Polygon", src: Polygon.src },
   { name: "Base", src: Base.src },
