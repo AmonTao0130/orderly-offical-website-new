@@ -20,6 +20,7 @@ import AscendEX from "./imgs/AscendEX.png";
 import EMDX from "./imgs/EMDX.png";
 import Bitoro from "./imgs/Bitoro.png";
 import IBX from "./imgs/IBX.png";
+import XYFinance from "./imgs/XYFinance.png";
 import Dfyn from "./imgs/Dfyn.png";
 import SharpeAI from "./imgs/SharpeAI.png";
 import SableFinance from "./imgs/SableFinance.png";
@@ -188,6 +189,14 @@ export const cardData: TCardData[] = [
     description:
       "IBX is a decentralized exchange that focuses on orderbook-based trading, offering secure crypto trades powered by Orderly.",
     url: "https://twitter.com/IBXtrade",
+  },
+  {
+    icon: XYFinance.src,
+    category: "Builder",
+    title: "XY Finance",
+    description:
+      "XY Finance is a cross-chain protocol aggregating DEXs & Bridges for seamless, one-click multi-chain swaps.",
+    url: "https://app.xy.finance/",
   },
   {
     icon: Dfyn.src,
