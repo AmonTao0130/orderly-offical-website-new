@@ -45,11 +45,7 @@ const Menu: React.FC<MenuProps> = (props) => {
                         className="flex items-center text-base hover:text-primary-100 px-[20px] my-[24px] first:mt-[20px] last:mb-[20px]"
                       >
                         {/* {child.title} */}
-                        <div
-                          className={cn(
-                            item.title === "Ecosystem" && "pr-[40px]"
-                          )}
-                        >
+                        <div className={cn("break-normal whitespace-nowrap")}>
                           {child.title}
                         </div>
                         {child.isNew && <NewLabel className="ml-[4px]" />}

@@ -8,6 +8,7 @@ import { cn } from "@/utils";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import type { PropsWithClassName } from "@/types";
+import { Hyperlink } from "@/utils/constant";
 
 type Banner = {
   title: string;
@@ -30,6 +31,11 @@ const banners: Banner[] = [
     title: "$ORDER claiming and staking are now LIVE.",
     url: "https://airdrop.orderly.network",
     moreText: "CLAIM NOW",
+  },
+  {
+    title: "Get your token listed on Orderly!",
+    url: Hyperlink.Ecosystem.ListingApplication,
+    moreText: "APPLY NOW",
   },
 ];
 

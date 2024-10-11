@@ -53,11 +53,11 @@ export default [
         title: "Blog",
         url: Hyperlink.Ecosystem.Blog,
       },
-      // {
-      //   title: "Radiance Ventures",
-      //   url: Hyperlink.Ecosystem.RadianceVentures,
-      //   target: "_blank",
-      // },
+      {
+        title: "Listing application",
+        url: Hyperlink.Ecosystem.ListingApplication,
+        target: "_blank",
+      },
     ],
   },
   {

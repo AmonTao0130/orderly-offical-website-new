@@ -32,6 +32,21 @@ const GetStart: React.FC<PropsWithClassName> = (props) => {
       >
         Drop us a line
       </Button>
+      <div className="flex justify-center mt-[20px]">
+        <iframe
+          src="https://embeds.beehiiv.com/9e540d28-edf5-4a96-87c5-007957569df3?slim=true"
+          data-test-id="beehiiv-embed"
+          height="52"
+          frameBorder="0"
+          scrolling="no"
+          style={{
+            margin: 0,
+            borderRadius: 0,
+            backgroundColor: "transparent",
+          }}
+          // style="margin: 0; border-radius: 0px !important; background-color: transparent;"
+        ></iframe>
+      </div>
     </div>
   );
 };
