@@ -10,7 +10,7 @@ import Brand from "@/layouts/main/Brand/index.tsx";
 import IntegrateSDK from "@/layouts/main/IntegrateSDK/index.tsx";
 import UseCases from "@/layouts/main/UseCases/index.tsx";
 import SaveHours from "@/layouts/main/SaveHours/index.tsx";
-import GetStart from "@/layouts/main/GetStart/index.tsx";
+import EmailSubscribe from "@/layouts/main/EmailSubscribe";
 import Footer from "@/components/Footer";
 import FooterBg from "@/layouts/main/Background/footer.astro";
 import { cn } from "@/utils";
@@ -168,7 +168,8 @@ import IntegrateSDKGradient from "@/layouts/main/Background/gradient/IntegrateSD
         <div class="relative">
           <FooterBg />
           <div class="relative">
-            <GetStart
+            <EmailSubscribe
+              client:visible
               className={cn(
                 /** 375 */
                 "mt-[151px] mb-[113px]",
