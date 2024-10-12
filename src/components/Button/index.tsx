@@ -6,6 +6,7 @@ import React, {
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/index";
 import ArrowRightTopIcon from "../../icons/ArrowRightTopIcon";
+import CircleLoading from "./CircleLoading";
 
 const buttonVariants = cva(
   [
@@ -60,10 +61,11 @@ export interface ButtonProps
   showArrow?: boolean;
   href?: string;
   target?: HTMLAttributeAnchorTarget;
+  loading?: boolean;
 }
 
 const Button: React.FC<ButtonProps & PropsWithChildren> = (props) => {
-  const { type, showArrow, disabled, className, href, target } = props;
+  const { type, showArrow, disabled, className, href, target, loading } = props;
 
   return (
     <a href={href} target={target}>
@@ -83,7 +85,7 @@ const Button: React.FC<ButtonProps & PropsWithChildren> = (props) => {
         onClick={props.onClick}
         disabled={disabled!}
       >
-        {props.children}
+        {loading ? <CircleLoading /> : props.children}
         {showArrow && <ArrowRightTopIcon className="pl-[4px]" />}
       </button>
     </a>
