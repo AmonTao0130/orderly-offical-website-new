@@ -9,7 +9,7 @@ function validateEmail(email: string) {
 }
 const EmailSubscribe: React.FC<PropsWithClassName> = (props) => {
   const [value, setValue] = useState("");
-  const [subscribed, setSubscribed] = useState(true);
+  const [subscribed, setSubscribed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -33,7 +33,7 @@ const EmailSubscribe: React.FC<PropsWithClassName> = (props) => {
 
     axios
       .post("/api/subscribe", {
-        // "jame@orderly.network"
+        // jame@orderly.network
         email: value,
       })
       .then((res) => {
@@ -69,6 +69,7 @@ const EmailSubscribe: React.FC<PropsWithClassName> = (props) => {
         <div>
           <div
             className={cn(
+              "flex items-center",
               /** 375 */
               "mt-[16px]",
               /** 1440 */
@@ -96,7 +97,7 @@ const EmailSubscribe: React.FC<PropsWithClassName> = (props) => {
             <Button
               className={cn(
                 "text-[13px] lg:text-sm",
-                "min-w-[97px] lg:min-w-[118px]",
+                "w-[97px] lg:w-[118px]",
                 "h-[32px] md:h-[40px] lg:h-[40px]",
                 "px-[16px] md:px-[12px]",
                 "rounded-l-none",
@@ -111,17 +112,16 @@ const EmailSubscribe: React.FC<PropsWithClassName> = (props) => {
               {subscribed ? "Subscribed" : "Subscribe"}
             </Button>
           </div>
-          {errorMsg && (
-            <div
-              className={cn(
-                "flex items-center gap-x-1 mt-[4px]",
-                "text-left text-[rgba(255,99,144,1)]"
-              )}
-            >
-              <div className="w-[6px] h-[6px] rounded-full bg-[rgba(255,99,144,1)]"></div>
-              {errorMsg}
-            </div>
-          )}
+          <div className="h-[24px] mt-[4px]">
+            {errorMsg && (
+              <div className={cn("flex items-center gap-x-1", "text-left")}>
+                <div className="w-[6px] h-[6px] rounded-full bg-[rgba(255,99,144,1)]"></div>
+                <div className="text-[rgba(255,99,144,1)] text-sm">
+                  {errorMsg}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
