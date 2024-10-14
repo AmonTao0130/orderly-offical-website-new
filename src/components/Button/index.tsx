@@ -80,6 +80,8 @@ const Button: React.FC<ButtonProps & PropsWithChildren> = (props) => {
           type === "outlined" &&
             disabled &&
             "border-white/[0.2]  hover:bg-transparent",
+          loading &&
+            "hover:[background:linear-gradient(270.23deg,#48BDFF_0.04%,#786CFF_47.76%,#BD00FF_99.64%),rgba(255,255,255,0.98)] cursor-not-allowed",
           className
         )}
         onClick={props.onClick}
