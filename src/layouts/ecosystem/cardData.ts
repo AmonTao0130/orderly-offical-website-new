@@ -182,14 +182,14 @@ export const cardData: TCardData[] = [
     description: "The Ultimate Hub for On-Chain Perpetual Futures Trading.",
     url: "https://bitoro.network/",
   },
-  {
-    icon: IBX.src,
-    category: "Builder",
-    title: "IBX",
-    description:
-      "IBX is a decentralized exchange that focuses on orderbook-based trading, offering secure crypto trades powered by Orderly.",
-    url: "https://twitter.com/IBXtrade",
-  },
+  // {
+  //   icon: IBX.src,
+  //   category: "Builder",
+  //   title: "IBX",
+  //   description:
+  //     "IBX is a decentralized exchange that focuses on orderbook-based trading, offering secure crypto trades powered by Orderly.",
+  //   url: "https://twitter.com/IBXtrade",
+  // },
   {
     icon: XYFinance.src,
     category: "Builder",
