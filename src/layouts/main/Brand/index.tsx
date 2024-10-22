@@ -1,37 +1,37 @@
 import React from "react";
 import Content from "@/components/Content";
-
+import { cn } from "@/utils";
+import type { PropsWithClassName } from "@/types";
 import Arbitrum from "./icons/Arbitrum.png";
 import Optimism from "./icons/Optimism.png";
 import LayerZero from "./icons/LayerZero.png";
 import Ethereum from "./icons/Ethereum.png";
+import Solana from "./icons/Solana.png";
 import Polygon from "./icons/Polygon.png";
 import Elixir from "./icons/Elixir.png";
-
-import RageTrade from "./icons/RageTrade.png";
+// import RageTrade from "./icons/RageTrade.png";
 import WOOFiPro from "./icons/WOOFiPro.png";
 import Base from "./icons/Base.png";
 // import Unidex from "./icons/Unidex.png";
 import Logx from "./icons/Logx.png";
-import Empyreal from "./icons/Empyreal.png";
-import Btse from "./icons/Btse.png";
-import { cn } from "@/utils";
-import type { PropsWithClassName } from "@/types";
+// import Empyreal from "./icons/Empyreal.png";
+// import Btse from "./icons/Btse.png";
+import QuickSwap from "./icons/QuickSwap.png";
+import Sei from "./icons/Sei.png";
 
 const icons = [
   { name: "Arbitrum", src: Arbitrum.src },
   { name: "Optimism", src: Optimism.src },
   { name: "LayerZero", src: LayerZero.src },
   { name: "Ethereum", src: Ethereum.src },
+  { name: "Solana", src: Solana.src },
   { name: "Polygon", src: Polygon.src },
-  { name: "Base", src: Base.src },
-  { name: "RageTrade", src: RageTrade.src },
   { name: "WOOFiPro", src: WOOFiPro.src },
-  // { name: "Unidex", src: Unidex.src },
   { name: "Elixir", src: Elixir.src },
+  { name: "QuickSwap", src: QuickSwap.src },
   { name: "Logx", src: Logx.src },
-  { name: "Empyreal", src: Empyreal.src },
-  { name: "Btse", src: Btse.src },
+  { name: "Base", src: Base.src },
+  { name: "Sei", src: Sei.src },
 ];
 
 const Brand: React.FC<PropsWithClassName> = (props) => {
