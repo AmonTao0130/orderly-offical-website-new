@@ -21,7 +21,7 @@ const Menu: React.FC<MenuProps> = (props) => {
             <div className="group">
               <div className="flex items-center group-hover:text-primary-100 text-lg">
                 {item.showHot && <CarnivalIcon className="mr-[4px]" />}
-                {item.title}
+                {item.component || item.title}
                 {item.children?.length && (
                   <ArrowDownIcon className="ml-[2px] transition duration-300  group-hover:rotate-180" />
                 )}
@@ -29,9 +29,9 @@ const Menu: React.FC<MenuProps> = (props) => {
 
               <div
                 className={cn(
-                  "absolute top-[20px] z-[1] overflow-hidden",
+                  "absolute top-[20px] z-50 overflow-hidden",
                   "transition-[max-height] duration-300",
-                  "max-h-0 group-hover:max-h-[178px]",
+                  "max-h-0 group-hover:max-h-[226px]",
                   item.showHot ? "left-[-4px]" : "left-[-20px] "
                 )}
               >
@@ -46,7 +46,7 @@ const Menu: React.FC<MenuProps> = (props) => {
                       >
                         {/* {child.title} */}
                         <div className={cn("break-normal whitespace-nowrap")}>
-                          {child.title}
+                          {child.component || child.title}
                         </div>
                         {child.isNew && <NewLabel className="ml-[4px]" />}
                         {child.showArrow && (

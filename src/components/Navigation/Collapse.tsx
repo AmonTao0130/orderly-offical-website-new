@@ -38,7 +38,7 @@ const Collapse: React.FC<PropsWithClassName> = (props) => {
               }}
             >
               <div className="flex items-center">
-                {item.title}
+                {item.component || item.title}
                 {!item.children?.length && (
                   <CarnivalIcon className="ml-[4px]" />
                 )}
@@ -62,7 +62,7 @@ const Collapse: React.FC<PropsWithClassName> = (props) => {
                       target={child.target}
                       className="flex items-center px-[16px] py-[12px] first:pt-[24px] last:pb-[8px]"
                     >
-                      {child.title}
+                      {child.component || child.title}
                       {child.isNew && <NewLabel className="ml-[4px]" />}
                       {child.showArrow && (
                         <ArrowRightTopIcon size={14} className="ml-[4px]" />

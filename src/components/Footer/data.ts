@@ -68,6 +68,12 @@ export default [
         url: Hyperlink.About.Team,
       },
       {
+        title: "Analytics",
+        url: Hyperlink.About.Analytics,
+        target: "_blank",
+        showArrow: true,
+      },
+      {
         title: "Press Kit",
         url: Hyperlink.About.PressKit,
         target: "_blank",

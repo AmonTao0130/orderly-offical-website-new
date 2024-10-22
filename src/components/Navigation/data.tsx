@@ -1,5 +1,6 @@
 import { Hyperlink } from "@/utils/constant";
-import type { HTMLAttributeAnchorTarget } from "react";
+import type { HTMLAttributeAnchorTarget, ReactNode } from "react";
+import dune from "./img/dune.svg";
 
 export default [
   {
@@ -75,6 +76,17 @@ export default [
         url: Hyperlink.About.Team,
       },
       {
+        title: "Analytics",
+        component: (
+          <div className="flex justify-center items-center gap-x-1">
+            Analytics <img src={dune.src} width="16px" height="16px" />
+          </div>
+        ),
+        url: Hyperlink.About.Analytics,
+        target: "_blank",
+        showArrow: true,
+      },
+      {
         title: "Press Kit",
         url: Hyperlink.About.PressKit,
         target: "_blank",
@@ -109,9 +121,11 @@ export default [
   // },
 ] as {
   title: string;
+  component?: ReactNode;
   showHot?: boolean;
   children: {
     title: string;
+    component?: ReactNode;
     url: string;
     isNew?: boolean;
     showArrow?: boolean;
