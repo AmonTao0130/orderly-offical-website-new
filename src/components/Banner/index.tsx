@@ -22,11 +22,11 @@ const banners: Banner[] = [
     url: "https://app.orderly.network/near",
     moreText: "WITHDRAW ASSETS",
   },
-  {
-    title: "Unlock 50K $ZRO giveaway on Orderly & LayerZero campaign!",
-    url: "https://app.galxe.com/quest/orderlynetwork/GC9jhtxnna",
-    moreText: "GET STARTED",
-  },
+  // {
+  //   title: "Unlock 50K $ZRO giveaway on Orderly & LayerZero campaign!",
+  //   url: "https://app.galxe.com/quest/orderlynetwork/GC9jhtxnna",
+  //   moreText: "GET STARTED",
+  // },
   {
     title: "$ORDER claiming and staking are now LIVE.",
     url: "https://airdrop.orderly.network",
@@ -36,6 +36,11 @@ const banners: Banner[] = [
     title: "Get your token listed on Orderly!",
     url: Hyperlink.Ecosystem.ListingApplication,
     moreText: "APPLY NOW",
+  },
+  {
+    title: "Win 100,000 $ORDER on Orderly Network x Degen Bridge Bash campaign",
+    url: "https://x.com/GalaxyExchangeX/status/1850922325752885484",
+    moreText: "LEARN MORE",
   },
 ];
 
@@ -57,7 +62,12 @@ const BannerText = forwardRef<HTMLDivElement, Banner & PropsWithClassName>(
         ref={ref}
       >
         {/* TODO: 第二行文字左对齐 */}
-        <span className="text-white font-semibold pr-[12px] text-base leading-[24px]">
+        <span
+          className={cn(
+            "text-white font-semiboldtext-base leading-[24px]"
+            // "pr-[12px]"
+          )}
+        >
           {title}
         </span>
         <a
