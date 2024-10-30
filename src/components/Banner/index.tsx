@@ -64,8 +64,8 @@ const BannerText = forwardRef<HTMLDivElement, Banner & PropsWithClassName>(
         {/* TODO: 第二行文字左对齐 */}
         <span
           className={cn(
-            "text-white font-semiboldtext-base leading-[24px]"
-            // "pr-[12px]"
+            "text-white font-semiboldtext-base leading-[24px]",
+            "md:pr-[12px]"
           )}
         >
           {title}
