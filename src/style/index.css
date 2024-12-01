@@ -135,6 +135,10 @@
   font-display: swap;
 }
 
+body {
+  line-height: 1.2;
+}
+
 
 .invisible-scrollbar::-webkit-scrollbar {
   display: none;

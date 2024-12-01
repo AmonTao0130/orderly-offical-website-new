@@ -1,0 +1,51 @@
+---
+import Layout from "@/layouts/index.astro";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
+import { cn } from "@/utils";
+import FooterGradient from "@/layouts/team/Gradient/Footer";
+import Header from "@/layouts/listing/Header";
+import Criteria from "@/layouts/listing/Criteria";
+import Content from "@/components/Content";
+import Benefits from "@/layouts/listing/Benefits";
+import Referral from "@/layouts/listing/Referral";
+import Contact from "@/layouts/listing/Contact";
+---
+
+<Layout
+  title="Orderly Network | Listing"
+  metaDescription=""
+  bodyClassName={cn(
+    "[background:linear-gradient(0deg,#110621,#110621),linear-gradient(0deg,#000000,#000000)]",
+    "bg-[rgb(17,6,33)]",
+    "font-title"
+  )}
+>
+  <div>
+    <Navigation client:visible />
+    <Header />
+  </div>
+
+  <div class="relative overflow-hidden z-10">
+    <Content className="max-w-[1060px]">
+      <div
+        class={cn(
+          "flex flex-col",
+          "gap-y-[80px] md:gap-y-[120px] lg:gap-y-[200px]"
+        )}
+      >
+        <Criteria />
+        <Benefits />
+        <Referral />
+      </div>
+    </Content>
+    <FooterGradient />
+    <div>
+      <div class="relative mt-[80px] md:mt-[120px] lg:mt-[200px]">
+        <Contact />
+
+        <Footer className={cn("mt-[80px]")} client:visible />
+      </div>
+    </div>
+  </div>
+</Layout>

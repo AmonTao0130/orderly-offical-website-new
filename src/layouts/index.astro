@@ -8,9 +8,11 @@ interface Props {
   metaDescription: string;
   image?: string;
   transitions?: boolean;
+  bodyClassName?: string;
 }
 
-const { title, metaDescription, image, transitions } = Astro.props;
+const { title, metaDescription, image, transitions, bodyClassName } =
+  Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const thumbnailURL = new URL("thumbnail.jpg", Astro.site);
 ---
@@ -81,7 +83,7 @@ const thumbnailURL = new URL("thumbnail.jpg", Astro.site);
     </style>
     {transitions && <ViewTransitions />}
   </head>
-  <body>
+  <body class={bodyClassName}>
     <Banner client:visible />
     <slot />
   </body>

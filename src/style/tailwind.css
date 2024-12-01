@@ -48,6 +48,14 @@
   .button-loading-circle-3 {
     animation: loading-circle-3 1200ms linear infinite;
   }
+
+  .listing-text-gradient {
+    background: linear-gradient(360deg, #9975FF -30.75%, rgba(155, 249, 255, 0) 103.38%), #FFFFFF;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+  }
 }
 
 
