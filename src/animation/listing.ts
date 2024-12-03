@@ -13,7 +13,7 @@ gsap.to(".listing-coin-layout-3", {
     start: "top top",
     end: "+100px top",
     scrub: 0.5,
-    markers: true,
+    // markers: true,
   },
 });
 
@@ -26,7 +26,7 @@ gsap.to(".listing-coin-layout-2", {
     start: "top top",
     end: "+100px top",
     scrub: 0.5,
-    markers: true,
+    // markers: true,
   },
 });
 
@@ -39,7 +39,7 @@ gsap.to(".listing-coin-layout-1", {
     start: "top top",
     end: "+100px top",
     scrub: 0.5,
-    markers: true,
+    // markers: true,
   },
 });
 
@@ -54,7 +54,7 @@ gsap.to("#listing-header", {
     end: "+100px top",
     // scrub: 0.5,
     scrub: true,
-    markers: true,
+    // markers: true,
   },
 });
 
