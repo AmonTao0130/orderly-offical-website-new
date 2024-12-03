@@ -25,8 +25,18 @@ const Contact: React.FC<ContactProps> = (props) => {
       </div>
 
       <div className="flex gap-x-[20px] justify-center mt-[20px]">
-        <Button className="!h-[40px]">Apply now</Button>
-        <Button type="outlined" className="!h-[40px]">
+        <Button
+          className="!h-[40px]"
+          href="https://forms.gle/rzqVxvyWTo3i9crp6"
+          target="_blank"
+        >
+          Apply now
+        </Button>
+        <Button
+          href="mailto:listing@orderly.network"
+          type="outlined"
+          className="!h-[40px]"
+        >
           Contact us
         </Button>
       </div>

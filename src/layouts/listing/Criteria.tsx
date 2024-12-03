@@ -32,7 +32,10 @@ const Criteria: React.FC<CriteriaProps> = (props) => {
   );
 
   return (
-    <div className={cn("mt-[14px] md:mt-[58px] lg:mt-[85px] xl:mt-[25px]")}>
+    <div
+      id="listing-criteria"
+      className={cn("mt-[14px] md:mt-[58px] lg:mt-[85px] xl:mt-[25px]")}
+    >
       <Title>Listing criteria</Title>
 
       <div className="flex flex-col md:flex-row gap-[20px] items-stretch">

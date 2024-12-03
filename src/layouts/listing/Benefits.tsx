@@ -47,7 +47,7 @@ const Benefits: React.FC<BenefitsProps> = (props) => {
             />
             <div
               className={cn(
-                "listing-text-gradient md:text-center md:mt-[20px] xl:px-[30px]",
+                "listing-text-gradient md:text-center md:mt-[20px]",
                 "text-[16px] lg:text-[18px] xl:text-[20px]"
               )}
             >

@@ -6,7 +6,7 @@ import { cn } from "@/utils";
 
 const Navigation: React.FC<PropsWithClassName> = (props) => {
   return (
-    <div className={cn(props.className)}>
+    <div className={cn(props.className, "relative z-10")}>
       <SmallNavigation className="lg:hidden" />
       <LargeNavigation className="hidden lg:block" />
     </div>

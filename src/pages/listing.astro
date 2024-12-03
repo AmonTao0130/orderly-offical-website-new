@@ -10,42 +10,47 @@ import Content from "@/components/Content";
 import Benefits from "@/layouts/listing/Benefits";
 import Referral from "@/layouts/listing/Referral";
 import Contact from "@/layouts/listing/Contact";
+import Background from "@/layouts/listing/Background";
+import Coin from "@/layouts/listing/Coin";
 ---
 
 <Layout
   title="Orderly Network | Listing"
   metaDescription=""
-  bodyClassName={cn(
-    "[background:linear-gradient(0deg,#110621,#110621),linear-gradient(0deg,#000000,#000000)]",
-    "bg-[rgb(17,6,33)]",
-    "font-title"
-  )}
+  bodyClassName={cn("bg-[rgb(17,6,33)]", "font-title")}
 >
   <div>
-    <Navigation client:visible />
-    <Header />
-  </div>
-
-  <div class="relative overflow-hidden z-10">
-    <Content className="max-w-[1060px]">
-      <div
-        class={cn(
-          "flex flex-col",
-          "gap-y-[80px] md:gap-y-[120px] lg:gap-y-[200px]"
-        )}
-      >
-        <Criteria />
-        <Benefits />
-        <Referral />
+    <div id="listing-page" class="relative">
+      <div class="relative">
+        <Background />
+        <Navigation client:visible />
+        <Coin />
+        <Header />
       </div>
-    </Content>
-    <FooterGradient />
-    <div>
-      <div class="relative mt-[80px] md:mt-[120px] lg:mt-[200px]">
-        <Contact />
 
-        <Footer className={cn("mt-[80px]")} client:visible />
+      <div class="relative overflow-hidden z-10">
+        <Content className="max-w-[1060px]">
+          <div
+            class={cn(
+              "flex flex-col",
+              "gap-y-[80px] md:gap-y-[120px] lg:gap-y-[200px]"
+            )}
+          >
+            <Criteria />
+            <Benefits />
+            <Referral />
+          </div>
+        </Content>
+        <FooterGradient />
+        <div>
+          <div class="relative mt-[80px] md:mt-[120px] lg:mt-[200px]">
+            <Contact />
+
+            <Footer className={cn("mt-[80px]")} client:visible />
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <script src="../animation/listing"></script>
 </Layout>
