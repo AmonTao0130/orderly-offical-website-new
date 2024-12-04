@@ -19,6 +19,11 @@ gsap.to(".listing-coin-layout-3", {
 
 gsap.to(".listing-coin-layout-2", {
   y: -600,
+  opacity: 0,
+  scale: 0.5,
+  // rotateX: 0,
+  // rotateY: 0,
+  rotateZ: -30,
   ease: "none",
   scrollTrigger: {
     trigger: "#listing-page",
@@ -32,6 +37,11 @@ gsap.to(".listing-coin-layout-2", {
 
 gsap.to(".listing-coin-layout-1", {
   y: -900,
+  opacity: 0,
+  scale: 0.5,
+  // rotateX: 0,
+  // rotateY: 0,
+  rotateZ: 30,
   ease: "none",
   scrollTrigger: {
     trigger: "#listing-page",
