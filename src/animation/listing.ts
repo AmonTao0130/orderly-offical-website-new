@@ -2,12 +2,14 @@ import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
+const scrollDistance = 600;
+
 const scrollTrigger = {
   trigger: ".listing-page",
-  endTrigger: "#listing-criteria",
-  start: "-200px top",
-  // start: "top top",
-  // end: "+200px top",
+  // endTrigger: "#listing-criteria",
+  // start: "-100px top",
+  start: "top top",
+  end: `+${scrollDistance}px top`,
   // end: "top top",
   scrub: 0.5,
   markers: true,
@@ -24,51 +26,20 @@ const common = {
 
 // 视差动画
 gsap.to(".listing-coin-layout-3", {
-  y: -1000,
+  y: -scrollDistance * 0.8,
   ...common,
 });
 
-gsap.to(".listing-coin-layout-2", {
-  y: -1300,
-  ...common,
+[0.9, 1, 1.1, 0.9, 0.925, 0.95, 1.2].forEach((scale, index) => {
+  gsap.to(`.listing-coin-${index + 1}`, {
+    y: -scrollDistance * scale,
+    ...common,
+  });
 });
 
-gsap.to(".listing-coin-layout-1", {
-  y: -1200,
-  ...common,
-});
-
-gsap.to(".listing-coin-1", {
-  rotateZ: -90,
-  ...common,
-});
-
-gsap.to(".listing-coin-2", {
-  rotateZ: -30,
-  ...common,
-});
-
-gsap.to(".listing-coin-3", {
-  rotateZ: 15,
-  ...common,
-});
-
-gsap.to(".listing-coin-4", {
-  rotateZ: -60,
-  ...common,
-});
-
-gsap.to(".listing-coin-5", {
-  rotateZ: 30,
-  ...common,
-});
-
-gsap.to(".listing-coin-6", {
-  rotateZ: 15,
-  ...common,
-});
-
-gsap.to(".listing-coin-7", {
-  rotateZ: -30,
-  ...common,
+[-90, -30, 15, -60, 30, 15, -30].forEach((deg, index) => {
+  gsap.to(`.listing-coin-${index + 1}`, {
+    rotateZ: deg,
+    ...common,
+  });
 });
