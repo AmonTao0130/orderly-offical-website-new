@@ -1,9 +1,8 @@
-import Button from "@/components/Button";
+import type { FC } from "react";
 import { cn } from "@/utils";
-import React from "react";
+import Button from "@/components/Button";
 
-interface ContactProps {}
-const Contact: React.FC<ContactProps> = (props) => {
+const Contact: FC = () => {
   return (
     <div className="text-center">
       <div

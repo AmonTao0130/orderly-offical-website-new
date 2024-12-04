@@ -1,12 +1,10 @@
-import React from "react";
+import type { FC } from "react";
 import Title from "./Title";
 import benefits1 from "./img/benefits1.png";
 import benefits2 from "./img/benefits2.png";
 import benefits3 from "./img/benefits3.png";
 import { cn } from "@/utils";
 import Block from "./Block";
-
-interface BenefitsProps {}
 
 const data = [
   {
@@ -22,7 +20,7 @@ const data = [
     title: "Community activation via customized campaigns",
   },
 ];
-const Benefits: React.FC<BenefitsProps> = (props) => {
+const Benefits: FC = () => {
   return (
     <div>
       <Title>Enjoy listing benefits on Orderly</Title>

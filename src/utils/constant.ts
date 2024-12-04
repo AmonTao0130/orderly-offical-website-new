@@ -27,11 +27,11 @@ export const Hyperlink = {
   Ecosystem: {
     Partners: "/partners",
     Blog: "/blog",
-    ListingApplication: "https://forms.gle/BVxxj5TAfAsKJEbc7",
+    ListingApplication: "/listing",
   },
   About: {
     Team: "/team",
-    Analytics:'https://dune.com/orderly_network/orderly-dashboard',
+    Analytics: "https://dune.com/orderly_network/orderly-dashboard",
     PressKit:
       "https://coral-shark-13c.notion.site/Orderly-Network-Media-Kit-bbc1f6513c26439c90dda117b83e063e?pvs=4",
     Careers: "https://boards.greenhouse.io/orderlynetwork ",

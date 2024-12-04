@@ -1,7 +1,8 @@
-import { cn } from "@/utils";
 import React, { type PropsWithChildren } from "react";
+import { cn } from "@/utils";
 
 type BlockProps = PropsWithChildren<{ className?: string }>;
+
 const Block: React.FC<BlockProps> = (props) => {
   return (
     <div

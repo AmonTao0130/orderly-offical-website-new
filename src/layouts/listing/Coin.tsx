@@ -1,24 +1,21 @@
-import React from "react";
+import type { FC } from "react";
 import { cn } from "@/utils";
-import coin11 from "./img/coin-layer-1-1.png";
-import coin12 from "./img/coin-layer-1-2.png";
-import coin13 from "./img/coin-layer-1-3.png";
-import coin14 from "./img/coin-layer-1-4.png";
+import coin1 from "./img/coin1.png";
+import coin2 from "./img/coin2.png";
+import coin3 from "./img/coin3.png";
+import coin4 from "./img/coin4.png";
+import coin5 from "./img/coin5.png";
+import coin6 from "./img/coin6.png";
+import coin7 from "./img/coin7.png";
+import coinBg1 from "./img/coin-bg1.png";
+import coinBg2 from "./img/coin-bg2.png";
 
-import coin21 from "./img/coin-layer-2-1.png";
-import coin22 from "./img/coin-layer-2-2.png";
-import coin23 from "./img/coin-layer-2-3.png";
-
-import coin31 from "./img/coin-layer-3-1.png";
-import coin32 from "./img/coin-layer-3-2.png";
-
-interface CoinProps {}
-const Coin: React.FC<CoinProps> = (props) => {
+const Coin: FC = () => {
   return (
     <div id="listing-coin" className="fixed left-0 w-full h-full">
       {/* layer 3 */}
       <img
-        src={coin31.src}
+        src={coinBg1.src}
         alt="listing background left"
         className={cn(
           "listing-coin-layout-3",
@@ -29,7 +26,7 @@ const Coin: React.FC<CoinProps> = (props) => {
       />
 
       <img
-        src={coin32.src}
+        src={coinBg2.src}
         alt="coin background right"
         className={cn(
           "listing-coin-layout-3",
@@ -38,12 +35,13 @@ const Coin: React.FC<CoinProps> = (props) => {
           "top-[-80px] md:top-[-100px] lg:top-[-160px] xl:top-[-160px] "
         )}
       />
+
       {/* layer 1 */}
       <img
-        src={coin11.src}
+        src={coin1.src}
         alt="coin 1"
         className={cn(
-          "listing-coin-layout-1",
+          "listing-coin-1 listing-coin-layout-1",
           "absolute",
           "w-[55px] md:w-[79px] lg:w-[103px] xl:w-[137px]",
           "top-[0px] left-[41px]",
@@ -53,10 +51,10 @@ const Coin: React.FC<CoinProps> = (props) => {
         )}
       />
       <img
-        src={coin12.src}
+        src={coin3.src}
         alt="coin 2"
         className={cn(
-          "listing-coin-layout-1",
+          "listing-coin-3 listing-coin-layout-1",
           "w-[71px] md:w-[101px] lg:w-[131px] xl:w-[172px]",
           "absolute",
           "top-[270px] left-[16px]",
@@ -66,10 +64,10 @@ const Coin: React.FC<CoinProps> = (props) => {
         )}
       />
       <img
-        src={coin13.src}
+        src={coin6.src}
         alt="coin 2"
         className={cn(
-          "listing-coin-layout-1",
+          "listing-coin-6 listing-coin-layout-1",
           "w-[71px] md:w-[102px] lg:w-[134px] xl:w-[177px]",
           "absolute",
           "top-[220px] right-[-30px]",
@@ -79,10 +77,10 @@ const Coin: React.FC<CoinProps> = (props) => {
         )}
       />
       <img
-        src={coin14.src}
+        src={coin7.src}
         alt="coin 2"
         className={cn(
-          "listing-coin-layout-1",
+          "listing-coin-7 listing-coin-layout-1",
           "w-[72px] md:w-[102px] lg:w-[134px] xl:w-[176px]",
           "absolute",
           "top-[316px] right-[29px]",
@@ -91,12 +89,13 @@ const Coin: React.FC<CoinProps> = (props) => {
           "xl:top-[413px] xl:right-[268px]"
         )}
       />
+
       {/* layer 2 */}
       <img
-        src={coin21.src}
+        src={coin2.src}
         alt="coin 2"
         className={cn(
-          "listing-coin-layout-2",
+          "listing-coin-2 listing-coin-layout-2",
           "w-[80px] md:w-[110px] lg:w-[130px] xl:w-[192px]",
           "absolute",
           "top-[110px] left-[-20px]",
@@ -106,10 +105,10 @@ const Coin: React.FC<CoinProps> = (props) => {
         )}
       />
       <img
-        src={coin22.src}
+        src={coin4.src}
         alt="coin 2"
         className={cn(
-          "listing-coin-layout-2",
+          "listing-coin-4 listing-coin-layout-2",
           "w-[55px] md:w-[79px] lg:w-[103px] xl:w-[138px]",
           "absolute",
           "top-[0px] right-[46px]",
@@ -119,10 +118,10 @@ const Coin: React.FC<CoinProps> = (props) => {
         )}
       />
       <img
-        src={coin23.src}
+        src={coin5.src}
         alt="coin 2"
         className={cn(
-          "listing-coin-layout-2",
+          "listing-coin-5 listing-coin-layout-2",
           "w-[60px] md:w-[66px] lg:w-[80px] xl:w-[157px]",
           "absolute",
           "top-[40px] right-[-10px]",

@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 import Title from "./Title";
 import { cn } from "@/utils";
 import Block from "./Block";
@@ -6,8 +6,7 @@ import criteria1 from "./img/criteria1.png";
 import criteria2 from "./img/criteria2.png";
 import criteria3 from "./img/criteria3.png";
 
-interface CriteriaProps {}
-const Criteria: React.FC<CriteriaProps> = (props) => {
+const Criteria: FC = () => {
   const imgCls = cn(
     "w-[80px] h-[80px]",
     "md:w-[120px] md:h-[120px]",

@@ -2,94 +2,73 @@ import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
+const scrollTrigger = {
+  trigger: ".listing-page",
+  endTrigger: "#listing-criteria",
+  start: "-200px top",
+  // start: "top top",
+  // end: "+200px top",
+  // end: "top top",
+  scrub: 0.5,
+  markers: true,
+};
+
+const ease = "power1.inOut";
+
+const common = {
+  // scale: 0.5,
+  // opacity: 0,
+  ease,
+  scrollTrigger,
+};
+
 // 视差动画
 gsap.to(".listing-coin-layout-3", {
-  y: -400,
-  // ease: "power1.inOut",
-  ease: "none",
-  scrollTrigger: {
-    trigger: "#listing-page",
-    endTrigger: "#listing-criteria",
-    start: "top top",
-    end: "+100px top",
-    scrub: 0.5,
-    // markers: true,
-  },
+  y: -1000,
+  ...common,
 });
 
 gsap.to(".listing-coin-layout-2", {
-  y: -600,
-  opacity: 0,
-  scale: 0.5,
-  // rotateX: 0,
-  // rotateY: 0,
-  rotateZ: -30,
-  ease: "none",
-  scrollTrigger: {
-    trigger: "#listing-page",
-    endTrigger: "#listing-criteria",
-    start: "top top",
-    end: "+100px top",
-    scrub: 0.5,
-    // markers: true,
-  },
+  y: -1300,
+  ...common,
 });
 
 gsap.to(".listing-coin-layout-1", {
-  y: -900,
-  opacity: 0,
-  scale: 0.5,
-  // rotateX: 0,
-  // rotateY: 0,
+  y: -1200,
+  ...common,
+});
+
+gsap.to(".listing-coin-1", {
+  rotateZ: -90,
+  ...common,
+});
+
+gsap.to(".listing-coin-2", {
+  rotateZ: -30,
+  ...common,
+});
+
+gsap.to(".listing-coin-3", {
+  rotateZ: 15,
+  ...common,
+});
+
+gsap.to(".listing-coin-4", {
+  rotateZ: -60,
+  ...common,
+});
+
+gsap.to(".listing-coin-5", {
   rotateZ: 30,
-  ease: "none",
-  scrollTrigger: {
-    trigger: "#listing-page",
-    endTrigger: "#listing-criteria",
-    start: "top top",
-    end: "+100px top",
-    scrub: 0.5,
-    // markers: true,
-  },
+  ...common,
 });
 
-gsap.to("#listing-header", {
-  y: 250,
-  ease: "none",
-  //ease: "power1.inOut",
-  scrollTrigger: {
-    trigger: "#listing-page",
-    endTrigger: "#listing-criteria",
-    start: "top top",
-    end: "+100px top",
-    // scrub: 0.5,
-    scrub: true,
-    // markers: true,
-  },
+gsap.to(".listing-coin-6", {
+  rotateZ: 15,
+  ...common,
 });
 
-// gsap.to(".listing-coin-layout-2", {
-//   y: -600,
-//   ease: "power1.inOut",
-//   scrollTrigger: {
-//     trigger: "#listing-page",
-//     start: "top top",
-//     // end: "bottom top",
-//     end: "25% top",
-//     scrub: true,
-//     markers: true,
-//   },
-// });
-
-// gsap.to(".listing-coin-layout-1", {
-//   y: -600,
-//   ease: "power1.inOut",
-//   scrollTrigger: {
-//     trigger: "#listing-page",
-//     start: "top top",
-//     // end: "bottom top",
-//     end: "25% top",
-//     scrub: true,
-//     markers: true,
-//   },
-// });
+gsap.to(".listing-coin-7", {
+  rotateZ: -30,
+  ...common,
+});

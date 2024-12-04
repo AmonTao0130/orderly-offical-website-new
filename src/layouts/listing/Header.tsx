@@ -1,17 +1,14 @@
+import type { FC } from "react";
 import { cn } from "@/utils";
 import Button from "@/components/Button";
 
-interface HeaderProps {}
-const Header: React.FC<HeaderProps> = (props) => {
+const Header: FC = () => {
   return (
     <div
       id="listing-header"
       className={cn("relative", "h-[400px] lg:h-[600px]")}
     >
-      <div
-        id="listing-header-text"
-        className={cn("fixed top-0 left-0 w-full h-full", "text-center")}
-      >
+      <div id="listing-header-text" className={cn("text-center")}>
         <div
           //   background:
           //     "linear-gradient(360deg, #9975FF -30.75%, rgba(155, 249, 255, 0) 103.38%), linear-gradient(0deg, #FFFFFF, #FFFFFF)",
@@ -25,10 +22,11 @@ const Header: React.FC<HeaderProps> = (props) => {
           )}
         >
           Trade Anything, Anywhere.
-          <br /> Hassle-free p Listings
+          <br /> Hassle-free Listings
         </div>
         <div
           className={cn(
+            
             "mx-auto text-primary-80",
             "w-[365px] md:w-[480px] lg:w-[680px]",
             "text-[14px] lg:text-[20px]",

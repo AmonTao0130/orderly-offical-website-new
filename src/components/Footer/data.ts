@@ -54,9 +54,8 @@ export default [
         url: Hyperlink.Ecosystem.Blog,
       },
       {
-        title: "Listing application",
+        title: "Listing",
         url: Hyperlink.Ecosystem.ListingApplication,
-        target: "_blank",
       },
     ],
   },

@@ -1,10 +1,9 @@
-import React, { type PropsWithChildren } from "react";
+import { type FC, type PropsWithChildren } from "react";
 import Title from "./Title";
 import { cn } from "@/utils";
 import referralBonus from "./img/referral_bonus.png";
 
-interface ReferralProps {}
-const Referral: React.FC<ReferralProps> = (props) => {
+const Referral: FC = () => {
   const titleCls = "isting-text-gradient text-[20px] lg:text-[24px]";
   const contentCls = cn(
     "text-primary-80 mt-[12px]",

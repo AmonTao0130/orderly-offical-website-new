@@ -1,11 +1,10 @@
-import React from "react";
+import type { FC } from "react";
 import bg375 from "./img/bg/375.png";
 import bg768 from "./img/bg/768.png";
 import bg1024 from "./img/bg/1024.png";
 import bg1440 from "./img/bg/1440.png";
 
-interface BackgroundProps {}
-const Background: React.FC<BackgroundProps> = (props) => {
+const Background: FC = () => {
   return (
     <div className="absolute top-0 left-0 mix-blend-screen object-cover">
       <picture>
