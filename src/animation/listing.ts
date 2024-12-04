@@ -2,7 +2,7 @@ import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
-const scrollDistance = 600;
+const scrollDistance = 700;
 
 const scrollTrigger = {
   trigger: ".listing-page",
@@ -12,7 +12,7 @@ const scrollTrigger = {
   end: `+${scrollDistance}px top`,
   // end: "top top",
   scrub: 0.5,
-  markers: true,
+  // markers: true,
 };
 
 const ease = "power1.inOut";
