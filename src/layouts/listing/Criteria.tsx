@@ -60,17 +60,17 @@ const Criteria: FC = () => {
         <div className="flex flex-1">
           <Block className="p-[32px]">
             <img className={imgCls} src={criteria3.src} alt="criteria1" />
-            <div className={titleCls}>Market maker and liquidity</div>
+            <div className={titleCls}>Liquidity provider and liquidity</div>
             <div className={cn(subTitleCls, "mt-[20px]")}>
-              Market maker and liquidity
+              Liquidity provider and liquidity
             </div>
             <div className={cn(contentCls, dotCls)}>
-              Need to bring your own market maker to provide liquidity for your
-              your perp market on Orderly
+              Need to bring your own liquidity provider to provide liquidity for
+              your your perp market on Orderly
             </div>
             <div className={cn(contentCls, dotCls)}>
-              Share the list of your token market makers for Orderly integration
-              status verification
+              Share the list of your token liquidity providers for Orderly
+              integration status verification
             </div>
 
             <div className={cn(subTitleCls, "mt-[20px]")}>
