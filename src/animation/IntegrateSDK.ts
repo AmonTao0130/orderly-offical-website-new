@@ -1,5 +1,6 @@
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { onGsapMedia } from "./onGsapMedia";
 gsap.registerPlugin(ScrollTrigger);
 
 const { orderBookTop, orderEntryTop } = getTops();
@@ -7,31 +8,13 @@ const { orderBookTop, orderEntryTop } = getTops();
 main();
 
 function main() {
-  gsapMedia();
-}
-
-function gsapMedia() {
-  // https://gsap.com/docs/v3/GSAP/gsap.matchMedia()
-  const mm = gsap.matchMedia();
-  const breakPoint = 768;
-
-  mm.add(
-    {
-      // set up any number of conditions. The function below will be called when ANY of them match.
-      isDesktop: `(min-width: ${breakPoint}px) and (prefers-reduced-motion: no-preference)`,
-      isMobile: `(max-width: ${
-        breakPoint - 1
-      }px) and (prefers-reduced-motion: no-preference)`,
-    },
-    (context) => {
-      let { isDesktop, isMobile } = context.conditions as any;
-      initPosition(isMobile);
-      // const tl = gsap.timeline();
-      // tl.add([firstTimeline(isMobile), timeline(isMobile)]);
-      quarterTimeline(isMobile);
-      restTimeline(isMobile);
-    }
-  );
+  onGsapMedia(({ isDesktop, isMobile }) => {
+    initPosition(isMobile);
+    // const tl = gsap.timeline();
+    // tl.add([firstTimeline(isMobile), timeline(isMobile)]);
+    quarterTimeline(isMobile);
+    restTimeline(isMobile);
+  });
 }
 
 function restTimeline(isMobile: boolean) {

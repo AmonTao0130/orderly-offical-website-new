@@ -12,7 +12,10 @@ import coinBg2 from "./img/coin-bg2.png";
 
 const Coin: FC = () => {
   return (
-    <div id="listing-coin" className="fixed left-0 w-full h-full">
+    <div
+      id="listing-coin"
+      className={cn("absolute md:fixed", "left-0 w-full h-full")}
+    >
       {/* layer 3 */}
       <img
         src={coinBg1.src}
