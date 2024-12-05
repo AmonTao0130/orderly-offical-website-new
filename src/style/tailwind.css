@@ -4,58 +4,67 @@
 
 @layer utilities {
   .blog-item-hover {
-    background:radial-gradient(114.23% 114.23% at 50% 108.86%, #903EF8 0%, rgba(0, 0, 0, 0.00) 100%), #0A0A0A;
+    background: radial-gradient(
+        114.23% 114.23% at 50% 108.86%,
+        #903ef8 0%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      #0a0a0a;
   }
 
   @keyframes loading-circle-1 {
     0% {
       transform: scale(1);
-      background-color: rgb(255,255,255,1);
+      background-color: rgb(255, 255, 255, 1);
     }
-    33%, 66% { 
-      background-color: rgb(255,255,255,0.5);
+    33%,
+    66% {
+      background-color: rgb(255, 255, 255, 0.5);
     }
   }
 
   @keyframes loading-circle-2 {
-    0%, 66%, 100% { 
-      background-color: rgb(255,255,255,0.5);
+    0%,
+    66%,
+    100% {
+      background-color: rgb(255, 255, 255, 0.5);
     }
     33% {
       transform: scale(1);
-      background-color: rgb(255,255,255,1);
-    }   
+      background-color: rgb(255, 255, 255, 1);
+    }
   }
 
   @keyframes loading-circle-3 {
-    0%, 33%, 100% { 
-      background-color: rgb(255,255,255,0.5);
-    } 
-    66% { 
+    0%,
+    33%,
+    100% {
+      background-color: rgb(255, 255, 255, 0.5);
+    }
+    66% {
       transform: scale(1);
-      background-color: rgb(255,255,255,1);
+      background-color: rgb(255, 255, 255, 1);
     }
   }
 
   .button-loading-circle-1 {
     animation: loading-circle-1 1200ms linear infinite;
   }
-  
+
   .button-loading-circle-2 {
     animation: loading-circle-2 1200ms linear infinite;
   }
-  
+
   .button-loading-circle-3 {
     animation: loading-circle-3 1200ms linear infinite;
   }
 
   .listing-text-gradient {
-    background: linear-gradient(360deg, #9975FF -30.75%, rgba(155, 249, 255, 0) 103.38%), #FFFFFF;
+    background: linear-gradient(0deg, #b1acff 0%, #d7e7ff 49.5%, #fcffff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-fill-color: transparent;
+    user-select: none;
   }
 }
-
-
