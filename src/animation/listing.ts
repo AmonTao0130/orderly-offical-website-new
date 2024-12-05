@@ -22,7 +22,7 @@ function start() {
     end: `+${scrollDistance}px top`,
     // end: "top top",
     scrub: 0.5,
-    markers: true,
+    // markers: true,
   };
 
   const ease = "power1.inOut";
