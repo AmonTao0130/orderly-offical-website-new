@@ -7,7 +7,6 @@ main();
 
 function main() {
   onGsapMedia(({ isDesktop }) => {
-    console.log("onGsapMedia", isDesktop);
     isDesktop && start();
   });
 }
@@ -18,12 +17,12 @@ function start() {
   const scrollTrigger = {
     trigger: ".listing-page",
     // endTrigger: "#listing-criteria",
-    // start: "-100px top",
-    start: "top top",
+    start: "-50px top",
+    // start: "top top",
     end: `+${scrollDistance}px top`,
     // end: "top top",
     scrub: 0.5,
-    // markers: true,
+    markers: true,
   };
 
   const ease = "power1.inOut";
