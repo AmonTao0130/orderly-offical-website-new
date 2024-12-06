@@ -34,14 +34,14 @@ const Referral: FC = () => {
         className={cn("flex flex-col md:flex-row items-stretch", "gap-[20px]")}
       >
         <div className={cn("flex flex-1 flex-col", "gap-[12px]")}>
-          <Block className="h-full">
+          <Block className={cn("h-full", "border-[rgba(113,0,255,0.2)]")}>
             <div className={titleCls}>Fixed Bonus</div>
             <div className={contentCls}>
               Receive $2,000 for every successful referral.
             </div>
           </Block>
           <div className={cn(operatorCls)}>+</div>
-          <Block className="h-full">
+          <Block className={cn("h-full", "border-[rgba(113,0,255,0.2)]")}>
             <div className={titleCls}>Variable Bonus</div>
             <div className={contentCls}>
               Receive 30% of the project’s marketing budget as a referral bonus
@@ -60,7 +60,8 @@ const Referral: FC = () => {
           <Block
             className={cn(
               "flex flex-col items-center justify-center text-center",
-              "[background:linear-gradient(180deg,rgba(27,0,44,0.1728)0%,rgba(139,15,216,0.54)100%)]"
+              "border-[rgb(59,41,78)]",
+              "[background:linear-gradient(180deg,rgba(27,0,44,0.1728)_0%,rgba(139,15,216,0.54)_100%)]"
             )}
           >
             <img
