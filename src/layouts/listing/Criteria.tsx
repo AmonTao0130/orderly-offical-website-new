@@ -41,7 +41,7 @@ const Criteria: FC = () => {
         <div className="flex flex-col gap-y-[20px] flex-1">
           <Block className="p-[32px] h-full">
             <img className={imgCls} src={criteria1.src} alt="criteria1" />
-            <div className={titleCls}>3+ price Oracles available</div>
+            <div className={titleCls}>3+ price oracles available</div>
             <div className={cn(subTitleCls, "mt-[8px]")}>
               Compatible oracles
             </div>
@@ -60,13 +60,15 @@ const Criteria: FC = () => {
         <div className="flex flex-1">
           <Block className="p-[32px]">
             <img className={imgCls} src={criteria3.src} alt="criteria1" />
-            <div className={titleCls}>Liquidity provider and liquidity</div>
+            <div className={titleCls}>
+              Liquidity provider and liquidity support
+            </div>
             <div className={cn(subTitleCls, "mt-[20px]")}>
-              Liquidity provider and liquidity
+              Liquidity provider requirement
             </div>
             <div className={cn(contentCls, dotCls)}>
-              Need to bring your own liquidity provider to provide liquidity for
-              your your perp market on Orderly
+              Need to bring your own liquidity provider to support your perp
+              market on Orderly
             </div>
             <div className={cn(contentCls, dotCls)}>
               Share the list of your token liquidity providers for Orderly
