@@ -46,7 +46,7 @@ export const cardData: TCardData[] = [
     category: "Builder",
     title: "WOOFi Pro",
     description: "All the tools you need, in one place.",
-    url: "https://dex.woo.org/",
+    url: "https://pro.woofi.com/",
   },
   {
     icon: LayerZero.src,
