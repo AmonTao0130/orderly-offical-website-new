@@ -41,6 +41,14 @@ export default {
       fontFeatureSettings: {
         ss05: '"ss05" on',
       },
+      fontWeight: {
+        thin: "100",
+        light: "300",
+        normal: "400",
+        medium: "400",
+        semibold: "500",
+        bold: "600",
+      },
       colors: {
         primary: {
           100: "rgba(255, 255, 255, 1)",
