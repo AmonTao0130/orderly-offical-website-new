@@ -57,7 +57,7 @@ const EmailSubscribe: React.FC<PropsWithClassName> = (props) => {
           /** 768 */
           "md:text-4xl md:leading-[48px]",
           /** 1024 */
-          "lg:text-[48px] lg:leading-[57px]",
+          "lg:text-[48px] lg:leading-[56px]",
           /** 1440 */
           "xl:text-6xl xl:leading-[76px]"
         )}

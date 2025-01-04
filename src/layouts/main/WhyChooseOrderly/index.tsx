@@ -104,7 +104,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
             className={cn(
               "flex justify-between items-center",
               /** 375 */
-              "text-[22px] leading-[28.8px] font-title font-bold",
+              "text-[22px] leading-[28.8px] font-title font-semibold",
               /** 768 */
               "md:text-4xl md:leading-[48px]",
               /** 1024 */
@@ -180,7 +180,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
             return (
               <div
                 className={cn(
-                  "font-title font-bold text-primary-100",
+                  "font-title text-primary-100",
                   /** 375 */
                   "py-[24px]",
                   /** 768 */
@@ -214,7 +214,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
                     //    background-clip: text;
                     //    text-fill-color: transparent;"
                     className={cn(
-                      "select-none",
+                      "select-none font-semibold",
                       /** 375 */
                       "text-lg leading-[18px]",
                       /** 768 */

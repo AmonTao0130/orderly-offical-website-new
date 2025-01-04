@@ -16,7 +16,7 @@ const Menu: React.FC<MenuProps> = (props) => {
           // hover 子项的菜单不会超出父容器的宽度，这里通过pr-[100px]使每个元素的宽度增加 100px
           <div
             key={item.title}
-            className="relative pr-[100px] ml-[-68px] xl:ml-[-52px] cursor-pointer select-none text-primary-80"
+            className="relative font-medium pr-[100px] ml-[-68px] xl:ml-[-52px] cursor-pointer select-none text-primary-80"
           >
             <div className="group">
               <div className="flex items-center group-hover:text-primary-100 text-lg">

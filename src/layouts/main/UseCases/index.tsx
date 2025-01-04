@@ -88,7 +88,7 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
             <div
               key={title}
               className={cn(
-                "flex justify-center items-center h-[52px] mx-[2px] rounded-full whitespace-nowrap ",
+                "flex justify-center font-semibold items-center h-[52px] mx-[2px] rounded-full whitespace-nowrap ",
                 // index === 0 && "ml-[8px]",
                 // title.length === index + 1 && "mr-0",
                 expanded ? "text-[#000]" : "text-primary-54",
@@ -142,7 +142,7 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
         {/* <div className="absolute top-0 left-0 z-10 w-full h-full rounded-[24px]"></div> */}
         <div
           className={cn(
-            "font-title font-bold text-primay",
+            "font-title font-semibold text-primay",
             /** 375 */
             "text-2xl leading-[28.8px]",
             /** 768 */
@@ -155,7 +155,7 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
         </div>
         <div
           className={cn(
-            "text-primary-80 mt-[16px]",
+            "text-primary-80 mt-[16px] font-medium",
             /** 375 */
             "text-[13px] leading-[23.4px] min-h-[70.2px] w-[271px]",
             /** 768 */

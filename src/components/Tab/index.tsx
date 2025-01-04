@@ -28,7 +28,7 @@ const Tab: React.FC<TabProps & PropsWithClassName> = (props) => {
           <div
             key={item.key}
             className={cn(
-              "flex items-center rounded-full whitespace-nowrap",
+              "flex items-center font-semibold rounded-full whitespace-nowrap",
               expanded ? "text-[#000]" : "text-primary-54",
               expanded ? "bg-[rgba(209,150,255,1)]" : "bg-primary-8",
               /** 375 */

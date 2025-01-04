@@ -8,9 +8,9 @@ const Menu: React.FC<PropsWithClassName> = (props) => {
     <div className={cn("flex justify-between", props.className)}>
       {data.map((item) => {
         return (
-          <div key={item.title} className="text-sm">
+          <div key={item.title} className="text-sm font-semibold">
             {item.title}
-            <div className="flex flex-col mt-[8px]">
+            <div className="flex flex-col mt-[8px] font-medium">
               {item.children.map((child) => {
                 return (
                   <a

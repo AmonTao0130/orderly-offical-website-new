@@ -42,12 +42,12 @@ export default {
         ss05: '"ss05" on',
       },
       fontWeight: {
-        thin: "100",
-        light: "200",
-        normal: "300",
-        medium: "300",
-        semibold: "400",
-        bold: "400",
+        light: "333",
+        normal: "400",
+        regular: "400",
+        medium: "507",
+        semibold: "612",
+        bold: "700",
       },
       colors: {
         primary: {
@@ -137,7 +137,7 @@ export default {
           backgroundColor: "#000",
           fontFamily: "'Atyp', sans-serif",
           fontFeatureSettings: '"ss05" on',
-          fontWeight: "300",
+          fontWeight: "400",
           margin: 0,
         },
         "::selection": {
