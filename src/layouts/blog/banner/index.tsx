@@ -114,7 +114,7 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
       }}
     >
       <Content>
-        <div style={{ lineHeight: 1.2 }} className="font-title pt-[20px] pb-[40px]">
+        <div style={{ lineHeight: 1.2 }} className="font-display pt-[20px] pb-[40px]">
           <div className="flex items-center gap-x-[8px]">
             <img src={spark.src} className="w-[24px] h-[24px]" />
             <div className={cn("font-extrabold", "text-xl leading-[20px]", "md:text-2xl md:leading-[24px]")}>

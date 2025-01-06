@@ -138,35 +138,49 @@
   Atyp Text 
 */
 @font-face {
-  font-family: "Atyp";
+  font-family: "Atyp Text";
   src: url("/fonts/Atyp/AtypBLText-Light.otf") format("opentype");
   font-weight: 333;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Atyp";
+  font-family: "Atyp Text";
   src: url("/fonts/Atyp/AtypBLText-Regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Atyp";
+  font-family: "Atyp Text";
   src: url("/fonts/Atyp/AtypBLText-Medium.otf") format("opentype");
   font-weight: 507;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Atyp";
+  font-family: "Atyp Text";
+  src: url("/fonts/Atyp/AtypBLText-Semibold.otf") format("opentype");
+  font-weight: 612;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Atyp Text";
+  src: url("/fonts/Atyp/AtypBLText-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Atyp Display";
   src: url("/fonts/Atyp/AtypBLDisplay-Semibold.otf") format("opentype");
   font-weight: 612;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "Atyp";
+  font-family: "Atyp Display";
   src: url("/fonts/Atyp/AtypBLDisplay-Bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;

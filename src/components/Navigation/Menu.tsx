@@ -16,10 +16,10 @@ const Menu: React.FC<MenuProps> = (props) => {
           // hover 子项的菜单不会超出父容器的宽度，这里通过pr-[100px]使每个元素的宽度增加 100px
           <div
             key={item.title}
-            className="relative font-medium pr-[100px] ml-[-68px] xl:ml-[-52px] cursor-pointer select-none text-primary-80"
+            className="relative pr-[100px] ml-[-68px] xl:ml-[-52px] cursor-pointer select-none text-primary-80"
           >
             <div className="group">
-              <div className="flex items-center group-hover:text-primary-100 text-lg">
+              <div className="flex items-center group-hover:text-primary-100 text-[16px] font-medium ">
                 {item.showHot && <CarnivalIcon className="mr-[4px]" />}
                 {item.component || item.title}
                 {item.children?.length && (
@@ -45,13 +45,9 @@ const Menu: React.FC<MenuProps> = (props) => {
                         className="flex items-center text-base hover:text-primary-100 px-[20px] my-[24px] first:mt-[20px] last:mb-[20px]"
                       >
                         {/* {child.title} */}
-                        <div className={cn("break-normal whitespace-nowrap")}>
-                          {child.component || child.title}
-                        </div>
+                        <div className={cn("break-normal whitespace-nowrap")}>{child.component || child.title}</div>
                         {child.isNew && <NewLabel className="ml-[4px]" />}
-                        {child.showArrow && (
-                          <ArrowRightTopIcon size={14} className="ml-[4px]" />
-                        )}
+                        {child.showArrow && <ArrowRightTopIcon size={14} className="ml-[4px]" />}
                       </a>
                     );
                   })}

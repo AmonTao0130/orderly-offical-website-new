@@ -37,8 +37,7 @@ const data = [
   {
     title: "High-Frequency Trading",
     abbr: "HFT",
-    content:
-      "Use our API and enjoy a CEX-level trading experience thanks to our low-latency orderbook.",
+    content: "Use our API and enjoy a CEX-level trading experience thanks to our low-latency orderbook.",
     img: HFT.src,
   },
   {
@@ -49,8 +48,7 @@ const data = [
   },
   {
     title: "Hedging",
-    content:
-      "Safeguard your positions on other exchanges by using our orderbook for effective hedging strategies.",
+    content: "Safeguard your positions on other exchanges by using our orderbook for effective hedging strategies.",
     img: Hedging.src,
   },
   {
@@ -109,8 +107,7 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
       </div>
       <div
         style={{
-          background:
-            "radial-gradient(114.23% 114.23% at 50% 108.86%, #903EF8 0%, rgba(0, 0, 0, 0.00) 100%), #000",
+          background: "radial-gradient(114.23% 114.23% at 50% 108.86%, #903EF8 0%, rgba(0, 0, 0, 0.00) 100%), #000",
         }}
         className={cn(
           "rounded-[24px] relative",
@@ -142,7 +139,7 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
         {/* <div className="absolute top-0 left-0 z-10 w-full h-full rounded-[24px]"></div> */}
         <div
           className={cn(
-            "font-title font-semibold text-primay",
+            "font-display font-semibold text-primay",
             /** 375 */
             "text-2xl leading-[28.8px]",
             /** 768 */

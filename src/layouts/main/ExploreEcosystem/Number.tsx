@@ -17,13 +17,12 @@ const numberStyle = {
   fontVariantLigatures: "none",
 };
 
-const NumberLabel: React.FC<NumberLabelProps & PropsWithClassName> = (
-  props
-) => {
+const NumberLabel: React.FC<NumberLabelProps & PropsWithClassName> = (props) => {
   return (
     <div className={props.className}>
       <div
         className={cn(
+          "font-medium",
           /** 375 */
           "text-sm leading-[14px] whitespace-nowrap",
           /** 768 */

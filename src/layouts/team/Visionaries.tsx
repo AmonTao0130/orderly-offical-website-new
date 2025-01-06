@@ -104,7 +104,7 @@ const Visionaries: React.FC<PropsWithClassName> = (props) => {
               <div
                 className={cn(
                   /** 375 */
-                  "text-[10.5px] leading-[12.6px] font-title mt-[5.33px]",
+                  "text-[10.5px] leading-[12.6px] font-display mt-[5.33px]",
                   /** 768 */
                   "md:text-sm md:leading-[16.8px] md:mt-[5.78px]",
                   /** 1024 */

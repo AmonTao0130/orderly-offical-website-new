@@ -36,7 +36,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        title: "'Atyp', sans-serif",
+        display: "'Atyp Display', sans-serif",
       },
       fontFeatureSettings: {
         ss05: '"ss05" on',
@@ -135,7 +135,7 @@ export default {
         html: {
           color: "white",
           backgroundColor: "#000",
-          fontFamily: "'Atyp', sans-serif",
+          fontFamily: "'Atyp Text', sans-serif",
           fontFeatureSettings: '"ss05" on',
           fontWeight: "400",
           margin: 0,

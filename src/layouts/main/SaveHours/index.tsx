@@ -27,8 +27,7 @@ const SaveHours: React.FC<PropsWithClassName> = (props) => {
         />
         <div
           style={{
-            background:
-              "linear-gradient(87.18deg, #FFFFFF 1.27%, #D196FF 108.54%)",
+            background: "linear-gradient(87.18deg, #FFFFFF 1.27%, #D196FF 108.54%)",
             backgroundClip: "text",
             WebkitTextFillColor: "transparent",
             WebkitBackgroundClip: "text",
@@ -37,7 +36,7 @@ const SaveHours: React.FC<PropsWithClassName> = (props) => {
             "select-none",
             "w-full h-full flex justify-center items-center text-center",
             /** 375 */
-            "text-[22px] font-title font-bold leading-[26.4px] mt-[11.7px]",
+            "text-[22px] font-display font-bold leading-[26.4px] mt-[11.7px]",
             /** 768 */
             "md:absolute md:text-4xl md:leading-[48px] md:mt-0",
             /** 1024 */
