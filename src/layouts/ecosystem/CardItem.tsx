@@ -68,7 +68,7 @@ const CardItem: React.FC<CardItemProps & CardItemProps> = (props) => {
 
         <div
           className={cn(
-            " text-primary-80 font-medium pt-[28px]",
+            " text-primary-80 font-regular pt-[28px]",
             "border-t-[1px] border-t-solid border-t-primary-36",
             /** 375 */
             "h-[120px] text-sm leading-[21px] mt-[16px]",
