@@ -58,7 +58,7 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
           {formatDate(attributes.postedTime || attributes.publishedAt)}
         </div>
         <div className="h-[152px]">
-          <div className="text-xl text-primary leading-[24px] mt-[8px] font-extrabold font-display max-h-[72px] text-ellipsis line-clamp-3">
+          <div className="text-xl text-primary leading-[24px] mt-[8px] font-semibold font-display max-h-[72px] text-ellipsis line-clamp-3">
             {attributes.title}
           </div>
           <div className="text-base leading-[24px] font-medium text-primary-80 mt-[8px] max-h-[72px] text-ellipsis line-clamp-3">

@@ -48,7 +48,7 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
             </div>
             <div
               className={cn(
-                "text-primary-80 font-medium",
+                "text-primary-80 font-regular",
                 /** 375 */
                 "w-[335px] text-sm leading-[21px] mt-[16px]",
                 /** 768 */

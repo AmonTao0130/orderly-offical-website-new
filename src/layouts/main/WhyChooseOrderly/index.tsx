@@ -217,7 +217,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
                 {expanded && (
                   <div
                     className={cn(
-                      "font-medium min-h-[48px] mt-[12px]",
+                      "font-regular min-h-[48px] mt-[12px]",
                       /** 375 */
                       "text-sm leading-[21px] pr-[20px] lg:pr-0",
                       /** 768 */

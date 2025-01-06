@@ -54,7 +54,7 @@ const CardItem: React.FC<CardItemProps & CardItemProps> = (props) => {
         </div>
         <h2
           className={cn(
-            " text-primary font-display font-extrabold",
+            " text-primary font-display font-semibold",
             /** 375 */
             "text-2xl leading-[24.48px] mt-[16px]",
             /** 768 */
