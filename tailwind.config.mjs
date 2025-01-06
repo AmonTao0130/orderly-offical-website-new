@@ -136,8 +136,8 @@ export default {
           color: "white",
           backgroundColor: "#000",
           fontFamily: "'Atyp Text', sans-serif",
-          fontFeatureSettings: '"ss05" on',
-          fontWeight: "400",
+          fontFeatureSettings: '"ss02" on, "ss03" on, "ss05" on, "ss06" on',
+          fontWeight: "507",
           margin: 0,
         },
         "::selection": {

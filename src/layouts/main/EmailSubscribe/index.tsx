@@ -53,7 +53,7 @@ const EmailSubscribe: React.FC<PropsWithClassName> = (props) => {
         className={cn(
           "text-center",
           /** 375 */
-          "font-display font-bold text-[22px] leading-[26px]",
+          "font-display font-semibold text-[22px] leading-[26px]",
           /** 768 */
           "md:text-4xl md:leading-[48px]",
           /** 1024 */

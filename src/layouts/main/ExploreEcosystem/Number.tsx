@@ -40,7 +40,7 @@ const NumberLabel: React.FC<NumberLabelProps & PropsWithClassName> = (props) => 
           /** 375 */
           "text-[32px] leading-[32px] font-semibold mt-[12px]",
           /** 768 */
-          "md:text-6xl md:leading-[64px] md:font-bold md:mt-[12px]",
+          "md:text-6xl md:leading-[64px] md:mt-[12px]",
           /** 1024 */
           "lg:text-7xl lg:leading-[98px] lg:mt-0",
           /** 1440 */

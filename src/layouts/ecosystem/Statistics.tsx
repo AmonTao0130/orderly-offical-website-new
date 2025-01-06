@@ -22,7 +22,7 @@ const StatisticsItem: React.FC<StatisticsItemProps & PropsWithClassName> = (prop
       <div
         className={cn(
           /** 375 */
-          "text-[10px] leading-[10.2px] font-display font-bold text-primary-100 ",
+          "text-[10px] leading-[10.2px] font-display font-semibold text-primary-100 ",
           /** 768 */
           "md:text-base md:leading-[16.32px]",
           /** 1024 */
@@ -42,7 +42,7 @@ const StatisticsItem: React.FC<StatisticsItemProps & PropsWithClassName> = (prop
         className={cn(
           "select-none",
           /** 375 */
-          "text-2xl leading-[24px] font-bold mt-[8px]",
+          "text-2xl leading-[24px] font-semibold mt-[8px]",
           /** 768 */
           "md:text-[32px] md:leading-[32px]",
           /** 1024 */
