@@ -33,7 +33,7 @@ export const Hyperlink = {
     Team: "/team",
     Analytics: "https://dune.com/orderly_network/orderly-dashboard",
     PressKit:
-      "https://coral-shark-13c.notion.site/orderly-network-brand-kit-2025",
+      "https://coral-shark-13c.notion.site/orderly-brand-kit-2025",
     Careers: "https://boards.greenhouse.io/orderlynetwork ",
   },
   SocialCarnival: {
