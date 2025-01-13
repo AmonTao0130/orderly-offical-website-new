@@ -16,6 +16,18 @@ export function useArticles({ displaySize = 6, category = "", publicationState }
   const [hasNextBatch, setHasNextBatch] = useState(false);
   const [currentBatch, setCurrentBatch] = useState(1);
 
+  const resetState = () => {
+    setCurrentPage(1);
+    setAllArticles([]);
+    setIsLoadingMore(false);
+    setHasNextBatch(false);
+    setCurrentBatch(1);
+  };
+
+  useEffect(() => {
+    resetState();
+  }, [category]);
+
   const {
     data: initialData,
     error,
@@ -28,6 +40,10 @@ export function useArticles({ displaySize = 6, category = "", publicationState }
     {
       revalidateOnFocus: false,
       dedupingInterval: 1000 * 60 * 5,
+      revalidateOnReconnect: false,
+      refreshWhenOffline: false,
+      refreshWhenHidden: false,
+      refreshInterval: 0,
     }
   );
 
@@ -58,12 +74,14 @@ export function useArticles({ displaySize = 6, category = "", publicationState }
             `/api/articles?page=${nextBatchPage}&pageSize=100&category=${category}&publicationState=${publicationState}`
           );
 
-          setAllArticles((prev) => [...prev, ...result.data]);
-          setCurrentBatch(nextBatchPage);
+          if (result.data) {
+            setAllArticles((prev) => [...prev, ...result.data]);
+            setCurrentBatch(nextBatchPage);
 
-          const total = result.meta.pagination.total;
-          const totalPages = Math.ceil(total / 100);
-          setHasNextBatch(nextBatchPage < totalPages);
+            const total = result.meta.pagination.total;
+            const totalPages = Math.ceil(total / 100);
+            setHasNextBatch(nextBatchPage < totalPages);
+          }
         } catch (error) {
           console.error("Error fetching next batch:", error);
         } finally {
