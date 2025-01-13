@@ -36,14 +36,12 @@ const data = [
   {
     icon: decentralize.src,
     title: "Complete Decentralization",
-    content:
-      "Community-driven collaborative ecosystem underpinned by permissionless innovation and full transparency.",
+    content: "Community-driven collaborative ecosystem underpinned by permissionless innovation and full transparency.",
   },
   {
     icon: multichain.src,
     title: "Reimagine Omnichain Trading",
-    content:
-      "Omnichain orderbook. Unified liquidity across blockchains. No need for bridges.",
+    content: "Omnichain orderbook. Unified liquidity across blockchains. No need for bridges.",
   },
   {
     icon: maximize.src,
@@ -102,9 +100,9 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
           <div
             id="WhyChooseOrderlyTitle"
             className={cn(
-              "flex justify-between items-center",
+              "flex justify-between items-center font-display",
               /** 375 */
-              "text-[22px] leading-[28.8px] font-title font-bold",
+              "text-[22px] leading-[28.8px]",
               /** 768 */
               "md:text-4xl md:leading-[48px]",
               /** 1024 */
@@ -113,7 +111,6 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
           >
             <h2>
               Discover why builders <br className="lg:hidden" /> choose Orderly
-              Network
             </h2>
 
             <div
@@ -125,10 +122,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
               {zellicLogo}
             </div>
           </div>
-          <div
-            id="WhyChooseOrderlyButton"
-            className="flex items-center mt-[16px] md:mt-[18px] lg:mt-0"
-          >
+          <div id="WhyChooseOrderlyButton" className="flex items-center mt-[16px] md:mt-[18px] lg:mt-0">
             <Button
               className={cn(
                 /** 1024 */
@@ -170,23 +164,19 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
             </div>
           </div>
         </div>
-        <div
-          id="WhyChooseOrderlyContent"
-          className="lg:w-[430px] mt-[32px] md:mt-[42px] lg:mt-0 cursor-pointer"
-        >
+        <div id="WhyChooseOrderlyContent" className="lg:w-[430px] mt-[32px] md:mt-[42px] lg:mt-0 cursor-pointer">
           {data.map((item, index) => {
             const expanded = expandKey === item.title;
 
             return (
               <div
                 className={cn(
-                  "font-title font-bold text-primary-100",
+                  "text-primary-100",
                   /** 375 */
                   "py-[24px]",
                   /** 768 */
                   "md:py-[32px] md:first:pt-[16px] md:last:pb-0",
-                  index + 1 !== data.length &&
-                    "border-b-[1px] border-b-solid border-b-primary-12"
+                  index + 1 !== data.length && "border-b-[1px] border-b-solid border-b-primary-12"
                 )}
                 key={item.title}
                 onClick={() => {
@@ -200,8 +190,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
                     style={
                       expanded
                         ? {
-                            background:
-                              "linear-gradient(84.32deg, #FFFFFF -1.85%, #D196FF 105.08%)",
+                            background: "linear-gradient(84.32deg, #FFFFFF -1.85%, #D196FF 105.08%)",
                             backgroundClip: "text",
                             WebkitTextFillColor: "transparent",
                             WebkitBackgroundClip: "text",
@@ -214,7 +203,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
                     //    background-clip: text;
                     //    text-fill-color: transparent;"
                     className={cn(
-                      "select-none",
+                      "select-none font-semibold",
                       /** 375 */
                       "text-lg leading-[18px]",
                       /** 768 */
@@ -228,7 +217,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
                 {expanded && (
                   <div
                     className={cn(
-                      "font-medium min-h-[48px] mt-[12px]",
+                      "font-regular min-h-[48px] mt-[12px]",
                       /** 375 */
                       "text-sm leading-[21px] pr-[20px] lg:pr-0",
                       /** 768 */

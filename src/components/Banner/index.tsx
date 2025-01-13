@@ -44,47 +44,35 @@ const banners: Banner[] = [
   },
 ];
 
-const BannerText = forwardRef<HTMLDivElement, Banner & PropsWithClassName>(
-  (props, ref) => {
-    const { title, url, moreText, className } = props;
-    return (
-      <div
-        key={title}
-        style={{
-          transform: "translate3d(0, 0, 0)",
-        }}
-        className={cn(
-          "flex-[0_0_100%] min-h-0 w-full py-[16px]",
-          "flex flex-col justify-center items-start",
-          "md:flex-row md:items-center",
-          className
-        )}
-        ref={ref}
+const BannerText = forwardRef<HTMLDivElement, Banner & PropsWithClassName>((props, ref) => {
+  const { title, url, moreText, className } = props;
+  return (
+    <div
+      key={title}
+      style={{
+        transform: "translate3d(0, 0, 0)",
+      }}
+      className={cn(
+        "flex-[0_0_100%] min-h-0 w-full py-[16px]",
+        "flex flex-col justify-center items-start",
+        "md:flex-row md:items-center",
+        className
+      )}
+      ref={ref}
+    >
+      {/* TODO: 第二行文字左对齐 */}
+      <span className={cn("text-white font-medium text-base leading-[24px]", "md:pr-[12px]")}>{title}</span>
+      <a
+        href={url}
+        target="_blank"
+        className={cn("inline-flex", "items-center text-[#8AEFF5] font-semibold text-sm leading-[32px]")}
       >
-        {/* TODO: 第二行文字左对齐 */}
-        <span
-          className={cn(
-            "text-white font-semiboldtext-base leading-[24px]",
-            "md:pr-[12px]"
-          )}
-        >
-          {title}
-        </span>
-        <a
-          href={url}
-          target="_blank"
-          className={cn(
-            "inline-flex",
-            "items-center text-[#8AEFF5] font-bold text-sm leading-[32px]"
-          )}
-        >
-          <div>{moreText}</div>
-          <ArrowForwardIcon />
-        </a>
-      </div>
-    );
-  }
-);
+        <div>{moreText}</div>
+        <ArrowForwardIcon />
+      </a>
+    </div>
+  );
+});
 
 const Banner: React.FC = () => {
   const { width } = useSize();
@@ -128,11 +116,7 @@ const Banner: React.FC = () => {
           </div>
         </div>
 
-        <BannerText
-          ref={ref}
-          className={cn(height && "absolute invisible")}
-          {...banners[0]}
-        />
+        <BannerText ref={ref} className={cn(height && "absolute invisible")} {...banners[0]} />
       </div>
 
       <CloseIcon

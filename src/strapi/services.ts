@@ -1,13 +1,5 @@
 import fetchApi from "@/strapi";
-import type {
-  Article,
-  Categorg,
-  Meta,
-  Pagination,
-  PublicationState,
-  ResponstList,
-  TFile,
-} from "@/strapi/type";
+import type { Article, Categorg, Meta, Pagination, PublicationState, ResponstList, TFile } from "@/strapi/type";
 import { options } from "marked";
 
 const commonArticlePopulate = {
@@ -47,12 +39,7 @@ export type GetArticlesOptions = {
 };
 
 export async function getArticles(options?: GetArticlesOptions) {
-  const {
-    isDetail,
-    pagination,
-    publicationState = "live",
-    category,
-  } = options || {};
+  const { isDetail, pagination, publicationState = "live", category } = options || {};
 
   const populate: any = {
     ...commonArticlePopulate,

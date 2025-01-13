@@ -15,7 +15,7 @@ const SDKText: React.FC<SDKTextProps & PropsWithClassName> = (props) => {
       <h3
         className={cn(
           /** 375 */
-          "text-primary text-xl leading-[24px] mt-[61px]",
+          "text-primary font-semibold text-xl leading-[24px] mt-[61px]",
           /** 768 */
           "md:mt-[15px]",
           /** 1024 */
@@ -28,7 +28,7 @@ const SDKText: React.FC<SDKTextProps & PropsWithClassName> = (props) => {
       </h3>
       <div
         className={cn(
-          "text-primary-80 mt-[12px]",
+          "text-primary-80 mt-[12px] font-regular",
           /** 375 */
           "w-[250px] text-sm leading-[21px] ",
           /** 768 */

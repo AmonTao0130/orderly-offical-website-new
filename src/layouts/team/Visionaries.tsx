@@ -89,6 +89,7 @@ const Visionaries: React.FC<PropsWithClassName> = (props) => {
               />
               <div
                 className={cn(
+                  "font-semibold",
                   /** 375 */
                   "text-[15px] leading-[18px] text-primary mt-[9px]",
                   /** 768 */
@@ -103,8 +104,9 @@ const Visionaries: React.FC<PropsWithClassName> = (props) => {
               </div>
               <div
                 className={cn(
+                  "font-regular",
                   /** 375 */
-                  "text-[10.5px] leading-[12.6px] font-title mt-[5.33px]",
+                  "text-[10.5px] leading-[12.6px]  mt-[5.33px]",
                   /** 768 */
                   "md:text-sm md:leading-[16.8px] md:mt-[5.78px]",
                   /** 1024 */

@@ -2,13 +2,11 @@ import React, { type PropsWithChildren } from "react";
 import { cn } from "@/utils";
 import type { PropsWithClassName } from "@/types";
 
-const TitleBlock: React.FC<PropsWithChildren & PropsWithClassName> = (
-  props
-) => {
+const TitleBlock: React.FC<PropsWithChildren & PropsWithClassName> = (props) => {
   return (
     <h2
       className={cn(
-        "font-title font-extrabold text-primary text-center",
+        "font-display font-semibold text-primary text-center",
         /** 375 */
         "text-2xl leading-[28.8px]",
         /** 768 */

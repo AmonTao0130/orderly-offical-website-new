@@ -43,7 +43,7 @@ const SystemStatus: React.FC<SystemStatusProps> = (props) => {
   return (
     <div
       className={cn(
-        "inline-flex items-center h-[35px] px-[12px] text-white text-sm font-semibold rounded-full",
+        "inline-flex items-center h-[35px] px-[12px] text-white text-sm font-medium rounded-full",
         "border-[1px] border-solid",
         isMaintenance
           ? "bg-[rgb(209,150,255,0.06)] border-[#D196FF33]"

@@ -7,7 +7,7 @@ const HeaderText: React.FC<PropsWithClassName> = (props) => {
     <div className="text-center">
       <h1
         className={cn(
-          "text-primary font-extrabold font-title",
+          "text-primary font-display",
           /** 375 */
           "text-[32px] leading-[38.4px] mt-[88px]",
           /** 768 */
@@ -30,8 +30,7 @@ const HeaderText: React.FC<PropsWithClassName> = (props) => {
       >
         An expansive ecosystem, featuring CEXs,
         <br className="md:hidden" /> DEXs, aggregators, wallets,
-        <br className="hidden md:inline lg:hidden" /> and more,{" "}
-        <br className="hidden lg:inline" />
+        <br className="hidden md:inline lg:hidden" /> and more, <br className="hidden lg:inline" />
         all powered by <br className="md:hidden" />
         Orderly’s permissionless liquidity layer.
       </div>

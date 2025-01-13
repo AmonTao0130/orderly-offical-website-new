@@ -36,7 +36,18 @@ export default {
     },
     extend: {
       fontFamily: {
-        title: "'Articulat CF', sans-serif",
+        display: "'Atyp Display', sans-serif",
+      },
+      fontFeatureSettings: {
+        ss05: '"ss05" on',
+      },
+      fontWeight: {
+        light: "333",
+        normal: "400",
+        regular: "400",
+        medium: "507",
+        semibold: "612",
+        bold: "700",
       },
       colors: {
         primary: {
@@ -120,20 +131,22 @@ export default {
   },
   plugins: [
     plugin(function ({ addBase }) {
-      const baseCSS = {
-        color: "white",
-        backgroundColor: "#000",
-        fontFamily: "'Manrope', sans-serif",
-        fontWeight: "500",
-        margin: 0,
+      addBase({
+        html: {
+          color: "white",
+          backgroundColor: "#000",
+          fontFamily: "'Atyp Text', sans-serif",
+          fontFeatureSettings: '"ss02" on, "ss03" on, "ss05" on, "ss06" on',
+          fontWeight: "400",
+          margin: 0,
+        },
         "::selection": {
           background: "#D196FF",
           color: "#000",
         },
-      };
-      addBase({
-        html: baseCSS,
-        body: baseCSS,
+        body: {
+          margin: 0,
+        },
       });
     }),
   ],

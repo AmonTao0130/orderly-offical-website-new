@@ -17,10 +17,7 @@ const Tab: React.FC<TabProps & PropsWithClassName> = (props) => {
   return (
     <div
       id="tabItem"
-      className={cn(
-        "flex overflow-x-auto invisible-scrollbar cursor-pointer select-none",
-        props.className
-      )}
+      className={cn("flex overflow-x-auto invisible-scrollbar cursor-pointer select-none", props.className)}
     >
       {props.data.map((item, index) => {
         const expanded = props.expandKey === item.key;
@@ -28,7 +25,7 @@ const Tab: React.FC<TabProps & PropsWithClassName> = (props) => {
           <div
             key={item.key}
             className={cn(
-              "flex items-center rounded-full whitespace-nowrap",
+              "flex items-center font-medium rounded-full whitespace-nowrap",
               expanded ? "text-[#000]" : "text-primary-54",
               expanded ? "bg-[rgba(209,150,255,1)]" : "bg-primary-8",
               /** 375 */

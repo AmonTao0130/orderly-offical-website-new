@@ -53,11 +53,11 @@ const EmailSubscribe: React.FC<PropsWithClassName> = (props) => {
         className={cn(
           "text-center",
           /** 375 */
-          "font-title font-bold text-[22px] leading-[26px]",
+          "font-display font-semibold text-[22px] leading-[26px]",
           /** 768 */
           "md:text-4xl md:leading-[48px]",
           /** 1024 */
-          "lg:text-[48px] lg:leading-[57px]",
+          "lg:text-[56px] lg:leading-[56px]",
           /** 1440 */
           "xl:text-6xl xl:leading-[76px]"
         )}
@@ -116,9 +116,7 @@ const EmailSubscribe: React.FC<PropsWithClassName> = (props) => {
             {errorMsg && (
               <div className={cn("flex items-center gap-x-1", "text-left")}>
                 <div className="w-[6px] h-[6px] rounded-full bg-[rgba(255,99,144,1)]"></div>
-                <div className="text-[rgba(255,99,144,1)] text-sm">
-                  {errorMsg}
-                </div>
+                <div className="text-[rgba(255,99,144,1)] text-sm">{errorMsg}</div>
               </div>
             )}
           </div>

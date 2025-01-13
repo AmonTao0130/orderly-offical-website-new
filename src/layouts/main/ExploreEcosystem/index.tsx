@@ -35,7 +35,7 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
           <div>
             <div
               className={cn(
-                "font-title font-bold text-primary",
+                "font-display text-primary",
                 /** 375 */
                 "text-2xl leading-[28.8px]",
                 /** 768 */
@@ -48,7 +48,7 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
             </div>
             <div
               className={cn(
-                "text-primary-80",
+                "text-primary-80 font-regular",
                 /** 375 */
                 "w-[335px] text-sm leading-[21px] mt-[16px]",
                 /** 768 */
@@ -57,9 +57,8 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
                 "lg:w-[530px]"
               )}
             >
-              An expansive ecosystem, featuring CEXs, DEXs, aggregators,
-              wallets, and more, all powered by Orderly’s permissionless
-              liquidity layer.
+              An expansive ecosystem, featuring CEXs, DEXs, aggregators, wallets, and more, all powered by Orderly’s
+              permissionless liquidity layer.
             </div>
           </div>
           {/* 这里加一层 div，button才不会填充整行 */}

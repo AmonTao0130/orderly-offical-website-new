@@ -1,4 +1,4 @@
-export const prerender = false
+export const prerender = false;
 
 import type { APIRoute } from "astro";
 import { getArticles } from "@/strapi/services";
@@ -10,7 +10,7 @@ export const GET: APIRoute = async (data) => {
   const res = await getArticles({
     pagination: {
       page: params.get("page") ? parseInt(params.get("page")!) : 1,
-      pageSize: 6,
+      pageSize: parseInt(params.get("pageSize") || "100"),
     },
     category: params.get("category")!,
     publicationState: params.get("publicationState") as PublicationState,

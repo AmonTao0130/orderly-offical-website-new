@@ -4,10 +4,7 @@ import Button from "@/components/Button";
 
 const Header: FC = () => {
   return (
-    <div
-      id="listing-header"
-      className={cn("relative", "h-[400px] lg:h-[600px]")}
-    >
+    <div id="listing-header" className={cn("relative", "h-[400px] lg:h-[600px]")}>
       <div id="listing-header-text" className={cn("text-center")}>
         <div
           //   background:
@@ -16,17 +13,13 @@ const Header: FC = () => {
           //   WebkitTextFillColor: "transparent",
           //   WebkitBackgroundClip: "text",
           // }}
-          className={cn(
-            "font-bold listing-text-gradient pt-[100px]",
-            "text-[26px] md:text-[36px] lg:text-[56px]"
-          )}
+          className={cn("font-semibold listing-text-gradient pt-[100px]", "text-[26px] md:text-[36px] lg:text-[56px]")}
         >
           Trade Anything, Anywhere.
           <br /> Hassle-free Listings
         </div>
         <div
           className={cn(
-            
             "mx-auto text-primary-80",
             "w-[365px] md:w-[480px] lg:w-[680px]",
             "text-[14px] lg:text-[20px]",
@@ -34,15 +27,11 @@ const Header: FC = () => {
             "mt-[8px] md:mt-[12px]"
           )}
         >
-          List your perps fast and hassle-free, with zero hidden costs—just
-          top-tier liquidity. Get instant access to 30+ DEXs connected with
-          Orderly.
+          List your perps fast and hassle-free, with zero hidden costs—just top-tier liquidity. Get instant access to
+          30+ DEXs connected with Orderly.
         </div>
         <Button
-          className={cn(
-            "mt-[24px] lg:mt-[40px]",
-            "px-[40px] md:px-[24px] lg:px-[40px]"
-          )}
+          className={cn("mt-[24px] lg:mt-[40px]", "px-[40px] md:px-[24px] lg:px-[40px]")}
           href="https://forms.gle/rzqVxvyWTo3i9crp6"
           target="_blank"
         >

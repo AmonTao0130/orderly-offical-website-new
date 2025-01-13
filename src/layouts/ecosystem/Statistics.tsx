@@ -10,22 +10,19 @@ interface StatisticsItemProps {
   border?: boolean;
 }
 
-const StatisticsItem: React.FC<StatisticsItemProps & PropsWithClassName> = (
-  props
-) => {
+const StatisticsItem: React.FC<StatisticsItemProps & PropsWithClassName> = (props) => {
   return (
     <div
       className={cn(
         "flex flex-1 flex-col",
         /** 768 */
-        props.border &&
-          "md:border-r-[1px] md:border-r-solid md:border-r-primary-20"
+        props.border && "md:border-r-[1px] md:border-r-solid md:border-r-primary-20"
       )}
     >
       <div
         className={cn(
           /** 375 */
-          "text-[10px] leading-[10.2px] font-title font-bold text-primary-100 ",
+          "text-[10px] leading-[10.2px] font-display font-semibold text-primary-100 ",
           /** 768 */
           "md:text-base md:leading-[16.32px]",
           /** 1024 */
@@ -36,8 +33,7 @@ const StatisticsItem: React.FC<StatisticsItemProps & PropsWithClassName> = (
       </div>
       <div
         style={{
-          background:
-            "linear-gradient(360deg, #9975FF -30.75%, rgba(155, 249, 255, 0) 103.38%), #FFFFFF",
+          background: "linear-gradient(360deg, #9975FF -30.75%, rgba(155, 249, 255, 0) 103.38%), #FFFFFF",
           backgroundClip: "text",
           WebkitTextFillColor: "transparent",
           WebkitBackgroundClip: "text",
@@ -46,7 +42,7 @@ const StatisticsItem: React.FC<StatisticsItemProps & PropsWithClassName> = (
         className={cn(
           "select-none",
           /** 375 */
-          "text-2xl leading-[24px] font-bold mt-[8px]",
+          "text-2xl leading-[24px] font-semibold mt-[8px]",
           /** 768 */
           "md:text-[32px] md:leading-[32px]",
           /** 1024 */
@@ -65,8 +61,7 @@ const Statistics: React.FC<PropsWithClassName> = (props) => {
   return (
     <div
       style={{
-        background:
-          "linear-gradient(180deg, rgba(38, 18, 73, 0.3) 0%, rgba(111, 69, 184, 0.3) 100%)",
+        background: "linear-gradient(180deg, rgba(38, 18, 73, 0.3) 0%, rgba(111, 69, 184, 0.3) 100%)",
       }}
       className={cn(
         "text-center backdrop-blur-[25px] rounded-[12px]",
@@ -82,11 +77,7 @@ const Statistics: React.FC<PropsWithClassName> = (props) => {
       )}
     >
       <div className="flex">
-        <StatisticsItem
-          label="Total trading volume"
-          value={`$${volume}`}
-          border
-        />
+        <StatisticsItem label="Total trading volume" value={`$${volume}`} border />
         <StatisticsItem label="Traders" value="400K+" border />
         <StatisticsItem label="Ecosystem partners" value={cardData.length} />
       </div>

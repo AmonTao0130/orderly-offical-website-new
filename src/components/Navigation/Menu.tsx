@@ -19,7 +19,7 @@ const Menu: React.FC<MenuProps> = (props) => {
             className="relative pr-[100px] ml-[-68px] xl:ml-[-52px] cursor-pointer select-none text-primary-80"
           >
             <div className="group">
-              <div className="flex items-center group-hover:text-primary-100 text-lg">
+              <div className="flex items-center group-hover:text-primary-100 text-[16px] font-medium">
                 {item.showHot && <CarnivalIcon className="mr-[4px]" />}
                 {item.component || item.title}
                 {item.children?.length && (
@@ -31,7 +31,7 @@ const Menu: React.FC<MenuProps> = (props) => {
                 className={cn(
                   "absolute top-[20px] z-50 overflow-hidden",
                   "transition-[max-height] duration-300",
-                  "max-h-0 group-hover:max-h-[226px]",
+                  "max-h-0 group-hover:max-h-[226px] min-w-[130px]",
                   item.showHot ? "left-[-4px]" : "left-[-20px] "
                 )}
               >
@@ -45,13 +45,9 @@ const Menu: React.FC<MenuProps> = (props) => {
                         className="flex items-center text-base hover:text-primary-100 px-[20px] my-[24px] first:mt-[20px] last:mb-[20px]"
                       >
                         {/* {child.title} */}
-                        <div className={cn("break-normal whitespace-nowrap")}>
-                          {child.component || child.title}
-                        </div>
+                        <div className={cn("break-normal whitespace-nowrap")}>{child.component || child.title}</div>
                         {child.isNew && <NewLabel className="ml-[4px]" />}
-                        {child.showArrow && (
-                          <ArrowRightTopIcon size={14} className="ml-[4px]" />
-                        )}
+                        {child.showArrow && <ArrowRightTopIcon size={14} className="ml-[4px]" />}
                       </a>
                     );
                   })}

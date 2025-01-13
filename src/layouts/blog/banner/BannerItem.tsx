@@ -51,7 +51,7 @@ const BannerItem: React.FC<BannerItemProps> = (props) => {
           <div
             className={cn(
               "text-2xl lg:text-[28px] xl:text-[36px]",
-              "text-primary font-extrabold mt-[8px]",
+              "text-primary font-semibold mt-[8px]",
               "text-ellipsis line-clamp-4"
             )}
           >
