@@ -110,7 +110,7 @@ const WhyChooseOrderly: React.FC<PropsWithClassName> = (props) => {
             )}
           >
             <h2>
-              Discover why builders <br className="lg:hidden" /> choose Orderly Network
+              Discover why builders <br className="lg:hidden" /> choose Orderly
             </h2>
 
             <div

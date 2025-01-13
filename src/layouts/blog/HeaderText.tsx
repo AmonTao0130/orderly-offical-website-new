@@ -21,7 +21,7 @@ const HeaderText: React.FC<PropsWithClassName> = (props) => {
             "2xl:"
           )}
         >
-          Orderly Network Blog
+          Orderly Blog
         </h1>
         <div
           className={cn(
