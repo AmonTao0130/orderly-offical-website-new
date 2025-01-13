@@ -34,13 +34,8 @@ const icons = [
 
 const Bottom: React.FC<PropsWithClassName> = (props) => {
   return (
-    <div
-      className={cn(
-        "flex justify-between pt-[20px] pb-[30px]",
-        props.className
-      )}
-    >
-      <div className="text-sm text-[#8C8C8C]">© 2024 Orderly Network.</div>
+    <div className={cn("flex justify-between pt-[20px] pb-[30px]", props.className)}>
+      <div className="text-sm text-[#8C8C8C]">© 2025 Orderly.</div>
       <div className="flex items-center">
         {icons.map((icon) => {
           const Icon = icon.icon;

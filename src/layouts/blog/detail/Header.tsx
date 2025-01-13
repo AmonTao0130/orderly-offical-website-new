@@ -91,7 +91,7 @@ const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
               "md:text-xl leading-[30px]"
             )}
           >
-            by {attributes.author?.data?.attributes?.name || "Orderly Network"}
+            by {attributes.author?.data?.attributes?.name || "Orderly"}
           </div>
         </div>
 

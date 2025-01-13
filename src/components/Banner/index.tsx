@@ -18,7 +18,7 @@ type Banner = {
 
 const banners: Banner[] = [
   {
-    title: "Orderly Network’s NEAR instance winds down on Sept. 18.",
+    title: "Orderly's NEAR instance winds down on Sept. 18.",
     url: "https://app.orderly.network/near",
     moreText: "WITHDRAW ASSETS",
   },
@@ -38,7 +38,7 @@ const banners: Banner[] = [
     moreText: "APPLY NOW",
   },
   {
-    title: "Win 100,000 $ORDER on Orderly Network x Degen Bridge Bash campaign",
+    title: "Win 100,000 $ORDER on Orderly x Degen Bridge Bash campaign",
     url: "https://x.com/GalaxyExchangeX/status/1850922325752885484",
     moreText: "LEARN MORE",
   },

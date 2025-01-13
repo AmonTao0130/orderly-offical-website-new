@@ -167,9 +167,8 @@ export const data = [
     id: 157,
     attributes: {
       title:
-        "Orderly Network and Very Long Swap To Expand Web3 Frontiers in Asian Markets, Introduces First-ever Japanese-built PerpDEX ",
-      description:
-        "Japanese-based builders to deliver omnichain perps trading, powered by Orderly\n",
+        "Orderly and Very Long Swap To Expand Web3 Frontiers in Asian Markets, Introduces First-ever Japanese-built PerpDEX ",
+      description: "Japanese-based builders to deliver omnichain perps trading, powered by Orderly\n",
       slug: "orderly-network-vls-perp-asia",
       createdAt: "2024-08-23T09:12:47.912Z",
       updatedAt: "2024-08-23T09:53:16.772Z",
@@ -250,8 +249,7 @@ export const data = [
   {
     id: 156,
     attributes: {
-      title:
-        "1 Million Messages: Orderly’s LayerZero Achievement (Who’s Counting?)",
+      title: "1 Million Messages: Orderly’s LayerZero Achievement (Who’s Counting?)",
       description: "We are announcing a celebration of epic proportions!",
       slug: "orderly-network-layerzero-campaign",
       createdAt: "2024-08-22T10:12:03.997Z",
@@ -333,10 +331,8 @@ export const data = [
   {
     id: 153,
     attributes: {
-      title:
-        "Orderly Network Welcomes Zotto, AI-Powered Automated Trading Platform For Onchain Perpetual Trading",
-      description:
-        "Perps Trading Simplified with Smart AI Agents on Zotto, powered by Orderly",
+      title: "Orderly Welcomes Zotto, AI-Powered Automated Trading Platform For Onchain Perpetual Trading",
+      description: "Perps Trading Simplified with Smart AI Agents on Zotto, powered by Orderly",
       slug: "orderly-network-zotto-ai-perps-trading",
       createdAt: "2024-08-13T23:33:30.213Z",
       updatedAt: "2024-08-15T12:58:16.578Z",

@@ -45,7 +45,7 @@ const Main: React.FC<PropsWithClassName> = (props) => {
             "md:mt-[48px]"
           )}
         >
-          We are Orderly Network, the ultimate destination for decentralized
+          We are Orderly, the ultimate destination for decentralized
           trading platforms. We are not satisfied with the limitations of
           centralized exchanges or the complexities of building decentralized
           order books. We aim to make trading easy, fast, and secure for
