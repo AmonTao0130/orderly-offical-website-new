@@ -22,11 +22,6 @@ const banners: Banner[] = [
     url: "https://app.orderly.network/near",
     moreText: "WITHDRAW ASSETS",
   },
-  // {
-  //   title: "Unlock 50K $ZRO giveaway on Orderly & LayerZero campaign!",
-  //   url: "https://app.galxe.com/quest/orderlynetwork/GC9jhtxnna",
-  //   moreText: "GET STARTED",
-  // },
   {
     title: "$ORDER claiming and staking are now LIVE.",
     url: "https://airdrop.orderly.network",
@@ -37,42 +32,49 @@ const banners: Banner[] = [
     url: Hyperlink.Ecosystem.ListingApplication,
     moreText: "APPLY NOW",
   },
-  {
-    title: "Win 100,000 $ORDER on Orderly x Degen Bridge Bash campaign",
-    url: "https://x.com/GalaxyExchangeX/status/1850922325752885484",
-    moreText: "LEARN MORE",
-  },
 ];
 
-const BannerText = forwardRef<HTMLDivElement, Banner & PropsWithClassName>((props, ref) => {
-  const { title, url, moreText, className } = props;
-  return (
-    <div
-      key={title}
-      style={{
-        transform: "translate3d(0, 0, 0)",
-      }}
-      className={cn(
-        "flex-[0_0_100%] min-h-0 w-full py-[16px]",
-        "flex flex-col justify-center items-start",
-        "md:flex-row md:items-center",
-        className
-      )}
-      ref={ref}
-    >
-      {/* TODO: 第二行文字左对齐 */}
-      <span className={cn("text-white font-medium text-base leading-[24px]", "md:pr-[12px]")}>{title}</span>
-      <a
-        href={url}
-        target="_blank"
-        className={cn("inline-flex", "items-center text-[#8AEFF5] font-semibold text-sm leading-[32px]")}
+const BannerText = forwardRef<HTMLDivElement, Banner & PropsWithClassName>(
+  (props, ref) => {
+    const { title, url, moreText, className } = props;
+    return (
+      <div
+        key={title}
+        style={{
+          transform: "translate3d(0, 0, 0)",
+        }}
+        className={cn(
+          "flex-[0_0_100%] min-h-0 w-full py-[16px]",
+          "flex flex-col justify-center items-start",
+          "md:flex-row md:items-center",
+          className
+        )}
+        ref={ref}
       >
-        <div>{moreText}</div>
-        <ArrowForwardIcon />
-      </a>
-    </div>
-  );
-});
+        {/* TODO: 第二行文字左对齐 */}
+        <span
+          className={cn(
+            "text-white font-medium text-base leading-[24px]",
+            "md:pr-[12px]"
+          )}
+        >
+          {title}
+        </span>
+        <a
+          href={url}
+          target="_blank"
+          className={cn(
+            "inline-flex",
+            "items-center text-[#8AEFF5] font-semibold text-sm leading-[32px]"
+          )}
+        >
+          <div>{moreText}</div>
+          <ArrowForwardIcon />
+        </a>
+      </div>
+    );
+  }
+);
 
 const Banner: React.FC = () => {
   const { width } = useSize();
@@ -116,7 +118,11 @@ const Banner: React.FC = () => {
           </div>
         </div>
 
-        <BannerText ref={ref} className={cn(height && "absolute invisible")} {...banners[0]} />
+        <BannerText
+          ref={ref}
+          className={cn(height && "absolute invisible")}
+          {...banners[0]}
+        />
       </div>
 
       <CloseIcon
