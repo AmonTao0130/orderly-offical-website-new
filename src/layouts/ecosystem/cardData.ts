@@ -88,14 +88,14 @@ export const cardData: TCardData[] = [
       "Elixir Protocol is a high-throughput DPoS consensus network that enables anyone to supply liquidity to orderbooks.",
     url: "https://elixir.finance/",
   },
-  {
-    icon: RageTrade.src,
-    category: "Builder",
-    title: "Rage Trade",
-    description:
-      "Perp Aggregator. Best prices, aggregated liquidity, multichain.",
-    url: "https://www.rage.trade/",
-  },
+  // {
+  //   icon: RageTrade.src,
+  //   category: "Builder",
+  //   title: "Rage Trade",
+  //   description:
+  //     "Perp Aggregator. Best prices, aggregated liquidity, multichain.",
+  //   url: "https://www.rage.trade/",
+  // },
   {
     icon: LogX.src,
     category: "Builder",
@@ -190,14 +190,14 @@ export const cardData: TCardData[] = [
   //     "IBX is a decentralized exchange that focuses on orderbook-based trading, offering secure crypto trades powered by Orderly.",
   //   url: "https://twitter.com/IBXtrade",
   // },
-  {
-    icon: XYFinance.src,
-    category: "Builder",
-    title: "XY Finance",
-    description:
-      "XY Finance is a cross-chain protocol aggregating DEXs & Bridges for seamless, one-click multi-chain swaps.",
-    url: "https://app.xy.finance/",
-  },
+  // {
+  //   icon: XYFinance.src,
+  //   category: "Builder",
+  //   title: "XY Finance",
+  //   description:
+  //     "XY Finance is a cross-chain protocol aggregating DEXs & Bridges for seamless, one-click multi-chain swaps.",
+  //   url: "https://app.xy.finance/",
+  // },
   {
     icon: Dfyn.src,
     category: "Builder",
@@ -246,14 +246,14 @@ export const cardData: TCardData[] = [
       "Unibot is the fastest on-chain trading terminal and telegram DEX trading bot.",
     url: "https://perps.unibot.app/",
   },
-  {
-    icon: Unidex.src,
-    category: "Builder",
-    title: "UniDex",
-    description:
-      "UniDex is a DeFi platform that aims to provide a hub for traders to access the best rates for their trades within the ecosystem",
-    url: "https://www.unidex.exchange/",
-  },
+  // {
+  //   icon: Unidex.src,
+  //   category: "Builder",
+  //   title: "UniDex",
+  //   description:
+  //     "UniDex is a DeFi platform that aims to provide a hub for traders to access the best rates for their trades within the ecosystem",
+  //   url: "https://www.unidex.exchange/",
+  // },
   {
     icon: PrimeProtocol.src,
     category: "Builder",
@@ -262,14 +262,14 @@ export const cardData: TCardData[] = [
       "Prime Protocol is a one-stop shop where investors can deposit all their digital assets across chains into a single protocol and receive credit anywhere.",
     url: "https://app.primeprotocol.xyz/trading/PERP_ETH_USDC",
   },
-  {
-    icon: TangleSwap.src,
-    category: "Builder",
-    title: "TangleSwap",
-    description:
-      "TangleSwap combines the best DeFi solutions for users to seamlessly manage and grow their digital assets.",
-    url: "https://www.tangleswap.exchange/",
-  },
+  // {
+  //   icon: TangleSwap.src,
+  //   category: "Builder",
+  //   title: "TangleSwap",
+  //   description:
+  //     "TangleSwap combines the best DeFi solutions for users to seamlessly manage and grow their digital assets.",
+  //   url: "https://www.tangleswap.exchange/",
+  // },
   {
     icon: Moonpay.src,
     category: "Product",
