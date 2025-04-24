@@ -17,11 +17,11 @@ type Banner = {
 };
 
 const banners: Banner[] = [
-  {
-    title: "Orderly's NEAR instance winds down on Sept. 18.",
-    url: "https://app.orderly.network/near",
-    moreText: "WITHDRAW ASSETS",
-  },
+  // {
+  //   title: "Orderly's NEAR instance winds down on Sept. 18.",
+  //   url: "https://app.orderly.network/near",
+  //   moreText: "WITHDRAW ASSETS",
+  // },
   {
     title: "$ORDER claiming and staking are now LIVE.",
     url: "https://airdrop.orderly.network",
