@@ -31,6 +31,8 @@ import QuickSwap from "./imgs/QuickSwap.png";
 import CoolWallet from "./imgs/CoolWallet.png";
 import FusionX from "./imgs/FusionX.png";
 import Xade from "./imgs/Xade.png";
+import Kyrr from "./imgs/Kyrr.png";
+import Coin98 from "./imgs/Coin98.png";
 
 export type TCardData = {
   icon: string;
@@ -301,5 +303,19 @@ export const cardData: TCardData[] = [
     description:
       "VOOI is a capital-efficient, low-slippage, and multi-stablecoin liquidity pool designed for various DeFi platforms and individuals.",
     url: "https://vooi.io/",
+  },
+  {
+    icon: Kyrr.src,
+    category: "Builder",
+    title: "Kyrr.io",
+    description: "Future of Finance, Today's Platform.",
+    url: "https://dex.kyrr.io/",
+  },
+  {
+    icon: Coin98.src,
+    category: "Builder",
+    title: "Coin98",
+    description: "Everyone's DeFi & AI Wallet.",
+    url: "https://coin98.com/",
   },
 ];
