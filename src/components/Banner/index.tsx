@@ -22,11 +22,11 @@ const banners: Banner[] = [
   //   url: "https://app.orderly.network/near",
   //   moreText: "WITHDRAW ASSETS",
   // },
-  {
-    title: "$ORDER claiming and staking are now LIVE.",
-    url: "https://airdrop.orderly.network",
-    moreText: "CLAIM NOW",
-  },
+  // {
+  //   title: "$ORDER claiming and staking are now LIVE.",
+  //   url: "https://airdrop.orderly.network",
+  //   moreText: "CLAIM NOW",
+  // },
   {
     title: "Get your token listed on Orderly!",
     url: Hyperlink.Ecosystem.ListingApplication,
