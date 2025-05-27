@@ -33,6 +33,7 @@ import FusionX from "./imgs/FusionX.png";
 import Xade from "./imgs/Xade.png";
 import Kyrr from "./imgs/Kyrr.png";
 import Coin98 from "./imgs/Coin98.png";
+import Solana from "./imgs/Solana.png";
 
 export type TCardData = {
   icon: string;
@@ -317,5 +318,13 @@ export const cardData: TCardData[] = [
     title: "Coin98",
     description: "Everyone's DeFi & AI Wallet.",
     url: "https://coin98.com/",
+  },
+  {
+    icon: Solana.src,
+    category: "Ecosystem",
+    title: "Solana",
+    description:
+      "Solana is a high performance blockchain that powers scalable, low-cost crypto applications.",
+    url: "https://solana.com",
   },
 ];

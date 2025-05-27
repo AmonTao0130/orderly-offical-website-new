@@ -9,6 +9,7 @@ import Ethereum from "./icons/Ethereum.png";
 import Solana from "./icons/Solana.png";
 import Polygon from "./icons/Polygon.png";
 import Elixir from "./icons/Elixir.png";
+import Kyrr from "./icons/kyrr.png";
 // import RageTrade from "./icons/RageTrade.png";
 import WOOFiPro from "./icons/WOOFiPro.png";
 import Base from "./icons/Base.png";
@@ -30,8 +31,8 @@ const icons = [
   { name: "Elixir", src: Elixir.src },
   { name: "QuickSwap", src: QuickSwap.src },
   { name: "Logx", src: Logx.src },
+  { name: "Kyrr", src: Kyrr.src },
   { name: "Base", src: Base.src },
-  { name: "Sei", src: Sei.src },
 ];
 
 const Brand: React.FC<PropsWithClassName> = (props) => {
