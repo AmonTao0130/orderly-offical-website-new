@@ -63,6 +63,7 @@ export const Hyperlink = {
     Medium: "https://medium.com/@orderlynetwork",
     Linkedin: "https://www.linkedin.com/company/orderly-network",
     Telegram: "https://t.me/Orderly_Discussions",
+    Snapshot: "https://snapshot.box/#/s:orderlygov.eth",
   },
 };
 

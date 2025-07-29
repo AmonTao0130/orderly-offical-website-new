@@ -7,8 +7,14 @@ import { cn } from "@/utils/index";
 import type { PropsWithClassName } from "@/types";
 import { Hyperlink } from "@/utils/constant";
 import TelegramIcon from "@/icons/TelegramIcon";
+import SnapshotIcon from "@/icons/SnapshotIcon";
 
 const icons = [
+  {
+    icon: SnapshotIcon,
+    url: Hyperlink.Community.Snapshot,
+    target: "_blank",
+  },
   {
     icon: DiscordIcon,
     url: Hyperlink.Community.Discord,

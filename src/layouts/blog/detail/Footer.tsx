@@ -9,6 +9,7 @@ import DiscordIcon from "@/icons/DiscordIcon";
 import MediumIcon from "@/icons/MediumIcon";
 import { Hyperlink } from "@/utils/constant";
 import { copyContent } from "@/utils";
+import SnapshotIcon from "@/icons/SnapshotIcon";
 
 const Footer: React.FC<PropsWithClassName> = (props) => {
   const [copy, setCopy] = useState(false);
@@ -70,6 +71,9 @@ const Footer: React.FC<PropsWithClassName> = (props) => {
             Join the Orderly community
           </div>
           <div className="w-[168px] flex justify-between items-center text-primary-50 mt-[12px]">
+            <a href={Hyperlink.Community.Snapshot}>
+              <SnapshotIcon size={24} />
+            </a>
             <a href={Hyperlink.Community.Discord}>
               <DiscordIcon size={24} />
             </a>
