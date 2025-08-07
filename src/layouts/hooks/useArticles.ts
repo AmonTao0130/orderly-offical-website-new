@@ -9,7 +9,11 @@ interface UseArticlesProps {
   publicationState: PublicationState;
 }
 
-export function useArticles({ displaySize = 6, category = "", publicationState }: UseArticlesProps) {
+export function useArticles({
+  displaySize = 6,
+  category = "",
+  publicationState,
+}: UseArticlesProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -48,7 +52,9 @@ export function useArticles({ displaySize = 6, category = "", publicationState }
   );
 
   useEffect(() => {
-    if (!initialData) return;
+    if (!initialData) {
+      return;
+    }
 
     const total = initialData.meta.pagination.total;
     const totalPages = Math.ceil(total / 100);
