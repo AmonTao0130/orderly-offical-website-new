@@ -1,6 +1,7 @@
 import type { Block } from "@/strapi/type";
 import { marked } from "marked";
 import { getRenderer } from "./marked";
+
 marked.use({
   // breaks: true, // 不生效，使用正则代替
   pedantic: false,

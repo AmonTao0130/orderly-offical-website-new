@@ -40,7 +40,12 @@ export default [
         target: "_blank",
         showArrow: true,
       },
-
+      {
+        title: "Orderly Dashboard",
+        url: Hyperlink.Traders.OrderlyDashboard,
+        target: "_blank",
+        showArrow: true,
+      },
       {
         title: "API Docs",
         url: Hyperlink.Traders.APIDocs,
