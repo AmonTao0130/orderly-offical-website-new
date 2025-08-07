@@ -52,20 +52,20 @@ export function useArticles({
   );
 
   useEffect(() => {
-    if (!initialData) {
+    if (!initialData || isLoading) {
       return;
     }
-
     const total = initialData.meta.pagination.total;
     const totalPages = Math.ceil(total / 100);
-
     setAllArticles(initialData.data);
     setHasNextBatch(totalPages > 1);
-  }, [initialData]);
+  }, [initialData, isLoading]);
 
   useEffect(() => {
     const loadNextBatch = async () => {
-      if (!hasNextBatch || isLoadingMore) return;
+      if (!hasNextBatch || isLoadingMore) {
+        return;
+      }
 
       const displayedItems = currentPage * displaySize;
       const loadedItems = allArticles.length;

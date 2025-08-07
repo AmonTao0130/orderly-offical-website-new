@@ -27,7 +27,7 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
     [Autoplay({ playOnInit: true, delay: 10000 })]
   );
 
-  const { data } = useSWR(
+  const { data, isLoading } = useSWR(
     `/api/pinArticles?&publicationState=${props.publicationState}`,
     fetcher,
     {
@@ -37,17 +37,20 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
   );
 
   useEffect(() => {
-    if (!data) {
+    if (!data || isLoading) {
       return;
     }
-
     setArticles(data?.data || []);
-  }, [data]);
+  }, [data, isLoading]);
 
   useEffect(() => {
-    emblaApi?.on("select", () => {
-      setScrollIndex(emblaApi?.selectedScrollSnap());
-    });
+    const callback = () => {
+      setScrollIndex(emblaApi?.selectedScrollSnap() ?? 0);
+    };
+    emblaApi?.on("select", callback);
+    return () => {
+      emblaApi?.off("select", callback);
+    };
   }, [emblaApi]);
 
   const hideIndicator = articles?.length <= 1;
