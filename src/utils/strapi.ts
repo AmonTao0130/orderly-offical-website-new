@@ -41,8 +41,8 @@ export function getTabData(categories: Categorg[]) {
 }
 
 export function getPageData(list: any[], pageSize: number, pageIndex: number) {
-  const pageData = [];
-  let rows = [];
+  const pageData: any[] = [];
+  let rows: any[] = [];
   for (let i = 0; i < list.length; i++) {
     rows.push(list[i]);
     if ((i + 1) % pageSize === 0 || i === list.length - 1) {

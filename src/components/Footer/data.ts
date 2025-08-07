@@ -36,6 +36,11 @@ export default [
         target: "_blank",
       },
       {
+        title: "Orderly Dashboard",
+        url: Hyperlink.Traders.OrderlyDashboard,
+        target: "_blank",
+      },
+      {
         title: "API Docs",
         url: Hyperlink.Traders.APIDocs,
         target: "_blank",
