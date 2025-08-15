@@ -10,20 +10,22 @@ const Menu: React.FC<PropsWithClassName> = (props) => {
         return (
           <div key={item.title} className="text-sm font-semibold">
             {item.title}
-            <div className="flex flex-col mt-[8px] font-medium">
-              {item.children.map((child) => {
-                return (
-                  <a
-                    key={child.url || child.title}
-                    href={child.url}
-                    target={child.target}
-                    className="text-primary-54 hover:text-primary-100 my-[8px]"
-                  >
-                    {child.title}
-                  </a>
-                );
-              })}
-            </div>
+            {Array.isArray(item.children) && (
+              <div className="flex flex-col mt-[8px] font-medium">
+                {item.children.map((child) => {
+                  return (
+                    <a
+                      key={child.url || child.title}
+                      href={child.url}
+                      target={child.target}
+                      className="text-primary-54 hover:text-primary-100 my-[8px]"
+                    >
+                      {child.title}
+                    </a>
+                  );
+                })}
+              </div>
+            )}
           </div>
         );
       })}

@@ -29,7 +29,7 @@ const IndicatorIcon: React.FC<SvgIconProps> = (props) => {
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="#20BB8C" />
-          <stop offset="1" stopColor="#42FFDD" stopOpacity="0.05" />
+          <stop stopColor="#42FFDD" offset="1" stopOpacity="0.05" />
         </linearGradient>
       </defs>
     </svg>

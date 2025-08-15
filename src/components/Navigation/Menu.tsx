@@ -7,6 +7,7 @@ import ArrowRightTopIcon from "@/icons/ArrowRightTopIcon";
 import { cn } from "@/utils";
 
 interface MenuProps {}
+
 const Menu: React.FC<MenuProps> = (props) => {
   return (
     // 这里使用mr-[-100px]抵销下面pr-[100px]的偏移量
@@ -21,12 +22,21 @@ const Menu: React.FC<MenuProps> = (props) => {
             <div className="group">
               <div className="flex items-center group-hover:text-primary-100 text-[16px] font-medium">
                 {item.showHot && <CarnivalIcon className="mr-[4px]" />}
-                {item.component || item.title}
+                {item.url ? (
+                  <a
+                    key={`item-${item.url}`}
+                    href={item.url}
+                    target={item.target}
+                  >
+                    {item.component || item.title}
+                  </a>
+                ) : (
+                  item.component || item.title
+                )}
                 {item.children?.length && (
                   <ArrowDownIcon className="ml-[2px] transition duration-300  group-hover:rotate-180" />
                 )}
               </div>
-
               <div
                 className={cn(
                   "absolute top-[20px] z-50 overflow-hidden",
@@ -35,23 +45,29 @@ const Menu: React.FC<MenuProps> = (props) => {
                   item.showHot ? "left-[-4px]" : "left-[-20px] "
                 )}
               >
-                <div className="mt-[16px] rounded-[12px] [background:linear-gradient(180deg,rgba(38,18,73,0.3)_0%,rgba(111,69,184,0.3)_100%)] border-[1px] border-solid border-[rgba(206,125,255,0.5)] backdrop-blur-[15px]">
-                  {item.children.map((child) => {
-                    return (
-                      <a
-                        key={child.url || child.title}
-                        href={child.url}
-                        target={child.target}
-                        className="flex items-center text-base hover:text-primary-100 px-[20px] my-[24px] first:mt-[20px] last:mb-[20px]"
-                      >
-                        {/* {child.title} */}
-                        <div className={cn("break-normal whitespace-nowrap")}>{child.component || child.title}</div>
-                        {child.isNew && <NewLabel className="ml-[4px]" />}
-                        {child.showArrow && <ArrowRightTopIcon size={14} className="ml-[4px]" />}
-                      </a>
-                    );
-                  })}
-                </div>
+                {Array.isArray(item.children) && (
+                  <div className="mt-[16px] rounded-[12px] [background:linear-gradient(180deg,rgba(38,18,73,0.3)_0%,rgba(111,69,184,0.3)_100%)] border-[1px] border-solid border-[rgba(206,125,255,0.5)] backdrop-blur-[15px]">
+                    {item.children.map((child) => {
+                      return (
+                        <a
+                          key={child.url || child.title}
+                          href={child.url}
+                          target={child.target}
+                          className="flex items-center text-base hover:text-primary-100 px-[20px] my-[24px] first:mt-[20px] last:mb-[20px]"
+                        >
+                          {/* {child.title} */}
+                          <div className={cn("break-normal whitespace-nowrap")}>
+                            {child.component || child.title}
+                          </div>
+                          {child.isNew && <NewLabel className="ml-[4px]" />}
+                          {child.showArrow && (
+                            <ArrowRightTopIcon size={14} className="ml-[4px]" />
+                          )}
+                        </a>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </div>
           </div>

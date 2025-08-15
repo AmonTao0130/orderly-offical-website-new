@@ -19,7 +19,7 @@ export function useSize() {
     };
   }, []);
 
-  const screen: "sm" | "md" | "lg" | "xl" | "2xl" | undefined = useMemo(() => {
+  const screen = useMemo(() => {
     if (width >= 1920) {
       return "2xl";
     }

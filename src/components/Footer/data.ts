@@ -1,7 +1,7 @@
 import { Hyperlink } from "@/utils/constant";
 import type { HTMLAttributeAnchorTarget } from "react";
 
-export default [
+const data = [
   {
     title: "Developers",
     children: [
@@ -62,6 +62,11 @@ export default [
         title: "Listing",
         url: Hyperlink.Ecosystem.ListingApplication,
       },
+      {
+        title: "Governance",
+        url: Hyperlink.Governance,
+        target: "_blank",
+      },
     ],
   },
   {
@@ -112,3 +117,5 @@ export default [
     target?: HTMLAttributeAnchorTarget;
   }[];
 }[];
+
+export default data;

@@ -2,7 +2,7 @@ import { Hyperlink } from "@/utils/constant";
 import type { HTMLAttributeAnchorTarget, ReactNode } from "react";
 import dune from "./img/dune.svg";
 
-export default [
+const data = [
   {
     title: "Developers",
     children: [
@@ -72,6 +72,11 @@ export default [
     ],
   },
   {
+    title: "Governance",
+    url: Hyperlink.Governance,
+    target: "_blank",
+  },
+  {
     title: "About",
     children: [
       {
@@ -124,6 +129,8 @@ export default [
   // },
 ] as {
   title: string;
+  url?: string;
+  target?: HTMLAttributeAnchorTarget;
   component?: ReactNode;
   showHot?: boolean;
   children: {
@@ -135,3 +142,5 @@ export default [
     target?: HTMLAttributeAnchorTarget;
   }[];
 }[];
+
+export default data;
