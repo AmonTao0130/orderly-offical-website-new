@@ -30,6 +30,7 @@ export const Hyperlink = {
     Blog: "/blog",
     ListingApplication: "/listing",
   },
+  Governance: "https://orderly.discourse.group",
   About: {
     Team: "/team",
     Analytics: "https://dune.com/orderly_network/orderly-dashboard",

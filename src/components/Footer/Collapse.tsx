@@ -36,7 +36,7 @@ const Collapse: React.FC<PropsWithClassName> = (props) => {
                 )}
               />
             </div>
-            {isExpand && (
+            {isExpand && Array.isArray(item.children) && (
               <div className="flex flex-col pl-[20px]">
                 {item.children.map((child) => {
                   return (

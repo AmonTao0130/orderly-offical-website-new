@@ -6,7 +6,7 @@ interface Content {
   id?: string;
 }
 
-const Content: React.FC<Content & PropsWithClassName & PropsWithChildren> = (
+const Content: React.FC<PropsWithChildren<Content & PropsWithClassName>> = (
   props
 ) => {
   return (
