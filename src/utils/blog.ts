@@ -20,9 +20,7 @@ export function parseBlocks(blocks: Block[]) {
 
   return blocks?.map((block) => {
     if (block.__component === "shared.rich-text") {
-      const html = marked.parse(block.body || "", {
-        renderer,
-      }) as string;
+      const html = marked.parse(block.body || "", { renderer }) as string;
       return {
         ...block,
         html: html
@@ -45,9 +43,7 @@ export function parseBlocks(blocks: Block[]) {
       const { title, body } = block || {};
       return {
         ...block,
-        title: marked.parse(title || "", {
-          renderer,
-        }) as string,
+        title: marked.parse(title || "", { renderer }) as string,
         body: marked.parse(body || "", { renderer }) as string,
       };
     }

@@ -7,33 +7,28 @@ import type {
 import { BlogPublishedTime } from "./constant";
 import { getArticleBySlug, getArticles } from "@/strapi/services";
 
-export async function getArticlesSortByDisplayTime(params?: {
+export const getArticlesSortByDisplayTime = async (params?: {
   isDetail?: boolean;
   pagination?: Pagination;
   publicationState?: PublicationState;
-}) {
+}) => {
   const articles = await getArticles(params);
-  return sortByDisplayTime(articles);
-}
+  return sortByDisplayTime(articles.data ?? []);
+};
 
-export async function getArticleWithDisplayTimeBySlug(
+export const getArticleWithDisplayTimeBySlug = async (
   slug: string = "",
-  params?: {
-    publicationState?: PublicationState;
-  }
-) {
+  params?: { publicationState?: PublicationState }
+) => {
   const article = await getArticleBySlug(slug, params);
   return wrapWithDisplayTime(article);
-}
+};
 
 export function getTabData(categories: Categorg[]) {
   const list = categories
     .map((category) => {
       const { name, slug } = category.attributes;
-      return {
-        title: name,
-        key: slug,
-      };
+      return { title: name, key: slug };
     })
     .filter((item) => !!item.key);
 
@@ -108,7 +103,7 @@ export function sortByDisplayTime(articles: Article[]) {
     };
   });
 
-  list.sort(function (a, b) {
+  list.sort((a, b) => {
     return a.attributes?.displayTime < b.attributes?.displayTime ? 1 : -1;
   });
 
@@ -122,7 +117,7 @@ export function checkSlugNotHardcoded(articles: Article[]) {
       const slug = article.attributes.slug;
       return BlogPublishedTime[slug] ? false : slug;
     })
-    .filter((item) => !!item);
+    .filter(Boolean);
 }
 
 /** 获取封面图片 */
