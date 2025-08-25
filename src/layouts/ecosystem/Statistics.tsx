@@ -1,7 +1,7 @@
 import React from "react";
 import type { PropsWithClassName } from "@/types";
 import { cn } from "@/utils";
-import { useVolume } from "../hooks/useVolume";
+import { useVolume } from "../hooks/useStatistics";
 import { cardData } from "./cardData";
 
 interface StatisticsItemProps {

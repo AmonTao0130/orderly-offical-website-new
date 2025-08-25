@@ -5,8 +5,7 @@ import { cn } from "@/utils";
 import NumberLabel from "./Number";
 import type { PropsWithClassName } from "@/types";
 import { Hyperlink } from "@/utils/constant";
-import { getTotalVolume } from "@/net/volume";
-import { useVolume } from "@/layouts/hooks/useVolume";
+import { useVolume } from "@/layouts/hooks/useStatistics";
 
 const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
   const volume = useVolume();
