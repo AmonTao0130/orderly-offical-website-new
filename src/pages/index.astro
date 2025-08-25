@@ -74,6 +74,21 @@ import PoweredDex from "@/layouts/main/PoweredDex";
       )}
       client:load
     />
+    <div id="PoweredDex">
+      <PoweredDex 
+        className={cn(
+          /** 375 */
+          "mt-[40px]",
+          /** 768 */
+          "md:mt-[40px]",
+          /** 1024 */
+          "lg:mt-[80px]",
+          /** 1440 */
+          "xl:mt-[80px]"
+        )}
+        client:visible
+      />
+    </div>
     <div class="relative">
       <WhyChooseOrderlyGradient />
       <WhyChooseOrderly
@@ -85,7 +100,7 @@ import PoweredDex from "@/layouts/main/PoweredDex";
           /** 1024 */
           "lg:mt-[147px]",
           /** 1440 */
-          "xl:mt-[285px]"
+          "xl:mt-[80px]"
         )}
         client:load
       />
