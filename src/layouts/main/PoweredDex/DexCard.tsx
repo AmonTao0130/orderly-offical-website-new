@@ -62,7 +62,7 @@ const gradientBorderStyles = {
 };
 
 const gradientBorderHoverStyles = {
-  background: 'linear-gradient(158.24deg, #7000FF 0.21%, #300F59 57.71%, #D4BFFF 101.58%)',
+  background: 'linear-gradient(168.24deg, #7000FF 0.21%, #300F59 57.71%, #D4BFFF 101.58%)',
   padding: '1.2px',
   WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
   WebkitMaskComposite: "xor",
@@ -72,7 +72,7 @@ const gradientBorderHoverStyles = {
 };
 
 const containerHoverStyles = {
-  background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), radial-gradient(114.23% 150.23% at 50% 120.86%, #644DC5 0%, rgba(0, 0, 0, 0) 60.62%)'
+  background: 'linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), radial-gradient(114.23% 155.23% at 50% 120.86%, #644DC5 0%, rgba(0, 0, 0, 0) 60.62%)'
 };
 
 const DexCard: React.FC<DexCardProps> = ({ name, src, url }) => {
