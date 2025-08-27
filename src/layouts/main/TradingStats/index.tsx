@@ -124,9 +124,9 @@ const TradingStats: React.FC<PropsWithClassName> = (props) => {
         <div className={cn(
           "min-w-[295px] ml-[24px] flex justify-between items-start",
           /** 375 */
-          "sm:w-full sm:ml-0 sm:justify-between sm:items-center",
+          "sm:w-full sm:justify-between sm:items-center",
           /** 768 */
-          "md:w-full md:justify-between md:items-center",
+          "md:w-full md:ml-0 md:justify-between md:items-center",
           /** 1024 */
           "lg:gap-8 lg:justify-between lg:items-start",
           /** 1440 */
