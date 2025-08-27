@@ -18,7 +18,17 @@ interface StatGroupProps {
 
 const StatGroup: React.FC<StatGroupProps> = ({ stats }) => {
   return (
-    <div className={cn("flex flex-col gap-12")}>
+    <div className={cn(
+      "flex flex-col",
+      /** 375 */
+      "gap-6",
+      /** 768 */
+      "md:gap-6",
+      /** 1024 */
+      "lg:gap-6",
+      /** 1440 */
+      "xl:gap-12"
+    )}>
       {stats.map((stat, index) => (
         <NumberLabel key={index} {...stat} />
       ))}
@@ -29,7 +39,15 @@ const StatGroup: React.FC<StatGroupProps> = ({ stats }) => {
 const Divider: React.FC = () => {
   return (
     <div
-      className="w-0 h-[189px]"
+      className={cn(
+        "w-0",
+        /** 375 */
+        "h-[108px]",
+        /** 768 */
+        "md:h-[148px]",
+        /** 1024 */
+        "lg:h-[189px]"
+      )}
       style={{
         borderLeft: "1px solid",
         borderImageSource:
@@ -64,9 +82,23 @@ const TradingStats: React.FC<PropsWithClassName> = (props) => {
       <div 
         className={cn(
           "flex justify-between items-start",
-          "gap-12",
+          /** 375 */
+          "flex-col gap-6 items-center",
+          /** 768 */
+          "md:flex-col md:gap-8 md:items-center",
+          /** 1024 */
+          "lg:flex-row lg:gap-8 lg:items-start",
+          /** 1440 */
+          "xl:gap-12",
           "rounded-[24px]",
-          "p-[48px]",
+          /** 375 */
+          "p-[24px] pt-[16px]",
+          /** 768 */
+          "md:py-[32px] md:px-[80px]",
+          /** 1024 */
+          "lg:py-[48px] lg:px-[40px]",
+          /** 1440 */
+          "xl:p-[48px]",
           "relative"
         )}
         style={containerStyle}
@@ -75,19 +107,44 @@ const TradingStats: React.FC<PropsWithClassName> = (props) => {
           className="absolute inset-0 rounded-[24px] p-px"
           style={borderStyle}
         />
-        <StatGroup stats={[
-          { label: "Total trading volume", number: loading ? "--" : stats.totalVolume, isLarge: true }
-        ]} />
-        <Divider />
-        <StatGroup stats={[
-          { label: "Open interest", number: loading ? "--" : stats.openInterest },
-          { label: "TVL", number: loading ? "--" : stats.tvl }
-        ]} />
-        <Divider />
-        <StatGroup stats={[
-          { label: "Total traders", number: loading ? "--" : stats.totalTraders },
-          { label: "Total builders", number: loading ? "--" : stats.totalBuilders }
-        ]} />
+
+        <div className={cn(
+          "w-auto",
+          /** 375 */
+          "sm:w-full sm:mx-[24px]",
+          /** 768 */
+          "md:w-full",
+          /** 1024 */
+          "lg:w-auto"
+        )}>
+          <StatGroup stats={[
+            { label: "Total trading volume", number: loading ? "--" : stats.totalVolume, isLarge: true }
+          ]} />
+        </div>
+        <div className={cn(
+          "min-w-[295px] ml-[24px] flex justify-between items-start",
+          /** 375 */
+          "sm:w-full sm:ml-0 sm:justify-between sm:items-center",
+          /** 768 */
+          "md:w-full md:justify-between md:items-center",
+          /** 1024 */
+          "lg:gap-8 lg:justify-between lg:items-start",
+          /** 1440 */
+          "xl:gap-12"
+        )}>
+          <div className="hidden lg:block">
+            <Divider />
+          </div>
+          <StatGroup stats={[
+            { label: "Open interest", number: loading ? "--" : stats.openInterest },
+            { label: "TVL", number: loading ? "--" : stats.tvl }
+          ]} />
+          <Divider />
+          <StatGroup stats={[
+            { label: "Total traders", number: loading ? "--" : stats.totalTraders },
+            { label: "Total builders", number: loading ? "--" : stats.totalBuilders }
+          ]} />
+        </div>
       </div>
     </Content>
   );
