@@ -1,5 +1,4 @@
 import React from "react";
-import Content from "@/components/Content";
 import Button from "@/components/Button";
 import { cn } from "@/utils";
 import type { PropsWithClassName } from "@/types";
@@ -85,88 +84,94 @@ const backers = [
 
 const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
   return (
-    <Content className={props.className}>
+    <div
+      className={cn(
+        "flex flex-col items-center",
+        /** 375 */
+        "px-5 sm:text-start",
+        /** 768 */
+        "md:px-10 md:text-start",
+        /** 1024 */
+        "lg:px-15 lg:text-start",
+        /** 1440 */
+        "xl:px-20 xl:text-center xl:items-center",
+        props.className
+      )}
+    >
       <div
         className={cn(
-          "flex flex-col items-center text-center",
+          "font-display text-primary",
+          /** 375 */
+          "text-2xl leading-[32px] sm:text-start",
+          /** 768 */
+          "md:text-4xl md:leading-[40px] md:text-start",
+          /** 1024 */
+          "lg:text-5xl lg:leading-[56px] lg:text-start"
         )}
       >
-        <div
-          className={cn(
-            "font-display text-primary",
-            /** 375 */
-            "text-2xl leading-[28.8px]",
-            /** 768 */
-            "md:text-4xl md:leading-[48px]",
-            /** 1024 */
-            "lg:text-5xl lg:leading-[72px]"
-          )}
-        >
-          Explore Orderly's vibrant ecosystem
-        </div>
-        <div
-          className={cn(
-            "text-primary-80 font-regular",
-            /** 375 */
-            "text-sm leading-[21px] mt-[12px]",
-            /** 768 */
-            "md:text-base md:leading-[24px] md:mt-[8px]"
-          )}
-        >
-          An expansive ecosystem, featuring CEXs, DEXs, aggregators, wallets, and more, all powered by Orderly's permissionless liquidity layer.
-        </div>
-        
-        <div 
-          className={cn(
-            "flex flex-wrap justify-start gap-x-6",
-            /** 375 */
-            "mt-[32px]",
-            /** 768 */
-            "md:mt-[40px]",
-            /** 1024 */
-            "lg:mt-[48px]"
-          )}
-        >
-          {backers.map((backer) => {
-            return (
-              <img
-                key={backer.name}
-                className={cn(
-                  "h-[80px] object-contain",
-                  /** 375 */
-                  "w-[113px]",
-                  /** 768 */
-                  "md:w-[172px]",
-                  /** 1024 */
-                  "lg:w-[150px]",
-                  /** 1440 */
-                  "xl:w-[193px]"
-                )}
-                src={backer.src}
-                alt={backer.name}
-              />
-            );
-          })}
-        </div>
-
-        <Button
-          type="outlined"
-          className={cn(
-            /** 375 */
-            "mt-[32px]",
-            /** 768 */
-            "md:mt-[40px]",
-            /** 1024 */
-            "lg:text-sm lg:px-[20px] lg:h-[40px] lg:mt-[48px]",
-            /** 1440 */
-            "xl:text-base xl:px-[24px] xl:h-[52px]"
-          )}
-          href={Hyperlink.Main.ViewMore}
-        >
-          View more
-        </Button>
+        Explore Orderly's vibrant ecosystem
       </div>
-    </Content>
+      <div
+        className={cn(
+          "font-regular  mt-[12px]",
+          /** 375 */
+          "text-sm leading-[21px] text-start",
+          /** 768 */
+          "md:text-base md:leading-[24px] md:text-start",
+          /** 1024 */
+          "lg:text-start",
+          /** 1440 */
+          "xl:text-center"
+        )}
+      >
+        An expansive ecosystem, featuring CEXs, DEXs, aggregators, wallets, and more, all powered by Orderly's permissionless liquidity layer.
+      </div>
+      
+      <div 
+        className={cn(
+          "grid gap-x-6 gap-y-6 w-full",
+          /** 375 */
+          "grid-cols-2 mt-[32px]",
+          /** 768 */
+          "md:grid-cols-4 md:mt-[40px]",
+          /** 1024 */
+          "lg:grid-cols-5 lg:mt-[48px]",
+          /** 1440 */
+          "xl:grid-cols-6",
+        )}
+      >
+        {backers.map((backer) => {
+          return (
+            <img
+              key={backer.name}
+              className={cn(
+                "h-[80px] object-contain flex items-center justify-center w-full",
+              )}
+              src={backer.src}
+              alt={backer.name}
+            />
+          );
+        })}
+      </div>
+
+      <Button
+        type="outlined"
+        className={cn(
+          "self-center",
+          /** 375 */
+          "mt-[32px]",
+          /** 768 */
+          "md:mt-[40px]",
+          /** 1024 */
+          "lg:text-sm lg:px-[20px] lg:h-[40px] lg:mt-[48px]",
+          /** 1440 */
+          "xl:text-base xl:px-[24px] xl:h-[52px]"
+        )}
+        href={Hyperlink.Main.ViewMore}
+      >
+        View more
+      </Button>
+    </div>
   );
 };
 
