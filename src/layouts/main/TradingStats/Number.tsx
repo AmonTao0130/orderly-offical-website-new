@@ -35,7 +35,7 @@ const NumberLabel: React.FC<NumberLabelProps & PropsWithClassName> = (props) => 
             )
           : cn(
               /** 375 */
-              "w-[125px] h-[42px] text-left",
+              "w-[130px] h-[42px] text-left",
               /** 768 */
               "md:w-[165px] md:h-[62px] md:text-left",
               /** 1024 */
@@ -66,7 +66,7 @@ const NumberLabel: React.FC<NumberLabelProps & PropsWithClassName> = (props) => 
           props.isLarge
             ? cn(
                 /** 375 */
-                "text-[32px] leading-[32px] font-display font-bold sm:mt-[3px]",
+                "text-[32px] leading-[32px] font-display font-bold mt-[3px]",
                 /** 768 */
                 "md:text-[48px] md:leading-[48px] md:mt-[12px]",
                 /** 1024 */
@@ -76,7 +76,7 @@ const NumberLabel: React.FC<NumberLabelProps & PropsWithClassName> = (props) => 
               )
             : cn(
                 /** 375 */
-                "text-[24px] leading-[24px] font-display font-semibold sm:mt-[3px]",
+                "text-[24px] leading-[24px] font-display font-semibold mt-[3px]",
                 /** 768 */
                 "md:text-[32px] md:leading-[32px] md:mt-[12px]",
                 /** 1024 */
