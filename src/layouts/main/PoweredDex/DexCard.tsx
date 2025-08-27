@@ -18,7 +18,10 @@ const Logo: React.FC<LogoProps> = ({ src, alt, isHovered = false }) => {
       className={cn(
         "flex items-center justify-center",
         "rounded-[60px]",
-        "w-[64px] h-[64px]",
+        /** 375 */
+        "w-[32px] h-[32px]",
+        /** 768 */
+        "md:w-[64px] md:h-[64px]",
         "flex-shrink-0"
       )}
       style={logoGradientBorderStyles}
@@ -37,7 +40,13 @@ const Logo: React.FC<LogoProps> = ({ src, alt, isHovered = false }) => {
         <img
           src={src}
           alt={alt}
-          className="object-contain w-[36px] h-[36px]"
+          className={cn(
+            "object-contain",
+            /** 375 */
+            "w-[20px] h-[20px]",
+            /** 768 */
+            "md:w-[36px] md:h-[36px]"
+          )}
         />
       </div>
     </div>
@@ -89,13 +98,14 @@ const DexCard: React.FC<DexCardProps> = ({ name, src, url }) => {
       className={cn(
         "relative group",
         /** 375 */
-        "w-[140px] h-[60px]",
+        "w-[150px] h-[64px] sm:w-[163px]",
         /** 768 */
-        "md:w-[180px] md:h-[70px]",
+        "md:w-[300px] md:h-[104px]",
         /** 1024 */
-        "lg:w-[200px] lg:h-[80px]",
+        "lg:w-[285px] lg:h-[104px]",
         /** 1440 */
         "xl:w-[300px] xl:h-[104px]",
+ 
         url ? "cursor-pointer" : ""
       )}
       onMouseEnter={() => setIsHovered(true)}
@@ -130,19 +140,15 @@ const DexCard: React.FC<DexCardProps> = ({ name, src, url }) => {
           className="absolute inset-0 rounded-2xl pointer-events-none transition-opacity ease-in-out duration-200"
           style={{ ...containerHoverStyles, opacity: isHovered ? 1 : 0 }}
         />
-        <div className="relative z-10 flex items-center gap-[24px]">
+        <div className="relative flex items-center gap-[8px] md:gap-[20px]">
           <Logo src={src} alt={name} isHovered={isHovered} />
           <span
             className={cn(
               "text-primary font-display font-semibold",
               /** 375 */
-              "text-sm leading-[16px]",
+              "text-xs leading-[12px]",
               /** 768 */
-              "md:text-base md:leading-[18px]",
-              /** 1024 */
-              "lg:text-lg lg:leading-[22px]",
-              /** 1440 */
-              "xl:text-2xl xl:leading-[24px]"
+              "md:text-2xl md:leading-[24px]"
             )}
           >
             {name}

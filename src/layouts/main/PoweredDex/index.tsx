@@ -30,17 +30,14 @@ const PoweredDex: React.FC<PropsWithClassName> = (props) => {
       <div 
         className={cn(
           "flex flex-col items-center",
-          /** Figma specs: height 504px, padding 80px */
-          "min-h-[504px] py-[80px]",
-          /** Responsive adjustments for smaller screens */
           /** 375 */
-          "py-[40px]",
+          "py-[24px]",
           /** 768 */
           "md:py-[60px]",
           /** 1024 */
           "lg:py-[70px]",
           /** 1440 */
-          "xl:py-[80px] xl:min-h-[504px]"
+          "xl:py-[80px]"
         )}
       >
         <BlockTitle>Trade on Orderly powered DEX</BlockTitle>
@@ -48,15 +45,14 @@ const PoweredDex: React.FC<PropsWithClassName> = (props) => {
         <div 
           className={cn(
             "flex flex-wrap justify-center items-center w-full",
-            /** Figma specs: 40px gap between items */
             /** 375 */
-            "mt-[40px] gap-[20px]",
+            "mt-[24px] gap-[16px]",
             /** 768 */
-            "md:mt-[50px] md:gap-[30px]",
+            "md:mt-[50px] md:gap-[24px]",
             /** 1024 */
-            "lg:mt-[60px] lg:gap-[35px]",
-            /** 1440 - Updated to 24px gap to fit 4 cards of 300px width */
-            "xl:gap-[24px] xl:mt-[60px]"
+            "lg:mt-[60px] lg:gap-[24px]",
+            /** 1440 */
+            "xl:mt-[60px] xl:gap-[24px]"
           )}
         >
           {dexData.map((dex) => (
