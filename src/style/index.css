@@ -190,6 +190,10 @@ body {
   line-height: 1.2;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .invisible-scrollbar::-webkit-scrollbar {
   display: none;
 }

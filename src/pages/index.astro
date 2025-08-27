@@ -20,6 +20,9 @@ import FooterGradient from "@/layouts/main/Background/gradient/Footer";
 import WhyChooseOrderlyGradient from "@/layouts/main/Background/gradient/WhyChooseOrderly";
 import BrandGradient from "@/layouts/main/Background/gradient/Brand";
 import IntegrateSDKGradient from "@/layouts/main/Background/gradient/IntegrateSDK";
+import TradingStats from "@/layouts/main/TradingStats";
+import PoweredDex from "@/layouts/main/PoweredDex";
+import EcosystemGradient from "@/layouts/main/Background/gradient/Ecosystem";
 ---
 
 <Layout
@@ -42,12 +45,13 @@ import IntegrateSDKGradient from "@/layouts/main/Background/gradient/IntegrateSD
               /** 1024 */
               "lg:mt-[119px]"
             )}
+            client:visible
           />
         </div>
       </div>
     </div>
 
-    <Investors
+    <!-- <Investors
       className={cn(
         /** 375 */
         "mt-[126px]",
@@ -58,39 +62,70 @@ import IntegrateSDKGradient from "@/layouts/main/Background/gradient/IntegrateSD
         /** 1024 */
         "2xl:mt-[276px]"
       )}
+    /> -->
+    <TradingStats  
+      className={cn(
+        /** 375 */
+        "mt-[32px]",
+        /** 768 */
+        "md:mt-[118px]",
+        /** 1024 */
+        "lg:mt-[223px]",
+        /** 1440 */
+        "xl:mt-[210px]"
+      )}
+      client:load
     />
+    <div id="PoweredDex">
+      <PoweredDex 
+        className={cn(
+          /** 375 */
+          "mt-[8px]",
+          /** 768 */
+          "md:mt-[40px]",
+          /** 1024 */
+          "lg:mt-[80px]",
+          /** 1440 */
+          "xl:mt-[80px]"
+        )}
+        client:visible
+      />
+    </div>
     <div class="relative">
       <WhyChooseOrderlyGradient />
       <WhyChooseOrderly
         className={cn(
           /** 375 */
-          "mt-[94px]",
+          "mt-[36px]",
           /** 768 */
-          "md:mt-[138px]",
+          "md:mt-[92px]",
           /** 1024 */
-          "lg:mt-[147px]",
+          "lg:mt-[107px]",
           /** 1440 */
-          "xl:mt-[285px]"
+          "xl:mt-[80px]"
         )}
         client:load
       />
     </div>
 
-    <ExploreEcosystem
-      className={cn(
-        /** 375 */
-        "mt-[110px]",
-        /** 768 */
-        "md:mt-[216px]",
-        /** 1024 */
-        "lg:mt-[208px]",
-        /** 1440 */
-        "xl:mt-[279px]"
-      )}
-      client:visible
-    />
-
     <div class="relative">
+      <EcosystemGradient />
+      <ExploreEcosystem
+        className={cn(
+          /** 375 */
+          "mt-[110px]",
+          /** 768 */
+          "md:mt-[216px]",
+          /** 1024 */
+          "lg:mt-[208px]",
+          /** 1440 */
+          "xl:mt-[279px]"
+        )}
+        client:visible
+      />
+    </div>
+
+    <!-- <div class="relative">
       <BrandGradient />
       <Brand
         className={cn(
@@ -105,20 +140,20 @@ import IntegrateSDKGradient from "@/layouts/main/Background/gradient/IntegrateSD
           "xl:mt-[202px]"
         )}
       />
-    </div>
+    </div> -->
 
     <div
       id="IntegrateSDK"
       class={cn(
         "relative mix-blend-screen",
         /** 375 */
-        "mt-[174px]",
+        "mt-[114px]",
         /** 768 */
-        "md:mt-[215.92px]",
+        "md:mt-[134px]",
         /** 1024 */
-        "lg:mt-[315.81px]",
+        "lg:mt-[235px]",
         /** 1440 */
-        "xl:mt-[343.3px]"
+        "xl:mt-[255px]"
       )}
     >
       <IntegrateSDKGradient />

@@ -62,8 +62,8 @@ const CardList: React.FC<PropsWithClassName> = (props) => {
           "lg:mt-[50px]"
         )}
       >
-        {pageIndexData.map((item) => {
-          return <CardItem key={item.title} data={item} />;
+        {pageIndexData.map((item: any) => {
+          return <CardItem key={`item-${item.title}`} data={item} />;
         })}
       </div>
       <Pagination {...pagination} />

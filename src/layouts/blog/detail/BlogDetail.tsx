@@ -117,7 +117,7 @@ const BlogDetail: React.FC<BlogDetailProps> = (props) => {
           "lg:w-[904px] lg:text-xl lg:leading-[36px] lg:mt-[80px]"
         )}
       >
-        <div id="blogDetail">{blocksHtml.filter((item) => !!item)}</div>
+        <div id="blogDetail">{blocksHtml.filter(Boolean)}</div>
         <DetailFooter />
       </div>
     </Content>

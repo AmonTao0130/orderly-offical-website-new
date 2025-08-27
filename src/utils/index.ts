@@ -18,7 +18,7 @@ export function formatDate(date: string | Date) {
 }
 
 export function array2Map(array: any[]) {
-  const map = {} as Record<string, any>;
+  const map: Record<string, any> = {};
   array.forEach((item) => {
     map[item.id] = item;
   });
@@ -38,5 +38,5 @@ export function isDev(hostname: string) {
   return ["localhost", "dev-v2.orderly.network"].includes(hostname);
 }
 
-export const fetcher: any = (url: string, init: RequestInit) =>
+export const fetcher = (url: string, init?: RequestInit) =>
   fetch(url, init).then((res) => res.json());

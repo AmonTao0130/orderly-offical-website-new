@@ -3,7 +3,7 @@ import { Renderer } from "marked";
 export function cleanUrl(href: string) {
   try {
     href = encodeURI(href).replace(/%25/g, "%");
-  } catch (e) {
+  } catch {
     return null;
   }
   return href;

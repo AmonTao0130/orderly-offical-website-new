@@ -7,7 +7,7 @@ const BlockTitle: React.FC<PropsWithChildren> = (props) => {
       className={cn(
         "font-semibold text-center",
         /** 375 */
-        "text-2xl leading-[24px]",
+        "text-2xl leading-[32px]",
         /** 768 */
         "md:text-4xl md:leading-[40px]",
         /** 1024 */
