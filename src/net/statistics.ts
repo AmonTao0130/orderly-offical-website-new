@@ -33,17 +33,18 @@ export async function getTotalVolume() {
 // Get total traders count (hardcoded for now as per requirement)
 export async function getTotalTraders() {
   // TODO: Implement actual API call when endpoint becomes available
-  return 700000; // 700K+
+  return 895000; // 895K+
 }
 
 export async function getTotalBuilders() {
   try {
     const res = await axios.get("https://api.orderly.org/v1/public/broker/name");
     const brokers = res?.data?.data?.rows || [];
-    return Array.isArray(brokers) ? brokers.length : 0;
+    // Hard code to 58 but keep API call for future use
+    return 58;
   } catch (error) {
     console.error("Error fetching builders count:", error);
-    return 12000; // Fallback to 12K+ as shown in current component
+    return 58; // Fallback to 58
   }
 }
 
@@ -54,14 +55,15 @@ export async function getOpenInterest() {
     if (Array.isArray(futures)) {
       const totalOI = futures.reduce((total, contract) => {
         const oi = parseFloat(contract.open_interest || 0);
-        return total + oi;
+        const indexPrice = parseFloat(contract.index_price || 0);
+        return total + (oi * indexPrice);
       }, 0);
       return totalOI;
     }
     return 0;
   } catch (error) {
     console.error("Error fetching open interest:", error);
-    return 8370000000; // Fallback to $8.37B+ as shown in current component
+    return 74560000; // Fallback to $74.56M+ as shown in current component
   }
 }
 
@@ -71,6 +73,6 @@ export async function getTVL() {
     return res?.data?.data?.total_holding || 0;
   } catch (error) {
     console.error("Error fetching TVL:", error);
-    return 5920000000; // Fallback to $5.92B+ as shown in current component
+    return 53290000; // Fallback to $53.29M+ as shown in current component
   }
 }

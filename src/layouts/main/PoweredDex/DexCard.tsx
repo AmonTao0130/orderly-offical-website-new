@@ -98,11 +98,11 @@ const DexCard: React.FC<DexCardProps> = ({ name, src, url }) => {
       className={cn(
         "relative group",
         /** 375 */
-        "w-[150px] h-[64px] sm:w-[163px]",
+        "w-[calc(50%-8px)] h-[64px]",
         /** 768 */
-        "md:w-[300px] md:h-[104px]",
+        "md:w-[calc(50%-12px)] md:h-[104px]",
         /** 1024 */
-        "lg:w-[285px] lg:h-[104px]",
+        "lg:w-[calc(33.333%-16px)] lg:h-[104px]",
         /** 1440 */
         "xl:w-[300px] xl:h-[104px]",
  
