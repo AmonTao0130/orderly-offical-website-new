@@ -78,7 +78,7 @@ const Statistics: React.FC<PropsWithClassName> = (props) => {
     >
       <div className="flex">
         <StatisticsItem label="Total trading volume" value={`$${volume}`} border />
-        <StatisticsItem label="Traders" value="400K+" border />
+        <StatisticsItem label="Traders" value="895K+" border />
         <StatisticsItem label="Ecosystem partners" value={cardData.length} />
       </div>
     </div>

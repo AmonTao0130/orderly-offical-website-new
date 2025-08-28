@@ -72,11 +72,11 @@ export function useStatistics() {
       console.error("Error fetching statistics:", error);
       // Fallback values
       setStats({
-        totalVolume: "$115.42B+",
-        totalTraders: "700K+",
-        totalBuilders: "12K+",
-        openInterest: "$8.37B+",
-        tvl: "$5.92B+"
+        totalVolume: "$128.86B+",
+        totalTraders: "895K+",
+        totalBuilders: "58",
+        openInterest: "$74.56M+",
+        tvl: "$53.29M+"
       });
     } finally {
       setLoading(false);

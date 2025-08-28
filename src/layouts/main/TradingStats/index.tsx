@@ -142,7 +142,7 @@ const TradingStats: React.FC<PropsWithClassName> = (props) => {
           <Divider />
           <StatGroup stats={[
             { label: "Total traders", number: loading ? "--" : stats.totalTraders },
-            { label: "Total builders", number: loading ? "--" : stats.totalBuilders }
+            { label: "Live builders", number: loading ? "--" : stats.totalBuilders }
           ]} />
         </div>
       </div>
