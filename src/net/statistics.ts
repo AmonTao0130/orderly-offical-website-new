@@ -5,6 +5,7 @@ export async function getEvmVolumeLtd() {
   const res = await axios.get(
     "https://api-evm.orderly.org/v1/public/volume/stats"
   );
+  console.log("res", res);
   return res?.data?.data?.perp_volume_ltd || 0;
 }
 
@@ -28,6 +29,15 @@ export async function getTotalVolume() {
   // const evmVolume = await getEvmVolumeLtd();
   // const nearVolume = await getNearVolumeLtd();
   // return evmVolume + nearVolume;
+}
+
+// perp_volume_last_1_day
+export async function get24hVolume() {
+  const res = await axios.get(
+    "https://api-evm.orderly.org/v1/public/volume/stats"
+  );
+  console.log("24h res", res);
+  return res?.data?.data?.perp_volume_last_1_day || 0;
 }
 
 // Get total traders count (hardcoded for now as per requirement)

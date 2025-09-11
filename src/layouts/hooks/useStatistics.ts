@@ -1,8 +1,9 @@
-import { getTotalVolume, getTotalTraders, getTotalBuilders, getOpenInterest, getTVL } from "@/net/statistics";
+import { getTotalVolume, getTotalTraders, getTotalBuilders, getOpenInterest, getTVL, get24hVolume } from "@/net/statistics";
 import { useEffect, useState } from "react";
 
 interface Statistics {
   totalVolume: string;
+  volume24h: string;
   totalTraders: string;
   totalBuilders: string;
   openInterest: string;
@@ -12,6 +13,7 @@ interface Statistics {
 export function useStatistics() {
   const [stats, setStats] = useState<Statistics>({
     totalVolume: "--",
+    volume24h: "--",
     totalTraders: "--",
     totalBuilders: "--",
     openInterest: "--",
@@ -22,11 +24,11 @@ export function useStatistics() {
 
   function formatNumber(value: number): string {
     if (value >= 1000000000) {
-      return `$${(value / 1000000000).toFixed(2)}B+`;
+      return `$${(value / 1000000000).toFixed(2)}B`;
     } else if (value >= 1000000) {
-      return `$${(value / 1000000).toFixed(2)}M+`;
+      return `$${(value / 1000000).toFixed(2)}M`;
     } else if (value >= 1000) {
-      return `${(value / 1000).toFixed(0)}K+`;
+      return `${(value / 1000).toFixed(0)}K`;
     }
     return value.toString();
   }
@@ -42,10 +44,13 @@ export function useStatistics() {
 
   function formatVolume(value: number): string {
     if (value === 0) {
-      return "$115.42B+";
-    } else {
+      return "$115.42B";
+    } else if (value >= 1000000000) {
       const _vol = (value / 1000000000).toFixed(2);
-      return `$${_vol}B+`;
+      return `$${_vol}B`;
+    } else {
+      const _vol = (value / 1000000).toFixed(2);
+      return `$${_vol}M`;
     }
   }
 
@@ -53,8 +58,9 @@ export function useStatistics() {
     try {
       setLoading(true);
       
-      const [volume, traders, builders, openInterest, tvl] = await Promise.all([
+      const [volume, volume24h, traders, builders, openInterest, tvl] = await Promise.all([
         getTotalVolume(),
+        get24hVolume(),
         getTotalTraders(),
         getTotalBuilders(),
         getOpenInterest(),
@@ -63,6 +69,7 @@ export function useStatistics() {
 
       setStats({
         totalVolume: formatVolume(volume),
+        volume24h: formatVolume(volume24h),
         totalTraders: formatTraders(traders),
         totalBuilders: formatTraders(builders),
         openInterest: formatNumber(openInterest),
@@ -72,11 +79,12 @@ export function useStatistics() {
       console.error("Error fetching statistics:", error);
       // Fallback values
       setStats({
-        totalVolume: "$128.86B+",
+        totalVolume: "$128.86B",
+        volume24h: "$2.45B",
         totalTraders: "895K+",
         totalBuilders: "58",
-        openInterest: "$74.56M+",
-        tvl: "$53.29M+"
+        openInterest: "$74.56M",
+        tvl: "$53.29M"
       });
     } finally {
       setLoading(false);
