@@ -121,7 +121,7 @@ const TradingStats: React.FC<PropsWithClassName> = (props) => {
           <div className="block hidden lg:block">
             <StatGroup stats={[
               { label: "Total trading volume", number: loading ? "--" : stats.totalVolume },
-              { label: "24h tradingvolume", number: loading ? "--" : stats.volume24h}
+              { label: "24h trading volume", number: loading ? "--" : stats.volume24h}
             ]} />
           </div>
         </div>
