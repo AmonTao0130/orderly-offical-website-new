@@ -42,9 +42,9 @@ const Divider: React.FC = () => {
       className={cn(
         "w-0",
         /** 375 */
-        "h-[108px]",
+        "h-[174px]",
         /** 768 */
-        "md:h-[148px]",
+        "md:h-[234px]",
         /** 1024 */
         "lg:h-[189px]"
       )}
@@ -83,16 +83,16 @@ const TradingStats: React.FC<PropsWithClassName> = (props) => {
         className={cn(
           "flex justify-between items-start",
           /** 375 */
-          "flex-col gap-6 items-center",
+          "flex-col items-center",
           /** 768 */
-          "md:flex-col md:gap-8 md:items-center",
+          "md:flex-col md:items-center",
           /** 1024 */
           "lg:flex-row lg:gap-8 lg:items-start",
           /** 1440 */
           "xl:gap-12",
           "rounded-[24px]",
           /** 375 */
-          "p-[24px] pt-[16px]",
+          "p-[24px]",
           /** 768 */
           "md:py-[32px] md:px-[80px]",
           /** 1024 */
@@ -111,18 +111,22 @@ const TradingStats: React.FC<PropsWithClassName> = (props) => {
         <div className={cn(
           "w-auto",
           /** 375 */
-          "sm:w-full sm:mx-[24px]",
+          "sm:w-full",
           /** 768 */
           "md:w-full",
           /** 1024 */
-          "lg:w-auto"
+          "lg:w-auto lg:mx-[12px]"
         )}>
-          <StatGroup stats={[
-            { label: "Total trading volume", number: loading ? "--" : stats.totalVolume, isLarge: true }
-          ]} />
+          {/* For under 1024, show total volume and 24h volume in one row */}
+          <div className="block hidden lg:block">
+            <StatGroup stats={[
+              { label: "Total trading volume", number: loading ? "--" : stats.totalVolume },
+              { label: "24h tradingvolume", number: loading ? "--" : stats.volume24h}
+            ]} />
+          </div>
         </div>
         <div className={cn(
-          "min-w-[295px] ml-[24px] flex justify-between items-start",
+          "min-w-[295px] ml-[18px] flex justify-between items-start",
           /** 375 */
           "sm:w-full sm:justify-between sm:items-center",
           /** 768 */
@@ -135,15 +139,33 @@ const TradingStats: React.FC<PropsWithClassName> = (props) => {
           <div className="hidden lg:block">
             <Divider />
           </div>
-          <StatGroup stats={[
-            { label: "Open interest", number: loading ? "--" : stats.openInterest },
-            { label: "TVL", number: loading ? "--" : stats.tvl }
-          ]} />
+          <div className="block lg:hidden">
+            <StatGroup stats={[
+              { label: "Total trading volume", number: loading ? "--" : stats.totalVolume },
+              { label: "Open interest", number: loading ? "--" : stats.openInterest },
+              { label: "TVL", number: loading ? "--" : stats.tvl }
+            ]} />
+          </div>
+          <div className="hidden lg:block">
+            <StatGroup stats={[
+              { label: "Open interest", number: loading ? "--" : stats.openInterest },
+              { label: "TVL", number: loading ? "--" : stats.tvl }
+            ]} />
+          </div>
           <Divider />
-          <StatGroup stats={[
-            { label: "Total traders", number: loading ? "--" : stats.totalTraders },
-            { label: "Live builders", number: loading ? "--" : stats.totalBuilders }
-          ]} />
+          <div className="block lg:hidden">
+            <StatGroup stats={[
+              { label: "24h trading volume", number: loading ? "--" : stats.volume24h},
+              { label: "Total traders", number: loading ? "--" : stats.totalTraders },
+              { label: "Live builders", number: loading ? "--" : stats.totalBuilders }
+            ]} />
+          </div>
+          <div className="hidden lg:block">
+            <StatGroup stats={[
+              { label: "Total traders", number: loading ? "--" : stats.totalTraders },
+              { label: "Live builders", number: loading ? "--" : stats.totalBuilders }
+            ]} />
+          </div>
         </div>
       </div>
     </Content>
