@@ -31,13 +31,23 @@ export async function getTotalVolume() {
   // return evmVolume + nearVolume;
 }
 
-// perp_volume_last_1_day
+// 24h volume from futures API
 export async function get24hVolume() {
-  const res = await axios.get(
-    "https://api-evm.orderly.org/v1/public/volume/stats"
-  );
-  console.log("24h res", res);
-  return res?.data?.data?.perp_volume_last_1_day || 0;
+  try {
+    const res = await axios.get("https://api.orderly.org/v1/public/futures");
+    const futures = res?.data?.data?.rows || [];
+    if (Array.isArray(futures)) {
+      const total24hVolume = futures.reduce((total, contract) => {
+        const amount24h = parseFloat(contract["24h_amount"] || 0);
+        return total + amount24h;
+      }, 0);
+      return total24hVolume;
+    }
+    return 0;
+  } catch (error) {
+    console.error("Error fetching 24h volume:", error);
+    return 0;
+  }
 }
 
 // Get total traders count (hardcoded for now as per requirement)
