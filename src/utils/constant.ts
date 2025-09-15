@@ -49,7 +49,7 @@ export const Hyperlink = {
   },
   Main: {
     BuildWithOrderly:
-      "https://orderly.network/docs/introduction/getting-started/what-is-orderly-network",
+      "https://orderly.network/docs/introduction/getting-started/what-is-orderly",
     TradeOnOrderly:
       "https://orderly.network/docs/introduction/trade-on-orderly/builders",
     ExploreDocs: "https://orderly.network/docs/build-on-evm/building-on-evm",
