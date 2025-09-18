@@ -52,7 +52,8 @@ export const Hyperlink = {
       "https://orderly.network/docs/introduction/getting-started/what-is-orderly",
     TradeOnOrderly:
       "https://orderly.network/docs/introduction/trade-on-orderly/builders",
-    ExploreDocs: "https://orderly.network/docs/build-on-evm/building-on-evm",
+    ExploreDocs:
+      "https://orderly.network/docs/build-on-omnichain/building-on-omnichain",
     ViewAuditReports: "https://github.com/OrderlyNetwork/Audits",
     ViewMore: "/partners",
     StartBuildingNow:
