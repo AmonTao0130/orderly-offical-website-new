@@ -27,22 +27,6 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
     [Autoplay({ playOnInit: true, delay: 10000 })]
   );
 
-  const { data, isLoading } = useSWR(
-    `/api/pinArticles?&publicationState=${props.publicationState}`,
-    fetcher,
-    {
-      revalidateOnFocus: false,
-      dedupingInterval: 1000 * 60 * 5,
-    }
-  );
-
-  useEffect(() => {
-    if (!data || isLoading) {
-      return;
-    }
-    setArticles(data?.data || []);
-  }, [data, isLoading]);
-
   useEffect(() => {
     const callback = () => {
       setScrollIndex(emblaApi?.selectedScrollSnap() ?? 0);
