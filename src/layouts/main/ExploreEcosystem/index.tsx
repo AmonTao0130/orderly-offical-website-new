@@ -157,7 +157,7 @@ const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
       <Button
         type="outlined"
         className={cn(
-          "self-center",
+          "self-center relative z-10",
           /** 375 */
           "mt-[32px]",
           /** 768 */
