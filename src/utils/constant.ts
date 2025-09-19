@@ -14,7 +14,7 @@ export const Screen = {
 export const Hyperlink = {
   Developers: {
     Documentation:
-      "https://orderly.network/docs/getting-started/what-is-orderly-network",
+      "https://orderly.network/docs/introduction/getting-started/what-is-orderly ",
     GitHub: "https://github.com/OrderlyNetwork",
     OrderlySDK: "https://orderly.network/docs/sdks/overview",
   },
