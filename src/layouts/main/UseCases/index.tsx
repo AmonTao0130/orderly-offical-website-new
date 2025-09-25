@@ -19,7 +19,7 @@ const data = [
   {
     title: "DEX Builders",
     content:
-      "Create your own Perps DEX on EVM. Benefit from our professional trading infrastructure and deep liquidity.",
+      "Create your own Perps DEX omnichain. Benefit from our professional trading infrastructure and deep liquidity.",
     img: Brokers.src,
   },
   {
@@ -169,9 +169,22 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
             /** 768 */
             "md:mt-[40px]"
           )}
-          href={Hyperlink.Main.StartBuildingNow}
+          href={Hyperlink.Main.BuildWithOrderlyOne}
         >
-          Start building now
+          Build with Orderly One
+        </Button>
+        <Button
+          type="outlined"
+          className={cn(
+            "relative",
+            /** 375 */
+            "mt-[16px] ml-[8px]",
+            /** 768 */
+            "md:mt-[40px] md:ml-[12px]"
+          )}
+          href={Hyperlink.Main.ExploreDocs}
+        >
+          Explore Docs
         </Button>
       </div>
     </Content>
