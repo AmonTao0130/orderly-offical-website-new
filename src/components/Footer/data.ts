@@ -6,6 +6,12 @@ const data = [
     title: "Developers",
     children: [
       {
+        title: "Orderly One",
+        url: Hyperlink.Developers.OrderlyOne,
+        target: "_blank",
+        showArrow: true,
+      },
+      {
         title: "Documentation",
         url: Hyperlink.Developers.Documentation,
         target: "_blank",

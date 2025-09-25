@@ -13,6 +13,8 @@ export const Screen = {
 
 export const Hyperlink = {
   Developers: {
+    OrderlyOne:
+      "https://dex.orderly.network",
     Documentation:
       "https://orderly.network/docs/introduction/getting-started/what-is-orderly ",
     GitHub: "https://github.com/OrderlyNetwork",
@@ -50,6 +52,8 @@ export const Hyperlink = {
   Main: {
     BuildWithOrderly:
       "https://orderly.network/docs/introduction/getting-started/what-is-orderly",
+    BuildWithOrderlyOne:
+      "https://dex.orderly.network",
     TradeOnOrderly:
       "https://orderly.network/docs/introduction/trade-on-orderly/builders",
     ExploreDocs:
