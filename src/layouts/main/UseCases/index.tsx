@@ -161,31 +161,48 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
         >
           {contents[expandKey]}
         </div>
-        <Button
-          className={cn(
-            "relative",
-            /** 375 */
-            "mt-[16px]",
-            /** 768 */
-            "md:mt-[40px]"
-          )}
-          href={Hyperlink.Main.BuildWithOrderlyOne}
-        >
-          Build with Orderly One
-        </Button>
-        <Button
-          type="outlined"
-          className={cn(
-            "relative",
-            /** 375 */
-            "mt-[16px] ml-[8px]",
-            /** 768 */
-            "md:mt-[40px] md:ml-[12px]"
-          )}
-          href={Hyperlink.Main.ExploreDocs}
-        >
-          Explore Docs
-        </Button>
+        {titles[expandKey] === "DEX Builders" ? (
+          <>
+            <Button
+              className={cn(
+                "relative",
+                /** 375 */
+                "mt-[16px]",
+                /** 768 */
+                "md:mt-[40px]"
+              )}
+              href={Hyperlink.Main.BuildWithOrderlyOne}
+            >
+              Build with Orderly One
+            </Button>
+            <Button
+              type="outlined"
+              className={cn(
+                "relative",
+                /** 375 */
+                "mt-[16px] ml-[8px]",
+                /** 768 */
+                "md:mt-[40px] md:ml-[12px]"
+              )}
+              href={Hyperlink.Main.ExploreDocs}
+            >
+              Explore Docs
+            </Button>
+          </>
+        ) : (
+          <Button
+            className={cn(
+              "relative",
+              /** 375 */
+              "mt-[16px]",
+              /** 768 */
+              "md:mt-[40px]"
+            )}
+            href={Hyperlink.Main.StartBuildingNow}
+          >
+            Start building now
+          </Button>
+        )}
       </div>
     </Content>
   );

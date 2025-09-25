@@ -61,7 +61,7 @@ export const Hyperlink = {
     ViewAuditReports: "https://github.com/OrderlyNetwork/Audits",
     ViewMore: "/partners",
     StartBuildingNow:
-      "https://orderly.network/docs/build-on-evm/building-on-evm",
+      "https://orderly.network/docs/build-on-omnichain/building-on-omnichain",
     DropUsALine: "mailto:hello@orderly.network",
   },
   Community: {
