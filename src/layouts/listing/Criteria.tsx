@@ -53,7 +53,7 @@ const Criteria: FC = () => {
 
           <Block className="p-[32px] h-full">
             <img className={imgCls} src={criteria2.src} alt="criteria1" />
-            <div className={titleCls}>$20M or above FDV</div>
+            <div className={titleCls}>$20M or above Market Cap</div>
           </Block>
         </div>
 

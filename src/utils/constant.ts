@@ -25,7 +25,7 @@ export const Hyperlink = {
       "https://orderly.network/docs/introduction/trade-on-orderly/builders",
     OderlyExplorer: "https://explorer.orderly.network/",
     OrderlyDashboard: "https://orderly-dashboard.orderly.network",
-    APIDocs: "https://orderly.network/docs/build-on-evm/evm-api/introduction",
+    APIDocs: "https://orderly.network/docs/build-on-omnichain/building-on-omnichain",
   },
   Ecosystem: {
     Partners: "/partners",
