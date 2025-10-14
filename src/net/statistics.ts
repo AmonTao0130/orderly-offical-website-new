@@ -60,8 +60,36 @@ export async function getTotalBuilders() {
   try {
     const res = await axios.get("https://api.orderly.org/v1/public/broker/name");
     const brokers = res?.data?.data?.rows || [];
-    // Hard code to 58 but keep API call for future use
-    return 58;
+    
+    // Exclude specific brokers from the count
+    const excludedBrokers = [
+      'root',
+      'blofin',
+      'flagiris',
+      'flagiris2',
+      'ibx',
+      'orderly',
+      'test-test',
+      'test123',
+      'alphanaut',
+      'ask_jimmy',
+      'denx',
+      'dvx',
+      'galar_fin',
+      'involio',
+      'luma',
+      'one_bow',
+      'orderoo',
+      'pinde',
+      'satuca'
+    ];
+    
+    // Filter out excluded brokers and count the remaining
+    const filteredBrokers = brokers.filter(
+      (broker: any) => !excludedBrokers.includes(broker.broker_id || broker.name)
+    );
+    
+    return filteredBrokers.length;
   } catch (error) {
     console.error("Error fetching builders count:", error);
     return 58; // Fallback to 58
