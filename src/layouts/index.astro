@@ -47,11 +47,7 @@ const thumbnailURL = new URL("thumbnail.jpg", Astro.site);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
-    <link
-      rel="preload"
-      href="/fonts/Atyp/AtypBLText-Regular.otf"
-      as="font"
-    />
+    <link rel="preload" href="/fonts/Atyp/AtypBLText-Regular.otf" as="font" />
     <link rel="icon" type="image/png" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap.xml" />
     <link rel="canonical" href={canonicalURL} />
@@ -90,6 +86,30 @@ const thumbnailURL = new URL("thumbnail.jpg", Astro.site);
 </html>
 <script>
   import { navigationOpen } from "@/store";
+  import * as amplitude from "@amplitude/analytics-browser";
+
+  const getAPIKey = () => {
+    if (window.location.hostname === "orderly.network") {
+      return "4fc0f624f0950dfa5020a2920b867b21";
+    }
+
+    return "5b08045d546fcc6aadf0a1244e3a2235";
+  };
+
+  // Initialize Amplitude Analytics
+  amplitude.init(getAPIKey(), {
+    autocapture: {
+      pageViews: true,
+      elementInteractions: true,
+      attribution: false,
+      fileDownloads: false,
+      formInteractions: false,
+      sessions: false,
+      networkTracking: false,
+      webVitals: false,
+      frustrationInteractions: false,
+    },
+  });
 
   window.onload = () => {
     if (history?.scrollRestoration) {
