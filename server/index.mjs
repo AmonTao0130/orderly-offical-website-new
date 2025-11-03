@@ -4,6 +4,32 @@ import { createProxyMiddleware } from "http-proxy-middleware";
 
 const app = express();
 
+// 添加安全头中间件 - 必须在所有路由之前
+app.use((req, res, next) => {
+  // CSP 配置
+  const csp = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline'", // Astro SSR 必须
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob: https:",
+    "font-src 'self' data:",
+    // "connect-src 'self' https://orderly.mintlify.dev", // 允许代理请求
+    // "frame-ancestors 'self' https://trusted-domain.com", // 允许特定域名嵌入
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "upgrade-insecure-requests",
+  ].join("; ");
+
+  // 设置安全头
+  res.setHeader("Content-Security-Policy", csp);
+  res.set("X-Frame-Options", "DENY");
+  res.set("X-Content-Type-Options", "nosniff");
+  res.set("Referrer-Policy", "strict-origin-when-cross-origin");
+
+  next();
+});
+
 // 根据 astro.config.mjs 中的 `base` 选项进行更改，默认值为"/"
 const base = "/";
 app.use(base, express.static("dist/client/"));
