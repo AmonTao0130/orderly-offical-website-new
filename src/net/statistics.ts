@@ -46,14 +46,14 @@ export async function get24hVolume() {
     return 0;
   } catch (error) {
     console.error("Error fetching 24h volume:", error);
-    return 0;
+    throw error;
   }
 }
 
 // Get total traders count (hardcoded for now as per requirement)
 export async function getTotalTraders() {
   // TODO: Implement actual API call when endpoint becomes available
-  return 895000; // 895K+
+  return 700000;
 }
 
 export async function getTotalBuilders() {
@@ -92,7 +92,7 @@ export async function getTotalBuilders() {
     return filteredBrokers.length;
   } catch (error) {
     console.error("Error fetching builders count:", error);
-    return 58; // Fallback to 58
+    throw error;
   }
 }
 
@@ -111,7 +111,7 @@ export async function getOpenInterest() {
     return 0;
   } catch (error) {
     console.error("Error fetching open interest:", error);
-    return 74560000; // Fallback to $74.56M+ as shown in current component
+    throw error;
   }
 }
 
@@ -121,6 +121,6 @@ export async function getTVL() {
     return res?.data?.data?.total_holding || 0;
   } catch (error) {
     console.error("Error fetching TVL:", error);
-    return 53290000; // Fallback to $53.29M+ as shown in current component
+    throw error;
   }
 }

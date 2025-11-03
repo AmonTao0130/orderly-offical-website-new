@@ -55,40 +55,49 @@ export function useStatistics() {
   }
 
   async function fetchAllStatistics() {
-    try {
-      setLoading(true);
-      
-      const [volume, volume24h, traders, builders, openInterest, tvl] = await Promise.all([
-        getTotalVolume(),
-        get24hVolume(),
-        getTotalTraders(),
-        getTotalBuilders(),
-        getOpenInterest(),
-        getTVL()
-      ]);
+    setLoading(true);
+    
+    const results = await Promise.allSettled([
+      getTotalVolume(),
+      get24hVolume(),
+      getTotalTraders(),
+      getTotalBuilders(),
+      getOpenInterest(),
+      getTVL()
+    ]);
 
-      setStats({
-        totalVolume: formatVolume(volume),
-        volume24h: formatVolume(volume24h),
-        totalTraders: formatTraders(traders),
-        totalBuilders: formatTraders(builders),
-        openInterest: formatNumber(openInterest),
-        tvl: formatNumber(tvl)
-      });
-    } catch (error) {
-      console.error("Error fetching statistics:", error);
-      // Fallback values
-      setStats({
-        totalVolume: "$128.86B",
-        volume24h: "$2.45B",
-        totalTraders: "895K+",
-        totalBuilders: "58",
-        openInterest: "$74.56M",
-        tvl: "$53.29M"
-      });
-    } finally {
-      setLoading(false);
-    }
+    const [volumeResult, volume24hResult, tradersResult, buildersResult, openInterestResult, tvlResult] = results;
+
+    setStats({
+      totalVolume: volumeResult.status === 'fulfilled' && volumeResult.value != null 
+        ? formatVolume(volumeResult.value) 
+        : "--",
+      volume24h: volume24hResult.status === 'fulfilled' && volume24hResult.value != null 
+        ? formatVolume(volume24hResult.value) 
+        : "--",
+      totalTraders: tradersResult.status === 'fulfilled' && tradersResult.value != null 
+        ? formatTraders(tradersResult.value) 
+        : "--",
+      totalBuilders: buildersResult.status === 'fulfilled' && buildersResult.value != null 
+        ? formatTraders(buildersResult.value) 
+        : "--",
+      openInterest: openInterestResult.status === 'fulfilled' && openInterestResult.value != null 
+        ? formatNumber(openInterestResult.value) 
+        : "--",
+      tvl: tvlResult.status === 'fulfilled' && tvlResult.value != null 
+        ? formatNumber(tvlResult.value) 
+        : "--"
+    });
+
+    // Log any errors for debugging
+    results.forEach((result, index) => {
+      if (result.status === 'rejected') {
+        const apiNames = ['getTotalVolume', 'get24hVolume', 'getTotalTraders', 'getTotalBuilders', 'getOpenInterest', 'getTVL'];
+        console.error(`Error fetching ${apiNames[index]}:`, result.reason);
+      }
+    });
+
+    setLoading(false);
   }
 
   useEffect(() => {
