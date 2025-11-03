@@ -53,7 +53,7 @@ export async function get24hVolume() {
 // Get total traders count (hardcoded for now as per requirement)
 export async function getTotalTraders() {
   // TODO: Implement actual API call when endpoint becomes available
-  return 700000;
+  return 895000;
 }
 
 export async function getTotalBuilders() {
