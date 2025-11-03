@@ -13,8 +13,8 @@ app.use((req, res, next) => {
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https:",
     "font-src 'self' data:",
-    // "connect-src 'self' https://orderly.mintlify.dev", // 允许代理请求
-    // "frame-ancestors 'self' https://trusted-domain.com", // 允许特定域名嵌入
+    "connect-src https: wss: data: blob:",
+    "frame-ancestors 'none'",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
