@@ -1,0 +1,70 @@
+---
+export const prerender = false;
+import Layout from "@/layouts/index.astro";
+import Navigation from "@/components/Navigation";
+import Header from "@/layouts/blog/detail/Header";
+import MoreBlog from "@/layouts/blog/detail/MoreBlog";
+import BlogDetail from "@/layouts/blog/detail/BlogDetail";
+import Footer from "@/components/Footer";
+import { cn, isDev } from "@/utils";
+import "@/layouts/blog/detail/index.less";
+import { getArticleCoverImage } from "@/utils/strapi";
+import { getArticleBySlug, getArticles } from "@/strapi/services";
+
+/** 动态渲染博客文章详情页 */
+async function getData(slug: string) {
+  try {
+    const publicationState = isDev(Astro.url.hostname) ? "preview" : "live";
+    const article = await getArticleBySlug(slug, {
+      publicationState,
+    });
+
+    if (!article) {
+      return null;
+    }
+
+    const res = await getArticles({
+      pagination: { pageSize: 3 },
+      publicationState,
+    });
+
+    const articles = res.data;
+
+    return { articles, article };
+  } catch (err) {
+    console.log("getData", err);
+    return null;
+  }
+}
+
+const { slug } = Astro.params;
+const data = await getData(slug!);
+const { article, articles } = data || {};
+---
+
+<Layout
+  title={`Orderly | ${article?.attributes.title || "404"}`}
+  metaDescription={article?.attributes.description! || "Page not found"}
+  image={getArticleCoverImage(article)}
+>
+  <Navigation client:visible />
+
+  {
+    article ? (
+      <>
+        <Header article={article!} />
+        <BlogDetail article={article} client:visible />
+        <MoreBlog className={cn("mt-[80px]")} data={articles!} client:visible />
+        <Footer />
+      </>
+    ) : (
+      <div>
+        <div class="my-[100px] text-center">
+          <div class="text-xl">404</div>
+          <div class="text-lg">Page not found</div>
+        </div>
+        <Footer className="fixed bottom-0 left-0 right-0" />
+      </div>
+    )
+  }
+</Layout>

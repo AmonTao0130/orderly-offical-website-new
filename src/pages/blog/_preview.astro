@@ -1,0 +1,13 @@
+---
+import Layout from "@/layouts/index.astro";
+import BlogPreview from "@/layouts/blog/BlogPreview";
+import "@/layouts/blog/detail/index.less";
+---
+
+<Layout
+  title={`Orderly | Blog Preview`}
+  metaDescription={""}
+  image={""}
+>
+  <BlogPreview client:visible />
+</Layout>
