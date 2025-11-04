@@ -19,5 +19,4 @@ export default defineConfig({
   server: {
     host: true,
   },
-  // Astro 会自动加载 src/middleware.js，无需手动配置
 });

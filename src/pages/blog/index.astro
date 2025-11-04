@@ -39,7 +39,7 @@ const pinArticles = pinArticlesRes?.data || [];
 const articlesRes = await getArticles({
   pagination: {
     page: 1,
-    pageSize: 6,
+    pageSize: 100,
   },
   publicationState,
 });
