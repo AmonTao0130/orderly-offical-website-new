@@ -7,13 +7,12 @@ interface UseArticlesProps {
   displaySize?: number;
   category?: string;
   publicationState: PublicationState;
+  articles: Article[];
+  pagination: TPagination;
 }
 
-export function useArticles({
-  displaySize = 6,
-  category = "",
-  publicationState,
-}: UseArticlesProps) {
+export function useArticles(props: UseArticlesProps) {
+  const { displaySize = 6, category = "", publicationState } = props;
   const [currentPage, setCurrentPage] = useState(1);
   const [allArticles, setAllArticles] = useState<Article[]>([]);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -55,11 +54,12 @@ export function useArticles({
     if (!initialData || isLoading) {
       return;
     }
-    const total = initialData.meta.pagination.total;
+    const total =
+      initialData.meta?.pagination?.total || props.pagination.total || 0;
     const totalPages = Math.ceil(total / 100);
-    setAllArticles(initialData.data);
+    setAllArticles(initialData.data || props.articles || []);
     setHasNextBatch(totalPages > 1);
-  }, [initialData, isLoading]);
+  }, [initialData, isLoading, props.articles, props.pagination]);
 
   useEffect(() => {
     const loadNextBatch = async () => {
@@ -115,7 +115,8 @@ export function useArticles({
   }, [allArticles, currentPage, displaySize]);
 
   const pagination: TPagination = useMemo(() => {
-    const total = initialData?.meta.pagination.total || 0;
+    const total =
+      initialData?.meta?.pagination?.total || props.pagination.total || 0;
     const pageCount = Math.ceil(total / displaySize);
 
     return {
@@ -124,7 +125,12 @@ export function useArticles({
       pageCount,
       total,
     };
-  }, [initialData?.meta.pagination.total, currentPage, displaySize]);
+  }, [
+    initialData?.meta?.pagination?.total,
+    currentPage,
+    displaySize,
+    props.pagination.total,
+  ]);
 
   return {
     data: currentPageData,
