@@ -21,7 +21,7 @@ export const GET: APIRoute = async (data) => {
   return new Response(JSON.stringify({ data: res || [] }), {
     headers: {
       "Content-Type": "application/json",
-      "X-Cache": hit ? "HIT" : "MISS",
+      "Strapi-Cache": hit ? "HIT" : "MISS",
     },
   });
 };

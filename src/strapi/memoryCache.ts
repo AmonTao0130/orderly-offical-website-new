@@ -56,12 +56,10 @@ export const getDataFromCache = async <T>(
 ): Promise<{ data: T; hit: boolean }> => {
   const cached = memoryCache.get(key);
   if (cached !== undefined) {
-    console.log("getDataFromCache hit", key);
     return { data: cached, hit: true };
   }
 
   try {
-    console.log("getDataFromCache miss", key);
     const data = await fetcher();
     memoryCache.set(key, data, ttlMs);
     return { data, hit: false };

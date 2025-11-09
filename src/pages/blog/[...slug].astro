@@ -45,7 +45,7 @@ const isExist = await checkSlugIsExist(slug!, publicationState);
 const data = isExist ? await getData(slug!) : null;
 const { article, latestArticles, hit } = data || {};
 
-Astro.response.headers.set("X-Cache", hit ? "HIT" : "MISS");
+Astro.response.headers.set("Strapi-Cache", hit ? "HIT" : "MISS");
 ---
 
 <Layout

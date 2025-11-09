@@ -32,7 +32,7 @@ export default async function fetchApi<T>({
 
   const url = `${STRAPI_URL}${path}`;
   // console.log("url", url);
-  console.log("endpoint", endpoint, query);
+  // console.log("endpoint", endpoint, query);
 
   let data: any;
 
