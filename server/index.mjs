@@ -38,6 +38,7 @@ const BASE_ALLOWED_ORIGINS = [
   "https://orderly.network",
   "https://www.orderly.network",
   "https://dev-v2.orderly.network",
+  // "http://localhost",
 ];
 
 function getAdditionalOrigins() {
@@ -45,6 +46,7 @@ function getAdditionalOrigins() {
   if (typeof env === "string" && env.trim()) {
     return env.split(",").map((o) => o.trim());
   }
+  console.log("env", env);
   return [];
 }
 

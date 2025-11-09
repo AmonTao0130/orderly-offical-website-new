@@ -1,66 +1,84 @@
 import useSWR from "swr";
 import { useState, useMemo, useEffect } from "react";
-import type { Article, PublicationState, TPagination } from "@/strapi/type";
+import { type Article, type TPagination } from "@/strapi/type";
 import { fetcher } from "@/utils";
+import { STRAPI_MAX_PAGE_SIZE } from "@/strapi/services";
 
 interface UseArticlesProps {
   displaySize?: number;
   category?: string;
-  publicationState: PublicationState;
   articles: Article[];
-  pagination: TPagination;
+  total: number;
 }
-
 export function useArticles(props: UseArticlesProps) {
-  const { displaySize = 6, category = "", publicationState } = props;
+  const { displaySize = 6, category = "" } = props;
   const [currentPage, setCurrentPage] = useState(1);
-  const [allArticles, setAllArticles] = useState<Article[]>([]);
+  const [dataSource, setDataSource] = useState<Article[]>(props.articles || []);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [hasNextBatch, setHasNextBatch] = useState(false);
   const [currentBatch, setCurrentBatch] = useState(1);
 
-  const resetState = () => {
-    setCurrentPage(1);
-    setAllArticles([]);
-    setIsLoadingMore(false);
-    setHasNextBatch(false);
-    setCurrentBatch(1);
+  const filterArticles = useMemo(() => {
+    if (category) {
+      return props.articles?.filter(
+        (article) =>
+          article?.attributes?.category?.data?.attributes?.slug === category
+      );
+    }
+
+    return props.articles;
+  }, [category, props.articles]);
+
+  useEffect(() => {
+    const resetState = () => {
+      setCurrentPage(1);
+      setIsLoadingMore(false);
+      setHasNextBatch(false);
+      setCurrentBatch(1);
+      setDataSource(filterArticles);
+    };
+
+    resetState();
+  }, [category, filterArticles]);
+
+  const getUrl = (page = 1) => {
+    // 接口固定每次请求 100 条数据，所以不需要添加 pageSize 参数
+    const categoryStr = category ? `&category=${category}` : "";
+    return `/api/articles?page=${page}${categoryStr}`;
   };
 
-  useEffect(() => {
-    resetState();
-  }, [category]);
+  const { data: firstPageData, isLoading } = useSWR(getUrl(), fetcher, {
+    revalidateOnFocus: false,
+    dedupingInterval: 1000 * 60 * 5,
+    revalidateOnReconnect: false,
+    refreshWhenOffline: false,
+    refreshWhenHidden: false,
+    refreshInterval: 0,
+  });
 
-  const {
-    data: initialData,
-    error,
-    isLoading,
-  } = useSWR(
-    `/api/articles?page=1&pageSize=100&category=${category}&publicationState=${publicationState}`,
-    async (url: string) => {
-      return fetcher(url);
-    },
-    {
-      revalidateOnFocus: false,
-      dedupingInterval: 1000 * 60 * 5,
-      revalidateOnReconnect: false,
-      refreshWhenOffline: false,
-      refreshWhenHidden: false,
-      refreshInterval: 0,
-    }
-  );
+  const total = useMemo(() => {
+    return (
+      firstPageData?.meta?.pagination?.total ||
+      (category ? filterArticles.length : props.total) ||
+      0
+    );
+  }, [firstPageData, filterArticles, category]);
 
   useEffect(() => {
-    if (!initialData || isLoading) {
+    if (!firstPageData || isLoading) {
       return;
     }
-    const total =
-      initialData.meta?.pagination?.total || props.pagination.total || 0;
-    const totalPages = Math.ceil(total / 100);
-    setAllArticles(initialData.data || props.articles || []);
-    setHasNextBatch(totalPages > 1);
-  }, [initialData, isLoading, props.articles, props.pagination]);
 
+    if (Array.isArray(firstPageData.data) && firstPageData.data.length > 0) {
+      setDataSource(firstPageData.data);
+
+      const totalPages = Math.ceil(total / STRAPI_MAX_PAGE_SIZE);
+      setHasNextBatch(totalPages > 1);
+    }
+  }, [firstPageData, isLoading, total]);
+
+  // 在编译阶段，会全部获取已发布的文章，然后分页展示，所以切换到下一页的时候不再需要请求 api
+  // TODO: 目前文章总数不到 200，后续文章数量多了，需要考虑是否需要分页请求
   useEffect(() => {
     const loadNextBatch = async () => {
       if (!hasNextBatch || isLoadingMore) {
@@ -68,7 +86,7 @@ export function useArticles(props: UseArticlesProps) {
       }
 
       const displayedItems = currentPage * displaySize;
-      const loadedItems = allArticles.length;
+      const loadedItems = dataSource.length;
 
       if (displayedItems >= loadedItems - displaySize) {
         setIsLoadingMore(true);
@@ -76,16 +94,15 @@ export function useArticles(props: UseArticlesProps) {
         try {
           const nextBatchPage = currentBatch + 1;
 
-          const result = await fetcher(
-            `/api/articles?page=${nextBatchPage}&pageSize=100&category=${category}&publicationState=${publicationState}`
-          );
+          // 接口固定每次请求 100 条数据，所以不需要添加 pageSize 参数
+          const result = await fetcher(getUrl(nextBatchPage));
 
           if (result.data) {
-            setAllArticles((prev) => [...prev, ...result.data]);
+            setDataSource((prev) => [...prev, ...result.data]);
             setCurrentBatch(nextBatchPage);
 
-            const total = result.meta.pagination.total;
-            const totalPages = Math.ceil(total / 100);
+            const total = result.meta?.pagination?.total || 0;
+            const totalPages = Math.ceil(total / STRAPI_MAX_PAGE_SIZE);
             setHasNextBatch(nextBatchPage < totalPages);
           }
         } catch (error) {
@@ -99,24 +116,21 @@ export function useArticles(props: UseArticlesProps) {
     loadNextBatch();
   }, [
     currentPage,
-    allArticles.length,
+    dataSource.length,
     displaySize,
     hasNextBatch,
     isLoadingMore,
     category,
-    publicationState,
     currentBatch,
   ]);
 
   const currentPageData = useMemo(() => {
     const start = (currentPage - 1) * displaySize;
     const end = start + displaySize;
-    return allArticles.slice(start, end);
-  }, [allArticles, currentPage, displaySize]);
+    return dataSource.slice(start, end);
+  }, [dataSource, currentPage, displaySize]);
 
   const pagination: TPagination = useMemo(() => {
-    const total =
-      initialData?.meta?.pagination?.total || props.pagination.total || 0;
     const pageCount = Math.ceil(total / displaySize);
 
     return {
@@ -125,21 +139,13 @@ export function useArticles(props: UseArticlesProps) {
       pageCount,
       total,
     };
-  }, [
-    initialData?.meta?.pagination?.total,
-    currentPage,
-    displaySize,
-    props.pagination.total,
-  ]);
+  }, [currentPage, displaySize, total]);
 
   return {
     data: currentPageData,
     pagination,
     isLoading: isLoading || isLoadingMore,
-    error,
-    setPage: (page: number) => {
-      setCurrentPage(page);
-    },
-    allArticles,
+    setPage: setCurrentPage,
+    allArticles: dataSource,
   };
 }

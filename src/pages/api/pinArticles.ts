@@ -1,24 +1,27 @@
 export const prerender = false;
 
 import type { APIRoute } from "astro";
-import { getArticles } from "@/strapi/services";
-import type { PublicationState } from "@/strapi/type";
+import { getPinArticles } from "@/strapi/services";
+import { getDataFromCache, TTL_MAP } from "@/strapi/memoryCache";
+import { getPublicationState, isDev } from "@/utils";
 
 export const GET: APIRoute = async (data) => {
-  const params = data.url.searchParams;
+  const hostname = data.url.hostname;
+  const publicationState = getPublicationState(hostname);
+  const cacheKey = `/pinArticles?publicationState=${publicationState}`;
 
-  const res = await getArticles({
-    pagination: {
-      page: 1,
-      pageSize: 20,
-    },
-    publicationState: params.get("publicationState") as PublicationState,
-    filters: {
-      pin: {
-        $eq: true,
-      },
+  const ttlMs = isDev(hostname) ? TTL_MAP.MINUTES_DEV : TTL_MAP.HOUR;
+
+  const { data: res, hit } = await getDataFromCache(
+    cacheKey,
+    () => getPinArticles(publicationState),
+    ttlMs
+  );
+
+  return new Response(JSON.stringify({ data: res || [] }), {
+    headers: {
+      "Content-Type": "application/json",
+      "X-Cache": hit ? "HIT" : "MISS",
     },
   });
-
-  return new Response(JSON.stringify(res));
 };

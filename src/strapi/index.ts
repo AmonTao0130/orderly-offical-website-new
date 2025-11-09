@@ -32,6 +32,7 @@ export default async function fetchApi<T>({
 
   const url = `${STRAPI_URL}${path}`;
   // console.log("url", url);
+  console.log("endpoint", endpoint, query);
 
   let data: any;
 
@@ -39,7 +40,13 @@ export default async function fetchApi<T>({
     data = MockData[path];
   } else {
     const res = await fetch(url.toString(), {
-      headers: { Authorization: `bearer ${API_TOKEN}` },
+      headers: {
+        Authorization: `bearer ${API_TOKEN}`,
+        // Enable the retro-compatibility flag to receive the v4 response format
+        // 先提前设置，后续升级到 v5 才不会导致线上有问题
+        // https://docs.strapi.io/cms/migration/v4-to-v5/breaking-changes/new-response-format
+        "Strapi-Response-Format": "v4",
+      },
     });
 
     data = await res.json();

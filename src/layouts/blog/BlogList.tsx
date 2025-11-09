@@ -2,11 +2,7 @@ import React, { useMemo } from "react";
 import type { PropsWithClassName } from "@/types";
 import BlogItem from "./BlogItem";
 import { cn } from "@/utils";
-import {
-  type Article,
-  type PublicationState,
-  type TPagination,
-} from "@/strapi/type";
+import { type Article } from "@/strapi/type";
 import Pagination from "../../components/Pagination";
 import { getRangePage } from "@/utils/strapi";
 import { useStore } from "@nanostores/react";
@@ -15,8 +11,7 @@ import { useArticles } from "@/layouts/hooks/useArticles";
 
 interface BlogListProps {
   articles: Article[];
-  pagination: TPagination;
-  publicationState: PublicationState;
+  total: number;
 }
 
 const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
@@ -31,9 +26,8 @@ const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
   } = useArticles({
     displaySize: 6,
     category,
-    publicationState: props.publicationState,
     articles: props.articles,
-    pagination: props.pagination,
+    total: props.total,
   });
 
   const { page, pageSize, pageCount, total } = pagination;
@@ -52,16 +46,17 @@ const BlogList: React.FC<BlogListProps & PropsWithClassName> = (props) => {
     };
   }, [articles, page, pageSize, pageCount, setPage]);
 
-  if (isLoading) {
-    return (
-      <div className={cn("flex justify-center items-center", "h-[550px]")}>
-        <img
-          src="/pageloading.gif"
-          className="w-[80px] h-[80px] md:w-[120px] md:h-[120px]"
-        />
-      </div>
-    );
-  }
+  // 不需要 loading，因为编译的时候就会有数据
+  // if (isLoading) {
+  //   return (
+  //     <div className={cn("flex justify-center items-center", "h-[550px]")}>
+  //       <img
+  //         src="/pageloading.gif"
+  //         className="w-[80px] h-[80px] md:w-[120px] md:h-[120px]"
+  //       />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>

@@ -8,46 +8,35 @@ import MoreBlog from "@/layouts/blog/detail/MoreBlog";
 import BlogDetail from "@/layouts/blog/detail/BlogDetail";
 import Footer from "@/components/Footer";
 import { cn } from "@/utils";
-import type { Article } from "@/strapi/type";
+import { PublicationStateEnum, type Article } from "@/strapi/type";
 import { getArticleCoverImage } from "@/utils/strapi";
-import { getArticles } from "@/strapi/services";
+import { getAllPageArticleDetails } from "@/strapi/services";
 import "@/layouts/blog/detail/index.less";
 
 /** 静态渲染博客文章详情页 */
 export async function getStaticPaths() {
-  let articles: Article[] = [];
-  // 静态渲染获取已发布的文章列表
-  const res1 = await getArticles({
-    isDetail: true,
-    pagination: { page: 1, pageSize: 100 },
+  // 获取所有已发布的文章列表, 静态渲染只能编译已经发布的文章，因为不同环境 build 的资源是一样的
+  const articles = await getAllPageArticleDetails({
+    publicationState: PublicationStateEnum.LIVE,
   });
 
-  articles = [...articles, ...res1?.data];
-
-  const pageCount = res1?.meta?.pagination?.pageCount || 1;
-
-  for (let page = 2; page <= pageCount; page++) {
-    const res2 = await getArticles({
-      isDetail: true,
-      pagination: { page, pageSize: 100 },
-    });
-    articles = [...articles, ...res2?.data];
-  }
+  // 获取最新发布的 3 篇文章
+  const latestArticles = articles.slice(0, 3);
 
   return articles.map((article) => {
     return {
       params: { slug: article.attributes.slug },
-      props: { article, articles: articles?.slice(0, 3) },
+      props: { article, latestArticles },
     };
   });
 }
 
 type Props = {
   article: Article;
-  articles: Article[];
+  latestArticles: Article[];
 };
 
-const { article, articles } = Astro.props;
+const { article, latestArticles } = Astro.props;
 ---
 
 <Layout
@@ -59,7 +48,7 @@ const { article, articles } = Astro.props;
   <Header article={article} />
   <BlogDetail article={article} client:visible />
 
-  <MoreBlog className={cn("mt-[80px]")} data={articles} client:visible />
+  <MoreBlog className={cn("mt-[80px]")} data={latestArticles} client:visible />
 
   <Footer />
 </Layout>

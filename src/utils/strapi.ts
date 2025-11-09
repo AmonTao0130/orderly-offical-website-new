@@ -24,7 +24,7 @@ export const getArticleWithDisplayTimeBySlug = async (
   return wrapWithDisplayTime(article);
 };
 
-export function getTabData(categories: Categorg[]) {
+export function categories2Tabs(categories: Categorg[]) {
   const list = categories
     .map((category) => {
       const { name, slug } = category.attributes;
@@ -32,7 +32,7 @@ export function getTabData(categories: Categorg[]) {
     })
     .filter((item) => !!item.key);
 
-  return [{ title: "All", key: "All" }, ...list];
+  return list;
 }
 
 export function getPageData(list: any[], pageSize: number, pageIndex: number) {
@@ -71,6 +71,7 @@ export function getDisplayTime(article: Article) {
   const { attributes } = article || {};
   const { createdAt, publishedAt, postedTime } = attributes || {};
   const hardcodePublishedTime = BlogPublishedTime[attributes?.slug];
+  console.log("postedTime", postedTime);
   const displayTime =
     postedTime || hardcodePublishedTime || publishedAt || createdAt;
   return new Date(displayTime);

@@ -8,7 +8,7 @@ import BlogItem from "../BlogItem";
 import { useSize } from "@/hooks/useSize";
 
 interface MoreBlogProps {
-  data: Article[];
+  data?: Article[];
 }
 
 const MoreBlog: React.FC<MoreBlogProps & PropsWithClassName> = (props) => {
@@ -43,7 +43,13 @@ const MoreBlog: React.FC<MoreBlogProps & PropsWithClassName> = (props) => {
         </Button>
       </div>
 
-      <div className={cn("hidden md:block", "border-t-[1px] border-t-solid border-t-primary-20", props.className)}>
+      <div
+        className={cn(
+          "hidden md:block",
+          "border-t-[1px] border-t-solid border-t-primary-20",
+          props.className
+        )}
+      >
         <Content className="my-[60px]">
           <div className="flex justify-between items-center">
             <div
@@ -67,7 +73,7 @@ const MoreBlog: React.FC<MoreBlogProps & PropsWithClassName> = (props) => {
             </Button>
           </div>
           <div className="flex flex-wrap">
-            {data.map((item, index) => {
+            {data?.map((item, index) => {
               return <BlogItem key={item.id} article={item} />;
             })}
           </div>

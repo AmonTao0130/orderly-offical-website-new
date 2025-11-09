@@ -1,13 +1,18 @@
 import fetchApi from "@/strapi";
-import type {
-  Article,
-  Categorg,
-  Meta,
-  Pagination,
-  PublicationState,
-  ResponstList,
-  TFile,
+import {
+  PublicationStateEnum,
+  type Article,
+  type Categorg,
+  type Meta,
+  type Pagination,
+  type PublicationState,
+  type ResponstList,
+  type TFile,
 } from "@/strapi/type";
+import { getDataFromCache, TTL_MAP } from "./memoryCache";
+
+// strapi api 一次最多只能请求 100 条
+export const STRAPI_MAX_PAGE_SIZE = 100;
 
 const commonArticlePopulate = {
   cover: {
@@ -83,11 +88,11 @@ export async function getArticles(options?: GetArticlesOptions) {
       // populate: "*",
       // populate: ["cover", "category", "blocks"],
       populate,
-      sort: "postedTime:desc",
+      sort: "publishedAt:desc",
       publicationState,
       pagination: {
         // 一次最多请求 100 条
-        pageSize: 6,
+        pageSize: 100,
         ...pagination,
       },
       filters: options?.filters || filters,
@@ -143,4 +148,143 @@ export async function getUploadFiles() {
   return await fetchApi<TFile[]>({
     endpoint: "upload/files",
   });
+}
+
+// 获取已置顶的文章
+export async function getPinArticles(
+  publicationState = PublicationStateEnum.LIVE
+) {
+  const res = await getArticles({
+    pagination: {
+      page: 1,
+      pageSize: 20,
+    },
+    publicationState,
+    filters: {
+      pin: {
+        $eq: true,
+      },
+    },
+  });
+
+  return res?.data || [];
+}
+
+// 获取所有页码的文章数据
+export async function getAllPageArticles(options?: GetArticlesOptions) {
+  const firstPageData = await getArticles({
+    pagination: { page: 1, pageSize: STRAPI_MAX_PAGE_SIZE },
+    publicationState: PublicationStateEnum.LIVE,
+    ...options,
+  });
+
+  let articles = firstPageData?.data || [];
+
+  const pageCount = firstPageData?.meta?.pagination?.pageCount || 1;
+
+  for (let page = 2; page <= pageCount; page++) {
+    const nextPageData = await getArticles({
+      pagination: { page, pageSize: STRAPI_MAX_PAGE_SIZE },
+      publicationState: PublicationStateEnum.LIVE,
+      ...options,
+    });
+    articles = [...articles, ...nextPageData?.data];
+  }
+
+  return articles;
+}
+
+export function getAllPageArticleDetails(options?: GetArticlesOptions) {
+  return getAllPageArticles({
+    isDetail: true,
+    ...options,
+  });
+}
+
+export async function getFirstPageArticlesFromCache(
+  publicationState: PublicationState = "live"
+) {
+  const cacheKey = `/articles?page=1&publicationState=${publicationState}`;
+
+  const { data, hit } = await getDataFromCache(cacheKey, () =>
+    getArticles({
+      pagination: {
+        page: 1,
+        pageSize: STRAPI_MAX_PAGE_SIZE,
+      },
+      publicationState,
+    })
+  );
+
+  return data as ResponstList<Article[]>;
+}
+
+export async function checkSlugIsExist(
+  slug: string,
+  publicationState: PublicationState = "live"
+) {
+  const firstPageArticles = await getFirstPageArticlesFromCache(
+    publicationState
+  );
+
+  return firstPageArticles?.data?.some(
+    (article) => article.attributes.slug === slug
+  );
+}
+
+export async function getArticleBySlugFromCache(
+  slug: string,
+  publicationState: PublicationState = "live",
+  ttlMs?: number
+) {
+  if (!slug) {
+    return { article: null, hit: false };
+  }
+
+  const cacheKey = `/article/${slug}?publicationState=${publicationState}`;
+  const { data: article, hit } = await getDataFromCache(
+    cacheKey,
+    () => getArticleBySlug(slug, { publicationState }),
+    ttlMs
+  );
+  return { article, hit };
+}
+
+// 获取最新发布的 3 篇文章
+export async function getLatestArticlesFromCache(
+  publicationState: PublicationState = "live"
+) {
+  const cacheKey = `/latestArticles?publicationState=${publicationState}`;
+
+  const { data, hit } = await getDataFromCache(
+    cacheKey,
+    () =>
+      getArticles({
+        pagination: { pageSize: 3 },
+        publicationState,
+      }),
+    TTL_MAP.HOUR // 最新发布的 3 篇文章，缓存更新频率不需要太高
+  );
+
+  return data?.data || [];
+}
+
+export async function getCategoriesFromCache() {
+  const cacheKey = `/categories`;
+  const { data, hit } = await getDataFromCache(
+    cacheKey,
+    () => getCategories(),
+    TTL_MAP.MONTH // 分类数据一般不会变，有变更的时候重新发版即可，这里设置 1 个月缓存时间
+  );
+  return data || [];
+}
+
+export async function checkCategoryIsExist(category?: string | null) {
+  if (!category) {
+    return false;
+  }
+  const categories = await getCategoriesFromCache();
+  const isExist = categories.some((item) => item.attributes.slug === category);
+
+  return isExist;
 }

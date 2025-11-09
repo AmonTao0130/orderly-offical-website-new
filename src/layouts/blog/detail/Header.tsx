@@ -1,6 +1,6 @@
 import React from "react";
 import type { PropsWithClassName } from "@/types";
-import { cn, formatDate } from "@/utils";
+import { cn, getDisplayTime } from "@/utils";
 import Content from "@/components/Content";
 import type { Article } from "@/strapi/type";
 import { getArticleCoverAlt, getArticleCoverImage } from "@/utils/strapi";
@@ -57,7 +57,7 @@ const Header: React.FC<HeaderProps & PropsWithClassName> = (props) => {
                 "md:text-xl md:leading-[30px]"
               )}
             >
-              {formatDate(attributes.postedTime || attributes.publishedAt)}
+              {getDisplayTime(attributes)}
             </div>
             <div
               className={cn(
