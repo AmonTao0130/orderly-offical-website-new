@@ -54,7 +54,7 @@ export async function getArticles(options?: GetArticlesOptions) {
   const {
     isDetail,
     pagination,
-    publicationState = "live",
+    publicationState = PublicationStateEnum.LIVE,
     category,
   } = options || {};
 
@@ -81,6 +81,11 @@ export async function getArticles(options?: GetArticlesOptions) {
     };
   }
 
+  const sort =
+    publicationState === PublicationStateEnum.LIVE
+      ? "postedTime:desc"
+      : [{ postedTime: "desc" }, { updatedAt: "desc" }];
+
   return await fetchApi<ResponstList<Article[]>>({
     endpoint: "articles",
     // wrappedByKey: "data",
@@ -88,7 +93,7 @@ export async function getArticles(options?: GetArticlesOptions) {
       // populate: "*",
       // populate: ["cover", "category", "blocks"],
       populate,
-      sort: "publishedAt:desc",
+      sort,
       publicationState,
       pagination: {
         // 一次最多请求 100 条
@@ -117,7 +122,7 @@ export async function getArticleBySlug(
     endpoint: "articles",
     query: {
       populate,
-      publicationState: params?.publicationState || "live",
+      publicationState: params?.publicationState || PublicationStateEnum.LIVE,
       filters: {
         slug: {
           $eq: slug,
@@ -202,7 +207,7 @@ export function getAllPageArticleDetails(options?: GetArticlesOptions) {
 }
 
 export async function getFirstPageArticlesFromCache(
-  publicationState: PublicationState = "live"
+  publicationState: PublicationState = PublicationStateEnum.LIVE
 ) {
   const cacheKey = `/articles?page=1&publicationState=${publicationState}`;
 
@@ -221,7 +226,7 @@ export async function getFirstPageArticlesFromCache(
 
 export async function checkSlugIsExist(
   slug: string,
-  publicationState: PublicationState = "live"
+  publicationState: PublicationState = PublicationStateEnum.LIVE
 ) {
   const firstPageArticles = await getFirstPageArticlesFromCache(
     publicationState
@@ -234,7 +239,7 @@ export async function checkSlugIsExist(
 
 export async function getArticleBySlugFromCache(
   slug: string,
-  publicationState: PublicationState = "live",
+  publicationState: PublicationState = PublicationStateEnum.LIVE,
   ttlMs?: number
 ) {
   if (!slug) {
@@ -252,7 +257,7 @@ export async function getArticleBySlugFromCache(
 
 // 获取最新发布的 3 篇文章
 export async function getLatestArticlesFromCache(
-  publicationState: PublicationState = "live"
+  publicationState: PublicationState = PublicationStateEnum.LIVE
 ) {
   const cacheKey = `/latestArticles?publicationState=${publicationState}`;
 
