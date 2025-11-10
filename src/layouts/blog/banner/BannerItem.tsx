@@ -1,6 +1,6 @@
 import React from "react";
 import type { PropsWithClassName } from "@/types";
-import { cn, formatDate } from "@/utils";
+import { cn, getDisplayTime } from "@/utils";
 import type { Article } from "@/strapi/type";
 import { getArticleCoverAlt, getArticleCoverImage } from "@/utils/strapi";
 
@@ -45,7 +45,7 @@ const BannerItem: React.FC<BannerItemProps> = (props) => {
             "md:text-base md:leading-[24px] md:mt-0"
           )}
         >
-          {formatDate(attributes.postedTime || attributes.publishedAt)}
+          {getDisplayTime(attributes)}
         </div>
         <div>
           <div

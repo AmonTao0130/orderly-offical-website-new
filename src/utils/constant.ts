@@ -13,8 +13,7 @@ export const Screen = {
 
 export const Hyperlink = {
   Developers: {
-    OrderlyOne:
-      "https://dex.orderly.network",
+    OrderlyOne: "https://dex.orderly.network",
     Documentation:
       "https://orderly.network/docs/introduction/getting-started/what-is-orderly ",
     GitHub: "https://github.com/OrderlyNetwork",
@@ -25,14 +24,15 @@ export const Hyperlink = {
       "https://orderly.network/docs/introduction/trade-on-orderly/builders",
     OderlyExplorer: "https://explorer.orderly.network/",
     OrderlyDashboard: "https://orderly-dashboard.orderly.network",
-    APIDocs: "https://orderly.network/docs/build-on-omnichain/building-on-omnichain",
+    APIDocs:
+      "https://orderly.network/docs/build-on-omnichain/building-on-omnichain",
   },
   Ecosystem: {
     Partners: "/partners",
     Blog: "/blog",
     ListingApplication: "/listing",
   },
-  Governance: "https://orderly.discourse.group",
+  Governance: "https://snapshot.box/#/s:orderlygov.eth",
   About: {
     Team: "/team",
     Analytics: "https://dune.com/orderly_network/orderly-dashboard",
@@ -52,8 +52,7 @@ export const Hyperlink = {
   Main: {
     BuildWithOrderly:
       "https://orderly.network/docs/introduction/getting-started/what-is-orderly",
-    BuildWithOrderlyOne:
-      "https://dex.orderly.network",
+    BuildWithOrderlyOne: "https://dex.orderly.network",
     TradeOnOrderly:
       "https://orderly.network/docs/introduction/trade-on-orderly/builders",
     ExploreDocs:

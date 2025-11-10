@@ -1,6 +1,6 @@
 import React from "react";
 import type { PropsWithClassName } from "@/types";
-import { cn, formatDate } from "@/utils";
+import { cn, getDisplayTime } from "@/utils";
 import Button from "@/components/Button";
 import type { Article } from "@/strapi/type";
 import { getArticleCoverAlt, getArticleCoverImage } from "@/utils/strapi";
@@ -11,6 +11,15 @@ type BlogItemProps = PropsWithClassName & {
 
 const BlogItem: React.FC<BlogItemProps> = (props) => {
   const { attributes } = props.article || {};
+
+  const isDraft = !attributes.publishedAt;
+
+  const draftTag = isDraft && (
+    <span className="text-blue-500 bg-blue-500/10 px-2 py-[2px] rounded-md border border-blue-500/20 ml-2">
+      Draft
+    </span>
+  );
+
   return (
     <div
       // 直接写tailwind样式没有生效 改为写在 tailwind utilities里了
@@ -55,7 +64,8 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
         )}
       >
         <div className="text-base leading-[24px] text-primary-80">
-          {formatDate(attributes.postedTime || attributes.publishedAt)}
+          {getDisplayTime(attributes)}
+          {draftTag}
         </div>
         <div className="h-[152px]">
           <div className="text-xl text-primary leading-[24px] mt-[8px] font-semibold font-display max-h-[72px] text-ellipsis line-clamp-3">
@@ -70,6 +80,10 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
           className="mt-[24px]"
           type="outlined"
           onClick={() => {
+            // let url = `/blog/${attributes.slug}`;
+            // if (isDraft) {
+            //   url = `/blog/preview?slug=${attributes.slug}`;
+            // }
             window.open(`/blog/${attributes.slug}`);
           }}
         >

@@ -1,6 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import { cx } from "class-variance-authority";
 import { format } from "date-fns";
+import { PublicationStateEnum, type Article } from "@/strapi/type";
 
 export function cn(...args: any[]) {
   return twMerge(cx(...args));
@@ -38,5 +39,21 @@ export function isDev(hostname: string) {
   return ["localhost", "dev-v2.orderly.network"].includes(hostname);
 }
 
-export const fetcher = (url: string, init?: RequestInit) =>
-  fetch(url, init).then((res) => res.json());
+export async function fetcher(url: string, init?: RequestInit) {
+  return fetch(url, init).then((res) => res.json());
+}
+
+export function getDisplayTime(attributes: Article["attributes"]) {
+  const { postedTime, publishedAt, updatedAt } = attributes || {};
+  return formatDate(postedTime || publishedAt || updatedAt);
+}
+
+export function isEnableFetchBlogApi() {
+  return import.meta.env.PUBLIC_ENABLE_FETCH_BLOG_API === "true";
+}
+
+export function getPublicationState(hostname: string) {
+  return isDev(hostname)
+    ? PublicationStateEnum.PREVIEW
+    : PublicationStateEnum.LIVE;
+}

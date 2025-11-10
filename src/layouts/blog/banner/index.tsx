@@ -6,12 +6,11 @@ import useEmblaCarousel from "embla-carousel-react";
 import ScrollIndicator from "./ScrollIndicator";
 import Autoplay from "embla-carousel-autoplay";
 import useSWR from "swr";
-import type { Article, PublicationState } from "@/strapi/type";
+import type { Article } from "@/strapi/type";
 import Content from "@/components/Content";
 
 type BlogBannerProps = {
   articles?: Article[];
-  publicationState: PublicationState;
 };
 
 const BlogBanner: React.FC<BlogBannerProps> = (props) => {
@@ -26,6 +25,22 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
     },
     [Autoplay({ playOnInit: true, delay: 10000 })]
   );
+
+  // 取消置顶文章的实时更新
+  // const { data, isLoading } = useSWR("/api/pinArticles", fetcher, {
+  //   revalidateOnFocus: false,
+  //   dedupingInterval: 1000 * 60 * 5,
+  // });
+
+  // useEffect(() => {
+  //   if (!data || isLoading) {
+  //     return;
+  //   }
+  //   const list = data?.data || [];
+  //   if (list.length > 0) {
+  //     setArticles(list);
+  //   }
+  // }, [data, isLoading]);
 
   useEffect(() => {
     const callback = () => {

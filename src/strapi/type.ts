@@ -123,6 +123,13 @@ export type Pagination = {
 
 export type PublicationState = "live" | "preview";
 
+export enum PublicationStateEnum {
+  // 获取已发布的文章，用于生产环境
+  LIVE = "live",
+  // 获取包含未发布和已发布的文章，用于开发环境
+  PREVIEW = "preview",
+}
+
 export type ResponstList<T> = {
   data: T;
   meta: { pagination: TPagination };
