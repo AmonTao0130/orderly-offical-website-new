@@ -26,20 +26,21 @@ const BlogBanner: React.FC<BlogBannerProps> = (props) => {
     [Autoplay({ playOnInit: true, delay: 10000 })]
   );
 
-  const { data, isLoading } = useSWR("/api/pinArticles", fetcher, {
-    revalidateOnFocus: false,
-    dedupingInterval: 1000 * 60 * 5,
-  });
+  // 取消置顶文章的实时更新
+  // const { data, isLoading } = useSWR("/api/pinArticles", fetcher, {
+  //   revalidateOnFocus: false,
+  //   dedupingInterval: 1000 * 60 * 5,
+  // });
 
-  useEffect(() => {
-    if (!data || isLoading) {
-      return;
-    }
-    const list = data?.data || [];
-    if (list.length > 0) {
-      setArticles(list);
-    }
-  }, [data, isLoading]);
+  // useEffect(() => {
+  //   if (!data || isLoading) {
+  //     return;
+  //   }
+  //   const list = data?.data || [];
+  //   if (list.length > 0) {
+  //     setArticles(list);
+  //   }
+  // }, [data, isLoading]);
 
   useEffect(() => {
     const callback = () => {
