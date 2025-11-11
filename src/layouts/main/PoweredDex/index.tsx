@@ -10,10 +10,10 @@ import ADEN from "./icons/ADEN.svg";
 import Raydium from "./icons/Raydium.svg";
 import Whatexchange from "./icons/Whatexchange.svg";
 import WOOFiPro from "./icons/WOOFiPro.svg";
-import PerpsDAO from "./icons/PerpsDAO.svg";
 import VOOI from "./icons/VOOI.svg";
 import Quickswap from "./icons/Quickswap.svg";
 import Kodiak from "./icons/Kodiak.svg";
+import Aegis from "./icons/Aegis.png";
 
 const dexData = [
   { name: "Aden", src: ADEN.src, url: "https://aden.io/perp/PERP_BTC_USDC" },
@@ -22,8 +22,8 @@ const dexData = [
   { name: "Quickswap", src: Quickswap.src, url: "https://dapp.quickswap.exchange/falkor" },
   { name: "What.Exchange", src: Whatexchange.src, url: "https://trade.what.exchange/perp/PERP_ETH_USDC" },
   { name: "VOOI", src: VOOI.src, url: "https://pro.vooi.io/" },
-  { name: "PerpsDAO", src: PerpsDAO.src, url: " https://trade.perpsdao.xyz/en/perp/PERP_ETH_USDC" },
   { name: "Kodiak", src: Kodiak.src, url: "https://perps.kodiak.finance/" },
+  { name: "AEGIS DEX", src: Aegis.src, url: "https://app.aegisdex.io/perp/PERP_ETH_USDC" },
 ];
 
 const PoweredDex: React.FC<PropsWithClassName> = (props) => {
