@@ -4,35 +4,10 @@ import { cn } from "@/utils";
 import type { PropsWithClassName } from "@/types";
 import { Hyperlink } from "@/utils/constant";
 
-import PanteraSvg from "./backers/Pantera.svg";
-import DragonflyCapitalSvg from "./backers/DragonflyCapital.svg";
-import SequoiaCapitalSvg from "./backers/SequoiaCapital.svg";
-import GSRSvg from "./backers/GSR.svg";
 import RaydiumSvg from "./backers/Raydium.svg";
-import CryptocomCapitalSvg from "./backers/CryptocomCapital.svg";
-import IOSGSvg from "./backers/IOSG.svg";
 import WOOSvg from "./backers/WOO.svg";
-import DIVenturesSvg from "./backers/DIVentures.svg";
-import SevenXSvg from "./backers/SevenX.svg";
-import AGBuildSvg from "./backers/AGBuild.svg";
-import JumpSvg from "./backers/Jump.svg";
 import KronosSvg from "./backers/Kronos.svg";
-import GateVenturesSvg from "./backers/GateVentures.svg";
-import NewmanSvg from "./backers/Newman.svg";
-import AmberSvg from "./backers/Amber.svg";
-import MetawebSvg from "./backers/Metaweb.svg";
-import SubzeroSvg from "./backers/Subzero.svg";
-import LaserDigitalSvg from "./backers/LaserDigital.svg";
-import CoinDCXSvg from "./backers/CoinDCX.svg";
-import CoboVenturesSvg from "./backers/CoboVentures.svg";
-import MiranaSvg from "./backers/Mirana.svg";
-import PuzzleVenturesSvg from "./backers/PuzzleVentures.svg";
-import C2VenturesSvg from "./backers/C2Ventures.svg";
-import LedgerPrimeSvg from "./backers/LedgerPrime.svg";
-import RageTradeSvg from "./backers/RageTrade.svg";
 import WOOFiProSvg from "./backers/WOOFiPro.svg";
-import UnidexSvg from "./backers/Unidex.svg";
-import LogXSvg from "./backers/LogX.svg";
 import EmpyrealSvg from "./backers/Empyreal.svg";
 import BTSESvg from "./backers/BTSE.svg";
 import ArbitrumSvg from "./backers/Arbitrum.svg";
@@ -40,38 +15,13 @@ import OptimismSvg from "./backers/Optimism.svg";
 import LayerZeroSvg from "./backers/LayerZero.svg";
 import EthereumSvg from "./backers/Ethereum.svg";
 import PolygonSvg from "./backers/Polygon.svg";
-import ElixirSvg from "./backers/Elixir.svg";
+import AegisSvg from "./backers/Aegis.svg";
 
 const backers = [
-  // { name: "Pantera", src: PanteraSvg.src },
-  // { name: "DragonflyCapital", src: DragonflyCapitalSvg.src },
-  // { name: "SequoiaCapital", src: SequoiaCapitalSvg.src },
-  // { name: "GSR", src: GSRSvg.src },
   { name: "Raydium", src: RaydiumSvg.src },
-  // { name: "CryptocomCapital", src: CryptocomCapitalSvg.src },
-  // { name: "IOSG", src: IOSGSvg.src },
   { name: "WOO", src: WOOSvg.src },
-  // { name: "DIVentures", src: DIVenturesSvg.src },
-  // { name: "SevenX", src: SevenXSvg.src },
-  // { name: "AGBuild", src: AGBuildSvg.src },
-  // { name: "Jump", src: JumpSvg.src },
   { name: "Kronos", src: KronosSvg.src },
-  // { name: "GateVentures", src: GateVenturesSvg.src },
-  // { name: "Newman", src: NewmanSvg.src },
-  // { name: "Amber", src: AmberSvg.src },
-  // { name: "Metaweb", src: MetawebSvg.src },
-  // { name: "C2Ventures", src: C2VenturesSvg.src },
-  // { name: "Subzero", src: SubzeroSvg.src },
-  // { name: "LedgerPrime", src: LedgerPrimeSvg.src },
-  // { name: "LaserDigital", src: LaserDigitalSvg.src },
-  // { name: "CoinDCX", src: CoinDCXSvg.src },
-  // { name: "CoboVentures", src: CoboVenturesSvg.src },
-  // { name: "Mirana", src: MiranaSvg.src },
-  // { name: "PuzzleVentures", src: PuzzleVenturesSvg.src },
-  // { name: "RageTrade", src: RageTradeSvg.src },
   { name: "WOOFiPro", src: WOOFiProSvg.src },
-  // { name: "Unidex", src: UnidexSvg.src },
-  // { name: "LogX", src: LogXSvg.src },
   { name: "Empyreal", src: EmpyrealSvg.src },
   { name: "BTSE", src: BTSESvg.src },
   { name: "Arbitrum", src: ArbitrumSvg.src },
@@ -79,7 +29,7 @@ const backers = [
   { name: "LayerZero", src: LayerZeroSvg.src },
   { name: "Ethereum", src: EthereumSvg.src },
   { name: "Polygon", src: PolygonSvg.src },
-  { name: "Elixir", src: ElixirSvg.src },
+  { name: "Aegis", src: AegisSvg.src },
 ];
 
 const ExploreEcosystem: React.FC<PropsWithClassName> = (props) => {
