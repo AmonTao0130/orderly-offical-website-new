@@ -34,6 +34,7 @@ import Xade from "./imgs/Xade.png";
 import Kyrr from "./imgs/Kyrr.png";
 import Coin98 from "./imgs/Coin98.png";
 import Solana from "./imgs/Solana.png";
+import Aegis from "./imgs/Aegis.png";
 
 export type TCardData = {
   icon: string;
@@ -327,4 +328,12 @@ export const cardData: TCardData[] = [
       "Solana is a high performance blockchain that powers scalable, low-cost crypto applications.",
     url: "https://solana.com",
   },
+  {
+    icon: Aegis.src,
+    category: "Product",
+    title: "Aegis",
+    description:
+      "Bitcoin-backed stablecoin with real-time transparency and built-in yield.",
+    url: "https://aegis.im",
+  }
 ];
