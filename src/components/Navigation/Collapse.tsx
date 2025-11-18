@@ -19,6 +19,9 @@ const Collapse: React.FC<PropsWithClassName> = (props) => {
     >
       {data.map((item, index) => {
         const isExpand = expandKey === item.title;
+        const hasChildren = item.children?.length;
+        const hasUrl = item.url && !hasChildren;
+        
         return (
           <div
             key={item.title}
@@ -34,7 +37,19 @@ const Collapse: React.FC<PropsWithClassName> = (props) => {
                 isExpand && "text-white"
               )}
               onClick={() => {
-                setExpandKey(isExpand ? "" : item.title);
+                // 如果有 url 且没有 children，直接跳转
+                if (hasUrl && item.url) {
+                  if (item.target === "_blank") {
+                    window.open(item.url, "_blank");
+                  } else {
+                    window.location.href = item.url;
+                  }
+                  return;
+                }
+                // 如果有 children，展开/折叠
+                if (hasChildren) {
+                  setExpandKey(isExpand ? "" : item.title);
+                }
               }}
             >
               <div className="flex items-center">
