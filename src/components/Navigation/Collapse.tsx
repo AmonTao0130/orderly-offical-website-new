@@ -54,9 +54,7 @@ const Collapse: React.FC<PropsWithClassName> = (props) => {
             >
               <div className="flex items-center">
                 {item.component || item.title}
-                {!item.children?.length && (
-                  <CarnivalIcon className="ml-[4px]" />
-                )}
+                {item.showHot && <CarnivalIcon className="ml-[4px]" />}
               </div>
               {item.children?.length && (
                 <ExpandIcon
