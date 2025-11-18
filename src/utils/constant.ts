@@ -71,6 +71,7 @@ export const Hyperlink = {
     Telegram: "https://t.me/Orderly_Discussions",
     Snapshot: "https://snapshot.box/#/s:orderlygov.eth",
   },
+  Campaigns: "https://app.orderly.network/campaigns",
 };
 
 /**
