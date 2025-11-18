@@ -114,6 +114,12 @@ const data = [
       },
     ],
   },
+  {
+    title: "Campaigns",
+    url: Hyperlink.Campaigns,
+    showHot: true,
+    target: "_blank",
+  },
   // {
   //   title: "Social Carnival",
   //   url: "/carnival",
