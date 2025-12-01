@@ -79,13 +79,8 @@ const BlogItem: React.FC<BlogItemProps> = (props) => {
         <Button
           className="mt-[24px]"
           type="outlined"
-          onClick={() => {
-            // let url = `/blog/${attributes.slug}`;
-            // if (isDraft) {
-            //   url = `/blog/preview?slug=${attributes.slug}`;
-            // }
-            window.open(`/blog/${attributes.slug}`);
-          }}
+          href={`/blog/${attributes.slug}`}
+          target="_blank"
         >
           View more
         </Button>
