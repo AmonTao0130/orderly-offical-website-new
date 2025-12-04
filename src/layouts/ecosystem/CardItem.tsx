@@ -91,9 +91,8 @@ const CardItem: React.FC<CardItemProps & CardItemProps> = (props) => {
             "md:mt-[28px]"
           )}
           type="outlined"
-          onClick={() => {
-            window.open(data.url);
-          }}
+          href={data.url}
+          target="_blank"
         >
           Visit
         </Button>

@@ -87,14 +87,13 @@ const containerHoverStyles = {
 const DexCard: React.FC<DexCardProps> = ({ name, src, url }) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
-  const handleClick = () => {
-    if (url) {
-      window.open(url, '_blank', 'noopener,noreferrer');
-    }
-  };
+  const Tag = url ? "a" : "div";
 
   return (
-    <div
+    <Tag
+      href={url}
+      target={url ? "_blank" : undefined}
+      rel={url ? "noopener noreferrer" : undefined}
       className={cn(
         "relative group",
         /** 375 */
@@ -105,12 +104,11 @@ const DexCard: React.FC<DexCardProps> = ({ name, src, url }) => {
         "lg:w-[calc(33.333%-16px)] lg:h-[104px]",
         /** 1440 */
         "xl:w-[300px] xl:h-[104px]",
- 
+
         url ? "cursor-pointer" : ""
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={handleClick}
     >
       <div
         className="absolute inset-0 rounded-2xl pointer-events-none"
@@ -155,7 +153,7 @@ const DexCard: React.FC<DexCardProps> = ({ name, src, url }) => {
           </span>
         </div>
       </div>
-    </div>
+    </Tag>
   );
 };
 
