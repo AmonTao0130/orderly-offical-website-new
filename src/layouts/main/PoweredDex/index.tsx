@@ -16,7 +16,7 @@ import Kodiak from "./icons/Kodiak.svg";
 import Aegis from "./icons/Aegis.png";
 
 const dexData = [
-  { name: "Aden", src: ADEN.src, url: "https://aden.io/perp/PERP_BTC_USDC" },
+  { name: "Aden", src: ADEN.src, url: "https://perp.aden.io/" },
   { name: "WOOFi Pro", src: WOOFiPro.src, url: "https://woofi.com" },
   { name: "Raydium", src: Raydium.src, url: "https://perps.raydium.io/perp/PERP_RAY_USDC" },
   { name: "Quickswap", src: Quickswap.src, url: "https://dapp.quickswap.exchange/falkor" },
