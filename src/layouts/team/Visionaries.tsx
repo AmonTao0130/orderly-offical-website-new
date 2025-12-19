@@ -4,8 +4,8 @@ import { cn } from "@/utils";
 import TitleBlock from "./TitleBlock";
 import RanYi from "./imgs/RanYi.png";
 import TerenceNg from "./imgs/TerenceNg.png";
-import ArjunArora from "./imgs/ArjunArora.png";
-import AudreyYang from "./imgs/AudreyYang.png";
+// import ArjunArora from "./imgs/ArjunArora.png";
+// import AudreyYang from "./imgs/AudreyYang.png";
 import TwitterIcon from "@/icons/TwitterIcon";
 
 const data = [
@@ -21,12 +21,12 @@ const data = [
     icon: TerenceNg.src,
     twitter: "https://x.com/TerenceTheNg",
   },
-  {
-    name: "Arjun Arora",
-    title: "COO",
-    icon: ArjunArora.src,
-    twitter: "https://x.com/0x_Arjun",
-  },
+  // {
+  //   name: "Arjun Arora",
+  //   title: "COO",
+  //   icon: ArjunArora.src,
+  //   twitter: "https://x.com/0x_Arjun",
+  // },
   // {
   //   name: "Audrey Yang",
   //   title: "CGO ",
