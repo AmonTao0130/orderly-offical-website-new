@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { cn } from "@/utils";
 import Button from "@/components/Button";
+import ArrowForwardIcon from "@/icons/ArrowForwardIcon";
 
 const Contact: FC = () => {
   return (
@@ -39,6 +40,21 @@ const Contact: FC = () => {
           Contact us
         </Button>
       </div>
+
+      <a
+        href="https://orderly.network/docs/introduction/delisting-standards"
+        className={cn(
+          "mt-[40px] md:mt-[50px] lg:mt-[57px] px-3 inline-block text-center",
+          "text-[12px] md:text-[14px] lg:text-[17px]",
+          "text-primary-54 hover:text-primary"
+        )}
+        target="_blank"
+      >
+        Listings on Orderly are subject to ongoing review. View delisting standards{" "}
+        <span className="inline-flex items-center align-middle mt-[-2px]">
+          <ArrowForwardIcon size={16} />
+        </span>
+      </a>
     </div>
   );
 };
