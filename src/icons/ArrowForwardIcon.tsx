@@ -1,13 +1,16 @@
 import React from "react";
+import type { SvgIconProps } from "src/types";
 
-const ArrowForwardIcon: React.FC = () => {
+const ArrowForwardIcon: React.FC<SvgIconProps> = (props) => {
+  const { size = 18, ...rest } = props;
   return (
     <svg
-      width="18"
-      height="18"
+      width={`${size}px`}
+      height={`${size}px`}
       viewBox="0 0 18 18"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
+      {...rest}
     >
       <mask
         id="mask0_4004_7203"
