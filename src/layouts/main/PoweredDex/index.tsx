@@ -14,9 +14,10 @@ import VOOI from "./icons/VOOI.svg";
 import Quickswap from "./icons/Quickswap.svg";
 import Kodiak from "./icons/Kodiak.svg";
 import Aegis from "./icons/Aegis.png";
+import Velto from "./icons/Velto.svg";
 
 const dexData = [
-  { name: "Aden", src: ADEN.src, url: "https://perp.aden.io/" },
+  // { name: "Aden", src: ADEN.src, url: "https://perp.aden.io/" },
   { name: "WOOFi Pro", src: WOOFiPro.src, url: "https://woofi.com" },
   { name: "Raydium", src: Raydium.src, url: "https://perps.raydium.io/perp/PERP_RAY_USDC" },
   { name: "Quickswap", src: Quickswap.src, url: "https://dapp.quickswap.exchange/falkor" },
@@ -24,6 +25,7 @@ const dexData = [
   { name: "VOOI", src: VOOI.src, url: "https://pro.vooi.io/" },
   { name: "Kodiak", src: Kodiak.src, url: "https://perps.kodiak.finance/" },
   { name: "AEGIS DEX", src: Aegis.src, url: "https://app.aegisdex.io/perp/PERP_ETH_USDC" },
+  { name: "Velto", src: Velto.src, url: "https://app.velto.com/" },
 ];
 
 const PoweredDex: React.FC<PropsWithClassName> = (props) => {
@@ -42,7 +44,7 @@ const PoweredDex: React.FC<PropsWithClassName> = (props) => {
           "xl:py-[80px]"
         )}
       >
-        <BlockTitle>Trade Orderly</BlockTitle>
+        <BlockTitle>Trade on Orderly</BlockTitle>
         
         <div 
           className={cn(
