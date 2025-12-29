@@ -31,6 +31,8 @@ export const Hyperlink = {
     Partners: "/partners",
     Blog: "/blog",
     ListingApplication: "/listing",
+    Staking: "https://app.orderly.network/staking",
+    Vaults: "https://app.orderly.network/vaults",
   },
   Governance: "https://snapshot.box/#/s:orderlygov.eth",
   About: {
