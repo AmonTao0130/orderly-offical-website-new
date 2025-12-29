@@ -41,7 +41,7 @@ const Menu: React.FC<MenuProps> = (props) => {
                 className={cn(
                   "absolute top-[20px] z-50 overflow-hidden",
                   "transition-[max-height] duration-300",
-                  "max-h-0 group-hover:max-h-[226px] min-w-[130px]",
+                  "max-h-0 group-hover:max-h-[350px] min-w-[130px]",
                   item.showHot ? "left-[-4px]" : "left-[-20px] "
                 )}
               >

@@ -68,12 +68,24 @@ const data = [
         url: Hyperlink.Ecosystem.Partners,
       },
       {
-        title: "Blog",
-        url: Hyperlink.Ecosystem.Blog,
-      },
-      {
         title: "Listing",
         url: Hyperlink.Ecosystem.ListingApplication,
+      },
+      {
+        title: "Staking",
+        url: Hyperlink.Ecosystem.Staking,
+        target: "_blank",
+        showArrow: true,
+      },
+      {
+        title: "Vaults",
+        url: Hyperlink.Ecosystem.Vaults,
+        target: "_blank",
+        showArrow: true,
+      },
+      {
+        title: "Blog",
+        url: Hyperlink.Ecosystem.Blog,
       },
     ],
   },

@@ -173,7 +173,7 @@ const UseCases: React.FC<PropsWithClassName> = (props) => {
               )}
               href={Hyperlink.Main.BuildWithOrderlyOne}
             >
-              Build with Orderly One
+              Build Now
             </Button>
             <Button
               type="outlined"
