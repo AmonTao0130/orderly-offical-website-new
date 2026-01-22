@@ -32,7 +32,7 @@ const Header: FC = () => {
         </div>
         <Button
           className={cn("mt-[24px] lg:mt-[40px]", "px-[40px] md:px-[24px] lg:px-[40px]")}
-          href="https://forms.gle/rzqVxvyWTo3i9crp6"
+          href="https://docs.google.com/forms/d/1uCPw2OlM_TA_gjkQNPQ4H3rdapcVR-JL0K-_ukwSvqk/viewform?edit_requested=true"
           target="_blank"
         >
           Apply Now
