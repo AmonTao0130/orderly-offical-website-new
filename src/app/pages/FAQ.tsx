@@ -1,10 +1,14 @@
-'use client';
+"use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { NavCanvas, FooterCanvas } from "../../imports/Frame1618872018";
+import { NavCanvas, SiteFooter } from "../../imports/Frame1618872018";
 import { MobileNavDrawer } from "../components/MobileHomePage";
-import { MobileAIAccessCard, MobileNewsletterCard, MobileFooterCard } from "../../imports/Frame1618872068-142-633";
+import {
+  MobileAIAccessCard,
+  MobileNewsletterCard,
+  MobileFooterCard,
+} from "../../imports/Frame1618872068-142-633";
 import svgPathsMobile from "../../imports/svg-4hybjba00c";
 
 // ── ScaledSection: scales Figma nav/footer canvas to viewport ────────────────
@@ -69,15 +73,43 @@ function MobileTopBar({ onMenuClick }: { onMenuClick: () => void }) {
   return (
     <div
       className="flex items-center justify-between px-[20px] py-[18px]"
-      style={{ background: "#000", borderBottom: "1px solid rgba(255,255,255,0.07)" }}
+      style={{
+        background: "#000",
+        borderBottom: "1px solid rgba(255,255,255,0.07)",
+      }}
     >
       <div className="flex items-center gap-[10px]">
         <div className="relative shrink-0" style={{ width: 28, height: 28 }}>
-          <svg className="absolute block w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 31.9999 31.9608">
-            <path clipRule="evenodd" d={svgPathsMobile.p2fe0400} fill="white" fillRule="evenodd" />
-            <path clipRule="evenodd" d={svgPathsMobile.p2f88ca00} fill="white" fillRule="evenodd" />
-            <path clipRule="evenodd" d={svgPathsMobile.p22c01780} fill="white" fillRule="evenodd" />
-            <path clipRule="evenodd" d={svgPathsMobile.p527fe00} fill="white" fillRule="evenodd" />
+          <svg
+            className="absolute block w-full h-full"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 31.9999 31.9608"
+          >
+            <path
+              clipRule="evenodd"
+              d={svgPathsMobile.p2fe0400}
+              fill="white"
+              fillRule="evenodd"
+            />
+            <path
+              clipRule="evenodd"
+              d={svgPathsMobile.p2f88ca00}
+              fill="white"
+              fillRule="evenodd"
+            />
+            <path
+              clipRule="evenodd"
+              d={svgPathsMobile.p22c01780}
+              fill="white"
+              fillRule="evenodd"
+            />
+            <path
+              clipRule="evenodd"
+              d={svgPathsMobile.p527fe00}
+              fill="white"
+              fillRule="evenodd"
+            />
           </svg>
         </div>
       </div>
@@ -264,8 +296,18 @@ function AccordionItem({ item, vp }: { item: FAQItem; vp: Viewport }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: isMobile ? "16px 18px" : isTablet ? "20px 24px" : "24px 28px",
-          background: open ? (hovered ? "#222228" : "#1a1a1f") : (hovered ? "#7b1de6" : "#6700ce"),
+          padding: isMobile
+            ? "16px 18px"
+            : isTablet
+            ? "20px 24px"
+            : "24px 28px",
+          background: open
+            ? hovered
+              ? "#222228"
+              : "#1a1a1f"
+            : hovered
+            ? "#7b1de6"
+            : "#6700ce",
           border: "none",
           cursor: "pointer",
           gap: "12px",
@@ -297,7 +339,12 @@ function AccordionItem({ item, vp }: { item: FAQItem; vp: Viewport }) {
             transform: open ? "rotate(180deg)" : "rotate(0deg)",
           }}
         >
-          <svg width={isMobile ? "16" : "20"} height={isMobile ? "16" : "20"} viewBox="0 0 20 20" fill="none">
+          <svg
+            width={isMobile ? "16" : "20"}
+            height={isMobile ? "16" : "20"}
+            viewBox="0 0 20 20"
+            fill="none"
+          >
             <path
               d="M5 7.5L10 12.5L15 7.5"
               stroke="currentColor"
@@ -317,21 +364,25 @@ function AccordionItem({ item, vp }: { item: FAQItem; vp: Viewport }) {
         }}
       >
         <div style={{ overflow: "hidden" }}>
-        <p
-          style={{
-            fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-            fontVariationSettings: "'wght' 300",
-            fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
-            fontSize: isMobile ? "14px" : "16px",
-            color: "rgba(255,255,255,0.82)",
-            lineHeight: 1.6,
-            padding: isMobile ? "0 18px 20px" : isTablet ? "0 24px 24px" : "0 28px 28px",
-            margin: 0,
-            letterSpacing: "0.025em",
-          }}
-        >
-          {item.answer}
-        </p>
+          <p
+            style={{
+              fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+              fontVariationSettings: "'wght' 300",
+              fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+              fontSize: isMobile ? "14px" : "16px",
+              color: "rgba(255,255,255,0.82)",
+              lineHeight: 1.6,
+              padding: isMobile
+                ? "0 18px 20px"
+                : isTablet
+                ? "0 24px 24px"
+                : "0 28px 28px",
+              margin: 0,
+              letterSpacing: "0.025em",
+            }}
+          >
+            {item.answer}
+          </p>
         </div>
       </div>
     </div>
@@ -346,8 +397,14 @@ export default function FAQ() {
   const [navOpen, setNavOpen] = useState(false);
 
   return (
-    <div style={{ background: "#000", minHeight: "100vh", width: "100vw", overflowX: "hidden" }}>
-
+    <div
+      style={{
+        background: "#000",
+        minHeight: "100vh",
+        width: "100vw",
+        overflowX: "hidden",
+      }}
+    >
       {/* ── Nav ── */}
       {isMobile ? (
         <MobileTopBar onMenuClick={() => setNavOpen(true)} />
@@ -358,52 +415,52 @@ export default function FAQ() {
       )}
 
       {/* ── Hero header ── */}
-      <motion.div
-        variants={heroContainer}
-        initial="hidden"
-        animate="visible"
-      >
-      <div
-        style={{
-          maxWidth: "800px",
-          margin: "0 auto",
-          padding: isMobile ? "40px 20px 48px" : isTablet ? "50px 32px 64px" : "60px 24px 80px",
-          textAlign: "center",
-        }}
-      >
-        <motion.h1
-          variants={heroChild}
+      <motion.div variants={heroContainer} initial="hidden" animate="visible">
+        <div
           style={{
-            fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-            fontVariationSettings: "'wght' 700",
-            fontSize: isMobile ? "32px" : "clamp(40px,6vw,68px)",
-            color: "white",
-            letterSpacing: "0.01em",
-            lineHeight: 1.1,
-            margin: isMobile ? "0 0 16px" : "0 0 24px",
-          }}
-        >
-          Frequently
-          <br />
-          Asked Questions
-        </motion.h1>
-        <motion.p
-          variants={heroChild}
-          style={{
-            fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-            fontVariationSettings: "'wght' 400",
-            fontSize: isMobile ? "14px" : "16px",
-            color: "rgba(255,255,255,0.55)",
-            lineHeight: 1.5,
-            maxWidth: "520px",
+            maxWidth: "800px",
             margin: "0 auto",
-            letterSpacing: "0.02em",
+            padding: isMobile
+              ? "40px 20px 48px"
+              : isTablet
+              ? "50px 32px 64px"
+              : "60px 24px 80px",
+            textAlign: "center",
           }}
         >
-          Everything you need to know about Orderly Network, from getting
-          started to advanced topics.
-        </motion.p>
-      </div>
+          <motion.h1
+            variants={heroChild}
+            style={{
+              fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+              fontVariationSettings: "'wght' 700",
+              fontSize: isMobile ? "32px" : "clamp(40px,6vw,68px)",
+              color: "white",
+              letterSpacing: "0.01em",
+              lineHeight: 1.1,
+              margin: isMobile ? "0 0 16px" : "0 0 24px",
+            }}
+          >
+            Frequently
+            <br />
+            Asked Questions
+          </motion.h1>
+          <motion.p
+            variants={heroChild}
+            style={{
+              fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+              fontVariationSettings: "'wght' 400",
+              fontSize: isMobile ? "14px" : "16px",
+              color: "rgba(255,255,255,0.55)",
+              lineHeight: 1.5,
+              maxWidth: "520px",
+              margin: "0 auto",
+              letterSpacing: "0.02em",
+            }}
+          >
+            Everything you need to know about Orderly Network, from getting
+            started to advanced topics.
+          </motion.p>
+        </div>
       </motion.div>
 
       {/* ── FAQ accordion ── */}
@@ -435,131 +492,136 @@ export default function FAQ() {
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
       >
-      <div
-        style={{
-          maxWidth: "740px",
-          margin: isMobile ? "64px auto 80px" : "80px auto 120px",
-          padding: isMobile ? "0 16px" : isTablet ? "0 32px" : "0 24px",
-        }}
-      >
         <div
           style={{
-            background: "#1E2026",
-            borderRadius: isMobile ? "16px" : "20px",
-            padding: isMobile ? "32px 20px" : isTablet ? "40px 32px" : "48px 40px",
-            textAlign: "center",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "16px",
+            maxWidth: "740px",
+            margin: isMobile ? "64px auto 80px" : "80px auto 120px",
+            padding: isMobile ? "0 16px" : isTablet ? "0 32px" : "0 24px",
           }}
         >
-          <h2
-            style={{
-              fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-              fontVariationSettings: "'wght' 700",
-              fontSize: isMobile ? "24px" : "clamp(28px,3.5vw,40px)",
-              color: "white",
-              margin: 0,
-              letterSpacing: "0.01em",
-            }}
-          >
-            Still Have Questions?
-          </h2>
-          <p
-            style={{
-              fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-              fontVariationSettings: "'wght' 400",
-              fontSize: isMobile ? "14px" : "16px",
-              color: "rgba(255,255,255,0.75)",
-              lineHeight: 1.5,
-              maxWidth: "490px",
-              margin: 0,
-              letterSpacing: "0.02em",
-            }}
-          >
-            Check the full documentation or join our Discord community for real-time support.
-          </p>
           <div
             style={{
+              background: "#1E2026",
+              borderRadius: isMobile ? "16px" : "20px",
+              padding: isMobile
+                ? "32px 20px"
+                : isTablet
+                ? "40px 32px"
+                : "48px 40px",
+              textAlign: "center",
               display: "flex",
-              flexDirection: isMobile ? "column" : "row",
-              gap: isMobile ? "10px" : "12px",
-              width: isMobile ? "100%" : "auto",
-              justifyContent: "center",
-              marginTop: "8px",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "16px",
             }}
           >
-            <a
-              href="https://orderly.network/docs/introduction/getting-started/what-is-orderly"
-              target="_blank"
-              rel="noopener noreferrer"
+            <h2
+              style={{
+                fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+                fontVariationSettings: "'wght' 700",
+                fontSize: isMobile ? "24px" : "clamp(28px,3.5vw,40px)",
+                color: "white",
+                margin: 0,
+                letterSpacing: "0.01em",
+              }}
+            >
+              Still Have Questions?
+            </h2>
+            <p
+              style={{
+                fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+                fontVariationSettings: "'wght' 400",
+                fontSize: isMobile ? "14px" : "16px",
+                color: "rgba(255,255,255,0.75)",
+                lineHeight: 1.5,
+                maxWidth: "490px",
+                margin: 0,
+                letterSpacing: "0.02em",
+              }}
+            >
+              Check the full documentation or join our Discord community for
+              real-time support.
+            </p>
+            <div
               style={{
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "8px",
-                border: "1.5px solid rgba(255,255,255,0.6)",
-                borderRadius: "100px",
-                padding: "12px 24px",
-                color: "white",
-                textDecoration: "none",
-                fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-                fontVariationSettings: "'wght' 600",
-                fontSize: "15px",
-                letterSpacing: "0.02em",
+                flexDirection: isMobile ? "column" : "row",
+                gap: isMobile ? "10px" : "12px",
                 width: isMobile ? "100%" : "auto",
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.borderColor = "white")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)")
-              }
-            >
-              Read the Docs
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path
-                  d="M2.5 11.5L11.5 2.5M7 2.5h4.5V7"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
-            <a
-              href="https://discord.com/invite/OrderlyNetwork"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "flex",
-                alignItems: "center",
                 justifyContent: "center",
-                gap: "8px",
-                border: "1.5px solid rgba(255,255,255,0.6)",
-                borderRadius: "100px",
-                padding: "12px 24px",
-                color: "white",
-                textDecoration: "none",
-                fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-                fontVariationSettings: "'wght' 600",
-                fontSize: "15px",
-                letterSpacing: "0.02em",
-                width: isMobile ? "100%" : "auto",
+                marginTop: "8px",
               }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.borderColor = "white")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)")
-              }
             >
-              Join Discord
-            </a>
+              <a
+                href="https://orderly.network/docs/introduction/getting-started/what-is-orderly"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                  border: "1.5px solid rgba(255,255,255,0.6)",
+                  borderRadius: "100px",
+                  padding: "12px 24px",
+                  color: "white",
+                  textDecoration: "none",
+                  fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+                  fontVariationSettings: "'wght' 600",
+                  fontSize: "15px",
+                  letterSpacing: "0.02em",
+                  width: isMobile ? "100%" : "auto",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.borderColor = "white")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)")
+                }
+              >
+                Read the Docs
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path
+                    d="M2.5 11.5L11.5 2.5M7 2.5h4.5V7"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+              <a
+                href="https://discord.com/invite/OrderlyNetwork"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                  border: "1.5px solid rgba(255,255,255,0.6)",
+                  borderRadius: "100px",
+                  padding: "12px 24px",
+                  color: "white",
+                  textDecoration: "none",
+                  fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+                  fontVariationSettings: "'wght' 600",
+                  fontSize: "15px",
+                  letterSpacing: "0.02em",
+                  width: isMobile ? "100%" : "auto",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.borderColor = "white")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)")
+                }
+              >
+                Join Discord
+              </a>
+            </div>
           </div>
         </div>
-      </div>
       </motion.div>
 
       {/* ── Footer ── */}
@@ -569,34 +631,27 @@ export default function FAQ() {
         whileInView="visible"
         viewport={{ once: true, margin: "-40px" }}
       >
-      {isMobile ? (
-        <div
-          style={{
-            padding: "0 20px 32px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px",
-            width: "100%",
-            boxSizing: "border-box",
-          }}
-        >
-          <MobileAIAccessCard />
-          <MobileNewsletterCard />
-          <MobileFooterCard />
-        </div>
-      ) : (
-        <ScaledSection designHeight={829}>
-          <FooterCanvas />
-        </ScaledSection>
-      )}
+        {isMobile ? (
+          <div
+            style={{
+              padding: "0 20px 32px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+              width: "100%",
+              boxSizing: "border-box",
+            }}
+          >
+            <MobileFooterCard />
+          </div>
+        ) : (
+          <SiteFooter />
+        )}
       </motion.div>
 
       <AnimatePresence mode="wait">
-        {navOpen && (
-          <MobileNavDrawer onClose={() => setNavOpen(false)} />
-        )}
+        {navOpen && <MobileNavDrawer onClose={() => setNavOpen(false)} />}
       </AnimatePresence>
-
     </div>
   );
 }

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { AnimatePresence } from "motion/react";
@@ -103,9 +103,9 @@ function ScaledFrame({
 
 export default function Home() {
   const [viewport, setViewport] = useState<"mobile" | "desktop">("desktop");
-  const [navOpen,  setNavOpen]  = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
 
-  const handleOpenNav  = useCallback(() => setNavOpen(true), []);
+  const handleOpenNav = useCallback(() => setNavOpen(true), []);
   const handleCloseNav = useCallback(() => setNavOpen(false), []);
 
   useEffect(() => {
@@ -122,7 +122,15 @@ export default function Home() {
   // Desktop & tablet: pixel-perfect ScaledFrame of the 1440 px Figma canvas
   if (viewport === "desktop") {
     return (
-      <div style={{ width: "100%", overflowX: "hidden", background: "#000", display: "flex", justifyContent: "center" }}>
+      <div
+        style={{
+          width: "100%",
+          overflowX: "hidden",
+          background: "#000",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <div style={{ width: "100%", maxWidth: "1200px" }}>
           <ScaledFrame cap>
             <Frame7 />
