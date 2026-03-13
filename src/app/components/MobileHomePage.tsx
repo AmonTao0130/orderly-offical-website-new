@@ -590,7 +590,7 @@ export function MobileHomePage({ onMenuClick }: { onMenuClick?: () => void } = {
       };
       const onPartner = (e: Event) => {
         e.stopPropagation();
-        window.location.href = `mailto:midoji@orderly.network?subject=${encodeURIComponent("Partnership Inquiry from Orderly Website")}&body=${encodeURIComponent("First Name:\nLast Name:\nEmail:\nTelegram ID:\nCompany / Project:\nMessage:\n")}`;
+        setPartnershipModalOpen(true);
       };
 
       buildEls.forEach(el => el.addEventListener("click", onBuild));

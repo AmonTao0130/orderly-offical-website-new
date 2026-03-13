@@ -313,7 +313,7 @@ export function PartnershipFormModal({ onClose }: { onClose: () => void }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-[16px]"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-[12px] sm:p-[16px]"
       style={{ backgroundColor: "rgba(0,0,0,0.85)" }}
       onClick={onClose}
     >
@@ -322,13 +322,13 @@ export function PartnershipFormModal({ onClose }: { onClose: () => void }) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.94, y: 12 }}
         transition={{ duration: 0.2, ease: [0.22, 0.61, 0.36, 1] }}
-        className="relative bg-[#14151a] rounded-[24px] w-full max-w-[520px] max-h-[90vh] overflow-hidden shadow-2xl"
+        className="relative bg-[#14151a] rounded-[20px] sm:rounded-[24px] w-full max-w-[520px] max-h-[90vh] overflow-hidden shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Scrollable content */}
         <div className="overflow-y-auto max-h-[90vh]">
           {/* Header */}
-          <div className="flex items-start justify-between px-[28px] pt-[28px] pb-[20px] sticky top-0 bg-[#14151a] z-10">
+          <div className="flex items-start justify-between px-[20px] sm:px-[28px] pt-[20px] sm:pt-[28px] pb-[16px] sm:pb-[20px] sticky top-0 bg-[#14151a] z-10">
             <div>
               <h2 className="text-[24px] text-white tracking-[0.24px]" style={{ fontFamily: "'atyp-bl-variable', 'Atyp BL', sans-serif", fontWeight: 700 }}>
                 Talk to Partnerships
@@ -349,12 +349,12 @@ export function PartnershipFormModal({ onClose }: { onClose: () => void }) {
           </div>
 
           {/* Divider */}
-          <div className="mx-[28px] h-px sticky top-[88px] bg-[rgba(255,255,255,0.07)] z-10" />
+          <div className="mx-[20px] sm:mx-[28px] h-px sticky top-[76px] sm:top-[88px] bg-[rgba(255,255,255,0.07)] z-10" />
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="px-[28px] py-[20px]">
+          <form onSubmit={handleSubmit} className="px-[20px] sm:px-[28px] py-[16px] sm:py-[20px]">
             {/* Name Row */}
-            <div className="flex gap-[16px] mb-[16px]">
+            <div className="flex flex-col sm:flex-row gap-[12px] sm:gap-[16px] mb-[16px]">
               <div className="flex-1">
                 <label className="block text-[13px] text-[#9c9fae] mb-[8px] tracking-[0.13px]" style={fontMediumPartnership}>
                   First Name <span className="text-red-500">*</span>
@@ -551,7 +551,7 @@ export function PartnershipFormModal({ onClose }: { onClose: () => void }) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-[16px] rounded-[24px] bg-[#6700ce] text-white text-[16px] font-semibold tracking-[0.16px] transition-all duration-200 hover:bg-[#7a00f0] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#6700ce]"
+              className="w-full py-[14px] sm:py-[16px] rounded-[24px] bg-[#6700ce] text-white text-[15px] sm:text-[16px] font-semibold tracking-[0.16px] transition-all duration-200 hover:bg-[#7a00f0] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#6700ce]"
               style={{ fontFamily: "'atyp-bl-variable', 'Atyp BL', sans-serif", fontWeight: 700 }}
             >
               {isSubmitting ? (
