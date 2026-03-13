@@ -185,6 +185,29 @@ html {
   }
 }
 
+/* Partnership form modal scrollbars (desktop + mobile) */
+.partnership-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.partnership-scroll::-webkit-scrollbar-track {
+  background: #111118;
+}
+
+.partnership-scroll::-webkit-scrollbar-thumb {
+  background: #6700ce;
+  border-radius: 9999px;
+}
+
+.partnership-scroll::-webkit-scrollbar-thumb:hover {
+  background: #7a00f0;
+}
+
+.partnership-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #6700ce #111118;
+}
+
 /* ─── Figma font-family intercept ─────────────────────────────────────────────
    Figma exports each weight as a distinct family name (e.g. 'Atyp BL:Bold').
    The Tailwind class font-['Atyp_BL:Bold',sans-serif] generates:

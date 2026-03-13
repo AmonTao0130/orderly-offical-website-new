@@ -462,7 +462,7 @@ export function PartnershipFormModal({ onClose }: { onClose: () => void }) {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Scrollable content */}
-        <div className="overflow-y-auto max-h-[90vh]">
+        <div className="overflow-y-auto max-h-[90vh] partnership-scroll">
           {/* Header */}
           <div className="flex items-start justify-between px-[20px] sm:px-[28px] pt-[20px] sm:pt-[28px] pb-[16px] sm:pb-[20px] sticky top-0 bg-[#14151a] z-10">
             <div>
