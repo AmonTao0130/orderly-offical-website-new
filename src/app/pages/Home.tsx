@@ -5,9 +5,9 @@ import { AnimatePresence } from "motion/react";
 import Frame7 from "../../imports/Frame1618872018";
 import { MobileHomePage, MobileNavDrawer } from "../components/MobileHomePage";
 
-// Desktop / tablet Figma canvas: 1440 × 6900 px
+// Desktop / tablet Figma canvas: 1440 × 6500 px
 const DESIGN_WIDTH = 1440;
-const DESIGN_HEIGHT = 6900;
+const DESIGN_HEIGHT = 6550;
 
 // Mobile Figma canvas: 375 px wide
 const MOBILE_DESIGN_WIDTH = 375;
