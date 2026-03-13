@@ -132,7 +132,7 @@ export default function Home() {
         }}
       >
         <div style={{ width: "100%", maxWidth: "1200px" }}>
-          <ScaledFrame cap>
+          <ScaledFrame cap autoHeight>
             <Frame7 />
           </ScaledFrame>
         </div>
