@@ -1415,14 +1415,14 @@ function Frame({
 function FeatureTag() {
   return (
     <div
-      className="absolute backdrop-blur-[30px] bg-gradient-to-t content-stretch flex from-[39.314%] from-[rgba(156,117,255,0.6)] gap-[16px] items-center justify-center left-[1090.19px] px-[40px] py-[30px] rounded-[124px] to-[rgba(156,117,255,0)] top-[667.98px]"
+      className="absolute backdrop-blur-[30px] bg-gradient-to-t content-stretch flex from-[39.314%] from-[rgba(156,117,255,0.6)] gap-[10px] items-center justify-center left-[1016px] px-[28px] py-[20px] rounded-[124px] to-[rgba(156,117,255,0)] top-[700px]"
       data-name="Feature Tag"
     >
       <div
         aria-hidden="true"
-        className="absolute border-3 border-solid border-white inset-0 pointer-events-none rounded-[124px] shadow-[18px_23px_40px_0px_rgba(0,0,0,0.1)]"
+        className="absolute border-3 border-solid border-white inset-0 pointer-events-none rounded-[124px] shadow-[14px_18px_30px_0px_rgba(0,0,0,0.1)]"
       />
-      <div className="relative shrink-0 size-[14.418px]">
+      <div className="relative shrink-0 size-[11px]">
         <svg
           className="absolute block size-full"
           fill="none"
@@ -1446,7 +1446,7 @@ function FeatureTag() {
         </svg>
       </div>
       <p
-        className="capitalize font-['Atyp_BL:Semibold',sans-serif] leading-none not-italic relative shrink-0 text-[24px] text-white"
+        className="capitalize font-['Atyp_BL:Semibold',sans-serif] leading-none not-italic relative shrink-0 text-[18px] text-white"
         style={{ fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'" }}
       >
         Deep Liquidity
@@ -1458,14 +1458,14 @@ function FeatureTag() {
 function FeatureTag1() {
   return (
     <div
-      className="absolute backdrop-blur-[30px] bg-gradient-to-t content-stretch flex from-[39.314%] from-[rgba(156,117,255,0.6)] gap-[16px] items-center justify-center left-[1060.56px] px-[40px] py-[30px] rounded-[124px] to-[rgba(156,117,255,0)] top-[1129.98px]"
+      className="absolute backdrop-blur-[30px] bg-gradient-to-t content-stretch flex from-[39.314%] from-[rgba(156,117,255,0.6)] gap-[10px] items-center justify-center left-[992px] px-[28px] py-[20px] rounded-[124px] to-[rgba(156,117,255,0)] top-[1070px]"
       data-name="Feature Tag"
     >
       <div
         aria-hidden="true"
-        className="absolute border-3 border-solid border-white inset-0 pointer-events-none rounded-[124px] shadow-[18px_23px_40px_0px_rgba(0,0,0,0.1)]"
+        className="absolute border-3 border-solid border-white inset-0 pointer-events-none rounded-[124px] shadow-[14px_18px_30px_0px_rgba(0,0,0,0.1)]"
       />
-      <div className="relative shrink-0 size-[14.418px]">
+      <div className="relative shrink-0 size-[11px]">
         <svg
           className="absolute block size-full"
           fill="none"
@@ -1482,7 +1482,7 @@ function FeatureTag1() {
         </svg>
       </div>
       <p
-        className="font-['Atyp_BL:Semibold',sans-serif] leading-none not-italic relative shrink-0 text-[24px] text-white"
+        className="font-['Atyp_BL:Semibold',sans-serif] leading-none not-italic relative shrink-0 text-[18px] text-white"
         style={{ fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'" }}
       >
         Customizable
@@ -1494,14 +1494,14 @@ function FeatureTag1() {
 function FeatureTag2() {
   return (
     <div
-      className="absolute backdrop-blur-[30px] bg-gradient-to-t content-stretch flex from-[rgba(156,117,255,0.6)] gap-[16px] items-center justify-center left-[50.9px] px-[40px] py-[30px] rounded-[124px] to-[133%] to-[rgba(156,117,255,0)] top-[1068.7px]"
+      className="absolute backdrop-blur-[30px] bg-gradient-to-t content-stretch flex from-[rgba(156,117,255,0.6)] gap-[10px] items-center justify-center left-[184px] px-[28px] py-[20px] rounded-[124px] to-[133%] to-[rgba(156,117,255,0)] top-[1021px]"
       data-name="Feature Tag"
     >
       <div
         aria-hidden="true"
-        className="absolute border-3 border-solid border-white inset-0 pointer-events-none rounded-[124px] shadow-[18px_23px_40px_0px_rgba(0,0,0,0.1)]"
+        className="absolute border-3 border-solid border-white inset-0 pointer-events-none rounded-[124px] shadow-[14px_18px_30px_0px_rgba(0,0,0,0.1)]"
       />
-      <div className="relative shrink-0 size-[14.418px]">
+      <div className="relative shrink-0 size-[11px]">
         <svg
           className="absolute block size-full"
           fill="none"
@@ -1518,7 +1518,7 @@ function FeatureTag2() {
         </svg>
       </div>
       <p
-        className="capitalize font-['Atyp_BL:Semibold',sans-serif] leading-none not-italic relative shrink-0 text-[24px] text-white"
+        className="capitalize font-['Atyp_BL:Semibold',sans-serif] leading-none not-italic relative shrink-0 text-[18px] text-white"
         style={{ fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'" }}
       >
         No-code
@@ -3658,7 +3658,7 @@ function Frame9() {
 
 function Frame10() {
   return (
-    <div className="content-stretch flex gap-[233px] items-center px-[60px] relative shrink-0 w-[1302px]">
+    <div className="content-stretch flex justify-between items-center px-[60px] relative shrink-0 w-full">
       <StatusMessageContainer1 />
       <Frame9 />
     </div>
@@ -6326,7 +6326,7 @@ export default function Frame7() {
           />
         </svg>
       </div>
-      <MacbookVideo className="-translate-x-1/2 absolute h-[837.698px] left-[calc(50%-0.1px)] top-[611.56px] w-[1125.404px]" />
+      <MacbookVideo className="-translate-x-1/2 absolute h-[670.158px] left-[calc(50%-0.1px)] top-[655.33px] w-[900.323px]" />
 
       {/* Nav - appears immediately on load */}
       <motion.div

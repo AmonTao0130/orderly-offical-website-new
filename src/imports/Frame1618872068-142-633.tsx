@@ -2320,7 +2320,8 @@ function FooterStatus1() {
 }
 
 function FooterStatus() {
-  const [price, setPrice] = useState<string | null>(() => getCachedPrice());
+  // Initialize as null to avoid hydration mismatch (localStorage is unavailable on server)
+  const [price, setPrice] = useState<string | null>(null);
 
   useEffect(() => {
     const cached = getCachedPrice();

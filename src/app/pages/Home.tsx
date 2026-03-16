@@ -127,15 +127,11 @@ export default function Home() {
           width: "100%",
           overflowX: "hidden",
           background: "#000",
-          display: "flex",
-          justifyContent: "center",
         }}
       >
-        <div style={{ width: "100%", maxWidth: "1200px" }}>
-          <ScaledFrame cap>
-            <Frame7 />
-          </ScaledFrame>
-        </div>
+        <ScaledFrame cap>
+          <Frame7 />
+        </ScaledFrame>
       </div>
     );
   }
