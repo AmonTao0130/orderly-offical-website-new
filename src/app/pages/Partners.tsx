@@ -810,14 +810,12 @@ export default function Partners() {
         ) : isTablet ? (
           <div
             style={{
-              padding: "0 24px 40px",
+              padding: "0 40px 40px",
               display: "flex",
               flexDirection: "column",
               gap: "16px",
               boxSizing: "border-box",
               width: "100%",
-              maxWidth: "760px",
-              margin: "0 auto",
             }}
           >
             <MobileFooterCard />
