@@ -106,9 +106,9 @@ function ScaledFrame({
 
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
-  const [navOpen, setNavOpen] = useState(false);
+  const [navOpen,  setNavOpen]  = useState(false);
 
-  const handleOpenNav = useCallback(() => setNavOpen(true), []);
+  const handleOpenNav  = useCallback(() => setNavOpen(true),  []);
   const handleCloseNav = useCallback(() => setNavOpen(false), []);
 
   useEffect(() => {
@@ -135,7 +135,7 @@ export default function Home() {
     );
   }
 
-  // Desktop + tablet (≥ 768 px): pixel-perfect ScaledFrame of the 1440 px Figma canvas
+  // Tablet + Desktop (≥ 768 px): pixel-perfect ScaledFrame of the 1440 px Figma canvas
   return (
     <div style={{ width: "100%", overflowX: "hidden", background: "#000" }}>
       <ScaledFrame cap comfortableViewport={1680}>

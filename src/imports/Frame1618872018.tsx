@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
@@ -7,7 +5,6 @@ import { motion } from "motion/react";
 import {
   useOrderlyStats,
   formatLargeNumber,
-  formatCount,
 } from "@/app/hooks/useOrderlyStats";
 import { AnimatedNumber } from "@/app/components/AnimatedNumber";
 import { useNewsletterSubscribe } from "@/app/hooks/useNewsletterSubscribe";
@@ -25,11 +22,7 @@ const CheckSvg = () => (
 );
 import svgPaths from "./svg-kykn6znl0w";
 import ImportedWhyContent from "./WhyContent";
-const imgMacBook11 =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQI12NgAAIABQABNjN9GQAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAAA0lEQVQI12P4z8BQDwAEgAF/pooBPQAAAABJRU5ErkJggg==";
 import MacbookVideo from "@/app/components/MacbookVideo";
-const imgYtIconWhiteDigital1 =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQI12NgAAIABQABNjN9GQAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAAA0lEQVQI12P4z8BQDwAEgAF/pooBPQAAAABJRU5ErkJggg==";
 import { imgGroup } from "./svg-z9q1x";
 import QuickStartGroup from "./Group1597879965";
 import IcSocialYoutubeS from "./IcSocialYoutubeS24";
@@ -3759,181 +3752,6 @@ function Frame12() {
   );
 }
 
-function Frame11() {
-  return (
-    <div className="content-stretch flex flex-col gap-[16px] relative shrink-0">
-      <p
-        className="font-['Atyp_BL:Semibold',sans-serif] leading-none not-italic text-[24px] text-white tracking-[0.24px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        Enter Your Email
-      </p>
-      <Group9 />
-    </div>
-  );
-}
-
-function Frame15() {
-  return (
-    <div className="content-stretch flex flex-col gap-[4px] items-start not-italic relative shrink-0 text-white">
-      <p
-        className="font-['Atyp_BL:Semibold',sans-serif] leading-[1.3] relative shrink-0 text-[30px] tracking-[0.3px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        AI Access
-      </p>
-      <p
-        className="font-['Atyp_BL:Medium',sans-serif] leading-[1.4] relative shrink-0 text-[24px] tracking-[0.504px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        Retrieve structured capabilities at:
-      </p>
-    </div>
-  );
-}
-
-function Group10() {
-  return (
-    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0">
-      <div
-        className="bg-[#14151a] col-1 h-[69px] ml-0 mt-0 rounded-bl-[20px] rounded-tl-[20px] row-1 w-[427.788px]"
-        data-name="Newsletter Input Background"
-      />
-      <p
-        className="col-1 font-['DM_Mono:Medium',sans-serif] leading-[1.4] ml-[18.34px] mt-[16px] not-italic opacity-70 relative row-1 text-[24px] text-white tracking-[0.504px]"
-        data-name="Skill URL"
-      >
-        orderly.network/skill.md
-      </p>
-      <div className="col-1 flex h-[69px] items-center justify-center ml-[427.79px] mt-0 relative row-1 w-[142px]">
-        <div className="flex-none rotate-180">
-          <div
-            className="bg-black h-[69px] rounded-bl-[20px] rounded-tl-[20px] w-[142px]"
-            data-name="Newsletter Button Background"
-          />
-        </div>
-      </div>
-      <p
-        className="col-1 font-['Atyp_BL:Bold',sans-serif] leading-none ml-[472.79px] mt-[24.5px] not-italic relative row-1 text-[20px] text-white tracking-[0.2px]"
-        style={{ fontFeatureSettings: "'liga' 0" }}
-      >
-        Copy
-      </p>
-    </div>
-  );
-}
-
-function Frame14() {
-  return (
-    <div className="content-stretch flex flex-col gap-[20px] items-start relative shrink-0">
-      <Frame15 />
-      <Group10 />
-    </div>
-  );
-}
-
-function Frame13() {
-  return (
-    <div className="absolute bg-[#1e2026] content-stretch flex flex-col h-[235.098px] items-start justify-center left-[68.89px] p-[30px] rounded-[30px] top-[5671px] w-[640px]">
-      <Frame14 />
-    </div>
-  );
-}
-
-function Frame18() {
-  return (
-    <div className="content-stretch flex flex-col gap-[4px] items-start not-italic relative shrink-0 text-white">
-      <p
-        className="font-['Atyp_BL:Semibold',sans-serif] leading-[1.3] relative shrink-0 text-[30px] tracking-[0.3px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        AI Access
-      </p>
-      <p
-        className="font-['Atyp_BL:Medium',sans-serif] leading-[1.4] relative shrink-0 text-[24px] tracking-[0.504px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        Retrieve structured capabilities at:
-      </p>
-    </div>
-  );
-}
-
-function Group11() {
-  const [copied, setCopied] = useState(false);
-  const url = "https://orderly.network/skill.md";
-
-  const handleCopy = () => {
-    // Fallback copy method that works without clipboard permissions
-    const textarea = document.createElement("textarea");
-    textarea.value = url;
-    textarea.style.position = "fixed";
-    textarea.style.opacity = "0";
-    document.body.appendChild(textarea);
-    textarea.select();
-    try {
-      document.execCommand("copy");
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error("Failed to copy:", err);
-    }
-    document.body.removeChild(textarea);
-  };
-
-  return (
-    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0">
-      <div
-        className="bg-[#14151a] col-1 h-[69px] ml-0 mt-0 rounded-bl-[20px] rounded-tl-[20px] row-1 w-[427.788px]"
-        data-name="Newsletter Input Background"
-      />
-      <a
-        href="https://orderly.network/skill.md"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="col-1 font-['DM_Mono:Medium',sans-serif] leading-[1.4] ml-[18.34px] mt-[16px] not-italic opacity-70 relative row-1 text-[24px] text-white tracking-[0.504px] hover:opacity-100 transition-opacity"
-        data-name="Skill URL"
-      >
-        orderly.network/skill.md
-      </a>
-      <button
-        onClick={handleCopy}
-        className="col-1 flex h-[69px] items-center justify-center ml-[427.79px] mt-0 relative row-1 w-[142px] bg-transparent border-0 cursor-pointer"
-      >
-        <div className="flex-none rotate-180">
-          <div
-            className="bg-black h-[69px] rounded-bl-[20px] rounded-tl-[20px] w-[142px]"
-            data-name="Newsletter Button Background"
-          />
-        </div>
-      </button>
-      <p
-        className="col-1 font-['Atyp_BL:Bold',sans-serif] leading-none ml-[427.79px] mt-[24.5px] not-italic relative row-1 text-[20px] text-white tracking-[0.2px] pointer-events-none flex items-center justify-center w-[142px]"
-        style={{ fontFeatureSettings: "'liga' 0" }}
-      >
-        {copied ? <CheckSvg /> : "Copy"}
-      </p>
-    </div>
-  );
-}
-
-function Frame17() {
-  return (
-    <div className="content-stretch flex flex-col gap-[20px] items-start relative shrink-0">
-      <Frame18 />
-      <Group11 />
-    </div>
-  );
-}
-
-function Frame16() {
-  return (
-    <div className="absolute bg-[#1e2026] content-stretch flex flex-col h-[235.098px] items-start justify-center left-[68.89px] p-[30px] rounded-[30px] top-[5671px] w-[640px]">
-      <Frame17 />
-    </div>
-  );
-}
-
 function StatItem({
   label,
   children,
@@ -3972,7 +3790,6 @@ function StatsContent() {
   const stats = useOrderlyStats();
   const formatTvl = useCallback((v: number) => formatLargeNumber(v), []);
   const formatVolume = useCallback((v: number) => formatLargeNumber(v), []);
-  const formatTraders = useCallback((v: number) => formatCount(v), []);
 
   return (
     <div
@@ -6487,92 +6304,6 @@ export function NavCanvas() {
     <div style={{ position: "relative", width: 1440, height: 200 }}>
       <Default />
     </div>
-  );
-}
-
-// ─── FooterCanvas: viewport into footer portion of the 6500px canvas ─────────
-const FOOTER_OFFSET = 5671;
-const FOOTER_CANVAS_H = 829;
-
-export function FooterCanvas() {
-  return (
-    <div
-      style={{
-        position: "relative",
-        width: 1440,
-        height: FOOTER_CANVAS_H,
-        overflow: "hidden",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          top: -FOOTER_OFFSET,
-          left: 0,
-          width: 1440,
-          height: 6900,
-        }}
-      >
-        <Frame16 />
-        <Frame12 />
-        <FooterSection />
-        <a
-          href="https://orderly.network/docs/introduction/terms-of-service"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute font-['Atyp_BL:Regular',sans-serif] leading-[1.2] left-[1168px] not-italic text-[12px] text-white top-[6854.98px] tracking-[0.12px] whitespace-nowrap no-underline hover:opacity-80 transition-opacity"
-        >
-          Terms of Service
-        </a>
-        <a
-          href="https://orderly.network/docs/introduction/privacy-policy"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute font-['Atyp_BL:Regular',sans-serif] leading-[1.2] left-[1288px] not-italic text-[12px] text-white top-[6854.98px] tracking-[0.12px] whitespace-nowrap no-underline hover:opacity-80 transition-opacity"
-        >
-          Privacy Policy
-        </a>
-        <p
-          className="absolute font-['Atyp_BL:Semibold',sans-serif] leading-[1.2] left-[68.89px] not-italic text-[12px] text-white top-[6854.98px] tracking-[0.12px] w-[362px] whitespace-pre-wrap"
-          style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-        >
-          © 2026 Orderly Network
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// ─── (legacy exports kept for reference) ─────────────────────────────────────
-export function SiteNav() {
-  return (
-    <nav
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 200,
-        width: "100%",
-        backdropFilter: "blur(8.65px)",
-        WebkitBackdropFilter: "blur(8.65px)",
-        background: "rgba(0,0,0,0.55)",
-        borderBottom: "1px solid rgba(255,255,255,0.05)",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 1440,
-          margin: "0 auto",
-          padding: "0 81.9px",
-          height: 100,
-          display: "flex",
-          alignItems: "center",
-          gap: 58,
-        }}
-      >
-        <HeaderLogoContainer />
-        <HeaderMenu />
-      </div>
-    </nav>
   );
 }
 
