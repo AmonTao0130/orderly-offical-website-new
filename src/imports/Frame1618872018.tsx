@@ -41,7 +41,7 @@ const solBadgeSrc = "/images/svg/SolBadge.svg";
 import UniswapLogo from "./UniswapLogo";
 const pancakeLogoSrc = "/images/svg/PancakeLogo.svg";
 import CamelotLogo from "./CamelotLogo";
-const raydiumLogoSrc = "/images/svg/RaydiumLogo.svg";
+const raydiumLogoSrc = "/images/logos/raydium.png";
 const woofiLogoSrc = "/images/svg/WOOFiLogo.svg";
 
 // ─── Buy ORDER Modal ──────────────────────────────────────────────────────────

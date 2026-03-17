@@ -242,7 +242,7 @@ const PARTNERS: Partner[] = [
     name: "Raydium",
     category: "Builder",
     description: "The leading Solana AMM and DEX powering DeFi with concentrated liquidity, farms, and perps — connected to Orderly's shared orderbook on Solana.",
-    logo: "logos/raydium.svg",
+    logo: "logos/raydium.png",
     initials: "RY",
     color: "#1a0a4a",
     url: "https://raydium.io/swap",
@@ -651,7 +651,7 @@ export default function Partners() {
         initial="hidden"
         animate="visible"
         style={{
-          maxWidth: isMobile ? "calc(100% - 40px)" : isTablet ? "calc(100% - 80px)" : "1000px",
+          maxWidth: isMobile ? "calc(100% - 40px)" : isTablet ? "calc(100% - 80px)" : "min(1000px, 87%)",
           margin: "0 auto",
           marginBottom: isMobile ? "48px" : "64px",
         }}
@@ -711,7 +711,7 @@ export default function Partners() {
       {/* ── Filter tabs ── */}
       <div
         style={{
-          maxWidth: isMobile ? "calc(100% - 40px)" : isTablet ? "calc(100% - 80px)" : "1100px",
+          maxWidth: isMobile ? "calc(100% - 40px)" : isTablet ? "calc(100% - 80px)" : "min(1100px, 87%)",
           margin: "0 auto",
           marginBottom: isMobile ? "28px" : "40px",
           display: "flex",
@@ -763,7 +763,7 @@ export default function Partners() {
         initial="hidden"
         animate="visible"
         style={{
-          maxWidth: isMobile ? "calc(100% - 40px)" : isTablet ? "calc(100% - 80px)" : "1100px",
+          maxWidth: isMobile ? "calc(100% - 40px)" : isTablet ? "calc(100% - 80px)" : "min(1100px, 87%)",
           margin: "0 auto",
           marginBottom: isMobile ? "64px" : "96px",
           display: "grid",
