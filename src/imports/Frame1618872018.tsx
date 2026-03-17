@@ -3557,7 +3557,7 @@ function SocialMediaIconsContainer() {
         </svg>
       </a>
       <a
-        href="https://github.com/OrderlyNetwork"
+        href="https://x.com/OrderlyNetwork"
         target="_blank"
         rel="noopener noreferrer"
         className="overflow-clip relative shrink-0 size-[16px] block hover:opacity-80 transition-opacity"
