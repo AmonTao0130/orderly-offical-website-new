@@ -22,10 +22,12 @@ function ScaledSection({
   const outerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
 
+  const COMFORTABLE_VIEWPORT = 1680;
   const updateScale = useCallback(() => {
     if (!outerRef.current) return;
-    setScale(Math.min(outerRef.current.offsetWidth / designWidth, 1));
-  }, [designWidth]);
+    const vw = outerRef.current.offsetWidth;
+    setScale(Math.min(vw / COMFORTABLE_VIEWPORT, 1));
+  }, []);
 
   useEffect(() => {
     updateScale();
@@ -42,7 +44,7 @@ function ScaledSection({
         height: `${designHeight * scale}px`,
         overflow: "visible",
         display: "flex",
-        justifyContent: scale === 1 ? "center" : "flex-start",
+        justifyContent: "center",
       }}
     >
       <div
@@ -50,7 +52,7 @@ function ScaledSection({
           width: `${designWidth}px`,
           height: `${designHeight}px`,
           flexShrink: 0,
-          transformOrigin: "top left",
+          transformOrigin: "top center",
           transform: `scale(${scale})`,
         }}
       >
@@ -493,18 +495,6 @@ function PartnerCard({ partner, isMobile }: { partner: Partner; isMobile: boolea
           </span>
         </div>
 
-        {/* Arrow */}
-        <div
-          style={{
-            flexShrink: 0,
-            opacity: hovered ? 1 : 0.35,
-            transition: "opacity 0.2s ease",
-            color: "#9c75ff",
-            marginTop: "4px",
-          }}
-        >
-          <ArrowUpRight size={16} color="#9c75ff" />
-        </div>
       </div>
 
       {/* Description */}
@@ -544,6 +534,9 @@ function PartnerCard({ partner, isMobile }: { partner: Partner; isMobile: boolea
   );
 }
 
+// ─── Pagination constants ──────────────────────────────────────────────────────
+const CARDS_PER_PAGE = 12;
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function Partners() {
   const vp = useViewport();
@@ -551,10 +544,17 @@ export default function Partners() {
   const isTablet = vp === "tablet";
   const [navOpen, setNavOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<Category>("All");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const filtered = activeCategory === "All"
     ? PARTNERS
     : PARTNERS.filter((p) => p.category === activeCategory);
+
+  const pageCount = Math.ceil(filtered.length / CARDS_PER_PAGE);
+  const paginatedPartners = filtered.slice(
+    (currentPage - 1) * CARDS_PER_PAGE,
+    currentPage * CARDS_PER_PAGE
+  );
 
   return (
     <div style={{ background: "#000", minHeight: "100vh", width: "100vw", overflowX: "hidden" }}>
@@ -580,35 +580,6 @@ export default function Partners() {
           textAlign: "center",
         }}
       >
-        {/* pill label */}
-        <motion.div
-          variants={heroChild}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "8px",
-            background: "rgba(103,0,206,0.18)",
-            border: "1px solid rgba(156,117,255,0.3)",
-            borderRadius: "100px",
-            padding: "6px 18px",
-            marginBottom: isMobile ? "24px" : "32px",
-          }}
-        >
-          <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#9c75ff", flexShrink: 0 }} />
-          <span
-            style={{
-              fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-              fontVariationSettings: "'wght' 500",
-              fontSize: "12px",
-              color: "#9c75ff",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-            }}
-          >
-            Ecosystem
-          </span>
-        </motion.div>
-
         {/* Heading */}
         <motion.h1
           variants={heroChild}
@@ -724,7 +695,7 @@ export default function Partners() {
           return (
             <button
               key={cat}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => { setActiveCategory(cat); setCurrentPage(1); }}
               style={{
                 fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
                 fontVariationSettings: active ? "'wght' 600" : "'wght' 400",
@@ -758,14 +729,14 @@ export default function Partners() {
 
       {/* ── Partner grid ── */}
       <motion.div
-        key={activeCategory}
+        key={`${activeCategory}-${currentPage}`}
         variants={gridContainer}
         initial="hidden"
         animate="visible"
         style={{
           maxWidth: isMobile ? "calc(100% - 40px)" : isTablet ? "calc(100% - 80px)" : "min(1100px, 87%)",
           margin: "0 auto",
-          marginBottom: isMobile ? "64px" : "96px",
+          marginBottom: isMobile ? "32px" : "48px",
           display: "grid",
           gridTemplateColumns: isMobile
             ? "1fr"
@@ -776,7 +747,7 @@ export default function Partners() {
           alignItems: "stretch",
         }}
       >
-        {filtered.map((partner) => (
+        {paginatedPartners.map((partner) => (
           <motion.div
             key={partner.name}
             variants={gridChild}
@@ -786,6 +757,98 @@ export default function Partners() {
           </motion.div>
         ))}
       </motion.div>
+
+      {/* ── Pagination ── */}
+      {pageCount > 1 && (
+        <div
+          style={{
+            maxWidth: isMobile ? "calc(100% - 40px)" : isTablet ? "calc(100% - 80px)" : "min(1100px, 87%)",
+            margin: "0 auto",
+            marginBottom: isMobile ? "64px" : "96px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "8px",
+          }}
+        >
+          {/* Prev */}
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: isMobile ? "36px" : "40px",
+              height: isMobile ? "36px" : "40px",
+              borderRadius: "50%",
+              border: "1.5px solid rgba(255,255,255,0.15)",
+              background: "transparent",
+              cursor: currentPage === 1 ? "not-allowed" : "pointer",
+              opacity: currentPage === 1 ? 0.3 : 1,
+              transition: "all 0.2s ease",
+              color: "white",
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M10 12L6 8l4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+
+          {/* Page numbers */}
+          {Array.from({ length: pageCount }, (_, i) => i + 1).map((page) => {
+            const isActive = page === currentPage;
+            return (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: isMobile ? "36px" : "40px",
+                  height: isMobile ? "36px" : "40px",
+                  borderRadius: "50%",
+                  border: isActive ? "1.5px solid #6700CE" : "1.5px solid rgba(255,255,255,0.15)",
+                  background: isActive ? "#6700CE" : "transparent",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                  fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+                  fontVariationSettings: isActive ? "'wght' 700" : "'wght' 400",
+                  fontSize: isMobile ? "13px" : "15px",
+                  color: "white",
+                }}
+              >
+                {page}
+              </button>
+            );
+          })}
+
+          {/* Next */}
+          <button
+            onClick={() => setCurrentPage((p) => Math.min(pageCount, p + 1))}
+            disabled={currentPage === pageCount}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: isMobile ? "36px" : "40px",
+              height: isMobile ? "36px" : "40px",
+              borderRadius: "50%",
+              border: "1.5px solid rgba(255,255,255,0.15)",
+              background: "transparent",
+              cursor: currentPage === pageCount ? "not-allowed" : "pointer",
+              opacity: currentPage === pageCount ? 0.3 : 1,
+              transition: "all 0.2s ease",
+              color: "white",
+            }}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+      )}
 
       {/* ── Footer ── */}
       <motion.div

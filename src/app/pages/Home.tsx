@@ -18,12 +18,14 @@ function ScaledFrame({
   designWidth,
   designHeight,
   autoHeight,
+  comfortableViewport,
 }: {
   children: React.ReactNode;
   cap?: boolean;
   designWidth?: number;
   designHeight?: number;
   autoHeight?: boolean;
+  comfortableViewport?: number;
 }) {
   const outerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -37,8 +39,9 @@ function ScaledFrame({
     if (!outerRef.current) return;
     const vw = outerRef.current.offsetWidth;
     const raw = vw / dw;
-    setScale(cap ? Math.min(raw, 1) : raw);
-  }, [cap, dw]);
+    const comfortCap = comfortableViewport ? Math.min(vw / comfortableViewport, 1) : 1;
+    setScale(cap ? Math.min(raw, comfortCap) : raw);
+  }, [cap, dw, comfortableViewport]);
 
   useEffect(() => {
     updateScale();
@@ -81,7 +84,7 @@ function ScaledFrame({
         overflowY: "visible",
         display: "flex",
         alignItems: "flex-start",
-        justifyContent: cap && scale === 1 ? "center" : "flex-start",
+        justifyContent: cap ? "center" : "flex-start",
       }}
     >
       <div
@@ -90,7 +93,7 @@ function ScaledFrame({
           width: `${dw}px`,
           height: autoHeight ? "auto" : `${dh}px`,
           flexShrink: 0,
-          transformOrigin: "top left",
+          transformOrigin: cap ? "top center" : "top left",
           transform: `scale(${scale})`,
           willChange: "transform",
         }}
@@ -129,7 +132,7 @@ export default function Home() {
           background: "#000",
         }}
       >
-        <ScaledFrame cap>
+        <ScaledFrame cap comfortableViewport={1680}>
           <Frame7 />
         </ScaledFrame>
       </div>
