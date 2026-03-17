@@ -105,55 +105,42 @@ function ScaledFrame({
 }
 
 export default function Home() {
-  const [viewport, setViewport] = useState<"mobile" | "desktop">("desktop");
+  const [isMobile, setIsMobile] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
 
   const handleOpenNav = useCallback(() => setNavOpen(true), []);
   const handleCloseNav = useCallback(() => setNavOpen(false), []);
 
   useEffect(() => {
-    const handleResize = () => {
-      const w = window.innerWidth;
-      if (w < 480) setViewport("mobile");
-      else setViewport("desktop");
-    };
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Desktop & tablet: pixel-perfect ScaledFrame of the 1440 px Figma canvas
-  if (viewport === "desktop") {
+  // Mobile (< 768 px): custom stacked MobileHomePage scaled to 375 px canvas
+  if (isMobile) {
     return (
-      <div
-        style={{
-          width: "100%",
-          overflowX: "hidden",
-          background: "#000",
-        }}
-      >
-        <ScaledFrame cap comfortableViewport={1680}>
-          <Frame7 />
+      <div style={{ width: "100vw", overflowX: "clip", background: "#000" }}>
+        <ScaledFrame designWidth={MOBILE_DESIGN_WIDTH} autoHeight cap>
+          <MobileHomePage onMenuClick={handleOpenNav} />
         </ScaledFrame>
+        {/* Nav drawer lives outside ScaledFrame so position:fixed works correctly */}
+        <AnimatePresence>
+          {navOpen && (
+            <MobileNavDrawer key="mobile-nav" onClose={handleCloseNav} />
+          )}
+        </AnimatePresence>
       </div>
     );
   }
 
-  // Mobile: your custom MobileHomePage design, scaled to fit the 375 px canvas
-  // MobileNavDrawer is rendered OUTSIDE the motion.div so position:fixed
-  // is always relative to the true viewport (no stacking-context interference).
+  // Desktop + tablet (≥ 768 px): pixel-perfect ScaledFrame of the 1440 px Figma canvas
   return (
-    <div style={{ width: "100vw", overflowX: "clip", background: "#000" }}>
-      <ScaledFrame designWidth={MOBILE_DESIGN_WIDTH} autoHeight cap>
-        <MobileHomePage onMenuClick={handleOpenNav} />
+    <div style={{ width: "100%", overflowX: "hidden", background: "#000" }}>
+      <ScaledFrame cap comfortableViewport={1680}>
+        <Frame7 />
       </ScaledFrame>
-
-      {/* Nav drawer lives outside ScaledFrame so position:fixed works correctly */}
-      <AnimatePresence>
-        {navOpen && (
-          <MobileNavDrawer key="mobile-nav" onClose={handleCloseNav} />
-        )}
-      </AnimatePresence>
     </div>
   );
 }

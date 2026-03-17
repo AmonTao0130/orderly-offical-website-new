@@ -167,11 +167,18 @@ function SkillsContent() {
 
 type DevTab = "mcp-server" | "skills";
 
-export default function DeveloperCard() {
+export default function DeveloperCard({ variant = "card" }: { variant?: "card" | "bare" }) {
   const [devTab, setDevTab] = useState<DevTab>("mcp-server");
 
+  const outerClass = variant === "card"
+    ? "rounded-[16px] p-[32px] flex flex-col gap-[24px] flex-1 basis-0 min-w-0"
+    : "p-[30px] flex flex-col gap-[24px] h-full min-w-0";
+  const outerStyle = variant === "card"
+    ? { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }
+    : {};
+
   return (
-    <div className="rounded-[16px] p-[32px] flex flex-col gap-[24px] flex-1 basis-0 min-w-0" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
+    <div className={outerClass} style={outerStyle}>
       {/* Card header */}
       <div className="flex items-center gap-[12px]">
         <img src="/images/developer.png" alt="Developer" className="size-[48px]" />

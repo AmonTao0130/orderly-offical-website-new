@@ -6441,6 +6441,7 @@ export default function Frame7() {
           animate="visible"
           variants={sectionVariants}
           transition={{ ...transition, delay: 0.9 }}
+          style={{ marginTop: -80 }}
         >
           <FooterSection />
           <div className="flex items-center justify-between px-[68.89px] mt-[40px]">
