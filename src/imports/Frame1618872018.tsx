@@ -3837,7 +3837,7 @@ function StatsSection() {
   );
 }
 
-function AIAgentCard() {
+function AIAgentCard({ compact = false }: { compact?: boolean }) {
   const [copied, setCopied] = useState(false);
   const url = "https://orderly.network/skill.md";
 
@@ -3860,7 +3860,7 @@ function AIAgentCard() {
 
   return (
     <div
-      className="rounded-[16px] p-[32px] flex flex-col gap-[24px] flex-1 basis-0 min-w-0"
+      className={`rounded-[16px] flex flex-col flex-1 basis-0 min-w-0 ${compact ? "p-[20px] gap-[16px]" : "p-[32px] gap-[24px]"}`}
       style={{
         background:
           "linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(0,0,0,0) 100%)",
@@ -3868,21 +3868,21 @@ function AIAgentCard() {
       }}
     >
       {/* Card header */}
-      <div className="flex items-center gap-[12px]">
+      <div className={`flex items-center ${compact ? "gap-[10px]" : "gap-[12px]"}`}>
         <img
           src="/images/ai-agent.png"
           alt="AI Agent"
-          className="size-[48px]"
+          className={compact ? "size-[36px]" : "size-[48px]"}
         />
         <div>
           <p
-            className="font-['Atyp_BL:Bold',sans-serif] text-[24px] text-white leading-[1.3]"
+            className={`font-['Atyp_BL:Bold',sans-serif] text-white leading-[1.3] ${compact ? "text-[18px]" : "text-[24px]"}`}
             style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
           >
             AI Agent
           </p>
           <p
-            className="font-['Atyp_BL:Medium',sans-serif] text-[14px] text-[#9C75FF] leading-[1.3]"
+            className={`font-['Atyp_BL:Medium',sans-serif] text-[#9C75FF] leading-[1.3] ${compact ? "text-[12px]" : "text-[14px]"}`}
             style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
           >
             Autonomous setup
@@ -3892,7 +3892,7 @@ function AIAgentCard() {
 
       {/* Description */}
       <p
-        className="font-['Atyp_BL:Medium',sans-serif] text-[18px] text-white leading-[1.5]"
+        className={`font-['Atyp_BL:Medium',sans-serif] text-white leading-[1.5] ${compact ? "text-[14px]" : "text-[18px]"}`}
         style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
       >
         Read the onboarding skill to understand Orderly&apos;s capabilities:
@@ -3906,12 +3906,12 @@ function AIAgentCard() {
           border: "1px solid rgba(255,255,255,0.1)",
         }}
       >
-        <div className="flex-1 px-[16px] py-[14px]">
+        <div className={`flex-1 ${compact ? "px-[12px] py-[10px]" : "px-[16px] py-[14px]"}`}>
           <a
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-['DM_Mono:Medium',sans-serif] text-[16px] text-white/70 no-underline hover:text-white transition-colors"
+            className={`font-['DM_Mono:Medium',sans-serif] text-white/70 no-underline hover:text-white transition-colors ${compact ? "text-[13px]" : "text-[16px]"}`}
           >
             orderly.network/skill.md
           </a>
@@ -3919,7 +3919,7 @@ function AIAgentCard() {
         <button
           onClick={handleCopy}
           title={copied ? "Copied!" : "Copy to clipboard"}
-          className="px-[20px] py-[14px] bg-black text-white font-['Atyp_BL:Bold',sans-serif] text-[14px] cursor-pointer transition-all hover:bg-[#1a1a1a]"
+          className={`bg-black text-white font-['Atyp_BL:Bold',sans-serif] cursor-pointer transition-all hover:bg-[#1a1a1a] ${compact ? "px-[14px] py-[10px] text-[12px]" : "px-[20px] py-[14px] text-[14px]"}`}
         >
           {copied ? "Copied!" : "Copy"}
         </button>
@@ -3927,7 +3927,7 @@ function AIAgentCard() {
 
       {/* Why callout */}
       <p
-        className="font-['Atyp_BL:Medium',sans-serif] text-[14px] text-[rgba(255,255,255,0.3)] leading-[1.6]"
+        className={`font-['Atyp_BL:Medium',sans-serif] text-[rgba(255,255,255,0.3)] leading-[1.6] ${compact ? "text-[12px]" : "text-[14px]"}`}
         style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
       >
         <strong className="text-[rgba(255,255,255,0.3)]">Why?</strong> This
@@ -3938,20 +3938,20 @@ function AIAgentCard() {
   );
 }
 
-function QuickStartHeader() {
+function QuickStartHeader({ fluid = false, compact = false }: { fluid?: boolean; compact?: boolean }) {
   return (
     <div
-      className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-[1302px]"
+      className={`content-stretch flex flex-col items-start relative shrink-0 ${compact ? "gap-[10px]" : "gap-[16px]"} ${fluid ? "w-full" : "w-[1302px]"}`}
       data-name="Quick Start Header"
     >
       <p
-        className="font-['Atyp_BL:Bold',sans-serif] leading-[1.1] text-[56px] text-white"
+        className={`font-['Atyp_BL:Bold',sans-serif] leading-[1.1] text-white ${compact ? "text-[32px]" : "text-[56px]"}`}
         style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
       >
         Agentic Quick Start
       </p>
       <p
-        className="font-['Atyp_BL:Medium',sans-serif] leading-[1.4] text-[24px] text-white/70 tracking-[0.504px]"
+        className={`font-['Atyp_BL:Medium',sans-serif] leading-[1.4] text-white/70 tracking-[0.504px] ${compact ? "text-[16px]" : "text-[24px]"}`}
         style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
       >
         Get started with Orderly&apos;s agentic infrastructure
@@ -4083,7 +4083,21 @@ function QuickStartContent() {
   );
 }
 
-function QuickStartSection() {
+export function QuickStartSection({ layout = "row" }: { layout?: "row" | "col" }) {
+  if (layout === "col") {
+    return (
+      <div
+        className="flex flex-col gap-[28px] items-start w-full px-6"
+        data-name="Quick Start Section"
+      >
+        <QuickStartHeader fluid compact />
+        <div className="flex flex-col gap-[16px] w-full">
+          <AIAgentCard compact />
+          <QuickStartGroup compact />
+        </div>
+      </div>
+    );
+  }
   return (
     <div
       className="content-stretch flex flex-col gap-[48px] items-center ml-[68.89px] w-[1302px]"

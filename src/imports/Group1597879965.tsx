@@ -44,19 +44,19 @@ const CLIENTS = ["claude", "cursor", "vscode", "codex", "opencode"] as const;
 
 // ── MCP Server content ───────────────────────────────────────────────────────
 
-function MCPServerContent() {
+function MCPServerContent({ compact = false }: { compact?: boolean }) {
   const { copied, copy } = useCopyToClipboard();
 
   return (
     <div className="flex flex-col gap-[16px]">
-      <p className={`${atypMedium} text-[16px] text-white/60 leading-[1.5]`} style={featureSettings}>
+      <p className={`${atypMedium} ${compact ? "text-[13px]" : "text-[16px]"} text-white/60 leading-[1.5]`} style={featureSettings}>
         Install the MCP server for your AI client:
       </p>
 
       {/* Single command block with integrated Copy button */}
       <div className="flex items-stretch rounded-[12px] overflow-hidden" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-        <div className="flex-1 px-[20px] py-[16px]">
-          <p className={`${monoClass} text-[16px] opacity-70`}>
+        <div className={`flex-1 ${compact ? "px-[16px] py-[12px]" : "px-[20px] py-[16px]"}`}>
+          <p className={`${monoClass} ${compact ? "text-[13px]" : "text-[16px]"} opacity-70`}>
             <span className="text-[#6b7280]">$ </span>
             <span className="text-[#4ade80]">npx</span>{" "}
             <span className="text-[#60a5fa]">@orderly.network/mcp-server</span>{" "}
@@ -68,7 +68,7 @@ function MCPServerContent() {
         <button
           onClick={() => copy("npx @orderly.network/mcp-server init --client <name>")}
           title={copied ? "Copied!" : "Copy to clipboard"}
-          className="px-[20px] py-[16px] bg-black text-white font-['Atyp_BL:Bold',sans-serif] text-[14px] cursor-pointer transition-all hover:bg-[#1a1a1a]"
+          className={`bg-black text-white font-['Atyp_BL:Bold',sans-serif] cursor-pointer transition-all hover:bg-[#1a1a1a] ${compact ? "px-[14px] py-[12px] text-[12px]" : "px-[20px] py-[16px] text-[14px]"}`}
         >
           {copied ? "Copied!" : "Copy"}
         </button>
@@ -76,9 +76,9 @@ function MCPServerContent() {
 
       {/* Client badges */}
       <div className="flex flex-wrap items-center gap-[8px]">
-        <span className={`${monoClass} text-[13px] text-white`}>Supported clients:</span>
+        <span className={`${monoClass} ${compact ? "text-[11px]" : "text-[13px]"} text-white`}>Supported clients:</span>
         {CLIENTS.map((c) => (
-          <span key={c} className={`${monoClass} text-[13px] text-white px-[10px] py-[4px] rounded-[6px]`} style={{ background: "rgba(255,255,255,0.05)" }}>
+          <span key={c} className={`${monoClass} ${compact ? "text-[11px] px-[8px] py-[3px]" : "text-[13px] px-[10px] py-[4px]"} text-white rounded-[6px]`} style={{ background: "rgba(255,255,255,0.05)" }}>
             {c}
           </span>
         ))}
@@ -95,15 +95,15 @@ const SKILLS_COMMANDS = [
   { comment: "# Install for all agents", cmd: "npx skills add OrderlyNetwork/skills --all --agent '*' -g" },
 ];
 
-function SkillsCodeBlock({ comment, cmd }: { comment: string; cmd: string }) {
+function SkillsCodeBlock({ comment, cmd, compact = false }: { comment: string; cmd: string; compact?: boolean }) {
   const { copied, copy } = useCopyToClipboard();
   const parts = cmd.split("add ");
 
   return (
     <div className="relative group">
-      <div className="rounded-[12px] px-[20px] py-[16px] flex flex-col gap-[4px]" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-        <p className={`${monoClass} text-[15px] text-[#6b7280]`}>{comment}</p>
-        <p className={`${monoClass} text-[15px]`}>
+      <div className={`rounded-[12px] flex flex-col gap-[4px] ${compact ? "px-[16px] py-[12px]" : "px-[20px] py-[16px]"}`} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
+        <p className={`${monoClass} ${compact ? "text-[12px]" : "text-[15px]"} text-[#6b7280]`}>{comment}</p>
+        <p className={`${monoClass} ${compact ? "text-[12px]" : "text-[15px]"}`}>
           <span className="text-[#6b7280]">$ </span>
           <span className="text-[#4ade80]">npx</span>{" "}
           <span className="text-[#60a5fa]">skills</span>{" "}
@@ -133,26 +133,26 @@ function SkillsCodeBlock({ comment, cmd }: { comment: string; cmd: string }) {
   );
 }
 
-function SkillsContent() {
+function SkillsContent({ compact = false }: { compact?: boolean }) {
   return (
     <div className="flex flex-col gap-[16px]">
-      <p className={`${atypMedium} text-[16px] text-white/60 leading-[1.5]`} style={featureSettings}>
+      <p className={`${atypMedium} ${compact ? "text-[13px]" : "text-[16px]"} text-white/60 leading-[1.5]`} style={featureSettings}>
         Install Orderly skills for enhanced agent capabilities:
       </p>
 
-      <div className="flex flex-col gap-[12px]">
+      <div className={`flex flex-col ${compact ? "gap-[8px]" : "gap-[12px]"}`}>
         {SKILLS_COMMANDS.map((s) => (
-          <SkillsCodeBlock key={s.comment} comment={s.comment} cmd={s.cmd} />
+          <SkillsCodeBlock key={s.comment} comment={s.comment} cmd={s.cmd} compact={compact} />
         ))}
       </div>
 
       {/* Info box */}
-      <div className="rounded-[12px] px-[16px] py-[12px] flex flex-col gap-[8px]" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-        <p className={`${atypMedium} text-[14px] text-white/60 leading-[1.5]`} style={featureSettings}>
+      <div className={`rounded-[12px] flex flex-col gap-[8px] ${compact ? "px-[12px] py-[8px]" : "px-[16px] py-[12px]"}`} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
+        <p className={`${atypMedium} ${compact ? "text-[12px]" : "text-[14px]"} text-white/60 leading-[1.5]`} style={featureSettings}>
           <span className={`${atypBold} text-white/80`}>16 skills available:</span>{" "}
           API authentication, trading orders, positions, WebSocket streaming, SDK hooks, UI components, wallet connection, and more.
         </p>
-        <p className={`${monoClass} text-[13px] text-[#6b7280]`}>
+        <p className={`${monoClass} ${compact ? "text-[11px]" : "text-[13px]"} text-[#6b7280]`}>
           <strong className="text-white/50">Flags:</strong>{" "}
           <span className="text-[#c4b5fd]">--all</span> install all skills{" "}
           &bull; <span className="text-[#c4b5fd]">-g</span> global install{" "}
@@ -167,12 +167,12 @@ function SkillsContent() {
 
 type DevTab = "mcp-server" | "skills";
 
-export default function DeveloperCard({ variant = "card" }: { variant?: "card" | "bare" }) {
+export default function DeveloperCard({ variant = "card", compact = false }: { variant?: "card" | "bare"; compact?: boolean }) {
   const [devTab, setDevTab] = useState<DevTab>("mcp-server");
 
   const outerClass = variant === "card"
-    ? "rounded-[16px] p-[32px] flex flex-col gap-[24px] flex-1 basis-0 min-w-0"
-    : "p-[30px] flex flex-col gap-[24px] h-full min-w-0";
+    ? `rounded-[16px] flex flex-col flex-1 basis-0 min-w-0 ${compact ? "p-[20px] gap-[16px]" : "p-[32px] gap-[24px]"}`
+    : `flex flex-col h-full min-w-0 ${compact ? "p-[20px] gap-[16px]" : "p-[30px] gap-[24px]"}`;
   const outerStyle = variant === "card"
     ? { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }
     : {};
@@ -180,24 +180,24 @@ export default function DeveloperCard({ variant = "card" }: { variant?: "card" |
   return (
     <div className={outerClass} style={outerStyle}>
       {/* Card header */}
-      <div className="flex items-center gap-[12px]">
-        <img src="/images/developer.png" alt="Developer" className="size-[48px]" />
+      <div className={`flex items-center ${compact ? "gap-[10px]" : "gap-[12px]"}`}>
+        <img src="/images/developer.png" alt="Developer" className={compact ? "size-[36px]" : "size-[48px]"} />
         <div>
-          <p className={`${atypBold} text-[24px] text-white leading-[1.3]`} style={featureSettings}>Developer</p>
-          <p className={`${atypMedium} text-[14px] text-[#9C75FF] leading-[1.3]`} style={featureSettings}>Manual installation</p>
+          <p className={`${atypBold} ${compact ? "text-[18px]" : "text-[24px]"} text-white leading-[1.3]`} style={featureSettings}>Developer</p>
+          <p className={`${atypMedium} ${compact ? "text-[12px]" : "text-[14px]"} text-[#9C75FF] leading-[1.3]`} style={featureSettings}>Manual installation</p>
         </div>
       </div>
 
       {/* Description */}
-      <p className={`${atypMedium} text-[18px] text-white leading-[1.5]`} style={featureSettings}>
+      <p className={`${atypMedium} ${compact ? "text-[14px]" : "text-[18px]"} text-white leading-[1.5]`} style={featureSettings}>
         Install Orderly&apos;s agentic tools for your AI client:
       </p>
 
       {/* MCP Server / Skills tabs */}
-      <div className="flex items-center gap-[8px]">
+      <div className={`flex items-center ${compact ? "gap-[6px]" : "gap-[8px]"}`}>
         <button
           onClick={() => setDevTab("mcp-server")}
-          className={`${atypMedium} text-[16px] px-[16px] py-[8px] rounded-[8px] transition-all ${
+          className={`${atypMedium} ${compact ? "text-[13px] px-[12px] py-[6px]" : "text-[16px] px-[16px] py-[8px]"} rounded-[8px] transition-all ${
             devTab === "mcp-server"
               ? "bg-[#7c3aed] text-white"
               : "text-[#9ca3af] hover:text-white hover:bg-white/5"
@@ -208,7 +208,7 @@ export default function DeveloperCard({ variant = "card" }: { variant?: "card" |
         </button>
         <button
           onClick={() => setDevTab("skills")}
-          className={`${atypMedium} text-[16px] px-[16px] py-[8px] rounded-[8px] transition-all ${
+          className={`${atypMedium} ${compact ? "text-[13px] px-[12px] py-[6px]" : "text-[16px] px-[16px] py-[8px]"} rounded-[8px] transition-all ${
             devTab === "skills"
               ? "bg-[#7c3aed] text-white"
               : "text-[#9ca3af] hover:text-white hover:bg-white/5"
@@ -220,7 +220,7 @@ export default function DeveloperCard({ variant = "card" }: { variant?: "card" |
       </div>
 
       {/* Tab content */}
-      {devTab === "mcp-server" ? <MCPServerContent /> : <SkillsContent />}
+      {devTab === "mcp-server" ? <MCPServerContent compact={compact} /> : <SkillsContent compact={compact} />}
     </div>
   );
 }

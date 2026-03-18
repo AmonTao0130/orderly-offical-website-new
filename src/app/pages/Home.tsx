@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { AnimatePresence } from "motion/react";
-import Frame7 from "../../imports/Frame1618872018";
+import Frame7, { QuickStartSection } from "../../imports/Frame1618872018";
 import { MobileHomePage, MobileNavDrawer } from "../components/MobileHomePage";
 
 // Desktop / tablet Figma canvas: 1440 × 6500 px
@@ -104,22 +104,29 @@ function ScaledFrame({
   );
 }
 
+type Viewport = "mobile" | "tablet" | "desktop";
+
 export default function Home() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [viewport, setViewport] = useState<Viewport>("desktop");
   const [navOpen,  setNavOpen]  = useState(false);
 
   const handleOpenNav  = useCallback(() => setNavOpen(true),  []);
   const handleCloseNav = useCallback(() => setNavOpen(false), []);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const update = () => {
+      const w = window.innerWidth;
+      if (w < 600) setViewport("mobile");
+      else if (w < 900) setViewport("tablet");
+      else setViewport("desktop");
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
   // Mobile (< 768 px): custom stacked MobileHomePage scaled to 375 px canvas
-  if (isMobile) {
+  if (viewport === "mobile") {
     return (
       <div style={{ width: "100vw", overflowX: "clip", background: "#000" }}>
         <ScaledFrame designWidth={MOBILE_DESIGN_WIDTH} autoHeight cap>
@@ -135,7 +142,16 @@ export default function Home() {
     );
   }
 
-  // Tablet + Desktop (≥ 768 px): pixel-perfect ScaledFrame of the 1440 px Figma canvas
+  // Tablet (768–1023 px): Quick Start section in normal flow
+  if (viewport === "tablet") {
+    return (
+      <div style={{ width: "100%", background: "#000", padding: "80px 0" }}>
+        <QuickStartSection layout="col" />
+      </div>
+    );
+  }
+
+  // Desktop (≥ 1024 px): pixel-perfect ScaledFrame of the 1440 px Figma canvas
   return (
     <div style={{ width: "100%", overflowX: "hidden", background: "#000" }}>
       <ScaledFrame cap comfortableViewport={1680}>
