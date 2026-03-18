@@ -1365,7 +1365,7 @@ function HeroButtonsContainer({
       <button
         onClick={onOpenPartnershipModal}
         className="content-stretch flex h-[52px] items-center justify-center pl-[24px] pr-[20px] py-[12px] relative rounded-[24px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
-        data-name="Trade on Orderly"
+        data-name="Talk to Partnerships"
       >
         <div
           aria-hidden="true"
@@ -2590,7 +2590,7 @@ function Frame5({
     <button
       onClick={onOpenPartnershipModal}
       className="content-stretch flex h-[52px] items-center justify-center pl-[24px] pr-[20px] py-[12px] relative rounded-[24px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
-      data-name="Trade on Orderly"
+      data-name="Talk to Partnerships"
     >
       <div
         aria-hidden="true"
@@ -2817,7 +2817,7 @@ function FooterStatus({ onBuyOrder }: { onBuyOrder?: () => void }) {
   );
 }
 
-function StatusMessageContainer() {
+export function StatusMessageContainer() {
   const [buyOrderOpen, setBuyOrderOpen] = useState(false);
   return (
     <>
@@ -6272,7 +6272,7 @@ export default function Frame7() {
           animate="visible"
           variants={sectionVariants}
           transition={{ ...transition, delay: 0.9 }}
-          style={{ marginTop: -80 }}
+          style={{ marginTop: -120 }}
         >
           <FooterSection />
           <div className="flex items-center justify-between px-[68.89px] mt-[40px]">

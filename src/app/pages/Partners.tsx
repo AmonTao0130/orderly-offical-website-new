@@ -4,7 +4,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { NavCanvas, SiteFooter } from "../../imports/Frame1618872018";
 import { MobileNavDrawer } from "../components/MobileHomePage";
-import { MobileAIAccessCard, MobileNewsletterCard, MobileFooterCard } from "../../imports/Frame1618872068-142-633";
+import { MobileFooterCard } from "../../imports/Frame1618872068-142-633";
+import { TabletNav, TabletFooter } from "../components/TabletHomePage";
 import svgPathsMobile from "../../imports/svg-4hybjba00c";
 
 // ─── ScaledSection ────────────────────────────────────────────────────────────
@@ -557,11 +558,13 @@ export default function Partners() {
   );
 
   return (
-    <div style={{ background: "#000", minHeight: "100vh", width: "100vw", overflowX: "hidden" }}>
+    <div style={{ background: "#000", minHeight: "100vh", width: "100%" }}>
 
       {/* ── Nav ── */}
-      {isMobile || isTablet ? (
+      {isMobile ? (
         <MobileTopBar onMenuClick={() => setNavOpen(true)} />
+      ) : isTablet ? (
+        <TabletNav onMenuClick={() => setNavOpen(true)} />
       ) : (
         <ScaledSection designHeight={200}>
           <NavCanvas />
@@ -571,7 +574,7 @@ export default function Partners() {
       {/* ── Hero ── */}
       <motion.div
         variants={heroContainer}
-        initial="hidden"
+        initial={false}
         animate="visible"
         style={{
           maxWidth: "860px",
@@ -587,7 +590,7 @@ export default function Partners() {
             fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
             fontVariationSettings: "'wght' 700",
             fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-            fontSize: isMobile ? "38px" : isTablet ? "56px" : "80px",
+            fontSize: isMobile ? "38px" : isTablet ? "48px" : "80px",
             color: "white",
             margin: "0 0 24px",
             lineHeight: 1.0,
@@ -604,7 +607,7 @@ export default function Partners() {
             fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
             fontVariationSettings: "'wght' 400",
             fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-            fontSize: isMobile ? "16px" : "22px",
+            fontSize: isMobile ? "16px" : isTablet ? "13px" : "22px",
             color: "rgba(255,255,255,0.6)",
             margin: "0 auto",
             lineHeight: 1.55,
@@ -619,10 +622,10 @@ export default function Partners() {
       {/* ── Stats ── */}
       <motion.div
         variants={reveal}
-        initial="hidden"
+        initial={false}
         animate="visible"
         style={{
-          maxWidth: isMobile ? "calc(100% - 40px)" : isTablet ? "calc(100% - 80px)" : "min(1000px, 87%)",
+          maxWidth: isMobile ? "calc(100% - 40px)" : isTablet ? "min(800px, calc(100% - 160px))" : "min(1000px, 87%)",
           margin: "0 auto",
           marginBottom: isMobile ? "48px" : "64px",
         }}
@@ -633,9 +636,9 @@ export default function Partners() {
             borderRadius: "30px",
             padding: isMobile ? "32px 24px" : "44px 64px",
             display: "flex",
-            flexDirection: isMobile ? "column" : "row",
+            flexDirection: "row",
             alignItems: "center",
-            gap: isMobile ? "32px" : "0",
+            gap: "0",
           }}
         >
           {STATS.map((stat, i) => (
@@ -652,7 +655,7 @@ export default function Partners() {
                   fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
                   fontVariationSettings: "'wght' 700",
                   fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-                  fontSize: isMobile ? "42px" : "56px",
+                  fontSize: isMobile ? "24px" : isTablet ? "36px" : "56px",
                   color: "white",
                   margin: "0 0 8px",
                   lineHeight: 1,
@@ -666,7 +669,7 @@ export default function Partners() {
                   fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
                   fontVariationSettings: "'wght' 400",
                   fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1",
-                  fontSize: isMobile ? "14px" : "18px",
+                  fontSize: isMobile ? "11px" : isTablet ? "14px" : "18px",
                   color: "rgba(255,255,255,0.7)",
                   margin: 0,
                   letterSpacing: "0.01em",
@@ -699,7 +702,7 @@ export default function Partners() {
               style={{
                 fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
                 fontVariationSettings: active ? "'wght' 600" : "'wght' 400",
-                fontSize: isMobile ? "13px" : "15px",
+                fontSize: isMobile ? "13px" : isTablet ? "13px" : "15px",
                 padding: isMobile ? "9px 20px" : "11px 28px",
                 borderRadius: "100px",
                 border: active ? "1.5px solid #6700CE" : "1.5px solid rgba(255,255,255,0.15)",
@@ -731,7 +734,7 @@ export default function Partners() {
       <motion.div
         key={`${activeCategory}-${currentPage}`}
         variants={gridContainer}
-        initial="hidden"
+        initial={false}
         animate="visible"
         style={{
           maxWidth: isMobile ? "calc(100% - 40px)" : isTablet ? "calc(100% - 80px)" : "min(1100px, 87%)",
@@ -815,7 +818,7 @@ export default function Partners() {
                   transition: "all 0.2s ease",
                   fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
                   fontVariationSettings: isActive ? "'wght' 700" : "'wght' 400",
-                  fontSize: isMobile ? "13px" : "15px",
+                  fontSize: isMobile ? "13px" : isTablet ? "13px" : "15px",
                   color: "white",
                 }}
               >
@@ -853,7 +856,7 @@ export default function Partners() {
       {/* ── Footer ── */}
       <motion.div
         variants={reveal}
-        initial="hidden"
+        initial="visible"
         whileInView="visible"
         viewport={{ once: true, margin: "-40px" }}
       >
@@ -861,9 +864,6 @@ export default function Partners() {
           <div
             style={{
               padding: "0 20px 32px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
               boxSizing: "border-box",
               width: "100%",
             }}
@@ -871,17 +871,8 @@ export default function Partners() {
             <MobileFooterCard />
           </div>
         ) : isTablet ? (
-          <div
-            style={{
-              padding: "0 40px 40px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "16px",
-              boxSizing: "border-box",
-              width: "100%",
-            }}
-          >
-            <MobileFooterCard />
+          <div className="pb-[24px]">
+            <TabletFooter />
           </div>
         ) : (
           <ScaledSection designWidth={1440} designHeight={900}>

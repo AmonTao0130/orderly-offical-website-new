@@ -30,6 +30,7 @@ import {
   BackgroundVector,
   BackgroundVector1,
   QuickStartSection,
+  StatusMessageContainer,
 } from "../../imports/Frame1618872018";
 import { MobileNavDrawer } from "./MobileHomePage";
 import {
@@ -57,10 +58,10 @@ function HamburgerIcon() {
   );
 }
 
-function TabletNav({ onMenuClick }: { onMenuClick: () => void }) {
+export function TabletNav({ onMenuClick }: { onMenuClick: () => void }) {
   return (
     <div
-      className="sticky top-0 z-[100] flex items-center justify-between h-[68px] px-6 gap-4"
+      className="sticky top-0 z-[100] flex items-center justify-between h-[68px] px-10 gap-4"
       style={{
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
@@ -335,7 +336,7 @@ function TabletHero({
       <div className="relative z-10">
 
         {/* Hero text + CTA buttons — centered, same copy & hierarchy as desktop */}
-        <div className="flex flex-col items-center gap-[20px] px-6 pt-[48px] pb-[40px] text-center">
+        <div className="flex flex-col items-center gap-[20px] px-10 pt-[48px] pb-[40px] text-center">
           {/* Display headline */}
           <div className="font-['Atyp_BL:Display_-_Bold',sans-serif] text-[48px] leading-none text-white">
             <p className="mb-0">LAUNCH YOUR</p>
@@ -1069,14 +1070,19 @@ const FOOTER_SOCIAL = [
  * TabletFooter — purple card with 2×2 nav grid + bottom status/social bar.
  * Same visual language as the desktop Footer, adapted for tablet width.
  */
-function TabletFooter() {
+export function TabletFooter() {
   return (
     <div>
       {/* Purple card */}
       <div
-        className="rounded-[24px] overflow-hidden mx-4"
+        className="rounded-[24px] overflow-hidden mx-8"
         style={{ background: "#6700ce" }}
       >
+        {/* ORDER logo + price + Buy ORDER pill */}
+        <div className="px-[28px] pt-[28px] inline-block">
+          <StatusMessageContainer />
+        </div>
+
         {/* Nav columns — 2×2 grid on tablet */}
         <div className="grid grid-cols-2 gap-x-[28px] gap-y-[28px] p-[28px]">
           {FOOTER_NAV_SECTIONS.map((section) => (
@@ -1094,7 +1100,7 @@ function TabletFooter() {
                     href={link.href}
                     target={link.href.startsWith("http") ? "_blank" : undefined}
                     rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="font-['Atyp_BL:Medium',sans-serif] text-[13px] text-[#c5a8ff] leading-none tracking-[0.13px] no-underline hover:opacity-80 transition-opacity"
+                    className="font-['Atyp_BL:Medium',sans-serif] text-[13px] text-[#9c75ff] leading-none tracking-[0.13px] no-underline hover:opacity-80 transition-opacity"
                     style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
                   >
                     {link.label}
@@ -1147,7 +1153,7 @@ function TabletFooter() {
       </div>
 
       {/* Copyright row below the card */}
-      <div className="flex items-center justify-between px-4 py-[16px] flex-wrap gap-[8px]">
+      <div className="flex items-center justify-between px-8 py-[16px] flex-wrap gap-[8px]">
         <p
           style={{
             fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
@@ -1217,17 +1223,17 @@ export function TabletHomePage() {
       <TabletHero onPartnership={handleOpenPartnership} />
 
       {/* 3. From zero to live DEX */}
-      <div className="px-6 pt-[64px] pb-[64px]">
+      <div className="px-10 pt-[64px] pb-[64px]">
         <TabletFeaturesSection />
       </div>
 
       {/* 4. Why Orderly */}
-      <div className="px-6 pt-[8px] pb-[64px]">
+      <div className="px-10 pt-[8px] pb-[64px]">
         <TabletWhySection />
       </div>
 
       {/* 5. On Orderly / Build */}
-      <div className="px-6 pb-[64px]">
+      <div className="px-10 pb-[64px]">
         <TabletBuildSection />
       </div>
 
@@ -1237,17 +1243,17 @@ export function TabletHomePage() {
       </div>
 
       {/* 7. Trusted by builders */}
-      <div className="px-6 pb-[64px]">
+      <div className="px-10 pb-[64px]">
         <TabletTrustedSection />
       </div>
 
       {/* 8. CTA — "The best time to launch was yesterday" */}
-      <div className="px-6 pb-[64px]">
+      <div className="px-10 pb-[64px]">
         <TabletCTASection onPartnership={handleOpenPartnership} />
       </div>
 
       {/* 9. Newsletter */}
-      <div className="px-6 pb-[64px]">
+      <div className="px-10 pb-[32px]">
         <TabletNewsletterSection />
       </div>
 

@@ -582,7 +582,7 @@ export function MobileHomePage({ onMenuClick }: { onMenuClick?: () => void } = {
     // Small delay so Frame40 has fully mounted its DOM
     const t = setTimeout(() => {
       const buildEls = Array.from(wrap.querySelectorAll('[data-name="build with orderly"]'));
-      const partnerEls = Array.from(wrap.querySelectorAll('[data-name="Trade on Orderly"]'));
+      const partnerEls = Array.from(wrap.querySelectorAll('[data-name="Talk to Partnerships"]'));
 
       const onBuild = (e: Event) => {
         e.stopPropagation();
@@ -683,7 +683,7 @@ export function MobileHomePage({ onMenuClick }: { onMenuClick?: () => void } = {
       }
 
       // Talk to Partnerships
-      if (name === "Trade on Orderly") {
+      if (name === "Talk to Partnerships") {
         e.preventDefault();
         setPartnershipModalOpen(true);
         return;

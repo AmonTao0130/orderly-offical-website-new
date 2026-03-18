@@ -112,7 +112,7 @@ export default function RootLayout({
       </head>
       <body className="bg-black">
         <GoogleAnalytics />
-        <div style={{ width: "100vw", overflowX: "clip" }}>
+        <div style={{ width: "100%", overflowX: "clip" }}>
           {children}
         </div>
       </body>

@@ -84,7 +84,7 @@ function HeroButtonsContainer() {
           Start Building
         </p>
       </div>
-      <div className="content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer hover:bg-white/10 transition-colors" data-name="Trade on Orderly">
+      <div className="content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer hover:bg-white/10 transition-colors" data-name="Talk to Partnerships">
         <div aria-hidden="true" className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[24px]" />
         <p className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap" style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0" }}>
           Talk to Partnerships
@@ -2043,7 +2043,7 @@ function Frame14() {
           Start Building
         </p>
       </div>
-      <div className="content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer hover:bg-white/10 transition-colors" data-name="Trade on Orderly">
+      <div className="content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer hover:bg-white/10 transition-colors" data-name="Talk to Partnerships">
         <div aria-hidden="true" className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[24px]" />
         <p className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap" style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0" }}>
           Talk to Partnerships

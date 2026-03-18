@@ -1,8 +1,21 @@
 @custom-variant dark (&:is(.dark *));
 
 html {
-  overscroll-behavior-y: none;
-  overflow-x: clip;
+  overscroll-behavior-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile smooth scrolling optimization */
+@media (max-width: 639px) {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 :root {

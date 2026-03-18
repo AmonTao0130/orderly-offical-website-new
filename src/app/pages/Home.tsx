@@ -118,7 +118,7 @@ export default function Home() {
     const update = () => {
       const w = window.innerWidth;
       if (w < 600) setViewport("mobile");
-      else if (w < 900) setViewport("tablet");
+      else if (w < 1024) setViewport("tablet");
       else setViewport("desktop");
     };
     update();
@@ -130,7 +130,7 @@ export default function Home() {
   if (viewport === "mobile") {
     return (
       <div style={{ width: "100vw", overflowX: "clip", background: "#000" }}>
-        <ScaledFrame designWidth={MOBILE_DESIGN_WIDTH} autoHeight cap>
+        <ScaledFrame designWidth={MOBILE_DESIGN_WIDTH} autoHeight>
           <MobileHomePage onMenuClick={handleOpenNav} />
         </ScaledFrame>
         {/* Nav drawer lives outside ScaledFrame so position:fixed works correctly */}
@@ -143,7 +143,7 @@ export default function Home() {
     );
   }
 
-  // Tablet (600–899 px): full tablet homepage in normal flow
+  // Tablet (600–1023 px): full tablet homepage in normal flow
   if (viewport === "tablet") {
     return <TabletHomePage />;
   }
