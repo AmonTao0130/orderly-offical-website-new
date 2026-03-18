@@ -131,7 +131,7 @@ function Group9() {
 function FeatureTag() {
   return (
     <div className="absolute backdrop-blur-[11.195px] bg-gradient-to-t content-stretch flex from-[39.314%] from-[rgba(156,117,255,0.6)] gap-[5.971px] items-center justify-center left-[287.17px] px-[14.927px] py-[11.195px] rounded-[46.273px] to-[rgba(156,117,255,0)] top-[269.05px]" data-name="Feature Tag">
-      <div aria-hidden="true" className="absolute border-[1.119px] border-solid border-white inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]" />
+      <div aria-hidden="true" className="absolute border-[1px] border-solid border-white inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]" />
       <div className="relative shrink-0 size-[5.38px]">
         <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 5.3803 5.3803">
           <circle cx="2.69015" cy="2.69015" fill="var(--fill-0, #44DED3)" id="Ellipse 6009" r="2.69015" />
@@ -147,7 +147,7 @@ function FeatureTag() {
 function FeatureTag1() {
   return (
     <div className="absolute backdrop-blur-[11.195px] bg-gradient-to-t content-stretch flex from-[rgba(156,117,255,0.6)] gap-[5.971px] items-center justify-center left-[79.64px] px-[14.927px] py-[11.195px] rounded-[46.273px] to-[133%] to-[rgba(156,117,255,0)] top-[246.18px]" data-name="Feature Tag">
-      <div aria-hidden="true" className="absolute border-[1.119px] border-solid border-white inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]" />
+      <div aria-hidden="true" className="absolute border-[1px] border-solid border-white inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]" />
       <div className="relative shrink-0 size-[5.38px]">
         <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 5.3803 5.3803">
           <circle cx="2.69015" cy="2.69015" fill="var(--fill-0, #44DED3)" id="Ellipse 6009" r="2.69015" />
@@ -163,7 +163,7 @@ function FeatureTag1() {
 function FeatureTag2() {
   return (
     <div className="absolute backdrop-blur-[11.195px] bg-gradient-to-t content-stretch flex from-[39.314%] from-[rgba(156,117,255,0.6)] gap-[5.971px] items-center justify-center left-[296.67px] px-[14.927px] py-[11.195px] rounded-[46.273px] to-[rgba(156,117,255,0)] top-[128.21px]" data-name="Feature Tag">
-      <div aria-hidden="true" className="absolute border-[1.119px] border-solid border-white inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]" />
+      <div aria-hidden="true" className="absolute border-[1px] border-solid border-white inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]" />
       <div className="relative shrink-0 size-[5.38px]">
         <svg className="absolute block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 5.3803 5.3803">
           <g id="Ellipse 6009">

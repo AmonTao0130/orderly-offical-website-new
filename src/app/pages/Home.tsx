@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { AnimatePresence } from "motion/react";
-import Frame7, { QuickStartSection } from "../../imports/Frame1618872018";
+import Frame7 from "../../imports/Frame1618872018";
 import { MobileHomePage, MobileNavDrawer } from "../components/MobileHomePage";
+import { TabletHomePage } from "../components/TabletHomePage";
 
 // Desktop / tablet Figma canvas: 1440 × 6500 px
 const DESIGN_WIDTH = 1440;
@@ -142,13 +143,9 @@ export default function Home() {
     );
   }
 
-  // Tablet (768–1023 px): Quick Start section in normal flow
+  // Tablet (600–899 px): full tablet homepage in normal flow
   if (viewport === "tablet") {
-    return (
-      <div style={{ width: "100%", background: "#000", padding: "80px 0" }}>
-        <QuickStartSection layout="col" />
-      </div>
-    );
+    return <TabletHomePage />;
   }
 
   // Desktop (≥ 1024 px): pixel-perfect ScaledFrame of the 1440 px Figma canvas

@@ -822,7 +822,7 @@ export function PartnershipFormModal({ onClose }: { onClose: () => void }) {
 }
 // ─────────────────────────────────────────────────────────────────────────────
 
-function BackgroundVector() {
+export function BackgroundVector() {
   return (
     <div className="relative size-full" data-name="Background Vector">
       <svg
@@ -866,7 +866,7 @@ function BackgroundVector() {
   );
 }
 
-function BackgroundVector1() {
+export function BackgroundVector1() {
   return (
     <div className="relative size-full" data-name="Background Vector">
       <svg
