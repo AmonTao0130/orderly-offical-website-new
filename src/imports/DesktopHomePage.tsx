@@ -1,3 +1,6 @@
+'use client'
+
+import posthog from 'posthog-js'
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
@@ -8,6 +11,13 @@ import {
 } from "@/app/hooks/useOrderlyStats";
 import { AnimatedNumber } from "@/app/components/AnimatedNumber";
 import { useNewsletterSubscribe } from "@/app/hooks/useNewsletterSubscribe";
+import svgPaths from "./svg-kykn6znl0w";
+import ImportedWhyContent from "./WhyContent";
+import MacbookVideo from "@/app/components/MacbookVideo";
+import { imgGroup } from "./svg-z9q1x";
+import QuickStartGroup from "./Group1597879965";
+import IcSocialYoutubeS from "./IcSocialYoutubeS24";
+
 // Lightweight inline check icon (replaces heavy MUI Check)
 const CheckSvg = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -20,12 +30,7 @@ const CheckSvg = () => (
     />
   </svg>
 );
-import svgPaths from "./svg-kykn6znl0w";
-import ImportedWhyContent from "./WhyContent";
-import MacbookVideo from "@/app/components/MacbookVideo";
-import { imgGroup } from "./svg-z9q1x";
-import QuickStartGroup from "./Group1597879965";
-import IcSocialYoutubeS from "./IcSocialYoutubeS24";
+
 
 // ─── SVG asset imports ────────────────────────────────────────────────────────
 const ethBadgeSrc = "/images/svg/EthBadge.svg";
@@ -280,17 +285,21 @@ export function BuyOrderModal({ onClose }: { onClose: () => void }) {
 
 // ─── Partnership Form Modal ───────────────────────────────────────────────────
 // Use Adobe Fonts Typekit font: atyp-bl-variable (weight range: 280-700)
+const partnershipFontFeatures = '"ss02", "ss03", "ss05", "ss06"';
 const fontRegularPartnership = {
   fontFamily: "'atyp-bl-variable', 'Atyp BL', sans-serif",
   fontWeight: 400,
+  fontFeatureSettings: partnershipFontFeatures,
 };
 const fontMediumPartnership = {
   fontFamily: "'atyp-bl-variable', 'Atyp BL', sans-serif",
   fontWeight: 500,
+  fontFeatureSettings: partnershipFontFeatures,
 };
 const fontBoldPartnership = {
   fontFamily: "'atyp-bl-variable', 'Atyp BL', sans-serif",
   fontWeight: 700,
+  fontFeatureSettings: partnershipFontFeatures,
 };
 
 export function PartnershipFormModal({ onClose }: { onClose: () => void }) {
@@ -670,11 +679,11 @@ export function PartnershipFormModal({ onClose }: { onClose: () => void }) {
                 Are you looking to build a DEX?{" "}
                 <span className="text-red-500">*</span>
               </label>
-              <div className="flex flex-col gap-[10px]">
-                {["Yes", "No", "Exploring options"].map((option) => (
+              <div className="flex flex-row gap-[10px]">
+                {["Yes", "No"].map((option) => (
                   <label
                     key={option}
-                    className={`flex items-center gap-[10px] px-[16px] py-[12px] rounded-[12px] border cursor-pointer transition-all duration-200 ${
+                    className={`flex-1 flex items-center gap-[10px] px-[16px] py-[12px] rounded-[12px] border cursor-pointer transition-all duration-200 ${
                       formData.buildDex === option
                         ? "border-[#9c75ff] bg-[#9c75ff]/10"
                         : "border-white/10 hover:border-white/20"
@@ -1014,6 +1023,10 @@ function ChevronIcon({ open }: { open: boolean }) {
 
 type DropdownItem = { label: string; href: string };
 
+function labelToKey(label: string) {
+  return label.toLowerCase().replace(/\s+/g, "_");
+}
+
 function useMenuHover() {
   const [open, setOpen] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -1031,10 +1044,12 @@ function DropdownPanel({
   items,
   onEnter,
   onLeave,
+  groupKey,
 }: {
   items: DropdownItem[];
   onEnter: () => void;
   onLeave: () => void;
+  groupKey: string;
 }) {
   return (
     <div
@@ -1055,8 +1070,14 @@ function DropdownPanel({
               {item.label}
             </p>
           );
+          const trackClick = () => posthog.capture('header_nav_clicked', {
+            tab_name: `${groupKey}_${labelToKey(item.label)}`,
+            source_page: 'homepage',
+            device_layout: 'desktop',
+            section: 'header',
+          });
           return isInternal ? (
-            <Link key={item.label} href={item.href} className={linkClass}>
+            <Link key={item.label} href={item.href} className={linkClass} onClick={trackClick}>
               {inner}
             </Link>
           ) : (
@@ -1066,6 +1087,7 @@ function DropdownPanel({
               target="_blank"
               rel="noopener noreferrer"
               className={linkClass}
+              onClick={trackClick}
             >
               {inner}
             </a>
@@ -1106,6 +1128,7 @@ function MenuCell() {
         <DropdownPanel
           onEnter={handleEnter}
           onLeave={handleLeave}
+          groupKey="builders"
           items={[
             { label: "Orderly One", href: "https://dex.orderly.network/" },
             { label: "My DEX", href: "https://dex.orderly.network/dex" },
@@ -1151,6 +1174,7 @@ function MenuCell1() {
         <DropdownPanel
           onEnter={handleEnter}
           onLeave={handleLeave}
+          groupKey="ecosystem"
           items={[
             { label: "Partners", href: "https://orderly.network/partners/" },
             { label: "Listings", href: "https://orderly.network/listing/" },
@@ -1203,6 +1227,7 @@ function MenuCell2() {
         <DropdownPanel
           onEnter={handleEnter}
           onLeave={handleLeave}
+          groupKey="traders"
           items={[
             { label: "Live DEXs", href: "https://dex.orderly.network/board/" },
             { label: "Dashboard", href: "https://dashboard.orderly.network" },
@@ -1255,12 +1280,17 @@ function MenuCell3() {
       rel="noopener noreferrer"
       className="content-stretch flex h-[50px] items-baseline pb-[10px] pt-[16px] relative shrink-0 no-underline"
       data-name="Menu cell"
+      onClick={() => posthog.capture('header_nav_clicked', {
+        tab_name: 'docs',
+        source_page: 'homepage',
+        device_layout: 'desktop',
+        section: 'header',
+      })}
     >
       <HeaderMenuItem3 />
     </a>
   );
 }
-
 function HeaderMenu() {
   return (
     <div
@@ -1277,6 +1307,13 @@ function HeaderMenu() {
         rel="noopener noreferrer"
         className="content-stretch flex h-[40px] items-center justify-center px-[20px] py-[12px] relative rounded-[46px] shrink-0 no-underline hover:opacity-90 transition-opacity"
         data-name="Button"
+        onClick={() => {
+          posthog.capture('homepage_cta_clicked', {
+            cta_name: 'launch_now',
+            source_page: 'homepage',
+            device_layout: 'desktop',
+          })
+        }}
         style={{
           backgroundImage:
             "linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%), linear-gradient(-89.1975deg, rgb(72, 189, 255) 0%, rgb(120, 108, 255) 47.763%, rgb(189, 0, 255) 99.638%)",
@@ -1350,6 +1387,13 @@ function HeroButtonsContainer({
         rel="noopener noreferrer"
         className="bg-[#6700ce] content-stretch flex h-[52px] items-center justify-center px-[24px] py-[12px] relative rounded-[24px] shrink-0 no-underline hover:opacity-90 transition-opacity"
         data-name="build with orderly"
+        onClick={() => {
+          posthog.capture('homepage_cta_clicked', {
+            cta_name: 'start_building',
+            source_page: 'homepage',
+            device_layout: 'desktop',
+          })
+        }}
       >
         <p
           className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[16px] text-white"
@@ -1363,7 +1407,14 @@ function HeroButtonsContainer({
         </p>
       </a>
       <button
-        onClick={onOpenPartnershipModal}
+        onClick={() => {
+          posthog.capture('homepage_cta_clicked', {
+            cta_name: 'talk_to_partnerships',
+            source_page: 'homepage',
+            device_layout: 'desktop',
+          })
+          onOpenPartnershipModal()
+        }}
         className="content-stretch flex h-[52px] items-center justify-center pl-[24px] pr-[20px] py-[12px] relative rounded-[24px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
         data-name="Talk to Partnerships"
       >
@@ -2566,6 +2617,13 @@ function Frame4() {
       rel="noopener noreferrer"
       className="bg-[#6700ce] content-stretch flex h-[52px] items-center justify-center px-[24px] py-[12px] relative rounded-[24px] shrink-0 no-underline hover:opacity-90 transition-opacity"
       data-name="build with orderly"
+      onClick={() => {
+        posthog.capture('homepage_cta_clicked', {
+          cta_name: 'start_building',
+          source_page: 'homepage',
+          device_layout: 'desktop',
+        })
+      }}
     >
       <p
         className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[16px] text-white"
@@ -2588,7 +2646,14 @@ function Frame5({
 }) {
   return (
     <button
-      onClick={onOpenPartnershipModal}
+      onClick={() => {
+        posthog.capture('homepage_cta_clicked', {
+          cta_name: 'talk_to_partnerships',
+          source_page: 'homepage',
+          device_layout: 'desktop',
+        })
+        onOpenPartnershipModal()
+      }}
       className="content-stretch flex h-[52px] items-center justify-center pl-[24px] pr-[20px] py-[12px] relative rounded-[24px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
       data-name="Talk to Partnerships"
     >
@@ -3837,7 +3902,7 @@ function StatsSection() {
   );
 }
 
-function AIAgentCard({ compact = false }: { compact?: boolean }) {
+function AIAgentCard({ compact = false, deviceLayout = "desktop" }: { compact?: boolean; deviceLayout?: "desktop" | "tablet" }) {
   const [copied, setCopied] = useState(false);
   const url = "https://orderly.network/skill.md";
 
@@ -3912,6 +3977,14 @@ function AIAgentCard({ compact = false }: { compact?: boolean }) {
             target="_blank"
             rel="noopener noreferrer"
             className={`font-['DM_Mono:Medium',sans-serif] text-white/70 no-underline hover:text-white transition-colors ${compact ? "text-[13px]" : "text-[16px]"}`}
+            onClick={() => {
+              posthog.capture('agentic_quickstart_clicked', {
+                button_name: 'skill_md',
+                source_page: 'homepage',
+                device_layout: deviceLayout,
+                section: 'agentic_quick_start',
+              })
+            }}
           >
             orderly.network/skill.md
           </a>
@@ -4083,7 +4156,7 @@ function QuickStartContent() {
   );
 }
 
-export function QuickStartSection({ layout = "row" }: { layout?: "row" | "col" }) {
+export function QuickStartSection({ layout = "row", deviceLayout = "desktop" }: { layout?: "row" | "col"; deviceLayout?: "desktop" | "tablet" }) {
   if (layout === "col") {
     return (
       <div
@@ -4092,8 +4165,8 @@ export function QuickStartSection({ layout = "row" }: { layout?: "row" | "col" }
       >
         <QuickStartHeader fluid compact />
         <div className="flex flex-col gap-[16px] w-full">
-          <AIAgentCard compact />
-          <QuickStartGroup compact />
+          <AIAgentCard compact deviceLayout={deviceLayout} />
+          <QuickStartGroup compact deviceLayout={deviceLayout} />
         </div>
       </div>
     );
@@ -4105,8 +4178,8 @@ export function QuickStartSection({ layout = "row" }: { layout?: "row" | "col" }
     >
       <QuickStartHeader />
       <div className="flex gap-[22px] items-stretch w-full">
-        <AIAgentCard />
-        <QuickStartGroup />
+        <AIAgentCard deviceLayout={deviceLayout} />
+        <QuickStartGroup deviceLayout={deviceLayout} />
       </div>
     </div>
   );
@@ -5305,6 +5378,14 @@ function BuildButtonContainer() {
       rel="noopener noreferrer"
       className="content-stretch flex gap-[7px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
       data-name="Build Button Container"
+      onClick={() => {
+        posthog.capture('homepage_card_clicked', {
+          card_name: 'dex',
+          source_page: 'homepage',
+          device_layout: 'desktop',
+          section: 'on_orderly',
+        })
+      }}
     >
       <p
         className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[20px] text-white tracking-[0.2px]"
@@ -5367,6 +5448,14 @@ function BuildButtonContainer1() {
       rel="noopener noreferrer"
       className="content-stretch flex gap-[7px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
       data-name="Build Button Container"
+      onClick={() => {
+        posthog.capture('homepage_card_clicked', {
+          card_name: 'build',
+          source_page: 'homepage',
+          device_layout: 'desktop',
+          section: 'on_orderly',
+        })
+      }}
     >
       <p
         className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[20px] text-white tracking-[0.2px]"
@@ -5409,6 +5498,19 @@ function BuildButtonContainerVault() {
       rel="noopener noreferrer"
       className="content-stretch flex gap-[7px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
       data-name="Build Button Container"
+      onClick={() => {
+        posthog.capture('homepage_cta_clicked', {
+          cta_name: 'vaults',
+          source_page: 'homepage',
+          device_layout: 'desktop',
+        })
+        posthog.capture('homepage_card_clicked', {
+          card_name: 'vaults',
+          source_page: 'homepage',
+          device_layout: 'desktop',
+          section: 'on_orderly',
+        })
+      }}
     >
       <p
         className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[20px] text-white tracking-[0.2px]"
@@ -5487,6 +5589,14 @@ function BuildButtonContainer2() {
       rel="noopener noreferrer"
       className="content-stretch flex gap-[7px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
       data-name="Build Button Container"
+      onClick={() => {
+        posthog.capture('homepage_card_clicked', {
+          card_name: 'listings',
+          source_page: 'homepage',
+          device_layout: 'desktop',
+          section: 'on_orderly',
+        })
+      }}
     >
       <p
         className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[20px] text-white tracking-[0.2px]"
@@ -5548,6 +5658,14 @@ function BuildButtonContainer3() {
       rel="noopener noreferrer"
       className="content-stretch flex gap-[7px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
       data-name="Build Button Container"
+      onClick={() => {
+        posthog.capture('homepage_card_clicked', {
+          card_name: 'start_building',
+          source_page: 'homepage',
+          device_layout: 'desktop',
+          section: 'on_orderly',
+        })
+      }}
     >
       <p
         className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[20px] text-white tracking-[0.2px]"

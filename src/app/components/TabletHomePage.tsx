@@ -1,5 +1,7 @@
 "use client";
 
+import posthog from 'posthog-js'
+
 /**
  * TabletHomePage — desktop-composition hero, compact typography
  *
@@ -31,7 +33,7 @@ import {
   BackgroundVector1,
   QuickStartSection,
   StatusMessageContainer,
-} from "../../imports/Frame1618872018";
+} from "../../imports/DesktopHomePage";
 import { MobileNavDrawer } from "./MobileHomePage";
 import {
   useOrderlyStats,
@@ -78,6 +80,13 @@ export function TabletNav({ onMenuClick }: { onMenuClick: () => void }) {
           target="_blank"
           rel="noopener noreferrer"
           className="font-['Atyp_BL:Bold',sans-serif] text-[14px] text-[#3f0086] leading-none no-underline whitespace-nowrap rounded-[46px] bg-white px-[18px] py-[8px]"
+          onClick={() => {
+            posthog.capture('homepage_cta_clicked', {
+              cta_name: 'launch_now',
+              source_page: 'homepage',
+              device_layout: 'tablet',
+            })
+          }}
         >
           Launch Now
         </a>
@@ -356,6 +365,13 @@ function TabletHero({
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#6700ce] flex h-[44px] items-center justify-center px-[20px] relative rounded-[24px] shrink-0 no-underline hover:opacity-90 transition-opacity"
+              onClick={() => {
+                posthog.capture('homepage_cta_clicked', {
+                  cta_name: 'start_building',
+                  source_page: 'homepage',
+                  device_layout: 'tablet',
+                })
+              }}
             >
               <p
                 className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[12px] text-white"
@@ -369,7 +385,14 @@ function TabletHero({
               </p>
             </a>
             <button
-              onClick={onPartnership}
+              onClick={() => {
+                posthog.capture('homepage_cta_clicked', {
+                  cta_name: 'talk_to_partnerships',
+                  source_page: 'homepage',
+                  device_layout: 'tablet',
+                })
+                onPartnership()
+              }}
               className="flex h-[44px] items-center justify-center pl-[20px] pr-[16px] relative rounded-[24px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
             >
               <div
@@ -657,6 +680,14 @@ const BUILD_CARDS = [
   },
 ] as const;
 
+const CARD_NAME_MAP: Record<string, string> = {
+  'Orderly One': 'dex',
+  'SDK & API': 'build',
+  'Vaults': 'vaults',
+  'Listings': 'listings',
+  'Start Building': 'start_building',
+};
+
 /**
  * TabletBuildSection — horizontal scrollable carousel of the 5 "On Orderly" cards.
  * Same title/link content as the desktop BuildSection containers.
@@ -725,6 +756,14 @@ function TabletBuildSection() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-[6px] no-underline hover:opacity-80 transition-opacity"
+              onClick={() => {
+                posthog.capture('homepage_card_clicked', {
+                  card_name: CARD_NAME_MAP[card.linkLabel],
+                  source_page: 'homepage',
+                  device_layout: 'tablet',
+                  section: 'on_orderly',
+                })
+              }}
             >
               <p
                 className="font-['Atyp_BL:Bold',sans-serif] text-[15px] text-white leading-none tracking-[0.15px]"
@@ -857,6 +896,13 @@ function TabletCTASection({ onPartnership }: { onPartnership: () => void }) {
           target="_blank"
           rel="noopener noreferrer"
           className="bg-[#6700ce] flex h-[44px] items-center justify-center px-[24px] relative rounded-[24px] no-underline hover:opacity-90 transition-opacity"
+          onClick={() => {
+            posthog.capture('homepage_cta_clicked', {
+              cta_name: 'start_building',
+              source_page: 'homepage',
+              device_layout: 'tablet',
+            })
+          }}
         >
           <p
             className="font-['Atyp_BL:Bold',sans-serif] text-[14px] text-white leading-none"
@@ -866,7 +912,14 @@ function TabletCTASection({ onPartnership }: { onPartnership: () => void }) {
           </p>
         </a>
         <button
-          onClick={onPartnership}
+          onClick={() => {
+            posthog.capture('homepage_cta_clicked', {
+              cta_name: 'talk_to_partnerships',
+              source_page: 'homepage',
+              device_layout: 'tablet',
+            })
+            onPartnership()
+          }}
           className="flex h-[44px] items-center justify-center pl-[20px] pr-[16px] relative rounded-[24px] hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
         >
           <div
@@ -1239,7 +1292,7 @@ export function TabletHomePage() {
 
       {/* 6. Quick Start — reuse exported col layout from desktop */}
       <div className="pb-[64px]">
-        <QuickStartSection layout="col" />
+        <QuickStartSection layout="col" deviceLayout="tablet" />
       </div>
 
       {/* 7. Trusted by builders */}
@@ -1270,7 +1323,7 @@ export function TabletHomePage() {
       {/* ── Nav drawer (reused from mobile) ── */}
       <AnimatePresence>
         {navOpen && (
-          <MobileNavDrawer key="tablet-nav" onClose={handleCloseNav} />
+          <MobileNavDrawer key="tablet-nav" onClose={handleCloseNav} deviceLayout="tablet" />
         )}
       </AnimatePresence>
     </div>

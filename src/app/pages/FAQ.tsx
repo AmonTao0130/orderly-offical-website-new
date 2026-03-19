@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { NavCanvas, SiteFooter } from "../../imports/Frame1618872018";
+import { NavCanvas, SiteFooter } from "../../imports/DesktopHomePage";
 import { MobileNavDrawer } from "../components/MobileHomePage";
 import {
   MobileAIAccessCard,

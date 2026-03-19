@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { AnimatePresence } from "motion/react";
-import Frame7 from "../../imports/Frame1618872018";
+import Frame7 from "../../imports/DesktopHomePage";
 import { MobileHomePage, MobileNavDrawer } from "../components/MobileHomePage";
 import { TabletHomePage } from "../components/TabletHomePage";
 

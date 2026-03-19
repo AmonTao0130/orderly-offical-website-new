@@ -1,9 +1,11 @@
 'use client';
 
+import posthog from 'posthog-js'
+
 /**
  * MobileHomePage
  *
- * Source-of-truth for behaviour: Frame1618872018 (desktop).
+ * Source-of-truth for behaviour: DesktopHomePage.
  * - Modals   → imported directly from the desktop file (PartnershipModal, BuyOrderModal)
  * - Data     → imported from /src/app/shared/orderly.ts (no duplication)
  * - Visuals  → Frame40 (375 px Figma frame), event-delegated via handleClick
@@ -20,7 +22,7 @@ import { useNewsletterSubscribe } from "@/app/hooks/useNewsletterSubscribe";
 import Frame40 from "../../imports/Frame1618872068-142-633";
 
 // ── Desktop modals — single source of truth, reused on mobile ───────────────
-import { BuyOrderModal, PartnershipFormModal } from "../../imports/Frame1618872018";
+import { BuyOrderModal, PartnershipFormModal } from "../../imports/DesktopHomePage";
 
 // ── Mobile icon paths (same file Frame40 uses for Brandmark) ─────────────────
 import svgPathsMobile from "../../imports/svg-4hybjba00c";
@@ -73,7 +75,7 @@ function walkDataAction(el: HTMLElement | null): string | null {
  * • Dual CTA: "Launch Now" (white) + "Start Building" (purple)
  * • Brandmark from svg-4hybjba00c (same paths used by Frame40 top bar)
  */
-function MobileNavDrawer({ onClose }: { onClose: () => void }) {
+function MobileNavDrawer({ onClose, deviceLayout = "mobile" }: { onClose: () => void; deviceLayout?: "mobile" | "tablet" }) {
   const [openSection, setOpenSection] = useState<string | null>(null);
 
   const NAV_SECTIONS = [
@@ -151,7 +153,15 @@ function MobileNavDrawer({ onClose }: { onClose: () => void }) {
 
             {/* Section toggle */}
             <button
-              onClick={() => toggle(key)}
+              onClick={() => {
+                toggle(key);
+                posthog.capture('header_nav_clicked', {
+                  tab_name: key.toLowerCase(),
+                  source_page: 'homepage',
+                  device_layout: deviceLayout,
+                  section: 'header',
+                });
+              }}
               className="w-full flex items-center justify-between py-[18px] px-[24px] bg-transparent border-0 cursor-pointer"
               aria-expanded={openSection === key}
             >
@@ -181,14 +191,20 @@ function MobileNavDrawer({ onClose }: { onClose: () => void }) {
                   style={{ overflow: "hidden" }}
                 >
                   <div className="flex flex-col px-[16px] pb-[14px] gap-[2px]">
-                    {items.map((item) =>
-                      item.external ? (
+                    {items.map((item) => {
+                      const trackSubItem = () => posthog.capture('header_nav_clicked', {
+                        tab_name: `${key.toLowerCase()}_${item.label.toLowerCase().replace(/\s+/g, '_')}`,
+                        source_page: 'homepage',
+                        device_layout: deviceLayout,
+                        section: 'header',
+                      });
+                      return item.external ? (
                         <a
                           key={item.label}
                           href={item.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          onClick={onClose}
+                          onClick={() => { trackSubItem(); onClose(); }}
                           className="flex items-center justify-between no-underline rounded-[10px] px-[14px] py-[14px]"
                           style={{ color: "rgba(255,255,255,0.65)", ...fontItemStyle, minHeight: 48 }}
                           onTouchStart={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(103,0,206,0.15)"; (e.currentTarget as HTMLAnchorElement).style.color = "#9c75ff"; }}
@@ -206,7 +222,7 @@ function MobileNavDrawer({ onClose }: { onClose: () => void }) {
                           <Link
                             key={item.label}
                             href={item.href}
-                            onClick={onClose}
+                            onClick={() => { trackSubItem(); onClose(); }}
                             className="no-underline rounded-[10px] px-[14px] py-[14px] block"
                             style={{ color: "rgba(255,255,255,0.65)", ...fontItemStyle, minHeight: 48 }}
                             onTouchStart={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(103,0,206,0.15)"; (e.currentTarget as HTMLAnchorElement).style.color = "white"; }}
@@ -217,8 +233,8 @@ function MobileNavDrawer({ onClose }: { onClose: () => void }) {
                             {item.label}
                           </Link>
                         )
-                      )
-                    )}
+                      );
+                    })}
                   </div>
                 </motion.div>
               )}
@@ -232,7 +248,15 @@ function MobileNavDrawer({ onClose }: { onClose: () => void }) {
             href="https://orderly.network/docs/introduction/getting-started/what-is-orderly"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={onClose}
+            onClick={() => {
+              posthog.capture('header_nav_clicked', {
+                tab_name: 'docs',
+                source_page: 'homepage',
+                device_layout: deviceLayout,
+                section: 'header',
+              });
+              onClose();
+            }}
             className="flex items-center justify-between no-underline py-[18px] px-[24px]"
             style={{ ...fontSectionStyle, minHeight: 56 }}
             onTouchStart={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.7"; }}
@@ -254,17 +278,34 @@ function MobileNavDrawer({ onClose }: { onClose: () => void }) {
       >
         {/* Launch Now — white, matches desktop HeaderMenu primary CTA */}
         <a
-          href="https://dex.orderly.network/dex/"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={onClose}
-          className="flex items-center justify-center rounded-[46px] py-[16px] no-underline"
-          style={{ background: "white", minHeight: 52 }}
-        >
-          <span style={{ color: "#3f0086", fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif", fontVariationSettings: "'wght' 700", fontFeatureSettings: "'ss02','ss03','ss05','ss06'", fontSize: "16px", letterSpacing: "0.16px" }}>
-            Launch Now
-          </span>
-        </a>
+        href="https://dex.orderly.network/dex/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center rounded-[46px] py-[16px] no-underline"
+        style={{ background: "white", minHeight: 52 }}
+        onClick={() => {
+          posthog.capture('homepage_cta_clicked', {
+            cta_name: 'launch_now',
+            source_page: 'homepage',
+            device_layout: 'mobile',
+          })
+          
+          onClose()
+       }}
+>
+  <span
+    style={{
+      color: "#3f0086",
+      fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
+      fontVariationSettings: "'wght' 700",
+      fontFeatureSettings: "'ss02','ss03','ss05','ss06'",
+      fontSize: "16px",
+      letterSpacing: "0.16px"
+    }}
+  >
+    Launch Now
+  </span>
+</a>
       </div>
     </motion.div>
   );
@@ -678,6 +719,11 @@ export function MobileHomePage({ onMenuClick }: { onMenuClick?: () => void } = {
       // Start Building → same href as desktop button
       if (name === "build with orderly") {
         e.preventDefault();
+        posthog.capture('homepage_cta_clicked', {
+          cta_name: 'start_building',
+          source_page: 'homepage',
+          device_layout: 'mobile',
+        })
         openUrl("https://dex.orderly.network/");
         return;
       }
@@ -685,6 +731,11 @@ export function MobileHomePage({ onMenuClick }: { onMenuClick?: () => void } = {
       // Talk to Partnerships
       if (name === "Talk to Partnerships") {
         e.preventDefault();
+        posthog.capture('homepage_cta_clicked', {
+          cta_name: 'talk_to_partnerships',
+          source_page: 'homepage',
+          device_layout: 'mobile',
+        })
         setPartnershipModalOpen(true);
         return;
       }

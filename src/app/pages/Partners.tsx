@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { NavCanvas, SiteFooter } from "../../imports/Frame1618872018";
+import { NavCanvas, SiteFooter } from "../../imports/DesktopHomePage";
 import { MobileNavDrawer } from "../components/MobileHomePage";
 import { MobileFooterCard } from "../../imports/Frame1618872068-142-633";
 import { TabletNav, TabletFooter } from "../components/TabletHomePage";
 import svgPathsMobile from "../../imports/svg-4hybjba00c";
+import { useOrderlyStats, formatLargeNumber } from "../hooks/useOrderlyStats";
 
 // ─── ScaledSection ────────────────────────────────────────────────────────────
 const DESIGN_WIDTH = 1440;
@@ -103,7 +104,7 @@ function useViewport(): Viewport {
   useEffect(() => {
     const update = () => {
       const w = window.innerWidth;
-      setVp(w < 640 ? "mobile" : w < 1080 ? "tablet" : "desktop");
+      setVp(w < 600 ? "mobile" : w < 1024 ? "tablet" : "desktop");
     };
     update();
     window.addEventListener("resize", update);
@@ -259,16 +260,6 @@ const PARTNERS: Partner[] = [
     color: "#0d2033",
     url: "https://www.what.exchange/",
   },
-  {
-    name: "VOOI",
-    category: "Builder",
-    description: "Cross-chain perp DEX aggregator that routes orders to the deepest available liquidity — including Orderly's shared orderbook across 17+ chains.",
-    logo: "logos/vooi.png",
-    initials: "VO",
-    color: "#052e32",
-    url: "https://vooi.io/",
-  },
-
   // ── Ecosystem ──
   {
     name: "Optimism",
@@ -333,6 +324,51 @@ const PARTNERS: Partner[] = [
     color: "#0a1a1a",
     url: "https://www.mantle.xyz/",
   },
+  {
+    name: "Sonic",
+    category: "Ecosystem",
+    description: "The fastest EVM Layer-1 blockchain, delivering high throughput and ultra-low fees. Orderly deployed its omnichain orderbook on Sonic in January 2025, bringing shared liquidity to the ecosystem.",
+    logo: "logos/sonic.png",
+    initials: "S",
+    color: "#1a0a06",
+    url: "https://www.soniclabs.com/",
+  },
+  {
+    name: "Berachain",
+    category: "Ecosystem",
+    description: "High-performance EVM-compatible L1 powered by Proof-of-Liquidity consensus. Orderly integrated Berachain in February 2025, enabling DEXes like Kodiak to offer perps with 100+ trading pairs and up to 50x leverage.",
+    logo: "logos/berachain.png",
+    initials: "BR",
+    color: "#0a1206",
+    url: "https://www.berachain.com/",
+  },
+  {
+    name: "Monad",
+    category: "Ecosystem",
+    description: "Superscalable EVM-compatible Layer-1 with 10,000 TPS, 1-second block times and finality, and full Ethereum RPC compatibility. Orderly's omnichain orderbook brings deep, bootstrapped liquidity to Monad from day one.",
+    logo: "logos/monad.png",
+    initials: "MON",
+    color: "#140520",
+    url: "https://www.monad.xyz/",
+  },
+  {
+    name: "Story",
+    category: "Ecosystem",
+    description: "Purpose-built Layer-1 for tokenizing intellectual property into programmable on-chain assets. Orderly's integration enables Story ecosystem projects to access deep cross-chain liquidity for trading tokenized IP.",
+    logo: "logos/story.png",
+    initials: "IP",
+    color: "#1a1206",
+    url: "https://www.story.foundation/",
+  },
+  {
+    name: "Mode",
+    category: "Ecosystem",
+    description: "Ethereum L2 focused on DeFi with a collaborative revenue-sharing model. Mode launched Mode Trade, an AI-native perpetuals DEX powered by Orderly — the first L2 to integrate a perp exchange directly on its platform.",
+    logo: "logos/mode.png",
+    initials: "MD",
+    color: "#1a1a06",
+    url: "https://www.mode.network/",
+  },
 
   // ── Product ──
   {
@@ -371,6 +407,132 @@ const PARTNERS: Partner[] = [
     color: "#1a0a2e",
     url: "https://wormhole.com/",
   },
+  {
+    name: "Stargate Finance",
+    category: "Product",
+    description: "Fully composable liquidity transport protocol enabling seamless cross-chain asset transfers. Stargate powers USDC.e bridging to the Orderly Chain, connecting it to 55+ blockchain ecosystems.",
+    logo: "logos/stargate.png",
+    initials: "STG",
+    color: "#0a1a10",
+    url: "https://stargate.finance/",
+  },
+  {
+    name: "Google Cloud",
+    category: "Product",
+    description: "Global cloud computing platform partnering with Orderly to drive secure, scalable DeFi adoption. Google Cloud supports Orderly's SDK infrastructure and co-ran an AI bounty program with the ecosystem.",
+    logo: "logos/google-cloud.svg",
+    initials: "GC",
+    color: "#0a0a1a",
+    url: "https://cloud.google.com/",
+  },
+  {
+    name: "Clearpool",
+    category: "Product",
+    description: "Decentralised credit marketplace and the force behind Ozean, the RWA yield blockchain. Orderly serves as the primary perpetual futures infrastructure on Ozean, with 30+ DEXes set to join the ecosystem.",
+    logo: "logos/clearpool.jpg",
+    initials: "CP",
+    color: "#061a1a",
+    url: "https://clearpool.finance/",
+  },
+  {
+    name: "VOOI",
+    category: "Builder",
+    description: "Cross-chain perp DEX aggregator that routes orders to the deepest available liquidity — including Orderly's shared orderbook across 17+ chains.",
+    logo: "logos/vooi.png",
+    initials: "VO",
+    color: "#052e32",
+    url: "https://vooi.io/",
+  },
+  {
+    name: "FusionX",
+    category: "Builder",
+    description: "FusionX is the one-stop DeFi ecosystem on Mantle Network.",
+    logo: "logos/fusionx.png",
+    initials: "FX",
+    color: "#0a1a10",
+    url: "https://fusionx.finance/",
+  },
+  {
+    name: "Xade",
+    category: "Builder",
+    description: "Xade is the ultimate trading app with over 100k+ spot and futures markets, including stocks, crypto, commodities, and forex.",
+    logo: "logos/xade.png",
+    initials: "XD",
+    color: "#1a1a1a",
+    url: "https://xade.finance/",
+  },
+  {
+    name: "AscendEX",
+    category: "Builder",
+    description: "AscendEX is a full-stack crypto platform that offers simple solutions for investing, trading, managing, and earning to help users maximize returns on their portfolio.",
+    logo: "logos/ascendex.png",
+    initials: "AX",
+    color: "#0a1a3a",
+    url: "https://ascendex.com/",
+  },
+  {
+    name: "EMDX",
+    category: "Builder",
+    description: "EMDX is a decentralized derivatives exchange bringing traditional assets into the web3 environment and enhancing cross-fi liquidity.",
+    logo: "logos/emdx.png",
+    initials: "EM",
+    color: "#0a2010",
+    url: "https://emdx.io/",
+  },
+  {
+    name: "Dfyn",
+    category: "Builder",
+    description: "Dfyn is the world's first on-chain limit order DEX combining RFQ matching with a concentrated liquidity AMM.",
+    logo: "logos/dfyn.png",
+    initials: "DF",
+    color: "#061a2e",
+    url: "https://dfyn.network/",
+  },
+  {
+    name: "SharpeAI",
+    category: "Builder",
+    description: "SharpeAI is an AI-powered crypto super-app designed for professional traders, offering a unified platform for intelligence, investing, and automating digital assets.",
+    logo: "logos/sharpe.png",
+    initials: "SAI",
+    color: "#101010",
+    url: "https://sharpe.ai/",
+  },
+  {
+    name: "Sable Finance",
+    category: "Builder",
+    description: "Sable Finance is a pioneering decentralized multichain stablecoin protocol backed by liquid staking derivatives (LSD).",
+    logo: "logos/sable.png",
+    initials: "SBL",
+    color: "#1a1200",
+    url: "https://trade.sable.finance",
+  },
+  {
+    name: "Alertatron",
+    category: "Builder",
+    description: "Alertatron is an automated algorithmic trading platform designed for digital asset markets and utilizes user trading strategies.",
+    logo: "logos/alertatron.png",
+    initials: "AT",
+    color: "#0a0a1a",
+    url: "https://alertatron.com/",
+  },
+  {
+    name: "Unibot",
+    category: "Builder",
+    description: "Unibot is the fastest on-chain trading terminal and telegram DEX trading bot.",
+    logo: "logos/unibot.png",
+    initials: "UB",
+    color: "#1a0a2e",
+    url: "https://unibot.app/",
+  },
+  {
+    name: "Prime Protocol",
+    category: "Builder",
+    description: "Prime Protocol is a one-stop shop where investors can deposit all their digital assets across chains into a single protocol and receive credit anywhere.",
+    logo: "logos/prime.png",
+    initials: "PP",
+    color: "#0a0a2e",
+    url: "https://www.primeprotocol.xyz/",
+  },
 ];
 
 const CATEGORIES: Category[] = ["All", "Builder", "Ecosystem", "Product"];
@@ -381,11 +543,7 @@ const CATEGORY_COLORS: Record<Exclude<Category, "All">, string> = {
   Product:   "#0a2a4a",
 };
 
-const STATS = [
-  { label: "Traders",            value: "895K+" },
-  { label: "Ecosystem partners", value: "32+" },
-  { label: "Supported chains",   value: "17+" },
-];
+const TRADERS_COUNT = "895K";
 
 // ─── Arrow icon ───────────────────────────────────────────────────────────────
 function ArrowUpRight({ size = 14, color = "currentColor" }: { size?: number; color?: string }) {
@@ -546,6 +704,7 @@ export default function Partners() {
   const [navOpen, setNavOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [currentPage, setCurrentPage] = useState(1);
+  const stats = useOrderlyStats();
 
   const filtered = activeCategory === "All"
     ? PARTNERS
@@ -572,52 +731,104 @@ export default function Partners() {
       )}
 
       {/* ── Hero ── */}
-      <motion.div
-        variants={heroContainer}
-        initial={false}
-        animate="visible"
-        style={{
-          maxWidth: "860px",
-          margin: "0 auto",
-          padding: isMobile ? "52px 20px 48px" : isTablet ? "60px 40px 56px" : "80px 24px 72px",
-          textAlign: "center",
-        }}
-      >
-        {/* Heading */}
-        <motion.h1
-          variants={heroChild}
-          style={{
-            fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-            fontVariationSettings: "'wght' 700",
-            fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-            fontSize: isMobile ? "38px" : isTablet ? "48px" : "80px",
-            color: "white",
-            margin: "0 0 24px",
-            lineHeight: 1.0,
-            letterSpacing: "-0.02em",
-          }}
-        >
-          Explore Orderly's<br />Unified Ecosystem
-        </motion.h1>
+      <div style={{ position: "relative", width: "100%", overflow: "hidden" }}>
 
-        {/* Subtitle */}
-        <motion.p
-          variants={heroChild}
+        {/* Desktop + Tablet + Mobile background decorations */}
+        <>
+          {/* Left group PNG */}
+          <img
+            src="/images/left.png"
+            alt=""
+            style={{
+              position: "absolute",
+              left: isMobile
+                ? "-25px"
+                : isTablet
+                ? "calc(10px + (100vw - 1024px) * 0.08)"
+                : "calc(70px + (100vw - 1440px) * 0.3)",
+              top: isMobile ? "10px" : isTablet ? "20px" : 0,
+              width: isMobile
+                ? "clamp(90px, 25vw, 120px)"
+                : isTablet
+                ? "clamp(130px, 22vw, 220px)"
+                : "clamp(240px, 26.4vw, 380px)",
+              pointerEvents: "none",
+              zIndex: 0,
+            }}
+          />
+
+          {/* Right group PNG */}
+          <img
+            src="/images/right.png"
+            alt=""
+            style={{
+              position: "absolute",
+              right: isMobile
+                ? "-25px"
+                : isTablet
+                ? "calc(10px + (100vw - 1024px) * 0.08)"
+                : "calc(40px + (100vw - 1440px) * 0.3)",
+              top: isMobile ? "10px" : isTablet ? "20px" : 0,
+              width: isMobile
+                ? "clamp(90px, 25vw, 120px)"
+                : isTablet
+                ? "clamp(130px, 22vw, 220px)"
+                : "clamp(240px, 26.4vw, 380px)",
+              pointerEvents: "none",
+              zIndex: 0,
+            }}
+          />
+        </>
+
+        <motion.div
+          variants={heroContainer}
+          initial={false}
+          animate="visible"
           style={{
-            fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-            fontVariationSettings: "'wght' 400",
-            fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-            fontSize: isMobile ? "16px" : isTablet ? "13px" : "22px",
-            color: "rgba(255,255,255,0.6)",
+            position: "relative",
+            zIndex: 1,
+            maxWidth: "860px",
             margin: "0 auto",
-            lineHeight: 1.55,
-            maxWidth: "600px",
+            padding: isMobile ? "52px 20px 48px" : isTablet ? "60px 40px 56px" : "80px 24px 72px",
+            textAlign: "center",
           }}
         >
-          An expansive ecosystem, featuring CEXs, DEXs, aggregators, wallets,
-          and more, all powered by Orderly's permissionless liquidity layer.
-        </motion.p>
-      </motion.div>
+          {/* Heading */}
+          <motion.h1
+            variants={heroChild}
+            style={{
+              fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+              fontVariationSettings: "'wght' 700",
+              fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
+              fontSize: isMobile ? "38px" : isTablet ? "48px" : "80px",
+              color: "white",
+              margin: "0 0 24px",
+              lineHeight: 1.0,
+              letterSpacing: "-0.02em",
+            }}
+          >
+            Explore Orderly's<br />Unified Ecosystem
+          </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            variants={heroChild}
+            style={{
+              fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+              fontVariationSettings: "'wght' 400",
+              fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
+              fontSize: isMobile ? "16px" : isTablet ? "13px" : "22px",
+              color: "rgba(255,255,255,0.6)",
+              margin: "0 auto",
+              lineHeight: 1.55,
+              maxWidth: "600px",
+            }}
+          >
+            An expansive ecosystem, featuring CEXs, DEXs, aggregators, wallets,
+            and more, all powered by Orderly's permissionless liquidity layer.
+          </motion.p>
+        </motion.div>
+      </div>
 
       {/* ── Stats ── */}
       <motion.div
@@ -625,7 +836,7 @@ export default function Partners() {
         initial={false}
         animate="visible"
         style={{
-          maxWidth: isMobile ? "calc(100% - 40px)" : isTablet ? "min(800px, calc(100% - 160px))" : "min(1000px, 87%)",
+          maxWidth: isMobile ? "calc(100% - 40px)" : isTablet ? "min(800px, calc(100% - 80px))" : "min(1000px, 87%)",
           margin: "0 auto",
           marginBottom: isMobile ? "48px" : "64px",
         }}
@@ -634,51 +845,122 @@ export default function Partners() {
           style={{
             background: "#6700CE",
             borderRadius: "30px",
-            padding: isMobile ? "32px 24px" : "44px 64px",
+            padding: isMobile ? "32px 24px" : isTablet ? "36px 32px" : "44px 64px",
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
             gap: "0",
           }}
         >
-          {STATS.map((stat, i) => (
-            <div
-              key={i}
+          {/* Traders */}
+          <div
+            style={{
+              flex: 1,
+              textAlign: "center",
+              borderRight: !isMobile ? "1px solid rgba(255,255,255,0.2)" : "none",
+            }}
+          >
+            <p
               style={{
-                flex: 1,
-                textAlign: "center",
-                borderRight: !isMobile && i < STATS.length - 1 ? "1px solid rgba(255,255,255,0.2)" : "none",
+                fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+                fontVariationSettings: "'wght' 600",
+                fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
+                fontSize: isMobile ? "24px" : isTablet ? "36px" : "56px",
+                color: "white",
+                margin: "0 0 8px",
+                lineHeight: 1,
+                letterSpacing: "-0.02em",
               }}
             >
-              <p
-                style={{
-                  fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-                  fontVariationSettings: "'wght' 700",
-                  fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-                  fontSize: isMobile ? "24px" : isTablet ? "36px" : "56px",
-                  color: "white",
-                  margin: "0 0 8px",
-                  lineHeight: 1,
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {stat.value}
-              </p>
-              <p
-                style={{
-                  fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-                  fontVariationSettings: "'wght' 400",
-                  fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1",
-                  fontSize: isMobile ? "11px" : isTablet ? "14px" : "18px",
-                  color: "rgba(255,255,255,0.7)",
-                  margin: 0,
-                  letterSpacing: "0.01em",
-                }}
-              >
-                {stat.label}
-              </p>
-            </div>
-          ))}
+              {TRADERS_COUNT}
+            </p>
+            <p
+              style={{
+                fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+                fontVariationSettings: "'wght' 400",
+                fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1",
+                fontSize: isMobile ? "11px" : isTablet ? "14px" : "18px",
+                color: "rgba(255,255,255,0.7)",
+                margin: 0,
+                letterSpacing: "0.01em",
+              }}
+            >
+              Traders
+            </p>
+          </div>
+
+          {/* Total Trading Volume */}
+          <div
+            style={{
+              flex: 1,
+              textAlign: "center",
+              borderRight: !isMobile ? "1px solid rgba(255,255,255,0.2)" : "none",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+                fontVariationSettings: "'wght' 600",
+                fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
+                fontSize: isMobile ? "24px" : isTablet ? "36px" : "56px",
+                color: "white",
+                margin: "0 0 8px",
+                lineHeight: 1,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {formatLargeNumber(stats.totalVolume)}
+            </p>
+            <p
+              style={{
+                fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+                fontVariationSettings: "'wght' 400",
+                fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1",
+                fontSize: isMobile ? "11px" : isTablet ? "14px" : "18px",
+                color: "rgba(255,255,255,0.7)",
+                margin: 0,
+                letterSpacing: "0.01em",
+              }}
+            >
+              Total Trading Volume
+            </p>
+          </div>
+
+          {/* Supported chains - from API */}
+          <div
+            style={{
+              flex: 1,
+              textAlign: "center",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+                fontVariationSettings: "'wght' 600",
+                fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
+                fontSize: isMobile ? "24px" : isTablet ? "36px" : "56px",
+                color: "white",
+                margin: "0 0 8px",
+                lineHeight: 1,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {stats.chains}
+            </p>
+            <p
+              style={{
+                fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+                fontVariationSettings: "'wght' 400",
+                fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1",
+                fontSize: isMobile ? "11px" : isTablet ? "14px" : "18px",
+                color: "rgba(255,255,255,0.7)",
+                margin: 0,
+                letterSpacing: "0.01em",
+              }}
+            >
+              Supported chains
+            </p>
+          </div>
         </div>
       </motion.div>
 
@@ -714,17 +996,15 @@ export default function Partners() {
               }}
             >
               {cat}
-              {cat !== "All" && (
-                <span
-                  style={{
-                    marginLeft: "8px",
-                    fontSize: "11px",
-                    opacity: 0.75,
-                  }}
-                >
-                  {PARTNERS.filter((p) => p.category === cat).length}
-                </span>
-              )}
+              <span
+                style={{
+                  marginLeft: "8px",
+                  fontSize: "11px",
+                  opacity: 0.75,
+                }}
+              >
+                {cat === "All" ? PARTNERS.length : PARTNERS.filter((p) => p.category === cat).length}
+              </span>
             </button>
           );
         })}

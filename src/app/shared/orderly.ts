@@ -1,6 +1,6 @@
 /**
  * Orderly – single source of truth for shared constants & utilities.
- * Both the desktop (Frame1618872018) and the mobile (MobileHomePage)
+ * Both the desktop DesktopHomePage and the mobile (MobileHomePage)
  * import from here so data is never duplicated.
  */
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, memo, useCallback } from "react";
+import posthog from 'posthog-js';
 import MacbookVideo from "@/app/components/MacbookVideo";
 // Lightweight inline check icon (replaces heavy MUI CheckIcon)
 const CheckSvg = () => (
@@ -832,7 +833,7 @@ function Frame23() {
 
 function BuildButtonContainer() {
   return (
-    <a href="https://dex.orderly.network/" target="_blank" rel="noopener noreferrer" className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity" data-name="Build Button Container">
+    <a href="https://dex.orderly.network/" target="_blank" rel="noopener noreferrer" className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity" data-name="Build Button Container" onClick={() => { posthog.capture('homepage_card_clicked', { card_name: 'dex', source_page: 'homepage', device_layout: 'mobile', section: 'on_orderly' }) }}>
       <p className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap" style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0" }}>
         Orderly One
       </p>
@@ -868,7 +869,7 @@ function Container6() {
 
 function BuildButtonContainer1() {
   return (
-    <a href="https://orderly.network/docs/build-on-omnichain/evm-api/introduction" target="_blank" rel="noopener noreferrer" className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity" data-name="Build Button Container">
+    <a href="https://orderly.network/docs/build-on-omnichain/evm-api/introduction" target="_blank" rel="noopener noreferrer" className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity" data-name="Build Button Container" onClick={() => { posthog.capture('homepage_card_clicked', { card_name: 'build', source_page: 'homepage', device_layout: 'mobile', section: 'on_orderly' }) }}>
       <p className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap" style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0" }}>{`SDK & API`}</p>
       <div className="flex items-center justify-center relative shrink-0">
         <div className="-scale-y-100 flex-none rotate-180">
@@ -898,7 +899,7 @@ function Container7() {
 
 function BuildButtonContainerVaults() {
   return (
-    <a href="http://app.orderly.network/vaults" target="_blank" rel="noopener noreferrer" className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity" data-name="Build Button Container">
+    <a href="http://app.orderly.network/vaults" target="_blank" rel="noopener noreferrer" className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity" data-name="Build Button Container" onClick={() => { posthog.capture('homepage_card_clicked', { card_name: 'vaults', source_page: 'homepage', device_layout: 'mobile', section: 'on_orderly' }) }}>
       <p className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap" style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0" }}>Vaults</p>
       <div className="flex items-center justify-center relative shrink-0">
         <div className="-scale-y-100 flex-none rotate-180">
@@ -928,7 +929,7 @@ function ContainerVaults() {
 
 function BuildButtonContainer2() {
   return (
-    <a href="https://orderly.network/listing/" target="_blank" rel="noopener noreferrer" className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity" data-name="Build Button Container">
+    <a href="https://orderly.network/listing/" target="_blank" rel="noopener noreferrer" className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity" data-name="Build Button Container" onClick={() => { posthog.capture('homepage_card_clicked', { card_name: 'listings', source_page: 'homepage', device_layout: 'mobile', section: 'on_orderly' }) }}>
       <p className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap" style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0" }}>
         Listings
       </p>
@@ -960,7 +961,7 @@ function Container8() {
 
 function BuildButtonContainer3() {
   return (
-    <a href="https://dex.orderly.network/" target="_blank" rel="noopener noreferrer" className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity" data-name="Build Button Container">
+    <a href="https://dex.orderly.network/" target="_blank" rel="noopener noreferrer" className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity" data-name="Build Button Container" onClick={() => { posthog.capture('homepage_card_clicked', { card_name: 'start_building', source_page: 'homepage', device_layout: 'mobile', section: 'on_orderly' }) }}>
       <p className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap" style={{ fontFeatureSettings: "'liga' 0" }}>
         Start Building
       </p>
@@ -1134,7 +1135,7 @@ function MobileAIAgentCard() {
 
       {/* URL box */}
       <div className="flex items-center rounded-[10px] px-[14px] py-[12px]" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-        <a href={url} target="_blank" rel="noopener noreferrer" className="flex-1 font-['DM_Mono:Medium',sans-serif] text-[14px] text-white/70 no-underline">
+        <a href={url} target="_blank" rel="noopener noreferrer" className="flex-1 font-['DM_Mono:Medium',sans-serif] text-[14px] text-white/70 no-underline" onClick={() => { posthog.capture('agentic_quickstart_clicked', { button_name: 'skill_md', source_page: 'homepage', device_layout: 'mobile', section: 'agentic_quick_start' }) }}>
           orderly.network/skill.md
         </a>
         <MobileCopyButton text={url} />
@@ -1426,7 +1427,7 @@ function QuickStartSection() {
         {/* MCP Server / Skills tabs */}
         <div className="flex items-center gap-[8px]">
           <button
-            onClick={(e) => { e.stopPropagation(); setDevTab("mcp-server"); }}
+            onClick={(e) => { e.stopPropagation(); setDevTab("mcp-server"); posthog.capture('agentic_quickstart_clicked', { button_name: 'mcp_server_tab', source_page: 'homepage', device_layout: 'mobile', section: 'agentic_quick_start' }); }}
             className={`font-['Atyp_BL:Medium',sans-serif] text-[14px] px-[14px] py-[6px] rounded-[8px] transition-all ${
               devTab === "mcp-server" ? "bg-[#7c3aed] text-white" : "text-[#9ca3af]"
             }`}
@@ -1435,7 +1436,7 @@ function QuickStartSection() {
             MCP Server
           </button>
           <button
-            onClick={(e) => { e.stopPropagation(); setDevTab("skills"); }}
+            onClick={(e) => { e.stopPropagation(); setDevTab("skills"); posthog.capture('agentic_quickstart_clicked', { button_name: 'skills_tab', source_page: 'homepage', device_layout: 'mobile', section: 'agentic_quick_start' }); }}
             className={`font-['Atyp_BL:Medium',sans-serif] text-[14px] px-[14px] py-[6px] rounded-[8px] transition-all ${
               devTab === "skills" ? "bg-[#7c3aed] text-white" : "text-[#9ca3af]"
             }`}

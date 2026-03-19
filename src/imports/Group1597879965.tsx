@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import posthog from 'posthog-js';
 import svgPaths from "./svg-t3rwygkbpy";
 
 // ── Shared ───────────────────────────────────────────────────────────────────
@@ -167,7 +168,7 @@ function SkillsContent({ compact = false }: { compact?: boolean }) {
 
 type DevTab = "mcp-server" | "skills";
 
-export default function DeveloperCard({ variant = "card", compact = false }: { variant?: "card" | "bare"; compact?: boolean }) {
+export default function DeveloperCard({ variant = "card", compact = false, deviceLayout = "desktop" }: { variant?: "card" | "bare"; compact?: boolean; deviceLayout?: "desktop" | "tablet" }) {
   const [devTab, setDevTab] = useState<DevTab>("mcp-server");
 
   const outerClass = variant === "card"
@@ -196,7 +197,15 @@ export default function DeveloperCard({ variant = "card", compact = false }: { v
       {/* MCP Server / Skills tabs */}
       <div className={`flex items-center ${compact ? "gap-[6px]" : "gap-[8px]"}`}>
         <button
-          onClick={() => setDevTab("mcp-server")}
+          onClick={() => {
+            setDevTab("mcp-server");
+            posthog.capture('agentic_quickstart_clicked', {
+              button_name: 'mcp_server_tab',
+              source_page: 'homepage',
+              device_layout: deviceLayout,
+              section: 'agentic_quick_start',
+            });
+          }}
           className={`${atypMedium} ${compact ? "text-[13px] px-[12px] py-[6px]" : "text-[16px] px-[16px] py-[8px]"} rounded-[8px] transition-all ${
             devTab === "mcp-server"
               ? "bg-[#7c3aed] text-white"
@@ -207,7 +216,15 @@ export default function DeveloperCard({ variant = "card", compact = false }: { v
           MCP Server
         </button>
         <button
-          onClick={() => setDevTab("skills")}
+          onClick={() => {
+            setDevTab("skills");
+            posthog.capture('agentic_quickstart_clicked', {
+              button_name: 'skills_tab',
+              source_page: 'homepage',
+              device_layout: deviceLayout,
+              section: 'agentic_quick_start',
+            });
+          }}
           className={`${atypMedium} ${compact ? "text-[13px] px-[12px] py-[6px]" : "text-[16px] px-[16px] py-[8px]"} rounded-[8px] transition-all ${
             devTab === "skills"
               ? "bg-[#7c3aed] text-white"
