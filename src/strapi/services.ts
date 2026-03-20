@@ -196,7 +196,8 @@ export async function getAllPageArticles(options?: GetArticlesOptions) {
     articles = [...articles, ...nextPageData?.data];
   }
 
-  return articles;
+  // filter out articles with no slug
+  return articles.filter((article) => !!article.attributes.slug);
 }
 
 export function getAllPageArticleDetails(options?: GetArticlesOptions) {
