@@ -482,7 +482,7 @@ function CopiedToast({ onDone }: { onDone: () => void }) {
 
 export { MobileNavDrawer };
 
-export function MobileHomePage({ onMenuClick }: { onMenuClick?: () => void } = {}) {
+export function MobileHomePage({ onMenuClick, hideNav, hideFooter }: { onMenuClick?: () => void; hideNav?: boolean; hideFooter?: boolean } = {}) {
   const router = useRouter();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -826,7 +826,7 @@ export function MobileHomePage({ onMenuClick }: { onMenuClick?: () => void } = {
         touchAction: "manipulation",
       }}
     >
-      <Frame40 onMenuClick={onMenuClick} />
+      <Frame40 onMenuClick={onMenuClick} hideNav={hideNav} hideFooter={hideFooter} />
 
       {/* Nav drawer is rendered in Home.tsx outside the motion.div stacking context */}
 

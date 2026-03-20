@@ -447,7 +447,7 @@ function TabletHero({
         {/* Stats card — overlaps MacBook bottom ~24px, matching desktop
             (desktop overlap: 1325px MacBook bottom − 1276px stats top = ~50px) */}
         <div className="relative z-10 -mt-[24px] pb-[32px] flex justify-center">
-          <div className="w-[85%] max-w-[680px]">
+          <div className="w-[85%] max-w-[820px]">
             <TabletStatsSection />
           </div>
         </div>

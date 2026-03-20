@@ -55,7 +55,8 @@ function Menu({ onClick }: { onClick?: () => void }) {
   );
 }
 
-function Frame3({ onMenuClick }: { onMenuClick?: () => void }) {
+function Frame3({ onMenuClick, hideNav }: { onMenuClick?: () => void; hideNav?: boolean }) {
+  if (hideNav) return null;
   return (
     <div className="absolute content-stretch flex gap-[10px] h-[72px] items-center left-0 px-[24px] top-0 w-[375px]">
       <Brandmark />
@@ -2436,10 +2437,9 @@ function Frame7() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="no-underline capitalize px-[2px] py-[10px]"
+              className="no-underline capitalize px-[2px] py-[10px] font-['Atyp_BL:Medium',sans-serif] not-italic"
               style={{
                 color: "#9c75ff",
-                fontFamily: "'Atyp BL Medium', sans-serif",
                 fontSize: "14px",
                 fontFeatureSettings: "'ss03','ss02','ss05','ss06'",
                 letterSpacing: "0.14px",
@@ -2521,10 +2521,9 @@ function Frame9() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="no-underline capitalize px-[2px] py-[10px]"
+              className="no-underline capitalize px-[2px] py-[10px] font-['Atyp_BL:Medium',sans-serif] not-italic"
               style={{
                 color: "#9c75ff",
-                fontFamily: "'Atyp BL Medium', sans-serif",
                 fontSize: "14px",
                 fontFeatureSettings: "'ss03','ss02','ss05','ss06'",
                 letterSpacing: "0.14px",
@@ -2608,10 +2607,9 @@ function Frame10() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="no-underline capitalize px-[2px] py-[10px]"
+              className="no-underline capitalize px-[2px] py-[10px] font-['Atyp_BL:Medium',sans-serif] not-italic"
               style={{
                 color: "#9c75ff",
-                fontFamily: "'Atyp BL Medium', sans-serif",
                 fontSize: "14px",
                 fontFeatureSettings: "'ss03','ss02','ss05','ss06'",
                 letterSpacing: "0.14px",
@@ -2692,10 +2690,9 @@ function Frame11() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="no-underline capitalize px-[2px] py-[10px]"
+              className="no-underline capitalize px-[2px] py-[10px] font-['Atyp_BL:Medium',sans-serif] not-italic"
               style={{
                 color: "#9c75ff",
-                fontFamily: "'Atyp BL Medium', sans-serif",
                 fontSize: "14px",
                 fontFeatureSettings: "'ss03','ss02','ss05','ss06'",
                 letterSpacing: "0.14px",
@@ -2933,14 +2930,14 @@ function Frame50() {
 
 function Frame43() {
   return (
-    <div className="content-stretch flex flex-col gap-[20px] items-start justify-center relative shrink-0 w-[335px] pb-[32px]">
+    <div className="content-stretch flex flex-col gap-[20px] items-start justify-center relative w-full pb-[32px]">
       <Frame26 />
       <Frame50 />
     </div>
   );
 }
 
-function Frame41() {
+function Frame41({ hideFooter }: { hideFooter?: boolean }) {
   return (
     <div className="absolute content-stretch flex flex-col gap-[46px] items-start left-[20px] top-[82px] w-[335px]">
       <Frame46 />
@@ -2950,16 +2947,16 @@ function Frame41() {
       <QuickStartSection />
       <TrustedSection />
       <Frame1 />
-      <Frame43 />
+      {!hideFooter && <Frame43 />}
     </div>
   );
 }
 
-const Frame40 = memo(function Frame40({ onMenuClick }: { onMenuClick?: () => void }) {
+const Frame40 = memo(function Frame40({ onMenuClick, hideNav, hideFooter }: { onMenuClick?: () => void; hideNav?: boolean; hideFooter?: boolean }) {
   return (
     <div className="bg-black relative size-full">
-      <Frame3 onMenuClick={onMenuClick} />
-      <Frame41 />
+      <Frame3 onMenuClick={onMenuClick} hideNav={hideNav} />
+      <Frame41 hideFooter={hideFooter} />
     </div>
   );
 });
@@ -2967,4 +2964,4 @@ const Frame40 = memo(function Frame40({ onMenuClick }: { onMenuClick?: () => voi
 export default Frame40;
 
 // ─── Named exports for reuse in other pages (e.g. FAQ mobile footer) ──────────
-export { Frame19 as MobileAIAccessCard, Frame26 as MobileNewsletterCard, Frame50 as MobileFooterCard };
+export { Frame19 as MobileAIAccessCard, Frame26 as MobileNewsletterCard, Frame50 as MobileFooterCard, Frame43 as MobileFullFooter };

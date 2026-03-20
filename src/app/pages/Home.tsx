@@ -2,9 +2,12 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { AnimatePresence } from "motion/react";
+import Link from "next/link";
 import Frame7 from "../../imports/DesktopHomePage";
 import { MobileHomePage, MobileNavDrawer } from "../components/MobileHomePage";
+import { MobileFullFooter } from "../../imports/Frame1618872068-142-633";
 import { TabletHomePage } from "../components/TabletHomePage";
+import svgPaths from "../../imports/svg-4hybjba00c";
 
 // Desktop / tablet Figma canvas: 1440 × 6500 px
 const DESIGN_WIDTH = 1440;
@@ -105,6 +108,38 @@ function ScaledFrame({
   );
 }
 
+function MobileFixedNav({ onMenuClick }: { onMenuClick: () => void }) {
+  return (
+    <div style={{
+      position: "fixed",
+      top: 0, left: 0, right: 0,
+      zIndex: 100,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      padding: "20px 24px",
+      background: "#000",
+      height: 72,
+    }}>
+      <Link href="/" style={{ display: "block", width: 32, height: 32, position: "relative" }}>
+        <svg style={{ position: "absolute", width: "100%", height: "100%" }} fill="none" preserveAspectRatio="none" viewBox="0 0 31.9999 31.9608">
+          <path clipRule="evenodd" d={svgPaths.p2fe0400} fill="white" fillRule="evenodd" />
+          <path clipRule="evenodd" d={svgPaths.p2f88ca00} fill="white" fillRule="evenodd" />
+          <path clipRule="evenodd" d={svgPaths.p22c01780} fill="white" fillRule="evenodd" />
+          <path clipRule="evenodd" d={svgPaths.p527fe00} fill="white" fillRule="evenodd" />
+        </svg>
+      </Link>
+      <button onClick={onMenuClick} style={{ background: "transparent", border: 0, cursor: "pointer", padding: "4px" }}>
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="9" width="24" height="2.5" rx="1.25" fill="white" />
+          <rect x="4" y="15" width="24" height="2.5" rx="1.25" fill="white" />
+          <rect x="4" y="21" width="24" height="2.5" rx="1.25" fill="white" />
+        </svg>
+      </button>
+    </div>
+  );
+}
+
 type Viewport = "mobile" | "tablet" | "desktop";
 
 export default function Home() {
@@ -130,9 +165,15 @@ export default function Home() {
   if (viewport === "mobile") {
     return (
       <div style={{ width: "100vw", overflowX: "clip", background: "#000" }}>
-        <ScaledFrame designWidth={MOBILE_DESIGN_WIDTH} autoHeight>
-          <MobileHomePage onMenuClick={handleOpenNav} />
-        </ScaledFrame>
+        <MobileFixedNav onMenuClick={handleOpenNav} />
+        <div style={{ paddingTop: 72 }}>
+          <ScaledFrame designWidth={MOBILE_DESIGN_WIDTH} autoHeight>
+            <MobileHomePage onMenuClick={handleOpenNav} hideNav hideFooter />
+          </ScaledFrame>
+          <div style={{ padding: "0 20px 32px", marginTop: "46px", boxSizing: "border-box", width: "100%" }}>
+            <MobileFullFooter />
+          </div>
+        </div>
         {/* Nav drawer lives outside ScaledFrame so position:fixed works correctly */}
         <AnimatePresence>
           {navOpen && (

@@ -69,27 +69,32 @@ function MobileTopBar({ onMenuClick }: { onMenuClick: () => void }) {
   return (
     <div
       style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "18px 20px",
+        padding: "20px 24px",
         background: "#000",
-        borderBottom: "1px solid rgba(255,255,255,0.07)",
+        height: 72,
       }}
     >
-      <div style={{ width: 28, height: 28, position: "relative" }}>
+      <a href="/" style={{ display: "block", width: 32, height: 32, position: "relative" }}>
         <svg style={{ position: "absolute", width: "100%", height: "100%" }} fill="none" preserveAspectRatio="none" viewBox="0 0 31.9999 31.9608">
           <path clipRule="evenodd" d={svgPathsMobile.p2fe0400} fill="white" fillRule="evenodd" />
           <path clipRule="evenodd" d={svgPathsMobile.p2f88ca00} fill="white" fillRule="evenodd" />
           <path clipRule="evenodd" d={svgPathsMobile.p22c01780} fill="white" fillRule="evenodd" />
           <path clipRule="evenodd" d={svgPathsMobile.p527fe00} fill="white" fillRule="evenodd" />
         </svg>
-      </div>
-      <button onClick={onMenuClick} style={{ background: "transparent", border: 0, cursor: "pointer", padding: "10px", marginRight: "-10px" }}>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <rect x="4" y="6" width="16" height="2" rx="1" fill="white" />
-          <rect x="4" y="11" width="16" height="2" rx="1" fill="white" />
-          <rect x="4" y="16" width="16" height="2" rx="1" fill="white" />
+      </a>
+      <button onClick={onMenuClick} style={{ background: "transparent", border: 0, cursor: "pointer", padding: "4px" }}>
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="9" width="24" height="2.5" rx="1.25" fill="white" />
+          <rect x="4" y="15" width="24" height="2.5" rx="1.25" fill="white" />
+          <rect x="4" y="21" width="24" height="2.5" rx="1.25" fill="white" />
         </svg>
       </button>
     </div>
@@ -717,7 +722,7 @@ export default function Partners() {
   );
 
   return (
-    <div style={{ background: "#000", minHeight: "100vh", width: "100%" }}>
+    <div style={{ background: "#000", minHeight: "100vh", width: "100%", paddingTop: isMobile ? "64px" : 0 }}>
 
       {/* ── Nav ── */}
       {isMobile ? (
