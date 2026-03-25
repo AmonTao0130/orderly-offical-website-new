@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import posthog from 'posthog-js'
+import posthog from "posthog-js";
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
@@ -30,7 +30,6 @@ const CheckSvg = () => (
     />
   </svg>
 );
-
 
 // ─── SVG asset imports ────────────────────────────────────────────────────────
 const ethBadgeSrc = "/images/svg/EthBadge.svg";
@@ -1070,14 +1069,20 @@ function DropdownPanel({
               {item.label}
             </p>
           );
-          const trackClick = () => posthog.capture('header_nav_clicked', {
-            tab_name: `${groupKey}_${labelToKey(item.label)}`,
-            source_page: 'homepage',
-            device_layout: 'desktop',
-            section: 'header',
-          });
+          const trackClick = () =>
+            posthog.capture("header_nav_clicked", {
+              tab_name: `${groupKey}_${labelToKey(item.label)}`,
+              source_page: "homepage",
+              device_layout: "desktop",
+              section: "header",
+            });
           return isInternal ? (
-            <Link key={item.label} href={item.href} className={linkClass} onClick={trackClick}>
+            <Link
+              key={item.label}
+              href={item.href}
+              className={linkClass}
+              onClick={trackClick}
+            >
               {inner}
             </Link>
           ) : (
@@ -1280,12 +1285,14 @@ function MenuCell3() {
       rel="noopener noreferrer"
       className="content-stretch flex h-[50px] items-baseline pb-[10px] pt-[16px] relative shrink-0 no-underline"
       data-name="Menu cell"
-      onClick={() => posthog.capture('header_nav_clicked', {
-        tab_name: 'docs',
-        source_page: 'homepage',
-        device_layout: 'desktop',
-        section: 'header',
-      })}
+      onClick={() =>
+        posthog.capture("header_nav_clicked", {
+          tab_name: "docs",
+          source_page: "homepage",
+          device_layout: "desktop",
+          section: "header",
+        })
+      }
     >
       <HeaderMenuItem3 />
     </a>
@@ -1308,11 +1315,11 @@ function HeaderMenu() {
         className="content-stretch flex h-[40px] items-center justify-center px-[20px] py-[12px] relative rounded-[46px] shrink-0 no-underline hover:opacity-90 transition-opacity"
         data-name="Button"
         onClick={() => {
-          posthog.capture('homepage_cta_clicked', {
-            cta_name: 'launch_now',
-            source_page: 'homepage',
-            device_layout: 'desktop',
-          })
+          posthog.capture("homepage_cta_clicked", {
+            cta_name: "launch_now",
+            source_page: "homepage",
+            device_layout: "desktop",
+          });
         }}
         style={{
           backgroundImage:
@@ -1388,11 +1395,11 @@ function HeroButtonsContainer({
         className="bg-[#6700ce] content-stretch flex h-[52px] items-center justify-center px-[24px] py-[12px] relative rounded-[24px] shrink-0 no-underline hover:opacity-90 transition-opacity"
         data-name="build with orderly"
         onClick={() => {
-          posthog.capture('homepage_cta_clicked', {
-            cta_name: 'start_building',
-            source_page: 'homepage',
-            device_layout: 'desktop',
-          })
+          posthog.capture("homepage_cta_clicked", {
+            cta_name: "start_building",
+            source_page: "homepage",
+            device_layout: "desktop",
+          });
         }}
       >
         <p
@@ -1408,12 +1415,12 @@ function HeroButtonsContainer({
       </a>
       <button
         onClick={() => {
-          posthog.capture('homepage_cta_clicked', {
-            cta_name: 'talk_to_partnerships',
-            source_page: 'homepage',
-            device_layout: 'desktop',
-          })
-          onOpenPartnershipModal()
+          posthog.capture("homepage_cta_clicked", {
+            cta_name: "talk_to_partnerships",
+            source_page: "homepage",
+            device_layout: "desktop",
+          });
+          onOpenPartnershipModal();
         }}
         className="content-stretch flex h-[52px] items-center justify-center pl-[24px] pr-[20px] py-[12px] relative rounded-[24px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
         data-name="Talk to Partnerships"
@@ -1776,7 +1783,7 @@ function ProductInfo1() {
 function DexCard1() {
   return (
     <a
-      href="https://woofi.com/about/"
+      href="https://woofi.com/trade"
       target="_blank"
       rel="noopener noreferrer"
       className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px]"
@@ -2618,11 +2625,11 @@ function Frame4() {
       className="bg-[#6700ce] content-stretch flex h-[52px] items-center justify-center px-[24px] py-[12px] relative rounded-[24px] shrink-0 no-underline hover:opacity-90 transition-opacity"
       data-name="build with orderly"
       onClick={() => {
-        posthog.capture('homepage_cta_clicked', {
-          cta_name: 'start_building',
-          source_page: 'homepage',
-          device_layout: 'desktop',
-        })
+        posthog.capture("homepage_cta_clicked", {
+          cta_name: "start_building",
+          source_page: "homepage",
+          device_layout: "desktop",
+        });
       }}
     >
       <p
@@ -2647,12 +2654,12 @@ function Frame5({
   return (
     <button
       onClick={() => {
-        posthog.capture('homepage_cta_clicked', {
-          cta_name: 'talk_to_partnerships',
-          source_page: 'homepage',
-          device_layout: 'desktop',
-        })
-        onOpenPartnershipModal()
+        posthog.capture("homepage_cta_clicked", {
+          cta_name: "talk_to_partnerships",
+          source_page: "homepage",
+          device_layout: "desktop",
+        });
+        onOpenPartnershipModal();
       }}
       className="content-stretch flex h-[52px] items-center justify-center pl-[24px] pr-[20px] py-[12px] relative rounded-[24px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
       data-name="Talk to Partnerships"
@@ -3902,7 +3909,13 @@ function StatsSection() {
   );
 }
 
-function AIAgentCard({ compact = false, deviceLayout = "desktop" }: { compact?: boolean; deviceLayout?: "desktop" | "tablet" }) {
+function AIAgentCard({
+  compact = false,
+  deviceLayout = "desktop",
+}: {
+  compact?: boolean;
+  deviceLayout?: "desktop" | "tablet";
+}) {
   const [copied, setCopied] = useState(false);
   const url = "https://orderly.network/skill.md";
 
@@ -3925,7 +3938,9 @@ function AIAgentCard({ compact = false, deviceLayout = "desktop" }: { compact?: 
 
   return (
     <div
-      className={`rounded-[16px] flex flex-col flex-1 basis-0 min-w-0 ${compact ? "p-[20px] gap-[16px]" : "p-[32px] gap-[24px]"}`}
+      className={`rounded-[16px] flex flex-col flex-1 basis-0 min-w-0 ${
+        compact ? "p-[20px] gap-[16px]" : "p-[32px] gap-[24px]"
+      }`}
       style={{
         background:
           "linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(0,0,0,0) 100%)",
@@ -3933,7 +3948,9 @@ function AIAgentCard({ compact = false, deviceLayout = "desktop" }: { compact?: 
       }}
     >
       {/* Card header */}
-      <div className={`flex items-center ${compact ? "gap-[10px]" : "gap-[12px]"}`}>
+      <div
+        className={`flex items-center ${compact ? "gap-[10px]" : "gap-[12px]"}`}
+      >
         <img
           src="/images/ai-agent.png"
           alt="AI Agent"
@@ -3941,13 +3958,17 @@ function AIAgentCard({ compact = false, deviceLayout = "desktop" }: { compact?: 
         />
         <div>
           <p
-            className={`font-['Atyp_BL:Bold',sans-serif] text-white leading-[1.3] ${compact ? "text-[18px]" : "text-[24px]"}`}
+            className={`font-['Atyp_BL:Bold',sans-serif] text-white leading-[1.3] ${
+              compact ? "text-[18px]" : "text-[24px]"
+            }`}
             style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
           >
             AI Agent
           </p>
           <p
-            className={`font-['Atyp_BL:Medium',sans-serif] text-[#9C75FF] leading-[1.3] ${compact ? "text-[12px]" : "text-[14px]"}`}
+            className={`font-['Atyp_BL:Medium',sans-serif] text-[#9C75FF] leading-[1.3] ${
+              compact ? "text-[12px]" : "text-[14px]"
+            }`}
             style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
           >
             Autonomous setup
@@ -3957,7 +3978,9 @@ function AIAgentCard({ compact = false, deviceLayout = "desktop" }: { compact?: 
 
       {/* Description */}
       <p
-        className={`font-['Atyp_BL:Medium',sans-serif] text-white leading-[1.5] ${compact ? "text-[14px]" : "text-[18px]"}`}
+        className={`font-['Atyp_BL:Medium',sans-serif] text-white leading-[1.5] ${
+          compact ? "text-[14px]" : "text-[18px]"
+        }`}
         style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
       >
         Read the onboarding skill to understand Orderly&apos;s capabilities:
@@ -3971,19 +3994,25 @@ function AIAgentCard({ compact = false, deviceLayout = "desktop" }: { compact?: 
           border: "1px solid rgba(255,255,255,0.1)",
         }}
       >
-        <div className={`flex-1 ${compact ? "px-[12px] py-[10px]" : "px-[16px] py-[14px]"}`}>
+        <div
+          className={`flex-1 ${
+            compact ? "px-[12px] py-[10px]" : "px-[16px] py-[14px]"
+          }`}
+        >
           <a
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`font-['DM_Mono:Medium',sans-serif] text-white/70 no-underline hover:text-white transition-colors ${compact ? "text-[13px]" : "text-[16px]"}`}
+            className={`font-['DM_Mono:Medium',sans-serif] text-white/70 no-underline hover:text-white transition-colors ${
+              compact ? "text-[13px]" : "text-[16px]"
+            }`}
             onClick={() => {
-              posthog.capture('agentic_quickstart_clicked', {
-                button_name: 'skill_md',
-                source_page: 'homepage',
+              posthog.capture("agentic_quickstart_clicked", {
+                button_name: "skill_md",
+                source_page: "homepage",
                 device_layout: deviceLayout,
-                section: 'agentic_quick_start',
-              })
+                section: "agentic_quick_start",
+              });
             }}
           >
             orderly.network/skill.md
@@ -3992,7 +4021,11 @@ function AIAgentCard({ compact = false, deviceLayout = "desktop" }: { compact?: 
         <button
           onClick={handleCopy}
           title={copied ? "Copied!" : "Copy to clipboard"}
-          className={`bg-black text-white font-['Atyp_BL:Bold',sans-serif] cursor-pointer transition-all hover:bg-[#1a1a1a] ${compact ? "px-[14px] py-[10px] text-[12px]" : "px-[20px] py-[14px] text-[14px]"}`}
+          className={`bg-black text-white font-['Atyp_BL:Bold',sans-serif] cursor-pointer transition-all hover:bg-[#1a1a1a] ${
+            compact
+              ? "px-[14px] py-[10px] text-[12px]"
+              : "px-[20px] py-[14px] text-[14px]"
+          }`}
         >
           {copied ? "Copied!" : "Copy"}
         </button>
@@ -4000,7 +4033,9 @@ function AIAgentCard({ compact = false, deviceLayout = "desktop" }: { compact?: 
 
       {/* Why callout */}
       <p
-        className={`font-['Atyp_BL:Medium',sans-serif] text-[rgba(255,255,255,0.3)] leading-[1.6] ${compact ? "text-[12px]" : "text-[14px]"}`}
+        className={`font-['Atyp_BL:Medium',sans-serif] text-[rgba(255,255,255,0.3)] leading-[1.6] ${
+          compact ? "text-[12px]" : "text-[14px]"
+        }`}
         style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
       >
         <strong className="text-[rgba(255,255,255,0.3)]">Why?</strong> This
@@ -4011,20 +4046,32 @@ function AIAgentCard({ compact = false, deviceLayout = "desktop" }: { compact?: 
   );
 }
 
-function QuickStartHeader({ fluid = false, compact = false }: { fluid?: boolean; compact?: boolean }) {
+function QuickStartHeader({
+  fluid = false,
+  compact = false,
+}: {
+  fluid?: boolean;
+  compact?: boolean;
+}) {
   return (
     <div
-      className={`content-stretch flex flex-col items-start relative shrink-0 ${compact ? "gap-[10px]" : "gap-[16px]"} ${fluid ? "w-full" : "w-[1302px]"}`}
+      className={`content-stretch flex flex-col items-start relative shrink-0 ${
+        compact ? "gap-[10px]" : "gap-[16px]"
+      } ${fluid ? "w-full" : "w-[1302px]"}`}
       data-name="Quick Start Header"
     >
       <p
-        className={`font-['Atyp_BL:Bold',sans-serif] leading-[1.1] text-white ${compact ? "text-[32px]" : "text-[56px]"}`}
+        className={`font-['Atyp_BL:Bold',sans-serif] leading-[1.1] text-white ${
+          compact ? "text-[32px]" : "text-[56px]"
+        }`}
         style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
       >
         Agentic Quick Start
       </p>
       <p
-        className={`font-['Atyp_BL:Medium',sans-serif] leading-[1.4] text-white/70 tracking-[0.504px] ${compact ? "text-[16px]" : "text-[24px]"}`}
+        className={`font-['Atyp_BL:Medium',sans-serif] leading-[1.4] text-white/70 tracking-[0.504px] ${
+          compact ? "text-[16px]" : "text-[24px]"
+        }`}
         style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
       >
         Get started with Orderly&apos;s agentic infrastructure
@@ -4156,7 +4203,13 @@ function QuickStartContent() {
   );
 }
 
-export function QuickStartSection({ layout = "row", deviceLayout = "desktop" }: { layout?: "row" | "col"; deviceLayout?: "desktop" | "tablet" }) {
+export function QuickStartSection({
+  layout = "row",
+  deviceLayout = "desktop",
+}: {
+  layout?: "row" | "col";
+  deviceLayout?: "desktop" | "tablet";
+}) {
   if (layout === "col") {
     return (
       <div
@@ -5379,12 +5432,12 @@ function BuildButtonContainer() {
       className="content-stretch flex gap-[7px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
       data-name="Build Button Container"
       onClick={() => {
-        posthog.capture('homepage_card_clicked', {
-          card_name: 'dex',
-          source_page: 'homepage',
-          device_layout: 'desktop',
-          section: 'on_orderly',
-        })
+        posthog.capture("homepage_card_clicked", {
+          card_name: "dex",
+          source_page: "homepage",
+          device_layout: "desktop",
+          section: "on_orderly",
+        });
       }}
     >
       <p
@@ -5449,12 +5502,12 @@ function BuildButtonContainer1() {
       className="content-stretch flex gap-[7px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
       data-name="Build Button Container"
       onClick={() => {
-        posthog.capture('homepage_card_clicked', {
-          card_name: 'build',
-          source_page: 'homepage',
-          device_layout: 'desktop',
-          section: 'on_orderly',
-        })
+        posthog.capture("homepage_card_clicked", {
+          card_name: "build",
+          source_page: "homepage",
+          device_layout: "desktop",
+          section: "on_orderly",
+        });
       }}
     >
       <p
@@ -5499,17 +5552,17 @@ function BuildButtonContainerVault() {
       className="content-stretch flex gap-[7px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
       data-name="Build Button Container"
       onClick={() => {
-        posthog.capture('homepage_cta_clicked', {
-          cta_name: 'vaults',
-          source_page: 'homepage',
-          device_layout: 'desktop',
-        })
-        posthog.capture('homepage_card_clicked', {
-          card_name: 'vaults',
-          source_page: 'homepage',
-          device_layout: 'desktop',
-          section: 'on_orderly',
-        })
+        posthog.capture("homepage_cta_clicked", {
+          cta_name: "vaults",
+          source_page: "homepage",
+          device_layout: "desktop",
+        });
+        posthog.capture("homepage_card_clicked", {
+          card_name: "vaults",
+          source_page: "homepage",
+          device_layout: "desktop",
+          section: "on_orderly",
+        });
       }}
     >
       <p
@@ -5590,12 +5643,12 @@ function BuildButtonContainer2() {
       className="content-stretch flex gap-[7px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
       data-name="Build Button Container"
       onClick={() => {
-        posthog.capture('homepage_card_clicked', {
-          card_name: 'listings',
-          source_page: 'homepage',
-          device_layout: 'desktop',
-          section: 'on_orderly',
-        })
+        posthog.capture("homepage_card_clicked", {
+          card_name: "listings",
+          source_page: "homepage",
+          device_layout: "desktop",
+          section: "on_orderly",
+        });
       }}
     >
       <p
@@ -5659,12 +5712,12 @@ function BuildButtonContainer3() {
       className="content-stretch flex gap-[7px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
       data-name="Build Button Container"
       onClick={() => {
-        posthog.capture('homepage_card_clicked', {
-          card_name: 'start_building',
-          source_page: 'homepage',
-          device_layout: 'desktop',
-          section: 'on_orderly',
-        })
+        posthog.capture("homepage_card_clicked", {
+          card_name: "start_building",
+          source_page: "homepage",
+          device_layout: "desktop",
+          section: "on_orderly",
+        });
       }}
     >
       <p

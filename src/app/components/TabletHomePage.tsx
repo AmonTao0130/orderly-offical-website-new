@@ -1,6 +1,6 @@
 "use client";
 
-import posthog from 'posthog-js'
+import posthog from "posthog-js";
 
 /**
  * TabletHomePage — desktop-composition hero, compact typography
@@ -81,11 +81,11 @@ export function TabletNav({ onMenuClick }: { onMenuClick: () => void }) {
           rel="noopener noreferrer"
           className="font-['Atyp_BL:Bold',sans-serif] text-[14px] text-[#3f0086] leading-none no-underline whitespace-nowrap rounded-[46px] bg-white px-[18px] py-[8px]"
           onClick={() => {
-            posthog.capture('homepage_cta_clicked', {
-              cta_name: 'launch_now',
-              source_page: 'homepage',
-              device_layout: 'tablet',
-            })
+            posthog.capture("homepage_cta_clicked", {
+              cta_name: "launch_now",
+              source_page: "homepage",
+              device_layout: "tablet",
+            });
           }}
         >
           Launch Now
@@ -231,14 +231,9 @@ function TabletStatsSection() {
  * desktop canvas coordinates (1440 × ~1602 px hero area), so they scale
  * proportionally with the tablet viewport width.
  */
-function TabletHero({
-  onPartnership,
-}: {
-  onPartnership: () => void;
-}) {
+function TabletHero({ onPartnership }: { onPartnership: () => void }) {
   return (
     <div className="relative w-full">
-
       {/* ── Background decorative shapes ──────────────────────────────────── */}
 
       {/* 1. BackgroundVector — dark diamond, top-right, partially off-canvas
@@ -343,7 +338,6 @@ function TabletHero({
 
       {/* ── Main content (z-10, above background shapes) ─────────────────── */}
       <div className="relative z-10">
-
         {/* Hero text + CTA buttons — centered, same copy & hierarchy as desktop */}
         <div className="flex flex-col items-center gap-[20px] px-10 pt-[48px] pb-[40px] text-center">
           {/* Display headline */}
@@ -366,11 +360,11 @@ function TabletHero({
               rel="noopener noreferrer"
               className="bg-[#6700ce] flex h-[44px] items-center justify-center px-[20px] relative rounded-[24px] shrink-0 no-underline hover:opacity-90 transition-opacity"
               onClick={() => {
-                posthog.capture('homepage_cta_clicked', {
-                  cta_name: 'start_building',
-                  source_page: 'homepage',
-                  device_layout: 'tablet',
-                })
+                posthog.capture("homepage_cta_clicked", {
+                  cta_name: "start_building",
+                  source_page: "homepage",
+                  device_layout: "tablet",
+                });
               }}
             >
               <p
@@ -378,7 +372,8 @@ function TabletHero({
                 style={{
                   fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
                   letterSpacing: "0.01em",
-                  fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
+                  fontFeatureSettings:
+                    "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
                 }}
               >
                 Start Building
@@ -386,12 +381,12 @@ function TabletHero({
             </a>
             <button
               onClick={() => {
-                posthog.capture('homepage_cta_clicked', {
-                  cta_name: 'talk_to_partnerships',
-                  source_page: 'homepage',
-                  device_layout: 'tablet',
-                })
-                onPartnership()
+                posthog.capture("homepage_cta_clicked", {
+                  cta_name: "talk_to_partnerships",
+                  source_page: "homepage",
+                  device_layout: "tablet",
+                });
+                onPartnership();
               }}
               className="flex h-[44px] items-center justify-center pl-[20px] pr-[16px] relative rounded-[24px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
             >
@@ -402,7 +397,8 @@ function TabletHero({
               <p
                 className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[12px] text-white"
                 style={{
-                  fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
+                  fontFeatureSettings:
+                    "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
                 }}
               >
                 Talk to Partnerships
@@ -421,7 +417,10 @@ function TabletHero({
         */}
         {/* Outer centering wrapper — constrains MacBook to 75% of viewport width */}
         <div className="flex justify-center w-full">
-          <div className="relative w-[75%]" style={{ aspectRatio: "900.323 / 670.158" }}>
+          <div
+            className="relative w-[75%]"
+            style={{ aspectRatio: "900.323 / 670.158" }}
+          >
             <MacbookVideo
               className="absolute inset-0 w-full h-full"
               canvasWidth={768}
@@ -451,7 +450,6 @@ function TabletHero({
             <TabletStatsSection />
           </div>
         </div>
-
       </div>
     </div>
   );
@@ -497,8 +495,21 @@ function TabletFeaturesSection() {
           className="absolute top-[21px] pointer-events-none overflow-visible"
           style={{ left: "calc(100% / 6)", right: "calc(100% / 6)", height: 2 }}
         >
-          <svg width="100%" height="2" preserveAspectRatio="none" style={{ display: "block" }}>
-            <line x1="0" y1="1" x2="100%" y2="1" stroke="#6700CE" strokeWidth="1" strokeDasharray="3 4" />
+          <svg
+            width="100%"
+            height="2"
+            preserveAspectRatio="none"
+            style={{ display: "block" }}
+          >
+            <line
+              x1="0"
+              y1="1"
+              x2="100%"
+              y2="1"
+              stroke="#6700CE"
+              strokeWidth="1"
+              strokeDasharray="3 4"
+            />
           </svg>
         </div>
         {FEATURE_STEPS.map((step) => (
@@ -622,12 +633,16 @@ function TabletWhySection() {
           <ScrollArrowBtn
             direction="left"
             enabled={canScrollLeft}
-            onClick={() => scrollRef.current?.scrollBy({ left: -260, behavior: "smooth" })}
+            onClick={() =>
+              scrollRef.current?.scrollBy({ left: -260, behavior: "smooth" })
+            }
           />
           <ScrollArrowBtn
             direction="right"
             enabled={canScrollRight}
-            onClick={() => scrollRef.current?.scrollBy({ left: 260, behavior: "smooth" })}
+            onClick={() =>
+              scrollRef.current?.scrollBy({ left: 260, behavior: "smooth" })
+            }
           />
         </div>
       </div>
@@ -681,11 +696,11 @@ const BUILD_CARDS = [
 ] as const;
 
 const CARD_NAME_MAP: Record<string, string> = {
-  'Orderly One': 'dex',
-  'SDK & API': 'build',
-  'Vaults': 'vaults',
-  'Listings': 'listings',
-  'Start Building': 'start_building',
+  "Orderly One": "dex",
+  "SDK & API": "build",
+  Vaults: "vaults",
+  Listings: "listings",
+  "Start Building": "start_building",
 };
 
 /**
@@ -722,12 +737,16 @@ function TabletBuildSection() {
           <ScrollArrowBtn
             direction="left"
             enabled={canScrollLeft}
-            onClick={() => scrollRef.current?.scrollBy({ left: -216, behavior: "smooth" })}
+            onClick={() =>
+              scrollRef.current?.scrollBy({ left: -216, behavior: "smooth" })
+            }
           />
           <ScrollArrowBtn
             direction="right"
             enabled={canScrollRight}
-            onClick={() => scrollRef.current?.scrollBy({ left: 216, behavior: "smooth" })}
+            onClick={() =>
+              scrollRef.current?.scrollBy({ left: 216, behavior: "smooth" })
+            }
           />
         </div>
       </div>
@@ -757,12 +776,12 @@ function TabletBuildSection() {
               rel="noopener noreferrer"
               className="flex items-center gap-[6px] no-underline hover:opacity-80 transition-opacity"
               onClick={() => {
-                posthog.capture('homepage_card_clicked', {
+                posthog.capture("homepage_card_clicked", {
                   card_name: CARD_NAME_MAP[card.linkLabel],
-                  source_page: 'homepage',
-                  device_layout: 'tablet',
-                  section: 'on_orderly',
-                })
+                  source_page: "homepage",
+                  device_layout: "tablet",
+                  section: "on_orderly",
+                });
               }}
             >
               <p
@@ -783,14 +802,42 @@ function TabletBuildSection() {
 // ─── 6. Trusted by builders ───────────────────────────────────────────────────
 
 const TRUSTED_DEX_CARDS = [
-  { name: "WOOFi Pro",     logo: "/images/logos/woofi.png",        href: "https://woofi.com/about/" },
-  { name: "Raydium",       logo: "/images/logos/raydium.png",      href: "https://raydium.io/swap" },
-  { name: "Quickswap",     logo: "/images/logos/quickswap.svg",    href: "https://quickswap.exchange/" },
-  { name: "What.Exchange", logo: "/images/logos/whatexchange.png", href: "https://www.what.exchange/" },
-  { name: "Kodiak",        logo: "/images/logos/kodiak.jpg",       href: "https://perps.kodiak.finance/" },
-  { name: "Aden",          logo: "/images/logos/aden.png",         href: "https://aden.finance/" },
-  { name: "VOOI",          logo: "/images/logos/vooi.png",         href: "https://vooi.io/" },
-  { name: "Perptools",     logo: "/images/logos/perpstool.jpg",    href: "https://app.perptools.ai/" },
+  {
+    name: "WOOFi Pro",
+    logo: "/images/logos/woofi.png",
+    href: "https://woofi.com/trade",
+  },
+  {
+    name: "Raydium",
+    logo: "/images/logos/raydium.png",
+    href: "https://raydium.io/swap",
+  },
+  {
+    name: "Quickswap",
+    logo: "/images/logos/quickswap.svg",
+    href: "https://quickswap.exchange/",
+  },
+  {
+    name: "What.Exchange",
+    logo: "/images/logos/whatexchange.png",
+    href: "https://www.what.exchange/",
+  },
+  {
+    name: "Kodiak",
+    logo: "/images/logos/kodiak.jpg",
+    href: "https://perps.kodiak.finance/",
+  },
+  {
+    name: "Aden",
+    logo: "/images/logos/aden.png",
+    href: "https://aden.finance/",
+  },
+  { name: "VOOI", logo: "/images/logos/vooi.png", href: "https://vooi.io/" },
+  {
+    name: "Perptools",
+    logo: "/images/logos/perpstool.jpg",
+    href: "https://app.perptools.ai/",
+  },
 ] as const;
 
 function TabletTrustedSection() {
@@ -897,28 +944,30 @@ function TabletCTASection({ onPartnership }: { onPartnership: () => void }) {
           rel="noopener noreferrer"
           className="bg-[#6700ce] flex h-[44px] items-center justify-center px-[24px] relative rounded-[24px] no-underline hover:opacity-90 transition-opacity"
           onClick={() => {
-            posthog.capture('homepage_cta_clicked', {
-              cta_name: 'start_building',
-              source_page: 'homepage',
-              device_layout: 'tablet',
-            })
+            posthog.capture("homepage_cta_clicked", {
+              cta_name: "start_building",
+              source_page: "homepage",
+              device_layout: "tablet",
+            });
           }}
         >
           <p
             className="font-['Atyp_BL:Bold',sans-serif] text-[14px] text-white leading-none"
-            style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0" }}
+            style={{
+              fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
+            }}
           >
             Start Building
           </p>
         </a>
         <button
           onClick={() => {
-            posthog.capture('homepage_cta_clicked', {
-              cta_name: 'talk_to_partnerships',
-              source_page: 'homepage',
-              device_layout: 'tablet',
-            })
-            onPartnership()
+            posthog.capture("homepage_cta_clicked", {
+              cta_name: "talk_to_partnerships",
+              source_page: "homepage",
+              device_layout: "tablet",
+            });
+            onPartnership();
           }}
           className="flex h-[44px] items-center justify-center pl-[20px] pr-[16px] relative rounded-[24px] hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
         >
@@ -928,7 +977,9 @@ function TabletCTASection({ onPartnership }: { onPartnership: () => void }) {
           />
           <p
             className="font-['Atyp_BL:Bold',sans-serif] text-[14px] text-white leading-none"
-            style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0" }}
+            style={{
+              fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
+            }}
           >
             Talk to Partnerships
           </p>
@@ -968,7 +1019,8 @@ function TabletNewsletterSection() {
           className="font-['Atyp_BL:Semibold',sans-serif] text-[22px] text-white leading-[1.2]"
           style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
         >
-          Be the first to hear about launches, token listings, and builder updates.
+          Be the first to hear about launches, token listings, and builder
+          updates.
         </p>
       </div>
       {/* Right: purple card */}
@@ -1026,21 +1078,27 @@ const FOOTER_NAV_SECTIONS = [
   {
     heading: "Builders",
     links: [
-      { label: "Orderly One",   href: "https://dex.orderly.network/" },
-      { label: "My DEX",        href: "https://dex.orderly.network/dex" },
-      { label: "Documentation", href: "https://orderly.network/docs/introduction/getting-started/what-is-orderly" },
-      { label: "GitHub",        href: "https://github.com/OrderlyNetwork" },
-      { label: "FAQ",           href: "/faq" },
+      { label: "Orderly One", href: "https://dex.orderly.network/" },
+      { label: "My DEX", href: "https://dex.orderly.network/dex" },
+      {
+        label: "Documentation",
+        href: "https://orderly.network/docs/introduction/getting-started/what-is-orderly",
+      },
+      { label: "GitHub", href: "https://github.com/OrderlyNetwork" },
+      { label: "FAQ", href: "/faq" },
     ],
   },
   {
     heading: "Ecosystem",
     links: [
-      { label: "Partners",     href: "https://orderly.network/partners/" },
-      { label: "Listings",     href: "https://orderly.network/listing/" },
-      { label: "Case Studies", href: "https://dex.orderly.network/case-studies" },
-      { label: "Governance",   href: "https://snapshot.box/#/s:orderlygov.eth" },
-      { label: "Staking",      href: "https://app.orderly.network/staking" },
+      { label: "Partners", href: "https://orderly.network/partners/" },
+      { label: "Listings", href: "https://orderly.network/listing/" },
+      {
+        label: "Case Studies",
+        href: "https://dex.orderly.network/case-studies",
+      },
+      { label: "Governance", href: "https://snapshot.box/#/s:orderlygov.eth" },
+      { label: "Staking", href: "https://app.orderly.network/staking" },
     ],
   },
   {
@@ -1048,8 +1106,8 @@ const FOOTER_NAV_SECTIONS = [
     links: [
       { label: "Live DEXs", href: "https://dex.orderly.network/board/" },
       { label: "Dashboard", href: "https://dashboard.orderly.network" },
-      { label: "Explorer",  href: "https://explorer.orderly.network/" },
-      { label: "Vaults",    href: "http://app.orderly.network/vaults" },
+      { label: "Explorer", href: "https://explorer.orderly.network/" },
+      { label: "Vaults", href: "http://app.orderly.network/vaults" },
     ],
   },
   {
@@ -1057,7 +1115,7 @@ const FOOTER_NAV_SECTIONS = [
     links: [
       { label: "Blog", href: "https://orderly.network/blog/" },
       { label: "Team", href: "https://orderly.network/team/" },
-      { label: "FAQ",  href: "/faq" },
+      { label: "FAQ", href: "/faq" },
     ],
   },
 ] as const;
@@ -1142,7 +1200,9 @@ export function TabletFooter() {
             <div key={section.heading} className="flex flex-col gap-[14px]">
               <p
                 className="font-['Atyp_BL:Bold',sans-serif] text-[13px] text-white leading-none tracking-[0.13px]"
-                style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+                style={{
+                  fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+                }}
               >
                 {section.heading}
               </p>
@@ -1152,9 +1212,15 @@ export function TabletFooter() {
                     key={link.label}
                     href={link.href}
                     target={link.href.startsWith("http") ? "_blank" : undefined}
-                    rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    rel={
+                      link.href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
                     className="font-['Atyp_BL:Medium',sans-serif] text-[13px] text-[#9c75ff] leading-none tracking-[0.13px] no-underline hover:opacity-80 transition-opacity"
-                    style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+                    style={{
+                      fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+                    }}
                   >
                     {link.label}
                   </a>
@@ -1264,11 +1330,13 @@ export function TabletHomePage() {
 
   const handleOpenNav = useCallback(() => setNavOpen(true), []);
   const handleCloseNav = useCallback(() => setNavOpen(false), []);
-  const handleOpenPartnership = useCallback(() => setPartnershipModalOpen(true), []);
+  const handleOpenPartnership = useCallback(
+    () => setPartnershipModalOpen(true),
+    []
+  );
 
   return (
     <div className="w-full bg-black text-white overflow-x-hidden">
-
       {/* 1. Sticky nav */}
       <TabletNav onMenuClick={handleOpenNav} />
 
@@ -1323,7 +1391,11 @@ export function TabletHomePage() {
       {/* ── Nav drawer (reused from mobile) ── */}
       <AnimatePresence>
         {navOpen && (
-          <MobileNavDrawer key="tablet-nav" onClose={handleCloseNav} deviceLayout="tablet" />
+          <MobileNavDrawer
+            key="tablet-nav"
+            onClose={handleCloseNav}
+            deviceLayout="tablet"
+          />
         )}
       </AnimatePresence>
     </div>
