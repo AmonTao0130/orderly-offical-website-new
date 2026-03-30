@@ -206,7 +206,7 @@ const PARTNERS: Partner[] = [
     logo: "logos/woofi.png",
     initials: "WF",
     color: "#1a3a5c",
-    url: "https://woofi.com/trade",
+    url: "https://pro.woofi.com/",
   },
   {
     name: "LogX",
