@@ -1022,12 +1022,13 @@ function ChevronIcon({ open }: { open: boolean }) {
 
 type DropdownItem = { label: string; href: string };
 type CampaignDropdownItem = {
-  title: string;
-  subtitle?: string;
   href: string;
   status: "Ongoing" | "Ended";
-  borderClass: string;
-  backgroundClass: string;
+  backgroundImageSrc: string;
+  backgroundImageClassName: string;
+  borderClassName: string;
+  subtitle?: string;
+  titleVariant: "perps" | "ucc";
 };
 
 function labelToKey(label: string) {
@@ -1155,21 +1156,25 @@ function CampaignsDropdownPanel({
 }) {
   const items: CampaignDropdownItem[] = [
     {
-      title: "I Love Perps Competition",
+      titleVariant: "perps",
       subtitle: "Join to earn USDC reward",
-      href: "https://app.orderly.network/campaigns/perps-competition?utm_source=orderly_website&utm_medium=navbar",
+      href: "https://app.orderly.network/campaigns",
       status: "Ongoing",
-      borderClass: "border-[#48bdff]",
-      backgroundClass:
-        "bg-[linear-gradient(120deg,rgba(72,189,255,0.15),rgba(120,108,255,0.08),rgba(189,0,255,0.15))]",
+      backgroundImageSrc: "/campaigns/header/campaign-bg-2.png",
+      backgroundImageClassName:
+        "absolute h-[160%] left-0 max-w-none top-[-30%] w-full object-cover object-top",
+      borderClassName:
+        "absolute border border-[#48bdff] border-solid inset-0 pointer-events-none rounded-[8px]",
     },
     {
-      title: "Ultimate Crypto Championship",
-      href: "https://app.orderly.network/campaigns/ultimate-crypto-championship?utm_source=orderly_website&utm_medium=navbar",
+      titleVariant: "ucc",
+      href: "https://app.orderly.network/campaigns/ultimate-crypto-championship",
       status: "Ended",
-      borderClass: "border-[rgba(255,255,255,0.06)]",
-      backgroundClass:
-        "bg-[linear-gradient(120deg,rgba(255,255,255,0.08),rgba(156,117,255,0.04),rgba(255,255,255,0.08))]",
+      backgroundImageSrc: "/campaigns/header/campaign-bg-1.png",
+      backgroundImageClassName:
+        "absolute h-[494.34%] left-[0.24%] max-w-none top-[-144.53%] w-full object-cover object-top",
+      borderClassName:
+        "absolute border border-[rgba(255,255,255,0.06)] border-solid inset-0 pointer-events-none rounded-[8px]",
     },
   ];
 
@@ -1183,39 +1188,82 @@ function CampaignsDropdownPanel({
         <div className="flex flex-col gap-[16px] rounded-[8px] bg-[#1e122f] p-[16px] shadow-[4px_4px_24px_0px_rgba(17,6,33,0.8)]">
           {items.map((item) => (
             <a
-              key={item.title}
+              key={item.href}
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={`relative h-[80px] w-full overflow-hidden rounded-[8px] border no-underline transition-opacity hover:opacity-90 ${item.borderClass} ${item.backgroundClass}`}
+              className="relative h-[80px] w-full overflow-hidden rounded-[8px] border no-underline transition-opacity hover:opacity-90"
               onClick={() =>
                 posthog.capture("header_nav_clicked", {
-                  tab_name: `campaigns_${labelToKey(item.title)}`,
+                  tab_name: `campaigns_${item.titleVariant}`,
                   source_page: "homepage",
                   device_layout: "desktop",
                   section: "header",
                 })
               }
             >
-              <div className="flex h-full items-center p-[16px]">
-                <div className="flex min-w-0 flex-1 flex-col gap-[4px]">
-                  <p className="truncate text-[14px] leading-[1.2] text-[rgba(255,255,255,0.98)]">
-                    {item.title}
-                  </p>
-                  {item.subtitle ? (
-                    <p className="text-[12px] leading-[1.2] text-[rgba(255,255,255,0.5)]">
-                      {item.subtitle}
-                    </p>
-                  ) : null}
-                </div>
-                <div
-                  className={`absolute right-0 top-0 rounded-bl-[8px] rounded-tr-[8px] px-[8px] py-[4px] text-[10px] leading-[1.2] text-[rgba(255,255,255,0.98)] ${
-                    item.status === "Ongoing"
-                      ? "bg-[linear-gradient(-89.33deg,#48bdff_0%,#786cff_47.763%,#bd00ff_99.638%)]"
-                      : "bg-[rgba(255,255,255,0.36)]"
-                  }`}
-                >
-                  {item.status}
+              {/* Background image */}
+              <div
+                className="absolute inset-0 opacity-20 overflow-hidden pointer-events-none rounded-[8px]"
+                aria-hidden
+              >
+                <img
+                  alt=""
+                  className={item.backgroundImageClassName}
+                  src={item.backgroundImageSrc}
+                />
+              </div>
+
+              {/* Border layer */}
+              <div aria-hidden className={item.borderClassName} />
+
+              <div className="flex flex-row items-center size-full">
+                <div className="content-stretch flex gap-[8px] items-center p-[16px] relative size-full flex-1">
+                  {item.titleVariant === "perps" ? (
+                    <div className="basis-0 content-stretch flex gap-[16px] grow items-center min-h-px min-w-px relative shrink-0">
+                      <div className="basis-0 content-stretch flex flex-col font-['Atyp_BL_Text:Medium',sans-serif] gap-[4px] grow items-start justify-center leading-[1.2] min-h-px min-w-px not-italic relative shrink-0">
+                        <p className="relative shrink-0 text-[14px] text-[rgba(255,255,255,0.98)] w-full flex items-center gap-1">
+                          I{" "}
+                          <img
+                            src="/campaigns/icons/heart-o.svg"
+                            alt="heart"
+                            className="h-[1em] w-[1em] inline"
+                          />{" "}
+                          Perps Competition
+                        </p>
+                        <p className="relative shrink-0 text-[12px] text-[rgba(255,255,255,0.5)] w-full">
+                          {item.subtitle}
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="basis-0 content-stretch flex gap-[16px] grow items-center min-h-px min-w-px relative shrink-0">
+                      <p className="font-['Atyp_BL_Text:Medium',sans-serif] h-full leading-[1.2] not-italic relative shrink-0 text-[14px] text-[rgba(255,255,255,0.5)] w-[256px]">
+                        Ultimate Crypto Championship
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Status badge */}
+                  {item.status === "Ongoing" ? (
+                    <div
+                      className="absolute content-stretch flex items-center justify-center px-[8px] py-[4px] right-0 rounded-bl-[8px] rounded-tr-[8px] top-0"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(-89.3303deg, rgb(72, 189, 255) 0%, rgb(120, 108, 255) 47.763%, rgb(189, 0, 255) 99.638%)",
+                      }}
+                    >
+                      <p className="font-['Atyp_BL_Text:Medium',sans-serif] leading-[1.2] not-italic relative shrink-0 text-[10px] text-[rgba(255,255,255,0.98)] text-nowrap">
+                        Ongoing
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="absolute bg-[rgba(255,255,255,0.36)] content-stretch flex items-center justify-center px-[8px] py-[4px] right-0 rounded-bl-[8px] rounded-tr-[8px] top-0">
+                      <p className="font-['Atyp_BL_Text:Medium',sans-serif] leading-[1.2] not-italic relative shrink-0 text-[10px] text-[rgba(255,255,255,0.98)] text-nowrap">
+                        Ended
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             </a>
