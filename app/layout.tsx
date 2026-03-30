@@ -1,6 +1,12 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "@/styles/index.css";
 import GoogleAnalytics from "@/app/components/GoogleAnalytics";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 const SITE_URL = "https://orderly.network";
 
@@ -76,7 +82,6 @@ export default function RootLayout({
       <head>
         <link rel="stylesheet" href="https://use.typekit.net/yda8slb.css" />
         <link rel="help" href="/skill.md" type="text/markdown" title="Orderly Network Agent Skill" />
-        <link rel="preload" href="/images/macbook-poster.webp" as="image" type="image/webp" media="(min-width: 768px)" />
         <link rel="preload" href="/images/macbook-static-mobile.webp" as="image" type="image/webp" media="(max-width: 767px)" />
         <script
           type="application/ld+json"

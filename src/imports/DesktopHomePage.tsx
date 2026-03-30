@@ -1783,7 +1783,7 @@ function ProductInfo1() {
 function DexCard1() {
   return (
     <a
-      href="https://woofi.com/trade"
+href="https://pro.woofi.com"
       target="_blank"
       rel="noopener noreferrer"
       className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px]"
@@ -6336,6 +6336,7 @@ export default function Frame7() {
         animate="visible"
         variants={sectionVariants}
         transition={transition}
+        style={{ position: "relative", zIndex: 1000 }}
       >
         <Default />
       </motion.div>

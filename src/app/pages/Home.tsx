@@ -108,11 +108,11 @@ function ScaledFrame({
   );
 }
 
-function MobileFixedNav({ onMenuClick }: { onMenuClick: () => void }) {
+function MobileFixedNav({ onMenuClick, bannerHeight = 0 }: { onMenuClick: () => void; bannerHeight?: number }) {
   return (
     <div style={{
       position: "fixed",
-      top: 0, left: 0, right: 0,
+      top: bannerHeight, left: 0, right: 0,
       zIndex: 100,
       display: "flex",
       alignItems: "center",
@@ -140,14 +140,189 @@ function MobileFixedNav({ onMenuClick }: { onMenuClick: () => void }) {
   );
 }
 
+const BANNER_HEIGHT = 44;
+const BANNER_HEIGHT_MOBILE = 60;
+
+const BANNER_BG = "#6700CE";
+
+const BANNER_FONT = {
+  fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
+  fontVariationSettings: "'wght' 500",
+  fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+} as const;
+
+const BANNER_TEXT_STYLE = {
+  color: "#fff",
+  ...BANNER_FONT,
+} as const;
+
+const BANNER_INLINE_LINK_STYLE = {
+  color: "#44DED3",
+  ...BANNER_FONT,
+  fontVariationSettings: "'wght' 600",
+  textDecoration: "none",
+  transition: "opacity 0.15s",
+} as const;
+
+const CLOSE_BTN_STYLE = {
+  background: "transparent",
+  border: 0,
+  cursor: "pointer",
+  padding: 6,
+  color: "rgba(255,255,255,0.65)",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+} as const;
+
+function CloseIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+      <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function AnnouncementBanner({ mobile, onClose }: { mobile?: boolean; onClose: () => void }) {
+  if (mobile) {
+    // Mobile: text wraps to ~2 lines, X vertically centered on right
+    return (
+      <div
+        style={{
+          position: "fixed",
+          top: 0, left: 0, right: 0,
+          zIndex: 200,
+          willChange: "transform",
+          height: `calc(${BANNER_HEIGHT_MOBILE}px + var(--sai-top, 0px))`,
+          paddingTop: "var(--sai-top, 0px)",
+          background: BANNER_BG,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "var(--sai-top, 0px) 36px 0 16px",
+          textAlign: "center",
+        }}
+      >
+        <span style={{ ...BANNER_TEXT_STYLE, fontSize: 13, lineHeight: 1.5 }}>
+          I 💜 Perps Trading Competition<br />Compete for $25,000+ ·{" "}
+          <a
+            href="https://app.orderly.network/campaigns"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="banner-link"
+            style={{ ...BANNER_INLINE_LINK_STYLE, fontSize: 13 }}
+          >
+            Join Now →
+          </a>
+        </span>
+        <button
+          onClick={onClose}
+          aria-label="Close announcement"
+          style={{ ...CLOSE_BTN_STYLE, position: "absolute", top: "50%", right: 6, transform: "translateY(-50%)" }}
+        >
+          <CloseIcon />
+        </button>
+      </div>
+    );
+  }
+
+  // Desktop / tablet: single row — spacer | text with inline link | X
+  return (
+    <div
+      style={{
+        position: "fixed",
+        top: 0, left: 0, right: 0,
+        zIndex: 200,
+        willChange: "transform",
+        height: `calc(${BANNER_HEIGHT}px + var(--sai-top, 0px))`,
+        paddingTop: "var(--sai-top, 0px)",
+        background: BANNER_BG,
+        display: "flex",
+        alignItems: "center",
+        padding: "var(--sai-top, 0px) 8px 0 16px",
+      }}
+    >
+      <div style={{ flex: 1 }} />
+
+      <span style={{ ...BANNER_TEXT_STYLE, fontSize: 13, whiteSpace: "nowrap" }}>
+        I 💜 Perps Trading Competition · Compete for $25,000+ ·{" "}
+        <a
+          href="https://app.orderly.network/campaigns"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="banner-link"
+          style={{ ...BANNER_INLINE_LINK_STYLE, fontSize: 13 }}
+        >
+          Join Now →
+        </a>
+      </span>
+
+      <div style={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
+        <button onClick={onClose} aria-label="Close announcement" style={CLOSE_BTN_STYLE}>
+          <CloseIcon />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function FloatingCampaignHeart() {
+  return (
+    <a
+      href="https://app.orderly.network/campaigns"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="floating-heart-btn"
+      aria-label="Join Perps Trading Campaign"
+      style={{
+        position: "fixed",
+        bottom: 28,
+        right: 24,
+        zIndex: 300,
+        display: "block",
+        width: 64,
+        height: 64,
+        textDecoration: "none",
+      }}
+    >
+      <img src="/images/love1.png" alt="Join Campaign" width={64} height={64} style={{ display: "block" }} />
+    </a>
+  );
+}
+
 type Viewport = "mobile" | "tablet" | "desktop";
 
 export default function Home() {
   const [viewport, setViewport] = useState<Viewport>("desktop");
   const [navOpen,  setNavOpen]  = useState(false);
+  const [bannerVisible, setBannerVisible] = useState(true);
+  const [safeAreaTop, setSafeAreaTop] = useState(0);
 
-  const handleOpenNav  = useCallback(() => setNavOpen(true),  []);
-  const handleCloseNav = useCallback(() => setNavOpen(false), []);
+  const handleOpenNav    = useCallback(() => setNavOpen(true),       []);
+  const handleCloseNav   = useCallback(() => setNavOpen(false),      []);
+  const handleCloseBanner = useCallback(() => setBannerVisible(false), []);
+
+  // Read env(safe-area-inset-top) from CSS variable (requires viewport-fit=cover)
+  useEffect(() => {
+    const read = () => {
+      const raw = getComputedStyle(document.documentElement)
+        .getPropertyValue('--sai-top').trim();
+      setSafeAreaTop(parseFloat(raw) || 0);
+    };
+    read();
+    window.addEventListener('resize', read);
+    return () => window.removeEventListener('resize', read);
+  }, []);
+
+  useEffect(() => {
+    let meta = document.querySelector('meta[name="theme-color"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement('meta') as HTMLMetaElement;
+      meta.setAttribute('name', 'theme-color');
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute('content', bannerVisible ? BANNER_BG : '#000000');
+  }, [bannerVisible]);
 
   useEffect(() => {
     const update = () => {
@@ -161,12 +336,16 @@ export default function Home() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  // Mobile (< 768 px): custom stacked MobileHomePage scaled to 375 px canvas
+  const bannerH       = bannerVisible ? BANNER_HEIGHT        + safeAreaTop : 0;
+  const bannerHMobile = bannerVisible ? BANNER_HEIGHT_MOBILE + safeAreaTop : 0;
+
+  // Mobile (< 600 px): custom stacked MobileHomePage scaled to 375 px canvas
   if (viewport === "mobile") {
     return (
       <div style={{ width: "100vw", overflowX: "clip", background: "#000" }}>
-        <MobileFixedNav onMenuClick={handleOpenNav} />
-        <div style={{ paddingTop: 72 }}>
+        {bannerVisible && <AnnouncementBanner mobile onClose={handleCloseBanner} />}
+        <MobileFixedNav onMenuClick={handleOpenNav} bannerHeight={bannerHMobile} />
+        <div style={{ paddingTop: 72 + bannerHMobile }}>
           <ScaledFrame designWidth={MOBILE_DESIGN_WIDTH} autoHeight>
             <MobileHomePage onMenuClick={handleOpenNav} hideNav hideFooter />
           </ScaledFrame>
@@ -180,21 +359,34 @@ export default function Home() {
             <MobileNavDrawer key="mobile-nav" onClose={handleCloseNav} />
           )}
         </AnimatePresence>
+        <FloatingCampaignHeart />
       </div>
     );
   }
 
   // Tablet (600–1023 px): full tablet homepage in normal flow
   if (viewport === "tablet") {
-    return <TabletHomePage />;
+    return (
+      <>
+        {bannerVisible && <AnnouncementBanner onClose={handleCloseBanner} />}
+        <div style={{ paddingTop: bannerH }}>
+          <TabletHomePage bannerOffset={bannerH} />
+        </div>
+        <FloatingCampaignHeart />
+      </>
+    );
   }
 
   // Desktop (≥ 1024 px): pixel-perfect ScaledFrame of the 1440 px Figma canvas
   return (
     <div style={{ width: "100%", overflowX: "hidden", background: "#000" }}>
-      <ScaledFrame cap comfortableViewport={1680}>
-        <Frame7 />
-      </ScaledFrame>
+      {bannerVisible && <AnnouncementBanner onClose={handleCloseBanner} />}
+      <div style={{ paddingTop: bannerH }}>
+        <ScaledFrame cap comfortableViewport={1680}>
+          <Frame7 />
+        </ScaledFrame>
+      </div>
+      <FloatingCampaignHeart />
     </div>
   );
 }

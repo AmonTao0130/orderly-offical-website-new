@@ -1,3 +1,18 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+
+:root {
+  --sai-top: env(safe-area-inset-top, 0px);
+}
+
+.banner-link:hover { opacity: 0.75; }
+
+.floating-heart-btn {
+  filter: drop-shadow(0 4px 18px rgba(103, 0, 206, 0.5));
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.floating-heart-btn:hover {
+  transform: scale(1.12);
+  filter: drop-shadow(0 6px 28px rgba(103, 0, 206, 0.8));
+}

@@ -12,7 +12,7 @@ export const ORDER_BUY_URL = "https://app.orderly.network/staking";
 // ── DEX card links (mobile carousel) ────────────────────────────────────────
 export const DEX_URLS: Record<string, string> = {
   Aden: "https://aden.finance/",
-  "WOOFi Pro": "https://woofi.com/trade",
+  "WOOFi Pro": "https://pro.woofi.com",
   Raydium: "https://raydium.io/swap",
   Quickswap: "https://quickswap.exchange/",
   "What.Exchange": "https://www.what.exchange/",

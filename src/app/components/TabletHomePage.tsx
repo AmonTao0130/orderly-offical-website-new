@@ -60,11 +60,12 @@ function HamburgerIcon() {
   );
 }
 
-export function TabletNav({ onMenuClick }: { onMenuClick: () => void }) {
+export function TabletNav({ onMenuClick, bannerOffset = 0 }: { onMenuClick: () => void; bannerOffset?: number }) {
   return (
     <div
-      className="sticky top-0 z-[100] flex items-center justify-between h-[68px] px-10 gap-4"
+      className="sticky z-[100] flex items-center justify-between h-[68px] px-10 gap-4"
       style={{
+        top: bannerOffset,
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         background: "rgba(0,0,0,0.55)",
@@ -805,7 +806,7 @@ const TRUSTED_DEX_CARDS = [
   {
     name: "WOOFi Pro",
     logo: "/images/logos/woofi.png",
-    href: "https://woofi.com/trade",
+    href: "https://pro.woofi.com",
   },
   {
     name: "Raydium",
@@ -832,7 +833,11 @@ const TRUSTED_DEX_CARDS = [
     logo: "/images/logos/aden.png",
     href: "https://aden.finance/",
   },
-  { name: "VOOI", logo: "/images/logos/vooi.png", href: "https://vooi.io/" },
+  {
+    name: "VOOI",
+    logo: "/images/logos/vooi.png",
+    href: "https://vooi.io/",
+  },
   {
     name: "Perptools",
     logo: "/images/logos/perpstool.jpg",
@@ -1324,7 +1329,7 @@ export function TabletFooter() {
 
 // ─── Main export ──────────────────────────────────────────────────────────────
 
-export function TabletHomePage() {
+export function TabletHomePage({ bannerOffset = 0 }: { bannerOffset?: number }) {
   const [navOpen, setNavOpen] = useState(false);
   const [partnershipModalOpen, setPartnershipModalOpen] = useState(false);
 
@@ -1338,7 +1343,7 @@ export function TabletHomePage() {
   return (
     <div className="w-full bg-black text-white overflow-x-hidden">
       {/* 1. Sticky nav */}
-      <TabletNav onMenuClick={handleOpenNav} />
+      <TabletNav onMenuClick={handleOpenNav} bannerOffset={bannerOffset} />
 
       {/* 2. Hero — background shapes + headline + MacBook + stats */}
       <TabletHero onPartnership={handleOpenPartnership} />
