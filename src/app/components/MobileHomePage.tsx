@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import posthog from 'posthog-js'
+import posthog from "posthog-js";
 
 /**
  * MobileHomePage
@@ -22,7 +22,11 @@ import { useNewsletterSubscribe } from "@/app/hooks/useNewsletterSubscribe";
 import Frame40 from "../../imports/Frame1618872068-142-633";
 
 // ── Desktop modals — single source of truth, reused on mobile ───────────────
-import { BuyOrderModal, PartnershipFormModal, CampaignIcon } from "../../imports/DesktopHomePage";
+import {
+  BuyOrderModal,
+  PartnershipFormModal,
+  CampaignIcon,
+} from "../../imports/DesktopHomePage";
 
 // ── Mobile icon paths (same file Frame40 uses for Brandmark) ─────────────────
 import svgPathsMobile from "../../imports/svg-4hybjba00c";
@@ -75,7 +79,13 @@ function walkDataAction(el: HTMLElement | null): string | null {
  * • Dual CTA: "Launch Now" (white) + "Start Building" (purple)
  * • Brandmark from svg-4hybjba00c (same paths used by Frame40 top bar)
  */
-function MobileNavDrawer({ onClose, deviceLayout = "mobile" }: { onClose: () => void; deviceLayout?: "mobile" | "tablet" }) {
+function MobileNavDrawer({
+  onClose,
+  deviceLayout = "mobile",
+}: {
+  onClose: () => void;
+  deviceLayout?: "mobile" | "tablet";
+}) {
   const [openSection, setOpenSection] = useState<string | null>(null);
 
   const NAV_SECTIONS = [
@@ -122,14 +132,38 @@ function MobileNavDrawer({ onClose, deviceLayout = "mobile" }: { onClose: () => 
         {/* Brandmark icon (same paths as Frame40 navbar) + "ORDERLY" text */}
         <div className="flex items-center gap-[10px]">
           <div className="relative shrink-0" style={{ width: 28, height: 28 }}>
-            <svg className="absolute block w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 31.9999 31.9608">
-              <path clipRule="evenodd" d={svgPathsMobile.p2fe0400} fill="white" fillRule="evenodd" />
-              <path clipRule="evenodd" d={svgPathsMobile.p2f88ca00} fill="white" fillRule="evenodd" />
-              <path clipRule="evenodd" d={svgPathsMobile.p22c01780} fill="white" fillRule="evenodd" />
-              <path clipRule="evenodd" d={svgPathsMobile.p527fe00} fill="white" fillRule="evenodd" />
+            <svg
+              className="absolute block w-full h-full"
+              fill="none"
+              preserveAspectRatio="none"
+              viewBox="0 0 31.9999 31.9608"
+            >
+              <path
+                clipRule="evenodd"
+                d={svgPathsMobile.p2fe0400}
+                fill="white"
+                fillRule="evenodd"
+              />
+              <path
+                clipRule="evenodd"
+                d={svgPathsMobile.p2f88ca00}
+                fill="white"
+                fillRule="evenodd"
+              />
+              <path
+                clipRule="evenodd"
+                d={svgPathsMobile.p22c01780}
+                fill="white"
+                fillRule="evenodd"
+              />
+              <path
+                clipRule="evenodd"
+                d={svgPathsMobile.p527fe00}
+                fill="white"
+                fillRule="evenodd"
+              />
             </svg>
           </div>
-
         </div>
 
         {/* Close button */}
@@ -139,27 +173,30 @@ function MobileNavDrawer({ onClose, deviceLayout = "mobile" }: { onClose: () => 
           aria-label="Close navigation"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+            <path
+              d="M6 6l12 12M18 6L6 18"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+            />
           </svg>
         </button>
       </div>
 
       {/* ── Scrollable nav body ── */}
       <nav className="flex-1 overflow-y-auto">
-
         {/* Accordion: Builders / Ecosystem / Traders */}
         {NAV_SECTIONS.map(({ key, items }) => (
           <div key={key} style={{ borderBottom: rowDivider }}>
-
             {/* Section toggle */}
             <button
               onClick={() => {
                 toggle(key);
-                posthog.capture('header_nav_clicked', {
+                posthog.capture("header_nav_clicked", {
                   tab_name: key.toLowerCase(),
-                  source_page: 'homepage',
+                  source_page: "homepage",
                   device_layout: deviceLayout,
-                  section: 'header',
+                  section: "header",
                 });
               }}
               className="w-full flex items-center justify-between py-[18px] px-[24px] bg-transparent border-0 cursor-pointer"
@@ -168,14 +205,24 @@ function MobileNavDrawer({ onClose, deviceLayout = "mobile" }: { onClose: () => 
               <span style={fontSectionStyle}>{key}</span>
               {/* CSS-animated chevron — no motion dependency */}
               <svg
-                width="16" height="16" viewBox="0 0 16 16" fill="none"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
                 style={{
                   transition: "transform 0.2s ease",
-                  transform: openSection === key ? "rotate(180deg)" : "rotate(0deg)",
+                  transform:
+                    openSection === key ? "rotate(180deg)" : "rotate(0deg)",
                   flexShrink: 0,
                 }}
               >
-                <path d="M4 6l4 4 4-4" stroke="#9c9fae" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path
+                  d="M4 6l4 4 4-4"
+                  stroke="#9c9fae"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </button>
 
@@ -192,29 +239,78 @@ function MobileNavDrawer({ onClose, deviceLayout = "mobile" }: { onClose: () => 
                 >
                   <div className="flex flex-col px-[16px] pb-[14px] gap-[2px]">
                     {items.map((item) => {
-                      const trackSubItem = () => posthog.capture('header_nav_clicked', {
-                        tab_name: `${key.toLowerCase()}_${item.label.toLowerCase().replace(/\s+/g, '_')}`,
-                        source_page: 'homepage',
-                        device_layout: deviceLayout,
-                        section: 'header',
-                      });
+                      const trackSubItem = () =>
+                        posthog.capture("header_nav_clicked", {
+                          tab_name: `${key.toLowerCase()}_${item.label
+                            .toLowerCase()
+                            .replace(/\s+/g, "_")}`,
+                          source_page: "homepage",
+                          device_layout: deviceLayout,
+                          section: "header",
+                        });
                       return item.external ? (
                         <a
                           key={item.label}
                           href={item.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          onClick={() => { trackSubItem(); onClose(); }}
+                          onClick={() => {
+                            trackSubItem();
+                            onClose();
+                          }}
                           className="flex items-center justify-between no-underline rounded-[10px] px-[14px] py-[14px]"
-                          style={{ color: "rgba(255,255,255,0.65)", ...fontItemStyle, minHeight: 48 }}
-                          onTouchStart={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(103,0,206,0.15)"; (e.currentTarget as HTMLAnchorElement).style.color = "#9c75ff"; }}
-                          onTouchEnd={(e) => { setTimeout(() => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.65)"; }, 200); }}
-                          onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(103,0,206,0.15)"; (e.currentTarget as HTMLAnchorElement).style.color = "#9c75ff"; }}
-                          onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.65)"; }}
+                          style={{
+                            color: "rgba(255,255,255,0.65)",
+                            ...fontItemStyle,
+                            minHeight: 48,
+                          }}
+                          onTouchStart={(e) => {
+                            (
+                              e.currentTarget as HTMLAnchorElement
+                            ).style.background = "rgba(103,0,206,0.15)";
+                            (e.currentTarget as HTMLAnchorElement).style.color =
+                              "#9c75ff";
+                          }}
+                          onTouchEnd={(e) => {
+                            setTimeout(() => {
+                              (
+                                e.currentTarget as HTMLAnchorElement
+                              ).style.background = "transparent";
+                              (
+                                e.currentTarget as HTMLAnchorElement
+                              ).style.color = "rgba(255,255,255,0.65)";
+                            }, 200);
+                          }}
+                          onMouseEnter={(e) => {
+                            (
+                              e.currentTarget as HTMLAnchorElement
+                            ).style.background = "rgba(103,0,206,0.15)";
+                            (e.currentTarget as HTMLAnchorElement).style.color =
+                              "#9c75ff";
+                          }}
+                          onMouseLeave={(e) => {
+                            (
+                              e.currentTarget as HTMLAnchorElement
+                            ).style.background = "transparent";
+                            (e.currentTarget as HTMLAnchorElement).style.color =
+                              "rgba(255,255,255,0.65)";
+                          }}
                         >
                           <span>{item.label}</span>
-                          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" style={{ opacity: 0.3, flexShrink: 0 }}>
-                            <path d="M2.5 9.5l7-7M4 2.5h5.5V8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                          <svg
+                            width="11"
+                            height="11"
+                            viewBox="0 0 12 12"
+                            fill="none"
+                            style={{ opacity: 0.3, flexShrink: 0 }}
+                          >
+                            <path
+                              d="M2.5 9.5l7-7M4 2.5h5.5V8"
+                              stroke="currentColor"
+                              strokeWidth="1.4"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
                           </svg>
                         </a>
                       ) : (
@@ -222,13 +318,50 @@ function MobileNavDrawer({ onClose, deviceLayout = "mobile" }: { onClose: () => 
                           <Link
                             key={item.label}
                             href={item.href}
-                            onClick={() => { trackSubItem(); onClose(); }}
+                            onClick={() => {
+                              trackSubItem();
+                              onClose();
+                            }}
                             className="no-underline rounded-[10px] px-[14px] py-[14px] block"
-                            style={{ color: "rgba(255,255,255,0.65)", ...fontItemStyle, minHeight: 48 }}
-                            onTouchStart={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(103,0,206,0.15)"; (e.currentTarget as HTMLAnchorElement).style.color = "white"; }}
-                            onTouchEnd={(e) => { setTimeout(() => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.65)"; }, 200); }}
-                            onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "rgba(103,0,206,0.15)"; (e.currentTarget as HTMLAnchorElement).style.color = "white"; }}
-                            onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.65)"; }}
+                            style={{
+                              color: "rgba(255,255,255,0.65)",
+                              ...fontItemStyle,
+                              minHeight: 48,
+                            }}
+                            onTouchStart={(e) => {
+                              (
+                                e.currentTarget as HTMLAnchorElement
+                              ).style.background = "rgba(103,0,206,0.15)";
+                              (
+                                e.currentTarget as HTMLAnchorElement
+                              ).style.color = "white";
+                            }}
+                            onTouchEnd={(e) => {
+                              setTimeout(() => {
+                                (
+                                  e.currentTarget as HTMLAnchorElement
+                                ).style.background = "transparent";
+                                (
+                                  e.currentTarget as HTMLAnchorElement
+                                ).style.color = "rgba(255,255,255,0.65)";
+                              }, 200);
+                            }}
+                            onMouseEnter={(e) => {
+                              (
+                                e.currentTarget as HTMLAnchorElement
+                              ).style.background = "rgba(103,0,206,0.15)";
+                              (
+                                e.currentTarget as HTMLAnchorElement
+                              ).style.color = "white";
+                            }}
+                            onMouseLeave={(e) => {
+                              (
+                                e.currentTarget as HTMLAnchorElement
+                              ).style.background = "transparent";
+                              (
+                                e.currentTarget as HTMLAnchorElement
+                              ).style.color = "rgba(255,255,255,0.65)";
+                            }}
                           >
                             {item.label}
                           </Link>
@@ -249,22 +382,40 @@ function MobileNavDrawer({ onClose, deviceLayout = "mobile" }: { onClose: () => 
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => {
-              posthog.capture('header_nav_clicked', {
-                tab_name: 'docs',
-                source_page: 'homepage',
+              posthog.capture("header_nav_clicked", {
+                tab_name: "docs",
+                source_page: "homepage",
                 device_layout: deviceLayout,
-                section: 'header',
+                section: "header",
               });
               onClose();
             }}
             className="flex items-center justify-between no-underline py-[18px] px-[24px]"
             style={{ ...fontSectionStyle, minHeight: 56 }}
-            onTouchStart={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.7"; }}
-            onTouchEnd={(e) => { setTimeout(() => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }, 200); }}
+            onTouchStart={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.opacity = "0.7";
+            }}
+            onTouchEnd={(e) => {
+              setTimeout(() => {
+                (e.currentTarget as HTMLAnchorElement).style.opacity = "1";
+              }, 200);
+            }}
           >
             Docs
-            <svg width="14" height="14" viewBox="0 0 12 12" fill="none" style={{ opacity: 0.35, flexShrink: 0 }}>
-              <path d="M2.5 9.5l7-7M4 2.5h5.5V8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 12 12"
+              fill="none"
+              style={{ opacity: 0.35, flexShrink: 0 }}
+            >
+              <path
+                d="M2.5 9.5l7-7M4 2.5h5.5V8"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </a>
         </div>
@@ -272,33 +423,50 @@ function MobileNavDrawer({ onClose, deviceLayout = "mobile" }: { onClose: () => 
         {/* Campaigns — direct link + left icon (matches desktop CampaignIcon, no dropdown animation) */}
         <div style={{ borderBottom: rowDivider }}>
           <a
-            href="https://app.orderly.network/campaigns"
+            href="https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => {
-              posthog.capture('header_nav_clicked', {
-                tab_name: 'campaigns',
-                source_page: 'homepage',
+              posthog.capture("header_nav_clicked", {
+                tab_name: "campaigns",
+                source_page: "homepage",
                 device_layout: deviceLayout,
-                section: 'header',
+                section: "header",
               });
               onClose();
             }}
             className="flex items-center justify-between gap-[12px] no-underline py-[18px] px-[24px]"
             style={{ ...fontSectionStyle, minHeight: 56 }}
-            onTouchStart={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.7"; }}
-            onTouchEnd={(e) => { setTimeout(() => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }, 200); }}
+            onTouchStart={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.opacity = "0.7";
+            }}
+            onTouchEnd={(e) => {
+              setTimeout(() => {
+                (e.currentTarget as HTMLAnchorElement).style.opacity = "1";
+              }, 200);
+            }}
           >
             <span className="flex min-w-0 flex-1 items-center gap-[10px]">
               <CampaignIcon className="shrink-0" />
               <span>Campaigns</span>
             </span>
-            <svg width="14" height="14" viewBox="0 0 12 12" fill="none" style={{ opacity: 0.35, flexShrink: 0 }}>
-              <path d="M2.5 9.5l7-7M4 2.5h5.5V8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 12 12"
+              fill="none"
+              style={{ opacity: 0.35, flexShrink: 0 }}
+            >
+              <path
+                d="M2.5 9.5l7-7M4 2.5h5.5V8"
+                stroke="currentColor"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </a>
         </div>
-
       </nav>
 
       {/* ── Bottom CTAs ── */}
@@ -308,34 +476,34 @@ function MobileNavDrawer({ onClose, deviceLayout = "mobile" }: { onClose: () => 
       >
         {/* Launch Now — white, matches desktop HeaderMenu primary CTA */}
         <a
-        href="https://dex.orderly.network/dex/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center rounded-[46px] py-[16px] no-underline"
-        style={{ background: "white", minHeight: 52 }}
-        onClick={() => {
-          posthog.capture('homepage_cta_clicked', {
-            cta_name: 'launch_now',
-            source_page: 'homepage',
-            device_layout: 'mobile',
-          })
-          
-          onClose()
-       }}
->
-  <span
-    style={{
-      color: "#3f0086",
-      fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
-      fontVariationSettings: "'wght' 700",
-      fontFeatureSettings: "'ss02','ss03','ss05','ss06'",
-      fontSize: "16px",
-      letterSpacing: "0.16px"
-    }}
-  >
-    Launch Now
-  </span>
-</a>
+          href="https://dex.orderly.network/dex/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center rounded-[46px] py-[16px] no-underline"
+          style={{ background: "white", minHeight: 52 }}
+          onClick={() => {
+            posthog.capture("homepage_cta_clicked", {
+              cta_name: "launch_now",
+              source_page: "homepage",
+              device_layout: "mobile",
+            });
+
+            onClose();
+          }}
+        >
+          <span
+            style={{
+              color: "#3f0086",
+              fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
+              fontVariationSettings: "'wght' 700",
+              fontFeatureSettings: "'ss02','ss03','ss05','ss06'",
+              fontSize: "16px",
+              letterSpacing: "0.16px",
+            }}
+          >
+            Launch Now
+          </span>
+        </a>
       </div>
     </motion.div>
   );
@@ -369,7 +537,17 @@ function FooterSheet({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
-          <p style={{ color: "white", fontSize: "16px", fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif", fontVariationSettings: "'wght' 700", fontFeatureSettings: "'ss02','ss03','ss05','ss06'", letterSpacing: "0.16px", textTransform: "capitalize" }}>
+          <p
+            style={{
+              color: "white",
+              fontSize: "16px",
+              fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
+              fontVariationSettings: "'wght' 700",
+              fontFeatureSettings: "'ss02','ss03','ss05','ss06'",
+              letterSpacing: "0.16px",
+              textTransform: "capitalize",
+            }}
+          >
             {sectionKey}
           </p>
           <button
@@ -378,7 +556,12 @@ function FooterSheet({
             aria-label="Close"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
             </svg>
           </button>
         </div>
@@ -392,7 +575,13 @@ function FooterSheet({
                 rel="noopener noreferrer"
                 onClick={onClose}
                 className="no-underline hover:opacity-80 transition-opacity"
-                style={{ color: "rgba(255,255,255,0.8)", fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif", fontVariationSettings: "'opsz' 72, 'wght' 500", fontFeatureSettings: "'ss02','ss03','ss05','ss06'", fontSize: "15px" }}
+                style={{
+                  color: "rgba(255,255,255,0.8)",
+                  fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
+                  fontVariationSettings: "'opsz' 72, 'wght' 500",
+                  fontFeatureSettings: "'ss02','ss03','ss05','ss06'",
+                  fontSize: "15px",
+                }}
               >
                 {item.label}
               </a>
@@ -402,7 +591,13 @@ function FooterSheet({
                 href={item.href}
                 onClick={onClose}
                 className="no-underline hover:opacity-80 transition-opacity"
-                style={{ color: "rgba(255,255,255,0.8)", fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif", fontVariationSettings: "'opsz' 72, 'wght' 500", fontFeatureSettings: "'ss02','ss03','ss05','ss06'", fontSize: "15px" }}
+                style={{
+                  color: "rgba(255,255,255,0.8)",
+                  fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
+                  fontVariationSettings: "'opsz' 72, 'wght' 500",
+                  fontFeatureSettings: "'ss02','ss03','ss05','ss06'",
+                  fontSize: "15px",
+                }}
               >
                 {item.label}
               </Link>
@@ -419,7 +614,11 @@ function SignUpModal({ onClose }: { onClose: () => void }) {
   const [email, setEmail] = useState("");
   const { status, subscribe } = useNewsletterSubscribe();
   const sent = status === "success";
-  const fontMedium = { fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif", fontVariationSettings: "'ital' 0, 'opsz' 72, 'wght' 500", fontFeatureSettings: "'ss02','ss03','ss05','ss06'" };
+  const fontMedium = {
+    fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
+    fontVariationSettings: "'ital' 0, 'opsz' 72, 'wght' 500",
+    fontFeatureSettings: "'ss02','ss03','ss05','ss06'",
+  };
 
   return (
     <div
@@ -437,7 +636,15 @@ function SignUpModal({ onClose }: { onClose: () => void }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
-          <p style={{ color: "white", fontSize: "18px", fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif", fontVariationSettings: "'opsz' 72, 'wght' 600", fontFeatureSettings: "'ss02','ss03','ss05','ss06'" }}>
+          <p
+            style={{
+              color: "white",
+              fontSize: "18px",
+              fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
+              fontVariationSettings: "'opsz' 72, 'wght' 600",
+              fontFeatureSettings: "'ss02','ss03','ss05','ss06'",
+            }}
+          >
             Stay updated
           </p>
           <button
@@ -445,20 +652,30 @@ function SignUpModal({ onClose }: { onClose: () => void }) {
             className="text-[#9c9fae] hover:text-white transition-colors bg-transparent border-0 cursor-pointer p-0"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+              />
             </svg>
           </button>
         </div>
 
         {sent ? (
           <div className="flex flex-col gap-[12px] items-center py-[16px]">
-            <p style={{ color: "#6700ce", fontSize: "16px", ...fontMedium }}>✓ You're subscribed!</p>
-            <p style={{ color: "#9c9fae", fontSize: "14px", ...fontMedium }}>We'll be in touch with updates.</p>
+            <p style={{ color: "#6700ce", fontSize: "16px", ...fontMedium }}>
+              ✓ You're subscribed!
+            </p>
+            <p style={{ color: "#9c9fae", fontSize: "14px", ...fontMedium }}>
+              We'll be in touch with updates.
+            </p>
           </div>
         ) : (
           <>
             <p style={{ color: "#9c9fae", fontSize: "14px", ...fontMedium }}>
-              Be the first to hear about launches, token listings, and builder updates.
+              Be the first to hear about launches, token listings, and builder
+              updates.
             </p>
             <input
               type="email"
@@ -466,15 +683,31 @@ function SignUpModal({ onClose }: { onClose: () => void }) {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="satoshi@orderly.network"
               className="rounded-[10px] px-[18px] py-[16px] border-0 outline-none w-full"
-              style={{ background: "#7800f0", color: "white", fontSize: "16px", ...fontMedium }}
+              style={{
+                background: "#7800f0",
+                color: "white",
+                fontSize: "16px",
+                ...fontMedium,
+              }}
               autoFocus
             />
             <button
-              onClick={() => { if (email.includes("@")) subscribe(email); }}
+              onClick={() => {
+                if (email.includes("@")) subscribe(email);
+              }}
               className="w-full rounded-[24px] py-[14px] border-0 cursor-pointer hover:opacity-90 transition-opacity"
               style={{ background: "black" }}
             >
-              <span style={{ color: "white", fontSize: "16px", letterSpacing: "0.16px", fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif", fontVariationSettings: "'wght' 700", fontFeatureSettings: "'ss02','ss03','ss05','ss06'" }}>
+              <span
+                style={{
+                  color: "white",
+                  fontSize: "16px",
+                  letterSpacing: "0.16px",
+                  fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
+                  fontVariationSettings: "'wght' 700",
+                  fontFeatureSettings: "'ss02','ss03','ss05','ss06'",
+                }}
+              >
                 Sign Up
               </span>
             </button>
@@ -498,10 +731,24 @@ function CopiedToast({ onDone }: { onDone: () => void }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       className="fixed bottom-[32px] left-1/2 -translate-x-1/2 z-[9999] flex items-center gap-[8px] rounded-[24px] px-[20px] py-[12px] shadow-lg"
-      style={{ background: "#1e2026", color: "white", fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif", fontVariationSettings: "'opsz' 72, 'wght' 500", fontFeatureSettings: "'ss02','ss03','ss05','ss06'", fontSize: "14px", whiteSpace: "nowrap" }}
+      style={{
+        background: "#1e2026",
+        color: "white",
+        fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
+        fontVariationSettings: "'opsz' 72, 'wght' 500",
+        fontFeatureSettings: "'ss02','ss03','ss05','ss06'",
+        fontSize: "14px",
+        whiteSpace: "nowrap",
+      }}
     >
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-        <path d="M5 13l4 4L19 7" stroke="#6700ce" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M5 13l4 4L19 7"
+          stroke="#6700ce"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
       Copied to clipboard
     </motion.div>
@@ -512,7 +759,11 @@ function CopiedToast({ onDone }: { onDone: () => void }) {
 
 export { MobileNavDrawer };
 
-export function MobileHomePage({ onMenuClick, hideNav, hideFooter }: { onMenuClick?: () => void; hideNav?: boolean; hideFooter?: boolean } = {}) {
+export function MobileHomePage({
+  onMenuClick,
+  hideNav,
+  hideFooter,
+}: { onMenuClick?: () => void; hideNav?: boolean; hideFooter?: boolean } = {}) {
   const router = useRouter();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -538,8 +789,12 @@ export function MobileHomePage({ onMenuClick, hideNav, hideFooter }: { onMenuCli
   useEffect(() => {
     const wrap = wrapperRef.current;
     if (!wrap) return;
-    const whyCont = wrap.querySelector('[data-name="Why Content List"]') as HTMLElement | null;
-    const buildCont = wrap.querySelector('[data-name="Build Content List"]') as HTMLElement | null;
+    const whyCont = wrap.querySelector(
+      '[data-name="Why Content List"]'
+    ) as HTMLElement | null;
+    const buildCont = wrap.querySelector(
+      '[data-name="Build Content List"]'
+    ) as HTMLElement | null;
     [whyCont, buildCont].forEach((el) => {
       if (!el) return;
       el.style.overflowX = "scroll";
@@ -607,7 +862,9 @@ export function MobileHomePage({ onMenuClick, hideNav, hideFooter }: { onMenuCli
 
     // 3. Raise the hero Frame ([data-name="Frame"]) above Frame31 so its
     //    buttons are always on top in the stacking order
-    const heroFrame = wrap.querySelector('[data-name="Frame"]') as HTMLElement | null;
+    const heroFrame = wrap.querySelector(
+      '[data-name="Frame"]'
+    ) as HTMLElement | null;
     if (heroFrame) {
       heroFrame.style.position = "relative";
       heroFrame.style.zIndex = "2";
@@ -623,25 +880,33 @@ export function MobileHomePage({ onMenuClick, hideNav, hideFooter }: { onMenuCli
 
   /* ── scroll Why carousel ── */
   useEffect(() => {
-    const el = wrapperRef.current?.querySelector('[data-name="Why Content List"]') as HTMLElement | null;
+    const el = wrapperRef.current?.querySelector(
+      '[data-name="Why Content List"]'
+    ) as HTMLElement | null;
     if (!el) return;
     const target = whyIdx * WHY_CARD_STEP;
     if (el.scrollLeft === target) return;
     whyProgrammaticRef.current = true;
     el.scrollTo({ left: target, behavior: "smooth" });
-    const t = setTimeout(() => { whyProgrammaticRef.current = false; }, 600);
+    const t = setTimeout(() => {
+      whyProgrammaticRef.current = false;
+    }, 600);
     return () => clearTimeout(t);
   }, [whyIdx]);
 
   /* ── scroll Build carousel ── */
   useEffect(() => {
-    const el = wrapperRef.current?.querySelector('[data-name="Build Content List"]') as HTMLElement | null;
+    const el = wrapperRef.current?.querySelector(
+      '[data-name="Build Content List"]'
+    ) as HTMLElement | null;
     if (!el) return;
     const target = buildIdx * BUILD_CARD_STEP;
     if (el.scrollLeft === target) return;
     buildProgrammaticRef.current = true;
     el.scrollTo({ left: target, behavior: "smooth" });
-    const t = setTimeout(() => { buildProgrammaticRef.current = false; }, 600);
+    const t = setTimeout(() => {
+      buildProgrammaticRef.current = false;
+    }, 600);
     return () => clearTimeout(t);
   }, [buildIdx]);
 
@@ -652,8 +917,12 @@ export function MobileHomePage({ onMenuClick, hideNav, hideFooter }: { onMenuCli
 
     // Small delay so Frame40 has fully mounted its DOM
     const t = setTimeout(() => {
-      const buildEls = Array.from(wrap.querySelectorAll('[data-name="build with orderly"]'));
-      const partnerEls = Array.from(wrap.querySelectorAll('[data-name="Talk to Partnerships"]'));
+      const buildEls = Array.from(
+        wrap.querySelectorAll('[data-name="build with orderly"]')
+      );
+      const partnerEls = Array.from(
+        wrap.querySelectorAll('[data-name="Talk to Partnerships"]')
+      );
 
       const onBuild = (e: Event) => {
         e.stopPropagation();
@@ -664,8 +933,8 @@ export function MobileHomePage({ onMenuClick, hideNav, hideFooter }: { onMenuCli
         setPartnershipModalOpen(true);
       };
 
-      buildEls.forEach(el => el.addEventListener("click", onBuild));
-      partnerEls.forEach(el => el.addEventListener("click", onPartner));
+      buildEls.forEach((el) => el.addEventListener("click", onBuild));
+      partnerEls.forEach((el) => el.addEventListener("click", onPartner));
 
       // Stash cleanup refs on the wrap element itself so we can remove them
       (wrap as any).__buildEls = buildEls;
@@ -677,8 +946,12 @@ export function MobileHomePage({ onMenuClick, hideNav, hideFooter }: { onMenuCli
     return () => {
       clearTimeout(t);
       const w = wrap as any;
-      w.__buildEls?.forEach((el: Element) => el.removeEventListener("click", w.__onBuild));
-      w.__partnerEls?.forEach((el: Element) => el.removeEventListener("click", w.__onPartner));
+      w.__buildEls?.forEach((el: Element) =>
+        el.removeEventListener("click", w.__onBuild)
+      );
+      w.__partnerEls?.forEach((el: Element) =>
+        el.removeEventListener("click", w.__onPartner)
+      );
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -696,154 +969,162 @@ export function MobileHomePage({ onMenuClick, hideNav, hideFooter }: { onMenuCli
   }
 
   /* ── event delegation ── */
-  const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLElement;
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      const target = e.target as HTMLElement;
 
-    /* 1. data-action shortcuts */
-    const action = walkDataAction(target);
-    if (action === "copy-ai-url") {
-      e.preventDefault();
-      copyToClipboard(AI_URL).catch(() => { });
-      setCopiedToast(true);
-      return;
-    }
-    if (action === "copy-npx") {
-      e.preventDefault();
-      copyToClipboard(NPX_CMD).catch(() => { });
-      setCopiedToast(true);
-      return;
-    }
-    if (action === "sign-up" || action === "email-input") {
-      e.preventDefault();
-      setSignUpOpen(true);
-      return;
-    }
-
-    /* 2. footer section accordion via data-footer-key */
-    const footerKey = walkDataFooterKey(target);
-    if (footerKey) {
-      e.preventDefault();
-      setFooterSheet(footerKey);
-      return;
-    }
-
-    /* 3. walk data-name hierarchy — same mapping as desktop handlers */
-    let el: HTMLElement | null = target;
-    while (el) {
-      const name = el.getAttribute("data-name");
-
-      // Logo → home
-      if (name === "Brandmark") {
+      /* 1. data-action shortcuts */
+      const action = walkDataAction(target);
+      if (action === "copy-ai-url") {
         e.preventDefault();
-        router.push("/");
-        return;
-      }
-
-      // Buy ORDER pill → same BuyOrderModal used on desktop
-      if (name === "buy-order") {
-        e.preventDefault();
-        setBuyOrderOpen(true);
-        return;
-      }
-
-      // Start Building → same href as desktop button
-      if (name === "build with orderly") {
-        e.preventDefault();
-        posthog.capture('homepage_cta_clicked', {
-          cta_name: 'start_building',
-          source_page: 'homepage',
-          device_layout: 'mobile',
-        })
-        openUrl("https://dex.orderly.network/");
-        return;
-      }
-
-      // Talk to Partnerships
-      if (name === "Talk to Partnerships") {
-        e.preventDefault();
-        posthog.capture('homepage_cta_clicked', {
-          cta_name: 'talk_to_partnerships',
-          source_page: 'homepage',
-          device_layout: 'mobile',
-        })
-        setPartnershipModalOpen(true);
-        return;
-      }
-
-      // Hamburger menu
-      if (name === "menu") {
-        e.preventDefault();
-        onMenuClick?.();
-        return;
-      }
-
-      // "View all" on trusted section → same link as desktop TrustedButtonContainer
-      if (name === "Trusted Button Container") {
-        e.preventDefault();
-        openUrl("https://dex.orderly.network/board/");
-        return;
-      }
-
-      // DEX partner cards → same URL mapping as desktop
-      if (name === "DEX Card") {
-        e.preventDefault();
-        const productName = el.querySelector("[data-name='Product Info'] p")?.textContent?.trim() ?? "";
-        openUrl(DEX_URLS[productName] ?? "https://dex.orderly.network/board/");
-        return;
-      }
-
-      // Social media icons row → same SOCIAL_LINKS order as desktop
-      if (name === "Social Media Icons Container") {
-        e.preventDefault();
-        const children = Array.from(el.children) as HTMLElement[];
-        const icon = children.find((c) => c === target || c.contains(target));
-        const idx = icon ? children.indexOf(icon) : -1;
-        if (idx >= 0 && SOCIAL_LINKS[idx]) openUrl(SOCIAL_LINKS[idx]);
-        return;
-      }
-
-
-      // Footer nav accordion rows (data-name="footer-nav-Builders", etc.)
-      if (name?.startsWith("footer-nav-")) {
-        e.preventDefault();
-        setFooterSheet(name.replace("footer-nav-", ""));
-        return;
-      }
-
-      // AI access URL copy
-      if (name === "ai-url" || name === "ai-copy") {
-        e.preventDefault();
-        copyToClipboard(AI_URL).catch(() => { });
+        copyToClipboard(AI_URL).catch(() => {});
         setCopiedToast(true);
         return;
       }
-
-      // Newsletter sign-up
-      if (name === "newsletter-email" || name === "newsletter-signup") {
+      if (action === "copy-npx") {
+        e.preventDefault();
+        copyToClipboard(NPX_CMD).catch(() => {});
+        setCopiedToast(true);
+        return;
+      }
+      if (action === "sign-up" || action === "email-input") {
         e.preventDefault();
         setSignUpOpen(true);
         return;
       }
 
-      // Carousel arrows
-      if (name === "Arrow right-circle") {
+      /* 2. footer section accordion via data-footer-key */
+      const footerKey = walkDataFooterKey(target);
+      if (footerKey) {
         e.preventDefault();
-        const ctx = getCarouselContext(el.parentElement);
-        if (ctx === "why") setWhyIdx((i) => Math.min(i + 1, WHY_MAX_IDX));
-        if (ctx === "build") setBuildIdx((i) => Math.min(i + 1, BUILD_MAX_IDX));
-        return;
-      }
-      if (name === "Arrow left-circle") {
-        e.preventDefault();
-        const ctx = getCarouselContext(el.parentElement);
-        if (ctx === "why") setWhyIdx((i) => Math.max(i - 1, 0));
-        if (ctx === "build") setBuildIdx((i) => Math.max(i - 1, 0));
+        setFooterSheet(footerKey);
         return;
       }
 
-      el = el.parentElement;
-    }
-  }, [router, onMenuClick]);
+      /* 3. walk data-name hierarchy — same mapping as desktop handlers */
+      let el: HTMLElement | null = target;
+      while (el) {
+        const name = el.getAttribute("data-name");
+
+        // Logo → home
+        if (name === "Brandmark") {
+          e.preventDefault();
+          router.push("/");
+          return;
+        }
+
+        // Buy ORDER pill → same BuyOrderModal used on desktop
+        if (name === "buy-order") {
+          e.preventDefault();
+          setBuyOrderOpen(true);
+          return;
+        }
+
+        // Start Building → same href as desktop button
+        if (name === "build with orderly") {
+          e.preventDefault();
+          posthog.capture("homepage_cta_clicked", {
+            cta_name: "start_building",
+            source_page: "homepage",
+            device_layout: "mobile",
+          });
+          openUrl("https://dex.orderly.network/");
+          return;
+        }
+
+        // Talk to Partnerships
+        if (name === "Talk to Partnerships") {
+          e.preventDefault();
+          posthog.capture("homepage_cta_clicked", {
+            cta_name: "talk_to_partnerships",
+            source_page: "homepage",
+            device_layout: "mobile",
+          });
+          setPartnershipModalOpen(true);
+          return;
+        }
+
+        // Hamburger menu
+        if (name === "menu") {
+          e.preventDefault();
+          onMenuClick?.();
+          return;
+        }
+
+        // "View all" on trusted section → same link as desktop TrustedButtonContainer
+        if (name === "Trusted Button Container") {
+          e.preventDefault();
+          openUrl("https://dex.orderly.network/board/");
+          return;
+        }
+
+        // DEX partner cards → same URL mapping as desktop
+        if (name === "DEX Card") {
+          e.preventDefault();
+          const productName =
+            el
+              .querySelector("[data-name='Product Info'] p")
+              ?.textContent?.trim() ?? "";
+          openUrl(
+            DEX_URLS[productName] ?? "https://dex.orderly.network/board/"
+          );
+          return;
+        }
+
+        // Social media icons row → same SOCIAL_LINKS order as desktop
+        if (name === "Social Media Icons Container") {
+          e.preventDefault();
+          const children = Array.from(el.children) as HTMLElement[];
+          const icon = children.find((c) => c === target || c.contains(target));
+          const idx = icon ? children.indexOf(icon) : -1;
+          if (idx >= 0 && SOCIAL_LINKS[idx]) openUrl(SOCIAL_LINKS[idx]);
+          return;
+        }
+
+        // Footer nav accordion rows (data-name="footer-nav-Builders", etc.)
+        if (name?.startsWith("footer-nav-")) {
+          e.preventDefault();
+          setFooterSheet(name.replace("footer-nav-", ""));
+          return;
+        }
+
+        // AI access URL copy
+        if (name === "ai-url" || name === "ai-copy") {
+          e.preventDefault();
+          copyToClipboard(AI_URL).catch(() => {});
+          setCopiedToast(true);
+          return;
+        }
+
+        // Newsletter sign-up
+        if (name === "newsletter-email" || name === "newsletter-signup") {
+          e.preventDefault();
+          setSignUpOpen(true);
+          return;
+        }
+
+        // Carousel arrows
+        if (name === "Arrow right-circle") {
+          e.preventDefault();
+          const ctx = getCarouselContext(el.parentElement);
+          if (ctx === "why") setWhyIdx((i) => Math.min(i + 1, WHY_MAX_IDX));
+          if (ctx === "build")
+            setBuildIdx((i) => Math.min(i + 1, BUILD_MAX_IDX));
+          return;
+        }
+        if (name === "Arrow left-circle") {
+          e.preventDefault();
+          const ctx = getCarouselContext(el.parentElement);
+          if (ctx === "why") setWhyIdx((i) => Math.max(i - 1, 0));
+          if (ctx === "build") setBuildIdx((i) => Math.max(i - 1, 0));
+          return;
+        }
+
+        el = el.parentElement;
+      }
+    },
+    [router, onMenuClick]
+  );
 
   return (
     <div
@@ -856,7 +1137,11 @@ export function MobileHomePage({ onMenuClick, hideNav, hideFooter }: { onMenuCli
         touchAction: "manipulation",
       }}
     >
-      <Frame40 onMenuClick={onMenuClick} hideNav={hideNav} hideFooter={hideFooter} />
+      <Frame40
+        onMenuClick={onMenuClick}
+        hideNav={hideNav}
+        hideFooter={hideFooter}
+      />
 
       {/* Nav drawer is rendered in Home.tsx outside the motion.div stacking context */}
 
@@ -870,32 +1155,40 @@ export function MobileHomePage({ onMenuClick, hideNav, hideFooter }: { onMenuCli
       {/* ── Partnership Form modal — exact same component as desktop ── */}
       <AnimatePresence>
         {partnershipModalOpen && (
-          <PartnershipFormModal onClose={() => setPartnershipModalOpen(false)} />
+          <PartnershipFormModal
+            onClose={() => setPartnershipModalOpen(false)}
+          />
         )}
       </AnimatePresence>
 
       {/* ── Newsletter sheet (mobile-only) ── */}
       <AnimatePresence>
-        {signUpOpen && createPortal(
-          <SignUpModal onClose={() => setSignUpOpen(false)} />,
-          document.body,
-        )}
+        {signUpOpen &&
+          createPortal(
+            <SignUpModal onClose={() => setSignUpOpen(false)} />,
+            document.body
+          )}
       </AnimatePresence>
 
       {/* ── Footer nav sheet (mobile-only) ── */}
       <AnimatePresence>
-        {footerSheet && createPortal(
-          <FooterSheet sectionKey={footerSheet} onClose={() => setFooterSheet(null)} />,
-          document.body,
-        )}
+        {footerSheet &&
+          createPortal(
+            <FooterSheet
+              sectionKey={footerSheet}
+              onClose={() => setFooterSheet(null)}
+            />,
+            document.body
+          )}
       </AnimatePresence>
 
       {/* ── Copied toast (mobile-only) ── */}
       <AnimatePresence>
-        {copiedToast && createPortal(
-          <CopiedToast onDone={() => setCopiedToast(false)} />,
-          document.body,
-        )}
+        {copiedToast &&
+          createPortal(
+            <CopiedToast onDone={() => setCopiedToast(false)} />,
+            document.body
+          )}
       </AnimatePresence>
     </div>
   );

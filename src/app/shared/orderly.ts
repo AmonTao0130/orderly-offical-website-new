@@ -126,7 +126,7 @@ export const FOOTER_NAV: Record<
     },
     {
       label: "Campaigns",
-      href: "https://app.orderly.network/campaigns",
+      href: "https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar",
       external: true,
     },
     {

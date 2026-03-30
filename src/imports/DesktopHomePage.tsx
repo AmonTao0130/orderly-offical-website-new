@@ -1157,7 +1157,7 @@ function CampaignsDropdownPanel({
     {
       title: "I Love Perps Competition",
       subtitle: "Join to earn USDC reward",
-      href: "https://app.orderly.network/campaigns/perps-competition",
+      href: "https://app.orderly.network/campaigns/perps-competition?utm_source=orderly_website&utm_medium=navbar",
       status: "Ongoing",
       borderClass: "border-[#48bdff]",
       backgroundClass:
@@ -1165,7 +1165,7 @@ function CampaignsDropdownPanel({
     },
     {
       title: "Ultimate Crypto Championship",
-      href: "https://app.orderly.network/campaigns/ultimate-crypto-championship",
+      href: "https://app.orderly.network/campaigns/ultimate-crypto-championship?utm_source=orderly_website&utm_medium=navbar",
       status: "Ended",
       borderClass: "border-[rgba(255,255,255,0.06)]",
       backgroundClass:
@@ -1245,7 +1245,7 @@ function CampaignsMenuCell() {
       }}
     >
       <a
-        href="https://app.orderly.network/campaigns"
+        href="https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
         target="_blank"
         rel="noopener noreferrer"
         className="campaign-gradient-button isolate relative z-0 flex h-[32px] items-center justify-center gap-[6px] overflow-clip rounded-full border border-solid border-transparent bg-[#110621] px-[14px] no-underline after:absolute after:inset-px after:z-[-1] after:rounded-full after:bg-[#110621] after:content-[''] before:absolute before:inset-0 before:z-[-1] before:rounded-[inherit] before:content-['']"
@@ -1413,7 +1413,7 @@ function MenuCell2() {
             { label: "Explorer", href: "https://explorer.orderly.network/" },
             {
               label: "Campaigns",
-              href: "https://app.orderly.network/campaigns",
+              href: "https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar",
             },
             { label: "Vaults", href: "http://app.orderly.network/vaults" },
             {
@@ -1959,7 +1959,7 @@ function ProductInfo1() {
 function DexCard1() {
   return (
     <a
-href="https://pro.woofi.com"
+      href="https://pro.woofi.com"
       target="_blank"
       rel="noopener noreferrer"
       className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px]"
@@ -3489,7 +3489,7 @@ function DevelopersLinksContainer1() {
         <OrderlySdkLinkContainer4 />
       </a>
       <a
-        href="https://app.orderly.network/campaigns"
+        href="https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
         target="_blank"
         rel="noopener noreferrer"
         className="no-underline hover:opacity-80 transition-opacity"

@@ -43,7 +43,9 @@ function ScaledFrame({
     if (!outerRef.current) return;
     const vw = outerRef.current.offsetWidth;
     const raw = vw / dw;
-    const comfortCap = comfortableViewport ? Math.min(vw / comfortableViewport, 1) : 1;
+    const comfortCap = comfortableViewport
+      ? Math.min(vw / comfortableViewport, 1)
+      : 1;
     setScale(cap ? Math.min(raw, comfortCap) : raw);
   }, [cap, dw, comfortableViewport]);
 
@@ -108,28 +110,79 @@ function ScaledFrame({
   );
 }
 
-function MobileFixedNav({ onMenuClick, bannerHeight = 0 }: { onMenuClick: () => void; bannerHeight?: number }) {
+function MobileFixedNav({
+  onMenuClick,
+  bannerHeight = 0,
+}: {
+  onMenuClick: () => void;
+  bannerHeight?: number;
+}) {
   return (
-    <div style={{
-      position: "fixed",
-      top: bannerHeight, left: 0, right: 0,
-      zIndex: 100,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      padding: "20px 24px",
-      background: "#000",
-      height: 72,
-    }}>
-      <Link href="/" style={{ display: "block", width: 32, height: 32, position: "relative" }}>
-        <svg style={{ position: "absolute", width: "100%", height: "100%" }} fill="none" preserveAspectRatio="none" viewBox="0 0 31.9999 31.9608">
-          <path clipRule="evenodd" d={svgPaths.p2fe0400} fill="white" fillRule="evenodd" />
-          <path clipRule="evenodd" d={svgPaths.p2f88ca00} fill="white" fillRule="evenodd" />
-          <path clipRule="evenodd" d={svgPaths.p22c01780} fill="white" fillRule="evenodd" />
-          <path clipRule="evenodd" d={svgPaths.p527fe00} fill="white" fillRule="evenodd" />
+    <div
+      style={{
+        position: "fixed",
+        top: bannerHeight,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "20px 24px",
+        background: "#000",
+        height: 72,
+      }}
+    >
+      <Link
+        href="/"
+        style={{
+          display: "block",
+          width: 32,
+          height: 32,
+          position: "relative",
+        }}
+      >
+        <svg
+          style={{ position: "absolute", width: "100%", height: "100%" }}
+          fill="none"
+          preserveAspectRatio="none"
+          viewBox="0 0 31.9999 31.9608"
+        >
+          <path
+            clipRule="evenodd"
+            d={svgPaths.p2fe0400}
+            fill="white"
+            fillRule="evenodd"
+          />
+          <path
+            clipRule="evenodd"
+            d={svgPaths.p2f88ca00}
+            fill="white"
+            fillRule="evenodd"
+          />
+          <path
+            clipRule="evenodd"
+            d={svgPaths.p22c01780}
+            fill="white"
+            fillRule="evenodd"
+          />
+          <path
+            clipRule="evenodd"
+            d={svgPaths.p527fe00}
+            fill="white"
+            fillRule="evenodd"
+          />
         </svg>
       </Link>
-      <button onClick={onMenuClick} style={{ background: "transparent", border: 0, cursor: "pointer", padding: "4px" }}>
+      <button
+        onClick={onMenuClick}
+        style={{
+          background: "transparent",
+          border: 0,
+          cursor: "pointer",
+          padding: "4px",
+        }}
+      >
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
           <rect x="4" y="9" width="24" height="2.5" rx="1.25" fill="white" />
           <rect x="4" y="15" width="24" height="2.5" rx="1.25" fill="white" />
@@ -178,19 +231,32 @@ const CLOSE_BTN_STYLE = {
 function CloseIcon() {
   return (
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-      <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path
+        d="M1 1L11 11M11 1L1 11"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
 
-function AnnouncementBanner({ mobile, onClose }: { mobile?: boolean; onClose: () => void }) {
+function AnnouncementBanner({
+  mobile,
+  onClose,
+}: {
+  mobile?: boolean;
+  onClose: () => void;
+}) {
   if (mobile) {
     // Mobile: text wraps to ~2 lines, X vertically centered on right
     return (
       <div
         style={{
           position: "fixed",
-          top: 0, left: 0, right: 0,
+          top: 0,
+          left: 0,
+          right: 0,
           zIndex: 200,
           willChange: "transform",
           height: `calc(${BANNER_HEIGHT_MOBILE}px + var(--sai-top, 0px))`,
@@ -204,7 +270,9 @@ function AnnouncementBanner({ mobile, onClose }: { mobile?: boolean; onClose: ()
         }}
       >
         <span style={{ ...BANNER_TEXT_STYLE, fontSize: 13, lineHeight: 1.5 }}>
-          I 💜 Perps Trading Competition<br />Compete for $25,000+ ·{" "}
+          I 💜 Perps Trading Competition
+          <br />
+          Compete for $25,000+ ·{" "}
           <a
             href="https://app.orderly.network/campaigns"
             target="_blank"
@@ -218,7 +286,13 @@ function AnnouncementBanner({ mobile, onClose }: { mobile?: boolean; onClose: ()
         <button
           onClick={onClose}
           aria-label="Close announcement"
-          style={{ ...CLOSE_BTN_STYLE, position: "absolute", top: "50%", right: 6, transform: "translateY(-50%)" }}
+          style={{
+            ...CLOSE_BTN_STYLE,
+            position: "absolute",
+            top: "50%",
+            right: 6,
+            transform: "translateY(-50%)",
+          }}
         >
           <CloseIcon />
         </button>
@@ -231,7 +305,9 @@ function AnnouncementBanner({ mobile, onClose }: { mobile?: boolean; onClose: ()
     <div
       style={{
         position: "fixed",
-        top: 0, left: 0, right: 0,
+        top: 0,
+        left: 0,
+        right: 0,
         zIndex: 200,
         willChange: "transform",
         height: `calc(${BANNER_HEIGHT}px + var(--sai-top, 0px))`,
@@ -244,7 +320,9 @@ function AnnouncementBanner({ mobile, onClose }: { mobile?: boolean; onClose: ()
     >
       <div style={{ flex: 1 }} />
 
-      <span style={{ ...BANNER_TEXT_STYLE, fontSize: 13, whiteSpace: "nowrap" }}>
+      <span
+        style={{ ...BANNER_TEXT_STYLE, fontSize: 13, whiteSpace: "nowrap" }}
+      >
         I 💜 Perps Trading Competition · Compete for $25,000+ ·{" "}
         <a
           href="https://app.orderly.network/campaigns"
@@ -258,7 +336,11 @@ function AnnouncementBanner({ mobile, onClose }: { mobile?: boolean; onClose: ()
       </span>
 
       <div style={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
-        <button onClick={onClose} aria-label="Close announcement" style={CLOSE_BTN_STYLE}>
+        <button
+          onClick={onClose}
+          aria-label="Close announcement"
+          style={CLOSE_BTN_STYLE}
+        >
           <CloseIcon />
         </button>
       </div>
@@ -285,7 +367,13 @@ function FloatingCampaignHeart() {
         textDecoration: "none",
       }}
     >
-      <img src="/images/love1.png" alt="Join Campaign" width={64} height={64} style={{ display: "block" }} />
+      <img
+        src="/images/love1.png"
+        alt="Join Campaign"
+        width={64}
+        height={64}
+        style={{ display: "block" }}
+      />
     </a>
   );
 }
@@ -294,34 +382,37 @@ type Viewport = "mobile" | "tablet" | "desktop";
 
 export default function Home() {
   const [viewport, setViewport] = useState<Viewport>("desktop");
-  const [navOpen,  setNavOpen]  = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
   const [bannerVisible, setBannerVisible] = useState(true);
   const [safeAreaTop, setSafeAreaTop] = useState(0);
 
-  const handleOpenNav    = useCallback(() => setNavOpen(true),       []);
-  const handleCloseNav   = useCallback(() => setNavOpen(false),      []);
+  const handleOpenNav = useCallback(() => setNavOpen(true), []);
+  const handleCloseNav = useCallback(() => setNavOpen(false), []);
   const handleCloseBanner = useCallback(() => setBannerVisible(false), []);
 
   // Read env(safe-area-inset-top) from CSS variable (requires viewport-fit=cover)
   useEffect(() => {
     const read = () => {
       const raw = getComputedStyle(document.documentElement)
-        .getPropertyValue('--sai-top').trim();
+        .getPropertyValue("--sai-top")
+        .trim();
       setSafeAreaTop(parseFloat(raw) || 0);
     };
     read();
-    window.addEventListener('resize', read);
-    return () => window.removeEventListener('resize', read);
+    window.addEventListener("resize", read);
+    return () => window.removeEventListener("resize", read);
   }, []);
 
   useEffect(() => {
-    let meta = document.querySelector('meta[name="theme-color"]') as HTMLMetaElement | null;
+    let meta = document.querySelector(
+      'meta[name="theme-color"]'
+    ) as HTMLMetaElement | null;
     if (!meta) {
-      meta = document.createElement('meta') as HTMLMetaElement;
-      meta.setAttribute('name', 'theme-color');
+      meta = document.createElement("meta") as HTMLMetaElement;
+      meta.setAttribute("name", "theme-color");
       document.head.appendChild(meta);
     }
-    meta.setAttribute('content', bannerVisible ? BANNER_BG : '#000000');
+    meta.setAttribute("content", bannerVisible ? BANNER_BG : "#000000");
   }, [bannerVisible]);
 
   useEffect(() => {
@@ -336,20 +427,32 @@ export default function Home() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  const bannerH       = bannerVisible ? BANNER_HEIGHT        + safeAreaTop : 0;
+  const bannerH = bannerVisible ? BANNER_HEIGHT + safeAreaTop : 0;
   const bannerHMobile = bannerVisible ? BANNER_HEIGHT_MOBILE + safeAreaTop : 0;
 
   // Mobile (< 600 px): custom stacked MobileHomePage scaled to 375 px canvas
   if (viewport === "mobile") {
     return (
       <div style={{ width: "100vw", overflowX: "clip", background: "#000" }}>
-        {bannerVisible && <AnnouncementBanner mobile onClose={handleCloseBanner} />}
-        <MobileFixedNav onMenuClick={handleOpenNav} bannerHeight={bannerHMobile} />
+        {bannerVisible && (
+          <AnnouncementBanner mobile onClose={handleCloseBanner} />
+        )}
+        <MobileFixedNav
+          onMenuClick={handleOpenNav}
+          bannerHeight={bannerHMobile}
+        />
         <div style={{ paddingTop: 72 + bannerHMobile }}>
           <ScaledFrame designWidth={MOBILE_DESIGN_WIDTH} autoHeight>
             <MobileHomePage onMenuClick={handleOpenNav} hideNav hideFooter />
           </ScaledFrame>
-          <div style={{ padding: "0 20px 32px", marginTop: "46px", boxSizing: "border-box", width: "100%" }}>
+          <div
+            style={{
+              padding: "0 20px 32px",
+              marginTop: "46px",
+              boxSizing: "border-box",
+              width: "100%",
+            }}
+          >
             <MobileFullFooter />
           </div>
         </div>
