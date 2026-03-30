@@ -22,7 +22,7 @@ import { useNewsletterSubscribe } from "@/app/hooks/useNewsletterSubscribe";
 import Frame40 from "../../imports/Frame1618872068-142-633";
 
 // ── Desktop modals — single source of truth, reused on mobile ───────────────
-import { BuyOrderModal, PartnershipFormModal } from "../../imports/DesktopHomePage";
+import { BuyOrderModal, PartnershipFormModal, CampaignIcon } from "../../imports/DesktopHomePage";
 
 // ── Mobile icon paths (same file Frame40 uses for Brandmark) ─────────────────
 import svgPathsMobile from "../../imports/svg-4hybjba00c";
@@ -71,7 +71,7 @@ function walkDataAction(el: HTMLElement | null): string | null {
 /**
  * Full-screen navigation overlay — mirrors the desktop HeaderMenu exactly.
  * • Accordion sections for Builders / Ecosystem / Traders (same dropdown items as desktop)
- * • Direct link for Docs (matches desktop MenuCell3)
+ * • Direct links for Docs and Campaigns (Campaigns uses same gradient icon as desktop header, no dropdown)
  * • Dual CTA: "Launch Now" (white) + "Start Building" (purple)
  * • Brandmark from svg-4hybjba00c (same paths used by Frame40 top bar)
  */
@@ -263,6 +263,36 @@ function MobileNavDrawer({ onClose, deviceLayout = "mobile" }: { onClose: () => 
             onTouchEnd={(e) => { setTimeout(() => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }, 200); }}
           >
             Docs
+            <svg width="14" height="14" viewBox="0 0 12 12" fill="none" style={{ opacity: 0.35, flexShrink: 0 }}>
+              <path d="M2.5 9.5l7-7M4 2.5h5.5V8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
+        </div>
+
+        {/* Campaigns — direct link + left icon (matches desktop CampaignIcon, no dropdown animation) */}
+        <div style={{ borderBottom: rowDivider }}>
+          <a
+            href="https://app.orderly.network/campaigns"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => {
+              posthog.capture('header_nav_clicked', {
+                tab_name: 'campaigns',
+                source_page: 'homepage',
+                device_layout: deviceLayout,
+                section: 'header',
+              });
+              onClose();
+            }}
+            className="flex items-center justify-between gap-[12px] no-underline py-[18px] px-[24px]"
+            style={{ ...fontSectionStyle, minHeight: 56 }}
+            onTouchStart={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "0.7"; }}
+            onTouchEnd={(e) => { setTimeout(() => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }, 200); }}
+          >
+            <span className="flex min-w-0 flex-1 items-center gap-[10px]">
+              <CampaignIcon className="shrink-0" />
+              <span>Campaigns</span>
+            </span>
             <svg width="14" height="14" viewBox="0 0 12 12" fill="none" style={{ opacity: 0.35, flexShrink: 0 }}>
               <path d="M2.5 9.5l7-7M4 2.5h5.5V8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
