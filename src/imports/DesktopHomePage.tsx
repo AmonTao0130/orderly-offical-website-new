@@ -4,7 +4,7 @@ import posthog from "posthog-js";
 import { useState, useRef, useEffect, useCallback, useId } from "react";
 import Link from "next/link";
 import { createPortal } from "react-dom";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   useOrderlyStats,
   formatLargeNumber,
@@ -1179,10 +1179,14 @@ function CampaignsDropdownPanel({
   ];
 
   return (
-    <div
+    <motion.div
       className="absolute top-full left-0 z-50 pt-[8px]"
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
+      initial={{ opacity: 0, y: -6, scale: 0.98 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -6, scale: 0.98 }}
+      transition={{ duration: 0.16, ease: [0.22, 0.61, 0.36, 1] }}
     >
       <div className="w-[320px] rounded-lg bg-[#38235D33] p-2 backdrop-blur-[25px]">
         <div className="flex flex-col gap-[16px] rounded-[8px] bg-[#1e122f] p-[16px] shadow-[4px_4px_24px_0px_rgba(17,6,33,0.8)]">
@@ -1270,7 +1274,7 @@ function CampaignsDropdownPanel({
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -1318,9 +1322,11 @@ function CampaignsMenuCell() {
         </span>
         <ChevronIcon open={shouldOpen} />
       </a>
-      {shouldOpen && (
-        <CampaignsDropdownPanel onEnter={handleEnter} onLeave={handleLeave} />
-      )}
+      <AnimatePresence>
+        {shouldOpen && (
+          <CampaignsDropdownPanel onEnter={handleEnter} onLeave={handleLeave} />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
