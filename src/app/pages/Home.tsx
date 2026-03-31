@@ -360,6 +360,7 @@ function AnnouncementBanner({
 }
 
 function FloatingCampaignHeart() {
+  const [hovered, setHovered] = useState(false);
   return (
     <a
       href="https://app.orderly.network/campaigns"
@@ -367,14 +368,17 @@ function FloatingCampaignHeart() {
       rel="noopener noreferrer"
       className="floating-heart-btn"
       aria-label="Join Perps Trading Campaign"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
         position: "fixed",
         bottom: 28,
         right: 24,
         zIndex: 300,
-        display: "block",
-        width: 64,
-        height: 64,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 6,
         textDecoration: "none",
       }}
     >
@@ -383,8 +387,26 @@ function FloatingCampaignHeart() {
         alt="Join Campaign"
         width={64}
         height={64}
-        style={{ display: "block" }}
+        style={{ display: "block", flexShrink: 0 }}
       />
+      <span
+        style={{
+          color: "#fff",
+          fontSize: 12,
+          fontFamily: "'atyp-bl-variable', sans-serif",
+          fontWeight: 500,
+          whiteSpace: "nowrap",
+          opacity: hovered ? 1 : 0,
+          transform: hovered ? "translateY(0)" : "translateY(-6px)",
+          transition: "opacity 0.2s ease, transform 0.2s ease",
+          pointerEvents: "none",
+          background: "rgba(0,0,0,0.55)",
+          borderRadius: 6,
+          padding: "3px 8px",
+        }}
+      >
+        Competition
+      </span>
     </a>
   );
 }
