@@ -281,7 +281,7 @@ function AnnouncementBanner({
           <br />
           Compete for {prizeText} ·{" "}
           <a
-            href="ttps://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
+            href="https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
             target="_blank"
             rel="noopener noreferrer"
             className="banner-link"
@@ -336,7 +336,7 @@ function AnnouncementBanner({
       >
         I 💜 Perps Trading Competition · Compete for {prizeText} ·{" "}
         <a
-          href="ttps://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
+          href="https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
           target="_blank"
           rel="noopener noreferrer"
           className="banner-link"
@@ -363,7 +363,7 @@ function FloatingCampaignHeart() {
   const [hovered, setHovered] = useState(false);
   return (
     <a
-      href="ttps://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
+      href="https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
       target="_blank"
       rel="noopener noreferrer"
       className="floating-heart-btn"
