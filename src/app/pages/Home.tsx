@@ -281,7 +281,7 @@ function AnnouncementBanner({
           <br />
           Compete for {prizeText} ·{" "}
           <a
-            href="https://app.orderly.network/campaigns"
+            href="ttps://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
             target="_blank"
             rel="noopener noreferrer"
             className="banner-link"
@@ -336,7 +336,7 @@ function AnnouncementBanner({
       >
         I 💜 Perps Trading Competition · Compete for {prizeText} ·{" "}
         <a
-          href="https://app.orderly.network/campaigns"
+          href="ttps://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
           target="_blank"
           rel="noopener noreferrer"
           className="banner-link"
@@ -363,7 +363,7 @@ function FloatingCampaignHeart() {
   const [hovered, setHovered] = useState(false);
   return (
     <a
-      href="https://app.orderly.network/campaigns"
+      href="ttps://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
       target="_blank"
       rel="noopener noreferrer"
       className="floating-heart-btn"
@@ -483,7 +483,7 @@ export default function Home() {
           )}
         </AnimatePresence>
         <MobileFixedNav
-        onMenuClick={handleOpenNav}
+          onMenuClick={handleOpenNav}
           bannerHeight={bannerHMobile}
         />
         <div
@@ -530,7 +530,10 @@ export default function Home() {
           )}
         </AnimatePresence>
         <div
-          style={{ paddingTop: bannerH, transition: "padding-top 220ms ease-out" }}
+          style={{
+            paddingTop: bannerH,
+            transition: "padding-top 220ms ease-out",
+          }}
         >
           <TabletHomePage bannerOffset={bannerH} />
         </div>
@@ -551,7 +554,10 @@ export default function Home() {
         )}
       </AnimatePresence>
       <div
-        style={{ paddingTop: bannerH, transition: "padding-top 220ms ease-out" }}
+        style={{
+          paddingTop: bannerH,
+          transition: "padding-top 220ms ease-out",
+        }}
       >
         <ScaledFrame cap comfortableViewport={1680}>
           <Frame7 />

@@ -1158,7 +1158,7 @@ function CampaignsDropdownPanel({
     {
       titleVariant: "perps",
       subtitle: "Join to earn USDC reward",
-      href: "https://app.orderly.network/campaigns",
+      href: "ttps://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar",
       status: "Ongoing",
       backgroundImageSrc: "/campaigns/header/campaign-bg-2.png",
       backgroundImageClassName:
