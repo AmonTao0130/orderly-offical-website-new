@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import Frame7 from "../../imports/DesktopHomePage";
 import { MobileHomePage, MobileNavDrawer } from "../components/MobileHomePage";
 import { MobileFullFooter } from "../../imports/Frame1618872068-142-633";
 import { TabletHomePage } from "../components/TabletHomePage";
 import svgPaths from "../../imports/svg-4hybjba00c";
+import { useCompetitionPrizePoolTotal } from "../hooks/useCompetitionPrizePoolTotal";
 
 // Desktop / tablet Figma canvas: 1440 × 6500 px
 const DESIGN_WIDTH = 1440;
@@ -244,14 +245,20 @@ function CloseIcon() {
 function AnnouncementBanner({
   mobile,
   onClose,
+  prizeText,
 }: {
   mobile?: boolean;
   onClose: () => void;
+  prizeText: string;
 }) {
   if (mobile) {
     // Mobile: text wraps to ~2 lines, X vertically centered on right
     return (
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.22, ease: "easeOut" }}
         style={{
           position: "fixed",
           top: 0,
@@ -272,7 +279,7 @@ function AnnouncementBanner({
         <span style={{ ...BANNER_TEXT_STYLE, fontSize: 13, lineHeight: 1.5 }}>
           I 💜 Perps Trading Competition
           <br />
-          Compete for $25,000+ ·{" "}
+          Compete for {prizeText} ·{" "}
           <a
             href="https://app.orderly.network/campaigns"
             target="_blank"
@@ -296,13 +303,17 @@ function AnnouncementBanner({
         >
           <CloseIcon />
         </button>
-      </div>
+      </motion.div>
     );
   }
 
   // Desktop / tablet: single row — spacer | text with inline link | X
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.22, ease: "easeOut" }}
       style={{
         position: "fixed",
         top: 0,
@@ -323,7 +334,7 @@ function AnnouncementBanner({
       <span
         style={{ ...BANNER_TEXT_STYLE, fontSize: 13, whiteSpace: "nowrap" }}
       >
-        I 💜 Perps Trading Competition · Compete for $25,000+ ·{" "}
+        I 💜 Perps Trading Competition · Compete for {prizeText} ·{" "}
         <a
           href="https://app.orderly.network/campaigns"
           target="_blank"
@@ -344,7 +355,7 @@ function AnnouncementBanner({
           <CloseIcon />
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -385,6 +396,12 @@ export default function Home() {
   const [navOpen, setNavOpen] = useState(false);
   const [bannerVisible, setBannerVisible] = useState(true);
   const [safeAreaTop, setSafeAreaTop] = useState(0);
+  const { total: prizePoolTotal, ready: prizePoolReady } =
+    useCompetitionPrizePoolTotal();
+  const prizeText = `$${new Intl.NumberFormat("en-US").format(
+    Math.round(prizePoolTotal)
+  )}+`;
+  const bannerShown = bannerVisible && prizePoolReady;
 
   const handleOpenNav = useCallback(() => setNavOpen(true), []);
   const handleCloseNav = useCallback(() => setNavOpen(false), []);
@@ -412,8 +429,8 @@ export default function Home() {
       meta.setAttribute("name", "theme-color");
       document.head.appendChild(meta);
     }
-    meta.setAttribute("content", bannerVisible ? BANNER_BG : "#000000");
-  }, [bannerVisible]);
+    meta.setAttribute("content", bannerShown ? BANNER_BG : "#000000");
+  }, [bannerShown]);
 
   useEffect(() => {
     const update = () => {
@@ -427,21 +444,32 @@ export default function Home() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  const bannerH = bannerVisible ? BANNER_HEIGHT + safeAreaTop : 0;
-  const bannerHMobile = bannerVisible ? BANNER_HEIGHT_MOBILE + safeAreaTop : 0;
+  const bannerH = bannerShown ? BANNER_HEIGHT + safeAreaTop : 0;
+  const bannerHMobile = bannerShown ? BANNER_HEIGHT_MOBILE + safeAreaTop : 0;
 
   // Mobile (< 600 px): custom stacked MobileHomePage scaled to 375 px canvas
   if (viewport === "mobile") {
     return (
       <div style={{ width: "100vw", overflowX: "clip", background: "#000" }}>
-        {bannerVisible && (
-          <AnnouncementBanner mobile onClose={handleCloseBanner} />
-        )}
+        <AnimatePresence>
+          {bannerShown && (
+            <AnnouncementBanner
+              mobile
+              onClose={handleCloseBanner}
+              prizeText={prizeText}
+            />
+          )}
+        </AnimatePresence>
         <MobileFixedNav
-          onMenuClick={handleOpenNav}
+        onMenuClick={handleOpenNav}
           bannerHeight={bannerHMobile}
         />
-        <div style={{ paddingTop: 72 + bannerHMobile }}>
+        <div
+          style={{
+            paddingTop: 72 + bannerHMobile,
+            transition: "padding-top 220ms ease-out",
+          }}
+        >
           <ScaledFrame designWidth={MOBILE_DESIGN_WIDTH} autoHeight>
             <MobileHomePage onMenuClick={handleOpenNav} hideNav hideFooter />
           </ScaledFrame>
@@ -471,8 +499,17 @@ export default function Home() {
   if (viewport === "tablet") {
     return (
       <>
-        {bannerVisible && <AnnouncementBanner onClose={handleCloseBanner} />}
-        <div style={{ paddingTop: bannerH }}>
+        <AnimatePresence>
+          {bannerShown && (
+            <AnnouncementBanner
+              onClose={handleCloseBanner}
+              prizeText={prizeText}
+            />
+          )}
+        </AnimatePresence>
+        <div
+          style={{ paddingTop: bannerH, transition: "padding-top 220ms ease-out" }}
+        >
           <TabletHomePage bannerOffset={bannerH} />
         </div>
         <FloatingCampaignHeart />
@@ -483,8 +520,17 @@ export default function Home() {
   // Desktop (≥ 1024 px): pixel-perfect ScaledFrame of the 1440 px Figma canvas
   return (
     <div style={{ width: "100%", overflowX: "hidden", background: "#000" }}>
-      {bannerVisible && <AnnouncementBanner onClose={handleCloseBanner} />}
-      <div style={{ paddingTop: bannerH }}>
+      <AnimatePresence>
+        {bannerShown && (
+          <AnnouncementBanner
+            onClose={handleCloseBanner}
+            prizeText={prizeText}
+          />
+        )}
+      </AnimatePresence>
+      <div
+        style={{ paddingTop: bannerH, transition: "padding-top 220ms ease-out" }}
+      >
         <ScaledFrame cap comfortableViewport={1680}>
           <Frame7 />
         </ScaledFrame>
