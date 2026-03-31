@@ -1225,8 +1225,11 @@ function CampaignsDropdownPanel({
                 <div className="content-stretch flex gap-[8px] items-center p-[16px] relative size-full flex-1">
                   {item.titleVariant === "perps" ? (
                     <div className="basis-0 content-stretch flex gap-[16px] grow items-center min-h-px min-w-px relative shrink-0">
-                      <div className="basis-0 content-stretch flex flex-col font-['Atyp_BL_Text:Medium',sans-serif] gap-[4px] grow items-start justify-center leading-[1.2] min-h-px min-w-px not-italic relative shrink-0">
-                        <p className="relative shrink-0 text-[14px] text-[rgba(255,255,255,0.98)] w-full flex items-center gap-1">
+                      <div className="basis-0 content-stretch flex flex-col gap-[4px] grow items-start justify-center min-h-px min-w-px not-italic relative shrink-0">
+                        <p
+                          className="font-['Atyp_BL:Regular',sans-serif] font-normal leading-[1.6] relative shrink-0 text-[14px] text-[rgba(255,255,255,0.98)] w-full flex items-center gap-1"
+                          style={{ letterSpacing: "0.042em" }}
+                        >
                           I{" "}
                           <img
                             src="/campaigns/icons/heart-o.svg"
@@ -1235,14 +1238,17 @@ function CampaignsDropdownPanel({
                           />{" "}
                           Perps Competition
                         </p>
-                        <p className="relative shrink-0 text-[12px] text-[rgba(255,255,255,0.5)] w-full">
+                        <p className="font-['Atyp_BL:Regular',sans-serif] font-normal leading-[1.6] relative shrink-0 text-[12px] text-[rgba(255,255,255,0.5)] w-full">
                           {item.subtitle}
                         </p>
                       </div>
                     </div>
                   ) : (
                     <div className="basis-0 content-stretch flex gap-[16px] grow items-center min-h-px min-w-px relative shrink-0">
-                      <p className="font-['Atyp_BL_Text:Medium',sans-serif] h-full leading-[1.2] not-italic relative shrink-0 text-[14px] text-[rgba(255,255,255,0.5)] w-[256px]">
+                      <p
+                        className="font-['Atyp_BL:Regular',sans-serif] font-normal leading-[1.6] h-full not-italic relative shrink-0 text-[14px] text-[rgba(255,255,255,0.5)] w-[256px]"
+                        style={{ letterSpacing: "0.042em" }}
+                      >
                         Ultimate Crypto Championship
                       </p>
                     </div>
@@ -1257,13 +1263,13 @@ function CampaignsDropdownPanel({
                           "linear-gradient(-89.3303deg, rgb(72, 189, 255) 0%, rgb(120, 108, 255) 47.763%, rgb(189, 0, 255) 99.638%)",
                       }}
                     >
-                      <p className="font-['Atyp_BL_Text:Medium',sans-serif] leading-[1.2] not-italic relative shrink-0 text-[10px] text-[rgba(255,255,255,0.98)] text-nowrap">
+                      <p className="font-['Atyp_BL:Regular',sans-serif] font-normal leading-[1.6] not-italic relative shrink-0 text-[10px] text-[rgba(255,255,255,0.98)] text-nowrap">
                         Ongoing
                       </p>
                     </div>
                   ) : (
                     <div className="absolute bg-[rgba(255,255,255,0.36)] content-stretch flex items-center justify-center px-[8px] py-[4px] right-0 rounded-bl-[8px] rounded-tr-[8px] top-0">
-                      <p className="font-['Atyp_BL_Text:Medium',sans-serif] leading-[1.2] not-italic relative shrink-0 text-[10px] text-[rgba(255,255,255,0.98)] text-nowrap">
+                      <p className="font-['Atyp_BL:Regular',sans-serif] font-normal leading-[1.6] not-italic relative shrink-0 text-[10px] text-[rgba(255,255,255,0.98)] text-nowrap">
                         Ended
                       </p>
                     </div>
@@ -1312,11 +1318,8 @@ function CampaignsMenuCell() {
       >
         <CampaignIcon className="mr-1" />
         <span
-          className="text-[16px] leading-none text-white"
-          style={{
-            fontFamily: "'Atyp_Text:Medium',sans-serif",
-            letterSpacing: "0.042em",
-          }}
+          className="font-['Atyp_Text:Medium',sans-serif] text-[16px] leading-none not-italic text-white"
+          style={{ letterSpacing: "0.042em" }}
         >
           Campaigns
         </span>
