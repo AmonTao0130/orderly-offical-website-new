@@ -71,11 +71,6 @@ export const FOOTER_NAV: Record<
       external: true,
     },
     {
-      label: "Documentation",
-      href: "https://orderly.network/docs/introduction/getting-started/what-is-orderly",
-      external: true,
-    },
-    {
       label: "GitHub",
       href: "https://github.com/OrderlyNetwork",
       external: true,
@@ -122,11 +117,6 @@ export const FOOTER_NAV: Record<
     {
       label: "Explorer",
       href: "https://explorer.orderly.network/",
-      external: true,
-    },
-    {
-      label: "Campaigns",
-      href: "https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar",
       external: true,
     },
     {

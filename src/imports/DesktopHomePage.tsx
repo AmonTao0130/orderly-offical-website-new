@@ -361,6 +361,15 @@ export function PartnershipFormModal({ onClose }: { onClose: () => void }) {
 
     if (!validateForm()) return;
 
+    const COOLDOWN_MS = 60 * 1000;
+    const lastSubmit = Number(localStorage.getItem("partnership_last_submit") || 0);
+    const remaining = Math.ceil((lastSubmit + COOLDOWN_MS - Date.now()) / 1000);
+    if (remaining > 0) {
+      setSubmitStatus("error");
+      setStatusMessage(`Please wait ${remaining} second(s) before submitting again.`);
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
@@ -385,6 +394,7 @@ export function PartnershipFormModal({ onClose }: { onClose: () => void }) {
       const data = await response.json();
 
       if (response.ok) {
+        localStorage.setItem("partnership_last_submit", String(Date.now()));
         setSubmitStatus("success");
         setStatusMessage(
           data.message || "Your inquiry has been submitted successfully!"
@@ -1368,10 +1378,6 @@ function MenuCell() {
           items={[
             { label: "Orderly One", href: "https://dex.orderly.network/" },
             { label: "My DEX", href: "https://dex.orderly.network/dex" },
-            {
-              label: "Documentation",
-              href: "https://orderly.network/docs/introduction/getting-started/what-is-orderly",
-            },
             { label: "GitHub", href: "https://github.com/OrderlyNetwork" },
           ]}
         />
@@ -1468,10 +1474,6 @@ function MenuCell2() {
             { label: "Live DEXs", href: "https://dex.orderly.network/board/" },
             { label: "Dashboard", href: "https://dashboard.orderly.network" },
             { label: "Explorer", href: "https://explorer.orderly.network/" },
-            {
-              label: "Campaigns",
-              href: "https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar",
-            },
             { label: "Vaults", href: "http://app.orderly.network/vaults" },
             {
               label: "API",

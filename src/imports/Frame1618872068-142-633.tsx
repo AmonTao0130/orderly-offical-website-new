@@ -4233,10 +4233,6 @@ function Frame7() {
       label: "Orderly SDKs",
       href: "https://orderly.network/docs/sdks/overview",
     },
-    {
-      label: "Documentation",
-      href: "https://orderly.network/docs/introduction/getting-started/what-is-orderly",
-    },
     { label: "GitHub", href: "https://github.com/OrderlyNetwork" },
   ];
 
@@ -4509,10 +4505,6 @@ function Frame10() {
       href: "https://orderly.network/docs/build-on-omnichain/evm-api/introduction",
     },
     { label: "Explorer", href: "https://explorer.orderly.network/" },
-    {
-      label: "Campaigns",
-      href: "https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar",
-    },
     { label: "Vaults", href: "http://app.orderly.network/vaults" },
   ];
 
