@@ -266,7 +266,7 @@ const PARTNERS: Partner[] = [
     url: "https://aden.finance/",
   },
   {
-    name: "Perptools",
+    name: "PERPTools",
     category: "Builder",
     description:
       "AI-powered perpetuals trading interface bringing intelligent order routing and strategy execution on top of Orderly's omnichain infrastructure.",

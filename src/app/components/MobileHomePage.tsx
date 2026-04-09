@@ -36,6 +36,10 @@ import {
   DEX_URLS,
   SOCIAL_LINKS,
   FOOTER_NAV,
+  HEADER_NAV,
+  HEADER_CTA,
+  DOCS_LINK,
+  CAMPAIGNS_LINK,
   AI_URL,
   NPX_CMD,
   copyToClipboard,
@@ -89,9 +93,9 @@ function MobileNavDrawer({
   const [openSection, setOpenSection] = useState<string | null>(null);
 
   const NAV_SECTIONS = [
-    { key: "Builders", items: FOOTER_NAV.Builders },
-    { key: "Ecosystem", items: FOOTER_NAV.Ecosystem },
-    { key: "Traders", items: FOOTER_NAV.Traders },
+    { key: "Builders", items: HEADER_NAV.Builders },
+    { key: "Ecosystem", items: HEADER_NAV.Ecosystem },
+    { key: "Traders", items: HEADER_NAV.Traders },
   ];
 
   const toggle = (key: string) =>
@@ -378,7 +382,7 @@ function MobileNavDrawer({
         {/* Docs — direct link, no dropdown (matches desktop MenuCell3) */}
         <div style={{ borderBottom: rowDivider }}>
           <a
-            href="https://orderly.network/docs/introduction/getting-started/what-is-orderly"
+            href={DOCS_LINK.href}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => {
@@ -401,7 +405,7 @@ function MobileNavDrawer({
               }, 200);
             }}
           >
-            Docs
+            {DOCS_LINK.label}
             <svg
               width="14"
               height="14"
@@ -423,7 +427,7 @@ function MobileNavDrawer({
         {/* Campaigns — direct link + left icon (matches desktop CampaignIcon, no dropdown animation) */}
         <div style={{ borderBottom: rowDivider }}>
           <a
-            href="https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
+            href={CAMPAIGNS_LINK.href}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => {
@@ -448,7 +452,7 @@ function MobileNavDrawer({
           >
             <span className="flex min-w-0 flex-1 items-center gap-[10px]">
               <CampaignIcon className="shrink-0" />
-              <span>Campaigns</span>
+              <span>{CAMPAIGNS_LINK.label}</span>
             </span>
             <svg
               width="14"
@@ -476,7 +480,7 @@ function MobileNavDrawer({
       >
         {/* Launch Now — white, matches desktop HeaderMenu primary CTA */}
         <a
-          href="https://dex.orderly.network/dex/"
+          href={HEADER_CTA.href}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center rounded-[46px] py-[16px] no-underline"

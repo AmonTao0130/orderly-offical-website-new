@@ -11,6 +11,14 @@ import {
 } from "@/app/hooks/useOrderlyStats";
 import { AnimatedNumber } from "@/app/components/AnimatedNumber";
 import { useNewsletterSubscribe } from "@/app/hooks/useNewsletterSubscribe";
+import {
+  HEADER_NAV,
+  HEADER_CTA,
+  DOCS_LINK,
+  CAMPAIGNS_LINK,
+  CAMPAIGN_ITEMS,
+  FOOTER_NAV,
+} from "@/app/shared/orderly";
 import svgPaths from "./svg-kykn6znl0w";
 import ImportedWhyContent from "./WhyContent";
 import MacbookVideo from "@/app/components/MacbookVideo";
@@ -1070,7 +1078,11 @@ function DropdownPanel({
   groupKey: string;
 }) {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: -6, scale: 0.97 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -6, scale: 0.97 }}
+      transition={{ duration: 0.18, ease: [0.22, 0.61, 0.36, 1] }}
       className="absolute top-full left-0 z-50 pt-[4px]"
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
@@ -1118,7 +1130,7 @@ function DropdownPanel({
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -1164,29 +1176,7 @@ function CampaignsDropdownPanel({
   onEnter: () => void;
   onLeave: () => void;
 }) {
-  const items: CampaignDropdownItem[] = [
-    {
-      titleVariant: "perps",
-      subtitle: "Join to earn USDC reward",
-      href: "https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar",
-      status: "Ongoing",
-      backgroundImageSrc: "/campaigns/header/campaign-bg-2.png",
-      backgroundImageClassName:
-        "absolute h-[160%] left-0 max-w-none top-[-30%] w-full object-cover object-top",
-      borderClassName:
-        "absolute border border-[#48bdff] border-solid inset-0 pointer-events-none rounded-[8px]",
-    },
-    {
-      titleVariant: "ucc",
-      href: "https://app.orderly.network/campaigns/ultimate-crypto-championship",
-      status: "Ended",
-      backgroundImageSrc: "/campaigns/header/campaign-bg-1.png",
-      backgroundImageClassName:
-        "absolute h-[494.34%] left-[0.24%] max-w-none top-[-144.53%] w-full object-cover object-top",
-      borderClassName:
-        "absolute border border-[rgba(255,255,255,0.06)] border-solid inset-0 pointer-events-none rounded-[8px]",
-    },
-  ];
+  const items = CAMPAIGN_ITEMS;
 
   return (
     <motion.div
@@ -1313,7 +1303,7 @@ function CampaignsMenuCell() {
       }}
     >
       <a
-        href="https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
+        href={CAMPAIGNS_LINK.href}
         target="_blank"
         rel="noopener noreferrer"
         className="relative flex h-[32px] items-center justify-center gap-[6px] rounded-full px-[14px] no-underline overflow-hidden"
@@ -1385,18 +1375,16 @@ function MenuCell() {
         </div>
       </div>
       <ChevronIcon open={open} />
-      {open && (
-        <DropdownPanel
-          onEnter={handleEnter}
-          onLeave={handleLeave}
-          groupKey="builders"
-          items={[
-            { label: "Orderly One", href: "https://dex.orderly.network/" },
-            { label: "My DEX", href: "https://dex.orderly.network/dex" },
-            { label: "GitHub", href: "https://github.com/OrderlyNetwork" },
-          ]}
-        />
-      )}
+      <AnimatePresence>
+        {open && (
+          <DropdownPanel
+            onEnter={handleEnter}
+            onLeave={handleLeave}
+            groupKey="builders"
+            items={HEADER_NAV.Builders}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -1427,29 +1415,16 @@ function MenuCell1() {
         </div>
       </div>
       <ChevronIcon open={open} />
-      {open && (
-        <DropdownPanel
-          onEnter={handleEnter}
-          onLeave={handleLeave}
-          groupKey="ecosystem"
-          items={[
-            { label: "Partners", href: "https://orderly.network/partners/" },
-            { label: "Listings", href: "https://orderly.network/listing/" },
-            {
-              label: "Case Studies",
-              href: "https://dex.orderly.network/case-studies",
-            },
-            {
-              label: "Governance",
-              href: "https://snapshot.box/#/s:orderlygov.eth",
-            },
-            { label: "Staking", href: "https://app.orderly.network/staking" },
-            { label: "Blog", href: "https://orderly.network/blog/" },
-            { label: "Team", href: "https://orderly.network/team/" },
-            { label: "FAQ", href: "/faq" },
-          ]}
-        />
-      )}
+      <AnimatePresence>
+        {open && (
+          <DropdownPanel
+            onEnter={handleEnter}
+            onLeave={handleLeave}
+            groupKey="ecosystem"
+            items={HEADER_NAV.Ecosystem}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -1480,23 +1455,16 @@ function MenuCell2() {
         </div>
       </div>
       <ChevronIcon open={open} />
-      {open && (
-        <DropdownPanel
-          onEnter={handleEnter}
-          onLeave={handleLeave}
-          groupKey="traders"
-          items={[
-            { label: "Live DEXs", href: "https://dex.orderly.network/board/" },
-            { label: "Dashboard", href: "https://dashboard.orderly.network" },
-            { label: "Explorer", href: "https://explorer.orderly.network/" },
-            { label: "Vaults", href: "http://app.orderly.network/vaults" },
-            {
-              label: "API",
-              href: "https://orderly.network/docs/build-on-omnichain/evm-api/introduction",
-            },
-          ]}
-        />
-      )}
+      <AnimatePresence>
+        {open && (
+          <DropdownPanel
+            onEnter={handleEnter}
+            onLeave={handleLeave}
+            groupKey="traders"
+            items={HEADER_NAV.Traders}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -1528,7 +1496,7 @@ function HeaderMenuItem3() {
 function MenuCell3() {
   return (
     <a
-      href="https://orderly.network/docs/introduction/getting-started/what-is-orderly"
+      href={DOCS_LINK.href}
       target="_blank"
       rel="noopener noreferrer"
       className="content-stretch flex h-[50px] items-baseline pb-[10px] pt-[16px] relative shrink-0 no-underline"
@@ -1559,7 +1527,7 @@ function HeaderMenu() {
       <CampaignsMenuCell />
 
       <a
-        href="https://dex.orderly.network/dex/"
+        href={HEADER_CTA.href}
         target="_blank"
         rel="noopener noreferrer"
         className="content-stretch flex h-[40px] items-center justify-center px-[20px] py-[12px] relative rounded-[46px] shrink-0 no-underline hover:opacity-90 transition-opacity"
@@ -1580,7 +1548,7 @@ function HeaderMenu() {
           className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[#3f0086] text-[16px] tracking-[0.16px]"
           style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05'" }}
         >
-          Launch Now
+          {HEADER_CTA.label}
         </p>
       </a>
     </div>
@@ -1814,7 +1782,14 @@ function FeatureTag() {
     >
       <div
         aria-hidden="true"
-        className="absolute border-3 border-solid border-white inset-0 pointer-events-none rounded-[124px] shadow-[14px_18px_30px_0px_rgba(0,0,0,0.1)]"
+        className="absolute inset-0 pointer-events-none rounded-[124px] shadow-[14px_18px_30px_0px_rgba(0,0,0,0.1)]"
+        style={{
+          padding: '2px',
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0))',
+          mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          maskComposite: 'xor',
+          WebkitMaskComposite: 'xor',
+        }}
       />
       <div className="relative shrink-0 size-[11px]">
         <svg
@@ -1857,7 +1832,14 @@ function FeatureTag1() {
     >
       <div
         aria-hidden="true"
-        className="absolute border-3 border-solid border-white inset-0 pointer-events-none rounded-[124px] shadow-[14px_18px_30px_0px_rgba(0,0,0,0.1)]"
+        className="absolute inset-0 pointer-events-none rounded-[124px] shadow-[14px_18px_30px_0px_rgba(0,0,0,0.1)]"
+        style={{
+          padding: '2px',
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0))',
+          mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          maskComposite: 'xor',
+          WebkitMaskComposite: 'xor',
+        }}
       />
       <div className="relative shrink-0 size-[11px]">
         <svg
@@ -1893,7 +1875,14 @@ function FeatureTag2() {
     >
       <div
         aria-hidden="true"
-        className="absolute border-3 border-solid border-white inset-0 pointer-events-none rounded-[124px] shadow-[14px_18px_30px_0px_rgba(0,0,0,0.1)]"
+        className="absolute inset-0 pointer-events-none rounded-[124px] shadow-[14px_18px_30px_0px_rgba(0,0,0,0.1)]"
+        style={{
+          padding: '2px',
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0))',
+          mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          maskComposite: 'xor',
+          WebkitMaskComposite: 'xor',
+        }}
       />
       <div className="relative shrink-0 size-[11px]">
         <svg
@@ -2702,7 +2691,7 @@ function DexCard6() {
             src="/images/logos/perpstool.jpg"
             width={64}
             height={64}
-            alt="Perptools"
+            alt="PERPTools"
             className="shrink-0 rounded-full"
           />
           <div
@@ -2716,7 +2705,7 @@ function DexCard6() {
                   "'ss02', 'ss03', 'ss05', 'ss06', 'lnum', 'pnum'",
               }}
             >
-              Perptools
+              PERPTools
             </p>
           </div>
         </div>
@@ -2848,7 +2837,7 @@ function TrustedButtonContainer() {
       href="https://dex.orderly.network/board/"
       target="_blank"
       rel="noopener noreferrer"
-      className="col-1 content-stretch flex gap-[7px] items-start justify-end ml-[6.1px] mt-[258px] relative row-1 w-[101.719px]"
+      className="col-1 content-stretch flex gap-[7px] items-start justify-end ml-[6.1px] mt-[258px] relative row-1 w-[101.719px] group"
       data-name="Trusted Button Container"
     >
       <p
@@ -2857,7 +2846,7 @@ function TrustedButtonContainer() {
       >
         View all
       </p>
-      <div className="flex items-center justify-center relative shrink-0">
+      <div className="flex items-center justify-center relative shrink-0 group-hover:translate-x-1 transition-transform duration-200">
         <div className="-scale-y-100 flex-none rotate-180">
           <div
             className="overflow-clip relative size-[16px]"
@@ -3248,573 +3237,71 @@ export function StatusMessageContainer() {
   );
 }
 
-function DocumentationLinkContainer() {
+// Footer link item component
+function FooterLinkItem({
+  label,
+  href,
+  external,
+}: {
+  label: string;
+  href: string;
+  external: boolean;
+}) {
+  const linkProps = external
+    ? { target: "_blank", rel: "noopener noreferrer" }
+    : {};
+  const LinkComponent = external ? "a" : Link;
+
   return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Documentation Link Container"
+    <LinkComponent
+      href={href}
+      {...linkProps}
+      className="no-underline hover:opacity-80 transition-opacity"
     >
-      <p
-        className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        Orderly One
-      </p>
-    </div>
+      <div className="content-stretch flex items-start relative shrink-0">
+        <p
+          className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]"
+          style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+        >
+          {label}
+        </p>
+      </div>
+    </LinkComponent>
   );
 }
 
-function OrderlySdkLinkContainer() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Orderly SDK Link Container"
-    >
-      <p
-        className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        Orderly SDKs
-      </p>
-    </div>
-  );
-}
-
-function OrderlySdkLinkContainer1() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Orderly SDK Link Container"
-    >
-      <p
-        className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        Documentation
-      </p>
-    </div>
-  );
-}
-
-function OrderlySdkLinkContainer2() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Orderly SDK Link Container"
-    >
-      <p
-        className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        GitHub
-      </p>
-    </div>
-  );
-}
-
-function DevelopersLinksContainer() {
+// Generic footer column component
+function FooterColumn({
+  title,
+  links,
+}: {
+  title: string;
+  links: { label: string; href: string; external: boolean }[];
+}) {
   return (
     <div
       className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0"
-      data-name="Developers Links Container"
-    >
-      <a
-        href="https://dex.orderly.network/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <DocumentationLinkContainer />
-      </a>
-      <a
-        href="https://orderly.network/docs/sdks/overview"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <OrderlySdkLinkContainer />
-      </a>
-      <a
-        href="https://orderly.network/docs/introduction/getting-started/what-is-orderly"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <OrderlySdkLinkContainer1 />
-      </a>
-      <a
-        href="https://github.com/OrderlyNetwork"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <OrderlySdkLinkContainer2 />
-      </a>
-    </div>
-  );
-}
-
-function DevelopersContainer() {
-  return (
-    <div
-      className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0"
-      data-name="Developers Container"
+      data-name={`${title} Container`}
     >
       <p
         className="capitalize font-['Atyp_BL:Bold',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px]"
         style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
       >
-        Builders
+        {title}
       </p>
-      <DevelopersLinksContainer />
-    </div>
-  );
-}
-
-function EcosystemPartnersLinkContainer() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Ecosystem Partners Link Container"
-    >
-      <p className="font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]">
-        Partners
-      </p>
-    </div>
-  );
-}
-
-function RadianceVenturesLinkContainer() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Radiance Ventures Link Container"
-    >
-      <p className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]">
-        Listings
-      </p>
-    </div>
-  );
-}
-
-function CaseStudiesLinkContainer() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Case Studies Link Container"
-    >
-      <p className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]">
-        Case Studies
-      </p>
-    </div>
-  );
-}
-
-function GovernanceLinkContainer() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Governance Link Container"
-    >
-      <p className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]">
-        Governance
-      </p>
-    </div>
-  );
-}
-
-function BlogLinkContainer() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Blog Link Container"
-    >
-      <p className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]">
-        Blog
-      </p>
-    </div>
-  );
-}
-
-function StakingLinkContainer() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Staking Link Container"
-    >
-      <p className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]">
-        Staking
-      </p>
-    </div>
-  );
-}
-
-function EcosystemLinksContainer() {
-  return (
-    <div
-      className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0"
-      data-name="Ecosystem Links Container"
-    >
-      <a
-        href="https://orderly.network/partners/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
+      <div
+        className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0"
+        data-name={`${title} Links Container`}
       >
-        <EcosystemPartnersLinkContainer />
-      </a>
-      <a
-        href="https://orderly.network/listing/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <RadianceVenturesLinkContainer />
-      </a>
-      <a
-        href="https://dex.orderly.network/case-studies"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <CaseStudiesLinkContainer />
-      </a>
-      <a
-        href="https://snapshot.box/#/s:orderlygov.eth"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <GovernanceLinkContainer />
-      </a>
-      <a
-        href="https://app.orderly.network/staking"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <StakingLinkContainer />
-      </a>
-      <a
-        href="https://orderly.network/blog/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <BlogLinkContainer />
-      </a>
-    </div>
-  );
-}
-
-function EcosystemContainer() {
-  return (
-    <div
-      className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0"
-      data-name="Ecosystem Container"
-    >
-      <p className="capitalize font-['Atyp_BL:Bold',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px]">
-        Ecosystem
-      </p>
-      <EcosystemLinksContainer />
-    </div>
-  );
-}
-
-function DocumentationLinkContainer1() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Documentation Link Container"
-    >
-      <p
-        className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        Live DEXs
-      </p>
-    </div>
-  );
-}
-
-function GitHubLinkContainer() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="GitHub Link Container"
-    >
-      <p
-        className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        Dashboard
-      </p>
-    </div>
-  );
-}
-
-function OrderlySdkLinkContainer3() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Orderly SDK Link Container"
-    >
-      <p
-        className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        API
-      </p>
-    </div>
-  );
-}
-
-function OrderlySdkLinkContainer4() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Orderly SDK Link Container"
-    >
-      <p
-        className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        Explorer
-      </p>
-    </div>
-  );
-}
-
-function OrderlySdkLinkContainer5() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Orderly SDK Link Container"
-    >
-      <p
-        className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        Campaigns
-      </p>
-    </div>
-  );
-}
-
-function OrderlySdkLinkContainer6() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Orderly SDK Link Container"
-    >
-      <p
-        className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        Vaults
-      </p>
-    </div>
-  );
-}
-
-function DevelopersLinksContainer1() {
-  return (
-    <div
-      className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0"
-      data-name="Developers Links Container"
-    >
-      <a
-        href="https://dex.orderly.network/board/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <DocumentationLinkContainer1 />
-      </a>
-      <a
-        href="https://orderly-dashboard.orderly.network/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <GitHubLinkContainer />
-      </a>
-      <a
-        href="https://orderly.network/docs/build-on-omnichain/evm-api/introduction"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <OrderlySdkLinkContainer3 />
-      </a>
-      <a
-        href="https://explorer.orderly.network/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <OrderlySdkLinkContainer4 />
-      </a>
-      <a
-        href="https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <OrderlySdkLinkContainer5 />
-      </a>
-      <a
-        href="http://app.orderly.network/vaults"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <OrderlySdkLinkContainer6 />
-      </a>
-    </div>
-  );
-}
-
-function DevelopersContainer1() {
-  return (
-    <div
-      className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0"
-      data-name="Developers Container"
-    >
-      <p
-        className="capitalize font-['Atyp_BL:Bold',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px]"
-        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-      >
-        Traders
-      </p>
-      <DevelopersLinksContainer1 />
-    </div>
-  );
-}
-
-function TeamLinkContainer() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Team Link Container"
-    >
-      <p className="font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]">
-        Team
-      </p>
-    </div>
-  );
-}
-
-function CareersLinkContainer() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Careers Link Container"
-    >
-      <p className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]">
-        Dune Dashboard
-      </p>
-    </div>
-  );
-}
-
-function CareersLinkContainer1() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Careers Link Container"
-    >
-      <p className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]">
-        Careers
-      </p>
-    </div>
-  );
-}
-
-function ContactLinkContainer() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Contact Link Container"
-    >
-      <p className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]">
-        Brand Kit
-      </p>
-    </div>
-  );
-}
-
-function ContactLinkContainer1() {
-  return (
-    <div
-      className="content-stretch flex items-start relative shrink-0"
-      data-name="Contact Link Container"
-    >
-      <p className="capitalize font-['Atyp_BL:Medium',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[#9c75ff] text-[14px] tracking-[0.14px]">
-        FAQ
-      </p>
-    </div>
-  );
-}
-
-function AboutLinksContainer() {
-  return (
-    <div
-      className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0"
-      data-name="About Links Container"
-    >
-      <a
-        href="https://orderly.network/team/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <TeamLinkContainer />
-      </a>
-      <a
-        href="https://dune.com/orderly_network/orderly-dashboard"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <CareersLinkContainer />
-      </a>
-      <a
-        href="https://job-boards.greenhouse.io/orderly"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <CareersLinkContainer1 />
-      </a>
-      <a
-        href="https://live.standards.site/orderly-brandguidelines"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <ContactLinkContainer />
-      </a>
-      <Link
-        href="/faq"
-        className="no-underline hover:opacity-80 transition-opacity"
-      >
-        <ContactLinkContainer1 />
-      </Link>
-    </div>
-  );
-}
-
-function AboutContainer() {
-  return (
-    <div
-      className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0"
-      data-name="About Container"
-    >
-      <p className="capitalize font-['Atyp_BL:Bold',sans-serif] leading-[0.753] not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px]">
-        About
-      </p>
-      <AboutLinksContainer />
+        {links.map((link) => (
+          <FooterLinkItem
+            key={link.label}
+            label={link.label}
+            href={link.href}
+            external={link.external}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -3825,10 +3312,10 @@ function LinksContainer() {
       className="content-stretch flex gap-[92px] items-start justify-end relative shrink-0 w-full"
       data-name="Links Container"
     >
-      <DevelopersContainer />
-      <EcosystemContainer />
-      <DevelopersContainer1 />
-      <AboutContainer />
+      <FooterColumn title="Builders" links={FOOTER_NAV.Builders} />
+      <FooterColumn title="Ecosystem" links={FOOTER_NAV.Ecosystem} />
+      <FooterColumn title="Traders" links={FOOTER_NAV.Traders} />
+      <FooterColumn title="About" links={FOOTER_NAV.About} />
     </div>
   );
 }
@@ -4017,36 +3504,6 @@ function SocialMediaIconsContainer() {
             id="Vector"
           />
         </svg>
-      </a>
-      <a
-        href="https://github.com/OrderlyNetwork"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="overflow-clip relative shrink-0 size-[16px] block hover:opacity-80 transition-opacity"
-        data-name="GitHub"
-      >
-        <div
-          className="absolute inset-[4.06%_10.42%_8.33%_8.33%]"
-          data-name="Icon"
-        >
-          <div className="absolute inset-[-5.71%_-6.15%_-5.71%_-6.16%]">
-            <svg
-              className="block size-full"
-              fill="none"
-              preserveAspectRatio="none"
-              viewBox="0 0 14.6002 15.6179"
-            >
-              <path
-                d={svgPaths.p11607ae8}
-                id="Icon"
-                stroke="var(--stroke-0, white)"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.6"
-              />
-            </svg>
-          </div>
-        </div>
       </a>
     </div>
   );

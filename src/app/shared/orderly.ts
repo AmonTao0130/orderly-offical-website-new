@@ -18,7 +18,7 @@ export const DEX_URLS: Record<string, string> = {
   "What.Exchange": "https://www.what.exchange/",
   VOOI: "https://vooi.io/",
   Kodiak: "https://perps.kodiak.finance/",
-  Perptools: "https://app.perptools.ai/",
+  PERPTools: "https://app.perptools.ai/",
   Zetarium: "https://www.zdex.world/",
 };
 
@@ -26,32 +26,93 @@ export const DEX_URLS: Record<string, string> = {
 export const SOCIAL_LINKS: string[] = [
   "https://discord.com/invite/OrderlyNetwork",
   "https://t.me/Orderly_Discussions",
-  "https://github.com/OrderlyNetwork",
   "https://www.youtube.com/@Orderly.Network",
   "https://www.linkedin.com/company/orderly-network",
   "https://t.me/Orderly_Discussions",
   "https://x.com/OrderlyNetwork",
 ];
 
-// ── Nav links (hamburger drawer on mobile, used in desktop nav dropdown) ─────
-export const NAV_LINKS: { label: string; href: string; external: boolean }[] = [
+// ── Header nav dropdown items (desktop & mobile accordion) ────────────────────
+export type HeaderNavItem = { label: string; href: string; external?: boolean };
+
+export const HEADER_NAV: Record<string, HeaderNavItem[]> = {
+  Builders: [
+    { label: "Orderly One", href: "https://dex.orderly.network/", external: true },
+    { label: "My DEX", href: "https://dex.orderly.network/dex", external: true },
+    { label: "Orderly SDKs", href: "https://orderly.network/docs/sdks/overview", external: true },
+    { label: "GitHub", href: "https://github.com/OrderlyNetwork", external: true },
+  ],
+  Ecosystem: [
+    { label: "Partners", href: "https://orderly.network/partners/", external: true },
+    { label: "Listings", href: "https://orderly.network/listing/", external: true },
+    { label: "Case Studies", href: "https://dex.orderly.network/case-studies", external: true },
+    { label: "Governance", href: "https://snapshot.box/#/s:orderlygov.eth", external: true },
+    { label: "Staking", href: ORDER_BUY_URL, external: true },
+    { label: "Blog", href: "https://orderly.network/blog/", external: true },
+  ],
+  Traders: [
+    { label: "Live DEXs", href: "https://dex.orderly.network/board/", external: true },
+    { label: "Dashboard", href: "https://dashboard.orderly.network", external: true },
+    { label: "Explorer", href: "https://explorer.orderly.network/", external: true },
+    { label: "Vaults", href: "http://app.orderly.network/vaults", external: true },
+    { label: "API", href: "https://orderly.network/docs/build-on-omnichain/evm-api/introduction", external: true },
+  ],
+};
+
+// ── Header CTA ─────────────────────────────────────────────────────────────────
+export const HEADER_CTA = {
+  label: "Launch Now",
+  href: "https://dex.orderly.network/dex/",
+  external: true,
+};
+
+// ── Docs link (shared between desktop & mobile) ────────────────────────────────
+export const DOCS_LINK = {
+  label: "Docs",
+  href: "https://orderly.network/docs/introduction/getting-started/what-is-orderly",
+  external: true,
+};
+
+// ── Campaigns link (shared between desktop & mobile) ───────────────────────────
+export const CAMPAIGNS_LINK = {
+  label: "Campaigns",
+  href: "https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar",
+  external: true,
+};
+
+// ── Campaign dropdown items (desktop header) ───────────────────────────────────
+export type CampaignItem = {
+  titleVariant: string;
+  subtitle?: string;
+  href: string;
+  status: "Ongoing" | "Ended";
+  backgroundImageSrc: string;
+  backgroundImageClassName: string;
+  borderClassName: string;
+};
+
+export const CAMPAIGN_ITEMS: CampaignItem[] = [
   {
-    label: "Orderly One",
-    href: "https://dex.orderly.network/",
-    external: true,
+    titleVariant: "perps",
+    subtitle: "Join to earn USDC reward",
+    href: "https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar",
+    status: "Ongoing",
+    backgroundImageSrc: "/campaigns/header/campaign-bg-2.png",
+    backgroundImageClassName:
+      "absolute h-[160%] left-0 max-w-none top-[-30%] w-full object-cover object-top",
+    borderClassName:
+      "absolute border border-[#48bdff] border-solid inset-0 pointer-events-none rounded-[8px]",
   },
-  { label: "My DEX", href: "https://dex.orderly.network/dex", external: true },
   {
-    label: "Documentation",
-    href: "https://orderly.network/docs/introduction/getting-started/what-is-orderly",
-    external: true,
+    titleVariant: "ucc",
+    href: "https://app.orderly.network/campaigns/ultimate-crypto-championship",
+    status: "Ended",
+    backgroundImageSrc: "/campaigns/header/campaign-bg-1.png",
+    backgroundImageClassName:
+      "absolute h-[494.34%] left-[0.24%] max-w-none top-[-144.53%] w-full object-cover object-top",
+    borderClassName:
+      "absolute border border-[rgba(255,255,255,0.06)] border-solid inset-0 pointer-events-none rounded-[8px]",
   },
-  {
-    label: "GitHub",
-    href: "https://github.com/OrderlyNetwork",
-    external: true,
-  },
-  { label: "FAQ", href: "/faq", external: false },
 ];
 
 // ── Footer nav sections (mobile accordion + desktop footer columns) ───────────
@@ -71,11 +132,20 @@ export const FOOTER_NAV: Record<
       external: true,
     },
     {
-      label: "GitHub",
+      label: "Orderly SDKs",
+      href: "https://orderly.network/docs/sdks/overview",
+      external: true,
+    },
+    {
+      label: "Docs",
+      href: "https://orderly.network/docs/introduction/getting-started/what-is-orderly",
+      external: true,
+    },
+    {
+      label: "Github",
       href: "https://github.com/OrderlyNetwork",
       external: true,
     },
-    { label: "FAQ", href: "/faq", external: false },
   ],
   Ecosystem: [
     {
@@ -100,8 +170,6 @@ export const FOOTER_NAV: Record<
     },
     { label: "Staking", href: ORDER_BUY_URL, external: true },
     { label: "Blog", href: "https://orderly.network/blog/", external: true },
-    { label: "Team", href: "https://orderly.network/team/", external: true },
-    { label: "FAQ", href: "/faq", external: false },
   ],
   Traders: [
     {
@@ -129,11 +197,18 @@ export const FOOTER_NAV: Record<
       href: "https://orderly.network/docs/build-on-omnichain/evm-api/introduction",
       external: true,
     },
+    {
+      label: "Campaigns",
+      href: "https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar",
+      external: true,
+    },
   ],
   About: [
-    { label: "Blog", href: "https://orderly.network/blog/", external: true },
     { label: "Team", href: "https://orderly.network/team/", external: true },
     { label: "FAQ", href: "/faq", external: false },
+    { label: "Dune Dashboard", href: "https://dune.com/orderly_network/orderly-dashboard", external: true },
+    { label: "Careers", href: "https://job-boards.greenhouse.io/orderly", external: true },
+    { label: "Brand Kit", href: "https://live.standards.site/orderly-brandguidelines", external: true },
   ],
 };
 

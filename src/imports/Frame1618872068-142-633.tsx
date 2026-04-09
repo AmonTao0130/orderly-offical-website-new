@@ -21,6 +21,7 @@ import {
   formatLargeNumber,
   formatCount,
 } from "@/app/hooks/useOrderlyStats";
+import { FOOTER_NAV, SOCIAL_LINKS } from "@/app/shared/orderly";
 import svgPaths from "./svg-4hybjba00c";
 const imgMacBook11 =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQI12NgAAIABQABNjN9GQAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAAA0lEQVQI12P4z8BQDwAEgAF/pooBPQAAAABJRU5ErkJggg==";
@@ -275,7 +276,14 @@ function FeatureTag() {
     >
       <div
         aria-hidden="true"
-        className="absolute border-[1px] border-solid border-white inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]"
+        className="absolute inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]"
+        style={{
+          padding: '1px',
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0))',
+          mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          maskComposite: 'xor',
+          WebkitMaskComposite: 'xor',
+        }}
       />
       <div className="relative shrink-0 size-[5.38px]">
         <svg
@@ -314,7 +322,14 @@ function FeatureTag1() {
     >
       <div
         aria-hidden="true"
-        className="absolute border-[1px] border-solid border-white inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]"
+        className="absolute inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]"
+        style={{
+          padding: '1px',
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0))',
+          mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          maskComposite: 'xor',
+          WebkitMaskComposite: 'xor',
+        }}
       />
       <div className="relative shrink-0 size-[5.38px]">
         <svg
@@ -353,7 +368,14 @@ function FeatureTag2() {
     >
       <div
         aria-hidden="true"
-        className="absolute border-[1px] border-solid border-white inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]"
+        className="absolute inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]"
+        style={{
+          padding: '1px',
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0))',
+          mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          maskComposite: 'xor',
+          WebkitMaskComposite: 'xor',
+        }}
       />
       <div className="relative shrink-0 size-[5.38px]">
         <svg
@@ -976,7 +998,7 @@ function Frame21() {
   return (
     <div className="col-1 content-stretch flex gap-[10px] items-center justify-end ml-[281px] mt-0 relative row-1">
       <ArrowLeftCircle />
-      <div className="flex items-center justify-center relative shrink-0">
+      <div className="flex items-center justify-center relative shrink-0 group-hover:translate-x-1 transition-transform duration-200">
         <div className="flex-none rotate-180">
           <ArrowRightCircle />
         </div>
@@ -1537,7 +1559,7 @@ function BuildButtonContainer() {
       >
         Orderly One
       </p>
-      <div className="flex items-center justify-center relative shrink-0">
+      <div className="flex items-center justify-center relative shrink-0 group-hover:translate-x-1 transition-transform duration-200">
         <div className="-scale-y-100 flex-none rotate-180">
           <div
             className="overflow-clip relative size-[9.607px]"
@@ -3479,7 +3501,7 @@ function DexCard6() {
             src="/images/logos/perpstool.jpg"
             width={30}
             height={30}
-            alt="Perptools"
+            alt="PERPTools"
             className="shrink-0 rounded-full"
           />
           <div
@@ -3494,7 +3516,7 @@ function DexCard6() {
                   "'ss02', 'ss03', 'ss05', 'ss06', 'lnum', 'pnum'",
               }}
             >
-              Perptools
+              PERPTools
             </p>
           </div>
         </div>
@@ -3614,7 +3636,7 @@ function Dex() {
 function TrustedButtonContainer() {
   return (
     <div
-      className="content-stretch flex gap-[7px] items-start relative shrink-0 w-[100px] cursor-pointer hover:opacity-80 transition-opacity"
+      className="content-stretch flex gap-[7px] items-start relative shrink-0 w-[100px] cursor-pointer hover:opacity-80 transition-opacity group"
       data-name="Trusted Button Container"
     >
       <p
@@ -3623,7 +3645,7 @@ function TrustedButtonContainer() {
       >
         View all
       </p>
-      <div className="flex items-center justify-center relative shrink-0">
+      <div className="flex items-center justify-center relative shrink-0 group-hover:translate-x-1 transition-transform duration-200">
         <div className="-scale-y-100 flex-none rotate-180">
           <div
             className="overflow-clip relative size-[16px]"
@@ -4224,24 +4246,24 @@ function ExpandMore() {
   );
 }
 
-function Frame7() {
+// Generic footer accordion component
+function FooterAccordion({
+  title,
+  links,
+  dataName,
+}: {
+  title: string;
+  links: { label: string; href: string; external: boolean }[];
+  dataName: string;
+}) {
   const [open, setOpen] = useState(false);
-
-  const links = [
-    { label: "Orderly One", href: "https://dex.orderly.network/" },
-    {
-      label: "Orderly SDKs",
-      href: "https://orderly.network/docs/sdks/overview",
-    },
-    { label: "GitHub", href: "https://github.com/OrderlyNetwork" },
-  ];
 
   return (
     <div className="flex flex-col w-full">
       {/* Header row — stopPropagation keeps MobileHomePage's FooterSheet from firing */}
       <div
         className="content-stretch flex items-center relative shrink-0 w-full cursor-pointer hover:opacity-80 transition-opacity"
-        data-name="footer-nav-Builders"
+        data-name={dataName}
         onClick={(e) => {
           e.stopPropagation();
           setOpen((o) => !o);
@@ -4251,7 +4273,7 @@ function Frame7() {
           className="capitalize flex-[1_0_0] font-['Atyp_BL:Bold',sans-serif] leading-[0.753] min-h-px min-w-px not-italic relative text-[14px] text-white tracking-[0.14px]"
           style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
         >
-          Builders
+          {title}
         </p>
         <div
           className="relative shrink-0 size-[24px]"
@@ -4267,10 +4289,10 @@ function Frame7() {
             preserveAspectRatio="none"
             viewBox="0 0 24 24"
           >
-            <g id="expand_more_frame7">
+            <g id={`expand_more_${dataName}`}>
               <mask
                 height="24"
-                id="mask0_frame7"
+                id={`mask0_${dataName}`}
                 maskUnits="userSpaceOnUse"
                 style={{ maskType: "alpha" }}
                 width="24"
@@ -4279,7 +4301,7 @@ function Frame7() {
               >
                 <rect fill="#D9D9D9" height="24" width="24" />
               </mask>
-              <g mask="url(#mask0_frame7)">
+              <g mask={`url(#mask0_${dataName})`}>
                 <path d={svgPaths.p2770b500} fill="white" fillOpacity="0.8" />
               </g>
             </g>
@@ -4294,8 +4316,8 @@ function Frame7() {
             <a
               key={link.label}
               href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={link.external ? "_blank" : undefined}
+              rel={link.external ? "noopener noreferrer" : undefined}
               onClick={(e) => e.stopPropagation()}
               className="no-underline capitalize px-[2px] py-[10px] font-['Atyp_BL:Medium',sans-serif] not-italic"
               style={{
@@ -4319,6 +4341,17 @@ function Frame7() {
         </div>
       )}
     </div>
+  );
+}
+
+// Builders accordion
+function Frame7() {
+  return (
+    <FooterAccordion
+      title="Builders"
+      links={FOOTER_NAV.Builders}
+      dataName="footer-nav-Builders"
+    />
   );
 }
 
@@ -4362,95 +4395,14 @@ function ExpandMore1() {
   );
 }
 
+// Ecosystem accordion
 function Frame9() {
-  const [open, setOpen] = useState(false);
-
-  const links = [
-    { label: "Partners", href: "https://orderly.network/partners/" },
-    { label: "Listings", href: "https://orderly.network/listing/" },
-    { label: "Case Studies", href: "https://dex.orderly.network/case-studies" },
-    { label: "Governance", href: "https://snapshot.box/#/s:orderlygov.eth" },
-    { label: "Staking", href: "https://app.orderly.network/staking" },
-    { label: "Blog", href: "https://orderly.network/blog/" },
-  ];
-
   return (
-    <div className="flex flex-col w-full">
-      <div
-        className="content-stretch flex items-center relative shrink-0 w-full cursor-pointer hover:opacity-80 transition-opacity"
-        data-name="footer-nav-Ecosystem"
-        onClick={(e) => {
-          e.stopPropagation();
-          setOpen((o) => !o);
-        }}
-      >
-        <p className="capitalize flex-[1_0_0] font-['Atyp_BL:Bold',sans-serif] leading-[0.753] min-h-px min-w-px not-italic relative text-[14px] text-white tracking-[0.14px]">
-          Ecosystem
-        </p>
-        <div
-          className="relative shrink-0 size-[24px]"
-          data-name="expand_more"
-          style={{
-            transition: "transform 0.22s ease",
-            transform: open ? "rotate(180deg)" : "rotate(0deg)",
-          }}
-        >
-          <svg
-            className="absolute block size-full"
-            fill="none"
-            preserveAspectRatio="none"
-            viewBox="0 0 24 24"
-          >
-            <g id="expand_more_frame9">
-              <mask
-                height="24"
-                id="mask0_frame9"
-                maskUnits="userSpaceOnUse"
-                style={{ maskType: "alpha" }}
-                width="24"
-                x="0"
-                y="0"
-              >
-                <rect fill="#D9D9D9" height="24" width="24" />
-              </mask>
-              <g mask="url(#mask0_frame9)">
-                <path d={svgPaths.p2770b500} fill="white" fillOpacity="0.8" />
-              </g>
-            </g>
-          </svg>
-        </div>
-      </div>
-      {open && (
-        <div className="flex flex-col gap-[4px] pt-[12px] pb-[6px]">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="no-underline capitalize px-[2px] py-[10px] font-['Atyp_BL:Medium',sans-serif] not-italic"
-              style={{
-                color: "#9c75ff",
-                fontSize: "14px",
-                fontFeatureSettings: "'ss03','ss02','ss05','ss06'",
-                letterSpacing: "0.14px",
-                lineHeight: "0.753",
-                transition: "opacity 0.15s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.opacity = "0.75";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.opacity = "1";
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      )}
-    </div>
+    <FooterAccordion
+      title="Ecosystem"
+      links={FOOTER_NAV.Ecosystem}
+      dataName="footer-nav-Ecosystem"
+    />
   );
 }
 
@@ -4494,100 +4446,14 @@ function ExpandMore2() {
   );
 }
 
+// Traders accordion
 function Frame10() {
-  const [open, setOpen] = useState(false);
-
-  const links = [
-    { label: "Live DEXs", href: "https://dex.orderly.network/board/" },
-    { label: "Dashboard", href: "https://dashboard.orderly.network" },
-    {
-      label: "API",
-      href: "https://orderly.network/docs/build-on-omnichain/evm-api/introduction",
-    },
-    { label: "Explorer", href: "https://explorer.orderly.network/" },
-    { label: "Vaults", href: "http://app.orderly.network/vaults" },
-  ];
-
   return (
-    <div className="flex flex-col w-full">
-      <div
-        className="content-stretch flex items-center relative shrink-0 w-full cursor-pointer hover:opacity-80 transition-opacity"
-        data-name="footer-nav-Traders"
-        onClick={(e) => {
-          e.stopPropagation();
-          setOpen((o) => !o);
-        }}
-      >
-        <p
-          className="capitalize flex-[1_0_0] font-['Atyp_BL:Bold',sans-serif] leading-[0.753] min-h-px min-w-px not-italic relative text-[14px] text-white tracking-[0.14px]"
-          style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
-        >
-          Traders
-        </p>
-        <div
-          className="relative shrink-0 size-[24px]"
-          data-name="expand_more"
-          style={{
-            transition: "transform 0.22s ease",
-            transform: open ? "rotate(180deg)" : "rotate(0deg)",
-          }}
-        >
-          <svg
-            className="absolute block size-full"
-            fill="none"
-            preserveAspectRatio="none"
-            viewBox="0 0 24 24"
-          >
-            <g id="expand_more_frame10">
-              <mask
-                height="24"
-                id="mask0_frame10"
-                maskUnits="userSpaceOnUse"
-                style={{ maskType: "alpha" }}
-                width="24"
-                x="0"
-                y="0"
-              >
-                <rect fill="#D9D9D9" height="24" width="24" />
-              </mask>
-              <g mask="url(#mask0_frame10)">
-                <path d={svgPaths.p2770b500} fill="white" fillOpacity="0.8" />
-              </g>
-            </g>
-          </svg>
-        </div>
-      </div>
-      {open && (
-        <div className="flex flex-col gap-[4px] pt-[12px] pb-[6px]">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="no-underline capitalize px-[2px] py-[10px] font-['Atyp_BL:Medium',sans-serif] not-italic"
-              style={{
-                color: "#9c75ff",
-                fontSize: "14px",
-                fontFeatureSettings: "'ss03','ss02','ss05','ss06'",
-                letterSpacing: "0.14px",
-                lineHeight: "0.753",
-                transition: "opacity 0.15s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.opacity = "0.75";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.opacity = "1";
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      )}
-    </div>
+    <FooterAccordion
+      title="Traders"
+      links={FOOTER_NAV.Traders}
+      dataName="footer-nav-Traders"
+    />
   );
 }
 
@@ -4631,100 +4497,14 @@ function ExpandMore3() {
   );
 }
 
+// About accordion
 function Frame11() {
-  const [open, setOpen] = useState(false);
-
-  const links = [
-    { label: "Team", href: "https://orderly.network/team/" },
-    {
-      label: "Analytics",
-      href: "https://dune.com/orderly_network/orderly-dashboard",
-    },
-    { label: "Careers", href: "https://job-boards.greenhouse.io/orderly" },
-    {
-      label: "Brand Kit",
-      href: "https://live.standards.site/orderly-brandguidelines",
-    },
-    { label: "FAQ", href: "/faq" },
-  ];
-
   return (
-    <div className="flex flex-col w-full">
-      <div
-        className="content-stretch flex items-center relative shrink-0 w-full cursor-pointer hover:opacity-80 transition-opacity"
-        data-name="footer-nav-About"
-        onClick={(e) => {
-          e.stopPropagation();
-          setOpen((o) => !o);
-        }}
-      >
-        <p className="capitalize flex-[1_0_0] font-['Atyp_BL:Bold',sans-serif] leading-[0.753] min-h-px min-w-px not-italic relative text-[14px] text-white tracking-[0.14px]">
-          About
-        </p>
-        <div
-          className="relative shrink-0 size-[24px]"
-          data-name="expand_more"
-          style={{
-            transition: "transform 0.22s ease",
-            transform: open ? "rotate(180deg)" : "rotate(0deg)",
-          }}
-        >
-          <svg
-            className="absolute block size-full"
-            fill="none"
-            preserveAspectRatio="none"
-            viewBox="0 0 24 24"
-          >
-            <g id="expand_more_frame11">
-              <mask
-                height="24"
-                id="mask0_frame11"
-                maskUnits="userSpaceOnUse"
-                style={{ maskType: "alpha" }}
-                width="24"
-                x="0"
-                y="0"
-              >
-                <rect fill="#D9D9D9" height="24" width="24" />
-              </mask>
-              <g mask="url(#mask0_frame11)">
-                <path d={svgPaths.p2770b500} fill="white" fillOpacity="0.8" />
-              </g>
-            </g>
-          </svg>
-        </div>
-      </div>
-      {open && (
-        <div className="flex flex-col gap-[4px] pt-[12px] pb-[6px]">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="no-underline capitalize px-[2px] py-[10px] font-['Atyp_BL:Medium',sans-serif] not-italic"
-              style={{
-                color: "#9c75ff",
-                fontSize: "14px",
-                fontFeatureSettings: "'ss03','ss02','ss05','ss06'",
-                letterSpacing: "0.14px",
-                lineHeight: "0.753",
-                transition: "opacity 0.15s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.opacity = "0.75";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.opacity = "1";
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      )}
-    </div>
+    <FooterAccordion
+      title="About"
+      links={FOOTER_NAV.About}
+      dataName="footer-nav-About"
+    />
   );
 }
 
@@ -4918,138 +4698,120 @@ function IcSocialYoutubeS() {
   );
 }
 
+// Social icon component based on URL
+function SocialIcon({ href }: { href: string }) {
+  const getLabel = () => {
+    if (href.includes("discord")) return "Discord";
+    if (href.includes("t.me")) return "Telegram";
+    if (href.includes("x.com")) return "X";
+    if (href.includes("youtube")) return "YouTube";
+    if (href.includes("linkedin")) return "LinkedIn";
+    return "Social";
+  };
+
+  const label = getLabel();
+
+  const iconSvg = () => {
+    switch (label) {
+      case "Discord":
+        return (
+          <div className="absolute inset-[11%_0_12.78%_0]" data-name="Vector">
+            <svg
+              className="absolute block size-full"
+              fill="none"
+              preserveAspectRatio="none"
+              viewBox="0 0 16 12.1955"
+            >
+              <path
+                d={svgPaths.p15bda300}
+                fill="var(--fill-0, white)"
+                id="Vector"
+              />
+            </svg>
+          </div>
+        );
+      case "Telegram":
+        return (
+          <svg
+            className="absolute block size-full"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d={svgPaths.p2a7b4dc0}
+              fill="var(--fill-0, white)"
+              id="Vector"
+            />
+          </svg>
+        );
+      case "X":
+        return (
+          <div
+            className="absolute inset-[7.93%_4.17%_9.21%_4.17%]"
+            data-name="Vector"
+          >
+            <svg
+              className="absolute block size-full"
+              fill="none"
+              preserveAspectRatio="none"
+              viewBox="0 0 14.6667 13.2573"
+            >
+              <path
+                d={svgPaths.p2746f000}
+                fill="var(--fill-0, white)"
+                id="Vector"
+              />
+            </svg>
+          </div>
+        );
+      case "YouTube":
+        return <IcSocialYoutubeS />;
+      case "LinkedIn":
+        return (
+          <svg
+            className="absolute block size-full"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d={svgPaths.p114d3270}
+              fill="var(--fill-0, white)"
+              id="Vector"
+            />
+          </svg>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const sizeClass = label === "YouTube" ? "size-[17px]" : "size-[16px]";
+  const isOverflow = label === "Discord" || label === "X";
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`relative shrink-0 ${sizeClass} block hover:opacity-80 transition-opacity ${isOverflow ? "overflow-clip" : ""}`}
+      data-name={label}
+    >
+      {iconSvg()}
+    </a>
+  );
+}
+
 function SocialMediaIconsContainer() {
   return (
     <div
       className="content-stretch flex gap-[16px] items-center justify-center relative shrink-0 w-full"
       data-name="Social Media Icons Container"
     >
-      <a
-        href="https://discord.com/invite/OrderlyNetwork"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="overflow-clip relative shrink-0 size-[16px] block hover:opacity-80 transition-opacity"
-        data-name="Discord"
-      >
-        <div className="absolute inset-[11%_0_12.78%_0]" data-name="Vector">
-          <svg
-            className="absolute block size-full"
-            fill="none"
-            preserveAspectRatio="none"
-            viewBox="0 0 16 12.1955"
-          >
-            <path
-              d={svgPaths.p15bda300}
-              fill="var(--fill-0, white)"
-              id="Vector"
-            />
-          </svg>
-        </div>
-      </a>
-      <a
-        href="https://t.me/Orderly_Discussions"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="relative shrink-0 size-[16px] block hover:opacity-80 transition-opacity"
-        data-name="Telegram"
-      >
-        <svg
-          className="absolute block size-full"
-          fill="none"
-          preserveAspectRatio="none"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d={svgPaths.p2a7b4dc0}
-            fill="var(--fill-0, white)"
-            id="Vector"
-          />
-        </svg>
-      </a>
-      <a
-        href="https://x.com/OrderlyNetwork"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="overflow-clip relative shrink-0 size-[16px] block hover:opacity-80 transition-opacity"
-        data-name="X"
-      >
-        <div
-          className="absolute inset-[7.93%_4.17%_9.21%_4.17%]"
-          data-name="Vector"
-        >
-          <svg
-            className="absolute block size-full"
-            fill="none"
-            preserveAspectRatio="none"
-            viewBox="0 0 14.6667 13.2573"
-          >
-            <path
-              d={svgPaths.p2746f000}
-              fill="var(--fill-0, white)"
-              id="Vector"
-            />
-          </svg>
-        </div>
-      </a>
-      <a
-        href="https://www.youtube.com/@Orderly.Network"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="relative shrink-0 size-[17px] block hover:opacity-80 transition-opacity"
-        data-name="YouTube"
-      >
-        <IcSocialYoutubeS />
-      </a>
-      <a
-        href="https://www.linkedin.com/company/orderly-network"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="overflow-clip relative shrink-0 size-[16px] block hover:opacity-80 transition-opacity"
-        data-name="LinkedIn"
-      >
-        <svg
-          className="absolute block size-full"
-          fill="none"
-          preserveAspectRatio="none"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d={svgPaths.p114d3270}
-            fill="var(--fill-0, white)"
-            id="Vector"
-          />
-        </svg>
-      </a>
-      <a
-        href="https://github.com/OrderlyNetwork"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="overflow-clip relative shrink-0 size-[16px] block hover:opacity-80 transition-opacity"
-        data-name="GitHub"
-      >
-        <div
-          className="absolute inset-[4.06%_10.42%_8.33%_8.33%]"
-          data-name="Icon"
-        >
-          <div className="absolute inset-[-5.71%_-6.15%_-5.71%_-6.16%]">
-            <svg
-              className="block size-full"
-              fill="none"
-              preserveAspectRatio="none"
-              viewBox="0 0 14.6002 15.6179"
-            >
-              <path
-                d={svgPaths.p11607ae8}
-                id="Icon"
-                stroke="var(--stroke-0, white)"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.6"
-              />
-            </svg>
-          </div>
-        </div>
-      </a>
+      {SOCIAL_LINKS.map((href) => (
+        <SocialIcon key={href} href={href} />
+      ))}
     </div>
   );
 }
