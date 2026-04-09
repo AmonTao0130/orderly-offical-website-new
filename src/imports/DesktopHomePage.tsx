@@ -1316,7 +1316,7 @@ function CampaignsMenuCell() {
         href="https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
         target="_blank"
         rel="noopener noreferrer"
-        className="campaign-gradient-button isolate relative z-0 flex h-[32px] items-center justify-center gap-[6px] overflow-clip rounded-full border border-solid border-transparent bg-[#110621] px-[14px] no-underline after:absolute after:inset-px after:z-[-1] after:rounded-full after:bg-[#110621] after:content-[''] before:absolute before:inset-0 before:z-[-1] before:rounded-[inherit] before:content-['']"
+        className="relative flex h-[32px] items-center justify-center gap-[6px] rounded-full px-[14px] no-underline overflow-hidden"
         onClick={() =>
           posthog.capture("header_nav_clicked", {
             tab_name: "campaigns",
@@ -1326,14 +1326,29 @@ function CampaignsMenuCell() {
           })
         }
       >
-        <CampaignIcon className="mr-1" />
+        {/* Animated gradient border - no fill background */}
         <span
-          className="font-['Atyp_Text:Medium',sans-serif] text-[16px] leading-none not-italic text-white"
+          className="absolute inset-0 rounded-full"
+          style={{
+            background: "linear-gradient(90deg, #48bdff, #786cff, #bd00ff, #48bdff)",
+            backgroundSize: "300% 100%",
+            animation: "gradient-border 3s linear infinite",
+            padding: "1px",
+            WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            WebkitMaskComposite: "xor",
+            maskComposite: "exclude",
+          }}
+        />
+        <CampaignIcon className="mr-1 relative z-10" />
+        <span
+          className="font-['Atyp_Text:Medium',sans-serif] text-[16px] leading-none not-italic text-white relative z-10"
           style={{ letterSpacing: "0.042em" }}
         >
           Campaigns
         </span>
-        <ChevronIcon open={shouldOpen} />
+        <span className="relative z-10">
+          <ChevronIcon open={shouldOpen} />
+        </span>
       </a>
       <AnimatePresence>
         {shouldOpen && (
@@ -1581,6 +1596,99 @@ function Default() {
       <HeaderLogoContainer />
       <HeaderMenu />
     </div>
+  );
+}
+
+// ─── Morphing Header: hides on scroll, shows when scroll stops ────────────────
+export function MorphingHeader() {
+  const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastScrollY = useRef(0);
+  
+  // Threshold for "top of page" - below this, header always stays visible
+  const TOP_THRESHOLD = 150;
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Check if we've scrolled past threshold for background style
+      setIsScrolled(currentScrollY > 50);
+      
+      // At top of page: always show header, don't hide
+      if (currentScrollY < TOP_THRESHOLD) {
+        setIsVisible(true);
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+      
+      // Hide header when scrolling (only when past top threshold)
+      if (Math.abs(currentScrollY - lastScrollY.current) > 5) {
+        setIsVisible(false);
+      }
+      lastScrollY.current = currentScrollY;
+      
+      // Clear existing timer
+      if (scrollTimerRef.current) {
+        clearTimeout(scrollTimerRef.current);
+      }
+      
+      // Show header after scroll stops (1s delay - wait before reappearing)
+      scrollTimerRef.current = setTimeout(() => {
+        setIsVisible(true);
+      }, 1000);
+    };
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimerRef.current) {
+        clearTimeout(scrollTimerRef.current);
+      }
+    };
+  }, []);
+  
+  return (
+    <motion.header
+      className="flex h-[72px] items-center w-full"
+      style={{
+        borderRadius: 80,
+        maxWidth: 1100,
+        marginTop: 24,
+        paddingLeft: 24,
+        paddingRight: 20,
+        gap: 40,
+        backdropFilter: "blur(20px) saturate(180%)",
+        WebkitBackdropFilter: "blur(20px) saturate(180%)",
+        backgroundColor: isScrolled 
+          ? "rgba(0, 0, 0, 0.3)" 
+          : "rgba(0, 0, 0, 0.15)",
+        border: "none",
+        boxShadow: isScrolled 
+          ? "0 8px 32px rgba(0,0,0,0.3)" 
+          : "0 4px 24px rgba(0,0,0,0.15)",
+      }}
+      initial={{ y: 0, opacity: 1 }}
+      animate={{ 
+        y: isVisible ? 0 : -100, 
+        opacity: isVisible ? 1 : 0 
+      }}
+      transition={{ 
+        duration: 0.6, 
+        ease: [0.22, 0.61, 0.36, 1] 
+      }}
+    >
+      {/* Logo container */}
+      <div className="flex flex-col justify-center shrink-0" style={{ transform: "scale(0.85)", transformOrigin: "left center" }}>
+        <HeaderLogo />
+      </div>
+      
+      {/* Menu - maintains flex grow to push items right */}
+      <div className="flex-1">
+        <HeaderMenu />
+      </div>
+    </motion.header>
   );
 }
 
@@ -1905,7 +2013,7 @@ function DexCard() {
       href="https://perps.kodiak.finance/"
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px]"
+      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px] border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_24px_rgba(103,0,206,0.22)] transition-all duration-300 cursor-pointer"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center min-w-[inherit] size-full">
@@ -2021,7 +2129,7 @@ function DexCard1() {
       href="https://pro.woofi.com"
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px]"
+      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px] border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_24px_rgba(103,0,206,0.22)] transition-all duration-300 cursor-pointer"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center min-w-[inherit] size-full">
@@ -2237,7 +2345,7 @@ function DexCard2() {
       href="https://raydium.io/swap"
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px]"
+      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px] border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_24px_rgba(103,0,206,0.22)] transition-all duration-300 cursor-pointer"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center min-w-[inherit] size-full">
@@ -2377,7 +2485,7 @@ function DexCard3() {
       href="https://quickswap.exchange/"
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px]"
+      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px] border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_24px_rgba(103,0,206,0.22)] transition-all duration-300 cursor-pointer"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center min-w-[inherit] size-full">
@@ -2440,7 +2548,7 @@ function DexCard4() {
       href="https://www.what.exchange/"
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px]"
+      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px] border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_24px_rgba(103,0,206,0.22)] transition-all duration-300 cursor-pointer"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center min-w-[inherit] size-full">
@@ -2503,7 +2611,7 @@ function DexCard5() {
       href="https://vooi.io/"
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px]"
+      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px] border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_24px_rgba(103,0,206,0.22)] transition-all duration-300 cursor-pointer"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center min-w-[inherit] size-full">
@@ -2585,7 +2693,7 @@ function DexCard6() {
       href="https://app.perptools.ai/"
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px]"
+      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px] border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_24px_rgba(103,0,206,0.22)] transition-all duration-300 cursor-pointer"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center min-w-[inherit] size-full">
@@ -2673,7 +2781,7 @@ function DexCard7() {
       href="https://www.zdex.world/"
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px]"
+      className="bg-[rgba(20,21,26,0.7)] flex-[1_0_0] min-h-px min-w-[280px] relative rounded-[5px] border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_24px_rgba(103,0,206,0.22)] transition-all duration-300 cursor-pointer"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center min-w-[inherit] size-full">
@@ -6566,15 +6674,7 @@ export default function Frame7() {
       <MacbookVideo className="-translate-x-1/2 absolute h-[670.158px] left-[calc(50%-0.1px)] top-[655.33px] w-[900.323px]" />
 
       {/* Nav - appears immediately on load */}
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={sectionVariants}
-        transition={transition}
-        style={{ position: "relative", zIndex: 1000 }}
-      >
-        <Default />
-      </motion.div>
+      {/* Header is rendered outside ScaledFrame in Home.tsx */}
 
       <motion.div
         initial="hidden"
@@ -6723,7 +6823,13 @@ export default function Frame7() {
 export function NavCanvas() {
   return (
     <div style={{ position: "relative", width: 1440, height: 200 }}>
-      <Default />
+      <div
+        className="absolute backdrop-blur-[8.65px] content-stretch flex gap-[58px] h-[100px] items-center left-[81.9px] p-[40px] rounded-[130px] top-[50px] w-[1278px] z-[100]"
+        data-name="Default"
+      >
+        <HeaderLogoContainer />
+        <HeaderMenu />
+      </div>
     </div>
   );
 }

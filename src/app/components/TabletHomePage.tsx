@@ -878,7 +878,7 @@ function TabletTrustedSection() {
             href={card.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-[rgba(20,21,26,0.7)] flex items-center gap-[12px] p-[14px] rounded-[8px] no-underline hover:opacity-80 transition-opacity"
+            className="bg-[rgba(20,21,26,0.7)] flex items-center gap-[12px] p-[14px] rounded-[8px] no-underline border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
           >
             <img
               src={card.logo}
@@ -901,7 +901,7 @@ function TabletTrustedSection() {
         href="https://dex.orderly.network/board/"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-[6px] no-underline hover:opacity-80 transition-opacity self-end"
+        className="flex items-center gap-[6px] no-underline self-end group"
       >
         <p
           className="font-['Atyp_BL:Bold',sans-serif] text-[16px] text-white leading-none tracking-[0.16px]"
@@ -909,7 +909,9 @@ function TabletTrustedSection() {
         >
           View all
         </p>
-        <ExternalArrowSm />
+        <div className="group-hover:translate-x-1 transition-transform duration-200">
+          <ExternalArrowSm />
+        </div>
       </a>
     </div>
   );

@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
-import Frame7 from "../../imports/DesktopHomePage";
+import Frame7, { MorphingHeader } from "../../imports/DesktopHomePage";
 import { MobileHomePage, MobileNavDrawer } from "../components/MobileHomePage";
 import { MobileFullFooter } from "../../imports/Frame1618872068-142-633";
 import { TabletHomePage } from "../components/TabletHomePage";
@@ -553,6 +553,21 @@ export default function Home() {
           />
         )}
       </AnimatePresence>
+      {/* Morphing Header - fixed position outside ScaledFrame */}
+      <div
+        style={{
+          position: "fixed",
+          top: bannerH,
+          left: 0,
+          right: 0,
+          zIndex: 1000,
+          transition: "top 220ms ease-out",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <MorphingHeader />
+      </div>
       <div
         style={{
           paddingTop: bannerH,

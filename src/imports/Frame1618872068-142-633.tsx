@@ -2798,7 +2798,7 @@ function ProductInfo() {
 function DexCard() {
   return (
     <div
-      className="bg-[rgba(20,21,26,0.7)] col-2 justify-self-stretch relative rounded-[5px] row-2 self-start shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+      className="bg-[rgba(20,21,26,0.7)] col-2 justify-self-stretch relative rounded-[5px] row-2 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center size-full">
@@ -2916,7 +2916,7 @@ function ProductInfo1() {
 function DexCard1() {
   return (
     <div
-      className="bg-[rgba(20,21,26,0.7)] col-1 justify-self-stretch relative rounded-[5px] row-1 self-start shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+      className="bg-[rgba(20,21,26,0.7)] col-1 justify-self-stretch relative rounded-[5px] row-1 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center size-full">
@@ -3130,7 +3130,7 @@ function ProductInfo2() {
 function DexCard2() {
   return (
     <div
-      className="bg-[rgba(20,21,26,0.7)] col-2 justify-self-stretch relative rounded-[5px] row-1 self-start shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+      className="bg-[rgba(20,21,26,0.7)] col-2 justify-self-stretch relative rounded-[5px] row-1 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center size-full">
@@ -3268,7 +3268,7 @@ function ProductInfo3() {
 function DexCard3() {
   return (
     <div
-      className="bg-[rgba(20,21,26,0.7)] col-1 justify-self-stretch relative rounded-[5px] row-2 self-start shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+      className="bg-[rgba(20,21,26,0.7)] col-1 justify-self-stretch relative rounded-[5px] row-2 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center size-full">
@@ -3329,7 +3329,7 @@ function ProductInfo4() {
 function DexCard4() {
   return (
     <div
-      className="bg-[rgba(20,21,26,0.7)] col-1 justify-self-stretch relative rounded-[5px] row-3 self-start shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+      className="bg-[rgba(20,21,26,0.7)] col-1 justify-self-stretch relative rounded-[5px] row-3 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center size-full">
@@ -3390,7 +3390,7 @@ function ProductInfo5() {
 function DexCard5() {
   return (
     <div
-      className="bg-[rgba(20,21,26,0.7)] col-2 justify-self-stretch relative rounded-[5px] row-3 self-start shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+      className="bg-[rgba(20,21,26,0.7)] col-2 justify-self-stretch relative rounded-[5px] row-3 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center size-full">
@@ -3470,7 +3470,7 @@ function ProductInfo6() {
 function DexCard6() {
   return (
     <div
-      className="bg-[rgba(20,21,26,0.7)] col-1 justify-self-stretch relative rounded-[5px] row-4 self-start shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+      className="bg-[rgba(20,21,26,0.7)] col-1 justify-self-stretch relative rounded-[5px] row-4 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center size-full">
@@ -3560,7 +3560,7 @@ function ProductInfo7() {
 function DexCard7() {
   return (
     <div
-      className="bg-[rgba(20,21,26,0.7)] col-2 justify-self-stretch relative rounded-[5px] row-4 self-start shrink-0 cursor-pointer hover:opacity-80 transition-opacity"
+      className="bg-[rgba(20,21,26,0.7)] col-2 justify-self-stretch relative rounded-[5px] row-4 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
       data-name="DEX Card"
     >
       <div className="flex flex-row items-center justify-center size-full">
