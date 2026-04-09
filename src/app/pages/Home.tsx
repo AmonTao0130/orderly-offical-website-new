@@ -24,6 +24,7 @@ function ScaledFrame({
   designHeight,
   autoHeight,
   comfortableViewport,
+  maxScale,
 }: {
   children: React.ReactNode;
   cap?: boolean;
@@ -31,6 +32,7 @@ function ScaledFrame({
   designHeight?: number;
   autoHeight?: boolean;
   comfortableViewport?: number;
+  maxScale?: number;
 }) {
   const outerRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -47,8 +49,9 @@ function ScaledFrame({
     const comfortCap = comfortableViewport
       ? Math.min(vw / comfortableViewport, 1)
       : 1;
-    setScale(cap ? Math.min(raw, comfortCap) : raw);
-  }, [cap, dw, comfortableViewport]);
+    const computed = cap ? Math.min(raw, comfortCap) : raw;
+    setScale(maxScale !== undefined ? Math.min(computed, maxScale) : computed);
+  }, [cap, dw, comfortableViewport, maxScale]);
 
   useEffect(() => {
     updateScale();
@@ -85,10 +88,9 @@ function ScaledFrame({
       style={{
         width: "100%",
         height: `${scaledHeight}px`,
-        // clip on X prevents horizontal page scrollbar without creating a scroll container,
-        // so overflowY stays truly visible (nav dropdowns are never clipped).
-        overflowX: "clip",
-        overflowY: "visible",
+        // Do NOT set overflowX here — Safari treats overflow-x:clip as also clipping Y,
+        // which cuts the footer. The parent wrapper in Home.tsx already handles X clipping.
+        overflow: "visible",
         display: "flex",
         alignItems: "flex-start",
         justifyContent: cap ? "center" : "flex-start",
@@ -574,7 +576,7 @@ export default function Home() {
           transition: "padding-top 220ms ease-out",
         }}
       >
-        <ScaledFrame cap comfortableViewport={1680} autoHeight>
+        <ScaledFrame cap comfortableViewport={1920} maxScale={0.85} autoHeight>
           <Frame7 />
         </ScaledFrame>
       </div>

@@ -1664,6 +1664,7 @@ function HeroTextContainer() {
   return (
     <div
       className="content-stretch flex flex-col gap-[12px] items-center justify-center relative shrink-0 text-center text-white w-full whitespace-nowrap"
+      style={{ willChange: "transform" }}
       data-name="Hero Text Container"
     >
       <div
@@ -2901,6 +2902,7 @@ function HeroTextContainer1() {
   return (
     <div
       className="content-stretch flex flex-col gap-[12px] items-center not-italic relative shrink-0 text-center text-white w-full"
+      style={{ transform: "translateZ(0)" }}
       data-name="Hero Text Container"
     >
       <p
@@ -2955,6 +2957,7 @@ function Frame4() {
       target="_blank"
       rel="noopener noreferrer"
       className="bg-[#6700ce] content-stretch flex h-[52px] items-center justify-center px-[24px] py-[12px] relative rounded-[24px] shrink-0 no-underline hover:opacity-90 transition-opacity"
+      style={{ willChange: "opacity" }}
       data-name="build with orderly"
       onClick={() => {
         posthog.capture("homepage_cta_clicked", {
@@ -2994,6 +2997,7 @@ function Frame5({
         onOpenPartnershipModal();
       }}
       className="content-stretch flex h-[52px] items-center justify-center pl-[24px] pr-[20px] py-[12px] relative rounded-[24px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
+      style={{ willChange: "background-color" }}
       data-name="Talk to Partnerships"
     >
       <div
@@ -3103,6 +3107,7 @@ function Component1({ onClick }: { onClick?: () => void }) {
   return (
     <div
       className="bg-white col-1 content-stretch flex gap-[6px] items-center ml-0 mt-0 p-[12px] relative rounded-[63px] row-1 cursor-pointer hover:opacity-80 transition-opacity"
+      style={{ willChange: "opacity" }}
       data-name
       onClick={onClick}
     >
@@ -3212,7 +3217,7 @@ function FooterStatus({ onBuyOrder }: { onBuyOrder?: () => void }) {
       data-name="Footer Status"
     >
       {price && (
-        <div className="flex flex-col font-['Atyp_BL:Semibold',sans-serif] h-[38px] justify-center not-italic relative text-[24px] text-white tracking-[0.24px]">
+        <div className="flex flex-col font-['Atyp_BL:Semibold',sans-serif] h-[38px] justify-center not-italic relative text-[24px] text-white tracking-[0.24px]" style={{ transform: "translateZ(0)" }}>
           <p className="leading-[0.753] whitespace-pre-wrap">{price}</p>
         </div>
       )}
@@ -3582,6 +3587,7 @@ function Group9() {
       <button
         onClick={handleSubmit}
         className="h-full px-[28px] bg-black border-0 cursor-pointer hover:opacity-80 transition-opacity rounded-[14px] shrink-0"
+        style={{ willChange: "opacity" }}
         data-name="Newsletter Button Container"
       >
         <p
@@ -3602,7 +3608,7 @@ function Frame12() {
       <div className="flex flex-col justify-center w-[50%]">
         <div
           className="font-['Atyp_BL:Semibold',sans-serif] leading-[1.2] not-italic text-[30px] text-white tracking-[0.3px]"
-          style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+          style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'", transform: "translateZ(0)" }}
         >
           <p className="mb-0">Be the first to hear about launches,</p>
           <p>token listings, and builder updates.</p>
