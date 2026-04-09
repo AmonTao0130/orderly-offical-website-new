@@ -544,7 +544,7 @@ export default function Home() {
 
   // Desktop (≥ 1024 px): pixel-perfect ScaledFrame of the 1440 px Figma canvas
   return (
-    <div style={{ width: "100%", overflowX: "hidden", background: "#000" }}>
+    <div style={{ width: "100%", overflowX: "clip", background: "#000" }}>
       <AnimatePresence>
         {bannerShown && (
           <AnnouncementBanner
@@ -574,7 +574,7 @@ export default function Home() {
           transition: "padding-top 220ms ease-out",
         }}
       >
-        <ScaledFrame cap comfortableViewport={1680}>
+        <ScaledFrame cap comfortableViewport={1680} autoHeight>
           <Frame7 />
         </ScaledFrame>
       </div>

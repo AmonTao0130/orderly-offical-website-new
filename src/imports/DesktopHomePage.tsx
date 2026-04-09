@@ -6046,12 +6046,12 @@ export default function Frame7() {
   return (
     <div className="bg-black relative size-full">
       {/* Background decorative elements - no animation */}
-      <div className="absolute flex inset-[10.47%_-14.1%_80.67%_73.74%] items-center justify-center">
+      <div className="absolute flex top-[785.79px] left-[1111.86px] items-center justify-center">
         <div className="flex-none h-[411.123px] rotate-45 w-[410.8px]">
           <BackgroundVector />
         </div>
       </div>
-      <div className="absolute flex inset-[7.48%_70.6%_86.92%_3.91%] items-center justify-center">
+      <div className="absolute flex top-[539.94px] left-[106.3px] items-center justify-center">
         <div className="-rotate-30 flex-none h-[268.859px] w-[268.648px]">
           <BackgroundVector1 />
         </div>
@@ -6239,7 +6239,7 @@ export default function Frame7() {
           style={{ marginTop: -120 }}
         >
           <FooterSection />
-          <div className="flex items-center justify-between px-[68.89px] mt-[40px]">
+          <div className="flex items-center justify-between px-[68.89px] mt-[40px] pb-[48px]">
             <p
               className="font-['Atyp_BL:Semibold',sans-serif] leading-[1.2] not-italic text-[12px] text-white tracking-[0.12px] whitespace-pre-wrap"
               style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
