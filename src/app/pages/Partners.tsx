@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { NavCanvas, SiteFooter } from "../../imports/DesktopHomePage";
+import { MorphingHeader, SiteFooter } from "../../imports/DesktopHomePage";
 import { MobileNavDrawer } from "../components/MobileHomePage";
-import { MobileFooterCard } from "../../imports/Frame1618872068-142-633";
+import { MobileFullFooter } from "../../imports/Frame1618872068-142-633";
 import { TabletNav, TabletFooter } from "../components/TabletHomePage";
 import svgPathsMobile from "../../imports/svg-4hybjba00c";
 import { useOrderlyStats, formatLargeNumber } from "../hooks/useOrderlyStats";
@@ -197,27 +197,7 @@ interface Partner {
 }
 
 const PARTNERS: Partner[] = [
-  // ── Builders ── (sorted by Dune rolling_avg_volume, updated 2026-04-06)
-  {
-    name: "Kodiak",
-    category: "Builder",
-    description:
-      "Perpetual futures trading platform on Berachain, powered by Orderly's shared orderbook for deep, bootstrapped liquidity from day one.",
-    logo: "logos/kodiak.jpg",
-    initials: "KD",
-    color: "#1a1200",
-    url: "https://perps.kodiak.finance/",
-  },
-  {
-    name: "Raydium",
-    category: "Builder",
-    description:
-      "The leading Solana AMM and DEX powering DeFi with concentrated liquidity, farms, and perps — connected to Orderly's shared orderbook on Solana.",
-    logo: "logos/raydium.png",
-    initials: "RY",
-    color: "#1a0a4a",
-    url: "https://raydium.io/swap",
-  },
+  // ── Builders ── (sorted by Dune 30-day volume, updated 2026-04-10)
   {
     name: "Fillex",
     category: "Builder",
@@ -237,13 +217,33 @@ const PARTNERS: Partner[] = [
     url: "https://dexless.exchange/perp/PERP_ETH_USDC",
   },
   {
-    name: "Velto",
+    name: "Raydium",
     category: "Builder",
-    description: "Next-generation perpetual futures platform delivering a seamless trading experience, built on Orderly's shared orderbook for deep, bootstrapped liquidity.",
-    logo: "logos/velto.jpg",
-    initials: "VL",
-    color: "#0a1a2e",
-    url: "https://bld-foggy-harbor.velto.com/perp/PERP_ETH_USDC",
+    description:
+      "The leading Solana AMM and DEX powering DeFi with concentrated liquidity, farms, and perps — connected to Orderly's shared orderbook on Solana.",
+    logo: "logos/raydium.png",
+    initials: "RY",
+    color: "#1a0a4a",
+    url: "https://raydium.io/swap",
+  },
+  {
+    name: "Kodiak",
+    category: "Builder",
+    description:
+      "Perpetual futures trading platform on Berachain, powered by Orderly's shared orderbook for deep, bootstrapped liquidity from day one.",
+    logo: "logos/kodiak.jpg",
+    initials: "KD",
+    color: "#1a1200",
+    url: "https://perps.kodiak.finance/",
+  },
+  {
+    name: "Solinu Exchange",
+    category: "Builder",
+    description: "A decentralized trading platform bringing accessible perpetual futures to users with seamless on-chain execution backed by Orderly's shared liquidity layer.",
+    logo: "logos/solinu.jpg",
+    initials: "SL",
+    color: "#0a1a0a",
+    url: "https://solinu.exchange",
   },
   {
     name: "WOOFi Pro",
@@ -256,6 +256,24 @@ const PARTNERS: Partner[] = [
     url: "https://pro.woofi.com/",
   },
   {
+    name: "Velto",
+    category: "Builder",
+    description: "Next-generation perpetual futures platform delivering a seamless trading experience, built on Orderly's shared orderbook for deep, bootstrapped liquidity.",
+    logo: "logos/velto.jpg",
+    initials: "VL",
+    color: "#0a1a2e",
+    url: "https://bld-foggy-harbor.velto.com/perp/PERP_ETH_USDC",
+  },
+  {
+    name: "Alpix.io",
+    category: "Builder",
+    description: "Professional-grade perpetual futures exchange combining a powerful trading interface with deep liquidity from Orderly's omnichain shared orderbook.",
+    logo: "logos/Alpix.jpg",
+    initials: "AP",
+    color: "#0a2010",
+    url: "https://alpix.io",
+  },
+  {
     name: "Aden",
     category: "Builder",
     description:
@@ -265,6 +283,198 @@ const PARTNERS: Partner[] = [
     color: "#1a0a36",
     url: "https://aden.finance/",
   },
+  {
+    name: "Holy Labs",
+    category: "Builder",
+    description: "A next-generation DeFi trading protocol built on Orderly's infrastructure, enabling advanced on-chain derivatives and perpetual futures trading.",
+    logo: "logos/holy labs.jpg",
+    initials: "HL",
+    color: "#0a1a36",
+    url: "https://holylabs.xyz/",
+  },
+  {
+    name: "UXUY",
+    category: "Builder",
+    description: "Multi-chain crypto wallet and trading platform offering seamless access to decentralized markets, powered by Orderly's shared liquidity infrastructure.",
+    logo: "logos/uxuy.jpg",
+    initials: "UX",
+    color: "#1a0a36",
+    url: "https://www.uxuy.com/",
+  },
+  {
+    name: "What.Exchange",
+    category: "Builder",
+    description:
+      "A clean, fast perpetuals trading interface with advanced order types and portfolio tools, built on Orderly's omnichain liquidity network.",
+    logo: "logos/whatexchange.png",
+    initials: "WX",
+    color: "#0d2033",
+    url: "https://www.what.exchange/",
+  },
+  {
+    name: "Novex Finance",
+    category: "Builder",
+    description: "A decentralized perpetuals exchange offering seamless on-chain derivatives trading with deep liquidity from Orderly's shared orderbook.",
+    logo: "logos/Novex Finance.jpg",
+    initials: "NV",
+    color: "#1a0a10",
+    url: "https://quests.novex.finance/",
+  },
+  {
+    name: "Interlink",
+    category: "Builder",
+    description: "AI-native trading infrastructure connecting on-chain liquidity across ecosystems, leveraging Orderly's omnichain orderbook for deep, unified market depth.",
+    logo: "logos/interlink.jpg",
+    initials: "IL",
+    color: "#061a2e",
+    url: "https://interlinklabs.ai",
+  },
+  {
+    name: "FastX",
+    category: "Builder",
+    description: "A high-performance perpetual futures trading platform delivering fast execution and deep liquidity powered by Orderly's omnichain shared orderbook.",
+    logo: "logos/FastX.png",
+    initials: "FX",
+    color: "#0a1a2e",
+    url: "https://fastx.co",
+  },
+  {
+    name: "LOL DEX",
+    category: "Builder",
+    description: "LOL DEX leverages Orderly One to bring native perpetual trading into the LOL ecosystem, turning community activity into a sustainable source of growth through fee capture.",
+    logo: "logos/lol.jpg",
+    initials: "LOL",
+    color: "#1a1a0a",
+    url: "https://www.loldex.lol/perp/PERP_ETH_USDC/",
+  },
+  {
+    name: "AlphaNet",
+    category: "Builder",
+    description: "A high-performance perpetuals trading platform delivering institutional-grade execution and deep liquidity powered by Orderly's shared orderbook.",
+    logo: "logos/alphanet.jpg",
+    initials: "AN",
+    color: "#0a1a2e",
+    url: "https://alphanet.phoenix.global",
+  },
+  {
+    name: "Berrie",
+    category: "Builder",
+    description: "Innovative decentralized exchange bringing accessible perpetual futures trading to users, leveraging Orderly's shared orderbook for reliable market depth.",
+    logo: "logos/berrie.png",
+    initials: "BR",
+    color: "#1a0a1a",
+    url: "https://berriedex.com",
+  },
+  {
+    name: "Clutch",
+    category: "Builder",
+    description: "Professional-grade perpetual futures trading platform delivering deep liquidity and seamless execution powered by Orderly's shared orderbook.",
+    logo: "logos/clutch.png",
+    initials: "CL",
+    color: "#1a0a2e",
+    url: "https://anvil.clutch.market",
+  },
+  {
+    name: "Volt",
+    category: "Builder",
+    description: "A high-performance perpetual futures trading platform delivering fast execution and deep liquidity powered by Orderly's omnichain shared orderbook.",
+    logo: "logos/Volt.png",
+    initials: "VT",
+    color: "#1a1a0a",
+    url: "https://dex.orderly.network/volt-0351/",
+  },
+  {
+    name: "OKLONG",
+    category: "Builder",
+    description: "A decentralized perpetuals exchange offering efficient on-chain derivatives trading with deep, bootstrapped liquidity from Orderly's omnichain orderbook.",
+    logo: "logos/OKLONG.jpg",
+    initials: "OK",
+    color: "#0a1a0a",
+    url: "https://oklong.io",
+  },
+  {
+    name: "Orange Perps",
+    category: "Builder",
+    description: "Perpetual futures DEX built for traders who demand speed and reliability, tapping into Orderly's omnichain orderbook for deep, bootstrapped liquidity.",
+    logo: "logos/orange-perps.jpg",
+    initials: "OP",
+    color: "#2a1200",
+    url: "https://home.orangeperps.com",
+  },
+  {
+    name: "Pangolin",
+    category: "Builder",
+    description: "Pangolin is Avalanche's premier and most battle-tested DEX, low fees, and high-performance trading across spot, perps and advanced AMM designs.",
+    logo: "logos/Pangolin.jpg",
+    initials: "PG",
+    color: "#0a2a1a",
+    url: "https://perps.pangolin.exchange",
+  },
+  {
+    name: "AEGIS",
+    category: "Builder",
+    description: "A decentralized derivatives exchange offering secure and efficient perpetual futures trading, built on Orderly's shared orderbook infrastructure.",
+    logo: "logos/aegis.jpg",
+    initials: "AG",
+    color: "#0a1a1a",
+    url: "https://aegisdex.io",
+  },
+  {
+    name: "DiamondX",
+    category: "Builder",
+    description: "A perpetuals-focused decentralized exchange delivering professional-grade derivatives trading powered by Orderly's shared orderbook.",
+    logo: "logos/DiamondX.jpg",
+    initials: "DX",
+    color: "#061a2e",
+    url: "https://diamondx.exchange",
+  },
+  {
+    name: "Arthur",
+    category: "Builder",
+    description: "A decentralized perpetuals DEX delivering professional-grade derivatives trading with deep liquidity powered by Orderly's shared orderbook.",
+    logo: "logos/Arthur.png",
+    initials: "AR",
+    color: "#1a0a0a",
+    url: "https://arthurdex.com",
+  },
+  {
+    name: "SIX DEX",
+    category: "Builder",
+    description: "A next-generation decentralized exchange bringing accessible and efficient perpetual futures trading to users, powered by Orderly's shared orderbook infrastructure.",
+    logo: "logos/SIX DEX.jpg",
+    initials: "SIX",
+    color: "#0a0a1a",
+    url: "https://sixdex.xyz/",
+  },
+  {
+    name: "Clypto",
+    category: "Builder",
+    description: "A next-gen cross-chain DeFi aggregation protocol and perp DEX. Swap seamlessly across 16+ blockchains and trade perpetuals powered by Orderly's shared orderbook.",
+    logo: "logos/clypto.jpg",
+    initials: "CL",
+    color: "#0a1a10",
+    url: "https://perps.clypto.com",
+  },
+  {
+    name: "Zetarium",
+    category: "Builder",
+    description:
+      "A next-generation decentralised exchange delivering high-performance perp trading on ZetaChain, backed by Orderly's shared liquidity layer.",
+    logo: "logos/Zetarium.jpg",
+    initials: "ZT",
+    color: "#0a1a1a",
+    url: "https://www.zdex.world/",
+  },
+  {
+    name: "Toro",
+    category: "Builder",
+    description: "A decentralized perpetuals DEX delivering fast, non-custodial derivatives trading with deep liquidity powered by Orderly's omnichain orderbook.",
+    logo: "logos/toro.jpg",
+    initials: "TR",
+    color: "#1a0a0a",
+    url: "https://dex.torodex.xyz/perp/PERP_ETH_USDC",
+  },
+  /* ── Low volume — keep for future use ──
   {
     name: "PERPTools",
     category: "Builder",
@@ -286,71 +496,6 @@ const PARTNERS: Partner[] = [
     url: "https://www.btse.com/",
   },
   {
-    name: "What.Exchange",
-    category: "Builder",
-    description:
-      "A clean, fast perpetuals trading interface with advanced order types and portfolio tools, built on Orderly's omnichain liquidity network.",
-    logo: "logos/whatexchange.png",
-    initials: "WX",
-    color: "#0d2033",
-    url: "https://www.what.exchange/",
-  },
-  {
-    name: "Alpix.io",
-    category: "Builder",
-    description: "Professional-grade perpetual futures exchange combining a powerful trading interface with deep liquidity from Orderly's omnichain shared orderbook.",
-    logo: "logos/Alpix.jpg",
-    initials: "AP",
-    color: "#0a2010",
-    url: "https://x.com/Alpix_io",
-  },
-  {
-    name: "Zetarium",
-    category: "Builder",
-    description:
-      "A next-generation decentralised exchange delivering high-performance perp trading on ZetaChain, backed by Orderly's shared liquidity layer.",
-    logo: "logos/Zetarium.jpg",
-    initials: "ZT",
-    color: "#0a1a1a",
-    url: "https://www.zdex.world/",
-  },
-  {
-    name: "Solinu Exchange",
-    category: "Builder",
-    description: "A decentralized trading platform bringing accessible perpetual futures to users with seamless on-chain execution backed by Orderly's shared liquidity layer.",
-    logo: "logos/solinu.jpg",
-    initials: "SL",
-    color: "#0a1a0a",
-    url: "https://solinu.exchange",
-  },
-  {
-    name: "Novex Finance",
-    category: "Builder",
-    description: "A decentralized perpetuals exchange offering seamless on-chain derivatives trading with deep liquidity from Orderly's shared orderbook.",
-    logo: "logos/Novex Finance.jpg",
-    initials: "NV",
-    color: "#1a0a10",
-    url: "https://novex.finance/perp/PERP_ETH_USDC",
-  },
-  {
-    name: "UXUY",
-    category: "Builder",
-    description: "Multi-chain crypto wallet and trading platform offering seamless access to decentralized markets, powered by Orderly's shared liquidity infrastructure.",
-    logo: "logos/uxuy.jpg",
-    initials: "UX",
-    color: "#1a0a36",
-    url: "https://www.uxuy.com/",
-  },
-  {
-    name: "Berrie",
-    category: "Builder",
-    description: "Innovative decentralized exchange bringing accessible perpetual futures trading to users, leveraging Orderly's shared orderbook for reliable market depth.",
-    logo: "logos/berrie.png",
-    initials: "BR",
-    color: "#1a0a1a",
-    url: "https://berriedex.com",
-  },
-  {
     name: "Bitbaazi",
     category: "Builder",
     description: "Decentralized perpetuals trading platform offering a fast, intuitive interface and competitive market depth powered by Orderly's liquidity infrastructure.",
@@ -358,42 +503,6 @@ const PARTNERS: Partner[] = [
     initials: "BB",
     color: "#1a0a0a",
     url: "https://bitbaazi.exchange/perp/PERP_ETH_USDC",
-  },
-  {
-    name: "Clypto",
-    category: "Builder",
-    description: "A next-gen cross-chain DeFi aggregation protocol and perp DEX. Swap seamlessly across 16+ blockchains and trade perpetuals powered by Orderly's shared orderbook.",
-    logo: "logos/clypto.jpg",
-    initials: "CL",
-    color: "#0a1a10",
-    url: "https://perps.clypto.com",
-  },
-  {
-    name: "Interlink",
-    category: "Builder",
-    description: "AI-native trading infrastructure connecting on-chain liquidity across ecosystems, leveraging Orderly's omnichain orderbook for deep, unified market depth.",
-    logo: "logos/interlink.jpg",
-    initials: "IL",
-    color: "#061a2e",
-    url: "https://interlinklabs.ai",
-  },
-  {
-    name: "Orange Perps",
-    category: "Builder",
-    description: "Perpetual futures DEX built for traders who demand speed and reliability, tapping into Orderly's omnichain orderbook for deep, bootstrapped liquidity.",
-    logo: "logos/orange-perps.jpg",
-    initials: "OP",
-    color: "#2a1200",
-    url: "https://home.orangeperps.com",
-  },
-  {
-    name: "FastX",
-    category: "Builder",
-    description: "A high-performance perpetual futures trading platform delivering fast execution and deep liquidity powered by Orderly's omnichain shared orderbook.",
-    logo: "logos/FastX.png",
-    initials: "FX",
-    color: "#0a1a2e",
-    url: "https://fastx.co",
   },
   {
     name: "FusionX",
@@ -405,33 +514,6 @@ const PARTNERS: Partner[] = [
     url: "https://fusionx.finance/",
   },
   {
-    name: "Holy Labs",
-    category: "Builder",
-    description: "A next-generation DeFi trading protocol built on Orderly's infrastructure, enabling advanced on-chain derivatives and perpetual futures trading.",
-    logo: "logos/holy labs.jpg",
-    initials: "HL",
-    color: "#0a1a36",
-    url: "https://holylabs.xyz/",
-  },
-  {
-    name: "LOL DEX",
-    category: "Builder",
-    description: "LOL DEX leverages Orderly One to bring native perpetual trading into the LOL ecosystem, turning community activity into a sustainable source of growth through fee capture.",
-    logo: "logos/lol.jpg",
-    initials: "LOL",
-    color: "#1a1a0a",
-    url: "https://www.loldex.lol/perp/PERP_ETH_USDC/",
-  },
-  {
-    name: "DiamondX",
-    category: "Builder",
-    description: "A perpetuals-focused decentralized exchange delivering professional-grade derivatives trading powered by Orderly's shared orderbook.",
-    logo: "logos/DiamondX.jpg",
-    initials: "DX",
-    color: "#061a2e",
-    url: "https://diamondx.exchange",
-  },
-  {
     name: "Algowhirl",
     category: "Builder",
     description: "An algorithmic trading platform with built-in automation tools, enabling strategy-driven perpetual trading on Orderly's shared orderbook.",
@@ -439,15 +521,6 @@ const PARTNERS: Partner[] = [
     initials: "AW",
     color: "#0a1a2e",
     url: "https://algowhirl.com",
-  },
-  {
-    name: "Pangolin",
-    category: "Builder",
-    description: "Pangolin is Avalanche's premier and most battle-tested DEX, low fees, and high-performance trading across spot, perps and advanced AMM designs.",
-    logo: "logos/Pangolin.jpg",
-    initials: "PG",
-    color: "#0a2a1a",
-    url: "https://perps.pangolin.exchange",
   },
   {
     name: "Toro",
@@ -458,25 +531,6 @@ const PARTNERS: Partner[] = [
     color: "#1a0a0a",
     url: "https://dex.torodex.xyz/perp/PERP_ETH_USDC",
   },
-  {
-    name: "AlphaNet",
-    category: "Builder",
-    description: "A high-performance perpetuals trading platform delivering institutional-grade execution and deep liquidity powered by Orderly's shared orderbook.",
-    logo: "logos/alphanet.jpg",
-    initials: "AN",
-    color: "#0a1a2e",
-    url: "https://alphanet.phoenix.global",
-  },
-  {
-    name: "AEGIS",
-    category: "Builder",
-    description: "A decentralized derivatives exchange offering secure and efficient perpetual futures trading, built on Orderly's shared orderbook infrastructure.",
-    logo: "logos/aegis.jpg",
-    initials: "AG",
-    color: "#0a1a1a",
-    url: "https://aegisdex.io",
-  },
-  /* ── Low volume — keep for future use ──
   {
     name: "VOOI",
     category: "Builder",
@@ -499,6 +553,26 @@ const PARTNERS: Partner[] = [
   },
   ── end low volume ── */
   // ── Ecosystem ──
+  {
+    name: "Ethereum",
+    category: "Ecosystem",
+    description:
+      "The world's leading programmable blockchain and the foundation of decentralized finance. Orderly's settlement layer is built on the OP Stack, securing all perp trading activity with Ethereum's security guarantees.",
+    logo: "logos/eth.png",
+    initials: "ETH",
+    color: "#0a0e2e",
+    url: "https://ethereum.org/",
+  },
+  {
+    name: "BNB Chain",
+    category: "Ecosystem",
+    description:
+      "High-performance EVM-compatible blockchain with one of the largest DeFi ecosystems. Orderly's integration on BNB Chain gives builders access to a shared orderbook with deep, bootstrapped perp liquidity.",
+    logo: "logos/BNB chain.png",
+    initials: "BNB",
+    color: "#1a1000",
+    url: "https://www.bnbchain.org/",
+  },
   {
     name: "Optimism",
     category: "Ecosystem",
@@ -548,16 +622,6 @@ const PARTNERS: Partner[] = [
     initials: "SOL",
     color: "#0a1a2e",
     url: "https://solana.com/",
-  },
-  {
-    name: "Near",
-    category: "Ecosystem",
-    description:
-      "The blockchain platform for simplifying open web development. Orderly's omnichain infrastructure extends full orderbook access to the NEAR ecosystem.",
-    logo: "logos/near.svg",
-    initials: "NR",
-    color: "#0a1a0a",
-    url: "https://near.org/",
   },
   {
     name: "Mantle",
@@ -619,6 +683,56 @@ const PARTNERS: Partner[] = [
     color: "#1a1a06",
     url: "https://www.mode.network/",
   },
+  {
+    name: "Sei Network",
+    category: "Ecosystem",
+    description:
+      "The fastest Layer-1 blockchain optimized for trading, with sub-400ms finality and a built-in order matching engine. Orderly's shared orderbook brings deep cross-chain perp liquidity natively to Sei.",
+    logo: "logos/sei.png",
+    initials: "SEI",
+    color: "#0e0a1a",
+    url: "https://www.sei.io/",
+  },
+  {
+    name: "Avalanche",
+    category: "Ecosystem",
+    description:
+      "High-throughput Layer-1 with sub-second finality and a scalable subnet architecture. Orderly extends its omnichain orderbook to Avalanche, giving builders access to deep, shared perp liquidity.",
+    logo: "logos/Avalanche.png",
+    initials: "AVAX",
+    color: "#2a0a0a",
+    url: "https://www.avax.network/",
+  },
+  {
+    name: "Morph",
+    category: "Ecosystem",
+    description:
+      "Consumer-focused Ethereum L2 combining optimistic and ZK rollup technology for low-cost, high-performance transactions. Orderly brings shared orderbook liquidity to the Morph ecosystem.",
+    logo: "logos/morph.png",
+    initials: "MOR",
+    color: "#0a160a",
+    url: "https://www.morphl2.io/",
+  },
+  {
+    name: "Plume",
+    category: "Ecosystem",
+    description:
+      "Modular L2 blockchain purpose-built for real-world assets, enabling compliant tokenization and on-chain trading. Orderly powers perpetual futures infrastructure across the Plume ecosystem.",
+    logo: "logos/plume.png",
+    initials: "PLM",
+    color: "#1a1206",
+    url: "https://plumenetwork.xyz/",
+  },
+  {
+    name: "Abstract",
+    category: "Ecosystem",
+    description:
+      "Consumer-centric Ethereum L2 built for accessible, user-friendly on-chain applications. Orderly's omnichain orderbook brings institutional-grade perp liquidity to Abstract's growing ecosystem.",
+    logo: "logos/abstract.png",
+    initials: "ABS",
+    color: "#0e0e0e",
+    url: "https://abs.xyz/",
+  },
 
   // ── Product ──
   {
@@ -645,7 +759,7 @@ const PARTNERS: Partner[] = [
     name: "Pyth",
     category: "Product",
     description:
-      "Real-time financial data oracle network delivering high-fidelity price feeds on-chain. Orderly uses Pyth to power accurate, tamper-proof price discovery across all its markets.",
+      "A decentralized oracle network delivering real-time market data from institutional sources to smart contracts.",
     logo: "logos/pyth.svg",
     initials: "PY",
     color: "#1a0a1a",
@@ -690,6 +804,56 @@ const PARTNERS: Partner[] = [
     initials: "CP",
     color: "#061a1a",
     url: "https://clearpool.finance/",
+  },
+  {
+    name: "Halborn",
+    category: "Product",
+    description:
+      "A leading blockchain security firm providing smart contract audits and security assessments for Web3 projects.",
+    logo: "logos/Halborn.jpg",
+    initials: "HB",
+    color: "#1a0a0a",
+    url: "https://www.halborn.com/",
+  },
+  {
+    name: "Zellic",
+    category: "Product",
+    description:
+      "A security research company specializing in audits of smart contracts, cryptography, and complex blockchain systems.",
+    logo: "logos/Zellic.jpg",
+    initials: "ZL",
+    color: "#0a101a",
+    url: "https://www.zellic.io/",
+  },
+  {
+    name: "Guardian Audits",
+    category: "Product",
+    description:
+      "A Web3 security firm focused on smart contract audits and vulnerability detection for DeFi protocols.",
+    logo: "logos/Guardian.jpg",
+    initials: "GA",
+    color: "#0a1a0a",
+    url: "https://guardianaudits.com/",
+  },
+  {
+    name: "Chainlink",
+    category: "Product",
+    description:
+      "A leading decentralized oracle network enabling smart contracts to securely access off-chain data and services.",
+    logo: "logos/Chainlink.jpg",
+    initials: "CL",
+    color: "#0a0a1a",
+    url: "https://chain.link/",
+  },
+  {
+    name: "Stork",
+    category: "Product",
+    description:
+      "A low-latency oracle designed to provide fast and reliable data feeds for high-performance DeFi applications.",
+    logo: "logos/Stork.jpg",
+    initials: "ST",
+    color: "#1a1a0a",
+    url: "https://www.stork.network/",
   },
 ];
 
@@ -936,7 +1100,7 @@ export default function Partners() {
         background: "#000",
         minHeight: "100vh",
         width: "100%",
-        paddingTop: isMobile ? "64px" : 0,
+        paddingTop: isMobile ? "64px" : isTablet ? 0 : "80px",
       }}
     >
       {/* ── Nav ── */}
@@ -945,9 +1109,19 @@ export default function Partners() {
       ) : isTablet ? (
         <TabletNav onMenuClick={() => setNavOpen(true)} />
       ) : (
-        <ScaledSection designHeight={200}>
-          <NavCanvas />
-        </ScaledSection>
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 1000,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <MorphingHeader />
+        </div>
       )}
 
       {/* ── Hero ── */}
@@ -1447,16 +1621,14 @@ export default function Partners() {
               width: "100%",
             }}
           >
-            <MobileFooterCard />
+            <MobileFullFooter />
           </div>
         ) : isTablet ? (
           <div className="pb-[24px]">
             <TabletFooter />
           </div>
         ) : (
-          <ScaledSection designWidth={1440} designHeight={900}>
-            <SiteFooter />
-          </ScaledSection>
+          <SiteFooter />
         )}
       </motion.div>
 
