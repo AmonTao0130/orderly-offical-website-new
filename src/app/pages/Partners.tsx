@@ -4,13 +4,14 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { MorphingHeader, SiteFooter } from "../../imports/DesktopHomePage";
 import { MobileNavDrawer } from "../components/MobileHomePage";
-import { MobileFullFooter } from "../../imports/Frame1618872068-142-633";
+import { MobileFullFooter, MobileFooterCard } from "../../imports/Frame1618872068-142-633";
 import { TabletNav, TabletFooter } from "../components/TabletHomePage";
 import svgPathsMobile from "../../imports/svg-4hybjba00c";
 import { useOrderlyStats, formatLargeNumber } from "../hooks/useOrderlyStats";
 
 // ─── ScaledSection ────────────────────────────────────────────────────────────
 const DESIGN_WIDTH = 1440;
+
 
 function ScaledSection({
   children,
@@ -1125,7 +1126,7 @@ export default function Partners() {
       )}
 
       {/* ── Hero ── */}
-      <div style={{ position: "relative", width: "100%", overflow: "hidden" }}>
+      <div style={{ position: "relative", width: "100%", overflow: "visible" }}>
         {/* Desktop + Tablet + Mobile background decorations */}
         <>
           {/* Left group PNG */}
@@ -1141,10 +1142,10 @@ export default function Partners() {
                 : "calc(70px + (100vw - 1440px) * 0.3)",
               top: isMobile ? "10px" : isTablet ? "20px" : 0,
               width: isMobile
-                ? "clamp(90px, 25vw, 120px)"
+                ? "clamp(72px, 20vw, 96px)"
                 : isTablet
-                ? "clamp(130px, 22vw, 220px)"
-                : "clamp(240px, 26.4vw, 380px)",
+                ? "clamp(104px, 17.6vw, 176px)"
+                : "clamp(192px, 21.1vw, 304px)",
               pointerEvents: "none",
               zIndex: 0,
             }}
@@ -1163,10 +1164,10 @@ export default function Partners() {
                 : "calc(40px + (100vw - 1440px) * 0.3)",
               top: isMobile ? "10px" : isTablet ? "20px" : 0,
               width: isMobile
-                ? "clamp(90px, 25vw, 120px)"
+                ? "clamp(72px, 20vw, 96px)"
                 : isTablet
-                ? "clamp(130px, 22vw, 220px)"
-                : "clamp(240px, 26.4vw, 380px)",
+                ? "clamp(104px, 17.6vw, 176px)"
+                : "clamp(192px, 21.1vw, 304px)",
               pointerEvents: "none",
               zIndex: 0,
             }}
@@ -1197,7 +1198,7 @@ export default function Partners() {
               fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
               fontVariationSettings: "'wght' 700",
               fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-              fontSize: isMobile ? "38px" : isTablet ? "48px" : "80px",
+              fontSize: isMobile ? "28px" : isTablet ? "36px" : "60px",
               color: "white",
               margin: "0 0 24px",
               lineHeight: 1.0,
@@ -1216,7 +1217,7 @@ export default function Partners() {
               fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
               fontVariationSettings: "'wght' 400",
               fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-              fontSize: isMobile ? "16px" : isTablet ? "13px" : "22px",
+              fontSize: isMobile ? "12px" : isTablet ? "10px" : "16.5px",
               color: "rgba(255,255,255,0.6)",
               margin: "0 auto",
               lineHeight: 1.55,
@@ -1505,7 +1506,7 @@ export default function Partners() {
               ? "calc(100% - 80px)"
               : "min(1100px, 87%)",
             margin: "0 auto",
-            marginBottom: isMobile ? "64px" : "96px",
+            marginBottom: isMobile ? "24px" : "24px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -1621,14 +1622,16 @@ export default function Partners() {
               width: "100%",
             }}
           >
-            <MobileFullFooter />
+            <MobileFooterCard />
           </div>
         ) : isTablet ? (
           <div className="pb-[24px]">
             <TabletFooter />
           </div>
         ) : (
-          <SiteFooter />
+          <div style={{ zoom: 0.85 }}>
+            <SiteFooter />
+          </div>
         )}
       </motion.div>
 
