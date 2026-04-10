@@ -32,6 +32,7 @@ COPY --from=landing-page-build /app/out/images /app/dist/client/images
 COPY --from=landing-page-build /app/out/campaigns /app/dist/client/campaigns
 COPY --from=landing-page-build /app/out/index.html /app/dist/client/index.html
 COPY --from=landing-page-build /app/out/faq.html /app/dist/client/faq/index.html
+COPY --from=landing-page-build /app/out/partners.html /app/dist/client/partners/index.html
 COPY --from=landing-page-build /app/out/skill.md /app/dist/client/skill.md
 
 ENV HOST=0.0.0.0
