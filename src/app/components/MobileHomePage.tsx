@@ -243,6 +243,8 @@ function MobileNavDrawer({
                 >
                   <div className="flex flex-col px-[16px] pb-[14px] gap-[2px]">
                     {items.map((item) => {
+                      const opensNewTab =
+                        item.external === true || item.target === "_blank";
                       const trackSubItem = () =>
                         posthog.capture("header_nav_clicked", {
                           tab_name: `${key.toLowerCase()}_${item.label
@@ -252,7 +254,7 @@ function MobileNavDrawer({
                           device_layout: deviceLayout,
                           section: "header",
                         });
-                      return item.external ? (
+                      return opensNewTab ? (
                         <a
                           key={item.label}
                           href={item.href}
@@ -571,7 +573,7 @@ function FooterSheet({
         </div>
         <nav className="flex flex-col gap-[16px]">
           {items.map((item) =>
-            item.external ? (
+            item.external === true || item.target === "_blank" ? (
               <a
                 key={item.label}
                 href={item.href}

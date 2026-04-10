@@ -21,7 +21,11 @@ import {
   formatLargeNumber,
   formatCount,
 } from "@/app/hooks/useOrderlyStats";
-import { FOOTER_NAV, SOCIAL_LINKS } from "@/app/shared/orderly";
+import {
+  FOOTER_NAV,
+  SOCIAL_LINKS,
+  type FooterNavLink,
+} from "@/app/shared/orderly";
 import svgPaths from "./svg-4hybjba00c";
 const imgMacBook11 =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQI12NgAAIABQABNjN9GQAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAAA0lEQVQI12P4z8BQDwAEgAF/pooBPQAAAABJRU5ErkJggg==";
@@ -4253,7 +4257,7 @@ function FooterAccordion({
   dataName,
 }: {
   title: string;
-  links: { label: string; href: string; external: boolean }[];
+  links: FooterNavLink[];
   dataName: string;
 }) {
   const [open, setOpen] = useState(false);
@@ -4316,8 +4320,14 @@ function FooterAccordion({
             <a
               key={link.label}
               href={link.href}
-              target={link.external ? "_blank" : undefined}
-              rel={link.external ? "noopener noreferrer" : undefined}
+              target={
+                link.external || link.target === "_blank" ? "_blank" : undefined
+              }
+              rel={
+                link.external || link.target === "_blank"
+                  ? "noopener noreferrer"
+                  : undefined
+              }
               onClick={(e) => e.stopPropagation()}
               className="no-underline capitalize px-[2px] py-[10px] font-['Atyp_BL:Medium',sans-serif] not-italic"
               style={{

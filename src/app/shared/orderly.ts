@@ -4,6 +4,8 @@
  * import from here so data is never duplicated.
  */
 
+import type { HTMLAttributeAnchorTarget } from "react";
+
 // ── Public URLs ──────────────────────────────────────────────────────────────
 export const AI_URL = "https://orderly.network/skill.md";
 export const NPX_CMD = "npx @orderly.network/mcp-server init";
@@ -32,7 +34,13 @@ export const SOCIAL_LINKS: string[] = [
 ];
 
 // ── Header nav dropdown items (desktop & mobile accordion) ────────────────────
-export type HeaderNavItem = { label: string; href: string; external?: boolean };
+export type HeaderNavItem = {
+  label: string;
+  href: string;
+  external?: boolean;
+  /** e.g. `"_blank"` for internal routes that should open in a new tab */
+  target?: HTMLAttributeAnchorTarget;
+};
 
 export const HEADER_NAV: Record<string, HeaderNavItem[]> = {
   Builders: [
@@ -42,7 +50,7 @@ export const HEADER_NAV: Record<string, HeaderNavItem[]> = {
     { label: "GitHub", href: "https://github.com/OrderlyNetwork", external: true },
   ],
   Ecosystem: [
-    { label: "Partners", href: "https://orderly.network/partners/", external: true },
+    { label: "Partners", href: "/partners", external: false, target: "_blank" },
     { label: "Listings", href: "https://orderly.network/listing/", external: true },
     { label: "Case Studies", href: "https://dex.orderly.network/case-studies", external: true },
     { label: "Governance", href: "https://snapshot.box/#/s:orderlygov.eth", external: true },
@@ -115,10 +123,14 @@ export const CAMPAIGN_ITEMS: CampaignItem[] = [
 ];
 
 // ── Footer nav sections (mobile accordion + desktop footer columns) ───────────
-export const FOOTER_NAV: Record<
-  string,
-  { label: string; href: string; external: boolean }[]
-> = {
+export type FooterNavLink = {
+  label: string;
+  href: string;
+  external: boolean;
+  target?: HTMLAttributeAnchorTarget;
+};
+
+export const FOOTER_NAV: Record<string, FooterNavLink[]> = {
   Builders: [
     {
       label: "Orderly One",
@@ -149,8 +161,9 @@ export const FOOTER_NAV: Record<
   Ecosystem: [
     {
       label: "Partners",
-      href: "https://orderly.network/partners/",
-      external: true,
+      href: "/partners",
+      external: false,
+      target: "_blank",
     },
     {
       label: "Listings",

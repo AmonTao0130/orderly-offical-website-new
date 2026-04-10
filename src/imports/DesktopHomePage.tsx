@@ -18,6 +18,8 @@ import {
   CAMPAIGNS_LINK,
   CAMPAIGN_ITEMS,
   FOOTER_NAV,
+  type HeaderNavItem,
+  type FooterNavLink,
 } from "@/app/shared/orderly";
 import svgPaths from "./svg-kykn6znl0w";
 import ImportedWhyContent from "./WhyContent";
@@ -1038,7 +1040,6 @@ function ChevronIcon({ open }: { open: boolean }) {
   );
 }
 
-type DropdownItem = { label: string; href: string };
 type CampaignDropdownItem = {
   href: string;
   status: "Ongoing" | "Ended";
@@ -1072,7 +1073,7 @@ function DropdownPanel({
   onLeave,
   groupKey,
 }: {
-  items: DropdownItem[];
+  items: HeaderNavItem[];
   onEnter: () => void;
   onLeave: () => void;
   groupKey: string;
@@ -1089,7 +1090,10 @@ function DropdownPanel({
     >
       <div className="bg-[#3f0086] flex flex-col gap-[15px] items-start justify-center px-[15px] py-[20px] rounded-[8px] min-w-[160px]">
         {items.map((item) => {
+          const opensNewTab =
+            item.external === true || item.target === "_blank";
           const isInternal = item.href.startsWith("/");
+          const useClientLink = isInternal && !opensNewTab;
           const linkClass =
             "content-stretch flex items-center relative shrink-0 w-full no-underline group";
           const inner = (
@@ -1107,7 +1111,7 @@ function DropdownPanel({
               device_layout: "desktop",
               section: "header",
             });
-          return isInternal ? (
+          return useClientLink ? (
             <Link
               key={item.label}
               href={item.href}
@@ -3247,15 +3251,13 @@ function FooterLinkItem({
   label,
   href,
   external,
-}: {
-  label: string;
-  href: string;
-  external: boolean;
-}) {
-  const linkProps = external
-    ? { target: "_blank", rel: "noopener noreferrer" }
+  target,
+}: FooterNavLink) {
+  const opensNewTab = external || target === "_blank";
+  const linkProps = opensNewTab
+    ? { target: "_blank" as const, rel: "noopener noreferrer" }
     : {};
-  const LinkComponent = external ? "a" : Link;
+  const LinkComponent = opensNewTab ? "a" : Link;
 
   return (
     <LinkComponent
@@ -3281,7 +3283,7 @@ function FooterColumn({
   links,
 }: {
   title: string;
-  links: { label: string; href: string; external: boolean }[];
+  links: FooterNavLink[];
 }) {
   return (
     <div
@@ -3299,12 +3301,7 @@ function FooterColumn({
         data-name={`${title} Links Container`}
       >
         {links.map((link) => (
-          <FooterLinkItem
-            key={link.label}
-            label={link.label}
-            href={link.href}
-            external={link.external}
-          />
+          <FooterLinkItem key={link.label} {...link} />
         ))}
       </div>
     </div>

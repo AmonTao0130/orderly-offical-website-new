@@ -1099,6 +1099,7 @@ const FOOTER_NAV_SECTIONS = [
     links: FOOTER_NAV.Builders.map((link) => ({
       label: link.label,
       href: link.href,
+      target: link.target,
     })),
   },
   {
@@ -1106,6 +1107,7 @@ const FOOTER_NAV_SECTIONS = [
     links: FOOTER_NAV.Ecosystem.map((link) => ({
       label: link.label,
       href: link.href,
+      target: link.target,
     })),
   },
   {
@@ -1113,6 +1115,7 @@ const FOOTER_NAV_SECTIONS = [
     links: FOOTER_NAV.Traders.map((link) => ({
       label: link.label,
       href: link.href,
+      target: link.target,
     })),
   },
   {
@@ -1120,6 +1123,7 @@ const FOOTER_NAV_SECTIONS = [
     links: FOOTER_NAV.About.map((link) => ({
       label: link.label,
       href: link.href,
+      target: link.target,
     })),
   },
 ] as const;
@@ -1204,9 +1208,13 @@ export function TabletFooter() {
                   <a
                     key={link.label}
                     href={link.href}
-                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    target={
+                      link.href.startsWith("http") || link.target === "_blank"
+                        ? "_blank"
+                        : undefined
+                    }
                     rel={
-                      link.href.startsWith("http")
+                      link.href.startsWith("http") || link.target === "_blank"
                         ? "noopener noreferrer"
                         : undefined
                     }
