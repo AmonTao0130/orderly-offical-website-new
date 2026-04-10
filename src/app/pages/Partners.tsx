@@ -200,7 +200,7 @@ interface Partner {
 const PARTNERS: Partner[] = [
   // ── Builders ── (sorted by Dune 30-day volume, updated 2026-04-10)
   {
-    name: "Fillex",
+    name: "FillX",
     category: "Builder",
     description: "A professional-grade on-chain trading interface offering perpetual futures with efficient order execution and deep liquidity via Orderly's shared orderbook.",
     logo: "logos/fillx.jpg",
@@ -785,16 +785,6 @@ const PARTNERS: Partner[] = [
     initials: "GC",
     color: "#0a0a1a",
     url: "https://cloud.google.com/",
-  },
-  {
-    name: "Clearpool",
-    category: "Product",
-    description:
-      "Decentralised credit marketplace and the force behind Ozean, the RWA yield blockchain. Orderly serves as the primary perpetual futures infrastructure on Ozean, with 30+ DEXes set to join the ecosystem.",
-    logo: "logos/clearpool.jpg",
-    initials: "CP",
-    color: "#061a1a",
-    url: "https://clearpool.finance/",
   },
   {
     name: "Halborn",
