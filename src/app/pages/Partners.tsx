@@ -709,7 +709,7 @@ const PARTNERS: Partner[] = [
     category: "Ecosystem",
     description:
       "Consumer-focused Ethereum L2 combining optimistic and ZK rollup technology for low-cost, high-performance transactions. Orderly brings shared orderbook liquidity to the Morph ecosystem.",
-    logo: "logos/morph.png",
+    logo: "logos/morph.svg",
     initials: "MOR",
     color: "#0a160a",
     url: "https://www.morphl2.io/",
@@ -745,16 +745,6 @@ const PARTNERS: Partner[] = [
     initials: "LZ",
     color: "#10111a",
     url: "https://layerzero.network/",
-  },
-  {
-    name: "Elixir",
-    category: "Product",
-    description:
-      "High-throughput DPoS consensus network that enables anyone to supply liquidity to orderbooks. Elixir deepens Orderly's shared liquidity pool for all builders.",
-    logo: "logos/elixir.png",
-    initials: "EL",
-    color: "#1a0636",
-    url: "https://www.elixir.xyz/",
   },
   {
     name: "Pyth",
