@@ -172,7 +172,7 @@ function HeroButtonsContainer() {
       </div>
       <div
         className="content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer hover:bg-white/10 transition-colors"
-        data-name="Talk to Partnerships"
+        data-name="Talk to Us"
       >
         <div
           aria-hidden="true"
@@ -184,7 +184,7 @@ function HeroButtonsContainer() {
             fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
           }}
         >
-          Talk to Partnerships
+          Talk to Us
         </p>
       </div>
     </div>
@@ -194,7 +194,7 @@ function HeroButtonsContainer() {
 function Frame() {
   return (
     <div
-      className="content-stretch flex flex-col gap-[40px] items-center justify-center mb-[-56px] relative shrink-0 w-full"
+      className="content-stretch flex flex-col gap-[24px] items-center justify-center mb-[-56px] relative shrink-0 w-full"
       data-name="Frame"
     >
       <HeroTextContainer />
@@ -3744,7 +3744,7 @@ function Frame14() {
       </div>
       <div
         className="content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer hover:bg-white/10 transition-colors"
-        data-name="Talk to Partnerships"
+        data-name="Talk to Us"
       >
         <div
           aria-hidden="true"
@@ -3756,7 +3756,7 @@ function Frame14() {
             fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
           }}
         >
-          Talk to Partnerships
+          Talk to Us
         </p>
       </div>
     </div>
@@ -4926,9 +4926,9 @@ function Frame43() {
   );
 }
 
-function Frame41({ hideFooter }: { hideFooter?: boolean }) {
+function Frame41({ hideFooter, hideNav }: { hideFooter?: boolean; hideNav?: boolean }) {
   return (
-    <div className="absolute content-stretch flex flex-col gap-[46px] items-start left-[20px] top-[82px] w-[335px]">
+    <div className={`absolute content-stretch flex flex-col gap-[46px] items-start left-[20px] ${hideNav ? "top-[20px]" : "top-[82px]"} w-[335px]`}>
       <Frame46 />
       <FromZeroTo />
       <WhySectionCarousel />
@@ -4953,7 +4953,7 @@ const Frame40 = memo(function Frame40({
   return (
     <div className="bg-black relative size-full">
       <Frame3 onMenuClick={onMenuClick} hideNav={hideNav} />
-      <Frame41 hideFooter={hideFooter} />
+      <Frame41 hideFooter={hideFooter} hideNav={hideNav} />
     </div>
   );
 });

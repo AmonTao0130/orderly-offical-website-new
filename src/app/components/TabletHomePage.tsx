@@ -413,7 +413,7 @@ function TabletHero({ onPartnership }: { onPartnership: () => void }) {
                     "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
                 }}
               >
-                Talk to Partnerships
+                Talk to Us
               </p>
             </button>
           </div>
@@ -999,7 +999,7 @@ function TabletCTASection({ onPartnership }: { onPartnership: () => void }) {
               fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
             }}
           >
-            Talk to Partnerships
+            Talk to Us
           </p>
         </button>
       </div>

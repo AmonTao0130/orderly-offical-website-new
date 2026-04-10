@@ -28,7 +28,6 @@ export const SOCIAL_LINKS: string[] = [
   "https://t.me/Orderly_Discussions",
   "https://www.youtube.com/@Orderly.Network",
   "https://www.linkedin.com/company/orderly-network",
-  "https://t.me/Orderly_Discussions",
   "https://x.com/OrderlyNetwork",
 ];
 

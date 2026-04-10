@@ -492,7 +492,7 @@ export function PartnershipFormModal({ onClose }: { onClose: () => void }) {
                   fontWeight: 700,
                 }}
               >
-                Talk to Partnerships
+                Talk to Us
               </h2>
               <p
                 className="text-[13px] text-[#9c9fae] mt-[4px] tracking-[0.13px]"
@@ -1697,14 +1697,14 @@ function HeroButtonsContainer({
 }) {
   return (
     <div
-      className="content-stretch flex gap-[16px] items-start relative shrink-0"
+      className="content-stretch flex gap-[21px] items-start relative shrink-0"
       data-name="Hero Buttons Container"
     >
       <a
         href="https://dex.orderly.network/"
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-[#6700ce] content-stretch flex h-[52px] items-center justify-center px-[24px] py-[12px] relative rounded-[24px] shrink-0 no-underline hover:opacity-90 transition-opacity"
+        className="bg-[#6700ce] content-stretch flex h-[69px] items-center justify-center px-[32px] py-[16px] relative rounded-[32px] shrink-0 no-underline hover:opacity-90 transition-opacity"
         data-name="build with orderly"
         onClick={() => {
           posthog.capture("homepage_cta_clicked", {
@@ -1715,7 +1715,7 @@ function HeroButtonsContainer({
         }}
       >
         <p
-          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[16px] text-white"
+          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[21px] text-white"
           style={{
             fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
             letterSpacing: "0.01em",
@@ -1734,20 +1734,20 @@ function HeroButtonsContainer({
           });
           onOpenPartnershipModal();
         }}
-        className="content-stretch flex h-[52px] items-center justify-center pl-[24px] pr-[20px] py-[12px] relative rounded-[24px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
-        data-name="Talk to Partnerships"
+        className="content-stretch flex h-[69px] items-center justify-center pl-[32px] pr-[27px] py-[16px] relative rounded-[32px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
+        data-name="Talk to Us"
       >
         <div
           aria-hidden="true"
-          className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[24px]"
+          className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[32px]"
         />
         <p
-          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[16px] text-white tracking-[0.16px]"
+          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[21px] text-white tracking-[0.21px]"
           style={{
             fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
           }}
         >
-          Talk to Partnerships
+          Talk to Us
         </p>
       </button>
     </div>
@@ -2956,7 +2956,7 @@ function Frame4() {
       href="https://dex.orderly.network/"
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-[#6700ce] content-stretch flex h-[52px] items-center justify-center px-[24px] py-[12px] relative rounded-[24px] shrink-0 no-underline hover:opacity-90 transition-opacity"
+      className="bg-[#6700ce] content-stretch flex h-[69px] items-center justify-center px-[32px] py-[16px] relative rounded-[32px] shrink-0 no-underline hover:opacity-90 transition-opacity"
       style={{ willChange: "opacity" }}
       data-name="build with orderly"
       onClick={() => {
@@ -2968,7 +2968,7 @@ function Frame4() {
       }}
     >
       <p
-        className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[16px] text-white"
+        className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[21px] text-white"
         style={{
           fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
           letterSpacing: "0.01em",
@@ -2996,21 +2996,21 @@ function Frame5({
         });
         onOpenPartnershipModal();
       }}
-      className="content-stretch flex h-[52px] items-center justify-center pl-[24px] pr-[20px] py-[12px] relative rounded-[24px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
+      className="content-stretch flex h-[69px] items-center justify-center pl-[32px] pr-[27px] py-[16px] relative rounded-[32px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
       style={{ willChange: "background-color" }}
-      data-name="Talk to Partnerships"
+      data-name="Talk to Us"
     >
       <div
         aria-hidden="true"
-        className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[24px]"
+        className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[32px]"
       />
       <p
-        className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[16px] text-white tracking-[0.16px]"
+        className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[21px] text-white tracking-[0.21px]"
         style={{
           fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
         }}
       >
-        Talk to Partnerships
+        Talk to Us
       </p>
     </button>
   );
@@ -3022,7 +3022,7 @@ function Frame6({
   onOpenPartnershipModal: () => void;
 }) {
   return (
-    <div className="content-stretch flex gap-[16px] items-start relative shrink-0">
+    <div className="content-stretch flex gap-[21px] items-start relative shrink-0">
       <Frame4 />
       <Frame5 onOpenPartnershipModal={onOpenPartnershipModal} />
     </div>

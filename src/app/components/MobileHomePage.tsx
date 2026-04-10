@@ -925,7 +925,7 @@ export function MobileHomePage({
         wrap.querySelectorAll('[data-name="build with orderly"]')
       );
       const partnerEls = Array.from(
-        wrap.querySelectorAll('[data-name="Talk to Partnerships"]')
+        wrap.querySelectorAll('[data-name="Talk to Us"]')
       );
 
       const onBuild = (e: Event) => {
@@ -1036,8 +1036,8 @@ export function MobileHomePage({
           return;
         }
 
-        // Talk to Partnerships
-        if (name === "Talk to Partnerships") {
+        // Talk to Us
+        if (name === "Talk to Us") {
           e.preventDefault();
           posthog.capture("homepage_cta_clicked", {
             cta_name: "talk_to_partnerships",
