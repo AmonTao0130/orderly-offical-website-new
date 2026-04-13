@@ -1,126 +1,86 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { NavCanvas, SiteFooter } from "../../imports/DesktopHomePage";
+import { MorphingHeader, SiteFooter } from "../../imports/DesktopHomePage";
 import { MobileNavDrawer } from "../components/MobileHomePage";
-import {
-  MobileAIAccessCard,
-  MobileNewsletterCard,
-  MobileFooterCard,
-} from "../../imports/Frame1618872068-142-633";
+import { MobileFooterCard } from "../../imports/Frame1618872068-142-633";
+import { TabletNav, TabletFooter } from "../components/TabletHomePage";
 import svgPathsMobile from "../../imports/svg-4hybjba00c";
 
-// ── ScaledSection: scales Figma nav/footer canvas to viewport ────────────────
-const DESIGN_WIDTH = 1440;
-const MOBILE_DESIGN_WIDTH = 375;
-
-function ScaledSection({
-  children,
-  designHeight,
-  designWidth = DESIGN_WIDTH,
-}: {
-  children: React.ReactNode;
-  designHeight: number;
-  designWidth?: number;
-}) {
-  const outerRef = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(1);
-
-  const updateScale = useCallback(() => {
-    if (!outerRef.current) return;
-    const vw = outerRef.current.offsetWidth;
-    setScale(Math.min(vw / designWidth, 1));
-  }, [designWidth]);
-
-  useEffect(() => {
-    updateScale();
-    const ro = new ResizeObserver(updateScale);
-    if (outerRef.current) ro.observe(outerRef.current);
-    return () => ro.disconnect();
-  }, [updateScale]);
-
-  const scaledHeight = designHeight * scale;
-
-  return (
-    <div
-      ref={outerRef}
-      style={{
-        width: "100%",
-        height: `${scaledHeight}px`,
-        overflow: "visible",
-        display: "flex",
-        justifyContent: scale === 1 ? "center" : "flex-start",
-      }}
-    >
-      <div
-        style={{
-          width: `${designWidth}px`,
-          height: `${designHeight}px`,
-          flexShrink: 0,
-          transformOrigin: "top left",
-          transform: `scale(${scale})`,
-        }}
-      >
-        {children}
-      </div>
-    </div>
-  );
-}
 
 // ── Mobile Top Bar ───────────────────────────────────────────────────────────
 function MobileTopBar({ onMenuClick }: { onMenuClick: () => void }) {
   return (
     <div
-      className="flex items-center justify-between px-[20px] py-[18px]"
       style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        padding: "20px 24px",
         background: "#000",
-        borderBottom: "1px solid rgba(255,255,255,0.07)",
+        height: 72,
       }}
     >
-      <div className="flex items-center gap-[10px]">
-        <div className="relative shrink-0" style={{ width: 28, height: 28 }}>
-          <svg
-            className="absolute block w-full h-full"
-            fill="none"
-            preserveAspectRatio="none"
-            viewBox="0 0 31.9999 31.9608"
-          >
-            <path
-              clipRule="evenodd"
-              d={svgPathsMobile.p2fe0400}
-              fill="white"
-              fillRule="evenodd"
-            />
-            <path
-              clipRule="evenodd"
-              d={svgPathsMobile.p2f88ca00}
-              fill="white"
-              fillRule="evenodd"
-            />
-            <path
-              clipRule="evenodd"
-              d={svgPathsMobile.p22c01780}
-              fill="white"
-              fillRule="evenodd"
-            />
-            <path
-              clipRule="evenodd"
-              d={svgPathsMobile.p527fe00}
-              fill="white"
-              fillRule="evenodd"
-            />
-          </svg>
-        </div>
-      </div>
+      <a
+        href="/"
+        style={{
+          display: "block",
+          width: 32,
+          height: 32,
+          position: "relative",
+        }}
+      >
+        <svg
+          style={{ position: "absolute", width: "100%", height: "100%" }}
+          fill="none"
+          preserveAspectRatio="none"
+          viewBox="0 0 31.9999 31.9608"
+        >
+          <path
+            clipRule="evenodd"
+            d={svgPathsMobile.p2fe0400}
+            fill="white"
+            fillRule="evenodd"
+          />
+          <path
+            clipRule="evenodd"
+            d={svgPathsMobile.p2f88ca00}
+            fill="white"
+            fillRule="evenodd"
+          />
+          <path
+            clipRule="evenodd"
+            d={svgPathsMobile.p22c01780}
+            fill="white"
+            fillRule="evenodd"
+          />
+          <path
+            clipRule="evenodd"
+            d={svgPathsMobile.p527fe00}
+            fill="white"
+            fillRule="evenodd"
+          />
+        </svg>
+      </a>
       <button
         onClick={onMenuClick}
-        className="bg-transparent border-0 cursor-pointer p-[10px] -mr-[10px]"
+        style={{
+          background: "transparent",
+          border: 0,
+          cursor: "pointer",
+          padding: "4px",
+        }}
       >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <rect x="4" y="6" width="16" height="2" rx="1" fill="white" />
-          <rect x="4" y="11" width="16" height="2" rx="1" fill="white" />
-          <rect x="4" y="16" width="16" height="2" rx="1" fill="white" />
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="9" width="24" height="2.5" rx="1.25" fill="white" />
+          <rect x="4" y="15" width="24" height="2.5" rx="1.25" fill="white" />
+          <rect x="4" y="21" width="24" height="2.5" rx="1.25" fill="white" />
         </svg>
       </button>
     </div>
@@ -135,7 +95,7 @@ function useViewport(): Viewport {
   useEffect(() => {
     const update = () => {
       const w = window.innerWidth;
-      setVp(w < 640 ? "mobile" : w < 1024 ? "tablet" : "desktop");
+      setVp(w < 600 ? "mobile" : w < 1024 ? "tablet" : "desktop");
     };
     update();
     window.addEventListener("resize", update);
@@ -302,9 +262,7 @@ function AccordionItem({ item, vp }: { item: FAQItem; vp: Viewport }) {
             ? "20px 24px"
             : "24px 28px",
           background: open
-            ? hovered
-              ? "#222228"
-              : "#1a1a1f"
+            ? "#1a1a1f"
             : hovered
             ? "#7b1de6"
             : "#6700ce",
@@ -319,6 +277,7 @@ function AccordionItem({ item, vp }: { item: FAQItem; vp: Viewport }) {
           style={{
             fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
             fontVariationSettings: "'wght' 500",
+            fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
             fontSize: isMobile ? "16px" : isTablet ? "18px" : "20px",
             color: "white",
             letterSpacing: "0.02em",
@@ -368,7 +327,7 @@ function AccordionItem({ item, vp }: { item: FAQItem; vp: Viewport }) {
             style={{
               fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
               fontVariationSettings: "'wght' 300",
-              fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+              fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
               fontSize: isMobile ? "14px" : "16px",
               color: "rgba(255,255,255,0.82)",
               lineHeight: 1.6,
@@ -403,15 +362,28 @@ export default function FAQ() {
         minHeight: "100vh",
         width: "100vw",
         overflowX: "hidden",
+        paddingTop: isMobile ? "64px" : isTablet ? 0 : "80px",
       }}
     >
       {/* ── Nav ── */}
       {isMobile ? (
         <MobileTopBar onMenuClick={() => setNavOpen(true)} />
+      ) : isTablet ? (
+        <TabletNav onMenuClick={() => setNavOpen(true)} />
       ) : (
-        <ScaledSection designHeight={200}>
-          <NavCanvas />
-        </ScaledSection>
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 1000,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <MorphingHeader />
+        </div>
       )}
 
       {/* ── Hero header ── */}
@@ -433,6 +405,7 @@ export default function FAQ() {
             style={{
               fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
               fontVariationSettings: "'wght' 700",
+              fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
               fontSize: isMobile ? "32px" : "clamp(40px,6vw,68px)",
               color: "white",
               letterSpacing: "0.01em",
@@ -449,6 +422,7 @@ export default function FAQ() {
             style={{
               fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
               fontVariationSettings: "'wght' 400",
+              fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
               fontSize: isMobile ? "14px" : "16px",
               color: "rgba(255,255,255,0.55)",
               lineHeight: 1.5,
@@ -495,7 +469,7 @@ export default function FAQ() {
         <div
           style={{
             maxWidth: "740px",
-            margin: isMobile ? "64px auto 80px" : "80px auto 120px",
+            margin: isMobile ? "64px auto 48px" : "80px auto 24px",
             padding: isMobile ? "0 16px" : isTablet ? "0 32px" : "0 24px",
           }}
         >
@@ -519,6 +493,7 @@ export default function FAQ() {
               style={{
                 fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
                 fontVariationSettings: "'wght' 700",
+                fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
                 fontSize: isMobile ? "24px" : "clamp(28px,3.5vw,40px)",
                 color: "white",
                 margin: 0,
@@ -531,6 +506,7 @@ export default function FAQ() {
               style={{
                 fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
                 fontVariationSettings: "'wght' 400",
+                fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
                 fontSize: isMobile ? "14px" : "16px",
                 color: "rgba(255,255,255,0.75)",
                 lineHeight: 1.5,
@@ -568,6 +544,7 @@ export default function FAQ() {
                   textDecoration: "none",
                   fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
                   fontVariationSettings: "'wght' 600",
+                  fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
                   fontSize: "15px",
                   letterSpacing: "0.02em",
                   width: isMobile ? "100%" : "auto",
@@ -606,6 +583,7 @@ export default function FAQ() {
                   textDecoration: "none",
                   fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
                   fontVariationSettings: "'wght' 600",
+                  fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
                   fontSize: "15px",
                   letterSpacing: "0.02em",
                   width: isMobile ? "100%" : "auto",
@@ -635,17 +613,20 @@ export default function FAQ() {
           <div
             style={{
               padding: "0 20px 32px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
-              width: "100%",
               boxSizing: "border-box",
+              width: "100%",
             }}
           >
             <MobileFooterCard />
           </div>
+        ) : isTablet ? (
+          <div className="pb-[24px]">
+            <TabletFooter />
+          </div>
         ) : (
-          <SiteFooter />
+          <div style={{ zoom: 0.85 }}>
+            <SiteFooter />
+          </div>
         )}
       </motion.div>
 
