@@ -55,7 +55,7 @@ export const HEADER_NAV: Record<string, HeaderNavItem[]> = {
     { label: "Case Studies", href: "https://dex.orderly.network/case-studies", external: true },
     { label: "Governance", href: "https://snapshot.box/#/s:orderlygov.eth", external: true },
     { label: "Staking", href: ORDER_BUY_URL, external: true },
-    { label: "Blog", href: "https://orderly.network/blog/", external: true },
+    { label: "Blog", href: "/blog", external: false },
   ],
   Traders: [
     { label: "Live DEXs", href: "https://dex.orderly.network/board/", external: true },
@@ -181,7 +181,7 @@ export const FOOTER_NAV: Record<string, FooterNavLink[]> = {
       external: true,
     },
     { label: "Staking", href: ORDER_BUY_URL, external: true },
-    { label: "Blog", href: "https://orderly.network/blog/", external: true },
+    { label: "Blog", href: "/blog", external: false },
   ],
   Traders: [
     {
