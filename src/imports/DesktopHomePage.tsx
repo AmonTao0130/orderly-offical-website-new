@@ -1572,7 +1572,7 @@ function Default() {
 }
 
 // ─── Morphing Header: hides on scroll, shows when scroll stops ────────────────
-export function MorphingHeader() {
+export function MorphingHeader({ variant = "default" }: { variant?: "default" | "solid-black" } = {}) {
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -1620,6 +1620,8 @@ export function MorphingHeader() {
       }
     };
   }, []);
+
+  const isSolidBlack = variant === "solid-black";
   
   return (
     <motion.header
@@ -1631,15 +1633,19 @@ export function MorphingHeader() {
         paddingLeft: 24,
         paddingRight: 20,
         gap: 40,
-        backdropFilter: "blur(20px) saturate(180%)",
-        WebkitBackdropFilter: "blur(20px) saturate(180%)",
-        backgroundColor: isScrolled 
-          ? "rgba(0, 0, 0, 0.3)" 
-          : "rgba(0, 0, 0, 0.15)",
+        backdropFilter: isSolidBlack ? undefined : "blur(20px) saturate(180%)",
+        WebkitBackdropFilter: isSolidBlack ? undefined : "blur(20px) saturate(180%)",
+        backgroundColor: isSolidBlack
+          ? "#000"
+          : isScrolled
+            ? "rgba(0, 0, 0, 0.3)"
+            : "rgba(0, 0, 0, 0.15)",
         border: "none",
-        boxShadow: isScrolled 
-          ? "0 8px 32px rgba(0,0,0,0.3)" 
-          : "0 4px 24px rgba(0,0,0,0.15)",
+        boxShadow: isSolidBlack
+          ? "none"
+          : isScrolled
+            ? "0 8px 32px rgba(0,0,0,0.3)"
+            : "0 4px 24px rgba(0,0,0,0.15)",
       }}
       initial={{ y: 0, opacity: 1 }}
       animate={{ 

@@ -1088,7 +1088,7 @@ export default function Partners() {
       {isMobile ? (
         <MobileTopBar onMenuClick={() => setNavOpen(true)} />
       ) : isTablet ? (
-        <TabletNav onMenuClick={() => setNavOpen(true)} />
+        <TabletNav onMenuClick={() => setNavOpen(true)} variant="solid-black" />
       ) : (
         <div
           style={{
@@ -1101,7 +1101,7 @@ export default function Partners() {
             justifyContent: "center",
           }}
         >
-          <MorphingHeader />
+          <MorphingHeader variant="solid-black" />
         </div>
       )}
 
@@ -1369,6 +1369,7 @@ export default function Partners() {
           display: "flex",
           gap: "10px",
           flexWrap: "wrap",
+          justifyContent: "center",
         }}
       >
         {CATEGORIES.map((cat) => {

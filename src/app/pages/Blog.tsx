@@ -935,6 +935,7 @@ export default function Blog() {
             overflowX: "auto",
             paddingBottom: "4px",
             scrollbarWidth: "none",
+            justifyContent: "center",
           }}
         >
           <CategoryPill

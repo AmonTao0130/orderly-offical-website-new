@@ -61,16 +61,17 @@ function HamburgerIcon() {
   );
 }
 
-export function TabletNav({ onMenuClick, bannerOffset = 0 }: { onMenuClick: () => void; bannerOffset?: number }) {
+export function TabletNav({ onMenuClick, bannerOffset = 0, variant = "default" }: { onMenuClick: () => void; bannerOffset?: number; variant?: "default" | "solid-black" }) {
+  const isSolidBlack = variant === "solid-black";
   return (
     <div
       className="sticky z-[100] flex items-center justify-between h-[68px] px-10 gap-4"
       style={{
         top: bannerOffset,
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        background: "rgba(0,0,0,0.55)",
-        borderBottom: "1px solid rgba(255,255,255,0.07)",
+        backdropFilter: isSolidBlack ? undefined : "blur(12px)",
+        WebkitBackdropFilter: isSolidBlack ? undefined : "blur(12px)",
+        background: isSolidBlack ? "#000" : "rgba(0,0,0,0.55)",
+        borderBottom: isSolidBlack ? "none" : "1px solid rgba(255,255,255,0.07)",
       }}
     >
       <div style={{ transform: "scale(0.8)", transformOrigin: "left center" }}>
@@ -1325,7 +1326,7 @@ export function TabletFooter() {
 
 // ─── Main export ──────────────────────────────────────────────────────────────
 
-export function TabletHomePage({ bannerOffset = 0 }: { bannerOffset?: number }) {
+export function TabletHomePage({ bannerOffset = 0, navVariant = "default", hideNav = false }: { bannerOffset?: number; navVariant?: "default" | "solid-black"; hideNav?: boolean }) {
   const [navOpen, setNavOpen] = useState(false);
   const [partnershipModalOpen, setPartnershipModalOpen] = useState(false);
 
@@ -1339,7 +1340,7 @@ export function TabletHomePage({ bannerOffset = 0 }: { bannerOffset?: number }) 
   return (
     <div className="w-full bg-black text-white overflow-x-hidden">
       {/* 1. Sticky nav */}
-      <TabletNav onMenuClick={handleOpenNav} bannerOffset={bannerOffset} />
+      {!hideNav && <TabletNav onMenuClick={handleOpenNav} bannerOffset={bannerOffset} variant={navVariant} />}
 
       {/* 2. Hero — background shapes + headline + MacBook + stats */}
       <TabletHero onPartnership={handleOpenPartnership} />

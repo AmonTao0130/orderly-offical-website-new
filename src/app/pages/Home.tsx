@@ -6,7 +6,7 @@ import Link from "next/link";
 import Frame7, { MorphingHeader } from "../../imports/DesktopHomePage";
 import { MobileHomePage, MobileNavDrawer } from "../components/MobileHomePage";
 import { MobileFullFooter } from "../../imports/Frame1618872068-142-633";
-import { TabletHomePage } from "../components/TabletHomePage";
+import { TabletHomePage, TabletNav } from "../components/TabletHomePage";
 import svgPaths from "../../imports/svg-4hybjba00c";
 import { useCompetitionPrizePoolTotal } from "../hooks/useCompetitionPrizePoolTotal";
 
@@ -531,13 +531,26 @@ export default function Home() {
             />
           )}
         </AnimatePresence>
+        {/* Fixed tablet nav — stays at top when scrolling */}
         <div
           style={{
-            paddingTop: bannerH,
+            position: "fixed",
+            top: bannerH,
+            left: 0,
+            right: 0,
+            zIndex: 1000,
+            transition: "top 220ms ease-out",
+          }}
+        >
+          <TabletNav onMenuClick={handleOpenNav} variant="solid-black" />
+        </div>
+        <div
+          style={{
+            paddingTop: 68 + bannerH,
             transition: "padding-top 220ms ease-out",
           }}
         >
-          <TabletHomePage bannerOffset={bannerH} />
+          <TabletHomePage bannerOffset={0} navVariant="solid-black" hideNav />
         </div>
         <FloatingCampaignHeart />
       </>
@@ -568,7 +581,7 @@ export default function Home() {
           justifyContent: "center",
         }}
       >
-        <MorphingHeader />
+        <MorphingHeader variant="solid-black" />
       </div>
       <div
         style={{
