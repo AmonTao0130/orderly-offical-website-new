@@ -33,7 +33,6 @@ export function useOrderlyStats(): OrderlyStats {
         chainsRes,
         statsRes,
         volumeStatsRes,
-        openInterestRes,
       ] = await Promise.allSettled([
         fetch("https://api.orderly.org/v1/public/balance/stats", {
           signal,
@@ -53,9 +52,6 @@ export function useOrderlyStats(): OrderlyStats {
         fetch("https://api.orderly.org/v1/public/volume/stats", {
           signal,
         }).then((r) => r.json()),
-        fetch("https://api.orderly.org/v1/public/market_info/traders_open_interests", {
-          signal,
-        }).then((r) => r.json()),
       ]);
 
       const statsData =
@@ -66,11 +62,6 @@ export function useOrderlyStats(): OrderlyStats {
       const volumeStatsData =
         volumeStatsRes.status === "fulfilled" && volumeStatsRes.value?.success
           ? volumeStatsRes.value.data
-          : null;
-
-      const openInterestData =
-        openInterestRes.status === "fulfilled" && openInterestRes.value?.success
-          ? openInterestRes.value.data
           : null;
 
       setStats({
@@ -100,11 +91,13 @@ export function useOrderlyStats(): OrderlyStats {
           statsData?.cumulative_volume ??
           FALLBACK.totalVolume,
         openInterest:
-          openInterestData?.rows?.reduce(
-            (sum: number, row: { long_oi: number; short_oi: number }) =>
-              sum + Math.max(row.long_oi || 0, -(row.short_oi || 0)),
-            0
-          ) ?? FALLBACK.openInterest,
+          volumeRes.status === "fulfilled" && volumeRes.value?.success
+            ? volumeRes.value.data.rows.reduce(
+                (sum: number, row: { open_interest: number; mark_price: number }) =>
+                  sum + (row.open_interest || 0) * (row.mark_price || 0),
+                0
+              )
+            : FALLBACK.openInterest,
       });
     }
 
