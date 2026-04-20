@@ -104,8 +104,7 @@ const FOUNDERS = [
     name: "Ran Yi",
     title: "Co-Founder",
     initials: "RY",
-    gradientFrom: "#6700ce",
-    gradientTo: "#9c4dff",
+    avatar: "/images/Ran yi.png",
     xUrl: "https://x.com/ranyi_orderly",
     bio: "Building the infrastructure layer for the next generation of decentralized finance.",
   },
@@ -113,10 +112,9 @@ const FOUNDERS = [
     name: "Terence Ng",
     title: "Co-Founder",
     initials: "TN",
-    gradientFrom: "#1a6bce",
-    gradientTo: "#4d9cff",
+    avatar: "/images/Terence.png",
     xUrl: "https://x.com/terence_orderly",
-    bio: "Pioneering omnichain liquidity solutions to unify DeFi and CeFi trading.",
+    bio: "FinTech Enthusiast.\nEquity Derivative Trading, OMS, FIX Protocol, Market Making, Quant Trading, Crypto Platform.",
   },
 ];
 
@@ -164,54 +162,31 @@ function FounderCard({
   founder: (typeof FOUNDERS)[0];
   vp: Viewport;
 }) {
-  const [hovered, setHovered] = useState(false);
   const isMobile = vp === "mobile";
 
   return (
     <motion.div
       variants={gridItem}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
-        background: hovered ? "#1a1a2e" : "#111118",
-        border: `1px solid ${hovered ? "rgba(103,0,206,0.5)" : "rgba(255,255,255,0.06)"}`,
-        borderRadius: isMobile ? "16px" : "20px",
-        padding: isMobile ? "28px 24px" : "40px 36px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: isMobile ? "16px" : "20px",
+        gap: isMobile ? "14px" : "18px",
         textAlign: "center",
-        transition: "background 0.3s ease, border-color 0.3s ease",
-        cursor: "default",
       }}
     >
       {/* Avatar */}
-      <div
+      <img
+        src={founder.avatar}
+        alt={founder.name}
         style={{
-          width: isMobile ? 72 : 88,
-          height: isMobile ? 72 : 88,
+          width: isMobile ? 120 : 148,
+          height: isMobile ? 120 : 148,
           borderRadius: "50%",
-          background: `linear-gradient(135deg, ${founder.gradientFrom}, ${founder.gradientTo})`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          objectFit: "cover",
           flexShrink: 0,
         }}
-      >
-        <span
-          style={{
-            fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-            fontVariationSettings: "'wght' 700",
-            fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-            fontSize: isMobile ? "22px" : "28px",
-            color: "white",
-            letterSpacing: "0.04em",
-          }}
-        >
-          {founder.initials}
-        </span>
-      </div>
+      />
 
       {/* Name + title */}
       <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
@@ -220,7 +195,7 @@ function FounderCard({
             fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
             fontVariationSettings: "'wght' 700",
             fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-            fontSize: isMobile ? "20px" : "24px",
+            fontSize: isMobile ? "22px" : "26px",
             color: "white",
             letterSpacing: "0.01em",
           }}
@@ -248,39 +223,50 @@ function FounderCard({
           fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
           fontVariationSettings: "'wght' 400",
           fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-          fontSize: isMobile ? "13px" : "15px",
+          fontSize: isMobile ? "14px" : "15px",
           color: "rgba(255,255,255,0.55)",
-          lineHeight: 1.6,
+          lineHeight: 1.65,
           margin: 0,
           letterSpacing: "0.02em",
-          maxWidth: "260px",
+          maxWidth: "280px",
+          whiteSpace: "pre-line",
         }}
       >
         {founder.bio}
       </p>
 
-      {/* X link */}
+      {/* X follow button */}
       <a
         href={founder.xUrl}
         target="_blank"
         rel="noopener noreferrer"
         style={{
-          display: "flex",
+          display: "inline-flex",
           alignItems: "center",
           gap: "8px",
-          color: "rgba(255,255,255,0.45)",
+          border: "1.5px solid rgba(255,255,255,0.18)",
+          borderRadius: "100px",
+          padding: "10px 22px",
+          color: "rgba(255,255,255,0.7)",
           textDecoration: "none",
           fontSize: "13px",
           fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
           fontVariationSettings: "'wght' 500",
-          transition: "color 0.2s ease",
-          letterSpacing: "0.02em",
+          letterSpacing: "0.03em",
+          transition: "border-color 0.2s ease, color 0.2s ease",
+          marginTop: "4px",
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.color = "white")}
-        onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = "rgba(156,117,255,0.7)";
+          e.currentTarget.style.color = "white";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = "rgba(255,255,255,0.18)";
+          e.currentTarget.style.color = "rgba(255,255,255,0.7)";
+        }}
       >
-        <XIcon size={15} />
-        Follow on X
+        Follow on
+        <XIcon size={14} />
       </a>
     </motion.div>
   );
@@ -512,7 +498,7 @@ export default function Team() {
           style={{
             display: "grid",
             gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-            gap: isMobile ? "16px" : "24px",
+            gap: isMobile ? "40px" : "64px",
           }}
         >
           {FOUNDERS.map((founder) => (
@@ -597,7 +583,7 @@ export default function Team() {
       >
         <div
           style={{
-            background: "#111118",
+            background: "#3F0086",
             border: "1px solid rgba(255,255,255,0.06)",
             borderRadius: isMobile ? "16px" : "20px",
             padding: isMobile ? "36px 24px" : isTablet ? "44px 40px" : "56px 64px",
@@ -610,20 +596,7 @@ export default function Team() {
             overflow: "hidden",
           }}
         >
-          {/* Decorative glow */}
-          <div
-            style={{
-              position: "absolute",
-              top: "-60px",
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: "400px",
-              height: "200px",
-              background: "radial-gradient(ellipse, rgba(103,0,206,0.18) 0%, transparent 70%)",
-              pointerEvents: "none",
-            }}
-          />
-
+        
           <h2
             style={{
               fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
@@ -647,7 +620,7 @@ export default function Team() {
               fontSize: isMobile ? "14px" : "16px",
               color: "rgba(255,255,255,0.6)",
               lineHeight: 1.6,
-              maxWidth: "480px",
+              maxWidth: "640px",
               margin: 0,
               letterSpacing: "0.02em",
             }}
@@ -674,7 +647,7 @@ export default function Team() {
                 alignItems: "center",
                 justifyContent: "center",
                 gap: "8px",
-                background: "#6700ce",
+                background: "#9C75FF",
                 borderRadius: "100px",
                 padding: "13px 28px",
                 color: "white",
@@ -687,19 +660,10 @@ export default function Team() {
                 width: isMobile ? "100%" : "auto",
                 transition: "background 0.2s ease",
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#7b1de6")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "#6700ce")}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#b08fff")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "#9C75FF")}
             >
               View Open Roles
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path
-                  d="M2.5 11.5L11.5 2.5M7 2.5h4.5V7"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
             </a>
 
             <a
