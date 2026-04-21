@@ -1,6 +1,7 @@
 import express from "express";
 import { handler as ssrHandler } from "../dist/server/entry.mjs";
 import { createProxyMiddleware } from "http-proxy-middleware";
+import markdownMiddleware from "./markdownMiddleware.mjs";
 
 const app = express();
 
@@ -32,6 +33,8 @@ app.use((req, res, next) => {
 
   next();
 });
+
+app.use(markdownMiddleware());
 
 // 仅允许特定域名访问部分 API（/api/articles, /api/pinArticles）
 const BASE_ALLOWED_ORIGINS = [
