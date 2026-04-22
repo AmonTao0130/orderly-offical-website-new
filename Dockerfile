@@ -26,10 +26,11 @@ FROM base AS runtime
 COPY --from=prod-deps /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY /server ./server
-RUN rm -rf /app/dist/client/_next /app/dist/client/images /app/dist/client/campaigns
+RUN rm -rf /app/dist/client/_next /app/dist/client/images /app/dist/client/campaigns /app/dist/client/.well-known
 COPY --from=landing-page-build /app/out/_next /app/dist/client/_next
 COPY --from=landing-page-build /app/out/images /app/dist/client/images
 COPY --from=landing-page-build /app/out/campaigns /app/dist/client/campaigns
+COPY --from=landing-page-build /app/out/.well-known /app/dist/client/.well-known
 COPY --from=landing-page-build /app/out/index.html /app/dist/client/index.html
 COPY --from=landing-page-build /app/out/faq.html /app/dist/client/faq/index.html
 COPY --from=landing-page-build /app/out/partners.html /app/dist/client/partners/index.html
