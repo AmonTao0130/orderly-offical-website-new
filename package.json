@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "generate:skills": "node scripts/generate-skills-index.mjs",
     "start": "next start"
   },
   "dependencies": {
