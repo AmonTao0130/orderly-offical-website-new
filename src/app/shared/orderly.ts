@@ -9,6 +9,8 @@ import type { HTMLAttributeAnchorTarget } from "react";
 // ── Public URLs ──────────────────────────────────────────────────────────────
 export const AI_URL = "https://orderly.network/skill.md";
 export const NPX_CMD = "npx @orderly.network/mcp-server init";
+export const CLI_INSTALL_CMD = "npm install -g @orderly.network/cli";
+export const CLI_GITHUB_URL = "https://github.com/OrderlyNetwork/cli";
 export const ORDER_BUY_URL = "https://app.orderly.network/staking";
 
 // ── DEX card links (mobile carousel) ────────────────────────────────────────
@@ -145,6 +147,11 @@ export const FOOTER_NAV: Record<string, FooterNavLink[]> = {
     {
       label: "Orderly SDKs",
       href: "https://orderly.network/docs/sdks/overview",
+      external: true,
+    },
+    {
+      label: "CLI",
+      href: CLI_GITHUB_URL,
       external: true,
     },
     {

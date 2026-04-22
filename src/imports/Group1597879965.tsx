@@ -3,6 +3,7 @@
 import { useState } from "react";
 import posthog from 'posthog-js';
 import svgPaths from "./svg-t3rwygkbpy";
+import { CLI_INSTALL_CMD, CLI_GITHUB_URL } from "@/app/shared/orderly";
 
 // ── Shared ───────────────────────────────────────────────────────────────────
 
@@ -164,9 +165,57 @@ function SkillsContent({ compact = false }: { compact?: boolean }) {
   );
 }
 
+// ── CLI content ─────────────────────────────────────────────────────────────
+
+function CLIContent({ compact = false }: { compact?: boolean }) {
+  const { copied, copy } = useCopyToClipboard();
+
+  return (
+    <div className="flex flex-col gap-[16px]">
+      <p className={`${atypMedium} ${compact ? "text-[13px]" : "text-[16px]"} text-white/60 leading-[1.5]`} style={featureSettings}>
+        Trade perps from the command line with secure OS keychain auth:
+      </p>
+
+      <div className="flex items-stretch rounded-[12px] overflow-hidden" style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
+        <div className={`flex-1 ${compact ? "px-[16px] py-[12px]" : "px-[20px] py-[16px]"}`}>
+          <p className={`${monoClass} ${compact ? "text-[13px]" : "text-[16px]"} opacity-70`}>
+            <span className="text-[#6b7280]">$ </span>
+            <span className="text-[#4ade80]">npm</span>{" "}
+            <span className="text-[#60a5fa]">install</span>{" "}
+            <span className="text-[#fbbf24]">-g</span>{" "}
+            <span className="text-[#60a5fa]">@orderly.network/cli</span>
+          </p>
+        </div>
+        <button
+          onClick={() => copy(CLI_INSTALL_CMD)}
+          title={copied ? "Copied!" : "Copy to clipboard"}
+          className={`bg-black text-white font-['Atyp_BL:Bold',sans-serif] cursor-pointer transition-all hover:bg-[#1a1a1a] ${compact ? "px-[14px] py-[12px] text-[12px]" : "px-[20px] py-[16px] text-[14px]"}`}
+        >
+          {copied ? "Copied!" : "Copy"}
+        </button>
+      </div>
+
+      <div className={`rounded-[12px] flex flex-col gap-[6px] ${compact ? "px-[12px] py-[8px]" : "px-[16px] py-[12px]"}`} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
+        <p className={`${atypMedium} ${compact ? "text-[12px]" : "text-[14px]"} text-white/60 leading-[1.5]`} style={featureSettings}>
+          <span className={`${atypBold} text-white/80`}>Place orders, manage positions, set TP/SL</span> — supports EVM &amp; Solana with keys stored securely in your OS keychain.
+        </p>
+        <a
+          href={CLI_GITHUB_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${atypMedium} ${compact ? "text-[11px]" : "text-[13px]"} text-[#9C75FF] no-underline hover:text-white transition-colors`}
+          style={featureSettings}
+        >
+          View on GitHub →
+        </a>
+      </div>
+    </div>
+  );
+}
+
 // ── Developer card (main export) ─────────────────────────────────────────────
 
-type DevTab = "mcp-server" | "skills";
+type DevTab = "mcp-server" | "skills" | "cli";
 
 export default function DeveloperCard({ variant = "card", compact = false, deviceLayout = "desktop" }: { variant?: "card" | "bare"; compact?: boolean; deviceLayout?: "desktop" | "tablet" }) {
   const [devTab, setDevTab] = useState<DevTab>("mcp-server");
@@ -234,10 +283,29 @@ export default function DeveloperCard({ variant = "card", compact = false, devic
         >
           Skills
         </button>
+        <button
+          onClick={() => {
+            setDevTab("cli");
+            posthog.capture('agentic_quickstart_clicked', {
+              button_name: 'cli_tab',
+              source_page: 'homepage',
+              device_layout: deviceLayout,
+              section: 'agentic_quick_start',
+            });
+          }}
+          className={`${atypMedium} ${compact ? "text-[13px] px-[12px] py-[6px]" : "text-[16px] px-[16px] py-[8px]"} rounded-[8px] transition-all ${
+            devTab === "cli"
+              ? "bg-[#7c3aed] text-white"
+              : "text-[#9ca3af] hover:text-white hover:bg-white/5"
+          }`}
+          style={featureSettings}
+        >
+          CLI
+        </button>
       </div>
 
       {/* Tab content */}
-      {devTab === "mcp-server" ? <MCPServerContent compact={compact} /> : <SkillsContent compact={compact} />}
+      {devTab === "mcp-server" ? <MCPServerContent compact={compact} /> : devTab === "skills" ? <SkillsContent compact={compact} /> : <CLIContent compact={compact} />}
     </div>
   );
 }

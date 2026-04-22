@@ -24,6 +24,8 @@ import {
 import {
   FOOTER_NAV,
   SOCIAL_LINKS,
+  CLI_INSTALL_CMD,
+  CLI_GITHUB_URL,
   type FooterNavLink,
 } from "@/app/shared/orderly";
 import svgPaths from "./svg-4hybjba00c";
@@ -2487,7 +2489,7 @@ function MobileSkillsCodeBlock({
 }
 
 function QuickStartSection() {
-  const [devTab, setDevTab] = useState<"mcp-server" | "skills">("mcp-server");
+  const [devTab, setDevTab] = useState<"mcp-server" | "skills" | "cli">("mcp-server");
   const [activeIdx, setActiveIdx] = useState(0);
   const [copied, setCopied] = useState(false);
   const active = QS_CLIENTS[activeIdx];
@@ -2627,6 +2629,24 @@ function QuickStartSection() {
           >
             Skills
           </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setDevTab("cli");
+              posthog.capture("agentic_quickstart_clicked", {
+                button_name: "cli_tab",
+                source_page: "homepage",
+                device_layout: "mobile",
+                section: "agentic_quick_start",
+              });
+            }}
+            className={`font-['Atyp_BL:Medium',sans-serif] text-[14px] px-[14px] py-[6px] rounded-[8px] transition-all ${
+              devTab === "cli" ? "bg-[#7c3aed] text-white" : "text-[#9ca3af]"
+            }`}
+            style={featureSettings}
+          >
+            CLI
+          </button>
         </div>
 
         {/* Tab content */}
@@ -2676,7 +2696,7 @@ function QuickStartSection() {
               ))}
             </div>
           </div>
-        ) : (
+        ) : devTab === "skills" ? (
           /* Skills tab */
           <div className="flex flex-col gap-[12px]">
             <p
@@ -2718,6 +2738,58 @@ function QuickStartSection() {
                 <span className="text-[#c4b5fd]">--agent &apos;*&apos;</span>{" "}
                 all agents
               </p>
+            </div>
+          </div>
+        ) : (
+          /* CLI tab */
+          <div className="flex flex-col gap-[12px]">
+            <p
+              className="font-['Atyp_BL:Medium',sans-serif] text-[13px] text-white/60 leading-[1.5]"
+              style={featureSettings}
+            >
+              Trade perps from the command line with secure OS keychain auth:
+            </p>
+            <div
+              className="flex items-center rounded-[10px] px-[14px] py-[12px]"
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.1)",
+              }}
+            >
+              <p className="flex-1 font-['DM_Mono:Regular',sans-serif] text-[12px] leading-[1.6] opacity-70">
+                <span className="text-[#6b7280]">$ </span>
+                <span className="text-[#4ade80]">npm</span>{" "}
+                <span className="text-[#60a5fa]">install</span>{" "}
+                <span className="text-[#fbbf24]">-g</span>{" "}
+                <span className="text-[#60a5fa]">@orderly.network/cli</span>
+              </p>
+              <MobileCopyButton text={CLI_INSTALL_CMD} />
+            </div>
+            <div
+              className="rounded-[10px] px-[14px] py-[12px] flex flex-col gap-[6px]"
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.1)",
+              }}
+            >
+              <p
+                className="font-['Atyp_BL:Medium',sans-serif] text-[12px] text-white/60 leading-[1.5]"
+                style={featureSettings}
+              >
+                <span className="font-['Atyp_BL:Bold',sans-serif] text-white/80">
+                  Place orders, manage positions, set TP/SL
+                </span>{" "}
+                — supports EVM &amp; Solana with keys stored securely in your OS keychain.
+              </p>
+              <a
+                href={CLI_GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-['Atyp_BL:Medium',sans-serif] text-[11px] text-[#9C75FF] no-underline hover:text-white transition-colors"
+                style={featureSettings}
+              >
+                View on GitHub →
+              </a>
             </div>
           </div>
         )}
