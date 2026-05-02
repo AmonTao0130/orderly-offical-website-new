@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-label="Example inline chart">
+  <rect width="900" height="360" fill="#111111"/>
+  <polyline points="80,260 220,210 360,230 500,150 640,170 800,90" fill="none" stroke="#52f6d8" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="80" y="70" fill="#ffffff" font-family="Arial, sans-serif" font-size="38" font-weight="700">Example inline asset</text>
+</svg>

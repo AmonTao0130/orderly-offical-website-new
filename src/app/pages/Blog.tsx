@@ -7,12 +7,7 @@ import { MobileNavDrawer } from "../components/MobileHomePage";
 import { MobileFooterCard } from "../../imports/Frame1618872068-142-633";
 import { TabletNav, TabletFooter } from "../components/TabletHomePage";
 import svgPathsMobile from "../../imports/svg-4hybjba00c";
-import {
-  BLOG_POSTS,
-  BLOG_CATEGORIES,
-  type BlogPost,
-  type BlogCategory,
-} from "../shared/blog";
+import type { BlogPost, BlogCategory, BlogTab } from "../shared/blog";
 
 // ── Viewport hook ─────────────────────────────────────────────────────────────
 type Viewport = "mobile" | "tablet" | "desktop";
@@ -687,7 +682,14 @@ function FeaturedCarousel({ posts, vp }: { posts: BlogPost[]; vp: Viewport }) {
 }
 
 // ── Page ──────────────────────────────────────────────────────────────────────
-export default function Blog() {
+type BlogProps = {
+  articles: BlogPost[];
+  pinArticles: BlogPost[];
+  tabs: BlogTab[];
+  total: number;
+};
+
+export default function Blog({ articles, pinArticles, tabs }: BlogProps) {
   const vp = useViewport();
   const isMobile = vp === "mobile";
   const isTablet = vp === "tablet";
@@ -696,15 +698,15 @@ export default function Blog() {
   const [gridPage, setGridPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const CAROUSEL_COUNT = 4;
   const GRID_PER_PAGE = 6;
+  const categories = tabs.map((tab) => tab.title);
 
   const q = searchQuery.trim().toLowerCase();
   const isSearching = q.length > 0;
 
   // When searching, flatten all posts and match against title + excerpt + category
   const searchResults = isSearching
-    ? BLOG_POSTS.filter(
+    ? articles.filter(
         (p) =>
           p.title.toLowerCase().includes(q) ||
           p.excerpt.toLowerCase().includes(q) ||
@@ -712,12 +714,12 @@ export default function Blog() {
       )
     : [];
 
-  const carouselPosts = !isSearching ? BLOG_POSTS.slice(0, CAROUSEL_COUNT) : [];
+  const carouselPosts = !isSearching ? pinArticles : [];
   const allGridPosts = isSearching
     ? searchResults
     : activeCategory === "All"
-    ? BLOG_POSTS.slice(CAROUSEL_COUNT)
-    : BLOG_POSTS.filter((p) => p.category === activeCategory);
+    ? articles
+    : articles.filter((p) => p.category === activeCategory);
 
   const gridPageCount = Math.ceil(allGridPosts.length / GRID_PER_PAGE);
   const gridPosts = allGridPosts.slice((gridPage - 1) * GRID_PER_PAGE, gridPage * GRID_PER_PAGE);
@@ -944,7 +946,7 @@ export default function Blog() {
             onClick={() => { setActiveCategory("All"); setGridPage(1); }}
             isMobile={isMobile}
           />
-          {BLOG_CATEGORIES.map((cat) => (
+          {categories.map((cat) => (
             <CategoryPill
               key={cat}
               label={cat}

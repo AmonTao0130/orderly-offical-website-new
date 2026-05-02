@@ -1,23 +1,38 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogPost from "@/app/pages/BlogPost";
-import { BLOG_POSTS } from "@/app/shared/blog";
+import {
+  articleToBlogPost,
+  articlesToBlogPosts,
+} from "@/app/shared/blog-adapter";
+import { getAllPageArticleDetails } from "@/app/shared/strapi/services";
+import { PublicationStateEnum } from "@/app/shared/strapi/type";
+import { getArticleCoverImage } from "@/app/shared/strapi/utils";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return BLOG_POSTS.map((post) => ({ slug: post.slug }));
+  const articles = await getAllPageArticleDetails({
+    publicationState: PublicationStateEnum.LIVE,
+  });
+  return articles.map((article) => ({ slug: article.attributes.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const articles = await getAllPageArticleDetails({
+    publicationState: PublicationStateEnum.LIVE,
+  });
+  const article = articles.find((item) => item.attributes.slug === slug);
 
-  if (!post) {
+  if (!article) {
     return { title: "Post Not Found | Orderly Network" };
   }
+
+  const post = articleToBlogPost(article);
+  const coverImage = getArticleCoverImage(article);
 
   return {
     title: `${post.title} | Orderly Network`,
@@ -32,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       publishedTime: post.isoDate,
       authors: [post.author],
-      ...(post.coverImage ? { images: [{ url: post.coverImage }] } : {}),
+      ...(coverImage ? { images: [{ url: coverImage }] } : {}),
     },
     other: {
       "article:published_time": post.isoDate,
@@ -43,11 +58,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const articles = await getAllPageArticleDetails({
+    publicationState: PublicationStateEnum.LIVE,
+  });
+  const article = articles.find((item) => item.attributes.slug === slug);
 
-  if (!post) {
+  if (!article) {
     notFound();
   }
 
-  return <BlogPost slug={slug} />;
+  const post = articleToBlogPost(article);
+  const latestPosts = articlesToBlogPosts(articles.slice(0, 3));
+
+  return <BlogPost slug={slug} post={post} latestPosts={latestPosts} />;
 }

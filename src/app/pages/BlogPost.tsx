@@ -8,7 +8,7 @@ import { MobileNavDrawer } from "../components/MobileHomePage";
 import { MobileFooterCard } from "../../imports/Frame1618872068-142-633";
 import { TabletNav, TabletFooter } from "../components/TabletHomePage";
 import svgPathsMobile from "../../imports/svg-4hybjba00c";
-import { BLOG_POSTS, type BlogPost as BlogPostType } from "../shared/blog";
+import type { BlogPost as BlogPostType } from "../shared/blog";
 import { copyToClipboard } from "../shared/orderly";
 
 // ── Viewport hook ─────────────────────────────────────────────────────────────
@@ -352,18 +352,22 @@ function NotFound({ vp }: { vp: Viewport }) {
 }
 
 // ── Page ──────────────────────────────────────────────────────────────────────
-export default function BlogPost({ slug }: { slug: string }) {
+export default function BlogPost({
+  slug,
+  post,
+  latestPosts,
+}: {
+  slug: string;
+  post: BlogPostType | null;
+  latestPosts: BlogPostType[];
+}) {
   const vp = useViewport();
   const isMobile = vp === "mobile";
   const isTablet = vp === "tablet";
   const [navOpen, setNavOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
-
-  const relatedPosts = post
-    ? BLOG_POSTS.filter((p) => p.slug !== slug && p.category === post.category).slice(0, 3)
-    : [];
+  const relatedPosts = post ? latestPosts : [];
 
   const handleCopyLink = async () => {
     await copyToClipboard(
@@ -700,7 +704,7 @@ export default function BlogPost({ slug }: { slug: string }) {
                     letterSpacing: "0.01em",
                   }}
                 >
-                  More in {post.category}
+                  More Blog
                 </h2>
                 <div
                   style={{

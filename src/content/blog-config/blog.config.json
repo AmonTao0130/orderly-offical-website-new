@@ -1,0 +1,23 @@
+{
+  "defaultAuthor": "Orderly Network",
+  "defaultPublicationState": "live",
+  "mediaBasePath": "/uploads/blog",
+  "descriptionMaxLength": 80,
+  "categories": [
+    { "slug": "Announcements", "name": "Announcements", "order": 1 },
+    { "slug": "Product", "name": "Product", "order": 2 },
+    { "slug": "Educational", "name": "Educational", "order": 3 },
+    { "slug": "Research", "name": "Research", "order": 4 },
+    { "slug": "Thought-Leadership", "name": "Thought-Leadership", "order": 5 },
+    {
+      "slug": "Ecosytem-Spotlight",
+      "name": "Ecosystem Spotlight",
+      "order": 6
+    },
+    { "slug": "Updates", "name": "Updates", "order": 7 }
+  ],
+  "authors": [
+    { "name": "Orderly Network", "email": "marketing@orderly.network" },
+    { "name": "Guest Post" }
+  ]
+}

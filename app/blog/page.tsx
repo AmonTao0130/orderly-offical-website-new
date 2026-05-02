@@ -1,5 +1,16 @@
 import type { Metadata } from "next";
 import Blog from "@/app/pages/Blog";
+import {
+  articleToBlogPost,
+  articlesToBlogPosts,
+  categoriesToBlogTabs,
+} from "@/app/shared/blog-adapter";
+import {
+  getAllPageArticles,
+  getCategories,
+  getPinArticles,
+} from "@/app/shared/strapi/services";
+import { PublicationStateEnum } from "@/app/shared/strapi/type";
 
 export const metadata: Metadata = {
   title: "Blog | Orderly Network",
@@ -16,6 +27,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
-  return <Blog />;
+export default async function Page() {
+  const categories = await getCategories();
+  const tabs = categoriesToBlogTabs(categories);
+  const pinArticles = await getPinArticles();
+  const articles = await getAllPageArticles({
+    publicationState: PublicationStateEnum.LIVE,
+  });
+  const total = articles.length;
+
+  return (
+    <Blog
+      articles={articlesToBlogPosts(articles)}
+      pinArticles={pinArticles.map(articleToBlogPost)}
+      tabs={tabs}
+      total={total}
+    />
+  );
 }
