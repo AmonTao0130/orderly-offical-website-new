@@ -8,7 +8,7 @@ import {
   getCategories,
   getPinArticles,
   PublicationStateEnum,
-} from "@/app/features/blog";
+} from "@/blog";
 
 export const metadata: Metadata = {
   title: "Blog | Orderly Network",

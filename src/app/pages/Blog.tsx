@@ -12,7 +12,7 @@ import {
   type BlogPost,
   type BlogCategory,
   type BlogTab,
-} from "../features/blog/types";
+} from "@/blog/types";
 
 // ── Viewport hook ─────────────────────────────────────────────────────────────
 type Viewport = "mobile" | "tablet" | "desktop";

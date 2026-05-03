@@ -3,7 +3,7 @@ import {
   articlesToBlogPosts,
   getAllPageArticles,
   PublicationStateEnum,
-} from "@/app/features/blog";
+} from "@/blog";
 
 export const dynamic = "force-static";
 

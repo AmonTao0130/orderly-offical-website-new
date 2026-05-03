@@ -11,7 +11,7 @@ import svgPathsMobile from "../../imports/svg-4hybjba00c";
 import {
   formatBlogDisplayDate,
   type BlogPost as BlogPostType,
-} from "../features/blog/types";
+} from "@/blog/types";
 import { copyToClipboard } from "../shared/orderly";
 
 // ── Viewport hook ─────────────────────────────────────────────────────────────

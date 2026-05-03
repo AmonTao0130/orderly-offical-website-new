@@ -6,7 +6,7 @@ import {
   articlesToBlogPosts,
   getAllPageArticleDetails,
   PublicationStateEnum,
-} from "@/app/features/blog";
+} from "@/blog";
 
 interface Props {
   params: Promise<{ slug: string }>;
