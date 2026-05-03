@@ -1,15 +1,4 @@
-import type { Article, Categorg } from "./type";
-
-export function categories2Tabs(categories: Categorg[]) {
-  const list = categories
-    .map((category) => {
-      const { name, slug } = category.attributes;
-      return { title: name, key: slug };
-    })
-    .filter((item) => !!item.key);
-
-  return list;
-}
+import type { Article } from "./type";
 
 export function getPageData(list: any[], pageSize: number, pageIndex: number) {
   const pageData: any[] = [];

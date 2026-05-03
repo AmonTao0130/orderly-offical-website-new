@@ -7,7 +7,6 @@ import {
 } from "@/app/shared/blog-adapter";
 import { getAllPageArticleDetails } from "@/app/shared/strapi/services";
 import { PublicationStateEnum } from "@/app/shared/strapi/type";
-import { getArticleCoverImage } from "@/app/shared/strapi/utils";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -32,26 +31,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const post = articleToBlogPost(article);
-  const coverImage = getArticleCoverImage(article);
 
   return {
     title: `${post.title} | Orderly Network`,
-    description: post.excerpt,
+    description: post.description,
     alternates: {
       canonical: `https://orderly.network/blog/${post.slug}`,
     },
     openGraph: {
       title: `${post.title} | Orderly Network`,
-      description: post.excerpt,
+      description: post.description,
       url: `https://orderly.network/blog/${post.slug}`,
       type: "article",
-      publishedTime: post.isoDate,
-      authors: [post.author],
-      ...(coverImage ? { images: [{ url: coverImage }] } : {}),
+      publishedTime: post.displayTime,
+      authors: [post.authorName],
+      ...(post.coverImageUrl ? { images: [{ url: post.coverImageUrl }] } : {}),
     },
     other: {
-      "article:published_time": post.isoDate,
-      "article:section": post.category,
+      "article:published_time": post.displayTime,
+      "article:section": post.categoryName,
     },
   };
 }

@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
   const blogPostEntries: MetadataRoute.Sitemap = articlesToBlogPosts(articles).map((post) => ({
     url: `https://orderly.network/blog/${post.slug}`,
-    lastModified: new Date(post.isoDate),
+    lastModified: new Date(post.displayTime),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));

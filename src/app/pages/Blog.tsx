@@ -7,7 +7,12 @@ import { MobileNavDrawer } from "../components/MobileHomePage";
 import { MobileFooterCard } from "../../imports/Frame1618872068-142-633";
 import { TabletNav, TabletFooter } from "../components/TabletHomePage";
 import svgPathsMobile from "../../imports/svg-4hybjba00c";
-import type { BlogPost, BlogCategory, BlogTab } from "../shared/blog";
+import {
+  formatBlogDisplayDate,
+  type BlogPost,
+  type BlogCategory,
+  type BlogTab,
+} from "../shared/blog";
 
 // ── Viewport hook ─────────────────────────────────────────────────────────────
 type Viewport = "mobile" | "tablet" | "desktop";
@@ -171,9 +176,9 @@ function PostCard({ post, vp }: { post: BlogPost; vp: Viewport }) {
           flexShrink: 0,
         }}
       >
-        {post.coverImage ? (
+        {post.coverImageUrl ? (
           <img
-            src={post.coverImage}
+            src={post.coverImageUrl}
             alt={post.title}
             style={{
               position: "absolute",
@@ -229,7 +234,7 @@ function PostCard({ post, vp }: { post: BlogPost; vp: Viewport }) {
               textTransform: "uppercase",
             }}
           >
-            {post.category}
+            {post.categoryName}
           </span>
           <span
             style={{
@@ -239,7 +244,7 @@ function PostCard({ post, vp }: { post: BlogPost; vp: Viewport }) {
               letterSpacing: "0.02em",
             }}
           >
-            {post.date}
+            {formatBlogDisplayDate(post.displayTime)}
           </span>
         </div>
 
@@ -276,7 +281,7 @@ function PostCard({ post, vp }: { post: BlogPost; vp: Viewport }) {
             overflow: "hidden",
           }}
         >
-          {post.excerpt}
+          {post.description}
         </p>
 
         {/* Footer row */}
@@ -444,9 +449,9 @@ function FeaturedCarousel({ posts, vp }: { posts: BlogPost[]; vp: Viewport }) {
                   </svg>
                   Featured
                 </div>
-                {post.coverImage ? (
+                {post.coverImageUrl ? (
                   <img
-                    src={post.coverImage}
+                    src={post.coverImageUrl}
                     alt={post.title}
                     style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                   />
@@ -497,7 +502,7 @@ function FeaturedCarousel({ posts, vp }: { posts: BlogPost[]; vp: Viewport }) {
                     textTransform: "uppercase",
                   }}
                 >
-                  {post.category}
+                  {post.categoryName}
                 </span>
                 <span
                   style={{
@@ -506,7 +511,7 @@ function FeaturedCarousel({ posts, vp }: { posts: BlogPost[]; vp: Viewport }) {
                     color: "rgba(255,255,255,0.4)",
                   }}
                 >
-                  {post.date}
+                  {formatBlogDisplayDate(post.displayTime)}
                 </span>
               </div>
 
@@ -539,7 +544,7 @@ function FeaturedCarousel({ posts, vp }: { posts: BlogPost[]; vp: Viewport }) {
                   WebkitBoxOrient: "vertical",
                 }}
               >
-                {post.excerpt}
+                {post.description}
               </p>
 
               <div style={{ display: "flex", alignItems: "center", gap: "14px", marginTop: "4px" }}>
@@ -704,13 +709,13 @@ export default function Blog({ articles, pinArticles, tabs }: BlogProps) {
   const q = searchQuery.trim().toLowerCase();
   const isSearching = q.length > 0;
 
-  // When searching, flatten all posts and match against title + excerpt + category
+  // When searching, flatten all posts and match against title + description + category
   const searchResults = isSearching
     ? articles.filter(
         (p) =>
           p.title.toLowerCase().includes(q) ||
-          p.excerpt.toLowerCase().includes(q) ||
-          p.category.toLowerCase().includes(q)
+          p.description.toLowerCase().includes(q) ||
+          p.categoryName.toLowerCase().includes(q)
       )
     : [];
 
@@ -719,7 +724,7 @@ export default function Blog({ articles, pinArticles, tabs }: BlogProps) {
     ? searchResults
     : activeCategory === "All"
     ? articles
-    : articles.filter((p) => p.category === activeCategory);
+    : articles.filter((p) => p.categoryName === activeCategory);
 
   const gridPageCount = Math.ceil(allGridPosts.length / GRID_PER_PAGE);
   const gridPosts = allGridPosts.slice((gridPage - 1) * GRID_PER_PAGE, gridPage * GRID_PER_PAGE);

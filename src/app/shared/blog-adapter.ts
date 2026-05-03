@@ -8,15 +8,6 @@ import {
 
 const WORDS_PER_MINUTE = 220;
 
-function formatDate(date: Date) {
-  return new Intl.DateTimeFormat("en", {
-    month: "short",
-    day: "2-digit",
-    year: "numeric",
-    timeZone: "UTC",
-  }).format(date);
-}
-
 function blockToHtml(block: Article["attributes"]["blocks"][number]) {
   if (block.__component === "shared.rich-text" && block.body) {
     return markdownToHtml(block.body);
@@ -68,22 +59,19 @@ export function categoriesToBlogTabs(categories: Categorg[]): BlogTab[] {
 
 export function articleToBlogPost(article: Article): BlogPost {
   const attributes = article.attributes;
-  const content = articleContentToHtml(article);
+  const html = articleContentToHtml(article);
   const displayTime = getDisplayTime(article);
-  const isoDate = displayTime.toISOString();
 
   return {
     slug: attributes.slug,
     title: attributes.title,
-    excerpt: attributes.description,
-    content,
-    date: formatDate(displayTime),
-    isoDate,
-    category: attributes.category?.data?.attributes?.name || "Updates",
-    author: attributes.author?.data?.attributes?.name || "Orderly Network",
-    coverImage: getArticleCoverImage(article),
-    readTime: estimateReadTime(content),
-    featured: !!attributes.pin,
+    description: attributes.description,
+    html,
+    displayTime: displayTime.toISOString(),
+    categoryName: attributes.category?.data?.attributes?.name || "Updates",
+    authorName: attributes.author?.data?.attributes?.name || "Orderly Network",
+    coverImageUrl: getArticleCoverImage(article),
+    readTime: estimateReadTime(html),
   };
 }
 

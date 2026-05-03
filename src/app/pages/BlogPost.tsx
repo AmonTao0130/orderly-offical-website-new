@@ -8,7 +8,10 @@ import { MobileNavDrawer } from "../components/MobileHomePage";
 import { MobileFooterCard } from "../../imports/Frame1618872068-142-633";
 import { TabletNav, TabletFooter } from "../components/TabletHomePage";
 import svgPathsMobile from "../../imports/svg-4hybjba00c";
-import type { BlogPost as BlogPostType } from "../shared/blog";
+import {
+  formatBlogDisplayDate,
+  type BlogPost as BlogPostType,
+} from "../shared/blog";
 import { copyToClipboard } from "../shared/orderly";
 
 // ── Viewport hook ─────────────────────────────────────────────────────────────
@@ -116,9 +119,9 @@ function RelatedCard({ post, isMobile }: { post: BlogPostType; isMobile: boolean
           background: "#1a1a1f",
         }}
       >
-        {post.coverImage ? (
+        {post.coverImageUrl ? (
           <img
-            src={post.coverImage}
+            src={post.coverImageUrl}
             alt={post.title}
             style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
           />
@@ -147,7 +150,7 @@ function RelatedCard({ post, isMobile }: { post: BlogPostType; isMobile: boolean
               textTransform: "uppercase",
             }}
           >
-            {post.category}
+            {post.categoryName}
           </span>
           <span
             style={{
@@ -156,7 +159,7 @@ function RelatedCard({ post, isMobile }: { post: BlogPostType; isMobile: boolean
               color: "rgba(255,255,255,0.35)",
             }}
           >
-            {post.date}
+            {formatBlogDisplayDate(post.displayTime)}
           </span>
         </div>
         <h4
@@ -493,7 +496,7 @@ export default function BlogPost({
                   textTransform: "uppercase",
                 }}
               >
-                {post.category}
+                {post.categoryName}
               </span>
               <span
                 style={{
@@ -535,7 +538,7 @@ export default function BlogPost({
                   color: "rgba(255,255,255,0.4)",
                 }}
               >
-                {post.date}
+                {formatBlogDisplayDate(post.displayTime)}
               </span>
               <span style={{ width: "1px", height: "14px", background: "rgba(255,255,255,0.15)" }} />
               <span
@@ -546,13 +549,13 @@ export default function BlogPost({
                   color: "rgba(255,255,255,0.4)",
                 }}
               >
-                {post.author}
+                {post.authorName}
               </span>
             </motion.div>
           </motion.div>
 
           {/* ── Cover image ── */}
-          {post.coverImage && (
+          {post.coverImageUrl && (
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -572,7 +575,7 @@ export default function BlogPost({
                 }}
               >
                 <img
-                  src={post.coverImage}
+                  src={post.coverImageUrl}
                   alt={post.title}
                   style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                 />
@@ -594,7 +597,7 @@ export default function BlogPost({
           >
             <div
               className="orderly-prose"
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{ __html: post.html }}
             />
           </motion.div>
 
