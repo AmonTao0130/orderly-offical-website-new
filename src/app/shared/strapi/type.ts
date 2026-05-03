@@ -78,10 +78,6 @@ export type TPagination = {
   total: number;
 };
 
-export type Meta = {
-  pagination: TPagination;
-};
-
 export type TFile = {
   id: number;
   url: string;

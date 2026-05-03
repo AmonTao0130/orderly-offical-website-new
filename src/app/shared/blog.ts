@@ -30,5 +30,3 @@ export interface BlogPost {
   readTime: number;
 }
 
-export const BLOG_CATEGORIES: BlogCategory[] = [];
-export const BLOG_POSTS: BlogPost[] = [];
