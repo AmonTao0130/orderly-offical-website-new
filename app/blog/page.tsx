@@ -4,13 +4,11 @@ import {
   articleToBlogPost,
   articlesToBlogPosts,
   categoriesToBlogTabs,
-} from "@/app/shared/blog-adapter";
-import {
   getAllPageArticles,
   getCategories,
   getPinArticles,
-} from "@/app/shared/strapi/services";
-import { PublicationStateEnum } from "@/app/shared/strapi/type";
+  PublicationStateEnum,
+} from "@/app/features/blog";
 
 export const metadata: Metadata = {
   title: "Blog | Orderly Network",

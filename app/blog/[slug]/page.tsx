@@ -4,9 +4,9 @@ import BlogPost from "@/app/pages/BlogPost";
 import {
   articleToBlogPost,
   articlesToBlogPosts,
-} from "@/app/shared/blog-adapter";
-import { getAllPageArticleDetails } from "@/app/shared/strapi/services";
-import { PublicationStateEnum } from "@/app/shared/strapi/type";
+  getAllPageArticleDetails,
+  PublicationStateEnum,
+} from "@/app/features/blog";
 
 interface Props {
   params: Promise<{ slug: string }>;

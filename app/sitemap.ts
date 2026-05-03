@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
-import { articlesToBlogPosts } from "@/app/shared/blog-adapter";
-import { getAllPageArticles } from "@/app/shared/strapi/services";
-import { PublicationStateEnum } from "@/app/shared/strapi/type";
+import {
+  articlesToBlogPosts,
+  getAllPageArticles,
+  PublicationStateEnum,
+} from "@/app/features/blog";
 
 export const dynamic = "force-static";
 

@@ -1,10 +1,10 @@
-import type { BlogPost, BlogTab } from "./blog";
-import { markdownToHtml } from "./marked";
-import type { Article, Categorg } from "./strapi/type";
+import type { BlogPost, BlogTab } from "./types";
+import { markdownToHtml } from "./markdown";
+import type { Article, Categorg } from "./data-source/legacy-strapi-types";
 import {
   getArticleCoverImage,
   getDisplayTime,
-} from "./strapi/utils";
+} from "./data-source/local-blog-source";
 
 const WORDS_PER_MINUTE = 220;
 

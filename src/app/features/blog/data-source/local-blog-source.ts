@@ -7,16 +7,13 @@ import type {
   PublicationState,
   ResponstList,
   TFile,
-} from "./type";
+} from "./legacy-strapi-types";
+import { PublicationStateEnum } from "./legacy-strapi-types";
 
-const CONTENT_ROOT = path.resolve(process.cwd(), "src", "content");
+const CONTENT_ROOT = path.resolve(process.cwd(), "src", "content", "blog");
 const EXPORT_ROOT = path.join(CONTENT_ROOT, "legacy-strapi-export");
-const MARKDOWN_POSTS_ROOT = path.join(CONTENT_ROOT, "blog-posts");
-const BLOG_CONFIG_FILE = path.join(
-  CONTENT_ROOT,
-  "blog-config",
-  "blog.config.json"
-);
+const MARKDOWN_POSTS_ROOT = path.join(CONTENT_ROOT, "posts");
+const BLOG_CONFIG_FILE = path.join(CONTENT_ROOT, "config", "blog.config.json");
 const PUBLIC_ROOT = path.resolve(process.cwd(), "public");
 const ENTITIES_FILE = path.join(EXPORT_ROOT, "entities_00001.jsonl");
 const LINKS_FILE = path.join(EXPORT_ROOT, "links_00001.jsonl");
@@ -252,14 +249,14 @@ function validateMarkdownFrontmatter(
 
   if (!config.categories.some((category) => category.slug === frontmatter.category)) {
     throw new Error(
-      `Invalid blog category "${frontmatter.category}" in ${filePath}. Add it to src/content/blog-config/blog.config.json first.`
+      `Invalid blog category "${frontmatter.category}" in ${filePath}. Add it to src/content/blog/config/blog.config.json first.`
     );
   }
 
   const author = frontmatter.author || config.defaultAuthor;
   if (!config.authors.some((item) => item.name === author)) {
     throw new Error(
-      `Invalid blog author "${author}" in ${filePath}. Add it to src/content/blog-config/blog.config.json first.`
+      `Invalid blog author "${author}" in ${filePath}. Add it to src/content/blog/config/blog.config.json first.`
     );
   }
 
@@ -754,7 +751,24 @@ function matchesFilters(article: Article, filters?: Record<string, any>) {
   return true;
 }
 
-export function getLocalCategories() {
+export function getDisplayTime(article: Article) {
+  const { attributes } = article || {};
+  const { createdAt, publishedAt, postedTime } = attributes || {};
+  const displayTime = postedTime || publishedAt || createdAt;
+  return new Date(displayTime);
+}
+
+export function getArticleCoverImage(article?: Article) {
+  const attributes = article?.attributes?.cover?.data?.attributes;
+  return (
+    attributes?.formats?.small?.url ||
+    attributes?.formats?.medium?.url ||
+    attributes?.formats?.thumbnail?.url ||
+    attributes?.url
+  );
+}
+
+function getLocalCategories() {
   return loadLocalData().categories;
 }
 
@@ -810,4 +824,60 @@ export function getLocalArticles(options?: {
       },
     },
   };
+}
+
+export type GetArticlesOptions = {
+  isDetail?: boolean;
+  pagination?: Pagination;
+  publicationState?: PublicationState;
+  category?: string;
+  filters?: Record<string, any>;
+};
+
+export async function getCategories() {
+  return getLocalCategories();
+}
+
+export async function getArticles(options?: GetArticlesOptions) {
+  return getLocalArticles({
+    pagination: options?.pagination,
+    publicationState: options?.publicationState || PublicationStateEnum.LIVE,
+    category: options?.category,
+    filters: options?.filters,
+  });
+}
+
+export async function getPinArticles(
+  publicationState = PublicationStateEnum.LIVE
+) {
+  const res = await getArticles({
+    pagination: {
+      page: 1,
+      pageSize: 20,
+    },
+    publicationState,
+    filters: {
+      pin: {
+        $eq: true,
+      },
+    },
+  });
+
+  return res?.data || [];
+}
+
+export async function getAllPageArticles(options?: GetArticlesOptions) {
+  const res = await getArticles({
+    ...options,
+    publicationState: options?.publicationState || PublicationStateEnum.LIVE,
+  });
+
+  return (res?.data || []).filter((article) => !!article.attributes.slug);
+}
+
+export function getAllPageArticleDetails(options?: GetArticlesOptions) {
+  return getAllPageArticles({
+    isDetail: true,
+    ...options,
+  });
 }
