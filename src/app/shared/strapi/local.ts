@@ -1,6 +1,5 @@
 import fs from "node:fs";
 import path from "node:path";
-import { BlogPublishedTime } from "../blog-constant";
 import type {
   Article,
   Categorg,
@@ -428,7 +427,6 @@ function getTimestamp(article: Article) {
   const { attributes } = article;
   const displayTime =
     attributes.postedTime ||
-    BlogPublishedTime[attributes.slug] ||
     attributes.publishedAt ||
     attributes.updatedAt ||
     attributes.createdAt;

@@ -1,5 +1,4 @@
 import type { Article, Categorg } from "./type";
-import { BlogPublishedTime } from "../blog-constant";
 
 export function categories2Tabs(categories: Categorg[]) {
   const list = categories
@@ -47,9 +46,7 @@ export function getRangePage(
 export function getDisplayTime(article: Article) {
   const { attributes } = article || {};
   const { createdAt, publishedAt, postedTime } = attributes || {};
-  const hardcodePublishedTime = BlogPublishedTime[attributes?.slug];
-  const displayTime =
-    postedTime || hardcodePublishedTime || publishedAt || createdAt;
+  const displayTime = postedTime || publishedAt || createdAt;
   return new Date(displayTime);
 }
 
@@ -85,16 +82,6 @@ export function sortByDisplayTime(articles: Article[]) {
   });
 
   return list;
-}
-
-/** 检测哪些slug的发布日期没有被hardcode */
-export function checkSlugNotHardcoded(articles: Article[]) {
-  return articles
-    .map((article) => {
-      const slug = article.attributes.slug;
-      return BlogPublishedTime[slug] ? false : slug;
-    })
-    .filter(Boolean);
 }
 
 /** 获取封面图片 */
