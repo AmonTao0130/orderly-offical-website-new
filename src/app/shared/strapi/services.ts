@@ -4,7 +4,6 @@ import {
   type Meta,
   type Pagination,
   type PublicationState,
-  type ResponstList,
 } from "./type";
 import {
   getLocalArticleBySlug,
@@ -12,9 +11,6 @@ import {
   getLocalCategories,
   getLocalUploadFiles,
 } from "./local";
-
-// strapi api 一次最多只能请求 100 条
-export const STRAPI_MAX_PAGE_SIZE = 100;
 
 export async function getCategories() {
   return getLocalCategories();
@@ -30,10 +26,7 @@ export type GetArticlesOptions = {
 
 export async function getArticles(options?: GetArticlesOptions) {
   return getLocalArticles({
-    pagination: {
-      pageSize: STRAPI_MAX_PAGE_SIZE,
-      ...options?.pagination,
-    },
+    pagination: options?.pagination,
     publicationState: options?.publicationState || PublicationStateEnum.LIVE,
     category: options?.category,
     filters: options?.filters,
@@ -83,29 +76,14 @@ export async function getPinArticles(
   return res?.data || [];
 }
 
-// 获取所有页码的文章数据
+// 获取所有文章数据（本地数据一次拿全，无需分页）
 export async function getAllPageArticles(options?: GetArticlesOptions) {
-  const firstPageData = await getArticles({
-    pagination: { page: 1, pageSize: STRAPI_MAX_PAGE_SIZE },
-    publicationState: PublicationStateEnum.LIVE,
+  const res = await getArticles({
     ...options,
+    publicationState: options?.publicationState || PublicationStateEnum.LIVE,
   });
 
-  let articles = firstPageData?.data || [];
-
-  const pageCount = firstPageData?.meta?.pagination?.pageCount || 1;
-
-  for (let page = 2; page <= pageCount; page++) {
-    const nextPageData = await getArticles({
-      pagination: { page, pageSize: STRAPI_MAX_PAGE_SIZE },
-      publicationState: PublicationStateEnum.LIVE,
-      ...options,
-    });
-    articles = [...articles, ...nextPageData?.data];
-  }
-
-  // filter out articles with no slug
-  return articles.filter((article) => !!article.attributes.slug);
+  return (res?.data || []).filter((article) => !!article.attributes.slug);
 }
 
 export function getAllPageArticleDetails(options?: GetArticlesOptions) {
@@ -115,27 +93,19 @@ export function getAllPageArticleDetails(options?: GetArticlesOptions) {
   });
 }
 
-export async function getFirstPageArticles(
+export async function getAllArticles(
   publicationState: PublicationState = PublicationStateEnum.LIVE
 ) {
-  return getArticles({
-    pagination: {
-      page: 1,
-      pageSize: STRAPI_MAX_PAGE_SIZE,
-    },
-    publicationState,
-  }) as Promise<ResponstList<Article[]>>;
+  const res = await getArticles({ publicationState });
+  return res?.data || [];
 }
 
 export async function checkSlugIsExist(
   slug: string,
   publicationState: PublicationState = PublicationStateEnum.LIVE
 ) {
-  const firstPageArticles = await getFirstPageArticles(publicationState);
-
-  return firstPageArticles?.data?.some(
-    (article) => article.attributes.slug === slug
-  );
+  const articles = await getAllArticles(publicationState);
+  return articles.some((article) => article.attributes.slug === slug);
 }
 
 export async function getArticleBySlugData(
