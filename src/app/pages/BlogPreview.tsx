@@ -5,7 +5,7 @@ import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 import BlogPost from "./BlogPost";
 import {
   collectBlogPreviewDownloadAssets,
-  DEFAULT_BLOG_PREVIEW_MARKDOWN,
+  DEFAULT_BLOG_DRAFT_MARKDOWN,
   findPreviewMarkdownFiles,
   getMarkdownDownloadFilename,
   makePreviewFileMap,
@@ -340,7 +340,7 @@ export default function BlogPreview() {
   const [files, setFiles] = useState<File[]>([]);
   const [selectedMarkdownPath, setSelectedMarkdownPath] = useState("");
   const [markdown, setMarkdown] = useState(() =>
-    normalizeEditorMarkdownAssetPaths(DEFAULT_BLOG_PREVIEW_MARKDOWN)
+    normalizeEditorMarkdownAssetPaths(DEFAULT_BLOG_DRAFT_MARKDOWN)
   );
   const [assetContext, setAssetContext] = useState<BlogPreviewAssetContext>({});
   const [state, setState] = useState<PreviewState>({
@@ -463,7 +463,7 @@ export default function BlogPreview() {
     setFiles([]);
     setSelectedMarkdownPath("");
     setAssetContext({});
-    setMarkdown(normalizeEditorMarkdownAssetPaths(DEFAULT_BLOG_PREVIEW_MARKDOWN));
+    setMarkdown(normalizeEditorMarkdownAssetPaths(DEFAULT_BLOG_DRAFT_MARKDOWN));
   }
 
   async function handleDownload() {

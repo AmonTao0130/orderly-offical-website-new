@@ -1,4 +1,4 @@
-export { DEFAULT_BLOG_PREVIEW_MARKDOWN } from "./preview-config";
+export { DEFAULT_BLOG_DRAFT_MARKDOWN } from "./default-preview-markdown";
 import { markdownToHtml } from "./markdown";
 import type { BlogPost } from "./types";
 

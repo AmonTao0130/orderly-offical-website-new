@@ -1,4 +1,4 @@
-export const DEFAULT_BLOG_PREVIEW_MARKDOWN = `---
+export const DEFAULT_BLOG_DRAFT_MARKDOWN = `---
 slug: "blog-editor-preview-guide"
 title: "How to Preview a Blog Draft"
 description: "A local Markdown guide for writing, previewing, and downloading blog drafts."
