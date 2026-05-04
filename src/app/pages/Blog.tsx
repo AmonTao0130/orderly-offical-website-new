@@ -694,6 +694,34 @@ type BlogProps = {
   total: number;
 };
 
+type PaginationItem = number | "ellipsis";
+
+function getPaginationItems(currentPage: number, pageCount: number, siblingCount: number): PaginationItem[] {
+  const pageItems = new Set<number>([1, pageCount]);
+  const start = Math.max(2, currentPage - siblingCount);
+  const end = Math.min(pageCount - 1, currentPage + siblingCount);
+
+  for (let page = start; page <= end; page += 1) {
+    pageItems.add(page);
+  }
+
+  const sortedPages = Array.from(pageItems).sort((a, b) => a - b);
+
+  return sortedPages.flatMap((page, index) => {
+    const previousPage = sortedPages[index - 1];
+
+    if (!previousPage || page - previousPage === 1) {
+      return [page];
+    }
+
+    if (page - previousPage === 2) {
+      return [previousPage + 1, page];
+    }
+
+    return ["ellipsis", page];
+  });
+}
+
 export default function Blog({ articles, pinArticles, tabs }: BlogProps) {
   const vp = useViewport();
   const isMobile = vp === "mobile";
@@ -728,6 +756,7 @@ export default function Blog({ articles, pinArticles, tabs }: BlogProps) {
 
   const gridPageCount = Math.ceil(allGridPosts.length / GRID_PER_PAGE);
   const gridPosts = allGridPosts.slice((gridPage - 1) * GRID_PER_PAGE, gridPage * GRID_PER_PAGE);
+  const paginationItems = getPaginationItems(gridPage, gridPageCount, isMobile ? 0 : isTablet ? 1 : 2);
 
   const maxW = "1200px";
 
@@ -1070,7 +1099,30 @@ export default function Blog({ articles, pinArticles, tabs }: BlogProps) {
             </button>
 
             {/* Page numbers */}
-            {Array.from({ length: gridPageCount }, (_, i) => i + 1).map((page) => {
+            {paginationItems.map((page, index) => {
+              if (page === "ellipsis") {
+                return (
+                  <span
+                    key={`ellipsis-${index}`}
+                    aria-hidden="true"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: isMobile ? "24px" : "32px",
+                      height: isMobile ? "36px" : "40px",
+                      color: "rgba(255,255,255,0.45)",
+                      fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+                      fontVariationSettings: "'wght' 500",
+                      fontFeatureSettings: "'ss02' 1,'ss03' 1,'ss05' 1,'ss06' 1",
+                      fontSize: isMobile ? "13px" : "15px",
+                    }}
+                  >
+                    ...
+                  </span>
+                );
+              }
+
               const isActive = page === gridPage;
               return (
                 <button
