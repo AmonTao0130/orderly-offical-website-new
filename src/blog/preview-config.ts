@@ -6,7 +6,7 @@ date: 2026-05-04
 category: "Announcements"
 publicationState: "preview"
 author: "Orderly Network"
-cover: "/thumbnail.jpg"
+cover: "./thumbnail.jpg"
 pin: false
 ---
 
@@ -22,7 +22,7 @@ Every draft begins with a frontmatter block between the two \`---\` lines. These
 - \`date\` should use the \`YYYY-MM-DD\` format.
 - \`category\` groups the post under the right blog tab.
 - \`author\` appears near the article metadata.
-- \`cover\` points to the cover image. This example uses \`/thumbnail.jpg\`, which maps to \`public/thumbnail.jpg\`.
+- \`cover\` points to the cover image. This example uses \`./thumbnail.jpg\`, which points to an image file next to the Markdown file.
 
 ## 2. Write the article body
 
@@ -37,14 +37,10 @@ Use short sections to keep the article scannable:
 
 ## 3. Add images
 
-For public assets, use root-relative paths:
-
-![Orderly blog preview cover](/thumbnail.jpg)
-
 When previewing a local folder, relative image paths can point to files next to your Markdown file:
 
 \`\`\`md
-![Chart example](./images/chart.png)
+![Orderly blog preview cover](./thumbnail.jpg)
 \`\`\`
 
 Choose the folder in the editor toolbar so the preview can resolve those local image files.
@@ -61,14 +57,14 @@ Code blocks are useful for tutorials, release notes, and integration guides:
 
 \`\`\`ts
 const draftStatus = "preview";
-const coverImage = "/thumbnail.jpg";
+const coverImage = "./thumbnail.jpg";
 
 console.log(\`Rendering \${draftStatus} draft with \${coverImage}\`);
 \`\`\`
 
 ## 6. Download the draft
 
-When the article is ready, click **Download .md**. The editor uses the \`slug\` field for the filename, so this example downloads as \`blog-editor-preview-guide.md\`.
+When the article is ready, click **Download ZIP**. The editor uses the \`slug\` field for the package name, so this example downloads as \`blog-editor-preview-guide.zip\`.
 
 You can keep editing the downloaded Markdown file locally, upload a folder with related assets, and return to the editor whenever you need another production-style preview.
 `;

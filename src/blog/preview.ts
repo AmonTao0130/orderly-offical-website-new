@@ -29,6 +29,13 @@ export type BlogPreviewParseResult = {
   frontmatter: MarkdownFrontmatter;
 };
 
+export type BlogPreviewDownloadAsset = {
+  file?: File;
+  publicUrl?: string;
+  packagePath: string;
+  sourcePath: string;
+};
+
 type FileWithRelativePath = File & {
   webkitRelativePath?: string;
 };
@@ -161,6 +168,14 @@ function splitAssetSuffix(value: string) {
   };
 }
 
+function getEditorPublicAssetFallback(assetPath: string) {
+  const normalized = normalizePath(
+    assetPath.startsWith("/") ? assetPath.slice(1) : assetPath
+  );
+
+  return normalized === "thumbnail.jpg" ? "/thumbnail.jpg" : "";
+}
+
 function estimateReadTime(html: string) {
   const text = html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
   if (!text) {
@@ -199,6 +214,11 @@ function makeObjectUrlResolver(
     const file = filesByPath.get(resolvedPath);
 
     if (!file) {
+      const publicFallback = getEditorPublicAssetFallback(assetPath);
+      if (publicFallback) {
+        return `${publicFallback}${suffix}`;
+      }
+
       warnings.push(`Markdown blog asset not found: ${resolvedPath}`);
       return options?.required ? "" : assetValue;
     }
@@ -233,6 +253,83 @@ function rewriteMarkdownBodyAssetUrls(
 
       return `${attr}="${resolveAssetUrl(url)}"`;
     });
+}
+
+function addDownloadAsset(
+  assetsByPackagePath: Map<string, BlogPreviewDownloadAsset>,
+  assetValue: string | undefined,
+  assetContext: BlogPreviewAssetContext
+) {
+  if (!assetValue || assetValue.startsWith("#") || /^[a-z][a-z0-9+.-]*:/i.test(assetValue)) {
+    return;
+  }
+
+  const filesByPath = assetContext.filesByPath || new Map<string, File>();
+  const baseDir = assetContext.baseDir || "";
+  const { assetPath } = splitAssetSuffix(assetValue);
+  const isRootPath = assetPath.startsWith("/");
+  const packagePath = normalizePath(isRootPath ? assetPath.slice(1) : assetPath);
+  const sourcePath = isRootPath ? packagePath : joinPath(baseDir, assetPath);
+
+  if (!packagePath) {
+    return;
+  }
+
+  const file = filesByPath.get(sourcePath);
+
+  if (!file) {
+    const publicUrl = getEditorPublicAssetFallback(assetPath);
+    if (!publicUrl) {
+      return;
+    }
+
+    assetsByPackagePath.set(packagePath, {
+      publicUrl,
+      packagePath,
+      sourcePath,
+    });
+    return;
+  }
+
+  assetsByPackagePath.set(packagePath, {
+    file,
+    packagePath,
+    sourcePath,
+  });
+}
+
+export function collectBlogPreviewDownloadAssets(
+  markdown: string,
+  assetContext: BlogPreviewAssetContext,
+  sourceName = "blog-draft.md"
+) {
+  const assetsByPackagePath = new Map<string, BlogPreviewDownloadAsset>();
+  let body = markdown;
+
+  try {
+    const parsed = parseFrontmatter(markdown, sourceName);
+    body = parsed.body;
+    addDownloadAsset(assetsByPackagePath, parsed.frontmatter.cover, assetContext);
+  } catch {
+    // Download should still work while the draft is structurally invalid.
+  }
+
+  body.replace(/!\[[^\]]*]\(\s*<?([^)\s>]+)>?(?:\s+["'][^)]*["'])?\s*\)/g, (
+    _match,
+    url: string
+  ) => {
+    addDownloadAsset(assetsByPackagePath, url, assetContext);
+    return _match;
+  });
+
+  body.replace(/\bsrc=["']([^"']+)["']/g, (_match, url: string) => {
+    addDownloadAsset(assetsByPackagePath, url, assetContext);
+    return _match;
+  });
+
+  return Array.from(assetsByPackagePath.values()).sort((a, b) =>
+    a.packagePath.localeCompare(b.packagePath)
+  );
 }
 
 export function findPreviewMarkdownFiles(files: File[]) {

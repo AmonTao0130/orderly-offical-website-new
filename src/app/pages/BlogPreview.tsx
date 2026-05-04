@@ -1,8 +1,10 @@
 "use client";
 
+import { strToU8, zipSync, type Zippable } from "fflate";
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 import BlogPost from "./BlogPost";
 import {
+  collectBlogPreviewDownloadAssets,
   DEFAULT_BLOG_PREVIEW_MARKDOWN,
   findPreviewMarkdownFiles,
   getMarkdownDownloadFilename,
@@ -163,7 +165,7 @@ function UploadPanel({
         </label>
 
         <ToolbarButton onClick={onNewDraft}>New draft</ToolbarButton>
-        <ToolbarButton onClick={onDownload}>Download .md</ToolbarButton>
+        <ToolbarButton onClick={onDownload}>Download ZIP</ToolbarButton>
         <StatusPill status={status} />
 
         {markdownFiles.length > 1 ? (
@@ -308,10 +310,38 @@ function EditorPanel({
   );
 }
 
+async function fetchPublicAsset(publicUrl?: string) {
+  if (!publicUrl) {
+    throw new Error("Download package asset is missing a file source.");
+  }
+
+  const response = await fetch(publicUrl);
+  if (!response.ok) {
+    throw new Error(`Unable to read public asset: ${publicUrl}`);
+  }
+
+  return new Uint8Array(await response.arrayBuffer());
+}
+
+function normalizeEditorMarkdownAssetPaths(markdown: string) {
+  return markdown
+    .replace(
+      /^(cover:\s*)(["']?)\/thumbnail\.jpg\2(\s*)$/m,
+      (_match, start: string, quote: string, end: string) =>
+        `${start}${quote}./thumbnail.jpg${quote}${end}`
+    )
+    .replace(/(!\[[^\]]*]\()\s*\/thumbnail\.jpg(\s*\))/g, "$1./thumbnail.jpg$2")
+    .replace(/\bsrc=(["'])\/thumbnail\.jpg\1/g, (_match, quote: string) =>
+      `src=${quote}./thumbnail.jpg${quote}`
+    );
+}
+
 export default function BlogPreview() {
   const [files, setFiles] = useState<File[]>([]);
   const [selectedMarkdownPath, setSelectedMarkdownPath] = useState("");
-  const [markdown, setMarkdown] = useState(DEFAULT_BLOG_PREVIEW_MARKDOWN);
+  const [markdown, setMarkdown] = useState(() =>
+    normalizeEditorMarkdownAssetPaths(DEFAULT_BLOG_PREVIEW_MARKDOWN)
+  );
   const [assetContext, setAssetContext] = useState<BlogPreviewAssetContext>({});
   const [state, setState] = useState<PreviewState>({
     status: "loading",
@@ -374,7 +404,7 @@ export default function BlogPreview() {
     markdownPath?: string
   ) {
     const loaded = await readPreviewMarkdownFile(nextFiles, markdownPath);
-    setMarkdown(loaded.markdown);
+    setMarkdown(normalizeEditorMarkdownAssetPaths(loaded.markdown));
     setSelectedMarkdownPath(loaded.selectedMarkdownPath);
     setAssetContext({
       filesByPath: loaded.filesByPath,
@@ -433,23 +463,69 @@ export default function BlogPreview() {
     setFiles([]);
     setSelectedMarkdownPath("");
     setAssetContext({});
-    setMarkdown(DEFAULT_BLOG_PREVIEW_MARKDOWN);
+    setMarkdown(normalizeEditorMarkdownAssetPaths(DEFAULT_BLOG_PREVIEW_MARKDOWN));
   }
 
-  function handleDownload() {
-    const filename = getMarkdownDownloadFilename(
+  async function handleDownload() {
+    const markdownFilename = getMarkdownDownloadFilename(
       markdown,
       selectedMarkdownPath
     );
-    const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
-    const objectUrl = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = objectUrl;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(objectUrl);
+    const packageName =
+      markdownFilename.replace(/\.md$/i, "").replace(/[\\/:*?"<>|]+/g, "-") ||
+      "blog-draft";
+    const sourceName = selectedMarkdownPath || markdownFilename;
+    const assets = collectBlogPreviewDownloadAssets(
+      markdown,
+      assetContext,
+      sourceName
+    );
+    const packageMarkdown = normalizeEditorMarkdownAssetPaths(markdown);
+    const zipEntries: Zippable = {
+      [`${packageName}/${markdownFilename}`]: strToU8(packageMarkdown),
+    };
+
+    try {
+      for (const asset of assets) {
+        const bytes = asset.file
+          ? new Uint8Array(await asset.file.arrayBuffer())
+          : await fetchPublicAsset(asset.publicUrl);
+        zipEntries[`${packageName}/${asset.packagePath}`] = [
+          bytes,
+          {
+            level: 0,
+            mtime: asset.file
+              ? new Date(asset.file.lastModified)
+              : new Date(),
+          },
+        ];
+      }
+
+      const zipped = zipSync(zipEntries, {
+        level: 6,
+        mtime: new Date(),
+      });
+      const zipBuffer = new ArrayBuffer(zipped.byteLength);
+      new Uint8Array(zipBuffer).set(zipped);
+      const blob = new Blob([zipBuffer], { type: "application/zip" });
+      const objectUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = objectUrl;
+      link.download = `${packageName}.zip`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(objectUrl);
+    } catch (error) {
+      setState((current) => ({
+        ...current,
+        status: "error",
+        error:
+          error instanceof Error
+            ? error.message
+            : "Unable to create blog download package.",
+      }));
+    }
   }
 
   const post = state.result?.post || null;
@@ -472,7 +548,9 @@ export default function BlogPreview() {
       <EditorPanel
         markdown={markdown}
         hasToolbarMessages={Boolean(state.error || state.warnings.length > 0)}
-        onMarkdownChange={setMarkdown}
+        onMarkdownChange={(nextMarkdown) =>
+          setMarkdown(normalizeEditorMarkdownAssetPaths(nextMarkdown))
+        }
       />
 
       <BlogPost
