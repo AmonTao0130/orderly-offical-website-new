@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import path from "path";
 
 const nextConfig: NextConfig = {
   // Temporarily removing static export to enable API routes for the partnership form
@@ -43,14 +42,6 @@ const nextConfig: NextConfig = {
         destination: "https://orderly.mintlify.dev/docs/:path*",
       },
     ];
-  },
-  webpack(config) {
-    config.resolve = config.resolve || {};
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      "@": path.resolve(__dirname, "src"),
-    };
-    return config;
   },
 };
 
