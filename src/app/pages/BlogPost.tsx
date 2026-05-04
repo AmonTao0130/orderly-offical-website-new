@@ -359,10 +359,12 @@ export default function BlogPost({
   slug,
   post,
   latestPosts,
+  hideChrome = false,
 }: {
   slug: string;
   post: BlogPostType | null;
   latestPosts: BlogPostType[];
+  hideChrome?: boolean;
 }) {
   const vp = useViewport();
   const isMobile = vp === "mobile";
@@ -398,33 +400,35 @@ export default function BlogPost({
       style={{
         background: "#000",
         minHeight: "100vh",
-        width: "100vw",
+        width: hideChrome ? "100%" : "100vw",
         overflowX: "hidden",
-        paddingTop: isMobile ? "64px" : isTablet ? 0 : "80px",
+        paddingTop: hideChrome ? 0 : isMobile ? "64px" : isTablet ? 0 : "80px",
       }}
     >
       {/* Inject prose styles */}
       <style dangerouslySetInnerHTML={{ __html: PROSE_CSS }} />
 
       {/* ── Nav ── */}
-      {isMobile ? (
-        <MobileTopBar onMenuClick={() => setNavOpen(true)} />
-      ) : isTablet ? (
-        <TabletNav onMenuClick={() => setNavOpen(true)} />
-      ) : (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            zIndex: 1000,
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <MorphingHeader />
-        </div>
+      {!hideChrome && (
+        isMobile ? (
+          <MobileTopBar onMenuClick={() => setNavOpen(true)} />
+        ) : isTablet ? (
+          <TabletNav onMenuClick={() => setNavOpen(true)} />
+        ) : (
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              right: 0,
+              zIndex: 1000,
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <MorphingHeader />
+          </div>
+        )
       )}
 
       {!post ? (
@@ -731,29 +735,31 @@ export default function BlogPost({
       )}
 
       {/* ── Footer ── */}
-      <motion.div
-        variants={revealOnScroll}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-40px" }}
-      >
-        {isMobile ? (
-          <div style={{ padding: "0 20px 32px", boxSizing: "border-box", width: "100%" }}>
-            <MobileFooterCard />
-          </div>
-        ) : isTablet ? (
-          <div className="pb-[24px]">
-            <TabletFooter />
-          </div>
-        ) : (
-          <div style={{ zoom: 0.85 }}>
-            <SiteFooter />
-          </div>
-        )}
-      </motion.div>
+      {!hideChrome && (
+        <motion.div
+          variants={revealOnScroll}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+        >
+          {isMobile ? (
+            <div style={{ padding: "0 20px 32px", boxSizing: "border-box", width: "100%" }}>
+              <MobileFooterCard />
+            </div>
+          ) : isTablet ? (
+            <div className="pb-[24px]">
+              <TabletFooter />
+            </div>
+          ) : (
+            <div style={{ zoom: 0.85 }}>
+              <SiteFooter />
+            </div>
+          )}
+        </motion.div>
+      )}
 
       <AnimatePresence mode="wait">
-        {navOpen && <MobileNavDrawer onClose={() => setNavOpen(false)} />}
+        {!hideChrome && navOpen && <MobileNavDrawer onClose={() => setNavOpen(false)} />}
       </AnimatePresence>
     </div>
   );

@@ -54,6 +54,7 @@ type EditorMarkdownChange = {
 };
 
 type SlugStatus = "auto" | "manual" | "duplicate" | "invalid";
+type EditorLayoutMode = "split" | "stack";
 
 type DownloadPlan = {
   packageName: string;
@@ -74,48 +75,17 @@ type BlogEditorAsset = {
 };
 
 const BLOG_EDITOR_DRAFT_STORAGE_KEY = "orderly_blog_editor_draft_v1";
+const BLOG_EDITOR_LAYOUT_STORAGE_KEY = "orderly_blog_editor_layout_v1";
+const BLOG_EDITOR_SPLIT_MIN_WIDTH = 1024;
+const BLOG_EDITOR_CONTENT_MAX_WIDTH = 740;
+const BLOG_EDITOR_SPLIT_GAP = 18;
+const BLOG_EDITOR_SCROLLBAR_WIDTH = 10;
 const EDITOR_FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---/;
 const PREVIEW_PARSE_DEBOUNCE_MS = 180;
 const DRAFT_SAVE_DEBOUNCE_MS = 500;
 const DEFAULT_EDITOR_MARKDOWN = normalizeEditorMarkdownAssetPaths(
   DEFAULT_BLOG_DRAFT_MARKDOWN
 );
-
-function StatusPill({ status }: { status: PreviewState["status"] }) {
-  const statusLabel = {
-    loading: "Parsing preview",
-    ready: "Preview ready",
-    error: "Preview error",
-  }[status];
-
-  return (
-    <span
-      style={{
-        minHeight: "28px",
-        display: "inline-flex",
-        alignItems: "center",
-        borderRadius: "999px",
-        padding: "0 10px",
-        background:
-          status === "error"
-            ? "rgba(255,88,88,0.15)"
-            : status === "ready"
-            ? "rgba(68,222,211,0.14)"
-            : "rgba(255,255,255,0.08)",
-        color:
-          status === "error"
-            ? "#ff9a9a"
-            : status === "ready"
-            ? "#44DED3"
-            : "rgba(255,255,255,0.72)",
-        fontFamily: "'DM Mono','dm-mono',monospace",
-        fontSize: "12px",
-      }}
-    >
-      {statusLabel}
-    </span>
-  );
-}
 
 function SlugStatusPill({ status }: { status: SlugStatus }) {
   const config = {
@@ -160,6 +130,83 @@ function SlugStatusPill({ status }: { status: SlugStatus }) {
   );
 }
 
+function LayoutToggle({
+  layoutPreference,
+  effectiveLayout,
+  canUseSplitLayout,
+  onLayoutChange,
+}: {
+  layoutPreference: EditorLayoutMode;
+  effectiveLayout: EditorLayoutMode;
+  canUseSplitLayout: boolean;
+  onLayoutChange: (layout: EditorLayoutMode) => void;
+}) {
+  const options: Array<{
+    value: EditorLayoutMode;
+    label: string;
+    ariaLabel: string;
+  }> = [
+    { value: "split", label: "Split", ariaLabel: "Split layout" },
+    { value: "stack", label: "Stack", ariaLabel: "Stack layout" },
+  ];
+
+  return (
+    <div
+      role="group"
+      aria-label="Editor layout"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        minHeight: "38px",
+        padding: "3px",
+        borderRadius: "7px",
+        border: "1px solid rgba(255,255,255,0.12)",
+        background: "rgba(255,255,255,0.045)",
+      }}
+    >
+      {options.map((option) => {
+        const isDisabled = option.value === "split" && !canUseSplitLayout;
+        const isActive = effectiveLayout === option.value;
+        const savedSplitOnSmallScreen =
+          option.value === "split" &&
+          layoutPreference === "split" &&
+          !canUseSplitLayout;
+
+        return (
+          <button
+            key={option.value}
+            type="button"
+            aria-label={option.ariaLabel}
+            aria-pressed={isActive}
+            title={option.ariaLabel}
+            disabled={isDisabled}
+            onClick={() => onLayoutChange(option.value)}
+            style={{
+              minHeight: "30px",
+              padding: "0 11px",
+              border: "0",
+              borderRadius: "5px",
+              background: isActive ? "rgba(68,222,211,0.16)" : "transparent",
+              color: isActive
+                ? "#44DED3"
+                : isDisabled
+                ? "rgba(255,255,255,0.32)"
+                : "rgba(255,255,255,0.68)",
+              cursor: isDisabled ? "not-allowed" : "pointer",
+              fontFamily: "'DM Mono','dm-mono',monospace",
+              fontSize: "12px",
+              opacity: savedSplitOnSmallScreen ? 0.62 : 1,
+              whiteSpace: "nowrap",
+            }}
+          >
+            {option.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 function ToolbarButton({
   children,
   onClick,
@@ -182,7 +229,9 @@ function ToolbarButton({
         border: isPrimary
           ? "1px solid rgba(68,222,211,0.5)"
           : "1px solid rgba(255,255,255,0.14)",
-        background: isPrimary ? "rgba(68,222,211,0.14)" : "rgba(255,255,255,0.055)",
+        background: isPrimary
+          ? "rgba(68,222,211,0.14)"
+          : "rgba(255,255,255,0.055)",
         color: isPrimary ? "#44DED3" : "rgba(255,255,255,0.88)",
         cursor: "pointer",
         fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
@@ -220,7 +269,9 @@ function MetaChip({
         border: accent
           ? "1px solid rgba(68,222,211,0.22)"
           : "1px solid rgba(255,255,255,0.1)",
-        background: accent ? "rgba(68,222,211,0.08)" : "rgba(255,255,255,0.045)",
+        background: accent
+          ? "rgba(68,222,211,0.08)"
+          : "rgba(255,255,255,0.045)",
         color: accent ? "#44DED3" : "rgba(255,255,255,0.74)",
         fontFamily: "'DM Mono','dm-mono',monospace",
         fontSize: "12px",
@@ -453,12 +504,14 @@ function AssetPanel({
                   padding: "0 9px",
                   borderRadius: "6px",
                   border: "1px solid rgba(255,255,255,0.1)",
-                  background: asset.path === copiedAssetPath
-                    ? "rgba(68,222,211,0.12)"
-                    : "rgba(255,255,255,0.045)",
-                  color: asset.path === copiedAssetPath
-                    ? "#44DED3"
-                    : "rgba(255,255,255,0.72)",
+                  background:
+                    asset.path === copiedAssetPath
+                      ? "rgba(68,222,211,0.12)"
+                      : "rgba(255,255,255,0.045)",
+                  color:
+                    asset.path === copiedAssetPath
+                      ? "#44DED3"
+                      : "rgba(255,255,255,0.72)",
                   cursor: "pointer",
                   fontFamily: "'DM Mono','dm-mono',monospace",
                   fontSize: "11px",
@@ -482,6 +535,9 @@ function UploadPanel({
   downloadPlan,
   error,
   warnings,
+  layoutPreference,
+  effectiveLayout,
+  canUseSplitLayout,
   markdownFiles,
   selectedMarkdownPath,
   hasFiles,
@@ -491,6 +547,7 @@ function UploadPanel({
   onDownload,
   onKeepSlug,
   onRegenerateSlug,
+  onLayoutChange,
   onHeightChange,
 }: {
   status: PreviewState["status"];
@@ -499,6 +556,9 @@ function UploadPanel({
   downloadPlan: DownloadPlan;
   error: string | null;
   warnings: string[];
+  layoutPreference: EditorLayoutMode;
+  effectiveLayout: EditorLayoutMode;
+  canUseSplitLayout: boolean;
   markdownFiles: string[];
   selectedMarkdownPath: string;
   hasFiles: boolean;
@@ -508,6 +568,7 @@ function UploadPanel({
   onDownload: () => void;
   onKeepSlug: () => void;
   onRegenerateSlug: () => void;
+  onLayoutChange: (layout: EditorLayoutMode) => void;
   onHeightChange: (height: number) => void;
 }) {
   const panelRef = useRef<HTMLDivElement>(null);
@@ -544,7 +605,8 @@ function UploadPanel({
         padding: "14px 16px",
         border: "1px solid rgba(255,255,255,0.12)",
         borderRadius: "10px",
-        background: "linear-gradient(180deg, rgba(13,13,17,0.94), rgba(8,8,10,0.92))",
+        background:
+          "linear-gradient(180deg, rgba(13,13,17,0.94), rgba(8,8,10,0.92))",
         boxShadow: "0 18px 60px rgba(0,0,0,0.38)",
         backdropFilter: "blur(18px)",
         color: "white",
@@ -589,8 +651,13 @@ function UploadPanel({
         <ToolbarButton onClick={onDownload} variant="primary">
           Download ZIP
         </ToolbarButton>
-        <StatusPill status={status} />
         <SlugStatusPill status={slugStatus} />
+        <LayoutToggle
+          layoutPreference={layoutPreference}
+          effectiveLayout={effectiveLayout}
+          canUseSplitLayout={canUseSplitLayout}
+          onLayoutChange={onLayoutChange}
+        />
 
         {markdownFiles.length > 1 ? (
           <select
@@ -717,7 +784,8 @@ function UploadPanel({
 
 function EditorPanel({
   markdown,
-  toolbarHeight,
+  layout,
+  panelHeight,
   assets,
   copiedAssetPath,
   copyWarning,
@@ -727,7 +795,8 @@ function EditorPanel({
   onCopyAssetPath,
 }: {
   markdown: string;
-  toolbarHeight: number;
+  layout: EditorLayoutMode;
+  panelHeight: string;
   assets: BlogEditorAsset[];
   copiedAssetPath: string;
   copyWarning: string;
@@ -740,27 +809,34 @@ function EditorPanel({
 
   useLayoutEffect(() => {
     const textarea = textareaRef.current;
-    if (!selectionToRestore || !textarea || document.activeElement !== textarea) {
+    if (
+      !selectionToRestore ||
+      !textarea ||
+      document.activeElement !== textarea
+    ) {
       return;
     }
 
-    textarea.setSelectionRange(selectionToRestore.start, selectionToRestore.end);
+    textarea.setSelectionRange(
+      selectionToRestore.start,
+      selectionToRestore.end
+    );
   }, [markdown, selectionToRestore]);
 
   return (
     <section
+      className={layout === "split" ? "blog-editor-scroll-panel" : undefined}
       style={{
-        background: "#000",
         color: "white",
-        padding: `${Math.max(116, toolbarHeight + 52)}px 24px 28px`,
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
         fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+        minWidth: 0,
+        height: layout === "split" ? panelHeight : undefined,
+        overflowY: layout === "split" ? "auto" : undefined,
+        paddingRight: layout === "split" ? "4px" : undefined,
       }}
     >
       <div
         style={{
-          width: "min(100%, 1280px)",
-          margin: "0 auto",
           display: "grid",
           gap: "18px",
         }}
@@ -841,7 +917,8 @@ function EditorPanel({
             spellCheck={false}
             style={{
               width: "100%",
-              minHeight: "420px",
+              minHeight: layout === "split" ? "360px" : "420px",
+              height: layout === "split" ? "min(52vh, 560px)" : undefined,
               resize: "vertical",
               boxSizing: "border-box",
               border: "0",
@@ -856,6 +933,56 @@ function EditorPanel({
           />
         </div>
       </div>
+    </section>
+  );
+}
+
+function PreviewPanel({
+  layout,
+  panelHeight,
+  children,
+}: {
+  layout: EditorLayoutMode;
+  panelHeight: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section
+      className={layout === "split" ? "blog-editor-scroll-panel" : undefined}
+      style={{
+        minWidth: 0,
+        height: layout === "split" ? panelHeight : undefined,
+        overflowY: layout === "split" ? "auto" : undefined,
+        border: layout === "split" ? "1px solid rgba(255,255,255,0.12)" : "0",
+        borderRadius: layout === "split" ? "10px" : 0,
+        background: "#000",
+        marginTop: layout === "stack" ? "28px" : undefined,
+      }}
+    >
+      {layout === "split" && (
+        <div
+          style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 2,
+            minHeight: "42px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0 16px",
+            borderBottom: "1px solid rgba(255,255,255,0.08)",
+            background: "rgba(10,10,12,0.92)",
+            backdropFilter: "blur(12px)",
+            color: "rgba(255,255,255,0.78)",
+            fontFamily: "'DM Mono','dm-mono',monospace",
+            fontSize: "12px",
+          }}
+        >
+          <span>Preview</span>
+          <span style={{ color: "rgba(68,222,211,0.78)" }}>Live</span>
+        </div>
+      )}
+      <div>{children}</div>
     </section>
   );
 }
@@ -914,7 +1041,9 @@ function normalizeEditorAssetPath(value: string) {
 }
 
 function joinEditorAssetPath(baseDir: string, relativePath: string) {
-  return normalizeEditorAssetPath(baseDir ? `${baseDir}/${relativePath}` : relativePath);
+  return normalizeEditorAssetPath(
+    baseDir ? `${baseDir}/${relativePath}` : relativePath
+  );
 }
 
 function isExternalOrRootEditorAssetPath(value: string) {
@@ -933,10 +1062,16 @@ function splitEditorAssetSuffix(value: string) {
   };
 }
 
-function getUploadedAssetPath(fileName: string, filesByPath: Map<string, File>, baseDir: string) {
-  const normalizedName = normalizeEditorAssetPath(fileName).split("/").pop() || "asset";
+function getUploadedAssetPath(
+  fileName: string,
+  filesByPath: Map<string, File>,
+  baseDir: string
+) {
+  const normalizedName =
+    normalizeEditorAssetPath(fileName).split("/").pop() || "asset";
   const dotIndex = normalizedName.lastIndexOf(".");
-  const name = dotIndex > 0 ? normalizedName.slice(0, dotIndex) : normalizedName;
+  const name =
+    dotIndex > 0 ? normalizedName.slice(0, dotIndex) : normalizedName;
   const ext = dotIndex > 0 ? normalizedName.slice(dotIndex) : "";
   let index = 1;
   let candidateName = normalizedName;
@@ -966,7 +1101,9 @@ function getFileTypeLabel(file: File) {
     return ext.slice(0, 5).toUpperCase();
   }
 
-  return (file.type.split("/")[1] || file.type || "FILE").slice(0, 5).toUpperCase();
+  return (file.type.split("/")[1] || file.type || "FILE")
+    .slice(0, 5)
+    .toUpperCase();
 }
 
 function getFileSizeLabel(size: number) {
@@ -992,13 +1129,13 @@ function collectReferencedAssetPaths(markdown: string, baseDir: string) {
     referenced.add(joinEditorAssetPath(baseDir, assetPath));
   };
 
-  markdown.replace(/!\[[^\]]*]\(\s*<?([^)\s>]+)>?(?:\s+["'][^)]*["'])?\s*\)/g, (
-    _match,
-    url: string
-  ) => {
-    addAsset(url);
-    return _match;
-  });
+  markdown.replace(
+    /!\[[^\]]*]\(\s*<?([^)\s>]+)>?(?:\s+["'][^)]*["'])?\s*\)/g,
+    (_match, url: string) => {
+      addAsset(url);
+      return _match;
+    }
+  );
 
   markdown.replace(/\bsrc=["']([^"']+)["']/g, (_match, url: string) => {
     addAsset(url);
@@ -1023,7 +1160,9 @@ function getEditorFrontmatterContent(markdown: string) {
 function getEditorFrontmatterField(markdown: string, field: string) {
   const content = getEditorFrontmatterContent(markdown);
   const escapedField = field.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const match = content.match(new RegExp(`^\\s*${escapedField}\\s*:\\s*(.*?)\\s*$`, "m"));
+  const match = content.match(
+    new RegExp(`^\\s*${escapedField}\\s*:\\s*(.*?)\\s*$`, "m")
+  );
   return match ? stripEditorFrontmatterQuotes(match[1]) : "";
 }
 
@@ -1077,7 +1216,10 @@ function replaceOrInsertEditorSlug(
     const replacementStart = contentStart + (slugMatch.index || 0);
     const replacement = `${slugMatch[1]}"${slug}"${slugMatch[3]}`;
     return {
-      markdown: `${markdown.slice(0, replacementStart)}${replacement}${markdown.slice(
+      markdown: `${markdown.slice(
+        0,
+        replacementStart
+      )}${replacement}${markdown.slice(
         replacementStart + slugMatch[0].length
       )}`,
       selection: adjustSelectionForReplacement(
@@ -1116,8 +1258,14 @@ function isValidBlogSlug(slug: string) {
   return slug === slugifyTitle(slug) && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug);
 }
 
-function getDownloadPlan(markdown: string, selectedMarkdownPath: string): DownloadPlan {
-  const markdownFilename = getMarkdownDownloadFilename(markdown, selectedMarkdownPath);
+function getDownloadPlan(
+  markdown: string,
+  selectedMarkdownPath: string
+): DownloadPlan {
+  const markdownFilename = getMarkdownDownloadFilename(
+    markdown,
+    selectedMarkdownPath
+  );
   const packageName =
     markdownFilename.replace(/\.md$/i, "").replace(/[\\/:*?"<>|]+/g, "-") ||
     "blog-draft";
@@ -1177,11 +1325,42 @@ function saveEditorDraftState(markdown: string, selectedMarkdownPath: string) {
   }
 }
 
+function readEditorLayoutPreference(): EditorLayoutMode {
+  if (typeof window === "undefined") {
+    return "split";
+  }
+
+  try {
+    const storedLayout = window.localStorage.getItem(
+      BLOG_EDITOR_LAYOUT_STORAGE_KEY
+    );
+    return storedLayout === "stack" || storedLayout === "split"
+      ? storedLayout
+      : "split";
+  } catch {
+    return "split";
+  }
+}
+
+function saveEditorLayoutPreference(layout: EditorLayoutMode) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    window.localStorage.setItem(BLOG_EDITOR_LAYOUT_STORAGE_KEY, layout);
+  } catch {
+    // The layout should still switch even when storage is unavailable.
+  }
+}
+
 export default function BlogPreview() {
   const [files, setFiles] = useState<File[]>([]);
   const [selectedMarkdownPath, setSelectedMarkdownPath] = useState("");
   const [markdown, setMarkdown] = useState(DEFAULT_EDITOR_MARKDOWN);
-  const [previewMarkdown, setPreviewMarkdown] = useState(DEFAULT_EDITOR_MARKDOWN);
+  const [previewMarkdown, setPreviewMarkdown] = useState(
+    DEFAULT_EDITOR_MARKDOWN
+  );
   const [selectionToRestore, setSelectionToRestore] =
     useState<EditorSelection | null>(null);
   const [toolbarHeight, setToolbarHeight] = useState(62);
@@ -1191,6 +1370,9 @@ export default function BlogPreview() {
   const [slugSyncVersion, setSlugSyncVersion] = useState(0);
   const [copyAssetWarning, setCopyAssetWarning] = useState("");
   const [copiedAssetPath, setCopiedAssetPath] = useState("");
+  const [layoutPreference, setLayoutPreference] =
+    useState<EditorLayoutMode>("split");
+  const [canUseSplitLayout, setCanUseSplitLayout] = useState(true);
   const [state, setState] = useState<PreviewState>({
     status: "loading",
     error: null,
@@ -1212,9 +1394,13 @@ export default function BlogPreview() {
     Boolean(currentSlug) &&
     Boolean(preservedSlug) &&
     currentSlug.toLowerCase() === preservedSlug.toLowerCase();
-  const isCurrentSlugDuplicate = Boolean(currentSlug) &&
-    existingSlugs.some((slug) => slug.toLowerCase() === currentSlug.toLowerCase());
-  const isCurrentSlugInvalid = Boolean(currentSlug) && !isValidBlogSlug(currentSlug);
+  const isCurrentSlugDuplicate =
+    Boolean(currentSlug) &&
+    existingSlugs.some(
+      (slug) => slug.toLowerCase() === currentSlug.toLowerCase()
+    );
+  const isCurrentSlugInvalid =
+    Boolean(currentSlug) && !isValidBlogSlug(currentSlug);
   const slugStatus: SlugStatus = isCurrentSlugInvalid
     ? "invalid"
     : isCurrentSlugDuplicate && !isPreservedHistoricalSlug
@@ -1236,7 +1422,12 @@ export default function BlogPreview() {
     }
 
     return `Slug "${currentSlug}" already exists in historical blog posts. Please choose a unique slug before publishing.`;
-  }, [currentSlug, isCurrentSlugDuplicate, isPreservedHistoricalSlug, slugSyncVersion]);
+  }, [
+    currentSlug,
+    isCurrentSlugDuplicate,
+    isPreservedHistoricalSlug,
+    slugSyncVersion,
+  ]);
   const toolbarWarnings = useMemo(
     () =>
       [
@@ -1282,33 +1473,32 @@ export default function BlogPreview() {
         };
       });
 
-    const fallbackAssets = Array.from(referencedAssetPaths).reduce<BlogEditorAsset[]>(
-      (assets, path) => {
-        if (filesByPath.has(path)) {
-          return assets;
-        }
-
-        const publicUrl = getEditorPublicAssetFallback(path);
-        if (!publicUrl) {
-          return assets;
-        }
-
-        assets.push({
-          name: path.split("/").pop() || path,
-          path,
-          markdownPath: getMarkdownAssetPath(path, baseDir),
-          sizeLabel: "public",
-          typeLabel: "IMG",
-          isImage: true,
-          isUsed: true,
-          previewUrl: publicUrl,
-          publicUrl,
-        });
-
+    const fallbackAssets = Array.from(referencedAssetPaths).reduce<
+      BlogEditorAsset[]
+    >((assets, path) => {
+      if (filesByPath.has(path)) {
         return assets;
-      },
-      []
-    );
+      }
+
+      const publicUrl = getEditorPublicAssetFallback(path);
+      if (!publicUrl) {
+        return assets;
+      }
+
+      assets.push({
+        name: path.split("/").pop() || path,
+        path,
+        markdownPath: getMarkdownAssetPath(path, baseDir),
+        sizeLabel: "public",
+        typeLabel: "IMG",
+        isImage: true,
+        isUsed: true,
+        previewUrl: publicUrl,
+        publicUrl,
+      });
+
+      return assets;
+    }, []);
 
     return [...localAssets, ...fallbackAssets].sort((a, b) =>
       a.path.localeCompare(b.path)
@@ -1383,11 +1573,16 @@ export default function BlogPreview() {
       return { markdown: nextMarkdown, selection: options?.selection };
     }
 
-    return replaceOrInsertEditorSlug(nextMarkdown, nextSlug, options?.selection);
+    return replaceOrInsertEditorSlug(
+      nextMarkdown,
+      nextSlug,
+      options?.selection
+    );
   }
 
   useEffect(() => {
     const draft = readEditorDraftState();
+    setLayoutPreference(readEditorLayoutPreference());
     if (draft) {
       setMarkdown(draft.markdown);
       setPreviewMarkdown(draft.markdown);
@@ -1395,6 +1590,22 @@ export default function BlogPreview() {
       resetSlugSync(draft.markdown);
     }
     setIsDraftReady(true);
+  }, []);
+
+  useEffect(() => {
+    const query = window.matchMedia(
+      `(min-width: ${BLOG_EDITOR_SPLIT_MIN_WIDTH}px)`
+    );
+    const updateCanUseSplitLayout = () => {
+      setCanUseSplitLayout(query.matches);
+    };
+
+    updateCanUseSplitLayout();
+    query.addEventListener("change", updateCanUseSplitLayout);
+
+    return () => {
+      query.removeEventListener("change", updateCanUseSplitLayout);
+    };
   }, []);
 
   useEffect(() => {
@@ -1411,7 +1622,9 @@ export default function BlogPreview() {
 
         const payload = (await response.json()) as { slugs?: unknown };
         const slugs = Array.isArray(payload.slugs)
-          ? payload.slugs.filter((slug): slug is string => typeof slug === "string")
+          ? payload.slugs.filter(
+              (slug): slug is string => typeof slug === "string"
+            )
           : [];
 
         if (isMounted) {
@@ -1531,7 +1744,9 @@ export default function BlogPreview() {
     markdownPath?: string
   ) {
     const loaded = await readPreviewMarkdownFile(nextFiles, markdownPath);
-    const normalizedMarkdown = normalizeEditorMarkdownAssetPaths(loaded.markdown);
+    const normalizedMarkdown = normalizeEditorMarkdownAssetPaths(
+      loaded.markdown
+    );
     clearAssetPreviewUrls();
     resetSlugSync(normalizedMarkdown, { preserveCurrentSlug: true });
     setMarkdown(normalizedMarkdown);
@@ -1607,7 +1822,9 @@ export default function BlogPreview() {
 
     setAssetContext((currentContext) => {
       const baseDir = currentContext.baseDir || "";
-      const filesByPath = new Map(currentContext.filesByPath || new Map<string, File>());
+      const filesByPath = new Map(
+        currentContext.filesByPath || new Map<string, File>()
+      );
       for (const file of uploadedFiles) {
         if (file.name.toLowerCase().endsWith(".md")) {
           continue;
@@ -1674,6 +1891,15 @@ export default function BlogPreview() {
     setMarkdown(change.markdown);
   }
 
+  function handleLayoutChange(layout: EditorLayoutMode) {
+    if (layout === "split" && !canUseSplitLayout) {
+      return;
+    }
+
+    setLayoutPreference(layout);
+    saveEditorLayoutPreference(layout);
+  }
+
   function getDownloadBlockers() {
     const blockers: string[] = [];
     const slug = getEditorFrontmatterField(markdown, "slug");
@@ -1691,12 +1917,14 @@ export default function BlogPreview() {
       }
     } catch (error) {
       blockers.push(
-        error instanceof Error ? error.message : "Unable to parse selected blog draft."
+        error instanceof Error
+          ? error.message
+          : "Unable to parse selected blog draft."
       );
     }
 
     if (!slug) {
-      blockers.push("Missing required frontmatter \"slug\".");
+      blockers.push('Missing required frontmatter "slug".');
     } else if (!isValidBlogSlug(slug)) {
       blockers.push(
         `Slug "${slug}" is not URL-safe. Use lowercase letters, numbers, and hyphens only.`
@@ -1710,7 +1938,7 @@ export default function BlogPreview() {
     }
 
     if (!cover) {
-      blockers.push("Missing required frontmatter \"cover\".");
+      blockers.push('Missing required frontmatter "cover".');
     }
 
     return Array.from(new Set(blockers));
@@ -1781,6 +2009,19 @@ export default function BlogPreview() {
   }
 
   const post = state.result?.post || null;
+  const effectiveLayout: EditorLayoutMode = canUseSplitLayout
+    ? layoutPreference
+    : "stack";
+  const workspaceTopPadding = Math.max(116, toolbarHeight + 52);
+  const splitPanelHeight = `calc(100vh - ${workspaceTopPadding + 28}px)`;
+  const workspaceMaxWidth =
+    effectiveLayout === "split"
+      ? BLOG_EDITOR_CONTENT_MAX_WIDTH * 2 +
+        BLOG_EDITOR_SCROLLBAR_WIDTH +
+        BLOG_EDITOR_SPLIT_GAP
+      : 1280;
+  const previewPanelMaxWidth =
+    BLOG_EDITOR_CONTENT_MAX_WIDTH + BLOG_EDITOR_SCROLLBAR_WIDTH;
 
   return (
     <>
@@ -1791,6 +2032,9 @@ export default function BlogPreview() {
         downloadPlan={downloadPlan}
         error={state.error}
         warnings={toolbarWarnings}
+        layoutPreference={layoutPreference}
+        effectiveLayout={effectiveLayout}
+        canUseSplitLayout={canUseSplitLayout}
         markdownFiles={markdownFiles}
         selectedMarkdownPath={selectedMarkdownPath}
         hasFiles={files.length > 0}
@@ -1800,35 +2044,66 @@ export default function BlogPreview() {
         onDownload={handleDownload}
         onKeepSlug={handleKeepSlug}
         onRegenerateSlug={handleRegenerateSlug}
+        onLayoutChange={handleLayoutChange}
         onHeightChange={setToolbarHeight}
       />
 
-      <EditorPanel
-        markdown={markdown}
-        toolbarHeight={toolbarHeight}
-        assets={editorAssets}
-        copiedAssetPath={copiedAssetPath}
-        copyWarning={copyAssetWarning}
-        selectionToRestore={selectionToRestore}
-        onMarkdownChange={(change) => {
-          const normalizedMarkdown = normalizeEditorMarkdownAssetPaths(
-            change.markdown
-          );
-          const syncedChange = applyTitleSlugSync(normalizedMarkdown, {
-            selection: change.selection,
-          });
-          setSelectionToRestore(syncedChange.selection || null);
-          setMarkdown(syncedChange.markdown);
+      <main
+        style={{
+          minHeight: "100vh",
+          background: "#000",
+          color: "white",
+          padding: `${workspaceTopPadding}px 24px 28px`,
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+          boxSizing: "border-box",
         }}
-        onAssetUpload={handleAssetUpload}
-        onCopyAssetPath={handleCopyAssetPath}
-      />
+      >
+        <div
+          style={{
+            width: `min(100%, ${workspaceMaxWidth}px)`,
+            margin: "0 auto",
+            display: effectiveLayout === "split" ? "grid" : "block",
+            gridTemplateColumns:
+              effectiveLayout === "split"
+                ? `minmax(0, ${BLOG_EDITOR_CONTENT_MAX_WIDTH}px) minmax(0, ${previewPanelMaxWidth}px)`
+                : undefined,
+            alignItems: "start",
+            justifyContent: effectiveLayout === "split" ? "center" : undefined,
+            gap: effectiveLayout === "split" ? `${BLOG_EDITOR_SPLIT_GAP}px` : undefined,
+          }}
+        >
+          <EditorPanel
+            markdown={markdown}
+            layout={effectiveLayout}
+            panelHeight={splitPanelHeight}
+            assets={editorAssets}
+            copiedAssetPath={copiedAssetPath}
+            copyWarning={copyAssetWarning}
+            selectionToRestore={selectionToRestore}
+            onMarkdownChange={(change) => {
+              const normalizedMarkdown = normalizeEditorMarkdownAssetPaths(
+                change.markdown
+              );
+              const syncedChange = applyTitleSlugSync(normalizedMarkdown, {
+                selection: change.selection,
+              });
+              setSelectionToRestore(syncedChange.selection || null);
+              setMarkdown(syncedChange.markdown);
+            }}
+            onAssetUpload={handleAssetUpload}
+            onCopyAssetPath={handleCopyAssetPath}
+          />
 
-      <BlogPost
-        slug={post?.slug || "blog-draft"}
-        post={post}
-        latestPosts={[]}
-      />
+          <PreviewPanel layout={effectiveLayout} panelHeight={splitPanelHeight}>
+            <BlogPost
+              slug={post?.slug || "blog-draft"}
+              post={post}
+              latestPosts={[]}
+              hideChrome
+            />
+          </PreviewPanel>
+        </div>
+      </main>
     </>
   );
 }

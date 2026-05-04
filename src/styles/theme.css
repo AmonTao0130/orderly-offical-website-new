@@ -267,6 +267,29 @@ html {
   );
 }
 
+.blog-editor-scroll-panel {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(68, 222, 211, 0.52) #08080a;
+}
+
+.blog-editor-scroll-panel::-webkit-scrollbar {
+  width: 10px;
+}
+
+.blog-editor-scroll-panel::-webkit-scrollbar-track {
+  background: #08080a;
+}
+
+.blog-editor-scroll-panel::-webkit-scrollbar-thumb {
+  background: rgba(68, 222, 211, 0.62);
+  border: 2px solid #08080a;
+  border-radius: 999px;
+}
+
+.blog-editor-scroll-panel::-webkit-scrollbar-thumb:hover {
+  background: rgba(92, 244, 234, 0.78);
+}
+
 /* ─── Figma font-family intercept ─────────────────────────────────────────────
    Figma exports each weight as a distinct family name (e.g. 'Atyp BL:Bold').
    The Tailwind class font-['Atyp_BL:Bold',sans-serif] generates:
