@@ -219,7 +219,9 @@ function makeObjectUrlResolver(
         return `${publicFallback}${suffix}`;
       }
 
-      warnings.push(`Markdown blog asset not found: ${resolvedPath}`);
+      warnings.push(
+        `Markdown blog asset not found and will not be included in the ZIP: ${resolvedPath}`
+      );
       return options?.required ? "" : assetValue;
     }
 

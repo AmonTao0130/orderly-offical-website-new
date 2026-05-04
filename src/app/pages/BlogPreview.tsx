@@ -21,7 +21,7 @@ import {
   type BlogPreviewAssetContext,
   type BlogPreviewParseResult,
 } from "@/blog/preview";
-import { makeUniqueSlug } from "@/blog/slug";
+import { makeUniqueSlug, slugifyTitle } from "@/blog/slug";
 
 type PreviewState = {
   status: "loading" | "ready" | "error";
@@ -40,6 +40,7 @@ type SlugSyncState = {
   lastAutoSlug: string;
   lastTitle: string;
   manualOverride: boolean;
+  preservedSlug: string;
 };
 
 type EditorSelection = {
@@ -52,8 +53,17 @@ type EditorMarkdownChange = {
   selection?: EditorSelection;
 };
 
+type SlugStatus = "auto" | "manual" | "duplicate" | "invalid";
+
+type DownloadPlan = {
+  packageName: string;
+  markdownFilename: string;
+};
+
 const BLOG_EDITOR_DRAFT_STORAGE_KEY = "orderly_blog_editor_draft_v1";
 const EDITOR_FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---/;
+const PREVIEW_PARSE_DEBOUNCE_MS = 180;
+const DRAFT_SAVE_DEBOUNCE_MS = 500;
 const DEFAULT_EDITOR_MARKDOWN = normalizeEditorMarkdownAssetPaths(
   DEFAULT_BLOG_DRAFT_MARKDOWN
 );
@@ -94,6 +104,49 @@ function StatusPill({ status }: { status: PreviewState["status"] }) {
   );
 }
 
+function SlugStatusPill({ status }: { status: SlugStatus }) {
+  const config = {
+    auto: {
+      label: "Slug auto",
+      background: "rgba(68,222,211,0.14)",
+      color: "#44DED3",
+    },
+    manual: {
+      label: "Slug manual",
+      background: "rgba(255,255,255,0.08)",
+      color: "rgba(255,255,255,0.74)",
+    },
+    duplicate: {
+      label: "Slug duplicate",
+      background: "rgba(255,193,112,0.15)",
+      color: "#ffd59a",
+    },
+    invalid: {
+      label: "Slug invalid",
+      background: "rgba(255,88,88,0.15)",
+      color: "#ff9a9a",
+    },
+  }[status];
+
+  return (
+    <span
+      style={{
+        minHeight: "28px",
+        display: "inline-flex",
+        alignItems: "center",
+        borderRadius: "999px",
+        padding: "0 10px",
+        background: config.background,
+        color: config.color,
+        fontFamily: "'DM Mono','dm-mono',monospace",
+        fontSize: "12px",
+      }}
+    >
+      {config.label}
+    </span>
+  );
+}
+
 function ToolbarButton({
   children,
   onClick,
@@ -126,6 +179,9 @@ function ToolbarButton({
 
 function UploadPanel({
   status,
+  slugStatus,
+  currentSlug,
+  downloadPlan,
   error,
   warnings,
   markdownFiles,
@@ -135,8 +191,14 @@ function UploadPanel({
   onMarkdownChange,
   onNewDraft,
   onDownload,
+  onKeepSlug,
+  onRegenerateSlug,
+  onHeightChange,
 }: {
   status: PreviewState["status"];
+  slugStatus: SlugStatus;
+  currentSlug: string;
+  downloadPlan: DownloadPlan;
   error: string | null;
   warnings: string[];
   markdownFiles: string[];
@@ -146,9 +208,34 @@ function UploadPanel({
   onMarkdownChange: (markdownPath: string) => void;
   onNewDraft: () => void;
   onDownload: () => void;
+  onKeepSlug: () => void;
+  onRegenerateSlug: () => void;
+  onHeightChange: (height: number) => void;
 }) {
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const panel = panelRef.current;
+    if (!panel) {
+      return;
+    }
+
+    const updateHeight = () => onHeightChange(panel.offsetHeight);
+    updateHeight();
+
+    if (typeof ResizeObserver === "undefined") {
+      return;
+    }
+
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(panel);
+
+    return () => observer.disconnect();
+  }, [onHeightChange]);
+
   return (
     <div
+      ref={panelRef}
       style={{
         position: "fixed",
         top: 18,
@@ -203,6 +290,7 @@ function UploadPanel({
         <ToolbarButton onClick={onNewDraft}>New draft</ToolbarButton>
         <ToolbarButton onClick={onDownload}>Download ZIP</ToolbarButton>
         <StatusPill status={status} />
+        <SlugStatusPill status={slugStatus} />
 
         {markdownFiles.length > 1 ? (
           <select
@@ -246,6 +334,75 @@ function UploadPanel({
         )}
       </div>
 
+      <div
+        style={{
+          marginTop: "10px",
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          gap: "8px 12px",
+          color: "rgba(255,255,255,0.58)",
+          fontFamily: "'DM Mono','dm-mono',monospace",
+          fontSize: "12px",
+          lineHeight: 1.5,
+        }}
+      >
+        <span
+          style={{
+            minWidth: 0,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
+        >
+          slug: {currentSlug || "missing"}
+        </span>
+        <span
+          style={{
+            minWidth: 0,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
+        >
+          ZIP: {downloadPlan.packageName}/{downloadPlan.markdownFilename}
+        </span>
+        <button
+          type="button"
+          onClick={onKeepSlug}
+          style={{
+            border: "0",
+            padding: 0,
+            background: "transparent",
+            color: "rgba(255,255,255,0.76)",
+            cursor: "pointer",
+            fontFamily: "inherit",
+            fontSize: "12px",
+            textDecoration: "underline",
+            textUnderlineOffset: "3px",
+          }}
+        >
+          Keep current slug
+        </button>
+        <button
+          type="button"
+          onClick={onRegenerateSlug}
+          style={{
+            border: "0",
+            padding: 0,
+            background: "transparent",
+            color: "#44DED3",
+            cursor: "pointer",
+            fontFamily: "inherit",
+            fontSize: "12px",
+            textDecoration: "underline",
+            textUnderlineOffset: "3px",
+          }}
+        >
+          Regenerate slug
+        </button>
+      </div>
+
       {(error || warnings.length > 0) && (
         <div
           style={{
@@ -272,12 +429,12 @@ function UploadPanel({
 
 function EditorPanel({
   markdown,
-  hasToolbarMessages,
+  toolbarHeight,
   selectionToRestore,
   onMarkdownChange,
 }: {
   markdown: string;
-  hasToolbarMessages: boolean;
+  toolbarHeight: number;
   selectionToRestore: EditorSelection | null;
   onMarkdownChange: (change: EditorMarkdownChange) => void;
 }) {
@@ -297,7 +454,7 @@ function EditorPanel({
       style={{
         background: "#000",
         color: "white",
-        padding: `${hasToolbarMessages ? 156 : 104}px 16px 28px`,
+        padding: `${Math.max(104, toolbarHeight + 42)}px 16px 28px`,
         borderBottom: "1px solid rgba(255,255,255,0.08)",
         fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
       }}
@@ -493,6 +650,23 @@ function getInitialSlugSyncState(markdown: string): SlugSyncState {
     lastAutoSlug: getEditorFrontmatterField(markdown, "slug"),
     lastTitle: getEditorFrontmatterField(markdown, "title"),
     manualOverride: false,
+    preservedSlug: "",
+  };
+}
+
+function isValidBlogSlug(slug: string) {
+  return slug === slugifyTitle(slug) && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug);
+}
+
+function getDownloadPlan(markdown: string, selectedMarkdownPath: string): DownloadPlan {
+  const markdownFilename = getMarkdownDownloadFilename(markdown, selectedMarkdownPath);
+  const packageName =
+    markdownFilename.replace(/\.md$/i, "").replace(/[\\/:*?"<>|]+/g, "-") ||
+    "blog-draft";
+
+  return {
+    markdownFilename,
+    packageName,
   };
 }
 
@@ -549,11 +723,14 @@ export default function BlogPreview() {
   const [files, setFiles] = useState<File[]>([]);
   const [selectedMarkdownPath, setSelectedMarkdownPath] = useState("");
   const [markdown, setMarkdown] = useState(DEFAULT_EDITOR_MARKDOWN);
+  const [previewMarkdown, setPreviewMarkdown] = useState(DEFAULT_EDITOR_MARKDOWN);
   const [selectionToRestore, setSelectionToRestore] =
     useState<EditorSelection | null>(null);
+  const [toolbarHeight, setToolbarHeight] = useState(62);
   const [assetContext, setAssetContext] = useState<BlogPreviewAssetContext>({});
   const [existingSlugs, setExistingSlugs] = useState<string[]>([]);
   const [slugLoadWarning, setSlugLoadWarning] = useState("");
+  const [slugSyncVersion, setSlugSyncVersion] = useState(0);
   const [state, setState] = useState<PreviewState>({
     status: "loading",
     error: null,
@@ -562,42 +739,66 @@ export default function BlogPreview() {
   });
   const [isDraftReady, setIsDraftReady] = useState(false);
   const objectUrlsRef = useRef<string[]>([]);
+  const loadedSourceSlugRef = useRef("");
   const slugSyncRef = useRef<SlugSyncState>(
     getInitialSlugSyncState(DEFAULT_EDITOR_MARKDOWN)
   );
 
   const markdownFiles = useMemo(() => findPreviewMarkdownFiles(files), [files]);
-  const duplicateSlugWarning = useMemo(() => {
-    if (!slugSyncRef.current.manualOverride) {
-      return "";
-    }
-
-    const currentSlug = getEditorFrontmatterField(markdown, "slug");
-    if (!currentSlug) {
-      return "";
-    }
-
-    const normalizedSlug = currentSlug.toLowerCase();
-    const isDuplicate = existingSlugs.some(
-      (slug) => slug.toLowerCase() === normalizedSlug
-    );
-
-    return isDuplicate
-      ? `Slug "${currentSlug}" already exists in historical blog posts. Please choose a unique slug before publishing.`
+  const currentSlug = getEditorFrontmatterField(markdown, "slug");
+  const preservedSlug = slugSyncRef.current.preservedSlug;
+  const isPreservedHistoricalSlug =
+    Boolean(currentSlug) &&
+    Boolean(preservedSlug) &&
+    currentSlug.toLowerCase() === preservedSlug.toLowerCase();
+  const isCurrentSlugDuplicate = Boolean(currentSlug) &&
+    existingSlugs.some((slug) => slug.toLowerCase() === currentSlug.toLowerCase());
+  const isCurrentSlugInvalid = Boolean(currentSlug) && !isValidBlogSlug(currentSlug);
+  const slugStatus: SlugStatus = isCurrentSlugInvalid
+    ? "invalid"
+    : isCurrentSlugDuplicate && !isPreservedHistoricalSlug
+    ? "duplicate"
+    : slugSyncRef.current.manualOverride
+    ? "manual"
+    : "auto";
+  const downloadPlan = useMemo(
+    () => getDownloadPlan(markdown, selectedMarkdownPath),
+    [markdown, selectedMarkdownPath]
+  );
+  const slugFormatWarning =
+    currentSlug && isCurrentSlugInvalid
+      ? `Slug "${currentSlug}" is not URL-safe. Use lowercase letters, numbers, and hyphens only.`
       : "";
-  }, [existingSlugs, markdown]);
+  const duplicateSlugWarning = useMemo(() => {
+    if (!currentSlug || !isCurrentSlugDuplicate || isPreservedHistoricalSlug) {
+      return "";
+    }
+
+    return `Slug "${currentSlug}" already exists in historical blog posts. Please choose a unique slug before publishing.`;
+  }, [currentSlug, isCurrentSlugDuplicate, isPreservedHistoricalSlug, slugSyncVersion]);
   const toolbarWarnings = useMemo(
     () =>
       [
         ...state.warnings,
         slugLoadWarning,
+        slugFormatWarning,
         duplicateSlugWarning,
       ].filter(Boolean),
-    [duplicateSlugWarning, slugLoadWarning, state.warnings]
+    [duplicateSlugWarning, slugFormatWarning, slugLoadWarning, state.warnings]
   );
 
-  function resetSlugSync(nextMarkdown: string) {
+  function resetSlugSync(
+    nextMarkdown: string,
+    options?: { preserveCurrentSlug?: boolean }
+  ) {
     slugSyncRef.current = getInitialSlugSyncState(nextMarkdown);
+    if (options?.preserveCurrentSlug) {
+      const currentSlug = getEditorFrontmatterField(nextMarkdown, "slug");
+      loadedSourceSlugRef.current = currentSlug;
+      slugSyncRef.current.manualOverride = true;
+      slugSyncRef.current.preservedSlug = currentSlug;
+    }
+    setSlugSyncVersion((version) => version + 1);
     setSelectionToRestore(null);
   }
 
@@ -619,11 +820,17 @@ export default function BlogPreview() {
       currentSlug !== syncState.lastAutoSlug
     ) {
       syncState.manualOverride = true;
+      if (syncState.preservedSlug !== currentSlug) {
+        syncState.preservedSlug = "";
+      }
       syncState.lastTitle = title;
       return { markdown: nextMarkdown, selection: options?.selection };
     }
 
     if (syncState.manualOverride) {
+      if (syncState.preservedSlug !== currentSlug) {
+        syncState.preservedSlug = "";
+      }
       syncState.lastTitle = title;
       return { markdown: nextMarkdown, selection: options?.selection };
     }
@@ -635,6 +842,7 @@ export default function BlogPreview() {
     const nextSlug = makeUniqueSlug(title, existingSlugs);
     syncState.lastAutoSlug = nextSlug;
     syncState.lastTitle = title;
+    syncState.preservedSlug = "";
 
     if (currentSlug === nextSlug) {
       return { markdown: nextMarkdown, selection: options?.selection };
@@ -647,6 +855,7 @@ export default function BlogPreview() {
     const draft = readEditorDraftState();
     if (draft) {
       setMarkdown(draft.markdown);
+      setPreviewMarkdown(draft.markdown);
       setSelectedMarkdownPath(draft.selectedMarkdownPath);
       resetSlugSync(draft.markdown);
     }
@@ -698,6 +907,20 @@ export default function BlogPreview() {
   }, [existingSlugs]);
 
   useEffect(() => {
+    setState((current) => ({
+      ...current,
+      status: "loading",
+      error: null,
+    }));
+
+    const timeout = window.setTimeout(() => {
+      setPreviewMarkdown(markdown);
+    }, PREVIEW_PARSE_DEBOUNCE_MS);
+
+    return () => window.clearTimeout(timeout);
+  }, [markdown]);
+
+  useEffect(() => {
     return () => {
       for (const objectUrl of objectUrlsRef.current) {
         URL.revokeObjectURL(objectUrl);
@@ -719,7 +942,7 @@ export default function BlogPreview() {
     }));
 
     try {
-      const result = parseBlogPreviewMarkdown(markdown, {
+      const result = parseBlogPreviewMarkdown(previewMarkdown, {
         sourceName: selectedMarkdownPath || "blog-draft.md",
         assetContext,
       });
@@ -741,14 +964,18 @@ export default function BlogPreview() {
         result: current.result,
       }));
     }
-  }, [assetContext, markdown, selectedMarkdownPath]);
+  }, [assetContext, previewMarkdown, selectedMarkdownPath]);
 
   useEffect(() => {
     if (!isDraftReady) {
       return;
     }
 
-    saveEditorDraftState(markdown, selectedMarkdownPath);
+    const timeout = window.setTimeout(() => {
+      saveEditorDraftState(markdown, selectedMarkdownPath);
+    }, DRAFT_SAVE_DEBOUNCE_MS);
+
+    return () => window.clearTimeout(timeout);
   }, [isDraftReady, markdown, selectedMarkdownPath]);
 
   async function loadMarkdownFromFiles(
@@ -757,8 +984,9 @@ export default function BlogPreview() {
   ) {
     const loaded = await readPreviewMarkdownFile(nextFiles, markdownPath);
     const normalizedMarkdown = normalizeEditorMarkdownAssetPaths(loaded.markdown);
-    resetSlugSync(normalizedMarkdown);
+    resetSlugSync(normalizedMarkdown, { preserveCurrentSlug: true });
     setMarkdown(normalizedMarkdown);
+    setPreviewMarkdown(normalizedMarkdown);
     setSelectedMarkdownPath(loaded.selectedMarkdownPath);
     setAssetContext({
       filesByPath: loaded.filesByPath,
@@ -778,6 +1006,7 @@ export default function BlogPreview() {
     try {
       await loadMarkdownFromFiles(nextFiles);
     } catch (error) {
+      loadedSourceSlugRef.current = "";
       setAssetContext({
         filesByPath: makePreviewFileMap(nextFiles),
         baseDir: "",
@@ -817,19 +1046,85 @@ export default function BlogPreview() {
     setFiles([]);
     setSelectedMarkdownPath("");
     setAssetContext({});
+    loadedSourceSlugRef.current = "";
     resetSlugSync(DEFAULT_EDITOR_MARKDOWN);
     setMarkdown(DEFAULT_EDITOR_MARKDOWN);
+    setPreviewMarkdown(DEFAULT_EDITOR_MARKDOWN);
     saveEditorDraftState(DEFAULT_EDITOR_MARKDOWN, "");
   }
 
+  function handleKeepSlug() {
+    const slug = getEditorFrontmatterField(markdown, "slug");
+    slugSyncRef.current.manualOverride = true;
+    slugSyncRef.current.preservedSlug =
+      slug && slug === loadedSourceSlugRef.current ? slug : "";
+    slugSyncRef.current.lastAutoSlug = slug;
+    setSlugSyncVersion((version) => version + 1);
+  }
+
+  function handleRegenerateSlug() {
+    slugSyncRef.current.manualOverride = false;
+    slugSyncRef.current.preservedSlug = "";
+    const change = applyTitleSlugSync(markdown, { force: true });
+    setSelectionToRestore(null);
+    setSlugSyncVersion((version) => version + 1);
+    setMarkdown(change.markdown);
+  }
+
+  function getDownloadBlockers() {
+    const blockers: string[] = [];
+    const slug = getEditorFrontmatterField(markdown, "slug");
+    const cover = getEditorFrontmatterField(markdown, "cover");
+
+    try {
+      const result = parseBlogPreviewMarkdown(markdown, {
+        sourceName: selectedMarkdownPath || downloadPlan.markdownFilename,
+        assetContext,
+      });
+      for (const warning of result.warnings) {
+        if (warning.includes("asset not found")) {
+          blockers.push(warning);
+        }
+      }
+    } catch (error) {
+      blockers.push(
+        error instanceof Error ? error.message : "Unable to parse selected blog draft."
+      );
+    }
+
+    if (!slug) {
+      blockers.push("Missing required frontmatter \"slug\".");
+    } else if (!isValidBlogSlug(slug)) {
+      blockers.push(
+        `Slug "${slug}" is not URL-safe. Use lowercase letters, numbers, and hyphens only.`
+      );
+    }
+
+    if (isCurrentSlugDuplicate && !isPreservedHistoricalSlug) {
+      blockers.push(
+        `Slug "${slug}" already exists in historical blog posts. Please choose a unique slug before downloading.`
+      );
+    }
+
+    if (!cover) {
+      blockers.push("Missing required frontmatter \"cover\".");
+    }
+
+    return Array.from(new Set(blockers));
+  }
+
   async function handleDownload() {
-    const markdownFilename = getMarkdownDownloadFilename(
-      markdown,
-      selectedMarkdownPath
-    );
-    const packageName =
-      markdownFilename.replace(/\.md$/i, "").replace(/[\\/:*?"<>|]+/g, "-") ||
-      "blog-draft";
+    const blockers = getDownloadBlockers();
+    if (blockers.length > 0) {
+      setState((current) => ({
+        ...current,
+        status: "error",
+        error: `Fix these issues before downloading: ${blockers.join(" ")}`,
+      }));
+      return;
+    }
+
+    const { markdownFilename, packageName } = downloadPlan;
     const sourceName = selectedMarkdownPath || markdownFilename;
     const assets = collectBlogPreviewDownloadAssets(
       markdown,
@@ -888,6 +1183,9 @@ export default function BlogPreview() {
     <>
       <UploadPanel
         status={state.status}
+        slugStatus={slugStatus}
+        currentSlug={currentSlug}
+        downloadPlan={downloadPlan}
         error={state.error}
         warnings={toolbarWarnings}
         markdownFiles={markdownFiles}
@@ -897,11 +1195,14 @@ export default function BlogPreview() {
         onMarkdownChange={handleMarkdownChange}
         onNewDraft={handleNewDraft}
         onDownload={handleDownload}
+        onKeepSlug={handleKeepSlug}
+        onRegenerateSlug={handleRegenerateSlug}
+        onHeightChange={setToolbarHeight}
       />
 
       <EditorPanel
         markdown={markdown}
-        hasToolbarMessages={Boolean(state.error || toolbarWarnings.length > 0)}
+        toolbarHeight={toolbarHeight}
         selectionToRestore={selectionToRestore}
         onMarkdownChange={(change) => {
           const normalizedMarkdown = normalizeEditorMarkdownAssetPaths(
