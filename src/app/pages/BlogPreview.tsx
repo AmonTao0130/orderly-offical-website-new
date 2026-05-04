@@ -234,9 +234,11 @@ function UploadPanel({
 
 function EditorPanel({
   markdown,
+  hasToolbarMessages,
   onMarkdownChange,
 }: {
   markdown: string;
+  hasToolbarMessages: boolean;
   onMarkdownChange: (markdown: string) => void;
 }) {
   return (
@@ -244,7 +246,7 @@ function EditorPanel({
       style={{
         background: "#000",
         color: "white",
-        padding: "104px 16px 28px",
+        padding: `${hasToolbarMessages ? 156 : 104}px 16px 28px`,
         borderBottom: "1px solid rgba(255,255,255,0.08)",
         fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
       }}
@@ -467,7 +469,11 @@ export default function BlogPreview() {
         onDownload={handleDownload}
       />
 
-      <EditorPanel markdown={markdown} onMarkdownChange={setMarkdown} />
+      <EditorPanel
+        markdown={markdown}
+        hasToolbarMessages={Boolean(state.error || state.warnings.length > 0)}
+        onMarkdownChange={setMarkdown}
+      />
 
       <BlogPost
         slug={post?.slug || "blog-draft"}

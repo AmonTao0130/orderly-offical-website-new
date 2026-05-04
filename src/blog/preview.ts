@@ -1,27 +1,9 @@
+export { DEFAULT_BLOG_PREVIEW_MARKDOWN } from "./preview-config";
 import { markdownToHtml } from "./markdown";
 import type { BlogPost } from "./types";
 
 const FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/;
 const WORDS_PER_MINUTE = 220;
-
-export const DEFAULT_BLOG_PREVIEW_MARKDOWN = `---
-slug: "blog-draft"
-title: "Blog Draft"
-description: "A local Markdown draft used to preview blog content."
-date: 2026-05-04
-category: "Announcements"
-publicationState: "preview"
-author: "Orderly Network"
-cover: ""
-pin: false
----
-
-Start writing your draft here.
-
-## Section title
-
-Use Markdown links, lists, images, quotes, and code blocks to preview how the article will look on the Orderly blog.
-`;
 
 type MarkdownFrontmatter = {
   slug?: string;
