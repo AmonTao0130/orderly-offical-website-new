@@ -266,7 +266,7 @@ function EditorPanel({
               fontVariationSettings: "'wght' 700",
             }}
           >
-            Blog preview editor
+            Blog editor
           </h1>
           <p
             style={{
