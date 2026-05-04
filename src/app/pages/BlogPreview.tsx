@@ -60,6 +60,19 @@ type DownloadPlan = {
   markdownFilename: string;
 };
 
+type BlogEditorAsset = {
+  file?: File;
+  name: string;
+  path: string;
+  markdownPath: string;
+  sizeLabel: string;
+  typeLabel: string;
+  isImage: boolean;
+  isUsed: boolean;
+  previewUrl?: string;
+  publicUrl?: string;
+};
+
 const BLOG_EDITOR_DRAFT_STORAGE_KEY = "orderly_blog_editor_draft_v1";
 const EDITOR_FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---/;
 const PREVIEW_PARSE_DEBOUNCE_MS = 180;
@@ -150,30 +163,315 @@ function SlugStatusPill({ status }: { status: SlugStatus }) {
 function ToolbarButton({
   children,
   onClick,
+  variant = "secondary",
 }: {
   children: React.ReactNode;
   onClick: () => void;
+  variant?: "primary" | "secondary";
 }) {
+  const isPrimary = variant === "primary";
+
   return (
     <button
       type="button"
       onClick={onClick}
       style={{
         minHeight: "38px",
-        padding: "0 14px",
+        padding: "0 16px",
         borderRadius: "6px",
-        border: "1px solid rgba(255,255,255,0.18)",
-        background: "rgba(255,255,255,0.08)",
-        color: "white",
+        border: isPrimary
+          ? "1px solid rgba(68,222,211,0.5)"
+          : "1px solid rgba(255,255,255,0.14)",
+        background: isPrimary ? "rgba(68,222,211,0.14)" : "rgba(255,255,255,0.055)",
+        color: isPrimary ? "#44DED3" : "rgba(255,255,255,0.88)",
         cursor: "pointer",
         fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
         fontVariationSettings: "'wght' 600",
         fontSize: "13px",
         whiteSpace: "nowrap",
+        boxShadow: isPrimary ? "0 0 24px rgba(68,222,211,0.08)" : "none",
       }}
     >
       {children}
     </button>
+  );
+}
+
+function MetaChip({
+  label,
+  value,
+  accent,
+}: {
+  label: string;
+  value: string;
+  accent?: boolean;
+}) {
+  return (
+    <span
+      style={{
+        minWidth: 0,
+        maxWidth: "100%",
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "8px",
+        minHeight: "30px",
+        padding: "0 10px",
+        borderRadius: "6px",
+        border: accent
+          ? "1px solid rgba(68,222,211,0.22)"
+          : "1px solid rgba(255,255,255,0.1)",
+        background: accent ? "rgba(68,222,211,0.08)" : "rgba(255,255,255,0.045)",
+        color: accent ? "#44DED3" : "rgba(255,255,255,0.74)",
+        fontFamily: "'DM Mono','dm-mono',monospace",
+        fontSize: "12px",
+        overflow: "hidden",
+      }}
+    >
+      <span style={{ color: "rgba(255,255,255,0.42)", flex: "0 0 auto" }}>
+        {label}
+      </span>
+      <span
+        style={{
+          minWidth: 0,
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {value}
+      </span>
+    </span>
+  );
+}
+
+function AssetPanel({
+  assets,
+  copiedAssetPath,
+  copyWarning,
+  onAssetUpload,
+  onCopyAssetPath,
+}: {
+  assets: BlogEditorAsset[];
+  copiedAssetPath: string;
+  copyWarning: string;
+  onAssetUpload: (event: ChangeEvent<HTMLInputElement>) => void;
+  onCopyAssetPath: (asset: BlogEditorAsset) => void;
+}) {
+  const usedCount = assets.filter((asset) => asset.isUsed).length;
+
+  return (
+    <div
+      style={{
+        border: "1px solid rgba(255,255,255,0.1)",
+        borderRadius: "10px",
+        background: "rgba(255,255,255,0.035)",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          minHeight: "44px",
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "10px",
+          padding: "0 14px",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            minWidth: 0,
+          }}
+        >
+          <span
+            style={{
+              color: "rgba(255,255,255,0.86)",
+              fontVariationSettings: "'wght' 700",
+              fontSize: "14px",
+            }}
+          >
+            Assets
+          </span>
+          <span
+            style={{
+              color: "rgba(255,255,255,0.46)",
+              fontFamily: "'DM Mono','dm-mono',monospace",
+              fontSize: "12px",
+            }}
+          >
+            {assets.length} files · {usedCount} used
+          </span>
+        </div>
+
+        <label
+          style={{
+            minHeight: "30px",
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "0 10px",
+            borderRadius: "6px",
+            border: "1px solid rgba(68,222,211,0.28)",
+            background: "rgba(68,222,211,0.08)",
+            color: "#44DED3",
+            cursor: "pointer",
+            fontVariationSettings: "'wght' 600",
+            fontSize: "12px",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Upload assets
+          <input
+            type="file"
+            multiple
+            onChange={onAssetUpload}
+            style={{ display: "none" }}
+          />
+        </label>
+      </div>
+
+      {copyWarning && (
+        <div
+          style={{
+            padding: "8px 14px 0",
+            color: "#ffd59a",
+            fontFamily: "'DM Mono','dm-mono',monospace",
+            fontSize: "12px",
+            lineHeight: 1.5,
+          }}
+        >
+          {copyWarning}
+        </div>
+      )}
+
+      {assets.length === 0 ? (
+        <div
+          style={{
+            padding: "14px",
+            color: "rgba(255,255,255,0.46)",
+            fontSize: "13px",
+            lineHeight: 1.5,
+          }}
+        >
+          No local assets yet. Upload files here, then copy their paths into the
+          Markdown when you need them.
+        </div>
+      ) : (
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: "8px",
+            padding: "10px",
+          }}
+        >
+          {assets.map((asset) => (
+            <div
+              key={asset.path}
+              style={{
+                minWidth: 0,
+                display: "grid",
+                gridTemplateColumns: "44px minmax(0, 1fr) auto",
+                alignItems: "center",
+                gap: "10px",
+                padding: "8px",
+                borderRadius: "8px",
+                border: "1px solid rgba(255,255,255,0.08)",
+                background: "rgba(0,0,0,0.18)",
+              }}
+            >
+              <div
+                style={{
+                  width: "44px",
+                  height: "44px",
+                  borderRadius: "6px",
+                  overflow: "hidden",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  background: "rgba(255,255,255,0.045)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "rgba(255,255,255,0.56)",
+                  fontFamily: "'DM Mono','dm-mono',monospace",
+                  fontSize: "10px",
+                }}
+              >
+                {asset.previewUrl ? (
+                  <img
+                    src={asset.previewUrl}
+                    alt=""
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                ) : (
+                  asset.typeLabel
+                )}
+              </div>
+
+              <div style={{ minWidth: 0, display: "grid", gap: "4px" }}>
+                <div
+                  style={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    color: "rgba(255,255,255,0.82)",
+                    fontFamily: "'DM Mono','dm-mono',monospace",
+                    fontSize: "12px",
+                  }}
+                  title={asset.path}
+                >
+                  {asset.markdownPath}
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    color: "rgba(255,255,255,0.44)",
+                    fontFamily: "'DM Mono','dm-mono',monospace",
+                    fontSize: "11px",
+                  }}
+                >
+                  <span>{asset.sizeLabel}</span>
+                  <span>{asset.isUsed ? "Used" : "Unused"}</span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => onCopyAssetPath(asset)}
+                style={{
+                  minHeight: "30px",
+                  padding: "0 9px",
+                  borderRadius: "6px",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  background: asset.path === copiedAssetPath
+                    ? "rgba(68,222,211,0.12)"
+                    : "rgba(255,255,255,0.045)",
+                  color: asset.path === copiedAssetPath
+                    ? "#44DED3"
+                    : "rgba(255,255,255,0.72)",
+                  cursor: "pointer",
+                  fontFamily: "'DM Mono','dm-mono',monospace",
+                  fontSize: "11px",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {asset.path === copiedAssetPath ? "Copied" : "Copy path"}
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -238,16 +536,16 @@ function UploadPanel({
       ref={panelRef}
       style={{
         position: "fixed",
-        top: 18,
+        top: 20,
         left: "50%",
         transform: "translateX(-50%)",
         zIndex: 1200,
-        width: "min(calc(100vw - 24px), 1080px)",
-        padding: "12px",
+        width: "min(calc(100vw - 48px), 1280px)",
+        padding: "14px 16px",
         border: "1px solid rgba(255,255,255,0.12)",
-        borderRadius: "8px",
-        background: "rgba(8,8,10,0.92)",
-        boxShadow: "0 18px 70px rgba(0,0,0,0.45)",
+        borderRadius: "10px",
+        background: "linear-gradient(180deg, rgba(13,13,17,0.94), rgba(8,8,10,0.92))",
+        boxShadow: "0 18px 60px rgba(0,0,0,0.38)",
         backdropFilter: "blur(18px)",
         color: "white",
         fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
@@ -258,7 +556,7 @@ function UploadPanel({
           display: "flex",
           flexWrap: "wrap",
           alignItems: "center",
-          gap: "10px",
+          gap: "10px 12px",
         }}
       >
         <label
@@ -267,10 +565,10 @@ function UploadPanel({
             alignItems: "center",
             justifyContent: "center",
             minHeight: "38px",
-            padding: "0 14px",
+            padding: "0 16px",
             borderRadius: "6px",
-            border: "1px solid rgba(255,255,255,0.18)",
-            background: "rgba(255,255,255,0.08)",
+            border: "1px solid rgba(255,255,255,0.14)",
+            background: "rgba(255,255,255,0.055)",
             cursor: "pointer",
             fontVariationSettings: "'wght' 600",
             fontSize: "13px",
@@ -288,7 +586,9 @@ function UploadPanel({
         </label>
 
         <ToolbarButton onClick={onNewDraft}>New draft</ToolbarButton>
-        <ToolbarButton onClick={onDownload}>Download ZIP</ToolbarButton>
+        <ToolbarButton onClick={onDownload} variant="primary">
+          Download ZIP
+        </ToolbarButton>
         <StatusPill status={status} />
         <SlugStatusPill status={slugStatus} />
 
@@ -326,6 +626,7 @@ function UploadPanel({
               color: "rgba(255,255,255,0.6)",
               fontFamily: "'DM Mono','dm-mono',monospace",
               fontSize: "12px",
+              marginLeft: "auto",
             }}
           >
             {selectedMarkdownPath ||
@@ -336,43 +637,29 @@ function UploadPanel({
 
       <div
         style={{
-          marginTop: "10px",
+          marginTop: "12px",
           display: "flex",
           flexWrap: "wrap",
           alignItems: "center",
-          gap: "8px 12px",
+          gap: "8px",
           color: "rgba(255,255,255,0.58)",
           fontFamily: "'DM Mono','dm-mono',monospace",
           fontSize: "12px",
           lineHeight: 1.5,
         }}
       >
-        <span
-          style={{
-            minWidth: 0,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-          }}
-        >
-          slug: {currentSlug || "missing"}
-        </span>
-        <span
-          style={{
-            minWidth: 0,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-          }}
-        >
-          ZIP: {downloadPlan.packageName}/{downloadPlan.markdownFilename}
-        </span>
+        <MetaChip label="slug" value={currentSlug || "missing"} accent />
+        <MetaChip
+          label="ZIP"
+          value={`${downloadPlan.packageName}/${downloadPlan.markdownFilename}`}
+        />
         <button
           type="button"
           onClick={onKeepSlug}
           style={{
             border: "0",
-            padding: 0,
+            padding: "0 6px",
+            minHeight: "30px",
             background: "transparent",
             color: "rgba(255,255,255,0.76)",
             cursor: "pointer",
@@ -389,7 +676,8 @@ function UploadPanel({
           onClick={onRegenerateSlug}
           style={{
             border: "0",
-            padding: 0,
+            padding: "0 6px",
+            minHeight: "30px",
             background: "transparent",
             color: "#44DED3",
             cursor: "pointer",
@@ -430,13 +718,23 @@ function UploadPanel({
 function EditorPanel({
   markdown,
   toolbarHeight,
+  assets,
+  copiedAssetPath,
+  copyWarning,
   selectionToRestore,
   onMarkdownChange,
+  onAssetUpload,
+  onCopyAssetPath,
 }: {
   markdown: string;
   toolbarHeight: number;
+  assets: BlogEditorAsset[];
+  copiedAssetPath: string;
+  copyWarning: string;
   selectionToRestore: EditorSelection | null;
   onMarkdownChange: (change: EditorMarkdownChange) => void;
+  onAssetUpload: (event: ChangeEvent<HTMLInputElement>) => void;
+  onCopyAssetPath: (asset: BlogEditorAsset) => void;
 }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -454,17 +752,17 @@ function EditorPanel({
       style={{
         background: "#000",
         color: "white",
-        padding: `${Math.max(104, toolbarHeight + 42)}px 16px 28px`,
+        padding: `${Math.max(116, toolbarHeight + 52)}px 24px 28px`,
         borderBottom: "1px solid rgba(255,255,255,0.08)",
         fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
       }}
     >
       <div
         style={{
-          width: "min(100%, 1120px)",
+          width: "min(100%, 1280px)",
           margin: "0 auto",
           display: "grid",
-          gap: "14px",
+          gap: "18px",
         }}
       >
         <div>
@@ -490,37 +788,73 @@ function EditorPanel({
             you type.
           </p>
         </div>
-        <textarea
-          ref={textareaRef}
-          className="blog-editor-markdown-input"
-          value={markdown}
-          onChange={(event) =>
-            onMarkdownChange({
-              markdown: event.target.value,
-              selection: {
-                start: event.target.selectionStart,
-                end: event.target.selectionEnd,
-              },
-            })
-          }
-          spellCheck={false}
+        <AssetPanel
+          assets={assets}
+          copiedAssetPath={copiedAssetPath}
+          copyWarning={copyWarning}
+          onAssetUpload={onAssetUpload}
+          onCopyAssetPath={onCopyAssetPath}
+        />
+        <div
+          className="blog-editor-markdown-shell"
           style={{
             width: "100%",
-            minHeight: "420px",
-            resize: "vertical",
             boxSizing: "border-box",
-            borderRadius: "8px",
+            borderRadius: "10px",
             border: "1px solid rgba(255,255,255,0.13)",
             background: "#0f0f12",
-            color: "rgba(255,255,255,0.88)",
-            padding: "18px",
-            fontFamily: "'DM Mono','dm-mono',monospace",
-            fontSize: "13px",
-            lineHeight: 1.6,
-            outline: "none",
             boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
+            overflow: "hidden",
           }}
-        />
+        >
+          <div
+            style={{
+              minHeight: "42px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "12px",
+              padding: "0 16px",
+              borderBottom: "1px solid rgba(255,255,255,0.08)",
+              background: "rgba(255,255,255,0.025)",
+              color: "rgba(255,255,255,0.58)",
+              fontFamily: "'DM Mono','dm-mono',monospace",
+              fontSize: "12px",
+            }}
+          >
+            <span style={{ color: "rgba(255,255,255,0.78)" }}>Markdown</span>
+            <span>{markdown.length.toLocaleString()} chars</span>
+          </div>
+          <textarea
+            ref={textareaRef}
+            className="blog-editor-markdown-input"
+            value={markdown}
+            onChange={(event) =>
+              onMarkdownChange({
+                markdown: event.target.value,
+                selection: {
+                  start: event.target.selectionStart,
+                  end: event.target.selectionEnd,
+                },
+              })
+            }
+            spellCheck={false}
+            style={{
+              width: "100%",
+              minHeight: "420px",
+              resize: "vertical",
+              boxSizing: "border-box",
+              border: "0",
+              background: "transparent",
+              color: "rgba(255,255,255,0.86)",
+              padding: "16px",
+              fontFamily: "'DM Mono','dm-mono',monospace",
+              fontSize: "13px",
+              lineHeight: 1.62,
+              outline: "none",
+            }}
+          />
+        </div>
       </div>
     </section>
   );
@@ -551,6 +885,130 @@ function normalizeEditorMarkdownAssetPaths(markdown: string) {
       /\bsrc=(["'])\/thumbnail\.jpg\1/g,
       (_match, quote: string) => `src=${quote}./thumbnail.jpg${quote}`
     );
+}
+
+function getEditorPublicAssetFallback(assetPath: string) {
+  const normalized = normalizeEditorAssetPath(
+    assetPath.startsWith("/") ? assetPath.slice(1) : assetPath
+  );
+
+  return normalized === "thumbnail.jpg" ? "/thumbnail.jpg" : "";
+}
+
+function normalizeEditorAssetPath(value: string) {
+  const parts: string[] = [];
+  for (const part of value.replace(/\\/g, "/").split("/")) {
+    if (!part || part === ".") {
+      continue;
+    }
+
+    if (part === "..") {
+      parts.pop();
+      continue;
+    }
+
+    parts.push(part);
+  }
+
+  return parts.join("/");
+}
+
+function joinEditorAssetPath(baseDir: string, relativePath: string) {
+  return normalizeEditorAssetPath(baseDir ? `${baseDir}/${relativePath}` : relativePath);
+}
+
+function isExternalOrRootEditorAssetPath(value: string) {
+  return (
+    value.startsWith("/") ||
+    value.startsWith("#") ||
+    /^[a-z][a-z0-9+.-]*:/i.test(value)
+  );
+}
+
+function splitEditorAssetSuffix(value: string) {
+  const match = value.match(/^([^?#]+)([?#].*)?$/);
+  return {
+    assetPath: match?.[1] || value,
+    suffix: match?.[2] || "",
+  };
+}
+
+function getUploadedAssetPath(fileName: string, filesByPath: Map<string, File>, baseDir: string) {
+  const normalizedName = normalizeEditorAssetPath(fileName).split("/").pop() || "asset";
+  const dotIndex = normalizedName.lastIndexOf(".");
+  const name = dotIndex > 0 ? normalizedName.slice(0, dotIndex) : normalizedName;
+  const ext = dotIndex > 0 ? normalizedName.slice(dotIndex) : "";
+  let index = 1;
+  let candidateName = normalizedName;
+  let candidatePath = joinEditorAssetPath(baseDir, candidateName);
+
+  while (filesByPath.has(candidatePath)) {
+    index += 1;
+    candidateName = `${name}-${index}${ext}`;
+    candidatePath = joinEditorAssetPath(baseDir, candidateName);
+  }
+
+  return candidatePath;
+}
+
+function getMarkdownAssetPath(assetPath: string, baseDir: string) {
+  const normalizedPath = normalizeEditorAssetPath(assetPath);
+  if (baseDir && normalizedPath.startsWith(`${baseDir}/`)) {
+    return `./${normalizedPath.slice(baseDir.length + 1)}`;
+  }
+
+  return `./${normalizedPath.split("/").pop() || normalizedPath}`;
+}
+
+function getFileTypeLabel(file: File) {
+  const ext = file.name.split(".").pop();
+  if (ext && ext !== file.name) {
+    return ext.slice(0, 5).toUpperCase();
+  }
+
+  return (file.type.split("/")[1] || file.type || "FILE").slice(0, 5).toUpperCase();
+}
+
+function getFileSizeLabel(size: number) {
+  if (size < 1024) {
+    return `${size} B`;
+  }
+
+  if (size < 1024 * 1024) {
+    return `${Math.round(size / 102.4) / 10} KB`;
+  }
+
+  return `${Math.round(size / (1024 * 102.4)) / 10} MB`;
+}
+
+function collectReferencedAssetPaths(markdown: string, baseDir: string) {
+  const referenced = new Set<string>();
+  const addAsset = (url: string) => {
+    if (!url || isExternalOrRootEditorAssetPath(url)) {
+      return;
+    }
+
+    const { assetPath } = splitEditorAssetSuffix(url);
+    referenced.add(joinEditorAssetPath(baseDir, assetPath));
+  };
+
+  markdown.replace(/!\[[^\]]*]\(\s*<?([^)\s>]+)>?(?:\s+["'][^)]*["'])?\s*\)/g, (
+    _match,
+    url: string
+  ) => {
+    addAsset(url);
+    return _match;
+  });
+
+  markdown.replace(/\bsrc=["']([^"']+)["']/g, (_match, url: string) => {
+    addAsset(url);
+    return _match;
+  });
+
+  const cover = getEditorFrontmatterField(markdown, "cover");
+  addAsset(cover);
+
+  return referenced;
 }
 
 function stripEditorFrontmatterQuotes(value: string) {
@@ -731,6 +1189,8 @@ export default function BlogPreview() {
   const [existingSlugs, setExistingSlugs] = useState<string[]>([]);
   const [slugLoadWarning, setSlugLoadWarning] = useState("");
   const [slugSyncVersion, setSlugSyncVersion] = useState(0);
+  const [copyAssetWarning, setCopyAssetWarning] = useState("");
+  const [copiedAssetPath, setCopiedAssetPath] = useState("");
   const [state, setState] = useState<PreviewState>({
     status: "loading",
     error: null,
@@ -739,6 +1199,7 @@ export default function BlogPreview() {
   });
   const [isDraftReady, setIsDraftReady] = useState(false);
   const objectUrlsRef = useRef<string[]>([]);
+  const assetPreviewUrlsRef = useRef<Map<string, string>>(new Map());
   const loadedSourceSlugRef = useRef("");
   const slugSyncRef = useRef<SlugSyncState>(
     getInitialSlugSyncState(DEFAULT_EDITOR_MARKDOWN)
@@ -783,9 +1244,76 @@ export default function BlogPreview() {
         slugLoadWarning,
         slugFormatWarning,
         duplicateSlugWarning,
+        copyAssetWarning,
       ].filter(Boolean),
-    [duplicateSlugWarning, slugFormatWarning, slugLoadWarning, state.warnings]
+    [
+      copyAssetWarning,
+      duplicateSlugWarning,
+      slugFormatWarning,
+      slugLoadWarning,
+      state.warnings,
+    ]
   );
+  const editorAssets = useMemo(() => {
+    const filesByPath = assetContext.filesByPath || new Map<string, File>();
+    const baseDir = assetContext.baseDir || "";
+    const referencedAssetPaths = collectReferencedAssetPaths(markdown, baseDir);
+    const localAssets = Array.from(filesByPath.entries())
+      .filter(([path]) => !path.toLowerCase().endsWith(".md"))
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([path, file]) => {
+        const isImage = file.type.startsWith("image/");
+        let previewUrl = assetPreviewUrlsRef.current.get(path);
+        if (isImage && !previewUrl) {
+          previewUrl = URL.createObjectURL(file);
+          assetPreviewUrlsRef.current.set(path, previewUrl);
+        }
+
+        return {
+          file,
+          name: file.name,
+          path,
+          markdownPath: getMarkdownAssetPath(path, baseDir),
+          sizeLabel: getFileSizeLabel(file.size),
+          typeLabel: getFileTypeLabel(file),
+          isImage,
+          isUsed: referencedAssetPaths.has(path),
+          previewUrl,
+        };
+      });
+
+    const fallbackAssets = Array.from(referencedAssetPaths).reduce<BlogEditorAsset[]>(
+      (assets, path) => {
+        if (filesByPath.has(path)) {
+          return assets;
+        }
+
+        const publicUrl = getEditorPublicAssetFallback(path);
+        if (!publicUrl) {
+          return assets;
+        }
+
+        assets.push({
+          name: path.split("/").pop() || path,
+          path,
+          markdownPath: getMarkdownAssetPath(path, baseDir),
+          sizeLabel: "public",
+          typeLabel: "IMG",
+          isImage: true,
+          isUsed: true,
+          previewUrl: publicUrl,
+          publicUrl,
+        });
+
+        return assets;
+      },
+      []
+    );
+
+    return [...localAssets, ...fallbackAssets].sort((a, b) =>
+      a.path.localeCompare(b.path)
+    );
+  }, [assetContext, markdown]);
 
   function resetSlugSync(
     nextMarkdown: string,
@@ -800,6 +1328,13 @@ export default function BlogPreview() {
     }
     setSlugSyncVersion((version) => version + 1);
     setSelectionToRestore(null);
+  }
+
+  function clearAssetPreviewUrls() {
+    for (const objectUrl of assetPreviewUrlsRef.current.values()) {
+      URL.revokeObjectURL(objectUrl);
+    }
+    assetPreviewUrlsRef.current.clear();
   }
 
   function applyTitleSlugSync(
@@ -925,8 +1460,21 @@ export default function BlogPreview() {
       for (const objectUrl of objectUrlsRef.current) {
         URL.revokeObjectURL(objectUrl);
       }
+      for (const objectUrl of assetPreviewUrlsRef.current.values()) {
+        URL.revokeObjectURL(objectUrl);
+      }
     };
   }, []);
+
+  useEffect(() => {
+    const filesByPath = assetContext.filesByPath || new Map<string, File>();
+    for (const [path, objectUrl] of assetPreviewUrlsRef.current.entries()) {
+      if (!filesByPath.has(path)) {
+        URL.revokeObjectURL(objectUrl);
+        assetPreviewUrlsRef.current.delete(path);
+      }
+    }
+  }, [assetContext]);
 
   useEffect(() => {
     for (const objectUrl of objectUrlsRef.current) {
@@ -984,6 +1532,7 @@ export default function BlogPreview() {
   ) {
     const loaded = await readPreviewMarkdownFile(nextFiles, markdownPath);
     const normalizedMarkdown = normalizeEditorMarkdownAssetPaths(loaded.markdown);
+    clearAssetPreviewUrls();
     resetSlugSync(normalizedMarkdown, { preserveCurrentSlug: true });
     setMarkdown(normalizedMarkdown);
     setPreviewMarkdown(normalizedMarkdown);
@@ -1005,8 +1554,13 @@ export default function BlogPreview() {
 
     try {
       await loadMarkdownFromFiles(nextFiles);
+      setCopyAssetWarning("");
+      setCopiedAssetPath("");
     } catch (error) {
       loadedSourceSlugRef.current = "";
+      clearAssetPreviewUrls();
+      setCopyAssetWarning("");
+      setCopiedAssetPath("");
       setAssetContext({
         filesByPath: makePreviewFileMap(nextFiles),
         baseDir: "",
@@ -1029,6 +1583,8 @@ export default function BlogPreview() {
 
     try {
       await loadMarkdownFromFiles(files, markdownPath);
+      setCopyAssetWarning("");
+      setCopiedAssetPath("");
     } catch (error) {
       setState((current) => ({
         status: "error",
@@ -1042,10 +1598,57 @@ export default function BlogPreview() {
     }
   }
 
+  function handleAssetUpload(event: ChangeEvent<HTMLInputElement>) {
+    const uploadedFiles = Array.from(event.target.files || []);
+    event.target.value = "";
+    if (uploadedFiles.length === 0) {
+      return;
+    }
+
+    setAssetContext((currentContext) => {
+      const baseDir = currentContext.baseDir || "";
+      const filesByPath = new Map(currentContext.filesByPath || new Map<string, File>());
+      for (const file of uploadedFiles) {
+        if (file.name.toLowerCase().endsWith(".md")) {
+          continue;
+        }
+
+        const assetPath = getUploadedAssetPath(file.name, filesByPath, baseDir);
+        filesByPath.set(assetPath, file);
+      }
+
+      return {
+        ...currentContext,
+        filesByPath,
+        baseDir,
+      };
+    });
+  }
+
+  async function handleCopyAssetPath(asset: BlogEditorAsset) {
+    setCopyAssetWarning("");
+    try {
+      await navigator.clipboard.writeText(asset.markdownPath);
+      setCopiedAssetPath(asset.path);
+      window.setTimeout(() => {
+        setCopiedAssetPath((currentPath) =>
+          currentPath === asset.path ? "" : currentPath
+        );
+      }, 1400);
+    } catch {
+      setCopyAssetWarning(
+        `Unable to copy ${asset.markdownPath}. Select the path manually.`
+      );
+    }
+  }
+
   function handleNewDraft() {
     setFiles([]);
     setSelectedMarkdownPath("");
     setAssetContext({});
+    clearAssetPreviewUrls();
+    setCopyAssetWarning("");
+    setCopiedAssetPath("");
     loadedSourceSlugRef.current = "";
     resetSlugSync(DEFAULT_EDITOR_MARKDOWN);
     setMarkdown(DEFAULT_EDITOR_MARKDOWN);
@@ -1203,6 +1806,9 @@ export default function BlogPreview() {
       <EditorPanel
         markdown={markdown}
         toolbarHeight={toolbarHeight}
+        assets={editorAssets}
+        copiedAssetPath={copiedAssetPath}
+        copyWarning={copyAssetWarning}
         selectionToRestore={selectionToRestore}
         onMarkdownChange={(change) => {
           const normalizedMarkdown = normalizeEditorMarkdownAssetPaths(
@@ -1214,6 +1820,8 @@ export default function BlogPreview() {
           setSelectionToRestore(syncedChange.selection || null);
           setMarkdown(syncedChange.markdown);
         }}
+        onAssetUpload={handleAssetUpload}
+        onCopyAssetPath={handleCopyAssetPath}
       />
 
       <BlogPost

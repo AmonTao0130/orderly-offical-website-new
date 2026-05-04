@@ -222,6 +222,18 @@ html {
 }
 
 /* Blog editor Markdown textarea scrollbar */
+.blog-editor-markdown-shell {
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.blog-editor-markdown-shell:focus-within {
+  border-color: rgba(68, 222, 211, 0.42) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0 0 1px rgba(68, 222, 211, 0.16),
+    0 18px 70px rgba(0, 0, 0, 0.32) !important;
+}
+
 .blog-editor-markdown-input {
   scrollbar-width: thin;
   scrollbar-color: rgba(68, 222, 211, 0.72) #101014;
