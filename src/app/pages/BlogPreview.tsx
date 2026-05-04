@@ -22,6 +22,17 @@ type PreviewState = {
   result: BlogPreviewParseResult | null;
 };
 
+type EditorDraftState = {
+  markdown: string;
+  selectedMarkdownPath: string;
+  updatedAt: number;
+};
+
+const BLOG_EDITOR_DRAFT_STORAGE_KEY = "orderly_blog_editor_draft_v1";
+const DEFAULT_EDITOR_MARKDOWN = normalizeEditorMarkdownAssetPaths(
+  DEFAULT_BLOG_DRAFT_MARKDOWN
+);
+
 function StatusPill({ status }: { status: PreviewState["status"] }) {
   const statusLabel = {
     loading: "Parsing preview",
@@ -336,12 +347,59 @@ function normalizeEditorMarkdownAssetPaths(markdown: string) {
     );
 }
 
+function readEditorDraftState(): EditorDraftState | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+
+  try {
+    const rawDraft = window.localStorage.getItem(BLOG_EDITOR_DRAFT_STORAGE_KEY);
+    if (!rawDraft) {
+      return null;
+    }
+
+    const draft = JSON.parse(rawDraft) as Partial<EditorDraftState>;
+    if (typeof draft.markdown !== "string") {
+      return null;
+    }
+
+    return {
+      markdown: normalizeEditorMarkdownAssetPaths(draft.markdown),
+      selectedMarkdownPath:
+        typeof draft.selectedMarkdownPath === "string"
+          ? draft.selectedMarkdownPath
+          : "",
+      updatedAt: typeof draft.updatedAt === "number" ? draft.updatedAt : 0,
+    };
+  } catch {
+    return null;
+  }
+}
+
+function saveEditorDraftState(markdown: string, selectedMarkdownPath: string) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    const draft: EditorDraftState = {
+      markdown,
+      selectedMarkdownPath,
+      updatedAt: Date.now(),
+    };
+    window.localStorage.setItem(
+      BLOG_EDITOR_DRAFT_STORAGE_KEY,
+      JSON.stringify(draft)
+    );
+  } catch {
+    // Browsers can block storage; editing should continue without persistence.
+  }
+}
+
 export default function BlogPreview() {
   const [files, setFiles] = useState<File[]>([]);
   const [selectedMarkdownPath, setSelectedMarkdownPath] = useState("");
-  const [markdown, setMarkdown] = useState(() =>
-    normalizeEditorMarkdownAssetPaths(DEFAULT_BLOG_DRAFT_MARKDOWN)
-  );
+  const [markdown, setMarkdown] = useState(DEFAULT_EDITOR_MARKDOWN);
   const [assetContext, setAssetContext] = useState<BlogPreviewAssetContext>({});
   const [state, setState] = useState<PreviewState>({
     status: "loading",
@@ -349,9 +407,19 @@ export default function BlogPreview() {
     warnings: [],
     result: null,
   });
+  const [isDraftReady, setIsDraftReady] = useState(false);
   const objectUrlsRef = useRef<string[]>([]);
 
   const markdownFiles = useMemo(() => findPreviewMarkdownFiles(files), [files]);
+
+  useEffect(() => {
+    const draft = readEditorDraftState();
+    if (draft) {
+      setMarkdown(draft.markdown);
+      setSelectedMarkdownPath(draft.selectedMarkdownPath);
+    }
+    setIsDraftReady(true);
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -398,6 +466,14 @@ export default function BlogPreview() {
       }));
     }
   }, [assetContext, markdown, selectedMarkdownPath]);
+
+  useEffect(() => {
+    if (!isDraftReady) {
+      return;
+    }
+
+    saveEditorDraftState(markdown, selectedMarkdownPath);
+  }, [isDraftReady, markdown, selectedMarkdownPath]);
 
   async function loadMarkdownFromFiles(
     nextFiles: File[],
@@ -463,7 +539,8 @@ export default function BlogPreview() {
     setFiles([]);
     setSelectedMarkdownPath("");
     setAssetContext({});
-    setMarkdown(normalizeEditorMarkdownAssetPaths(DEFAULT_BLOG_DRAFT_MARKDOWN));
+    setMarkdown(DEFAULT_EDITOR_MARKDOWN);
+    saveEditorDraftState(DEFAULT_EDITOR_MARKDOWN, "");
   }
 
   async function handleDownload() {
