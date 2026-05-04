@@ -19,6 +19,9 @@ const ENTITIES_FILE = path.join(EXPORT_ROOT, "entities_00001.jsonl");
 const LINKS_FILE = path.join(EXPORT_ROOT, "links_00001.jsonl");
 const STRAPI_MEDIA_URL_RE =
   /https:\/\/[^)\s"']*media\.strapiapp\.com\/([^)\s"']+)/g;
+const LEGACY_UPLOADS_URL_RE =
+  /(^|[\s"'(=])\/uploads\/(?!blog(?:\/|$))([^)\s"']+)/g;
+const LEGACY_UPLOADS_MEDIA_BASE_URL = "https://oss.orderly.network/static/blog";
 const FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/;
 const PUBLICATION_STATES: PublicationState[] = ["live", "preview"];
 
@@ -167,7 +170,12 @@ function parseFrontmatter(markdown: string, filePath: string) {
 
 function rewriteMediaUrls<T>(value: T): T {
   if (typeof value === "string") {
-    return value.replace(STRAPI_MEDIA_URL_RE, "/uploads/$1") as T;
+    return value
+      .replace(STRAPI_MEDIA_URL_RE, `${LEGACY_UPLOADS_MEDIA_BASE_URL}/$1`)
+      .replace(
+        LEGACY_UPLOADS_URL_RE,
+        `$1${LEGACY_UPLOADS_MEDIA_BASE_URL}/$2`
+      ) as T;
   }
 
   if (Array.isArray(value)) {
