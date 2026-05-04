@@ -4,23 +4,47 @@ import type { BlogPost } from "./types";
 const FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/;
 const WORDS_PER_MINUTE = 220;
 
+export const DEFAULT_BLOG_PREVIEW_MARKDOWN = `---
+slug: "blog-draft"
+title: "Blog Draft"
+description: "A local Markdown draft used to preview blog content."
+date: 2026-05-04
+category: "Announcements"
+publicationState: "preview"
+author: "Orderly Network"
+cover: ""
+pin: false
+---
+
+Start writing your draft here.
+
+## Section title
+
+Use Markdown links, lists, images, quotes, and code blocks to preview how the article will look on the Orderly blog.
+`;
+
 type MarkdownFrontmatter = {
-  slug: string;
-  title: string;
-  description: string;
-  date: string;
-  category: string;
+  slug?: string;
+  title?: string;
+  description?: string;
+  date?: string;
+  category?: string;
   publicationState?: string;
   author?: string;
-  cover: string;
+  cover?: string;
   pin?: boolean;
 };
 
-export type BlogPreviewResult = {
+export type BlogPreviewAssetContext = {
+  filesByPath?: Map<string, File>;
+  baseDir?: string;
+};
+
+export type BlogPreviewParseResult = {
   post: BlogPost;
   objectUrls: string[];
-  markdownFiles: string[];
-  selectedMarkdownPath: string;
+  warnings: string[];
+  frontmatter: MarkdownFrontmatter;
 };
 
 type FileWithRelativePath = File & {
@@ -57,11 +81,11 @@ function parseFrontmatterValue(value: string): unknown {
   return stripQuotes(trimmed);
 }
 
-function parseFrontmatter(markdown: string, filePath: string) {
+function parseFrontmatter(markdown: string, sourceName: string) {
   const match = markdown.match(FRONTMATTER_RE);
 
   if (!match) {
-    throw new Error(`Markdown blog post is missing frontmatter: ${filePath}`);
+    throw new Error(`Markdown blog post is missing frontmatter: ${sourceName}`);
   }
 
   const data: Record<string, unknown> = {};
@@ -73,7 +97,7 @@ function parseFrontmatter(markdown: string, filePath: string) {
 
     const index = trimmed.indexOf(":");
     if (index === -1) {
-      throw new Error(`Invalid frontmatter line in ${filePath}: ${line}`);
+      throw new Error(`Invalid frontmatter line in ${sourceName}: ${line}`);
     }
 
     const key = trimmed.slice(0, index).trim();
@@ -89,7 +113,7 @@ function parseFrontmatter(markdown: string, filePath: string) {
 
 function assertRequiredFrontmatter(
   frontmatter: MarkdownFrontmatter,
-  filePath: string
+  sourceName: string
 ) {
   const required: Array<keyof MarkdownFrontmatter> = [
     "slug",
@@ -97,12 +121,11 @@ function assertRequiredFrontmatter(
     "description",
     "date",
     "category",
-    "cover",
   ];
 
   for (const field of required) {
     if (!frontmatter[field]) {
-      throw new Error(`Missing required frontmatter "${field}" in ${filePath}`);
+      throw new Error(`Missing required frontmatter "${field}" in ${sourceName}`);
     }
   }
 }
@@ -130,9 +153,10 @@ function normalizePath(value: string) {
   return parts.join("/");
 }
 
-function getDirname(filePath: string) {
-  const index = filePath.lastIndexOf("/");
-  return index === -1 ? "" : filePath.slice(0, index);
+export function getPreviewDirname(filePath: string) {
+  const normalized = normalizePath(filePath);
+  const index = normalized.lastIndexOf("/");
+  return index === -1 ? "" : normalized.slice(0, index);
 }
 
 function joinPath(baseDir: string, relativePath: string) {
@@ -164,9 +188,9 @@ function estimateReadTime(html: string) {
   return Math.max(1, Math.ceil(text.split(" ").length / WORDS_PER_MINUTE));
 }
 
-function makeFileMap(files: FileWithRelativePath[]) {
+export function makePreviewFileMap(files: File[]) {
   const map = new Map<string, File>();
-  for (const file of files) {
+  for (const file of files as FileWithRelativePath[]) {
     const filePath = getFilePath(file);
     map.set(filePath, file);
   }
@@ -175,14 +199,16 @@ function makeFileMap(files: FileWithRelativePath[]) {
 }
 
 function makeObjectUrlResolver(
-  filesByPath: Map<string, File>,
-  baseDir: string,
-  objectUrls: string[]
+  assetContext: BlogPreviewAssetContext,
+  objectUrls: string[],
+  warnings: string[]
 ) {
   const objectUrlByPath = new Map<string, string>();
+  const filesByPath = assetContext.filesByPath || new Map<string, File>();
+  const baseDir = assetContext.baseDir || "";
 
-  return (assetValue: string) => {
-    if (isExternalOrRootPath(assetValue)) {
+  return (assetValue: string, options?: { required?: boolean }) => {
+    if (!assetValue || isExternalOrRootPath(assetValue)) {
       return assetValue;
     }
 
@@ -191,7 +217,8 @@ function makeObjectUrlResolver(
     const file = filesByPath.get(resolvedPath);
 
     if (!file) {
-      throw new Error(`Markdown blog asset not found: ${resolvedPath}`);
+      warnings.push(`Markdown blog asset not found: ${resolvedPath}`);
+      return options?.required ? "" : assetValue;
     }
 
     let objectUrl = objectUrlByPath.get(resolvedPath);
@@ -233,58 +260,50 @@ export function findPreviewMarkdownFiles(files: File[]) {
     .sort((a, b) => a.localeCompare(b));
 }
 
-export async function parseBlogPreviewFolder(
-  files: File[],
-  selectedMarkdownPath?: string
-): Promise<BlogPreviewResult> {
-  const inputFiles = files as FileWithRelativePath[];
-  const markdownFiles = findPreviewMarkdownFiles(files);
-  if (markdownFiles.length === 0) {
-    throw new Error("No Markdown (.md) file found in the selected folder.");
+export function parseBlogPreviewMarkdown(
+  markdown: string,
+  options?: {
+    sourceName?: string;
+    assetContext?: BlogPreviewAssetContext;
   }
+): BlogPreviewParseResult {
+  const sourceName = options?.sourceName || "blog-draft.md";
+  const { frontmatter, body } = parseFrontmatter(markdown, sourceName);
+  assertRequiredFrontmatter(frontmatter, sourceName);
 
-  const selectedPath = selectedMarkdownPath || markdownFiles[0];
-  if (!markdownFiles.includes(selectedPath)) {
-    throw new Error(`Selected Markdown file was not found: ${selectedPath}`);
-  }
-
-  const filesByPath = makeFileMap(inputFiles);
-  const markdownFile = filesByPath.get(selectedPath);
-  if (!markdownFile) {
-    throw new Error(`Selected Markdown file was not found: ${selectedPath}`);
-  }
-
-  const markdown = await markdownFile.text();
-  const { frontmatter, body } = parseFrontmatter(markdown, selectedPath);
-  assertRequiredFrontmatter(frontmatter, selectedPath);
-
-  const date = new Date(frontmatter.date);
+  const date = new Date(frontmatter.date || "");
   if (Number.isNaN(date.getTime())) {
-    throw new Error(`Invalid blog date "${frontmatter.date}" in ${selectedPath}`);
+    throw new Error(`Invalid blog date "${frontmatter.date}" in ${sourceName}`);
   }
 
   const objectUrls: string[] = [];
+  const warnings: string[] = [];
 
   try {
-    const baseDir = getDirname(selectedPath);
-    const resolveAssetUrl = makeObjectUrlResolver(filesByPath, baseDir, objectUrls);
-    const coverImageUrl = resolveAssetUrl(frontmatter.cover);
+    const resolveAssetUrl = makeObjectUrlResolver(
+      options?.assetContext || {},
+      objectUrls,
+      warnings
+    );
+    const coverImageUrl = frontmatter.cover
+      ? resolveAssetUrl(frontmatter.cover, { required: true })
+      : "";
     const rewrittenBody = rewriteMarkdownBodyAssetUrls(body, resolveAssetUrl);
     const html = markdownToHtml(rewrittenBody);
 
     return {
-      markdownFiles,
-      selectedMarkdownPath: selectedPath,
       objectUrls,
+      warnings,
+      frontmatter,
       post: {
-        slug: frontmatter.slug,
-        title: frontmatter.title,
-        description: frontmatter.description,
+        slug: frontmatter.slug || "blog-draft",
+        title: frontmatter.title || "Blog Draft",
+        description: frontmatter.description || "",
         html,
         displayTime: date.toISOString(),
-        categoryName: frontmatter.category,
+        categoryName: frontmatter.category || "Announcements",
         authorName: frontmatter.author || "Orderly Network",
-        coverImageUrl,
+        coverImageUrl: coverImageUrl || undefined,
         readTime: estimateReadTime(html),
       },
     };
@@ -295,4 +314,56 @@ export async function parseBlogPreviewFolder(
 
     throw error;
   }
+}
+
+export async function readPreviewMarkdownFile(
+  files: File[],
+  selectedMarkdownPath?: string
+) {
+  const markdownFiles = findPreviewMarkdownFiles(files);
+  if (markdownFiles.length === 0) {
+    throw new Error("No Markdown (.md) file found in the selected folder.");
+  }
+
+  const selectedPath = selectedMarkdownPath || markdownFiles[0];
+  if (!markdownFiles.includes(selectedPath)) {
+    throw new Error(`Selected Markdown file was not found: ${selectedPath}`);
+  }
+
+  const filesByPath = makePreviewFileMap(files);
+  const markdownFile = filesByPath.get(selectedPath);
+  if (!markdownFile) {
+    throw new Error(`Selected Markdown file was not found: ${selectedPath}`);
+  }
+
+  return {
+    markdown: await markdownFile.text(),
+    markdownFiles,
+    selectedMarkdownPath: selectedPath,
+    filesByPath,
+    baseDir: getPreviewDirname(selectedPath),
+  };
+}
+
+export function getMarkdownDownloadFilename(
+  markdown: string,
+  fallbackFilename?: string
+) {
+  try {
+    const { frontmatter } = parseFrontmatter(markdown, fallbackFilename || "blog-draft.md");
+    if (frontmatter.slug) {
+      return `${frontmatter.slug}.md`;
+    }
+  } catch {
+    // Download should remain available even while the draft has parse errors.
+  }
+
+  if (fallbackFilename) {
+    const basename = fallbackFilename.split("/").pop();
+    if (basename?.toLowerCase().endsWith(".md")) {
+      return basename;
+    }
+  }
+
+  return "blog-draft.md";
 }

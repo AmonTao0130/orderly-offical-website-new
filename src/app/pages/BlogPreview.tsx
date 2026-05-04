@@ -3,56 +3,121 @@
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 import BlogPost from "./BlogPost";
 import {
+  DEFAULT_BLOG_PREVIEW_MARKDOWN,
   findPreviewMarkdownFiles,
-  parseBlogPreviewFolder,
-  type BlogPreviewResult,
+  getMarkdownDownloadFilename,
+  makePreviewFileMap,
+  parseBlogPreviewMarkdown,
+  readPreviewMarkdownFile,
+  type BlogPreviewAssetContext,
+  type BlogPreviewParseResult,
 } from "@/blog/preview";
 
 type PreviewState = {
-  status: "idle" | "loading" | "ready" | "error";
+  status: "loading" | "ready" | "error";
   error: string | null;
-  result: BlogPreviewResult | null;
+  warnings: string[];
+  result: BlogPreviewParseResult | null;
 };
 
-const initialState: PreviewState = {
-  status: "idle",
-  error: null,
-  result: null,
-};
-
-function UploadPanel({
-  status,
-  error,
-  markdownFiles,
-  selectedMarkdownPath,
-  hasFiles,
-  onFileChange,
-  onMarkdownChange,
-}: {
-  status: PreviewState["status"];
-  error: string | null;
-  markdownFiles: string[];
-  selectedMarkdownPath: string;
-  hasFiles: boolean;
-  onFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onMarkdownChange: (markdownPath: string) => void;
-}) {
+function StatusPill({ status }: { status: PreviewState["status"] }) {
   const statusLabel = {
-    idle: "Waiting for folder",
     loading: "Parsing preview",
     ready: "Preview ready",
     error: "Preview error",
   }[status];
 
   return (
+    <span
+      style={{
+        minHeight: "28px",
+        display: "inline-flex",
+        alignItems: "center",
+        borderRadius: "999px",
+        padding: "0 10px",
+        background:
+          status === "error"
+            ? "rgba(255,88,88,0.15)"
+            : status === "ready"
+            ? "rgba(68,222,211,0.14)"
+            : "rgba(255,255,255,0.08)",
+        color:
+          status === "error"
+            ? "#ff9a9a"
+            : status === "ready"
+            ? "#44DED3"
+            : "rgba(255,255,255,0.72)",
+        fontFamily: "'DM Mono','dm-mono',monospace",
+        fontSize: "12px",
+      }}
+    >
+      {statusLabel}
+    </span>
+  );
+}
+
+function ToolbarButton({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      style={{
+        minHeight: "38px",
+        padding: "0 14px",
+        borderRadius: "6px",
+        border: "1px solid rgba(255,255,255,0.18)",
+        background: "rgba(255,255,255,0.08)",
+        color: "white",
+        cursor: "pointer",
+        fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+        fontVariationSettings: "'wght' 600",
+        fontSize: "13px",
+        whiteSpace: "nowrap",
+      }}
+    >
+      {children}
+    </button>
+  );
+}
+
+function UploadPanel({
+  status,
+  error,
+  warnings,
+  markdownFiles,
+  selectedMarkdownPath,
+  hasFiles,
+  onFileChange,
+  onMarkdownChange,
+  onNewDraft,
+  onDownload,
+}: {
+  status: PreviewState["status"];
+  error: string | null;
+  warnings: string[];
+  markdownFiles: string[];
+  selectedMarkdownPath: string;
+  hasFiles: boolean;
+  onFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onMarkdownChange: (markdownPath: string) => void;
+  onNewDraft: () => void;
+  onDownload: () => void;
+}) {
+  return (
     <div
       style={{
         position: "fixed",
-        top: 12,
+        top: 18,
         left: "50%",
         transform: "translateX(-50%)",
         zIndex: 1200,
-        width: "min(calc(100vw - 24px), 920px)",
+        width: "min(calc(100vw - 24px), 1080px)",
         padding: "12px",
         border: "1px solid rgba(255,255,255,0.12)",
         borderRadius: "8px",
@@ -97,31 +162,9 @@ function UploadPanel({
           />
         </label>
 
-        <span
-          style={{
-            minHeight: "28px",
-            display: "inline-flex",
-            alignItems: "center",
-            borderRadius: "999px",
-            padding: "0 10px",
-            background:
-              status === "error"
-                ? "rgba(255,88,88,0.15)"
-                : status === "ready"
-                ? "rgba(68,222,211,0.14)"
-                : "rgba(255,255,255,0.08)",
-            color:
-              status === "error"
-                ? "#ff9a9a"
-                : status === "ready"
-                ? "#44DED3"
-                : "rgba(255,255,255,0.72)",
-            fontFamily: "'DM Mono','dm-mono',monospace",
-            fontSize: "12px",
-          }}
-        >
-          {statusLabel}
-        </span>
+        <ToolbarButton onClick={onNewDraft}>New draft</ToolbarButton>
+        <ToolbarButton onClick={onDownload}>Download .md</ToolbarButton>
+        <StatusPill status={status} />
 
         {markdownFiles.length > 1 ? (
           <select
@@ -159,77 +202,121 @@ function UploadPanel({
               fontSize: "12px",
             }}
           >
-            {selectedMarkdownPath || (hasFiles ? "No Markdown selected" : "Select a folder such as src/content/blog/posts/example-markdown-draft")}
+            {selectedMarkdownPath ||
+              (hasFiles ? "No Markdown selected" : "Editing a new local draft")}
           </span>
         )}
       </div>
 
-      {error && (
+      {(error || warnings.length > 0) && (
         <div
           style={{
             marginTop: "10px",
-            color: "#ffb3b3",
+            display: "grid",
+            gap: "4px",
             fontFamily: "'DM Mono','dm-mono',monospace",
             fontSize: "12px",
             lineHeight: 1.5,
             overflowWrap: "anywhere",
           }}
         >
-          {error}
+          {error && <div style={{ color: "#ffb3b3" }}>{error}</div>}
+          {warnings.map((warning) => (
+            <div key={warning} style={{ color: "#ffd59a" }}>
+              {warning}
+            </div>
+          ))}
         </div>
       )}
     </div>
   );
 }
 
-function EmptyPreview() {
+function EditorPanel({
+  markdown,
+  onMarkdownChange,
+}: {
+  markdown: string;
+  onMarkdownChange: (markdown: string) => void;
+}) {
   return (
-    <main
+    <section
       style={{
-        minHeight: "100vh",
-        width: "100vw",
         background: "#000",
         color: "white",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "120px 20px 48px",
-        boxSizing: "border-box",
+        padding: "104px 16px 28px",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
         fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
       }}
     >
-      <div style={{ width: "min(100%, 640px)", textAlign: "center" }}>
-        <h1
+      <div
+        style={{
+          width: "min(100%, 1120px)",
+          margin: "0 auto",
+          display: "grid",
+          gap: "14px",
+        }}
+      >
+        <div>
+          <h1
+            style={{
+              margin: "0 0 6px",
+              fontSize: "24px",
+              lineHeight: 1.2,
+              fontVariationSettings: "'wght' 700",
+            }}
+          >
+            Blog preview editor
+          </h1>
+          <p
+            style={{
+              margin: 0,
+              color: "rgba(255,255,255,0.58)",
+              fontSize: "14px",
+              lineHeight: 1.55,
+            }}
+          >
+            Edit the full Markdown file below. The production article preview
+            updates as you type.
+          </p>
+        </div>
+        <textarea
+          value={markdown}
+          onChange={(event) => onMarkdownChange(event.target.value)}
+          spellCheck={false}
           style={{
-            margin: "0 0 16px",
-            fontVariationSettings: "'wght' 700",
-            fontSize: "clamp(30px,5vw,52px)",
-            lineHeight: 1.08,
+            width: "100%",
+            minHeight: "420px",
+            resize: "vertical",
+            boxSizing: "border-box",
+            borderRadius: "8px",
+            border: "1px solid rgba(255,255,255,0.13)",
+            background: "#0f0f12",
+            color: "rgba(255,255,255,0.88)",
+            padding: "18px",
+            fontFamily: "'DM Mono','dm-mono',monospace",
+            fontSize: "13px",
+            lineHeight: 1.6,
+            outline: "none",
+            boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
           }}
-        >
-          Blog preview
-        </h1>
-        <p
-          style={{
-            margin: 0,
-            color: "rgba(255,255,255,0.58)",
-            fontSize: "16px",
-            lineHeight: 1.65,
-          }}
-        >
-          Choose a folder that contains one Markdown draft and its local assets.
-          The files stay in this browser session and are rendered with the
-          production article layout.
-        </p>
+        />
       </div>
-    </main>
+    </section>
   );
 }
 
 export default function BlogPreview() {
   const [files, setFiles] = useState<File[]>([]);
   const [selectedMarkdownPath, setSelectedMarkdownPath] = useState("");
-  const [state, setState] = useState<PreviewState>(initialState);
+  const [markdown, setMarkdown] = useState(DEFAULT_BLOG_PREVIEW_MARKDOWN);
+  const [assetContext, setAssetContext] = useState<BlogPreviewAssetContext>({});
+  const [state, setState] = useState<PreviewState>({
+    status: "loading",
+    error: null,
+    warnings: [],
+    result: null,
+  });
   const objectUrlsRef = useRef<string[]>([]);
 
   const markdownFiles = useMemo(() => findPreviewMarkdownFiles(files), [files]);
@@ -243,105 +330,150 @@ export default function BlogPreview() {
   }, []);
 
   useEffect(() => {
-    if (files.length === 0) {
+    for (const objectUrl of objectUrlsRef.current) {
+      URL.revokeObjectURL(objectUrl);
+    }
+    objectUrlsRef.current = [];
+
+    setState((current) => ({
+      ...current,
+      status: "loading",
+      error: null,
+      warnings: [],
+    }));
+
+    try {
+      const result = parseBlogPreviewMarkdown(markdown, {
+        sourceName: selectedMarkdownPath || "blog-draft.md",
+        assetContext,
+      });
+      objectUrlsRef.current = result.objectUrls;
+      setState({
+        status: "ready",
+        error: null,
+        warnings: result.warnings,
+        result,
+      });
+    } catch (error) {
+      setState((current) => ({
+        status: "error",
+        error:
+          error instanceof Error
+            ? error.message
+            : "Unable to parse selected blog draft.",
+        warnings: [],
+        result: current.result,
+      }));
+    }
+  }, [assetContext, markdown, selectedMarkdownPath]);
+
+  async function loadMarkdownFromFiles(
+    nextFiles: File[],
+    markdownPath?: string
+  ) {
+    const loaded = await readPreviewMarkdownFile(nextFiles, markdownPath);
+    setMarkdown(loaded.markdown);
+    setSelectedMarkdownPath(loaded.selectedMarkdownPath);
+    setAssetContext({
+      filesByPath: loaded.filesByPath,
+      baseDir: loaded.baseDir,
+    });
+  }
+
+  async function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
+    const nextFiles = Array.from(event.target.files || []);
+    event.target.value = "";
+    setFiles(nextFiles);
+
+    if (nextFiles.length === 0) {
       return;
     }
 
-    let cancelled = false;
-
-    async function parsePreview() {
-      for (const objectUrl of objectUrlsRef.current) {
-        URL.revokeObjectURL(objectUrl);
-      }
-      objectUrlsRef.current = [];
-
+    try {
+      await loadMarkdownFromFiles(nextFiles);
+    } catch (error) {
+      setAssetContext({
+        filesByPath: makePreviewFileMap(nextFiles),
+        baseDir: "",
+      });
+      setSelectedMarkdownPath("");
       setState((current) => ({
-        ...current,
-        status: "loading",
-        error: null,
+        status: "error",
+        error:
+          error instanceof Error
+            ? error.message
+            : "Unable to read selected blog folder.",
+        warnings: [],
+        result: current.result,
       }));
-
-      try {
-        const result = await parseBlogPreviewFolder(
-          files,
-          selectedMarkdownPath || undefined
-        );
-
-        if (cancelled) {
-          for (const objectUrl of result.objectUrls) {
-            URL.revokeObjectURL(objectUrl);
-          }
-          return;
-        }
-
-        objectUrlsRef.current = result.objectUrls;
-        setSelectedMarkdownPath(result.selectedMarkdownPath);
-        setState({
-          status: "ready",
-          error: null,
-          result,
-        });
-      } catch (error) {
-        if (cancelled) {
-          return;
-        }
-
-        setState({
-          status: "error",
-          error:
-            error instanceof Error
-              ? error.message
-              : "Unable to parse selected blog folder.",
-          result: null,
-        });
-      }
     }
-
-    parsePreview();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [files, selectedMarkdownPath]);
-
-  function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
-    const nextFiles = Array.from(event.target.files || []);
-    setFiles(nextFiles);
-    const nextMarkdownFiles = findPreviewMarkdownFiles(nextFiles);
-    setSelectedMarkdownPath(nextMarkdownFiles[0] || "");
-    setState({
-      status: nextFiles.length > 0 ? "loading" : "idle",
-      error: null,
-      result: null,
-    });
-    event.target.value = "";
   }
 
-  function handleMarkdownChange(markdownPath: string) {
+  async function handleMarkdownChange(markdownPath: string) {
     setSelectedMarkdownPath(markdownPath);
+
+    try {
+      await loadMarkdownFromFiles(files, markdownPath);
+    } catch (error) {
+      setState((current) => ({
+        status: "error",
+        error:
+          error instanceof Error
+            ? error.message
+            : "Unable to read selected Markdown file.",
+        warnings: [],
+        result: current.result,
+      }));
+    }
   }
+
+  function handleNewDraft() {
+    setFiles([]);
+    setSelectedMarkdownPath("");
+    setAssetContext({});
+    setMarkdown(DEFAULT_BLOG_PREVIEW_MARKDOWN);
+  }
+
+  function handleDownload() {
+    const filename = getMarkdownDownloadFilename(
+      markdown,
+      selectedMarkdownPath
+    );
+    const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
+    const objectUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = objectUrl;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(objectUrl);
+  }
+
+  const post = state.result?.post || null;
 
   return (
     <>
       <UploadPanel
         status={state.status}
         error={state.error}
+        warnings={state.warnings}
         markdownFiles={markdownFiles}
         selectedMarkdownPath={selectedMarkdownPath}
         hasFiles={files.length > 0}
         onFileChange={handleFileChange}
         onMarkdownChange={handleMarkdownChange}
+        onNewDraft={handleNewDraft}
+        onDownload={handleDownload}
       />
 
-      {state.result?.post ? (
-        <BlogPost
-          slug={state.result.post.slug}
-          post={state.result.post}
-          latestPosts={[]}
-        />
-      ) : (
-        <EmptyPreview />
-      )}
+      <EditorPanel markdown={markdown} onMarkdownChange={setMarkdown} />
+
+      <BlogPost
+        slug={post?.slug || "blog-draft"}
+        post={post}
+        latestPosts={[]}
+      />
     </>
   );
 }
