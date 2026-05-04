@@ -1,5 +1,5 @@
 export const DEFAULT_BLOG_DRAFT_MARKDOWN = `---
-slug: "blog-editor-preview-guide"
+slug: "how-to-preview-a-blog-draft"
 title: "How to Preview a Blog Draft"
 description: "A local Markdown guide for writing, previewing, and downloading blog drafts."
 date: 2026-05-04
@@ -47,7 +47,7 @@ Choose the folder in the editor toolbar so the preview can resolve those local i
 
 ## 4. Preview while editing
 
-The production article preview refreshes automatically whenever you change the Markdown. If a frontmatter field is missing or an asset cannot be found, the toolbar shows an error or warning so you can fix the draft before publishing.
+The article preview refreshes automatically whenever you change the Markdown. If a frontmatter field is missing or an asset cannot be found, the toolbar shows an error or warning so you can fix the draft before publishing.
 
 > Tip: keep the preview open while polishing titles, descriptions, and images. Small metadata changes often have a big impact on how the post feels.
 
@@ -64,7 +64,7 @@ console.log(\`Rendering \${draftStatus} draft with \${coverImage}\`);
 
 ## 6. Download the draft
 
-When the article is ready, click **Download ZIP**. The editor uses the \`slug\` field for the package name, so this example downloads as \`blog-editor-preview-guide.zip\`.
+When the article is ready, click **Download ZIP**. The editor uses the \`slug\` field for the package name, so this example downloads as \`how-to-preview-a-blog-draft.zip\`.
 
 You can keep editing the downloaded Markdown file locally, upload a folder with related assets, and return to the editor whenever you need another production-style preview.
 `;
