@@ -335,6 +335,7 @@ function EditorPanel({
         </div>
         <textarea
           ref={textareaRef}
+          className="blog-editor-markdown-input"
           value={markdown}
           onChange={(event) =>
             onMarkdownChange({
