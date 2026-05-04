@@ -17,6 +17,7 @@ const BLOG_CONFIG_FILE = path.join(CONTENT_ROOT, "config", "blog.config.json");
 const PUBLIC_ROOT = path.resolve(process.cwd(), "public");
 const ENTITIES_FILE = path.join(EXPORT_ROOT, "entities_00001.jsonl");
 const LINKS_FILE = path.join(EXPORT_ROOT, "links_00001.jsonl");
+const ALL_ARTICLES_PAGE_SIZE = Number.MAX_SAFE_INTEGER;
 const STRAPI_MEDIA_URL_RE =
   /https:\/\/[^)\s"']*media\.strapiapp\.com\/([^)\s"']+)/g;
 const LEGACY_UPLOADS_URL_RE =
@@ -877,6 +878,10 @@ export async function getPinArticles(
 export async function getAllPageArticles(options?: GetArticlesOptions) {
   const res = await getArticles({
     ...options,
+    pagination: options?.pagination || {
+      page: 1,
+      pageSize: ALL_ARTICLES_PAGE_SIZE,
+    },
     publicationState: options?.publicationState || PublicationStateEnum.LIVE,
   });
 
