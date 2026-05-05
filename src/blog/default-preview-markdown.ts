@@ -4,9 +4,9 @@ title: "How to Preview a Blog Draft"
 description: "A local Markdown guide for writing, previewing, and downloading blog drafts."
 date: 2026-05-04
 category: "Announcements"
-publicationState: "live"
 author: "Orderly Network"
 cover: "./thumbnail.jpg"
+publicationState: "live"
 pin: false
 ---
 

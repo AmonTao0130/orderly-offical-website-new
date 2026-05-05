@@ -10,6 +10,7 @@ import {
   useState,
 } from "react";
 import BlogPost from "./BlogPost";
+import blogConfig from "@/content/blog/config/blog.config.json";
 import {
   collectBlogPreviewDownloadAssets,
   DEFAULT_BLOG_DRAFT_MARKDOWN,
@@ -53,13 +54,24 @@ type EditorMarkdownChange = {
   selection?: EditorSelection;
 };
 
-type SlugStatus = "auto" | "manual" | "duplicate" | "invalid";
 type EditorLayoutMode = "split" | "stack";
+type BlogMetadataField =
+  | "slug"
+  | "title"
+  | "description"
+  | "date"
+  | "category"
+  | "publicationState"
+  | "author"
+  | "cover"
+  | "pin";
 
 type DownloadPlan = {
   packageName: string;
   markdownFilename: string;
 };
+
+type BlogMetadataFormValues = Record<BlogMetadataField, string>;
 
 type BlogEditorAsset = {
   file?: File;
@@ -86,49 +98,22 @@ const DRAFT_SAVE_DEBOUNCE_MS = 500;
 const DEFAULT_EDITOR_MARKDOWN = normalizeEditorMarkdownAssetPaths(
   DEFAULT_BLOG_DRAFT_MARKDOWN
 );
-
-function SlugStatusPill({ status }: { status: SlugStatus }) {
-  const config = {
-    auto: {
-      label: "Slug auto",
-      background: "rgba(68,222,211,0.14)",
-      color: "#44DED3",
-    },
-    manual: {
-      label: "Slug manual",
-      background: "rgba(255,255,255,0.08)",
-      color: "rgba(255,255,255,0.74)",
-    },
-    duplicate: {
-      label: "Slug duplicate",
-      background: "rgba(255,193,112,0.15)",
-      color: "#ffd59a",
-    },
-    invalid: {
-      label: "Slug invalid",
-      background: "rgba(255,88,88,0.15)",
-      color: "#ff9a9a",
-    },
-  }[status];
-
-  return (
-    <span
-      style={{
-        minHeight: "28px",
-        display: "inline-flex",
-        alignItems: "center",
-        borderRadius: "999px",
-        padding: "0 10px",
-        background: config.background,
-        color: config.color,
-        fontFamily: "'DM Mono','dm-mono',monospace",
-        fontSize: "12px",
-      }}
-    >
-      {config.label}
-    </span>
-  );
-}
+const BLOG_DESCRIPTION_MAX_LENGTH =
+  typeof blogConfig.descriptionMaxLength === "number"
+    ? blogConfig.descriptionMaxLength
+    : 80;
+const BLOG_PUBLICATION_STATES = ["live", "preview"];
+const BLOG_METADATA_FIELDS: BlogMetadataField[] = [
+  "slug",
+  "title",
+  "description",
+  "date",
+  "category",
+  "publicationState",
+  "author",
+  "cover",
+  "pin",
+];
 
 function LayoutToggle({
   layoutPreference,
@@ -528,11 +513,472 @@ function AssetPanel({
   );
 }
 
+function MetadataFieldLabel({
+  children,
+  aside,
+}: {
+  children: React.ReactNode;
+  aside?: React.ReactNode;
+}) {
+  return (
+    <label
+      style={{
+        display: "grid",
+        gap: "8px",
+        color: "rgba(255,255,255,0.74)",
+        fontFamily: "'DM Mono','dm-mono',monospace",
+        fontSize: "12px",
+      }}
+    >
+      <span
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "10px",
+        }}
+      >
+        <span>{children}</span>
+        {aside && (
+          <span style={{ color: "rgba(255,255,255,0.42)" }}>{aside}</span>
+        )}
+      </span>
+    </label>
+  );
+}
+
+function metadataInputStyle(multiline?: boolean): React.CSSProperties {
+  return {
+    width: "100%",
+    minHeight: multiline ? "86px" : "38px",
+    boxSizing: "border-box",
+    borderRadius: "6px",
+    border: "1px solid rgba(255,255,255,0.13)",
+    background: "rgba(0,0,0,0.22)",
+    color: "rgba(255,255,255,0.86)",
+    padding: multiline ? "10px 12px" : "0 12px",
+    outline: "none",
+    fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+    fontSize: "13px",
+    lineHeight: 1.5,
+    resize: multiline ? "vertical" : undefined,
+  };
+}
+
+function MetadataSegmentedControl({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  options: string[];
+  onChange: (value: string) => void;
+}) {
+  return (
+    <div style={{ display: "grid", gap: "8px" }}>
+      <div
+        style={{
+          color: "rgba(255,255,255,0.74)",
+          fontFamily: "'DM Mono','dm-mono',monospace",
+          fontSize: "12px",
+        }}
+      >
+        {label}
+      </div>
+      <div
+        role="group"
+        aria-label={label}
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))`,
+          gap: "4px",
+          minHeight: "38px",
+          padding: "4px",
+          borderRadius: "7px",
+          border: "1px solid rgba(255,255,255,0.13)",
+          background: "rgba(0,0,0,0.22)",
+        }}
+      >
+        {options.map((option) => {
+          const isActive = option === value;
+          return (
+            <button
+              key={option}
+              type="button"
+              aria-pressed={isActive}
+              onClick={() => onChange(option)}
+              style={{
+                border: "0",
+                borderRadius: "5px",
+                background: isActive ? "rgba(68,222,211,0.16)" : "transparent",
+                color: isActive ? "#44DED3" : "rgba(255,255,255,0.66)",
+                cursor: "pointer",
+                fontFamily: "'DM Mono','dm-mono',monospace",
+                fontSize: "12px",
+                textTransform: "uppercase",
+              }}
+            >
+              {option}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function MetadataPanel({
+  values,
+  assets,
+  slugError,
+  descriptionError,
+  onMetadataChange,
+  onRegenerateSlug,
+  onAssetUpload,
+}: {
+  values: BlogMetadataFormValues;
+  assets: BlogEditorAsset[];
+  slugError: string;
+  descriptionError: string;
+  onMetadataChange: (field: BlogMetadataField, value: string) => void;
+  onRegenerateSlug: () => void;
+  onAssetUpload: (event: ChangeEvent<HTMLInputElement>) => void;
+}) {
+  const imageAssets = assets.filter((asset) => asset.isImage);
+  const descriptionLength = values.description.length;
+  const descriptionOverLimit = Boolean(descriptionError);
+
+  return (
+    <div
+      style={{
+        border: "1px solid rgba(255,255,255,0.1)",
+        borderRadius: "10px",
+        background: "rgba(255,255,255,0.035)",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          minHeight: "44px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "10px",
+          padding: "0 14px",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+          background: "rgba(255,255,255,0.018)",
+        }}
+      >
+        <span
+          style={{
+            color: "rgba(255,255,255,0.86)",
+            fontVariationSettings: "'wght' 700",
+            fontSize: "14px",
+          }}
+        >
+          Metadata
+        </span>
+        <span
+          style={{
+            color: "rgba(255,255,255,0.44)",
+            fontFamily: "'DM Mono','dm-mono',monospace",
+            fontSize: "12px",
+          }}
+        >
+          frontmatter
+        </span>
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+          alignItems: "start",
+          gap: "14px",
+          padding: "14px",
+        }}
+      >
+        <div style={{ display: "grid", gap: "8px" }}>
+          <MetadataFieldLabel>title</MetadataFieldLabel>
+          <input
+            value={values.title}
+            onChange={(event) => onMetadataChange("title", event.target.value)}
+            style={metadataInputStyle()}
+          />
+        </div>
+
+        <div style={{ display: "grid", gap: "8px" }}>
+          <MetadataFieldLabel>slug</MetadataFieldLabel>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "minmax(0, 1fr) auto",
+              alignItems: "stretch",
+              borderRadius: "6px",
+              border: slugError
+                ? "1px solid rgba(255,88,88,0.62)"
+                : "1px solid rgba(255,255,255,0.13)",
+              background: "rgba(0,0,0,0.22)",
+              overflow: "hidden",
+            }}
+          >
+            <input
+              value={values.slug}
+              onChange={(event) => onMetadataChange("slug", event.target.value)}
+              style={{
+                ...metadataInputStyle(),
+                border: "0",
+                background: "transparent",
+              }}
+            />
+            <button
+              type="button"
+              aria-label="Regenerate slug"
+              title="Regenerate slug"
+              onClick={onRegenerateSlug}
+              style={{
+                minHeight: "38px",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "44px",
+                padding: 0,
+                border: "0",
+                borderLeft: "1px solid rgba(255,255,255,0.1)",
+                background: "rgba(255,255,255,0.035)",
+                color: "#6B63FF",
+                cursor: "pointer",
+                fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+                fontSize: "13px",
+                whiteSpace: "nowrap",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                style={{
+                  display: "inline-block",
+                  fontFamily: "'DM Mono','dm-mono',monospace",
+                  fontSize: "18px",
+                  lineHeight: 1,
+                }}
+              >
+                ↻
+              </span>
+            </button>
+          </div>
+          {slugError && (
+            <div
+              style={{
+                color: "#ff9a9a",
+                fontFamily: "'DM Mono','dm-mono',monospace",
+                fontSize: "11px",
+                lineHeight: 1.45,
+              }}
+            >
+              {slugError}
+            </div>
+          )}
+        </div>
+
+        <div style={{ display: "grid", gap: "8px" }}>
+          <MetadataFieldLabel
+            aside={`${descriptionLength}/${BLOG_DESCRIPTION_MAX_LENGTH}`}
+          >
+            description
+          </MetadataFieldLabel>
+          <textarea
+            value={values.description}
+            onChange={(event) =>
+              onMetadataChange("description", event.target.value)
+            }
+            style={{
+              ...metadataInputStyle(true),
+              borderColor: descriptionOverLimit
+                ? "rgba(255,193,112,0.48)"
+                : "rgba(255,255,255,0.13)",
+            }}
+          />
+          {descriptionError && (
+            <div
+              style={{
+                color: "#ffd59a",
+                fontFamily: "'DM Mono','dm-mono',monospace",
+                fontSize: "11px",
+                lineHeight: 1.45,
+              }}
+            >
+              {descriptionError}
+            </div>
+          )}
+        </div>
+
+        <div style={{ display: "grid", gap: "8px" }}>
+          <MetadataFieldLabel>cover</MetadataFieldLabel>
+          <input
+            value={values.cover}
+            onChange={(event) => onMetadataChange("cover", event.target.value)}
+            placeholder="./thumbnail.jpg"
+            style={metadataInputStyle()}
+          />
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: "8px",
+            }}
+          >
+            <label
+              style={{
+                minHeight: "30px",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "0 10px",
+                borderRadius: "6px",
+                border: "1px solid rgba(68,222,211,0.28)",
+                background: "rgba(68,222,211,0.08)",
+                color: "#44DED3",
+                cursor: "pointer",
+                fontVariationSettings: "'wght' 600",
+                fontSize: "12px",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Upload cover
+              <input
+                type="file"
+                accept="image/*"
+                onChange={onAssetUpload}
+                style={{ display: "none" }}
+              />
+            </label>
+            {imageAssets.length === 0 ? (
+              <span
+                style={{
+                  color: "rgba(255,255,255,0.42)",
+                  fontFamily: "'DM Mono','dm-mono',monospace",
+                  fontSize: "11px",
+                }}
+              >
+                No uploaded images yet
+              </span>
+            ) : (
+              imageAssets.map((asset) => (
+                <button
+                  key={asset.path}
+                  type="button"
+                  onClick={() => onMetadataChange("cover", asset.markdownPath)}
+                  title={asset.markdownPath}
+                  style={{
+                    width: "32px",
+                    height: "32px",
+                    padding: 0,
+                    borderRadius: "6px",
+                    overflow: "hidden",
+                    border:
+                      values.cover === asset.markdownPath
+                        ? "1px solid rgba(68,222,211,0.72)"
+                        : "1px solid rgba(255,255,255,0.12)",
+                    background: "rgba(0,0,0,0.22)",
+                    cursor: "pointer",
+                  }}
+                >
+                  {asset.previewUrl ? (
+                    <img
+                      src={asset.previewUrl}
+                      alt=""
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        display: "block",
+                      }}
+                    />
+                  ) : (
+                    <span
+                      style={{
+                        color: "rgba(255,255,255,0.5)",
+                        fontFamily: "'DM Mono','dm-mono',monospace",
+                        fontSize: "9px",
+                      }}
+                    >
+                      IMG
+                    </span>
+                  )}
+                </button>
+              ))
+            )}
+          </div>
+        </div>
+
+        <div style={{ display: "grid", gap: "8px" }}>
+          <MetadataFieldLabel>category</MetadataFieldLabel>
+          <select
+            value={values.category}
+            onChange={(event) =>
+              onMetadataChange("category", event.target.value)
+            }
+            style={metadataInputStyle()}
+          >
+            {blogConfig.categories.map((category) => (
+              <option key={category.slug} value={category.slug}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div style={{ display: "grid", gap: "8px" }}>
+          <MetadataFieldLabel>author</MetadataFieldLabel>
+          <select
+            value={values.author}
+            onChange={(event) => onMetadataChange("author", event.target.value)}
+            style={metadataInputStyle()}
+          >
+            {blogConfig.authors.map((author) => (
+              <option key={author.name} value={author.name}>
+                {author.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <MetadataSegmentedControl
+          label="publicationState"
+          value={values.publicationState}
+          options={BLOG_PUBLICATION_STATES}
+          onChange={(value) => onMetadataChange("publicationState", value)}
+        />
+
+        <MetadataSegmentedControl
+          label="pin"
+          value={values.pin}
+          options={["false", "true"]}
+          onChange={(value) => onMetadataChange("pin", value)}
+        />
+
+        <div style={{ display: "grid", gap: "8px" }}>
+          <MetadataFieldLabel>date</MetadataFieldLabel>
+          <input
+            type="date"
+            value={values.date}
+            onChange={(event) => onMetadataChange("date", event.target.value)}
+            style={{
+              ...metadataInputStyle(),
+              colorScheme: "dark",
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function UploadPanel({
   status,
-  slugStatus,
-  currentSlug,
-  downloadPlan,
   error,
   warnings,
   layoutPreference,
@@ -545,15 +991,10 @@ function UploadPanel({
   onMarkdownChange,
   onNewDraft,
   onDownload,
-  onKeepSlug,
-  onRegenerateSlug,
   onLayoutChange,
   onHeightChange,
 }: {
   status: PreviewState["status"];
-  slugStatus: SlugStatus;
-  currentSlug: string;
-  downloadPlan: DownloadPlan;
   error: string | null;
   warnings: string[];
   layoutPreference: EditorLayoutMode;
@@ -566,8 +1007,6 @@ function UploadPanel({
   onMarkdownChange: (markdownPath: string) => void;
   onNewDraft: () => void;
   onDownload: () => void;
-  onKeepSlug: () => void;
-  onRegenerateSlug: () => void;
   onLayoutChange: (layout: EditorLayoutMode) => void;
   onHeightChange: (height: number) => void;
 }) {
@@ -651,7 +1090,6 @@ function UploadPanel({
         <ToolbarButton onClick={onDownload} variant="primary">
           Download ZIP
         </ToolbarButton>
-        <SlugStatusPill status={slugStatus} />
         <LayoutToggle
           layoutPreference={layoutPreference}
           effectiveLayout={effectiveLayout}
@@ -702,62 +1140,6 @@ function UploadPanel({
         )}
       </div>
 
-      <div
-        style={{
-          marginTop: "12px",
-          display: "flex",
-          flexWrap: "wrap",
-          alignItems: "center",
-          gap: "8px",
-          color: "rgba(255,255,255,0.58)",
-          fontFamily: "'DM Mono','dm-mono',monospace",
-          fontSize: "12px",
-          lineHeight: 1.5,
-        }}
-      >
-        <MetaChip label="slug" value={currentSlug || "missing"} accent />
-        <MetaChip
-          label="ZIP"
-          value={`${downloadPlan.packageName}/${downloadPlan.markdownFilename}`}
-        />
-        <button
-          type="button"
-          onClick={onKeepSlug}
-          style={{
-            border: "0",
-            padding: "0 6px",
-            minHeight: "30px",
-            background: "transparent",
-            color: "rgba(255,255,255,0.76)",
-            cursor: "pointer",
-            fontFamily: "inherit",
-            fontSize: "12px",
-            textDecoration: "underline",
-            textUnderlineOffset: "3px",
-          }}
-        >
-          Keep current slug
-        </button>
-        <button
-          type="button"
-          onClick={onRegenerateSlug}
-          style={{
-            border: "0",
-            padding: "0 6px",
-            minHeight: "30px",
-            background: "transparent",
-            color: "#44DED3",
-            cursor: "pointer",
-            fontFamily: "inherit",
-            fontSize: "12px",
-            textDecoration: "underline",
-            textUnderlineOffset: "3px",
-          }}
-        >
-          Regenerate slug
-        </button>
-      </div>
-
       {(error || warnings.length > 0) && (
         <div
           style={{
@@ -784,24 +1166,34 @@ function UploadPanel({
 
 function EditorPanel({
   markdown,
+  metadataValues,
   layout,
   panelHeight,
   assets,
+  slugError,
+  descriptionError,
   copiedAssetPath,
   copyWarning,
   selectionToRestore,
   onMarkdownChange,
+  onMetadataChange,
+  onRegenerateSlug,
   onAssetUpload,
   onCopyAssetPath,
 }: {
   markdown: string;
+  metadataValues: BlogMetadataFormValues;
   layout: EditorLayoutMode;
   panelHeight: string;
   assets: BlogEditorAsset[];
+  slugError: string;
+  descriptionError: string;
   copiedAssetPath: string;
   copyWarning: string;
   selectionToRestore: EditorSelection | null;
   onMarkdownChange: (change: EditorMarkdownChange) => void;
+  onMetadataChange: (field: BlogMetadataField, value: string) => void;
+  onRegenerateSlug: () => void;
   onAssetUpload: (event: ChangeEvent<HTMLInputElement>) => void;
   onCopyAssetPath: (asset: BlogEditorAsset) => void;
 }) {
@@ -841,7 +1233,9 @@ function EditorPanel({
           display: "grid",
           gap: "18px",
           gridTemplateRows:
-            layout === "split" ? "auto auto minmax(360px, 1fr)" : undefined,
+            layout === "split"
+              ? "auto auto auto minmax(360px, 1fr)"
+              : undefined,
           minHeight: layout === "split" ? "100%" : undefined,
         }}
       >
@@ -874,6 +1268,15 @@ function EditorPanel({
           copyWarning={copyWarning}
           onAssetUpload={onAssetUpload}
           onCopyAssetPath={onCopyAssetPath}
+        />
+        <MetadataPanel
+          values={metadataValues}
+          assets={assets}
+          slugError={slugError}
+          descriptionError={descriptionError}
+          onMetadataChange={onMetadataChange}
+          onRegenerateSlug={onRegenerateSlug}
+          onAssetUpload={onAssetUpload}
         />
         <div
           className="blog-editor-markdown-shell"
@@ -1180,6 +1583,97 @@ function getEditorFrontmatterField(markdown: string, field: string) {
   return match ? stripEditorFrontmatterQuotes(match[1]) : "";
 }
 
+function getEditorMetadataFormValues(markdown: string): BlogMetadataFormValues {
+  return {
+    slug: getEditorFrontmatterField(markdown, "slug"),
+    title: getEditorFrontmatterField(markdown, "title"),
+    description: getEditorFrontmatterField(markdown, "description"),
+    date: getEditorFrontmatterField(markdown, "date"),
+    category: getEditorFrontmatterField(markdown, "category"),
+    publicationState:
+      getEditorFrontmatterField(markdown, "publicationState") ||
+      blogConfig.defaultPublicationState,
+    author:
+      getEditorFrontmatterField(markdown, "author") || blogConfig.defaultAuthor,
+    cover: getEditorFrontmatterField(markdown, "cover"),
+    pin: getEditorFrontmatterField(markdown, "pin") || "false",
+  };
+}
+
+function escapeEditorFrontmatterString(value: string) {
+  return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+}
+
+function formatEditorFrontmatterValue(field: BlogMetadataField, value: string) {
+  if (field === "pin") {
+    return value === "true" ? "true" : "false";
+  }
+
+  return `"${escapeEditorFrontmatterString(value)}"`;
+}
+
+function makeEditorFrontmatterLine(field: BlogMetadataField, value: string) {
+  return `${field}: ${formatEditorFrontmatterValue(field, value)}`;
+}
+
+function replaceOrInsertEditorFrontmatterField(
+  markdown: string,
+  field: BlogMetadataField,
+  value: string
+) {
+  const frontmatterMatch = markdown.match(EDITOR_FRONTMATTER_RE);
+  const line = makeEditorFrontmatterLine(field, value);
+
+  if (!frontmatterMatch) {
+    return `---\n${line}\n---\n\n${markdown}`;
+  }
+
+  const frontmatterStart = frontmatterMatch.index || 0;
+  const fullFrontmatter = frontmatterMatch[0];
+  const content = frontmatterMatch[1];
+  const contentStart = frontmatterStart + fullFrontmatter.indexOf(content);
+  const escapedField = field.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const fieldMatch = content.match(
+    new RegExp(`^(\\s*)${escapedField}\\s*:\\s*.*?(\\s*)$`, "m")
+  );
+
+  if (fieldMatch) {
+    const replacementStart = contentStart + (fieldMatch.index || 0);
+    const replacement = `${fieldMatch[1]}${line}${fieldMatch[2]}`;
+    return `${markdown.slice(
+      0,
+      replacementStart
+    )}${replacement}${markdown.slice(replacementStart + fieldMatch[0].length)}`;
+  }
+
+  const existingFields = BLOG_METADATA_FIELDS.filter(
+    (candidate) =>
+      candidate !== field &&
+      new RegExp(`^\\s*${candidate}\\s*:`, "m").test(content)
+  );
+  const fieldIndex = BLOG_METADATA_FIELDS.indexOf(field);
+  const previousField = existingFields
+    .filter((candidate) => BLOG_METADATA_FIELDS.indexOf(candidate) < fieldIndex)
+    .pop();
+
+  if (previousField) {
+    const previousMatch = content.match(
+      new RegExp(`^\\s*${previousField}\\s*:.*?$`, "m")
+    );
+    if (previousMatch) {
+      const insertionStart =
+        contentStart + (previousMatch.index || 0) + previousMatch[0].length;
+      return `${markdown.slice(0, insertionStart)}\n${line}${markdown.slice(
+        insertionStart
+      )}`;
+    }
+  }
+
+  return `${markdown.slice(0, contentStart)}${line}\n${markdown.slice(
+    contentStart
+  )}`;
+}
+
 function adjustSelectionForReplacement(
   selection: EditorSelection | undefined,
   replacementStart: number,
@@ -1415,16 +1909,13 @@ export default function BlogPreview() {
     );
   const isCurrentSlugInvalid =
     Boolean(currentSlug) && !isValidBlogSlug(currentSlug);
-  const slugStatus: SlugStatus = isCurrentSlugInvalid
-    ? "invalid"
-    : isCurrentSlugDuplicate && !isPreservedHistoricalSlug
-    ? "duplicate"
-    : slugSyncRef.current.manualOverride
-    ? "manual"
-    : "auto";
   const downloadPlan = useMemo(
     () => getDownloadPlan(markdown, selectedMarkdownPath),
     [markdown, selectedMarkdownPath]
+  );
+  const metadataValues = useMemo(
+    () => getEditorMetadataFormValues(markdown),
+    [markdown]
   );
   const slugFormatWarning =
     currentSlug && isCurrentSlugInvalid
@@ -1442,22 +1933,15 @@ export default function BlogPreview() {
     isPreservedHistoricalSlug,
     slugSyncVersion,
   ]);
+  const slugInputError = slugFormatWarning || duplicateSlugWarning;
+  const descriptionInputError =
+    metadataValues.description.length > BLOG_DESCRIPTION_MAX_LENGTH
+      ? `Description is ${metadataValues.description.length} characters; max is ${BLOG_DESCRIPTION_MAX_LENGTH}.`
+      : "";
   const toolbarWarnings = useMemo(
     () =>
-      [
-        ...state.warnings,
-        slugLoadWarning,
-        slugFormatWarning,
-        duplicateSlugWarning,
-        copyAssetWarning,
-      ].filter(Boolean),
-    [
-      copyAssetWarning,
-      duplicateSlugWarning,
-      slugFormatWarning,
-      slugLoadWarning,
-      state.warnings,
-    ]
+      [...state.warnings, slugLoadWarning, copyAssetWarning].filter(Boolean),
+    [copyAssetWarning, slugLoadWarning, state.warnings]
   );
   const editorAssets = useMemo(() => {
     const filesByPath = assetContext.filesByPath || new Map<string, File>();
@@ -1660,13 +2144,6 @@ export default function BlogPreview() {
       isMounted = false;
     };
   }, []);
-
-  useEffect(() => {
-    setMarkdown((currentMarkdown) => {
-      const change = applyTitleSlugSync(currentMarkdown, { force: true });
-      return change.markdown;
-    });
-  }, [existingSlugs]);
 
   useEffect(() => {
     setState((current) => ({
@@ -1873,6 +2350,26 @@ export default function BlogPreview() {
     }
   }
 
+  function handleMetadataChange(field: BlogMetadataField, value: string) {
+    setSelectionToRestore(null);
+
+    if (field === "slug") {
+      slugSyncRef.current.manualOverride = true;
+      slugSyncRef.current.lastAutoSlug = value;
+      slugSyncRef.current.preservedSlug =
+        value && value === loadedSourceSlugRef.current ? value : "";
+      setSlugSyncVersion((version) => version + 1);
+    }
+
+    setMarkdown((currentMarkdown) => {
+      const nextMarkdown = normalizeEditorMarkdownAssetPaths(
+        replaceOrInsertEditorFrontmatterField(currentMarkdown, field, value)
+      );
+
+      return nextMarkdown;
+    });
+  }
+
   function handleNewDraft() {
     setFiles([]);
     setSelectedMarkdownPath("");
@@ -1885,15 +2382,6 @@ export default function BlogPreview() {
     setMarkdown(DEFAULT_EDITOR_MARKDOWN);
     setPreviewMarkdown(DEFAULT_EDITOR_MARKDOWN);
     saveEditorDraftState(DEFAULT_EDITOR_MARKDOWN, "");
-  }
-
-  function handleKeepSlug() {
-    const slug = getEditorFrontmatterField(markdown, "slug");
-    slugSyncRef.current.manualOverride = true;
-    slugSyncRef.current.preservedSlug =
-      slug && slug === loadedSourceSlugRef.current ? slug : "";
-    slugSyncRef.current.lastAutoSlug = slug;
-    setSlugSyncVersion((version) => version + 1);
   }
 
   function handleRegenerateSlug() {
@@ -2041,9 +2529,6 @@ export default function BlogPreview() {
     <>
       <UploadPanel
         status={state.status}
-        slugStatus={slugStatus}
-        currentSlug={currentSlug}
-        downloadPlan={downloadPlan}
         error={state.error}
         warnings={toolbarWarnings}
         layoutPreference={layoutPreference}
@@ -2056,8 +2541,6 @@ export default function BlogPreview() {
         onMarkdownChange={handleMarkdownChange}
         onNewDraft={handleNewDraft}
         onDownload={handleDownload}
-        onKeepSlug={handleKeepSlug}
-        onRegenerateSlug={handleRegenerateSlug}
         onLayoutChange={handleLayoutChange}
         onHeightChange={setToolbarHeight}
       />
@@ -2085,14 +2568,20 @@ export default function BlogPreview() {
                 : undefined,
             alignItems: "start",
             justifyContent: effectiveLayout === "split" ? "center" : undefined,
-            gap: effectiveLayout === "split" ? `${BLOG_EDITOR_SPLIT_GAP}px` : undefined,
+            gap:
+              effectiveLayout === "split"
+                ? `${BLOG_EDITOR_SPLIT_GAP}px`
+                : undefined,
           }}
         >
           <EditorPanel
             markdown={markdown}
+            metadataValues={metadataValues}
             layout={effectiveLayout}
             panelHeight={splitPanelHeight}
             assets={editorAssets}
+            slugError={slugInputError}
+            descriptionError={descriptionInputError}
             copiedAssetPath={copiedAssetPath}
             copyWarning={copyAssetWarning}
             selectionToRestore={selectionToRestore}
@@ -2100,12 +2589,11 @@ export default function BlogPreview() {
               const normalizedMarkdown = normalizeEditorMarkdownAssetPaths(
                 change.markdown
               );
-              const syncedChange = applyTitleSlugSync(normalizedMarkdown, {
-                selection: change.selection,
-              });
-              setSelectionToRestore(syncedChange.selection || null);
-              setMarkdown(syncedChange.markdown);
+              setSelectionToRestore(change.selection || null);
+              setMarkdown(normalizedMarkdown);
             }}
+            onMetadataChange={handleMetadataChange}
+            onRegenerateSlug={handleRegenerateSlug}
             onAssetUpload={handleAssetUpload}
             onCopyAssetPath={handleCopyAssetPath}
           />
