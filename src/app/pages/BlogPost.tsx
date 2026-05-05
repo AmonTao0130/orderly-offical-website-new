@@ -399,7 +399,7 @@ export default function BlogPost({
     <div
       style={{
         background: "#000",
-        minHeight: "100vh",
+        minHeight: hideChrome ? undefined : "100vh",
         width: hideChrome ? "100%" : "100vw",
         overflowX: "hidden",
         paddingTop: hideChrome ? 0 : isMobile ? "64px" : isTablet ? 0 : "80px",

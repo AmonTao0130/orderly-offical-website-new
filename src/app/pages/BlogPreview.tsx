@@ -831,6 +831,7 @@ function EditorPanel({
         fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
         minWidth: 0,
         height: layout === "split" ? panelHeight : undefined,
+        boxSizing: "border-box",
         overflowY: layout === "split" ? "auto" : undefined,
         paddingRight: layout === "split" ? "4px" : undefined,
       }}
@@ -839,6 +840,9 @@ function EditorPanel({
         style={{
           display: "grid",
           gap: "18px",
+          gridTemplateRows:
+            layout === "split" ? "auto auto minmax(360px, 1fr)" : undefined,
+          minHeight: layout === "split" ? "100%" : undefined,
         }}
       >
         <div>
@@ -881,6 +885,9 @@ function EditorPanel({
             background: "#0f0f12",
             boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
             overflow: "hidden",
+            display: layout === "split" ? "flex" : undefined,
+            flexDirection: layout === "split" ? "column" : undefined,
+            minHeight: 0,
           }}
         >
           <div
@@ -918,8 +925,9 @@ function EditorPanel({
             style={{
               width: "100%",
               minHeight: layout === "split" ? "360px" : "420px",
-              height: layout === "split" ? "min(52vh, 560px)" : undefined,
-              resize: "vertical",
+              height: layout === "split" ? "auto" : undefined,
+              flex: layout === "split" ? "1 1 auto" : undefined,
+              resize: layout === "split" ? "none" : "vertical",
               boxSizing: "border-box",
               border: "0",
               background: "transparent",
@@ -948,11 +956,11 @@ function PreviewPanel({
 }) {
   return (
     <section
-      className={layout === "split" ? "blog-editor-scroll-panel" : undefined}
       style={{
         minWidth: 0,
         height: layout === "split" ? panelHeight : undefined,
-        overflowY: layout === "split" ? "auto" : undefined,
+        boxSizing: "border-box",
+        overflow: layout === "split" ? "hidden" : undefined,
         border: layout === "split" ? "1px solid rgba(255,255,255,0.12)" : "0",
         borderRadius: layout === "split" ? "10px" : 0,
         background: "#000",
@@ -962,9 +970,6 @@ function PreviewPanel({
       {layout === "split" && (
         <div
           style={{
-            position: "sticky",
-            top: 0,
-            zIndex: 2,
             minHeight: "42px",
             display: "flex",
             alignItems: "center",
@@ -982,7 +987,16 @@ function PreviewPanel({
           <span style={{ color: "rgba(68,222,211,0.78)" }}>Live</span>
         </div>
       )}
-      <div>{children}</div>
+      <div
+        className={layout === "split" ? "blog-editor-scroll-panel" : undefined}
+        style={{
+          height: layout === "split" ? "calc(100% - 42px)" : undefined,
+          overflowY: layout === "split" ? "auto" : undefined,
+          boxSizing: "border-box",
+        }}
+      >
+        {children}
+      </div>
     </section>
   );
 }
@@ -2050,12 +2064,14 @@ export default function BlogPreview() {
 
       <main
         style={{
-          minHeight: "100vh",
+          minHeight: effectiveLayout === "split" ? undefined : "100vh",
+          height: effectiveLayout === "split" ? "100vh" : undefined,
           background: "#000",
           color: "white",
           padding: `${workspaceTopPadding}px 24px 28px`,
           borderBottom: "1px solid rgba(255,255,255,0.08)",
           boxSizing: "border-box",
+          overflow: effectiveLayout === "split" ? "hidden" : undefined,
         }}
       >
         <div
