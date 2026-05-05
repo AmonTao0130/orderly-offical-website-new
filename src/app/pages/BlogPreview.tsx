@@ -282,14 +282,18 @@ function MetaChip({
 
 function AssetPanel({
   assets,
+  isCollapsed,
   copiedAssetPath,
   copyWarning,
+  onToggleCollapsed,
   onAssetUpload,
   onCopyAssetPath,
 }: {
   assets: BlogEditorAsset[];
+  isCollapsed: boolean;
   copiedAssetPath: string;
   copyWarning: string;
+  onToggleCollapsed: () => void;
   onAssetUpload: (event: ChangeEvent<HTMLInputElement>) => void;
   onCopyAssetPath: (asset: BlogEditorAsset) => void;
 }) {
@@ -305,6 +309,7 @@ function AssetPanel({
       }}
     >
       <div
+        onClick={onToggleCollapsed}
         style={{
           minHeight: "44px",
           display: "flex",
@@ -314,14 +319,25 @@ function AssetPanel({
           gap: "10px",
           padding: "0 14px",
           borderBottom: "1px solid rgba(255,255,255,0.08)",
+          cursor: "pointer",
         }}
       >
-        <div
+        <button
+          type="button"
+          onClick={(event) => {
+            event.stopPropagation();
+            onToggleCollapsed();
+          }}
           style={{
             display: "flex",
             alignItems: "center",
             gap: "10px",
             minWidth: 0,
+            border: "0",
+            background: "transparent",
+            padding: 0,
+            cursor: "pointer",
+            textAlign: "left",
           }}
         >
           <span
@@ -342,9 +358,20 @@ function AssetPanel({
           >
             {assets.length} files · {usedCount} used
           </span>
-        </div>
+          <span
+            aria-hidden="true"
+            style={{
+              color: "rgba(255,255,255,0.42)",
+              fontFamily: "'DM Mono','dm-mono',monospace",
+              fontSize: "14px",
+            }}
+          >
+            {isCollapsed ? "▾" : "▴"}
+          </span>
+        </button>
 
         <label
+          onClick={(event) => event.stopPropagation()}
           style={{
             minHeight: "30px",
             display: "inline-flex",
@@ -371,7 +398,7 @@ function AssetPanel({
         </label>
       </div>
 
-      {copyWarning && (
+      {!isCollapsed && copyWarning && (
         <div
           style={{
             padding: "8px 14px 0",
@@ -385,7 +412,7 @@ function AssetPanel({
         </div>
       )}
 
-      {assets.length === 0 ? (
+      {!isCollapsed && assets.length === 0 ? (
         <div
           style={{
             padding: "14px",
@@ -397,7 +424,7 @@ function AssetPanel({
           No local assets yet. Upload files here, then copy their paths into the
           Markdown when you need them.
         </div>
-      ) : (
+      ) : !isCollapsed ? (
         <div
           style={{
             display: "grid",
@@ -508,7 +535,7 @@ function AssetPanel({
             </div>
           ))}
         </div>
-      )}
+      ) : null}
     </div>
   );
 }
@@ -632,16 +659,20 @@ function MetadataSegmentedControl({
 function MetadataPanel({
   values,
   assets,
+  isCollapsed,
   slugError,
   descriptionError,
+  onToggleCollapsed,
   onMetadataChange,
   onRegenerateSlug,
   onAssetUpload,
 }: {
   values: BlogMetadataFormValues;
   assets: BlogEditorAsset[];
+  isCollapsed: boolean;
   slugError: string;
   descriptionError: string;
+  onToggleCollapsed: () => void;
   onMetadataChange: (field: BlogMetadataField, value: string) => void;
   onRegenerateSlug: () => void;
   onAssetUpload: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -660,6 +691,7 @@ function MetadataPanel({
       }}
     >
       <div
+        onClick={onToggleCollapsed}
         style={{
           minHeight: "44px",
           display: "flex",
@@ -669,17 +701,66 @@ function MetadataPanel({
           padding: "0 14px",
           borderBottom: "1px solid rgba(255,255,255,0.08)",
           background: "rgba(255,255,255,0.018)",
+          cursor: "pointer",
         }}
       >
-        <span
+        <button
+          type="button"
+          onClick={(event) => {
+            event.stopPropagation();
+            onToggleCollapsed();
+          }}
           style={{
-            color: "rgba(255,255,255,0.86)",
-            fontVariationSettings: "'wght' 700",
-            fontSize: "14px",
+            minWidth: 0,
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            border: "0",
+            background: "transparent",
+            padding: 0,
+            cursor: "pointer",
+            textAlign: "left",
           }}
         >
-          Metadata
-        </span>
+          <span
+            style={{
+              color: "rgba(255,255,255,0.86)",
+              fontVariationSettings: "'wght' 700",
+              fontSize: "14px",
+              flex: "0 0 auto",
+            }}
+          >
+            Metadata
+          </span>
+          {isCollapsed && (
+            <span
+              style={{
+                minWidth: 0,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                color: "rgba(255,255,255,0.48)",
+                fontFamily: "'DM Mono','dm-mono',monospace",
+                fontSize: "12px",
+              }}
+            >
+              {[values.title || "Untitled", values.category]
+                .filter(Boolean)
+                .join(" · ")}
+            </span>
+          )}
+          <span
+            aria-hidden="true"
+            style={{
+              color: "rgba(255,255,255,0.42)",
+              fontFamily: "'DM Mono','dm-mono',monospace",
+              fontSize: "14px",
+              flex: "0 0 auto",
+            }}
+          >
+            {isCollapsed ? "▾" : "▴"}
+          </span>
+        </button>
         <span
           style={{
             color: "rgba(255,255,255,0.44)",
@@ -691,7 +772,8 @@ function MetadataPanel({
         </span>
       </div>
 
-      <div
+      {!isCollapsed && (
+        <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
@@ -701,7 +783,7 @@ function MetadataPanel({
         }}
       >
         <div style={{ display: "grid", gap: "8px" }}>
-          <MetadataFieldLabel>title</MetadataFieldLabel>
+          <MetadataFieldLabel>Title</MetadataFieldLabel>
           <input
             value={values.title}
             onChange={(event) => onMetadataChange("title", event.target.value)}
@@ -710,7 +792,7 @@ function MetadataPanel({
         </div>
 
         <div style={{ display: "grid", gap: "8px" }}>
-          <MetadataFieldLabel>slug</MetadataFieldLabel>
+          <MetadataFieldLabel>URL slug</MetadataFieldLabel>
           <div
             style={{
               display: "grid",
@@ -786,7 +868,7 @@ function MetadataPanel({
           <MetadataFieldLabel
             aside={`${descriptionLength}/${BLOG_DESCRIPTION_MAX_LENGTH}`}
           >
-            description
+            Description
           </MetadataFieldLabel>
           <textarea
             value={values.description}
@@ -815,7 +897,7 @@ function MetadataPanel({
         </div>
 
         <div style={{ display: "grid", gap: "8px" }}>
-          <MetadataFieldLabel>cover</MetadataFieldLabel>
+          <MetadataFieldLabel>Cover image</MetadataFieldLabel>
           <input
             value={values.cover}
             onChange={(event) => onMetadataChange("cover", event.target.value)}
@@ -915,7 +997,7 @@ function MetadataPanel({
         </div>
 
         <div style={{ display: "grid", gap: "8px" }}>
-          <MetadataFieldLabel>category</MetadataFieldLabel>
+          <MetadataFieldLabel>Category</MetadataFieldLabel>
           <select
             value={values.category}
             onChange={(event) =>
@@ -932,7 +1014,7 @@ function MetadataPanel({
         </div>
 
         <div style={{ display: "grid", gap: "8px" }}>
-          <MetadataFieldLabel>author</MetadataFieldLabel>
+          <MetadataFieldLabel>Author</MetadataFieldLabel>
           <select
             value={values.author}
             onChange={(event) => onMetadataChange("author", event.target.value)}
@@ -947,21 +1029,21 @@ function MetadataPanel({
         </div>
 
         <MetadataSegmentedControl
-          label="publicationState"
+          label="Publication state"
           value={values.publicationState}
           options={BLOG_PUBLICATION_STATES}
           onChange={(value) => onMetadataChange("publicationState", value)}
         />
 
         <MetadataSegmentedControl
-          label="pin"
+          label="Pinned"
           value={values.pin}
           options={["false", "true"]}
           onChange={(value) => onMetadataChange("pin", value)}
         />
 
         <div style={{ display: "grid", gap: "8px" }}>
-          <MetadataFieldLabel>date</MetadataFieldLabel>
+          <MetadataFieldLabel>Publish date</MetadataFieldLabel>
           <input
             type="date"
             value={values.date}
@@ -973,6 +1055,7 @@ function MetadataPanel({
           />
         </div>
       </div>
+      )}
     </div>
   );
 }
@@ -1170,6 +1253,8 @@ function EditorPanel({
   layout,
   panelHeight,
   assets,
+  isAssetsCollapsed,
+  isMetadataCollapsed,
   slugError,
   descriptionError,
   copiedAssetPath,
@@ -1178,6 +1263,8 @@ function EditorPanel({
   onMarkdownChange,
   onMetadataChange,
   onRegenerateSlug,
+  onToggleAssetsCollapsed,
+  onToggleMetadataCollapsed,
   onAssetUpload,
   onCopyAssetPath,
 }: {
@@ -1186,6 +1273,8 @@ function EditorPanel({
   layout: EditorLayoutMode;
   panelHeight: string;
   assets: BlogEditorAsset[];
+  isAssetsCollapsed: boolean;
+  isMetadataCollapsed: boolean;
   slugError: string;
   descriptionError: string;
   copiedAssetPath: string;
@@ -1194,6 +1283,8 @@ function EditorPanel({
   onMarkdownChange: (change: EditorMarkdownChange) => void;
   onMetadataChange: (field: BlogMetadataField, value: string) => void;
   onRegenerateSlug: () => void;
+  onToggleAssetsCollapsed: () => void;
+  onToggleMetadataCollapsed: () => void;
   onAssetUpload: (event: ChangeEvent<HTMLInputElement>) => void;
   onCopyAssetPath: (asset: BlogEditorAsset) => void;
 }) {
@@ -1264,16 +1355,20 @@ function EditorPanel({
         </div>
         <AssetPanel
           assets={assets}
+          isCollapsed={isAssetsCollapsed}
           copiedAssetPath={copiedAssetPath}
           copyWarning={copyWarning}
+          onToggleCollapsed={onToggleAssetsCollapsed}
           onAssetUpload={onAssetUpload}
           onCopyAssetPath={onCopyAssetPath}
         />
         <MetadataPanel
           values={metadataValues}
           assets={assets}
+          isCollapsed={isMetadataCollapsed}
           slugError={slugError}
           descriptionError={descriptionError}
+          onToggleCollapsed={onToggleMetadataCollapsed}
           onMetadataChange={onMetadataChange}
           onRegenerateSlug={onRegenerateSlug}
           onAssetUpload={onAssetUpload}
@@ -1881,6 +1976,8 @@ export default function BlogPreview() {
   const [layoutPreference, setLayoutPreference] =
     useState<EditorLayoutMode>("split");
   const [canUseSplitLayout, setCanUseSplitLayout] = useState(true);
+  const [isAssetsCollapsed, setIsAssetsCollapsed] = useState(true);
+  const [isMetadataCollapsed, setIsMetadataCollapsed] = useState(false);
   const [state, setState] = useState<PreviewState>({
     status: "loading",
     error: null,
@@ -2580,6 +2677,8 @@ export default function BlogPreview() {
             layout={effectiveLayout}
             panelHeight={splitPanelHeight}
             assets={editorAssets}
+            isAssetsCollapsed={isAssetsCollapsed}
+            isMetadataCollapsed={isMetadataCollapsed}
             slugError={slugInputError}
             descriptionError={descriptionInputError}
             copiedAssetPath={copiedAssetPath}
@@ -2594,6 +2693,12 @@ export default function BlogPreview() {
             }}
             onMetadataChange={handleMetadataChange}
             onRegenerateSlug={handleRegenerateSlug}
+            onToggleAssetsCollapsed={() =>
+              setIsAssetsCollapsed((isCollapsed) => !isCollapsed)
+            }
+            onToggleMetadataCollapsed={() =>
+              setIsMetadataCollapsed((isCollapsed) => !isCollapsed)
+            }
             onAssetUpload={handleAssetUpload}
             onCopyAssetPath={handleCopyAssetPath}
           />
