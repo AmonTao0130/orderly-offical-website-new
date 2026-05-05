@@ -16,8 +16,8 @@ export function ToolbarButton({
       type="button"
       onClick={onClick}
       style={{
-        minHeight: "38px",
-        padding: "0 16px",
+        minHeight: "34px",
+        padding: "0 13px",
         borderRadius: "6px",
         border: isPrimary
           ? "1px solid rgba(68,222,211,0.5)"

@@ -27,7 +27,7 @@ export function LayoutToggle({
       style={{
         display: "inline-flex",
         alignItems: "center",
-        minHeight: "38px",
+        minHeight: "34px",
         padding: "3px",
         borderRadius: "7px",
         border: "1px solid rgba(255,255,255,0.12)",
@@ -52,8 +52,8 @@ export function LayoutToggle({
             disabled={isDisabled}
             onClick={() => onLayoutChange(option.value)}
             style={{
-              minHeight: "30px",
-              padding: "0 11px",
+              minHeight: "26px",
+              padding: "0 10px",
               border: "0",
               borderRadius: "5px",
               background: isActive ? "rgba(68,222,211,0.16)" : "transparent",

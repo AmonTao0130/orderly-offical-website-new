@@ -374,15 +374,18 @@ export default function BlogPost({
   post,
   latestPosts,
   hideChrome = false,
+  previewMode = "full",
 }: {
   slug: string;
   post: BlogPostType | null;
   latestPosts: BlogPostType[];
   hideChrome?: boolean;
+  previewMode?: "full" | "editor";
 }) {
   const vp = useViewport();
   const isMobile = vp === "mobile";
   const isTablet = vp === "tablet";
+  const isEditorPreview = previewMode === "editor";
   const [navOpen, setNavOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -407,7 +410,7 @@ export default function BlogPost({
   };
 
   const px = isMobile ? "16px" : isTablet ? "32px" : "24px";
-  const contentMaxW = "740px";
+  const contentMaxW = isEditorPreview ? "680px" : "740px";
 
   return (
     <div
@@ -421,6 +424,43 @@ export default function BlogPost({
     >
       {/* Inject prose styles */}
       <style dangerouslySetInnerHTML={{ __html: PROSE_CSS }} />
+      {isEditorPreview && (
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              .orderly-prose.blog-editor-preview-prose {
+                font-size: 16px;
+                line-height: 1.68;
+                color: rgba(255,255,255,0.82);
+              }
+              .orderly-prose.blog-editor-preview-prose p {
+                margin-bottom: 20px;
+              }
+              .orderly-prose.blog-editor-preview-prose ul,
+              .orderly-prose.blog-editor-preview-prose ol {
+                margin-left: 24px;
+              }
+              .orderly-prose.blog-editor-preview-prose li {
+                margin-bottom: 10px;
+              }
+              .orderly-prose.blog-editor-preview-prose h1,
+              .orderly-prose.blog-editor-preview-prose h2,
+              .orderly-prose.blog-editor-preview-prose h3,
+              .orderly-prose.blog-editor-preview-prose h4 {
+                margin-top: 18px;
+                margin-bottom: 10px;
+                line-height: 1.35;
+              }
+              @media (min-width: 1024px) {
+                .orderly-prose.blog-editor-preview-prose h1 { font-size: 28px; }
+                .orderly-prose.blog-editor-preview-prose h2 { font-size: 24px; }
+                .orderly-prose.blog-editor-preview-prose h3 { font-size: 21px; }
+                .orderly-prose.blog-editor-preview-prose h4 { font-size: 18px; }
+              }
+            `,
+          }}
+        />
+      )}
 
       {/* ── Nav ── */}
       {!hideChrome && (
@@ -457,7 +497,13 @@ export default function BlogPost({
             style={{
               maxWidth: contentMaxW,
               margin: "0 auto",
-              padding: isMobile
+              padding: isEditorPreview
+                ? isMobile
+                  ? "28px 16px 20px"
+                  : isTablet
+                  ? "32px 32px 24px"
+                  : "30px 24px 24px"
+                : isMobile
                 ? "40px 16px 32px"
                 : isTablet
                 ? "48px 32px 40px"
@@ -465,6 +511,7 @@ export default function BlogPost({
             }}
           >
             {/* Back link */}
+            {!isEditorPreview && (
             <motion.div variants={heroChild} style={{ marginBottom: "32px" }}>
               <a
                 href="/blog"
@@ -495,11 +542,17 @@ export default function BlogPost({
                 Back to Blog
               </a>
             </motion.div>
+            )}
 
             {/* Category + read time */}
             <motion.div
               variants={heroChild}
-              style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                marginBottom: isEditorPreview ? "14px" : "20px",
+              }}
             >
               <span
                 style={{
@@ -534,11 +587,17 @@ export default function BlogPost({
                 fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
                 fontVariationSettings: "'wght' 700",
                 fontFeatureSettings: "'ss02' 1,'ss03' 1,'ss05' 1,'ss06' 1",
-                fontSize: isMobile ? "28px" : "clamp(32px,4vw,52px)",
+                fontSize: isEditorPreview
+                  ? isMobile
+                    ? "26px"
+                    : "clamp(30px,3vw,40px)"
+                  : isMobile
+                  ? "28px"
+                  : "clamp(32px,4vw,52px)",
                 color: "white",
                 letterSpacing: "0.01em",
                 lineHeight: 1.18,
-                margin: "0 0 24px",
+                margin: isEditorPreview ? "0 0 16px" : "0 0 24px",
               }}
             >
               {post.title}
@@ -579,17 +638,31 @@ export default function BlogPost({
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, ease: smoothEase, delay: 0.3 }}
               style={{
-                maxWidth: isMobile ? "100%" : isTablet ? "calc(100% - 128px)" : "720px",
+                maxWidth: isEditorPreview
+                  ? isMobile
+                    ? "100%"
+                    : "640px"
+                  : isMobile
+                  ? "100%"
+                  : isTablet
+                  ? "calc(100% - 128px)"
+                  : "720px",
                 margin: "0 auto",
                 padding: isMobile ? "0" : isTablet ? "0 0px" : "0 0px",
-                marginBottom: isMobile ? "40px" : "56px",
+                marginBottom: isEditorPreview
+                  ? isMobile
+                    ? "28px"
+                    : "32px"
+                  : isMobile
+                  ? "40px"
+                  : "56px",
               }}
             >
               <div
                 style={{
-                  borderRadius: isMobile ? "0" : "20px",
+                  borderRadius: isMobile ? "0" : isEditorPreview ? "14px" : "20px",
                   overflow: "hidden",
-                  maxHeight: "480px",
+                  maxHeight: isEditorPreview ? "320px" : "480px",
                 }}
               >
                 <img
@@ -610,16 +683,27 @@ export default function BlogPost({
               maxWidth: contentMaxW,
               margin: "0 auto",
               padding: isMobile ? "0 16px" : isTablet ? "0 32px" : "0 24px",
-              marginBottom: isMobile ? "56px" : "72px",
+              marginBottom: isEditorPreview
+                ? isMobile
+                  ? "40px"
+                  : "48px"
+                : isMobile
+                ? "56px"
+                : "72px",
             }}
           >
             <div
-              className="orderly-prose"
+              className={
+                isEditorPreview
+                  ? "orderly-prose blog-editor-preview-prose"
+                  : "orderly-prose"
+              }
               dangerouslySetInnerHTML={{ __html: post.html }}
             />
           </motion.div>
 
           {/* ── Share section ── */}
+          {!isEditorPreview && (
           <motion.div
             variants={revealOnScroll}
             initial="hidden"
@@ -698,6 +782,7 @@ export default function BlogPost({
               </div>
             </div>
           </motion.div>
+          )}
 
           {/* ── Related posts ── */}
           {relatedPosts.length > 0 && (

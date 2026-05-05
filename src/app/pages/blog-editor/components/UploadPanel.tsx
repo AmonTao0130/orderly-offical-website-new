@@ -60,18 +60,18 @@ export function UploadPanel({
       ref={panelRef}
       style={{
         position: "fixed",
-        top: 20,
+        top: 12,
         left: "50%",
         transform: "translateX(-50%)",
         zIndex: 1200,
-        width: "min(calc(100vw - 48px), 1280px)",
-        padding: "14px 16px",
+        width: "min(calc(100vw - 32px), 1180px)",
+        padding: "8px 10px",
         border: "1px solid rgba(255,255,255,0.12)",
-        borderRadius: "10px",
+        borderRadius: "8px",
         background:
-          "linear-gradient(180deg, rgba(13,13,17,0.94), rgba(8,8,10,0.92))",
-        boxShadow: "0 18px 60px rgba(0,0,0,0.38)",
-        backdropFilter: "blur(18px)",
+          "linear-gradient(180deg, rgba(13,13,17,0.88), rgba(8,8,10,0.84))",
+        boxShadow: "0 12px 36px rgba(0,0,0,0.32)",
+        backdropFilter: "blur(14px)",
         color: "white",
         fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
       }}
@@ -81,7 +81,7 @@ export function UploadPanel({
           display: "flex",
           flexWrap: "wrap",
           alignItems: "center",
-          gap: "10px 12px",
+          gap: "8px 10px",
         }}
       >
         <label
@@ -89,8 +89,8 @@ export function UploadPanel({
             display: "inline-flex",
             alignItems: "center",
             justifyContent: "center",
-            minHeight: "38px",
-            padding: "0 16px",
+            minHeight: "34px",
+            padding: "0 13px",
             borderRadius: "6px",
             border: "1px solid rgba(255,255,255,0.14)",
             background: "rgba(255,255,255,0.055)",
@@ -128,7 +128,7 @@ export function UploadPanel({
             style={{
               flex: "1 1 240px",
               minWidth: 0,
-              minHeight: "38px",
+              minHeight: "34px",
               borderRadius: "6px",
               border: "1px solid rgba(255,255,255,0.14)",
               background: "#111114",
@@ -147,7 +147,7 @@ export function UploadPanel({
         ) : (
           <span
             style={{
-              flex: "1 1 220px",
+              flex: "1 1 180px",
               minWidth: 0,
               overflow: "hidden",
               textOverflow: "ellipsis",

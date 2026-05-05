@@ -657,8 +657,8 @@ export function useBlogEditor() {
   const effectiveLayout: EditorLayoutMode = canUseSplitLayout
     ? layoutPreference
     : "stack";
-  const workspaceTopPadding = Math.max(116, toolbarHeight + 52);
-  const splitPanelHeight = `calc(100vh - ${workspaceTopPadding + 28}px)`;
+  const workspaceTopPadding = Math.max(86, toolbarHeight + 32);
+  const splitPanelHeight = `calc(100vh - ${workspaceTopPadding + 20}px)`;
   const workspaceMaxWidth =
     effectiveLayout === "split"
       ? BLOG_EDITOR_CONTENT_MAX_WIDTH * 2 +

@@ -22,7 +22,7 @@ export default function BlogEditor() {
           height: editor.effectiveLayout === "split" ? "100vh" : undefined,
           background: "#000",
           color: "white",
-          padding: `${editor.workspaceTopPadding}px 24px 28px`,
+          padding: `${editor.workspaceTopPadding}px 24px 24px`,
           borderBottom: "1px solid rgba(255,255,255,0.08)",
           boxSizing: "border-box",
           overflow: editor.effectiveLayout === "split" ? "hidden" : undefined,
@@ -54,6 +54,7 @@ export default function BlogEditor() {
               post={post}
               latestPosts={[]}
               hideChrome
+              previewMode="editor"
             />
           </PreviewPanel>
         </div>
