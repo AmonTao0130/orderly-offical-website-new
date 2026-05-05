@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import BlogPreview from "@/app/pages/BlogPreview";
+import BlogEditor from "@/app/pages/BlogEditor";
 
 export const metadata: Metadata = {
   title: "Blog Editor | Orderly Network",
@@ -10,5 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <BlogPreview />;
+  return <BlogEditor />;
 }

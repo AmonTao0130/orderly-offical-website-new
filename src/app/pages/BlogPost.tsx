@@ -231,41 +231,49 @@ const PROSE_CSS = `
   font-variation-settings: 'wght' 350;
   letter-spacing: 0.018em;
 }
-.orderly-prose p { margin: 0 0 20px; }
-.orderly-prose h2 {
-  font-size: 26px;
+.orderly-prose h1,
+.orderly-prose h2,
+.orderly-prose h3,
+.orderly-prose h4 {
   font-variation-settings: 'wght' 700;
   color: white;
-  margin: 48px 0 16px;
-  line-height: 1.25;
-  letter-spacing: 0.01em;
+  margin-top: 20px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  letter-spacing: 0;
 }
-.orderly-prose h3 {
-  font-size: 20px;
-  font-variation-settings: 'wght' 600;
-  color: white;
-  margin: 36px 0 12px;
-  line-height: 1.3;
+.orderly-prose h1 { font-size: 24px; }
+.orderly-prose h2 { font-size: 20px; }
+.orderly-prose h3 { font-size: 18px; }
+.orderly-prose h4 { font-size: 16px; }
+@media (min-width: 1024px) {
+  .orderly-prose h1 { font-size: 32px; }
+  .orderly-prose h2 { font-size: 28px; }
+  .orderly-prose h3 { font-size: 24px; }
+  .orderly-prose h4 { font-size: 22px; }
 }
-.orderly-prose ul, .orderly-prose ol {
-  margin: 0 0 20px;
-  padding-left: 24px;
+.orderly-prose p {
+  margin-top: 10px;
+  margin-bottom: 28px;
 }
-.orderly-prose li { margin-bottom: 8px; }
+.orderly-prose ul,
+.orderly-prose ol {
+  list-style: disc;
+  margin-left: 32px;
+  padding-left: 0;
+}
+.orderly-prose li { margin-bottom: 16px; }
 .orderly-prose a {
-  color: #9c75ff;
+  color: #8AEFF5;
   text-decoration: underline;
-  text-underline-offset: 3px;
 }
-.orderly-prose a:hover { color: #b47dff; }
 .orderly-prose strong { font-variation-settings: 'wght' 700; color: white; }
 .orderly-prose blockquote {
-  border-left: 3px solid #6700ce;
-  padding-left: 20px;
-  margin: 24px 0;
+  border-left: 4px solid rgba(255,255,255,0.2);
+  padding-left: 28px;
   font-style: italic;
-  color: rgba(255,255,255,0.6);
 }
+.orderly-prose u { word-break: break-all; }
 .orderly-prose code {
   font-family: 'DM Mono','dm-mono',monospace;
   color: #44DED3;
@@ -292,6 +300,12 @@ const PROSE_CSS = `
   border: none;
   border-top: 1px solid rgba(255,255,255,0.1);
   margin: 40px 0;
+}
+.orderly-prose img {
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(255,255,255,0.12);
+  border-radius: 8px;
 }
 `;
 
