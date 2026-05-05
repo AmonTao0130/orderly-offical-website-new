@@ -74,6 +74,7 @@ export function useBlogEditor() {
   const [canUseSplitLayout, setCanUseSplitLayout] = useState(true);
   const [isAssetsCollapsed, setIsAssetsCollapsed] = useState(true);
   const [isMetadataCollapsed, setIsMetadataCollapsed] = useState(false);
+  const [hasEditedCurrentDraft, setHasEditedCurrentDraft] = useState(false);
   const [state, setState] = useState<PreviewState>({
     status: "loading",
     error: null,
@@ -308,6 +309,10 @@ export function useBlogEditor() {
       setMarkdown(draft.markdown);
       setPreviewMarkdown(draft.markdown);
       setSelectedMarkdownPath(draft.selectedMarkdownPath);
+      setHasEditedCurrentDraft(
+        draft.markdown !== DEFAULT_EDITOR_MARKDOWN ||
+          Boolean(draft.selectedMarkdownPath)
+      );
       resetSlugSync(draft.markdown);
     }
     setIsDraftReady(true);
@@ -457,6 +462,7 @@ export function useBlogEditor() {
     setMarkdown(normalizedMarkdown);
     setPreviewMarkdown(normalizedMarkdown);
     setSelectedMarkdownPath(loaded.selectedMarkdownPath);
+    setHasEditedCurrentDraft(false);
     setAssetContext({
       filesByPath: loaded.filesByPath,
       baseDir: loaded.baseDir,
@@ -525,16 +531,20 @@ export function useBlogEditor() {
       return;
     }
 
+    const editableFiles = uploadedFiles.filter(
+      (file) => !file.name.toLowerCase().endsWith(".md")
+    );
+    if (editableFiles.length === 0) {
+      return;
+    }
+
+    setHasEditedCurrentDraft(true);
     setAssetContext((currentContext) => {
       const baseDir = currentContext.baseDir || "";
       const filesByPath = new Map(
         currentContext.filesByPath || new Map<string, File>()
       );
-      for (const file of uploadedFiles) {
-        if (file.name.toLowerCase().endsWith(".md")) {
-          continue;
-        }
-
+      for (const file of editableFiles) {
         const assetPath = getUploadedAssetPath(file.name, filesByPath, baseDir);
         filesByPath.set(assetPath, file);
       }
@@ -566,6 +576,7 @@ export function useBlogEditor() {
 
   function handleMetadataChange(field: BlogMetadataField, value: string) {
     setSelectionToRestore(null);
+    setHasEditedCurrentDraft(true);
 
     if (field === "slug") {
       slugSyncRef.current.manualOverride = true;
@@ -595,10 +606,12 @@ export function useBlogEditor() {
     resetSlugSync(DEFAULT_EDITOR_MARKDOWN);
     setMarkdown(DEFAULT_EDITOR_MARKDOWN);
     setPreviewMarkdown(DEFAULT_EDITOR_MARKDOWN);
+    setHasEditedCurrentDraft(false);
     saveEditorDraftState(DEFAULT_EDITOR_MARKDOWN, "");
   }
 
   function handleRegenerateSlug() {
+    setHasEditedCurrentDraft(true);
     slugSyncRef.current.manualOverride = false;
     slugSyncRef.current.preservedSlug = "";
     const change = applyTitleSlugSync(markdown, { force: true });
@@ -673,6 +686,7 @@ export function useBlogEditor() {
       change.markdown
     );
     setSelectionToRestore(change.selection || null);
+    setHasEditedCurrentDraft(true);
     setMarkdown(normalizedMarkdown);
   }
 
@@ -692,6 +706,7 @@ export function useBlogEditor() {
       markdownFiles,
       selectedMarkdownPath,
       hasFiles: files.length > 0,
+      shouldConfirmNewDraft: hasEditedCurrentDraft,
       onFileChange: handleFileChange,
       onMarkdownChange: handleMarkdownChange,
       onNewDraft: handleNewDraft,
