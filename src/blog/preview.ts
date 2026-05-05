@@ -168,6 +168,45 @@ function splitAssetSuffix(value: string) {
   };
 }
 
+function transformMarkdownOutsideFencedCodeBlocks(
+  markdown: string,
+  transformLine: (line: string) => string
+) {
+  let fenceChar = "";
+  let fenceLength = 0;
+
+  return markdown.replace(/[^\r\n]*(?:\r\n|\n|\r|$)/g, (line) => {
+    if (!line) {
+      return line;
+    }
+
+    const lineBreak = line.match(/(\r\n|\n|\r)$/)?.[0] || "";
+    const content = lineBreak ? line.slice(0, -lineBreak.length) : line;
+    const fenceMatch = content.match(/^[ \t]{0,3}(`{3,}|~{3,})/);
+
+    if (fenceChar) {
+      if (
+        fenceMatch &&
+        fenceMatch[1][0] === fenceChar &&
+        fenceMatch[1].length >= fenceLength
+      ) {
+        fenceChar = "";
+        fenceLength = 0;
+      }
+
+      return line;
+    }
+
+    if (fenceMatch) {
+      fenceChar = fenceMatch[1][0];
+      fenceLength = fenceMatch[1].length;
+      return line;
+    }
+
+    return `${transformLine(content)}${lineBreak}`;
+  });
+}
+
 function getEditorPublicAssetFallback(assetPath: string) {
   const normalized = normalizePath(
     assetPath.startsWith("/") ? assetPath.slice(1) : assetPath
@@ -240,21 +279,23 @@ function rewriteMarkdownBodyAssetUrls(
   body: string,
   resolveAssetUrl: (assetValue: string) => string
 ) {
-  return body
-    .replace(/(!?\[[^\]]*]\()([^)\s]+)(\))/g, (match, start, url, end) => {
-      if (isExternalOrRootPath(url)) {
-        return match;
-      }
+  return transformMarkdownOutsideFencedCodeBlocks(body, (line) =>
+    line
+      .replace(/(!?\[[^\]]*]\()([^)\s]+)(\))/g, (match, start, url, end) => {
+        if (isExternalOrRootPath(url)) {
+          return match;
+        }
 
-      return `${start}${resolveAssetUrl(url)}${end}`;
-    })
-    .replace(/\b(src|href)=["']([^"']+)["']/g, (match, attr, url) => {
-      if (isExternalOrRootPath(url)) {
-        return match;
-      }
+        return `${start}${resolveAssetUrl(url)}${end}`;
+      })
+      .replace(/\b(src|href)=["']([^"']+)["']/g, (match, attr, url) => {
+        if (isExternalOrRootPath(url)) {
+          return match;
+        }
 
-      return `${attr}="${resolveAssetUrl(url)}"`;
-    });
+        return `${attr}="${resolveAssetUrl(url)}"`;
+      })
+  );
 }
 
 function addDownloadAsset(
@@ -316,17 +357,21 @@ export function collectBlogPreviewDownloadAssets(
     // Download should still work while the draft is structurally invalid.
   }
 
-  body.replace(/!\[[^\]]*]\(\s*<?([^)\s>]+)>?(?:\s+["'][^)]*["'])?\s*\)/g, (
-    _match,
-    url: string
-  ) => {
-    addDownloadAsset(assetsByPackagePath, url, assetContext);
-    return _match;
-  });
+  transformMarkdownOutsideFencedCodeBlocks(body, (line) => {
+    line.replace(
+      /!\[[^\]]*]\(\s*<?([^)\s>]+)>?(?:\s+["'][^)]*["'])?\s*\)/g,
+      (_match, url: string) => {
+        addDownloadAsset(assetsByPackagePath, url, assetContext);
+        return _match;
+      }
+    );
 
-  body.replace(/\bsrc=["']([^"']+)["']/g, (_match, url: string) => {
-    addDownloadAsset(assetsByPackagePath, url, assetContext);
-    return _match;
+    line.replace(/\bsrc=["']([^"']+)["']/g, (_match, url: string) => {
+      addDownloadAsset(assetsByPackagePath, url, assetContext);
+      return _match;
+    });
+
+    return line;
   });
 
   return Array.from(assetsByPackagePath.values()).sort((a, b) =>
