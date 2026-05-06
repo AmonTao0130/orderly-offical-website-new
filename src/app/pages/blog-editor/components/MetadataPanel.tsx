@@ -151,6 +151,26 @@ function metadataInputStyle(multiline?: boolean): CSSProperties {
   };
 }
 
+function metadataSelectStyle(): CSSProperties {
+  const chevronSvg = encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75L10.5 5.25" stroke="rgba(255,255,255,0.66)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  );
+
+  return {
+    ...metadataInputStyle(),
+    height: "38px",
+    lineHeight: "38px",
+    padding: "0 36px 0 12px",
+    appearance: "none",
+    WebkitAppearance: "none",
+    MozAppearance: "none",
+    backgroundImage: `url("data:image/svg+xml,${chevronSvg}")`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "right 12px center",
+    backgroundSize: "14px 14px",
+  };
+}
+
 function MetadataSegmentedControl({
   label,
   field,
@@ -595,7 +615,7 @@ export function MetadataPanel({
               onChange={(event) =>
                 onMetadataChange("category", event.target.value)
               }
-              style={metadataInputStyle()}
+              style={metadataSelectStyle()}
             >
               {blogConfig.categories.map((category) => (
                 <option key={category.slug} value={category.slug}>
@@ -617,7 +637,7 @@ export function MetadataPanel({
               onChange={(event) =>
                 onMetadataChange("author", event.target.value)
               }
-              style={metadataInputStyle()}
+              style={metadataSelectStyle()}
             >
               {blogConfig.authors.map((author) => (
                 <option key={author.name} value={author.name}>
