@@ -453,7 +453,6 @@ function MobileNavDrawer({
             }}
           >
             <span className="flex min-w-0 flex-1 items-center gap-[10px]">
-              <CampaignIcon className="shrink-0" />
               <span>{CAMPAIGNS_LINK.label}</span>
             </span>
             <svg

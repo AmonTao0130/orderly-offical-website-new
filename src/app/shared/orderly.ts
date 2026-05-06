@@ -53,7 +53,6 @@ export const HEADER_NAV: Record<string, HeaderNavItem[]> = {
   ],
   Ecosystem: [
     { label: "Partners", href: "/partners", external: false, target: "_blank" },
-    { label: "Listings", href: "https://orderly.network/listing/", external: true },
     { label: "Case Studies", href: "https://dex.orderly.network/case-studies", external: true },
     { label: "Governance", href: "https://snapshot.box/#/s:orderlygov.eth", external: true },
     { label: "Staking", href: ORDER_BUY_URL, external: true },
@@ -171,11 +170,6 @@ export const FOOTER_NAV: Record<string, FooterNavLink[]> = {
       href: "/partners",
       external: false,
       target: "_blank",
-    },
-    {
-      label: "Listings",
-      href: "https://orderly.network/listing/",
-      external: true,
     },
     {
       label: "Case Studies",

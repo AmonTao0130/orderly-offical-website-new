@@ -1200,7 +1200,7 @@ function CampaignsDropdownPanel({
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative h-[80px] w-full overflow-hidden rounded-[8px] border no-underline transition-opacity hover:opacity-90"
+              className="relative h-[80px] w-full overflow-hidden rounded-[8px] no-underline transition-opacity hover:opacity-90"
               onClick={() =>
                 posthog.capture("header_nav_clicked", {
                   tab_name: `campaigns_${item.titleVariant}`,
@@ -1221,9 +1221,6 @@ function CampaignsDropdownPanel({
                   src={item.backgroundImageSrc}
                 />
               </div>
-
-              {/* Border layer */}
-              <div aria-hidden className={item.borderClassName} />
 
               <div className="flex flex-row items-center size-full">
                 <div className="content-stretch flex gap-[8px] items-center p-[16px] relative size-full flex-1">
@@ -1258,26 +1255,6 @@ function CampaignsDropdownPanel({
                     </div>
                   )}
 
-                  {/* Status badge */}
-                  {item.status === "Ongoing" ? (
-                    <div
-                      className="absolute content-stretch flex items-center justify-center px-[8px] py-[4px] right-0 rounded-bl-[8px] rounded-tr-[8px] top-0"
-                      style={{
-                        backgroundImage:
-                          "linear-gradient(-89.3303deg, rgb(72, 189, 255) 0%, rgb(120, 108, 255) 47.763%, rgb(189, 0, 255) 99.638%)",
-                      }}
-                    >
-                      <p className="font-['Atyp_BL:Regular',sans-serif] font-normal leading-[1.6] not-italic relative shrink-0 text-[10px] text-[rgba(255,255,255,0.98)] text-nowrap">
-                        Ongoing
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="absolute bg-[rgba(255,255,255,0.36)] content-stretch flex items-center justify-center px-[8px] py-[4px] right-0 rounded-bl-[8px] rounded-tr-[8px] top-0">
-                      <p className="font-['Atyp_BL:Regular',sans-serif] font-normal leading-[1.6] not-italic relative shrink-0 text-[10px] text-[rgba(255,255,255,0.98)] text-nowrap">
-                        Ended
-                      </p>
-                    </div>
-                  )}
                 </div>
               </div>
             </a>
@@ -1320,20 +1297,6 @@ function CampaignsMenuCell() {
           })
         }
       >
-        {/* Animated gradient border - no fill background */}
-        <span
-          className="absolute inset-0 rounded-full"
-          style={{
-            background: "linear-gradient(90deg, #48bdff, #786cff, #bd00ff, #48bdff)",
-            backgroundSize: "300% 100%",
-            animation: "gradient-border 3s linear infinite",
-            padding: "1px",
-            WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-            WebkitMaskComposite: "xor",
-            maskComposite: "exclude",
-          }}
-        />
-        <CampaignIcon className="mr-1 relative z-10" />
         <span
           className="font-['Atyp_Text:Medium',sans-serif] text-[16px] leading-none not-italic text-white relative z-10"
           style={{ letterSpacing: "0.042em" }}
@@ -5597,7 +5560,6 @@ function BuildContentList({
       <Container6 />
       <Container7 />
       <ContainerVaults />
-      <Container8 />
       <Container9 />
     </div>
   );

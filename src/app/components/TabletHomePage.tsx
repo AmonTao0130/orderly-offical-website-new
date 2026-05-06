@@ -695,12 +695,6 @@ const BUILD_CARDS = [
     bg: "#3f0086",
   },
   {
-    title: "List your token",
-    linkLabel: "Listings",
-    href: "https://orderly.network/listing/",
-    bg: "#6700ce",
-  },
-  {
     title: "Building trading tools",
     linkLabel: "Start Building",
     href: "https://dex.orderly.network/",
@@ -712,7 +706,6 @@ const CARD_NAME_MAP: Record<string, string> = {
   "Orderly One": "dex",
   "SDK & API": "build",
   Vaults: "vaults",
-  Listings: "listings",
   "Start Building": "start_building",
 };
 
