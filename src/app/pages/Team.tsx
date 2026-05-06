@@ -119,30 +119,30 @@ const FOUNDERS = [
 ];
 
 const INVESTORS = [
-  "Pantera",
-  "GSR",
-  "Laser Digital",
-  "Dragonfly Capital",
-  "Jump",
-  "Crypto.com Capital",
-  "Sequoia Capital",
-  "Primitive",
-  "Metaweb",
-  "SevenX",
-  "CoinDCX",
-  "Kronos",
-  "Raydium",
-  "Amber",
-  "AG Build",
-  "Cobo Ventures",
-  "Gate Ventures",
-  "Mirana",
-  "Puzzle Ventures",
-  "IOSG",
-  "WOO",
-  "Subzero",
-  "DI Ventures",
-  "Newman",
+  { name: "Pantera", img: "/images/investors/Pantera_White.png" },
+  { name: "Sequoia Capital", img: "/images/investors/Sequoia Capital_White.png" },
+  { name: "Dragonfly Capital", img: "/images/investors/Dragonfly_White.png" },
+  { name: "Jump", img: "/images/investors/jump_White.png" },
+  { name: "GSR", img: "/images/investors/GSR_White.png" },
+  { name: "OKX Ventures", img: "/images/investors/okx ventures.png" },
+  { name: "Laser Digital", img: "/images/investors/Laser_White.png" },
+  { name: "Crypto.com Capital", img: "/images/investors/crypto.com_White.png" },
+  { name: "Primitive", img: "/images/investors/Primitive_White.png" },
+  { name: "SevenX", img: "/images/investors/SevenX_White.png" },
+  { name: "CoinDCX", img: "/images/investors/CoinDCX_White.png" },
+  { name: "Kronos", img: "/images/investors/kronos_White.png" },
+  { name: "Raydium", img: "/images/investors/Raydium_White.png" },
+  { name: "Amber", img: "/images/investors/Amber_White.png" },
+  { name: "AG Build", img: "/images/investors/AGBuild_White.png" },
+  { name: "Cobo Ventures", img: "/images/investors/cobo_White.png" },
+  { name: "Gate Ventures", img: "/images/investors/Gate_White.png" },
+  { name: "Mirana", img: "/images/investors/Mirana_White.png" },
+  { name: "Puzzle Ventures", img: "/images/investors/Puzzle_White.png" },
+  { name: "IOSG", img: "/images/investors/IOSG_White.png" },
+  { name: "WOO", img: "/images/investors/WOOFi_White.png", scale: 0.75 },
+  { name: "Subzero", img: "/images/investors/Subzero_White.png" },
+  { name: "DI Ventures", img: "/images/investors/DI_White.png" },
+  { name: "Newman", img: "/images/investors/Newman_White.png", scale: 1.3 },
 ];
 
 // ── X (Twitter) icon ──────────────────────────────────────────────────────────
@@ -272,8 +272,8 @@ function FounderCard({
   );
 }
 
-// ── Investor Badge ────────────────────────────────────────────────────────────
-function InvestorBadge({ name, vp }: { name: string; vp: Viewport }) {
+// ── Investor Logo ────────────────────────────────────────────────────────────
+function InvestorBadge({ name, img, vp, scale = 1 }: { name: string; img: string; vp: Viewport; scale?: number }) {
   const [hovered, setHovered] = useState(false);
   const isMobile = vp === "mobile";
 
@@ -283,30 +283,24 @@ function InvestorBadge({ name, vp }: { name: string; vp: Viewport }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        background: hovered ? "rgba(103,0,206,0.15)" : "rgba(255,255,255,0.04)",
-        border: `1px solid ${hovered ? "rgba(103,0,206,0.45)" : "rgba(255,255,255,0.08)"}`,
-        borderRadius: "10px",
-        padding: isMobile ? "10px 16px" : "12px 20px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        transition: "background 0.25s ease, border-color 0.25s ease",
+        padding: isMobile ? "8px 12px" : "10px 16px",
       }}
     >
-      <span
+      <img
+        src={img}
+        alt={name}
         style={{
-          fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-          fontVariationSettings: "'wght' 500",
-          fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-          fontSize: isMobile ? "13px" : "14px",
-          color: hovered ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.55)",
-          letterSpacing: "0.025em",
-          whiteSpace: "nowrap",
-          transition: "color 0.25s ease",
+          maxHeight: (isMobile ? 24 : 28) * scale,
+          maxWidth: (isMobile ? 100 : 130) * scale,
+          objectFit: "contain",
+          opacity: hovered ? 1 : 0.55,
+          transition: "opacity 0.25s ease",
+          display: "block",
         }}
-      >
-        {name}
-      </span>
+      />
     </motion.div>
   );
 }
@@ -391,23 +385,7 @@ export default function Team() {
           </span>
         </motion.h1>
 
-        <motion.p
-          variants={heroChild}
-          style={{
-            fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-            fontVariationSettings: "'wght' 400",
-            fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-            fontSize: isMobile ? "15px" : "17px",
-            color: "rgba(255,255,255,0.55)",
-            lineHeight: 1.65,
-            maxWidth: "560px",
-            margin: "0 auto",
-            letterSpacing: "0.02em",
-          }}
-        >
-          Institutional-grade infrastructure with shared liquidity for CeFi &amp; DeFi —
-          built by a team obsessed with making decentralized trading truly competitive.
-        </motion.p>
+
       </motion.div>
 
       {/* ── Mission strip ── */}
@@ -563,8 +541,8 @@ export default function Team() {
             justifyContent: "center",
           }}
         >
-          {INVESTORS.map((name) => (
-            <InvestorBadge key={name} name={name} vp={vp} />
+          {INVESTORS.map(({ name, img, scale }) => (
+            <InvestorBadge key={name} name={name} img={img} vp={vp} scale={scale} />
           ))}
         </motion.div>
       </motion.div>
