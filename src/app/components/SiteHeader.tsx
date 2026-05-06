@@ -291,18 +291,6 @@ function CampaignsDropdownPanel({ onEnter, onLeave }: { onEnter: () => void; onL
                       </p>
                     </div>
                   )}
-                  {item.status === "Ongoing" ? (
-                    <div
-                      className="absolute content-stretch flex items-center justify-center px-[8px] py-[4px] right-0 rounded-bl-[8px] rounded-tr-[8px] top-0"
-                      style={{ backgroundImage: "linear-gradient(-89.3303deg, rgb(72, 189, 255) 0%, rgb(120, 108, 255) 47.763%, rgb(189, 0, 255) 99.638%)" }}
-                    >
-                      <p className="font-['Atyp_BL:Regular',sans-serif] font-normal leading-[1.6] not-italic relative shrink-0 text-[10px] text-[rgba(255,255,255,0.98)] text-nowrap">Ongoing</p>
-                    </div>
-                  ) : (
-                    <div className="absolute bg-[rgba(255,255,255,0.36)] content-stretch flex items-center justify-center px-[8px] py-[4px] right-0 rounded-bl-[8px] rounded-tr-[8px] top-0">
-                      <p className="font-['Atyp_BL:Regular',sans-serif] font-normal leading-[1.6] not-italic relative shrink-0 text-[10px] text-[rgba(255,255,255,0.98)] text-nowrap">Ended</p>
-                    </div>
-                  )}
                 </div>
               </div>
             </a>
@@ -337,19 +325,6 @@ function CampaignsMenuCell() {
           })
         }
       >
-        <span
-          className="absolute inset-0 rounded-full"
-          style={{
-            background: "linear-gradient(90deg, #48bdff, #786cff, #bd00ff, #48bdff)",
-            backgroundSize: "300% 100%",
-            animation: "gradient-border 3s linear infinite",
-            padding: "1px",
-            WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-            WebkitMaskComposite: "xor",
-            maskComposite: "exclude",
-          }}
-        />
-        <CampaignIcon className="mr-1 relative z-10" />
         <span className="font-['Atyp_Text:Medium',sans-serif] text-[16px] leading-none not-italic text-white relative z-10" style={{ letterSpacing: "0.042em" }}>
           Campaigns
         </span>
@@ -825,7 +800,6 @@ export function MobileNavDrawer({
             onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.opacity = "1"; }}
           >
             <span className="flex min-w-0 flex-1 items-center gap-[10px]">
-              <CampaignIcon className="shrink-0" />
               <span>{CAMPAIGNS_LINK.label}</span>
             </span>
             <svg

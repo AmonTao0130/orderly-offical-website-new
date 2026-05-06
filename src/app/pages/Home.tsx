@@ -195,58 +195,6 @@ function MobileFixedNav({
   );
 }
 
-function FloatingCampaignHeart() {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <a
-      href="https://app.orderly.network/campaigns/?utm_source=orderly_website&utm_medium=navbar"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="floating-heart-btn"
-      aria-label="Join Perps Trading Campaign"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        position: "fixed",
-        bottom: 28,
-        right: 24,
-        zIndex: 300,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: 6,
-        textDecoration: "none",
-      }}
-    >
-      <img
-        src="/images/love1.png"
-        alt="Join Campaign"
-        width={64}
-        height={64}
-        style={{ display: "block", flexShrink: 0 }}
-      />
-      <span
-        style={{
-          color: "#fff",
-          fontSize: 12,
-          fontFamily: "'atyp-bl-variable', sans-serif",
-          fontWeight: 500,
-          whiteSpace: "nowrap",
-          opacity: hovered ? 1 : 0,
-          transform: hovered ? "translateY(0)" : "translateY(-6px)",
-          transition: "opacity 0.2s ease, transform 0.2s ease",
-          pointerEvents: "none",
-          background: "rgba(0,0,0,0.55)",
-          borderRadius: 6,
-          padding: "3px 8px",
-        }}
-      >
-        Competition
-      </span>
-    </a>
-  );
-}
-
 type Viewport = "mobile" | "tablet" | "desktop";
 
 export default function Home() {
@@ -294,7 +242,6 @@ export default function Home() {
             <MobileNavDrawer key="mobile-nav" onClose={handleCloseNav} />
           )}
         </AnimatePresence>
-        <FloatingCampaignHeart />
       </div>
     );
   }
@@ -318,7 +265,12 @@ export default function Home() {
         <div style={{ paddingTop: 68 }}>
           <TabletHomePage bannerOffset={0} navVariant="solid-black" hideNav />
         </div>
-        <FloatingCampaignHeart />
+        {/* Nav drawer lives outside TabletHomePage so position:fixed works correctly */}
+        <AnimatePresence>
+          {navOpen && (
+            <MobileNavDrawer key="tablet-nav" onClose={handleCloseNav} deviceLayout="tablet" />
+          )}
+        </AnimatePresence>
       </>
     );
   }
@@ -338,14 +290,13 @@ export default function Home() {
           justifyContent: "center",
         }}
       >
-        <MorphingHeader variant="solid-black" />
+        <MorphingHeader />
       </div>
       <div>
         <ScaledFrame cap comfortableViewport={1920} maxScale={0.85} autoHeight>
           <Frame7 />
         </ScaledFrame>
       </div>
-      <FloatingCampaignHeart />
     </div>
   );
 }
