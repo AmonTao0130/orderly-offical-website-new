@@ -1,25 +1,34 @@
-FROM node:20-alpine AS base
-WORKDIR /app
-COPY package.json package-lock.json ./
+FROM node:22-alpine AS base
 
 FROM base AS deps
-RUN npm ci
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm install
 
-FROM deps AS build
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
-FROM node:20-alpine AS runtime
+FROM base AS runtime
 WORKDIR /app
+ENV NODE_ENV=production
+ARG TELEGRAM_BOT_TOKEN
+ARG TELEGRAM_CHAT_ID
+ARG BEEHIIV_API_KEY
+ENV TELEGRAM_BOT_TOKEN=$TELEGRAM_BOT_TOKEN
+ENV TELEGRAM_CHAT_ID=$TELEGRAM_CHAT_ID
+ENV BEEHIIV_API_KEY=$BEEHIIV_API_KEY
 
-COPY --from=build /app/.next ./.next
-COPY --from=build /app/public ./public
-COPY --from=build /app/package.json ./package.json
-COPY --from=build /app/next.config.ts ./next.config.ts
-COPY --from=build /app/node_modules ./node_modules
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
 
-ENV HOST=0.0.0.0
-ENV PORT=80
 EXPOSE 80
 
-CMD ["npx", "next", "start"]
+ENV PORT=80
+# set hostname to localhost
+ENV HOSTNAME=0.0.0.0
+
+CMD ["node", "server.js"]
