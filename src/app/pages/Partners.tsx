@@ -1197,7 +1197,7 @@ export default function Partners() {
               fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
               fontVariationSettings: "'wght' 400",
               fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-              fontSize: isMobile ? "12px" : isTablet ? "10px" : "16.5px",
+              fontSize: isMobile ? "14px" : isTablet ? "15px" : "16.5px",
               color: "rgba(255,255,255,0.6)",
               margin: "0 auto",
               lineHeight: 1.55,
