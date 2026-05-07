@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Temporarily removing static export to enable API routes for the partnership form
   // For static hosting, consider using a serverless function or form service like Formspree
-  // output: "export",
+  output: "standalone",
   transpilePackages: ["@mui/icons-material", "@mui/material"],
   async headers() {
     return [
