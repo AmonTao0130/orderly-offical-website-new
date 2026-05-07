@@ -620,13 +620,23 @@ function FeaturedCarousel({ posts, vp }: { posts: BlogPost[]; vp: Viewport }) {
         style={{
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "flex-end",
           marginTop: "14px",
           padding: "0 2px",
+          position: "relative",
         }}
       >
         {/* Dot indicators */}
-        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        >
           {posts.map((_, i) => (
             <button
               key={i}
