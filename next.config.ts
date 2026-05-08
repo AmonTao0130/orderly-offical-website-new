@@ -35,7 +35,7 @@ const nextConfig: NextConfig = {
       {
         source: "/docs",
         destination:
-          "https://orderly.mintlify.dev/docs/getting-started/what-is-orderly-network",
+          "https://orderly.mintlify.dev/docs/introduction/getting-started/what-is-orderly",
       },
       {
         source: "/docs/:path*",
