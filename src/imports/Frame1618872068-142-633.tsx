@@ -1,0 +1,5051 @@
+"use client";
+
+import { useState, useEffect, useRef, memo, useCallback } from "react";
+import posthog from "posthog-js";
+import MacbookVideo from "@/app/components/MacbookVideo";
+// Lightweight inline check icon (replaces heavy MUI CheckIcon)
+const CheckSvg = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M5 13l4 4L19 7"
+      stroke="white"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+import { AnimatedNumber } from "@/app/components/AnimatedNumber";
+import {
+  useOrderlyStats,
+  formatLargeNumber,
+  formatCount,
+} from "@/app/hooks/useOrderlyStats";
+import {
+  FOOTER_NAV,
+  SOCIAL_LINKS,
+  CLI_INSTALL_CMD,
+  CLI_GITHUB_URL,
+  type FooterNavLink,
+} from "@/app/shared/orderly";
+import svgPaths from "./svg-4hybjba00c";
+const imgMacBook11 =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQI12NgAAIABQABNjN9GQAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAAA0lEQVQI12P4z8BQDwAEgAF/pooBPQAAAABJRU5ErkJggg==";
+const imgWhyIconContainer3 = "/images/deep-liquidity.png";
+const imgWhyIconContainer12 = "/images/omnichain-by-default.png";
+const imgWhyIconContainer22 = "/images/you-own-the-economics.png";
+const imgWhyIconContainer31 = "/images/ship-fast.png";
+const imgWhyIconContainer42 = "/images/self-custody.png";
+const imgWhyIconContainer52 = "/images/battle-tested.png";
+
+function Brandmark() {
+  return (
+    <div
+      className="h-[31.961px] relative shrink-0 w-[32px]"
+      data-name="Brandmark"
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 31.9999 31.9608"
+      >
+        <g id="Brandmark">
+          <path
+            clipRule="evenodd"
+            d={svgPaths.p2fe0400}
+            fill="var(--fill-0, white)"
+            fillRule="evenodd"
+            id="Intersect"
+          />
+          <path
+            clipRule="evenodd"
+            d={svgPaths.p2f88ca00}
+            fill="var(--fill-0, white)"
+            fillRule="evenodd"
+            id="Subtract"
+          />
+          <path
+            clipRule="evenodd"
+            d={svgPaths.p22c01780}
+            fill="var(--fill-0, white)"
+            fillRule="evenodd"
+            id="Subtract_2"
+          />
+          <path
+            clipRule="evenodd"
+            d={svgPaths.p527fe00}
+            fill="var(--fill-0, white)"
+            fillRule="evenodd"
+            id="Subtract_3"
+          />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function Frame4() {
+  return <div className="flex-[1_0_0] h-[15px] min-h-px min-w-px" />;
+}
+
+function Menu({ onClick }: { onClick?: () => void }) {
+  return (
+    <div
+      className="relative shrink-0 size-[32px] cursor-pointer hover:opacity-80 active:opacity-60 transition-opacity"
+      data-name="menu"
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick?.();
+      }}
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 32 32"
+      >
+        <rect x="4" y="9" width="24" height="2.5" rx="1.25" fill="white" />
+        <rect x="4" y="15" width="24" height="2.5" rx="1.25" fill="white" />
+        <rect x="4" y="21" width="24" height="2.5" rx="1.25" fill="white" />
+      </svg>
+    </div>
+  );
+}
+
+function Frame3({
+  onMenuClick,
+  hideNav,
+}: {
+  onMenuClick?: () => void;
+  hideNav?: boolean;
+}) {
+  if (hideNav) return null;
+  return (
+    <div className="absolute content-stretch flex gap-[10px] h-[72px] items-center left-0 px-[24px] top-0 w-[375px]">
+      <Brandmark />
+      <Frame4 />
+      <Menu onClick={onMenuClick} />
+    </div>
+  );
+}
+
+function HeroTextContainer() {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[12px] items-center justify-center relative shrink-0 text-center text-white w-[306px]"
+      data-name="Hero Text Container"
+    >
+      <div
+        className="font-['Atyp_BL:Text_-_Bold',sans-serif] font-bold leading-none relative shrink-0 text-[36px] whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 6",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05'",
+        }}
+      >
+        <p className="mb-0">LAUNCH YOUR</p>
+        <p>OWN PERP DEX</p>
+      </div>
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] leading-[1.3] min-w-full relative shrink-0 text-[16px] w-[min-content] whitespace-pre-wrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >{`Launch a perpetuals DEX on any chain — for humans and agents, with shared liquidity, zero infra cost, and fees that go to you.`}</p>
+    </div>
+  );
+}
+
+function HeroButtonsContainer() {
+  return (
+    <div
+      className="content-stretch flex gap-[16px] items-start relative shrink-0"
+      data-name="Hero Buttons Container"
+    >
+      <div
+        className="bg-[#6700ce] content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer hover:opacity-90 transition-opacity"
+        data-name="build with orderly"
+      >
+        <p
+          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+          style={{
+            fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
+          }}
+        >
+          Start Building
+        </p>
+      </div>
+      <div
+        className="content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer hover:bg-white/10 transition-colors"
+        data-name="Talk to Us"
+      >
+        <div
+          aria-hidden="true"
+          className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[24px]"
+        />
+        <p
+          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+          style={{
+            fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
+          }}
+        >
+          Talk to Us
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function Frame() {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[24px] items-center justify-center mb-[-56px] relative shrink-0 w-full"
+      data-name="Frame"
+    >
+      <HeroTextContainer />
+      <HeroButtonsContainer />
+    </div>
+  );
+}
+
+function BackgroundVector() {
+  return (
+    <div
+      className="-translate-x-1/2 absolute h-[229.903px] left-[calc(50%+5.75px)] top-[63.58px] w-[467.296px]"
+      data-name="Background Vector"
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 467.296 229.903"
+      >
+        <g id="Background Vector">
+          <path
+            d={svgPaths.p34e54400}
+            fill="var(--fill-0, #3F0086)"
+            id="Union"
+          />
+          <path
+            d={svgPaths.p19b3e0a0}
+            fill="var(--fill-0, #9C75FF)"
+            id="Union_2"
+          />
+          <ellipse
+            cx="74.9511"
+            cy="173.172"
+            fill="var(--fill-0, #3F0086)"
+            id="Ellipse 6007"
+            rx="68.11"
+            ry="31.2846"
+            transform="rotate(24.5215 74.9511 173.172)"
+          />
+          <ellipse
+            cx="58.4747"
+            cy="108.119"
+            fill="var(--fill-0, #6700CE)"
+            id="Ellipse 6008"
+            rx="7.72497"
+            ry="7.73516"
+            transform="rotate(24.5215 58.4747 108.119)"
+          />
+          <path
+            d={svgPaths.p26d2eb00}
+            fill="var(--fill-0, #9C75FF)"
+            id="Vector 7"
+          />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function Group9() {
+  return (
+    <div className="absolute contents left-[10.93px] top-[63.58px]">
+      <BackgroundVector />
+      <MacbookVideo
+        className="-translate-x-1/2 absolute h-[264px] left-[calc(50%+1.72px)] top-[111.84px] w-[355px]"
+        canvasWidth={355}
+        canvasHeight={264}
+      />
+    </div>
+  );
+}
+
+function FeatureTag() {
+  return (
+    <div
+      className="absolute backdrop-blur-[11.195px] bg-gradient-to-t content-stretch flex from-[39.314%] from-[rgba(156,117,255,0.6)] gap-[5.971px] items-center justify-center left-[287.17px] px-[14.927px] py-[11.195px] rounded-[46.273px] to-[rgba(156,117,255,0)] top-[269.05px]"
+      data-name="Feature Tag"
+    >
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]"
+        style={{
+          padding: '1px',
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0))',
+          mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          maskComposite: 'xor',
+          WebkitMaskComposite: 'xor',
+        }}
+      />
+      <div className="relative shrink-0 size-[5.38px]">
+        <svg
+          className="absolute block size-full"
+          fill="none"
+          preserveAspectRatio="none"
+          viewBox="0 0 5.3803 5.3803"
+        >
+          <circle
+            cx="2.69015"
+            cy="2.69015"
+            fill="var(--fill-0, #44DED3)"
+            id="Ellipse 6009"
+            r="2.69015"
+          />
+        </svg>
+      </div>
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-none relative shrink-0 text-[10px] text-white whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        Customizable
+      </p>
+    </div>
+  );
+}
+
+function FeatureTag1() {
+  return (
+    <div
+      className="absolute backdrop-blur-[11.195px] bg-gradient-to-t content-stretch flex from-[rgba(156,117,255,0.6)] gap-[5.971px] items-center justify-center left-[79.64px] px-[14.927px] py-[11.195px] rounded-[46.273px] to-[133%] to-[rgba(156,117,255,0)] top-[246.18px]"
+      data-name="Feature Tag"
+    >
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]"
+        style={{
+          padding: '1px',
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0))',
+          mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          maskComposite: 'xor',
+          WebkitMaskComposite: 'xor',
+        }}
+      />
+      <div className="relative shrink-0 size-[5.38px]">
+        <svg
+          className="absolute block size-full"
+          fill="none"
+          preserveAspectRatio="none"
+          viewBox="0 0 5.3803 5.3803"
+        >
+          <circle
+            cx="2.69015"
+            cy="2.69015"
+            fill="var(--fill-0, #44DED3)"
+            id="Ellipse 6009"
+            r="2.69015"
+          />
+        </svg>
+      </div>
+      <p
+        className="capitalize font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-none relative shrink-0 text-[10px] text-white whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        No-code
+      </p>
+    </div>
+  );
+}
+
+function FeatureTag2() {
+  return (
+    <div
+      className="absolute backdrop-blur-[11.195px] bg-gradient-to-t content-stretch flex from-[39.314%] from-[rgba(156,117,255,0.6)] gap-[5.971px] items-center justify-center left-[296.67px] px-[14.927px] py-[11.195px] rounded-[46.273px] to-[rgba(156,117,255,0)] top-[128.21px]"
+      data-name="Feature Tag"
+    >
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none rounded-[46.273px] shadow-[6.717px_8.583px_14.927px_0px_rgba(0,0,0,0.1)]"
+        style={{
+          padding: '1px',
+          background: 'linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0))',
+          mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          maskComposite: 'xor',
+          WebkitMaskComposite: 'xor',
+        }}
+      />
+      <div className="relative shrink-0 size-[5.38px]">
+        <svg
+          className="absolute block size-full"
+          fill="none"
+          preserveAspectRatio="none"
+          viewBox="0 0 5.3803 5.3803"
+        >
+          <g id="Ellipse 6009">
+            <circle
+              cx="2.69015"
+              cy="2.69015"
+              fill="var(--fill-0, #FF375B)"
+              r="2.69015"
+            />
+            <circle
+              cx="2.69015"
+              cy="2.69015"
+              fill="var(--fill-1, #44DED3)"
+              r="2.69015"
+            />
+          </g>
+        </svg>
+      </div>
+      <p
+        className="capitalize font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-none relative shrink-0 text-[10px] text-white whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        Deep Liquidity
+      </p>
+    </div>
+  );
+}
+
+function Frame30() {
+  return (
+    <div className="h-[323.535px] relative shrink-0 w-[477.653px]">
+      <Group9 />
+      <FeatureTag />
+      <FeatureTag1 />
+      <FeatureTag2 />
+    </div>
+  );
+}
+
+function Tvl({
+  formatTvl,
+  value,
+}: {
+  formatTvl: (v: number) => string;
+  value: number;
+}) {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[10px] items-center justify-center relative shrink-0 text-center text-white w-[151px]"
+      data-name="TVL"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] leading-[1.3] min-w-full relative shrink-0 text-[14px] tracking-[-0.1166px] w-[min-content]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        TVL
+      </p>
+      <div
+        className="capitalize flex flex-col font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] justify-center leading-[0] relative shrink-0 text-[24px] whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        <p className="leading-none">
+          <AnimatedNumber value={value} format={formatTvl} />
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function OpenInterest({
+  formatTvl,
+  value,
+}: {
+  formatTvl: (v: number) => string;
+  value: number;
+}) {
+  return (
+    <div
+      className="content-stretch flex flex-col h-[47.104px] items-center justify-center relative shrink-0 w-full"
+      data-name="Open interest"
+    >
+      <Tvl formatTvl={formatTvl} value={value} />
+    </div>
+  );
+}
+
+function TotalBuilders({
+  formatInteger,
+  value,
+}: {
+  formatInteger: (v: number) => string;
+  value: number;
+}) {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[10px] items-center justify-center relative shrink-0 text-center text-white w-[151px]"
+      data-name="Total builders"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] leading-[1.3] relative shrink-0 text-[14px] tracking-[-0.1166px] w-full"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        Live builders
+      </p>
+      <div
+        className="capitalize flex flex-col font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] justify-center leading-[0] relative shrink-0 text-[24px] w-full"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        <p className="leading-none">
+          <AnimatedNumber value={value} format={formatInteger} />
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function TotalTradingVolume({
+  formatInteger,
+  value,
+}: {
+  formatInteger: (v: number) => string;
+  value: number;
+}) {
+  return (
+    <div
+      className="content-stretch flex flex-col h-[44.591px] items-center justify-center relative shrink-0 w-full"
+      data-name="Total trading volume"
+    >
+      <TotalBuilders formatInteger={formatInteger} value={value} />
+    </div>
+  );
+}
+
+function Frame37({
+  formatTvl,
+  tvlValue,
+  formatInteger,
+  buildersValue,
+}: {
+  formatTvl: (v: number) => string;
+  tvlValue: number;
+  formatInteger: (v: number) => string;
+  buildersValue: number;
+}) {
+  return (
+    <div className="content-stretch flex flex-col gap-[20px] items-start justify-center relative shrink-0 w-[130px]">
+      <OpenInterest formatTvl={formatTvl} value={tvlValue} />
+      <TotalTradingVolume formatInteger={formatInteger} value={buildersValue} />
+    </div>
+  );
+}
+
+function Tvl1({
+  formatVolume,
+  value,
+}: {
+  formatVolume: (v: number) => string;
+  value: number;
+}) {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[10px] items-center justify-center relative shrink-0 text-center text-white"
+      data-name="TVL"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] leading-[1.3] relative shrink-0 text-[14px] tracking-[-0.1166px] w-[143.517px]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        24h trading volume
+      </p>
+      <div
+        className="capitalize flex flex-col font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] justify-center leading-[0] relative shrink-0 text-[24px] whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        <p className="leading-none">
+          <AnimatedNumber value={value} format={formatVolume} />
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function OpenInterest1({
+  formatVolume,
+  value,
+}: {
+  formatVolume: (v: number) => string;
+  value: number;
+}) {
+  return (
+    <div
+      className="content-stretch flex flex-col h-[47.104px] items-center justify-center relative shrink-0 w-full"
+      data-name="Open interest"
+    >
+      <Tvl1 formatVolume={formatVolume} value={value} />
+    </div>
+  );
+}
+
+function TotalBuilders1({
+  formatInteger,
+  value,
+}: {
+  formatInteger: (v: number) => string;
+  value: number;
+}) {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[10px] items-center justify-center relative shrink-0 text-center text-white w-[151px]"
+      data-name="Total builders"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] leading-[1.3] relative shrink-0 text-[14px] tracking-[-0.1166px] w-full"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        Chains
+      </p>
+      <div
+        className="capitalize flex flex-col font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] justify-center leading-[0] relative shrink-0 text-[24px] w-full"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        <p className="leading-none">
+          <AnimatedNumber value={value} format={formatInteger} />
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function TotalTradingVolume1({
+  formatInteger,
+  value,
+}: {
+  formatInteger: (v: number) => string;
+  value: number;
+}) {
+  return (
+    <div
+      className="content-stretch flex flex-col h-[44.591px] items-center justify-center relative shrink-0 w-full"
+      data-name="Total trading volume"
+    >
+      <TotalBuilders1 formatInteger={formatInteger} value={value} />
+    </div>
+  );
+}
+
+function Frame42({
+  formatVolume,
+  volumeValue,
+  formatInteger,
+  chainsValue,
+}: {
+  formatVolume: (v: number) => string;
+  volumeValue: number;
+  formatInteger: (v: number) => string;
+  chainsValue: number;
+}) {
+  return (
+    <div className="content-stretch flex flex-col gap-[20px] items-start justify-center relative shrink-0 w-[140px]">
+      <OpenInterest1 formatVolume={formatVolume} value={volumeValue} />
+      <TotalTradingVolume1 formatInteger={formatInteger} value={chainsValue} />
+    </div>
+  );
+}
+
+const formatInteger = (v: number) => `${Math.round(v)}`;
+
+function MobileStatItem({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="content-stretch flex flex-col gap-[4px] items-center justify-center text-center text-white">
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] leading-[1.3] text-[11px] tracking-[-0.1166px]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        {label}
+      </p>
+      <div
+        className="capitalize flex flex-col font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] justify-center leading-[0] text-[20px] whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        <p className="leading-none">{children}</p>
+      </div>
+    </div>
+  );
+}
+
+function MobileStatsDividerV() {
+  return (
+    <div className="self-stretch w-[0.75px] bg-[#9C75FF] opacity-70 shrink-0" />
+  );
+}
+
+function StatsSection() {
+  const stats = useOrderlyStats();
+  const formatTvl = useCallback((v: number) => formatLargeNumber(v), []);
+  const formatVolume = useCallback((v: number) => formatLargeNumber(v), []);
+
+  return (
+    <div
+      className="bg-[#6700ce] content-stretch flex items-stretch py-[20px] px-[12px] relative rounded-[11.195px] shrink-0 w-[335px]"
+      data-name="Stats Section"
+    >
+      <div className="flex flex-1 flex-col items-center justify-center gap-[20px]">
+        <MobileStatItem label="Total Volume">
+          <AnimatedNumber value={stats.totalVolume} format={formatVolume} />
+        </MobileStatItem>
+        <MobileStatItem label="TVL">
+          <AnimatedNumber value={stats.tvl} format={formatTvl} />
+        </MobileStatItem>
+      </div>
+      <MobileStatsDividerV />
+      <div className="flex flex-1 flex-col items-center justify-center gap-[20px]">
+        <MobileStatItem label="24h Volume">
+          <AnimatedNumber value={stats.tradingVolume} format={formatVolume} />
+        </MobileStatItem>
+        <MobileStatItem label="Open Interest">
+          <AnimatedNumber value={stats.openInterest} format={formatVolume} />
+        </MobileStatItem>
+      </div>
+      <MobileStatsDividerV />
+      <div className="flex flex-1 flex-col items-center justify-center gap-[20px]">
+        <MobileStatItem label="Live Builders">
+          <AnimatedNumber value={stats.liveBuilders} format={formatInteger} />
+        </MobileStatItem>
+        <MobileStatItem label="Chains">
+          <AnimatedNumber value={stats.chains} format={formatInteger} />
+        </MobileStatItem>
+      </div>
+    </div>
+  );
+}
+
+function Frame31() {
+  return (
+    <div className="content-stretch flex flex-col items-center mb-[-56px] relative shrink-0 w-full">
+      <Frame30 />
+      <StatsSection />
+    </div>
+  );
+}
+
+function Frame46() {
+  return (
+    <div className="content-stretch flex flex-col items-center pb-[56px] relative shrink-0 w-[335px]">
+      <Frame />
+      <Frame31 />
+    </div>
+  );
+}
+
+function FeatureIcon() {
+  return (
+    <div
+      className="bg-[#6700ce] content-stretch flex flex-col items-center justify-center px-[18px] py-[3.75px] relative rounded-[30px] shrink-0 size-[40px]"
+      data-name="Feature Icon"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-[1.2] relative shrink-0 text-[24px] text-center text-white w-[20.25px]"
+        style={{ fontVariationSettings: "'ital' 0, 'opsz' 72" }}
+      >
+        1
+      </p>
+    </div>
+  );
+}
+
+function FeatureItem() {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[10px] items-center relative shrink-0 w-full"
+      data-name="Feature Item"
+    >
+      <FeatureIcon />
+      <p
+        className="font-['Atyp_BL:Display_-_Bold',sans-serif] font-bold leading-[1.2] min-w-full relative shrink-0 text-[24px] text-center text-white w-[min-content]"
+        style={{ fontVariationSettings: "'ital' 0, 'opsz' 72" }}
+      >
+        Connect
+      </p>
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] leading-[1.3] min-w-full relative shrink-0 text-[14px] text-center text-white tracking-[-0.3125px] w-[min-content] whitespace-pre-wrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        {`Plug into Orderly’s shared orderbook via SDK `}
+        <br aria-hidden="true" />
+        or white-label (OrderlyOne).
+      </p>
+    </div>
+  );
+}
+
+function FeatureIcon1() {
+  return (
+    <div
+      className="bg-[#6700ce] content-stretch flex flex-col items-center justify-center px-[18px] py-[3.75px] relative rounded-[30px] shrink-0 size-[40px]"
+      data-name="Feature Icon"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-[1.2] relative shrink-0 text-[24px] text-center text-white w-[24px]"
+        style={{ fontVariationSettings: "'ital' 0, 'opsz' 72" }}
+      >
+        2
+      </p>
+    </div>
+  );
+}
+
+function FeatureItem1() {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[10px] items-center relative shrink-0 w-full"
+      data-name="Feature Item"
+    >
+      <FeatureIcon1 />
+      <p
+        className="font-['Atyp_BL:Display_-_Bold',sans-serif] font-bold leading-[1.2] min-w-full relative shrink-0 text-[24px] text-center text-white w-[min-content]"
+        style={{ fontVariationSettings: "'ital' 0, 'opsz' 72" }}
+      >
+        Customize
+      </p>
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] leading-[1.3] min-w-full relative shrink-0 text-[14px] text-center text-white tracking-[-0.3125px] w-[min-content]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        Brand it, set fees, choose your chain.
+        <br aria-hidden="true" />
+        Your exchange, your rules.
+      </p>
+    </div>
+  );
+}
+
+function FeatureIcon2() {
+  return (
+    <div
+      className="bg-[#6700ce] content-stretch flex flex-col items-center justify-center px-[18px] py-[3.75px] relative rounded-[30px] shrink-0 size-[40px]"
+      data-name="Feature Icon"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-[1.2] relative shrink-0 text-[24px] text-center text-white w-[21.75px]"
+        style={{ fontVariationSettings: "'ital' 0, 'opsz' 72" }}
+      >
+        3
+      </p>
+    </div>
+  );
+}
+
+function FeatureItem2() {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[10px] items-center relative shrink-0 w-full"
+      data-name="Feature Item"
+    >
+      <FeatureIcon2 />
+      <p
+        className="font-['Atyp_BL:Display_-_Bold',sans-serif] font-bold leading-[1.2] min-w-full relative shrink-0 text-[24px] text-center text-white w-[min-content]"
+        style={{ fontVariationSettings: "'ital' 0, 'opsz' 72" }}
+      >
+        Earn
+      </p>
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] h-[36.4px] leading-[1.3] min-w-full relative shrink-0 text-[14px] text-center text-white tracking-[-0.3125px] w-[min-content] whitespace-pre-wrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >{`Every trade on your frontend =\nrevenue to you. Day one.`}</p>
+    </div>
+  );
+}
+
+function Frame20() {
+  return (
+    <div className="content-stretch flex flex-col gap-[40px] items-start relative shrink-0 w-full">
+      <FeatureItem />
+      <FeatureItem1 />
+      <FeatureItem2 />
+    </div>
+  );
+}
+
+function FromZeroTo() {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-[335px]"
+      data-name="from zero to"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_Bold',sans-serif] font-bold leading-[1.2] relative shrink-0 text-[20px] text-center text-white w-full"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        From zero to live DEX
+        <br aria-hidden="true" />
+        in one integration
+      </p>
+      <Frame20 />
+    </div>
+  );
+}
+
+function ArrowLeftCircle({ isEnabled = false }: { isEnabled?: boolean }) {
+  const fillColor = isEnabled ? "#3F0086" : "#1E2026";
+  const strokeColor = isEnabled ? "white" : "#474D57";
+  return (
+    <div
+      className="relative shrink-0 size-[21.998px]"
+      data-name="Arrow left-circle"
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 21.9978 21.9978"
+      >
+        <g id="Arrow left-circle">
+          <g id="Icon">
+            <path d={svgPaths.p207f9000} fill={fillColor} />
+            <path d={svgPaths.pff2fc00} fill={fillColor} />
+          </g>
+          <path
+            d={svgPaths.p104d1d80}
+            id="Icon_2"
+            stroke={strokeColor}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.49986"
+          />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function ArrowRightCircle({ isEnabled = true }: { isEnabled?: boolean }) {
+  const fillColor = isEnabled ? "#3F0086" : "#1E2026";
+  const strokeColor = isEnabled ? "white" : "#474D57";
+  return (
+    <div className="relative size-[21.998px]" data-name="Arrow right-circle">
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 21.998 21.9978"
+      >
+        <g id="Arrow right-circle">
+          <g id="Icon">
+            <path d={svgPaths.p207f9000} fill={fillColor} />
+            <path d={svgPaths.pff2fc00} fill={fillColor} />
+          </g>
+          <path
+            d={svgPaths.p3672b240}
+            id="Icon_2"
+            stroke={strokeColor}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.49986"
+          />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function Frame21() {
+  return (
+    <div className="col-1 content-stretch flex gap-[10px] items-center justify-end ml-[281px] mt-0 relative row-1">
+      <ArrowLeftCircle />
+      <div className="flex items-center justify-center relative shrink-0 group-hover:translate-x-1 transition-transform duration-200">
+        <div className="flex-none rotate-180">
+          <ArrowRightCircle />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function WhyTitleContainer2() {
+  return (
+    <div
+      className="col-1 grid-cols-[max-content] grid-rows-[max-content] inline-grid ml-0 mt-0 place-items-start relative row-1"
+      data-name="Why Title Container"
+    >
+      <p
+        className="col-1 font-['Atyp_BL:Bold',sans-serif] leading-[1.1] ml-0 mt-0 not-italic relative row-1 text-[20px] text-white w-[285px]"
+        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+      >
+        Why Orderly?
+      </p>
+    </div>
+  );
+}
+
+function WhyTitleContainer1() {
+  return (
+    <div
+      className="col-1 grid-cols-[max-content] grid-rows-[max-content] inline-grid ml-0 mt-0 place-items-start relative row-1"
+      data-name="Why Title Container"
+    >
+      <WhyTitleContainer2 />
+    </div>
+  );
+}
+
+function WhyTitleContainer() {
+  return (
+    <div
+      className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0"
+      data-name="Why Title Container"
+    >
+      <Frame21 />
+      <WhyTitleContainer1 />
+    </div>
+  );
+}
+
+function Frame22() {
+  return (
+    <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
+      <WhyTitleContainer />
+    </div>
+  );
+}
+
+function Frame38() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+      <Frame22 />
+    </div>
+  );
+}
+
+function WhySectionCarousel() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScrollPosition = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+    }
+  };
+
+  useEffect(() => {
+    checkScrollPosition();
+  }, []);
+
+  return (
+    <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full">
+      {/* Header row: title left, arrows right — clicks handled by MobileHomePage event delegation */}
+      <div className="flex items-center justify-between w-full">
+        <p
+          className="font-['Atyp_BL:Bold',sans-serif] leading-[1.1] not-italic relative text-[20px] text-white"
+          style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+        >
+          Why Orderly?
+        </p>
+        <div className="flex gap-[10px] items-center">
+          <ArrowLeftCircle isEnabled={canScrollLeft} />
+          <div className="flex items-center justify-center relative shrink-0">
+            <div className="flex-none rotate-180">
+              <ArrowRightCircle isEnabled={canScrollRight} />
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Scroll container: ref + overflow + flex + data-name all on ONE div — mirrors desktop BuildContentList */}
+      <div
+        ref={scrollRef}
+        onScroll={checkScrollPosition}
+        className="overflow-x-auto flex gap-[14px] items-center hide-scrollbar"
+        data-name="Why Content List"
+        style={{
+          width: "calc(100% + 40px)",
+          marginLeft: "-20px",
+          paddingLeft: "20px",
+          scrollPaddingLeft: "20px",
+        }}
+      >
+        <Container />
+        <Container1 />
+        <Container2 />
+        <Container3 />
+        <Container4 />
+        <Container5 />
+      </div>
+    </div>
+  );
+}
+
+function WhyIconContainer() {
+  return (
+    <div
+      className="absolute contents left-[135.85px] top-[144.63px]"
+      data-name="Why Icon Container"
+    >
+      <div
+        className="absolute h-[110px] left-[135.85px] top-[144.63px] w-[79.322px]"
+        data-name="Why Icon Container 3"
+      >
+        <img
+          alt=""
+          className="absolute inset-0 max-w-none object-cover pointer-events-none size-full mx-[0px] my-[14px]"
+          src={imgWhyIconContainer3}
+        />
+      </div>
+    </div>
+  );
+}
+
+function Container() {
+  return (
+    <div
+      className="bg-[#3f0086] content-stretch flex flex-col gap-[12.096px] h-[290px] items-start overflow-clip px-[20px] py-[21.772px] relative rounded-[18.143px] shrink-0 w-[240px]"
+      data-name="Container"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-[1.2] min-w-full relative shrink-0 text-[17px] text-white w-[min-content]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        Deep Shared Liquidity
+      </p>
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] h-[72.8px] leading-[1.3] relative shrink-0 text-[14px] text-[rgba(255,255,255,0.8)] w-[205px]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        One orderbook powers every builder. Your users get CEX-grade depth from
+        day one — no bootstrapping needed.
+      </p>
+      <WhyIconContainer />
+    </div>
+  );
+}
+
+function WhyIconContainer1() {
+  return (
+    <div
+      className="-translate-y-1/2 absolute contents left-[110px] top-[calc(50%+55.21px)]"
+      data-name="Why Icon Container"
+    >
+      <div
+        className="-translate-y-1/2 absolute left-[110px] size-[110px] top-[calc(50%+55.21px)]"
+        data-name="Why Icon Container-1 2"
+      >
+        <img
+          alt=""
+          className="absolute inset-0 max-w-none object-cover pointer-events-none size-full m-[0px]"
+          src={imgWhyIconContainer12}
+        />
+      </div>
+    </div>
+  );
+}
+
+function Container1() {
+  return (
+    <div
+      className="bg-[#6700ce] content-stretch flex flex-col gap-[12.096px] h-[290px] items-start overflow-clip px-[20px] py-[21.772px] relative rounded-[18.143px] shrink-0 w-[240px]"
+      data-name="Container"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-[1.2] min-w-full relative shrink-0 text-[17px] text-white w-[min-content]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        Omnichain by Default
+      </p>
+      <WhyIconContainer1 />
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] h-[85.449px] leading-[1.3] relative shrink-0 text-[14px] text-[rgba(255,255,255,0.8)] w-[198px]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        Live on Ethereum, Arbitrum, Base, Solana, and 14+ more. One integration,
+        every chain.
+      </p>
+    </div>
+  );
+}
+
+function WhyIconContainer2() {
+  return (
+    <div
+      className="-translate-x-1/2 -translate-y-1/2 absolute contents left-[calc(50%+42.54px)] top-[calc(50%+53.62px)]"
+      data-name="Why Icon Container"
+    >
+      <div
+        className="-translate-x-1/2 -translate-y-1/2 absolute h-[112.148px] left-[calc(50%+42.54px)] top-[calc(50%+53.62px)] w-[126.167px]"
+        data-name="Why Icon Container-2 2"
+      >
+        <img
+          alt=""
+          className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+          src={imgWhyIconContainer22}
+        />
+      </div>
+    </div>
+  );
+}
+
+function Container2() {
+  return (
+    <div
+      className="bg-[#3f0086] content-stretch flex flex-col gap-[12.096px] h-[290px] items-start overflow-clip px-[20px] py-[21.772px] relative rounded-[18.143px] shrink-0 w-[240px]"
+      data-name="Container"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-[1.2] relative shrink-0 text-[17px] text-white whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        You own the economics
+      </p>
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] h-[85.449px] leading-[1.3] relative shrink-0 text-[14px] text-[rgba(255,255,255,0.8)] w-[200px]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        Set your own fees. Keep your revenue. No rev-share traps.
+      </p>
+      <WhyIconContainer2 />
+    </div>
+  );
+}
+
+function WhyIconContainer3() {
+  return (
+    <div
+      className="-translate-x-1/2 -translate-y-1/2 absolute contents h-[205.151px] left-[calc(50%+48.3px)] top-[calc(50%+54.42px)] w-[189.492px]"
+      data-name="Why Icon Container"
+    >
+      <div
+        className="-translate-x-1/2 -translate-y-1/2 absolute h-[165.131px] left-[calc(50%+48.3px)] top-[calc(50%+54.42px)] w-[143.41px]"
+        data-name="Why Icon Container-3 1"
+      >
+        <img
+          alt=""
+          className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+          src={imgWhyIconContainer31}
+        />
+      </div>
+    </div>
+  );
+}
+
+function Container3() {
+  return (
+    <div
+      className="bg-[#6700ce] content-stretch flex flex-col gap-[12.096px] h-[290px] items-start overflow-clip px-[20px] py-[21.772px] relative rounded-[18.143px] shrink-0 w-[240px]"
+      data-name="Container"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-[1.2] min-w-full relative shrink-0 text-[17px] text-white w-[min-content]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        Ship Fast
+      </p>
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] h-[85.449px] leading-[1.3] relative shrink-0 text-[14px] text-[rgba(255,255,255,0.8)] w-[198px] whitespace-pre-wrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        White-label DEX in minutes. SDK: full custom integration in days.
+      </p>
+      <WhyIconContainer3 />
+    </div>
+  );
+}
+
+function WhyIconContainer4() {
+  return (
+    <div
+      className="absolute contents right-[23.86px] top-[145px]"
+      data-name="Why Icon Container"
+    >
+      <div
+        className="absolute h-[120.668px] right-[23.86px] top-[145px] w-[98.654px]"
+        data-name="Why Icon Container-4 2"
+      >
+        <img
+          alt=""
+          className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+          src={imgWhyIconContainer42}
+        />
+      </div>
+    </div>
+  );
+}
+
+function Container4() {
+  return (
+    <div
+      className="bg-[#3f0086] content-stretch flex flex-col gap-[12.096px] h-[290px] items-start overflow-clip px-[20px] py-[21.772px] relative rounded-[18.143px] shrink-0 w-[240px]"
+      data-name="Container"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-[1.2] min-w-full relative shrink-0 text-[17px] text-white w-[min-content]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        Self Custody
+      </p>
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] h-[85.449px] leading-[1.3] relative shrink-0 text-[14px] text-[rgba(255,255,255,0.8)] w-[175.653px]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        User funds stay on-chain. No counterparty risk. Sleep at night.
+      </p>
+      <WhyIconContainer4 />
+    </div>
+  );
+}
+
+function WhyIconContainer5() {
+  return (
+    <div
+      className="-translate-x-1/2 absolute contents left-[calc(50%+43.37px)] top-[150.48px]"
+      data-name="Why Icon Container"
+    >
+      <div
+        className="-translate-x-1/2 absolute h-[114.617px] left-[calc(50%+43.37px)] top-[150.48px] w-[113.408px]"
+        data-name="Why Icon Container-5 2"
+      >
+        <img
+          alt=""
+          className="absolute inset-0 max-w-none object-cover pointer-events-none size-full m-[0px]"
+          src={imgWhyIconContainer52}
+        />
+      </div>
+    </div>
+  );
+}
+
+function Container5() {
+  return (
+    <div
+      className="bg-[#6700ce] content-stretch flex flex-col gap-[12.096px] h-[290px] items-start overflow-clip px-[20px] py-[21.772px] relative rounded-[18.143px] shrink-0 w-[240px]"
+      data-name="Container"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-[1.2] min-w-full relative shrink-0 text-[17px] text-white w-[min-content]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        Battle-Tested
+      </p>
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] h-[85.449px] leading-[1.3] relative shrink-0 text-[14px] text-[rgba(255,255,255,0.8)] w-[198px] whitespace-pre-wrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        {`$30B+ cumulative volume. `}
+        <br aria-hidden="true" />
+        Multiple audits. 1M+ users across the ecosystem.
+      </p>
+      <WhyIconContainer5 />
+    </div>
+  );
+}
+
+function WhyContentList() {
+  return (
+    <div
+      className="content-stretch flex gap-[14px] items-center relative shrink-0 w-[335px]"
+      data-name="Why Content List"
+    >
+      <Container />
+      <Container1 />
+      <Container2 />
+      <Container3 />
+      <Container4 />
+      <Container5 />
+    </div>
+  );
+}
+
+function ArrowLeftCircle1({ isEnabled = false }: { isEnabled?: boolean }) {
+  const fillColor = isEnabled ? "#3F0086" : "#1E2026";
+  const strokeColor = isEnabled ? "white" : "#474D57";
+  return (
+    <div
+      className="col-1 ml-0 mt-0 relative row-1 size-[21.998px]"
+      data-name="Arrow left-circle"
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 21.9978 21.9978"
+      >
+        <g id="Arrow left-circle">
+          <g id="Icon">
+            <path d={svgPaths.p207f9000} fill={fillColor} />
+            <path d={svgPaths.pff2fc00} fill={fillColor} />
+          </g>
+          <path
+            d={svgPaths.p104d1d80}
+            id="Icon_2"
+            stroke={strokeColor}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.49986"
+          />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function ArrowRightCircle1({ isEnabled = true }: { isEnabled?: boolean }) {
+  const fillColor = isEnabled ? "#3F0086" : "#1E2026";
+  const strokeColor = isEnabled ? "white" : "#474D57";
+  return (
+    <div className="relative size-[21.998px]" data-name="Arrow right-circle">
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 21.998 21.9978"
+      >
+        <g id="Arrow right-circle">
+          <g id="Icon">
+            <path d={svgPaths.p207f9000} fill={fillColor} />
+            <path d={svgPaths.pff2fc00} fill={fillColor} />
+          </g>
+          <path
+            d={svgPaths.p3672b240}
+            id="Icon_2"
+            stroke={strokeColor}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.49986"
+          />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function Group10() {
+  return (
+    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid leading-[0] place-items-start relative shrink-0">
+      <ArrowLeftCircle1 />
+      <div className="col-1 flex items-center justify-center ml-[28px] mt-0 relative row-1 size-[21.998px]">
+        <div className="flex-none rotate-180">
+          <ArrowRightCircle1 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Frame24() {
+  return (
+    <div className="content-stretch flex items-center justify-end relative shrink-0">
+      <Group10 />
+    </div>
+  );
+}
+
+function Frame23() {
+  return (
+    <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
+      <p
+        className="flex-[1_0_0] font-['Atyp_BL:Bold',sans-serif] leading-[1.1] min-h-px min-w-px not-italic relative text-[20px] text-white"
+        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+      >
+        On Orderly
+      </p>
+      <Frame24 />
+    </div>
+  );
+}
+
+function BuildButtonContainer() {
+  return (
+    <a
+      href="https://dex.orderly.network/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
+      data-name="Build Button Container"
+      onClick={() => {
+        posthog.capture("homepage_card_clicked", {
+          card_name: "dex",
+          source_page: "homepage",
+          device_layout: "mobile",
+          section: "on_orderly",
+        });
+      }}
+    >
+      <p
+        className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+        style={{
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
+        }}
+      >
+        Orderly One
+      </p>
+      <div className="flex items-center justify-center relative shrink-0 group-hover:translate-x-1 transition-transform duration-200">
+        <div className="-scale-y-100 flex-none rotate-180">
+          <div
+            className="overflow-clip relative size-[9.607px]"
+            data-name="Build Button Icon"
+          >
+            <div className="absolute inset-[10.42%]" data-name="Union">
+              <svg
+                className="absolute block size-full"
+                fill="none"
+                preserveAspectRatio="none"
+                viewBox="0 0 7.57227 7.57324"
+              >
+                <path
+                  d={svgPaths.p10472e00}
+                  fill="var(--fill-0, white)"
+                  id="Union"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  );
+}
+
+function Container6() {
+  return (
+    <div
+      className="bg-[#3f0086] content-stretch flex flex-col gap-[130.29px] h-[290px] items-start overflow-clip p-[21.014px] relative rounded-[18.012px] shrink-0 w-[240px]"
+      data-name="Container"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] h-[103.872px] leading-[1.2] relative shrink-0 text-[24px] text-white w-full whitespace-pre-wrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        {`Launch `}
+        <br aria-hidden="true" />
+        {`a branded `}
+        <br aria-hidden="true" />
+        Perp DEX
+      </p>
+      <BuildButtonContainer />
+    </div>
+  );
+}
+
+function BuildButtonContainer1() {
+  return (
+    <a
+      href="https://orderly.network/docs/build-on-omnichain/evm-api/introduction"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
+      data-name="Build Button Container"
+      onClick={() => {
+        posthog.capture("homepage_card_clicked", {
+          card_name: "build",
+          source_page: "homepage",
+          device_layout: "mobile",
+          section: "on_orderly",
+        });
+      }}
+    >
+      <p
+        className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+        style={{
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
+        }}
+      >{`SDK & API`}</p>
+      <div className="flex items-center justify-center relative shrink-0">
+        <div className="-scale-y-100 flex-none rotate-180">
+          <div
+            className="overflow-clip relative size-[9.607px]"
+            data-name="Build Button Icon"
+          >
+            <div className="absolute inset-[10.42%]" data-name="Union">
+              <svg
+                className="absolute block size-full"
+                fill="none"
+                preserveAspectRatio="none"
+                viewBox="0 0 7.57227 7.57324"
+              >
+                <path
+                  d={svgPaths.p10472e00}
+                  fill="var(--fill-0, white)"
+                  id="Union"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  );
+}
+
+function Container7() {
+  return (
+    <div
+      className="bg-[#6700ce] content-stretch flex flex-col gap-[130.29px] h-[290px] items-start overflow-clip p-[21.014px] relative rounded-[18.012px] shrink-0 w-[240px]"
+      data-name="Container"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] h-[103.872px] leading-[1.2] relative shrink-0 text-[24px] text-white w-full"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        Add perps to your dApp or wallet
+      </p>
+      <BuildButtonContainer1 />
+    </div>
+  );
+}
+
+function BuildButtonContainerVaults() {
+  return (
+    <a
+      href="http://app.orderly.network/vaults"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
+      data-name="Build Button Container"
+      onClick={() => {
+        posthog.capture("homepage_card_clicked", {
+          card_name: "vaults",
+          source_page: "homepage",
+          device_layout: "mobile",
+          section: "on_orderly",
+        });
+      }}
+    >
+      <p
+        className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+        style={{
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
+        }}
+      >
+        Vaults
+      </p>
+      <div className="flex items-center justify-center relative shrink-0">
+        <div className="-scale-y-100 flex-none rotate-180">
+          <div
+            className="overflow-clip relative size-[9.607px]"
+            data-name="Build Button Icon"
+          >
+            <div className="absolute inset-[10.42%]" data-name="Union">
+              <svg
+                className="absolute block size-full"
+                fill="none"
+                preserveAspectRatio="none"
+                viewBox="0 0 7.57227 7.57324"
+              >
+                <path
+                  d={svgPaths.p10472e00}
+                  fill="var(--fill-0, white)"
+                  id="Union"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  );
+}
+
+function ContainerVaults() {
+  return (
+    <div
+      className="bg-[#3f0086] content-stretch flex flex-col gap-[130.29px] h-[290px] items-start overflow-clip p-[21.014px] relative rounded-[18.012px] shrink-0 w-[240px]"
+      data-name="Container"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] h-[103.872px] leading-[1.2] relative shrink-0 text-[24px] text-white w-full"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        Earn with Vaults
+      </p>
+      <BuildButtonContainerVaults />
+    </div>
+  );
+}
+
+function BuildButtonContainer2() {
+  return (
+    <a
+      href="https://orderly.network/listing/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
+      data-name="Build Button Container"
+      onClick={() => {
+        posthog.capture("homepage_card_clicked", {
+          card_name: "listings",
+          source_page: "homepage",
+          device_layout: "mobile",
+          section: "on_orderly",
+        });
+      }}
+    >
+      <p
+        className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+        style={{
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
+        }}
+      >
+        Listings
+      </p>
+      <div className="flex items-center justify-center relative shrink-0">
+        <div className="-scale-y-100 flex-none rotate-180">
+          <div
+            className="overflow-clip relative size-[9.607px]"
+            data-name="Build Button Icon"
+          >
+            <div className="absolute inset-[10.42%]" data-name="Union">
+              <svg
+                className="absolute block size-full"
+                fill="none"
+                preserveAspectRatio="none"
+                viewBox="0 0 7.57227 7.57324"
+              >
+                <path
+                  d={svgPaths.p10472e00}
+                  fill="var(--fill-0, white)"
+                  id="Union"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  );
+}
+
+function Container8() {
+  return (
+    <div
+      className="bg-[#6700ce] content-stretch flex flex-col gap-[130.29px] h-[290px] items-start overflow-clip p-[21.014px] relative rounded-[18.012px] shrink-0 w-[240px]"
+      data-name="Container"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] h-[103.872px] leading-[1.2] relative shrink-0 text-[24px] text-white w-full"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        List your token
+      </p>
+      <BuildButtonContainer2 />
+    </div>
+  );
+}
+
+function BuildButtonContainer3() {
+  return (
+    <a
+      href="https://dex.orderly.network/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="content-stretch flex gap-[4.203px] items-end justify-end relative shrink-0 w-full no-underline hover:opacity-80 transition-opacity"
+      data-name="Build Button Container"
+      onClick={() => {
+        posthog.capture("homepage_card_clicked", {
+          card_name: "start_building",
+          source_page: "homepage",
+          device_layout: "mobile",
+          section: "on_orderly",
+        });
+      }}
+    >
+      <p
+        className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+        style={{ fontFeatureSettings: "'liga' 0" }}
+      >
+        Start Building
+      </p>
+      <div className="flex items-center justify-center relative shrink-0">
+        <div className="-scale-y-100 flex-none rotate-180">
+          <div
+            className="overflow-clip relative size-[9.607px]"
+            data-name="Build Button Icon"
+          >
+            <div className="absolute inset-[10.42%]" data-name="Union">
+              <svg
+                className="absolute block size-full"
+                fill="none"
+                preserveAspectRatio="none"
+                viewBox="0 0 7.57227 7.57324"
+              >
+                <path
+                  d={svgPaths.p10472e00}
+                  fill="var(--fill-0, white)"
+                  id="Union"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  );
+}
+
+function Container9() {
+  return (
+    <div
+      className="bg-[#3f0086] content-stretch flex flex-col gap-[130.29px] h-[290px] items-start overflow-clip p-[21.014px] relative rounded-[18.012px] shrink-0 w-[240px]"
+      data-name="Container"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] h-[103.872px] leading-[1.2] relative shrink-0 text-[24px] text-white w-full"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06'",
+        }}
+      >
+        Building trading tools
+      </p>
+      <BuildButtonContainer3 />
+    </div>
+  );
+}
+
+function BuildContentList() {
+  return (
+    <div
+      className="content-stretch flex gap-[14px] items-center relative shrink-0 w-[335px]"
+      data-name="Build Content List"
+    >
+      <Container6 />
+      <Container7 />
+      <ContainerVaults />
+      <Container8 />
+      <Container9 />
+    </div>
+  );
+}
+
+function Frame39() {
+  return (
+    <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full">
+      <Frame23 />
+      <BuildContentList />
+    </div>
+  );
+}
+
+function BuildSectionCarousel() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScrollPosition = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+    }
+  };
+
+  useEffect(() => {
+    checkScrollPosition();
+  }, []);
+
+  return (
+    <div className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-full">
+      {/* Header row: title left, arrows right — clicks handled by MobileHomePage event delegation */}
+      <div className="flex items-center justify-between w-full">
+        <p
+          className="flex-[1_0_0] font-['Atyp_BL:Bold',sans-serif] leading-[1.1] min-h-px min-w-px not-italic relative text-[20px] text-white"
+          style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+        >
+          On Orderly
+        </p>
+        <div className="flex gap-[10px] items-center">
+          <ArrowLeftCircle1 isEnabled={canScrollLeft} />
+          <div className="flex items-center justify-center relative shrink-0">
+            <div className="flex-none rotate-180">
+              <ArrowRightCircle1 isEnabled={canScrollRight} />
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Scroll container: ref + overflow + flex + data-name all on ONE div — mirrors desktop BuildContentList */}
+      <div
+        ref={scrollRef}
+        onScroll={checkScrollPosition}
+        className="overflow-x-auto flex gap-[14px] items-center hide-scrollbar"
+        data-name="Build Content List"
+        style={{
+          width: "calc(100% + 40px)",
+          marginLeft: "-20px",
+          paddingLeft: "20px",
+          scrollPaddingLeft: "20px",
+        }}
+      >
+        <Container6 />
+        <Container7 />
+        <ContainerVaults />
+        <Container8 />
+        <Container9 />
+      </div>
+    </div>
+  );
+}
+
+function QuickStartTitleContainer() {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[10px] items-start relative shrink-0 text-white w-full"
+      data-name="Quick Start Title Container"
+    >
+      <p
+        className="font-['Atyp_BL:Bold',sans-serif] leading-[1.1] not-italic relative shrink-0 text-[20px]"
+        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+      >
+        Agentic Quick Start
+      </p>
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] leading-[1.4] relative shrink-0 text-[14px] tracking-[0.294px] text-white/70"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        Get started with Orderly&apos;s agentic infrastructure
+      </p>
+    </div>
+  );
+}
+
+function MobileCopyButton({ text }: { text: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand("copy");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+    document.body.removeChild(textarea);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="shrink-0 cursor-pointer text-white/50"
+    >
+      {copied ? (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M5 13l4 4L19 7"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      ) : (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
+function MobileAIAgentCard() {
+  const url = "https://orderly.network/skill.md";
+
+  return (
+    <div
+      className="rounded-[16px] p-[24px] flex flex-col gap-[16px] w-full"
+      style={{
+        background:
+          "linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(0,0,0,0) 100%)",
+        border: "1px solid rgba(168,85,247,0.2)",
+      }}
+    >
+      {/* Header */}
+      <div className="flex items-center gap-[10px]">
+        <img
+          src="/images/ai-agent.png"
+          alt="AI Agent"
+          className="size-[36px]"
+        />
+        <div>
+          <p
+            className="font-['Atyp_BL:Bold',sans-serif] text-[18px] text-white leading-[1.3]"
+            style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+          >
+            AI Agent
+          </p>
+          <p
+            className="font-['Atyp_BL:Medium',sans-serif] text-[12px] text-[#9C75FF] leading-[1.3]"
+            style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+          >
+            Autonomous setup
+          </p>
+        </div>
+      </div>
+
+      {/* Description */}
+      <p
+        className="font-['Atyp_BL:Medium',sans-serif] text-[14px] text-white leading-[1.5]"
+        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+      >
+        Read the onboarding skill to understand Orderly&apos;s capabilities:
+      </p>
+
+      {/* URL box */}
+      <div
+        className="flex items-center rounded-[10px] px-[14px] py-[12px]"
+        style={{
+          background: "rgba(255,255,255,0.05)",
+          border: "1px solid rgba(255,255,255,0.1)",
+        }}
+      >
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 font-['DM_Mono:Medium',sans-serif] text-[14px] text-white/70 no-underline"
+          onClick={() => {
+            posthog.capture("agentic_quickstart_clicked", {
+              button_name: "skill_md",
+              source_page: "homepage",
+              device_layout: "mobile",
+              section: "agentic_quick_start",
+            });
+          }}
+        >
+          orderly.network/skill.md
+        </a>
+        <MobileCopyButton text={url} />
+      </div>
+
+      {/* Why callout */}
+      <p
+        className="font-['Atyp_BL:Medium',sans-serif] text-[12px] text-[rgba(255,255,255,0.3)] leading-[1.6]"
+        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+      >
+        <strong className="text-[rgba(255,255,255,0.3)]">Why?</strong> This
+        skill contains comprehensive documentation about Orderly&apos;s API,
+        SDK, trading workflows, and best practices for agents.
+      </p>
+    </div>
+  );
+}
+
+function QuickStartClient() {
+  return (
+    <div
+      className="bg-[#6700ce] content-stretch flex h-[47.305px] items-center justify-center px-[17px] py-[8px] relative rounded-[8px] shrink-0"
+      data-name="Quick Start Client"
+    >
+      <p className="font-['DM_Mono:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-white whitespace-nowrap">
+        Interactive
+      </p>
+    </div>
+  );
+}
+
+function QuickStartClients() {
+  return (
+    <div
+      className="content-stretch flex flex-[1_0_0] gap-[30px] items-center min-h-px min-w-px overflow-clip relative"
+      data-name="Quick Start Clients"
+    >
+      <QuickStartClient />
+      <p className="font-['DM_Mono:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-white whitespace-nowrap">
+        Claude
+      </p>
+      <p className="font-['DM_Mono:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-white whitespace-nowrap">
+        Cursor
+      </p>
+      <p className="font-['DM_Mono:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-white whitespace-nowrap">
+        VScode
+      </p>
+      <p className="font-['DM_Mono:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-white whitespace-nowrap">
+        Codex
+      </p>
+      <p className="font-['DM_Mono:Regular',sans-serif] leading-[normal] not-italic relative shrink-0 text-[14px] text-white whitespace-nowrap">
+        Opencode
+      </p>
+    </div>
+  );
+}
+
+function ArrowLeftCircle2() {
+  return (
+    <div
+      className="h-[42.667px] relative w-[44.667px]"
+      data-name="Arrow left-circle"
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 44.6667 42.6667"
+      >
+        <g id="Arrow left-circle">
+          <g id="Icon">
+            <path d={svgPaths.p10be0e00} fill="var(--fill-0, #3F0086)" />
+            <path d={svgPaths.p16992700} fill="var(--fill-0, #3F0086)" />
+            <path
+              d={svgPaths.p180d8980}
+              stroke="var(--stroke-0, #3F0086)"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2.5"
+            />
+          </g>
+          <path
+            d={svgPaths.p344fa9e0}
+            id="Icon_2"
+            stroke="var(--stroke-0, white)"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2.5"
+          />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function Frame36() {
+  return (
+    <div className="content-stretch flex flex-col items-end relative shrink-0">
+      <div className="flex items-center justify-center relative shrink-0">
+        <div className="flex-none rotate-180">
+          <ArrowLeftCircle2 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Frame35() {
+  return (
+    <div className="bg-[#14151a] h-[98.461px] relative rounded-tl-[30px] rounded-tr-[30px] shrink-0 w-full">
+      <div className="flex flex-row items-center size-full">
+        <div className="content-stretch flex gap-[8px] items-center p-[20px] relative size-full">
+          <QuickStartClients />
+          <Frame36 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function QuickStartCommand() {
+  return (
+    <div
+      className="content-stretch flex flex-[1_0_0] flex-col font-['DM_Mono:Regular',sans-serif] gap-[20px] items-start leading-[normal] min-h-px min-w-px not-italic relative text-[16px]"
+      data-name="Quick Start Command"
+    >
+      <p className="relative shrink-0 text-[#5e6673] w-full">
+        Supported clients: claude, cursor, vscode, codex, opencode
+      </p>
+      <p className="relative shrink-0 text-white w-full">
+        $ npx @orderly.network/mcp-server init
+      </p>
+    </div>
+  );
+}
+
+function ContentCopy() {
+  return (
+    <div
+      className="h-[24px] relative shrink-0 w-[23.594px]"
+      data-name="content_copy"
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 23.5945 24"
+      >
+        <g id="content_copy">
+          <mask
+            height="24"
+            id="mask0_78_972"
+            maskUnits="userSpaceOnUse"
+            style={{ maskType: "alpha" }}
+            width="24"
+            x="0"
+            y="0"
+          >
+            <rect
+              fill="var(--fill-0, #D9D9D9)"
+              height="24"
+              id="Bounding box"
+              width="23.5945"
+            />
+          </mask>
+          <g mask="url(#mask0_78_972)">
+            <path
+              d={svgPaths.p3775a80}
+              fill="var(--fill-0, white)"
+              id="content_copy_2"
+            />
+          </g>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function QuickStartIconContainer() {
+  return (
+    <div
+      className="bg-[rgba(255,255,255,0.1)] content-stretch flex h-[40px] items-start justify-end p-[8px] relative rounded-[8px] shrink-0 w-[39.324px]"
+      data-name="Quick Start Icon Container"
+    >
+      <ContentCopy />
+    </div>
+  );
+}
+
+function Frame33() {
+  return (
+    <div className="content-stretch flex items-center justify-end relative shrink-0">
+      <QuickStartIconContainer />
+    </div>
+  );
+}
+
+function Frame32() {
+  return (
+    <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
+      <QuickStartCommand />
+      <Frame33 />
+    </div>
+  );
+}
+
+function Frame34() {
+  return (
+    <div className="bg-[#1e2026] relative rounded-bl-[30px] rounded-br-[30px] shrink-0 w-full">
+      <div className="content-stretch flex flex-col items-start px-[20px] py-[30px] relative w-full">
+        <Frame32 />
+      </div>
+    </div>
+  );
+}
+
+function QuickStartContent() {
+  return (
+    <div
+      className="content-stretch flex flex-col items-start relative shrink-0 w-full"
+      data-name="Quick Start Content"
+    >
+      <Frame35 />
+      <Frame34 />
+    </div>
+  );
+}
+
+function QuickStartHeader1() {
+  return (
+    <div
+      className="content-stretch flex flex-col items-start relative shrink-0 w-[333px]"
+      data-name="Quick Start Header"
+    >
+      <QuickStartContent />
+    </div>
+  );
+}
+
+function QuickStartHeader() {
+  return (
+    <div
+      className="content-stretch flex flex-col items-start relative shrink-0 w-[333px]"
+      data-name="Quick Start Header"
+    >
+      <QuickStartHeader1 />
+    </div>
+  );
+}
+
+const QS_CLIENTS = [
+  {
+    id: "interactive",
+    label: "Interactive",
+    mode: "interactive" as const,
+    command: "npx @orderly.network/mcp-server init",
+    subtext: "Supported clients: claude, cursor, vscode, codex, opencode",
+  },
+  {
+    id: "claude",
+    label: "Claude",
+    mode: "one-liner" as const,
+    command: "npx @orderly.network/mcp-server init --client claude",
+  },
+  {
+    id: "cursor",
+    label: "Cursor",
+    mode: "one-liner" as const,
+    command: "npx @orderly.network/mcp-server init --client cursor",
+  },
+  {
+    id: "vscode",
+    label: "VScode",
+    mode: "one-liner" as const,
+    command: "npx @orderly.network/mcp-server init --client vscode",
+  },
+  {
+    id: "codex",
+    label: "Codex",
+    mode: "one-liner" as const,
+    command: "npx @orderly.network/mcp-server init --client codex",
+  },
+  {
+    id: "opencode",
+    label: "Opencode",
+    mode: "one-liner" as const,
+    command: "npx @orderly.network/mcp-server init --client opencode",
+  },
+];
+
+const SKILLS_COMMANDS_MOBILE = [
+  {
+    comment: "# Install all skills globally",
+    cmd: "npx skills add OrderlyNetwork/skills --all -g",
+  },
+  {
+    comment: "# Install specific skill",
+    cmd: "npx skills add OrderlyNetwork/skills --skill orderly-trading-orders",
+  },
+  {
+    comment: "# Install for all agents",
+    cmd: "npx skills add OrderlyNetwork/skills --all --agent '*' -g",
+  },
+];
+
+function MobileSkillsCodeBlock({
+  comment,
+  cmd,
+}: {
+  comment: string;
+  cmd: string;
+}) {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const textarea = document.createElement("textarea");
+    textarea.value = cmd;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand("copy");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {}
+    document.body.removeChild(textarea);
+  };
+  return (
+    <div
+      className="bg-[#14151a] rounded-[10px] px-[14px] py-[12px] flex flex-col gap-[4px] relative"
+      onClick={handleCopy}
+    >
+      <p className="font-['DM_Mono:Regular',sans-serif] text-[12px] text-[#5e6673] leading-[1.5]">
+        {comment}
+      </p>
+      <p className="font-['DM_Mono:Regular',sans-serif] text-[12px] text-white leading-[1.5] break-all">
+        <span className="text-white/60">$ </span>
+        <span className="text-[#22d3ee]">npx</span>
+        <span className="text-white"> skills add </span>
+        <span className="text-[#fbbf24]">{cmd.split("add ")[1]}</span>
+      </p>
+      {copied && (
+        <div className="absolute right-[8px] top-[8px]">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M5 13l4 4L19 7"
+              stroke="#9c75ff"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function QuickStartSection() {
+  const [devTab, setDevTab] = useState<"mcp-server" | "skills" | "cli">("mcp-server");
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [copied, setCopied] = useState(false);
+  const active = QS_CLIENTS[activeIdx];
+  const total = QS_CLIENTS.length;
+
+  function copyCmd(e: React.MouseEvent) {
+    e.stopPropagation();
+    const text = active.command;
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(text).catch(() => {});
+    } else {
+      const el = document.createElement("textarea");
+      el.value = text;
+      el.style.cssText =
+        "position:fixed;top:0;left:0;opacity:0;pointer-events:none";
+      document.body.appendChild(el);
+      el.focus();
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
+
+  function advance(e: React.MouseEvent) {
+    e.stopPropagation();
+    setActiveIdx((i) => (i + 1) % total);
+  }
+
+  function pickTab(e: React.MouseEvent, i: number) {
+    e.stopPropagation();
+    setActiveIdx(i);
+  }
+
+  const isInteractive = active.mode === "interactive";
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const tabRefs = useRef<(HTMLElement | null)[]>([]);
+
+  useEffect(() => {
+    const el = tabRefs.current[activeIdx];
+    if (el && scrollRef.current) {
+      scrollRef.current.scrollTo({ left: el.offsetLeft, behavior: "smooth" });
+    }
+  }, [activeIdx]);
+
+  const featureSettings = {
+    fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+  } as const;
+
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full"
+      data-name="Quick Start Section"
+    >
+      <QuickStartTitleContainer />
+
+      {/* AI Agent card */}
+      <MobileAIAgentCard />
+
+      {/* Developer card */}
+      <div
+        className="rounded-[16px] p-[24px] flex flex-col gap-[20px] w-full"
+        style={{
+          background: "rgba(255,255,255,0.05)",
+          border: "1px solid rgba(255,255,255,0.1)",
+        }}
+      >
+        {/* Card header */}
+        <div className="flex items-center gap-[10px]">
+          <img
+            src="/images/developer.png"
+            alt="Developer"
+            className="size-[36px]"
+          />
+          <div>
+            <p
+              className="font-['Atyp_BL:Bold',sans-serif] text-[18px] text-white leading-[1.3]"
+              style={featureSettings}
+            >
+              Developer
+            </p>
+            <p
+              className="font-['Atyp_BL:Medium',sans-serif] text-[12px] text-[#9C75FF] leading-[1.3]"
+              style={featureSettings}
+            >
+              Manual installation
+            </p>
+          </div>
+        </div>
+
+        {/* Description */}
+        <p
+          className="font-['Atyp_BL:Medium',sans-serif] text-[14px] text-white leading-[1.5]"
+          style={featureSettings}
+        >
+          Install Orderly&apos;s agentic tools for your AI client:
+        </p>
+
+        {/* MCP Server / Skills tabs */}
+        <div className="flex items-center gap-[8px]">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setDevTab("mcp-server");
+              posthog.capture("agentic_quickstart_clicked", {
+                button_name: "mcp_server_tab",
+                source_page: "homepage",
+                device_layout: "mobile",
+                section: "agentic_quick_start",
+              });
+            }}
+            className={`font-['Atyp_BL:Medium',sans-serif] text-[14px] px-[14px] py-[6px] rounded-[8px] transition-all ${
+              devTab === "mcp-server"
+                ? "bg-[#7c3aed] text-white"
+                : "text-[#9ca3af]"
+            }`}
+            style={featureSettings}
+          >
+            MCP Server
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setDevTab("skills");
+              posthog.capture("agentic_quickstart_clicked", {
+                button_name: "skills_tab",
+                source_page: "homepage",
+                device_layout: "mobile",
+                section: "agentic_quick_start",
+              });
+            }}
+            className={`font-['Atyp_BL:Medium',sans-serif] text-[14px] px-[14px] py-[6px] rounded-[8px] transition-all ${
+              devTab === "skills" ? "bg-[#7c3aed] text-white" : "text-[#9ca3af]"
+            }`}
+            style={featureSettings}
+          >
+            Skills
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setDevTab("cli");
+              posthog.capture("agentic_quickstart_clicked", {
+                button_name: "cli_tab",
+                source_page: "homepage",
+                device_layout: "mobile",
+                section: "agentic_quick_start",
+              });
+            }}
+            className={`font-['Atyp_BL:Medium',sans-serif] text-[14px] px-[14px] py-[6px] rounded-[8px] transition-all ${
+              devTab === "cli" ? "bg-[#7c3aed] text-white" : "text-[#9ca3af]"
+            }`}
+            style={featureSettings}
+          >
+            CLI
+          </button>
+        </div>
+
+        {/* Tab content */}
+        {devTab === "mcp-server" ? (
+          <div className="flex flex-col gap-[12px]">
+            <p
+              className="font-['Atyp_BL:Medium',sans-serif] text-[13px] text-white/60 leading-[1.5]"
+              style={featureSettings}
+            >
+              Install the MCP server for your AI client:
+            </p>
+            {/* Single command */}
+            <div
+              className="flex items-center rounded-[10px] px-[14px] py-[12px]"
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.1)",
+              }}
+            >
+              <p className="flex-1 font-['DM_Mono:Regular',sans-serif] text-[12px] leading-[1.6] opacity-70">
+                <span className="text-[#6b7280]">$ </span>
+                <span className="text-[#4ade80]">npx</span>{" "}
+                <span className="text-[#60a5fa]">
+                  @orderly.network/mcp-server
+                </span>{" "}
+                <span className="text-[#fbbf24]">init</span>{" "}
+                <span className="text-white/40">--client</span>{" "}
+                <span className="text-[#a78bfa]">&lt;name&gt;</span>
+              </p>
+              <MobileCopyButton text="npx @orderly.network/mcp-server init --client <name>" />
+            </div>
+            {/* Client badges */}
+            <div className="flex flex-wrap items-center gap-[6px]">
+              <span className="font-['DM_Mono:Regular',sans-serif] text-[11px] text-white">
+                Supported clients:
+              </span>
+              {(
+                ["claude", "cursor", "vscode", "codex", "opencode"] as const
+              ).map((c) => (
+                <span
+                  key={c}
+                  className="font-['DM_Mono:Regular',sans-serif] text-[11px] text-white px-[8px] py-[3px] rounded-[4px]"
+                  style={{ background: "rgba(255,255,255,0.05)" }}
+                >
+                  {c}
+                </span>
+              ))}
+            </div>
+          </div>
+        ) : devTab === "skills" ? (
+          /* Skills tab */
+          <div className="flex flex-col gap-[12px]">
+            <p
+              className="font-['Atyp_BL:Medium',sans-serif] text-[13px] text-white/60 leading-[1.5]"
+              style={featureSettings}
+            >
+              Install Orderly skills for enhanced agent capabilities:
+            </p>
+            {SKILLS_COMMANDS_MOBILE.map((s) => (
+              <MobileSkillsCodeBlock
+                key={s.comment}
+                comment={s.comment}
+                cmd={s.cmd}
+              />
+            ))}
+            <div
+              className="rounded-[10px] px-[14px] py-[12px] flex flex-col gap-[6px]"
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.1)",
+              }}
+            >
+              <p
+                className="font-['Atyp_BL:Medium',sans-serif] text-[12px] text-white/60 leading-[1.5]"
+                style={featureSettings}
+              >
+                <span className="font-['Atyp_BL:Bold',sans-serif] text-white/80">
+                  16 skills available:
+                </span>{" "}
+                API authentication, trading orders, positions, WebSocket
+                streaming, SDK hooks, UI components, wallet connection, and
+                more.
+              </p>
+              <p className="font-['DM_Mono:Regular',sans-serif] text-[11px] text-[#6b7280] leading-[1.5]">
+                <strong className="text-white/50">Flags:</strong>{" "}
+                <span className="text-[#c4b5fd]">--all</span> install all skills{" "}
+                &bull; <span className="text-[#c4b5fd]">-g</span> global install{" "}
+                &bull;{" "}
+                <span className="text-[#c4b5fd]">--agent &apos;*&apos;</span>{" "}
+                all agents
+              </p>
+            </div>
+          </div>
+        ) : (
+          /* CLI tab */
+          <div className="flex flex-col gap-[12px]">
+            <p
+              className="font-['Atyp_BL:Medium',sans-serif] text-[13px] text-white/60 leading-[1.5]"
+              style={featureSettings}
+            >
+              Trade perps from the command line with secure OS keychain auth:
+            </p>
+            <div
+              className="flex items-center rounded-[10px] px-[14px] py-[12px]"
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.1)",
+              }}
+            >
+              <p className="flex-1 font-['DM_Mono:Regular',sans-serif] text-[12px] leading-[1.6] opacity-70">
+                <span className="text-[#6b7280]">$ </span>
+                <span className="text-[#4ade80]">npm</span>{" "}
+                <span className="text-[#60a5fa]">install</span>{" "}
+                <span className="text-[#fbbf24]">-g</span>{" "}
+                <span className="text-[#60a5fa]">@orderly.network/cli</span>
+              </p>
+              <MobileCopyButton text={CLI_INSTALL_CMD} />
+            </div>
+            <div
+              className="rounded-[10px] px-[14px] py-[12px] flex flex-col gap-[6px]"
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.1)",
+              }}
+            >
+              <p
+                className="font-['Atyp_BL:Medium',sans-serif] text-[12px] text-white/60 leading-[1.5]"
+                style={featureSettings}
+              >
+                <span className="font-['Atyp_BL:Bold',sans-serif] text-white/80">
+                  Place orders, manage positions, set TP/SL
+                </span>{" "}
+                — supports EVM &amp; Solana with keys stored securely in your OS keychain.
+              </p>
+              <a
+                href={CLI_GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-['Atyp_BL:Medium',sans-serif] text-[11px] text-[#9C75FF] no-underline hover:text-white transition-colors"
+                style={featureSettings}
+              >
+                View on GitHub →
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function TrustedHeader() {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[10px] items-start relative shrink-0 text-white w-full"
+      data-name="Trusted Header"
+    >
+      <p
+        className="font-['Atyp_BL:Bold',sans-serif] leading-[1.1] not-italic relative shrink-0 text-[20px] w-full"
+        style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+      >
+        Trusted by builders you know
+      </p>
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] leading-[1.4] relative shrink-0 text-[14px] tracking-[0.294px] w-full"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        DEXs and protocols powered by the Orderly omnichain infrastructure.
+      </p>
+    </div>
+  );
+}
+
+function Image5Vectorized() {
+  return (
+    <div
+      className="h-[25px] relative shrink-0 w-[26px]"
+      data-name="image 5 [Vectorized]"
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 26 25"
+      >
+        <g id="image 5 [Vectorized]">
+          <path d={svgPaths.pae3d500} fill="var(--fill-0, black)" id="Vector" />
+          <path
+            d={svgPaths.p18fcec80}
+            fill="var(--fill-0, #3EEDB9)"
+            id="Vector_2"
+          />
+          <path
+            d={svgPaths.p12efb330}
+            fill="var(--fill-0, #26FAB9)"
+            id="Vector_3"
+          />
+          <path
+            d={svgPaths.p5db2300}
+            fill="var(--fill-0, black)"
+            id="Vector_4"
+          />
+          <path
+            d={svgPaths.p1f627100}
+            fill="var(--fill-0, #26FAB9)"
+            id="Vector_5"
+          />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function LogoContainer() {
+  return (
+    <div
+      className="bg-[#26fab9] content-stretch flex flex-col items-center justify-center relative rounded-[28.125px] shrink-0 size-[30px]"
+      data-name="Logo Container"
+    >
+      <Image5Vectorized />
+    </div>
+  );
+}
+
+function ProductInfo() {
+  return (
+    <div
+      className="content-stretch flex flex-col items-start relative shrink-0"
+      data-name="Product Info"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-none relative shrink-0 text-[12px] text-white whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06', 'lnum', 'pnum'",
+        }}
+      >
+        LogX
+      </p>
+    </div>
+  );
+}
+
+function DexCard() {
+  return (
+    <div
+      className="bg-[rgba(20,21,26,0.7)] col-2 justify-self-stretch relative rounded-[5px] row-2 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
+      data-name="DEX Card"
+    >
+      <div className="flex flex-row items-center justify-center size-full">
+        <div className="content-stretch flex gap-[10px] items-center justify-center p-[10px] relative w-full">
+          <img
+            src="/images/logos/kodiak.jpg"
+            width={30}
+            height={30}
+            alt="Kodiak"
+            className="shrink-0 rounded-full"
+          />
+          <div
+            className="content-stretch flex flex-col items-start relative shrink-0"
+            data-name="Product Info"
+          >
+            <p
+              className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-none relative shrink-0 text-[12px] text-white whitespace-nowrap"
+              style={{
+                fontVariationSettings: "'ital' 0, 'opsz' 72",
+                fontFeatureSettings:
+                  "'ss02', 'ss03', 'ss05', 'ss06', 'lnum', 'pnum'",
+              }}
+            >
+              Kodiak
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LogoContainer1() {
+  return (
+    <div
+      className="bg-[#00a9de] content-stretch flex flex-col items-center justify-center relative rounded-[28.125px] shrink-0 size-[30px]"
+      data-name="Logo Container"
+    >
+      <div
+        className="h-[11.25px] relative shrink-0 w-[16.875px]"
+        data-name="logos"
+      >
+        <div className="absolute inset-[0_25.05%_0_0.77%]" data-name="Vector">
+          <svg
+            className="absolute block size-full"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 12.5178 11.25"
+          >
+            <path
+              d={svgPaths.p8ceb900}
+              fill="var(--fill-0, black)"
+              id="Vector"
+            />
+          </svg>
+        </div>
+        <div
+          className="absolute inset-[40.38%_9.01%_0_60.21%]"
+          data-name="Vector"
+        >
+          <svg
+            className="absolute block size-full"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 5.19447 6.70673"
+          >
+            <path
+              d={svgPaths.p1313b980}
+              fill="var(--fill-0, black)"
+              id="Vector"
+            />
+          </svg>
+        </div>
+        <div
+          className="absolute inset-[0_0.78%_75.96%_77.55%]"
+          data-name="Vector"
+        >
+          <svg
+            className="absolute block size-full"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 3.65625 2.70433"
+          >
+            <path
+              d={svgPaths.pa0b4c80}
+              fill="var(--fill-0, black)"
+              id="Vector"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ProductInfo1() {
+  return (
+    <div
+      className="content-stretch flex flex-col items-start relative shrink-0"
+      data-name="Product Info"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-none relative shrink-0 text-[12px] text-white whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06', 'lnum', 'pnum'",
+        }}
+      >
+        WOOFi Pro
+      </p>
+    </div>
+  );
+}
+
+function DexCard1() {
+  return (
+    <div
+      className="bg-[rgba(20,21,26,0.7)] col-1 justify-self-stretch relative rounded-[5px] row-1 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
+      data-name="DEX Card"
+    >
+      <div className="flex flex-row items-center justify-center size-full">
+        <div className="content-stretch flex gap-[10px] items-center justify-center p-[10px] relative w-full">
+          <LogoContainer1 />
+          <ProductInfo1 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Group3() {
+  return (
+    <div
+      className="absolute inset-[33.13%_35.93%_33.21%_36.48%]"
+      data-name="Group"
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 8.27785 10.1001"
+      >
+        <g id="Group">
+          <path
+            d={svgPaths.p1ceebd80}
+            fill="url(#paint0_linear_78_873)"
+            id="Vector"
+          />
+        </g>
+        <defs>
+          <linearGradient
+            gradientUnits="userSpaceOnUse"
+            id="paint0_linear_78_873"
+            x1="-6.51099"
+            x2="13.1405"
+            y1="9.29075"
+            y2="-2.17741"
+          >
+            <stop stopColor="#4ECDC4" />
+            <stop offset="0.4946" stopColor="#3772FF" />
+            <stop offset="1" stopColor="#C200FB" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+function Group2() {
+  return (
+    <div
+      className="absolute contents inset-[33.13%_35.93%_33.21%_36.48%]"
+      data-name="Group"
+    >
+      <Group3 />
+    </div>
+  );
+}
+
+function Group5() {
+  return (
+    <div
+      className="absolute inset-[57.52%_36.14%_33.62%_53.54%]"
+      data-name="Group"
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 3.09641 2.65901"
+      >
+        <g id="Group">
+          <path
+            d={svgPaths.p363d200}
+            fill="url(#paint0_linear_78_1031)"
+            id="Vector"
+          />
+        </g>
+        <defs>
+          <linearGradient
+            gradientUnits="userSpaceOnUse"
+            id="paint0_linear_78_1031"
+            x1="-8.49161"
+            x2="11.1602"
+            y1="7.35285"
+            y2="-4.11551"
+          >
+            <stop stopColor="#4ECDC4" />
+            <stop offset="0.4946" stopColor="#3772FF" />
+            <stop offset="1" stopColor="#C200FB" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+function Group4() {
+  return (
+    <div
+      className="absolute contents inset-[57.52%_36.14%_33.62%_53.54%]"
+      data-name="Group"
+    >
+      <Group5 />
+    </div>
+  );
+}
+
+function Group1() {
+  return (
+    <div
+      className="absolute contents inset-[33.13%_35.93%_33.21%_36.48%]"
+      data-name="Group"
+    >
+      <Group2 />
+      <Group4 />
+    </div>
+  );
+}
+
+function Group6() {
+  return (
+    <div
+      className="absolute inset-[11.3%_17.12%_12.08%_16.52%]"
+      data-name="Group"
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 19.908 22.9854"
+      >
+        <g id="Group">
+          <path
+            d={svgPaths.p1e47aa00}
+            fill="url(#paint0_linear_78_862)"
+            id="Vector"
+          />
+          <g id="Group_2">
+            <path
+              d={svgPaths.p1743fd00}
+              fill="url(#paint1_linear_78_862)"
+              id="Vector_2"
+            />
+          </g>
+        </g>
+        <defs>
+          <linearGradient
+            gradientUnits="userSpaceOnUse"
+            id="paint0_linear_78_862"
+            x1="0.246451"
+            x2="19.8981"
+            y1="17.1581"
+            y2="5.6899"
+          >
+            <stop stopColor="#4ECDC4" />
+            <stop offset="0.4946" stopColor="#3772FF" />
+            <stop offset="1" stopColor="#C200FB" />
+          </linearGradient>
+          <linearGradient
+            gradientUnits="userSpaceOnUse"
+            id="paint1_linear_78_862"
+            x1="0.268789"
+            x2="19.9199"
+            y1="17.1963"
+            y2="5.72836"
+          >
+            <stop stopColor="#4ECDC4" />
+            <stop offset="0.4946" stopColor="#3772FF" />
+            <stop offset="1" stopColor="#C200FB" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+function Group() {
+  return (
+    <div
+      className="absolute contents inset-[11.3%_17.12%_12.08%_16.52%]"
+      data-name="Group"
+    >
+      <Group1 />
+      <Group6 />
+    </div>
+  );
+}
+
+function ProductInfo2() {
+  return (
+    <div
+      className="content-stretch flex flex-col items-start relative shrink-0"
+      data-name="Product Info"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-none relative shrink-0 text-[12px] text-white whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06', 'lnum', 'pnum'",
+        }}
+      >
+        Raydium
+      </p>
+    </div>
+  );
+}
+
+function DexCard2() {
+  return (
+    <div
+      className="bg-[rgba(20,21,26,0.7)] col-2 justify-self-stretch relative rounded-[5px] row-1 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
+      data-name="DEX Card"
+    >
+      <div className="flex flex-row items-center justify-center size-full">
+        <div className="content-stretch flex gap-[10px] items-center justify-center p-[10px] relative w-full">
+          <div
+            className="relative shrink-0 size-[30px]"
+            data-name="Trusted Logo"
+          >
+            <svg
+              className="absolute block size-full"
+              fill="none"
+              preserveAspectRatio="none"
+              viewBox="0 0 30 30"
+            >
+              <circle
+                cx="15"
+                cy="15"
+                fill="var(--fill-0, #131A35)"
+                id="Ellipse 3023"
+                r="15"
+              />
+            </svg>
+            <Group />
+          </div>
+          <ProductInfo2 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Group8() {
+  return (
+    <div className="absolute inset-[0_-0.11%]">
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 29.5952 29.5314"
+      >
+        <g id="Group 25979">
+          <path
+            d={svgPaths.p1dffff00}
+            fill="var(--fill-0, white)"
+            id="Path 16214"
+          />
+          <path
+            d={svgPaths.p759ad80}
+            fill="var(--fill-0, #2188C6)"
+            id="Path 16215"
+          />
+          <path
+            d={svgPaths.pb94c080}
+            fill="var(--fill-0, #162B4E)"
+            id="Path 16216"
+          />
+          <path
+            d={svgPaths.p22d08500}
+            fill="var(--fill-0, #21326F)"
+            id="Path 16217"
+          />
+          <path
+            d={svgPaths.p192abfc0}
+            fill="var(--fill-0, #162B4E)"
+            id="Path 16218"
+          />
+          <path
+            d={svgPaths.pf0bb560}
+            fill="var(--fill-0, #3F0086)"
+            id="Path 16219"
+          />
+          <path
+            d={svgPaths.p3c96f00}
+            fill="var(--fill-0, #3A9DD7)"
+            id="Path 16220"
+          />
+          <path
+            d={svgPaths.p184025f0}
+            fill="var(--fill-0, #162B4E)"
+            id="Path 16221"
+          />
+          <path
+            d={svgPaths.p191a7600}
+            fill="var(--fill-0, #162B4E)"
+            id="Path 16222"
+          />
+          <path
+            d={svgPaths.p27dafe80}
+            fill="var(--fill-0, #2797D2)"
+            id="Path 16223"
+          />
+          <path
+            d={svgPaths.p307c8f80}
+            fill="var(--fill-0, #162B4E)"
+            id="Path 16224"
+          />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function LogoContainer2() {
+  return (
+    <div
+      className="bg-white content-stretch flex flex-col items-center justify-center relative rounded-[28.125px] shrink-0 size-[30px]"
+      data-name="Logo Container"
+    >
+      <div className="relative shrink-0 size-[29.531px]" data-name="logos">
+        <Group8 />
+      </div>
+    </div>
+  );
+}
+
+function ProductInfo3() {
+  return (
+    <div
+      className="content-stretch flex flex-col items-start relative shrink-0"
+      data-name="Product Info"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-none relative shrink-0 text-[12px] text-white whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06', 'lnum', 'pnum'",
+        }}
+      >
+        Quickswap
+      </p>
+    </div>
+  );
+}
+
+function DexCard3() {
+  return (
+    <div
+      className="bg-[rgba(20,21,26,0.7)] col-1 justify-self-stretch relative rounded-[5px] row-2 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
+      data-name="DEX Card"
+    >
+      <div className="flex flex-row items-center justify-center size-full">
+        <div className="content-stretch flex gap-[10px] items-center justify-center p-[10px] relative w-full">
+          <LogoContainer2 />
+          <ProductInfo3 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Logos() {
+  return (
+    <div className="relative shrink-0 size-[16.875px]" data-name="logos">
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 16.875 16.875"
+      >
+        <path d={svgPaths.p18108800} fill="var(--fill-0, white)" id="Vector" />
+      </svg>
+    </div>
+  );
+}
+
+function LogoContainer3() {
+  return (
+    <div
+      className="bg-[#1e2026] content-stretch flex flex-col items-center justify-center relative rounded-[28.125px] shrink-0 size-[30px]"
+      data-name="Logo Container"
+    >
+      <Logos />
+    </div>
+  );
+}
+
+function ProductInfo4() {
+  return (
+    <div
+      className="content-stretch flex flex-col items-start relative shrink-0"
+      data-name="Product Info"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-none relative shrink-0 text-[12px] text-white whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06', 'lnum', 'pnum'",
+        }}
+      >
+        What.Exchange
+      </p>
+    </div>
+  );
+}
+
+function DexCard4() {
+  return (
+    <div
+      className="bg-[rgba(20,21,26,0.7)] col-1 justify-self-stretch relative rounded-[5px] row-3 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
+      data-name="DEX Card"
+    >
+      <div className="flex flex-row items-center justify-center size-full">
+        <div className="content-stretch flex gap-[10px] items-center justify-center p-[10px] relative w-full">
+          <LogoContainer3 />
+          <ProductInfo4 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LogoContainer4() {
+  return (
+    <div
+      className="bg-black content-stretch flex flex-col items-center justify-center relative rounded-[28.125px] shrink-0 size-[30px]"
+      data-name="Logo Container"
+    >
+      <div className="relative shrink-0 size-[29.531px]" data-name="logos">
+        <svg
+          className="absolute block size-full"
+          fill="none"
+          preserveAspectRatio="none"
+          viewBox="0 0 29.5312 29.5312"
+        >
+          <path
+            clipRule="evenodd"
+            d={svgPaths.p210f6100}
+            fill="var(--fill-0, white)"
+            fillRule="evenodd"
+            id="Vector"
+          />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+function ProductInfo5() {
+  return (
+    <div
+      className="content-stretch flex flex-col items-start relative shrink-0"
+      data-name="Product Info"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-none relative shrink-0 text-[12px] text-white whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06', 'lnum', 'pnum'",
+        }}
+      >
+        VOOI
+      </p>
+    </div>
+  );
+}
+
+function DexCard5() {
+  return (
+    <div
+      className="bg-[rgba(20,21,26,0.7)] col-2 justify-self-stretch relative rounded-[5px] row-3 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
+      data-name="DEX Card"
+    >
+      <div className="flex flex-row items-center justify-center size-full">
+        <div className="content-stretch flex gap-[10px] items-center justify-center p-[10px] relative w-full">
+          <LogoContainer4 />
+          <ProductInfo5 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TrustedLogo() {
+  return (
+    <div
+      className="h-[16.873px] relative shrink-0 w-[16.387px]"
+      data-name="Trusted Logo"
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 16.3866 16.8742"
+      >
+        <g id="Trusted Logo">
+          <path
+            d={svgPaths.p3cd2af00}
+            fill="var(--fill-0, #0A0B0D)"
+            id="Rectangle 376715171"
+          />
+          <path
+            d={svgPaths.p37695180}
+            fill="var(--fill-0, #D6F22B)"
+            id="Vector 8"
+          />
+          <path
+            d={svgPaths.p26f5cb00}
+            fill="var(--fill-0, #D6F22B)"
+            id="Vector 9"
+          />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function LogoContainer5() {
+  return (
+    <div
+      className="bg-white content-stretch flex flex-col items-center justify-center relative rounded-[28.125px] shrink-0 size-[30px]"
+      data-name="Logo Container"
+    >
+      <TrustedLogo />
+    </div>
+  );
+}
+
+function ProductInfo6() {
+  return (
+    <div
+      className="content-stretch flex flex-col items-start relative shrink-0"
+      data-name="Product Info"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-none relative shrink-0 text-[12px] text-white whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06', 'lnum', 'pnum'",
+        }}
+      >
+        Kyrrio
+      </p>
+    </div>
+  );
+}
+
+function DexCard6() {
+  return (
+    <div
+      className="bg-[rgba(20,21,26,0.7)] col-1 justify-self-stretch relative rounded-[5px] row-4 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
+      data-name="DEX Card"
+    >
+      <div className="flex flex-row items-center justify-center size-full">
+        <div className="content-stretch flex gap-[10px] items-center justify-center p-[10px] relative w-full">
+          <img
+            src="/images/logos/perpstool.jpg"
+            width={30}
+            height={30}
+            alt="PERPTools"
+            className="shrink-0 rounded-full"
+          />
+          <div
+            className="content-stretch flex flex-col items-start relative shrink-0"
+            data-name="Product Info"
+          >
+            <p
+              className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-none relative shrink-0 text-[12px] text-white whitespace-nowrap"
+              style={{
+                fontVariationSettings: "'ital' 0, 'opsz' 72",
+                fontFeatureSettings:
+                  "'ss02', 'ss03', 'ss05', 'ss06', 'lnum', 'pnum'",
+              }}
+            >
+              PERPTools
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Component() {
+  return (
+    <div
+      className="h-[36.563px] relative shrink-0 w-[37.031px]"
+      data-name="_隔离模式"
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 37.0312 36.5625"
+      >
+        <g id="_éç¦»æ¨¡å¼">
+          <path
+            d={svgPaths.p1934be00}
+            fill="var(--fill-0, white)"
+            id="Vector"
+          />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function LogoContainer6() {
+  return (
+    <div
+      className="bg-black content-stretch flex flex-col items-center justify-center relative rounded-[28.125px] shrink-0 size-[30px]"
+      data-name="Logo Container"
+    >
+      <Component />
+    </div>
+  );
+}
+
+function ProductInfo7() {
+  return (
+    <div
+      className="content-stretch flex flex-col items-start relative shrink-0"
+      data-name="Product Info"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-none relative shrink-0 text-[12px] text-white whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss02', 'ss03', 'ss05', 'ss06', 'lnum', 'pnum'",
+        }}
+      >
+        PerpsDAO
+      </p>
+    </div>
+  );
+}
+
+function DexCard7() {
+  return (
+    <div
+      className="bg-[rgba(20,21,26,0.7)] col-2 justify-self-stretch relative rounded-[5px] row-4 self-start shrink-0 cursor-pointer border border-transparent hover:border-[rgba(103,0,206,0.5)] hover:bg-[rgba(103,0,206,0.15)] hover:shadow-[0_0_20px_rgba(103,0,206,0.22)] transition-all duration-300"
+      data-name="DEX Card"
+    >
+      <div className="flex flex-row items-center justify-center size-full">
+        <div className="content-stretch flex gap-[10px] items-center justify-center p-[10px] relative w-full">
+          <img
+            src="/images/logos/Zetarium.jpg"
+            width={30}
+            height={30}
+            alt="Zetarium"
+            className="shrink-0 rounded-full"
+          />
+          <div
+            className="content-stretch flex flex-col items-start relative shrink-0"
+            data-name="Product Info"
+          >
+            <p
+              className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-none relative shrink-0 text-[12px] text-white whitespace-nowrap"
+              style={{
+                fontVariationSettings: "'ital' 0, 'opsz' 72",
+                fontFeatureSettings:
+                  "'ss02', 'ss03', 'ss05', 'ss06', 'lnum', 'pnum'",
+              }}
+            >
+              Zetarium
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Dex() {
+  return (
+    <div
+      className="gap-x-[14px] gap-y-[14px] grid grid-cols-[repeat(2,minmax(0,1fr))] grid-rows-[repeat(4,fit-content(100%))] relative shrink-0 w-full"
+      data-name="DEX"
+    >
+      <DexCard />
+      <DexCard1 />
+      <DexCard2 />
+      <DexCard3 />
+      <DexCard4 />
+      <DexCard5 />
+      <DexCard6 />
+      <DexCard7 />
+    </div>
+  );
+}
+
+function TrustedButtonContainer() {
+  return (
+    <div
+      className="content-stretch flex gap-[7px] items-start relative shrink-0 w-[100px] cursor-pointer hover:opacity-80 transition-opacity group"
+      data-name="Trusted Button Container"
+    >
+      <p
+        className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+        style={{ fontFeatureSettings: "'liga' 0" }}
+      >
+        View all
+      </p>
+      <div className="flex items-center justify-center relative shrink-0 group-hover:translate-x-1 transition-transform duration-200">
+        <div className="-scale-y-100 flex-none rotate-180">
+          <div
+            className="overflow-clip relative size-[16px]"
+            data-name="Trusted Button Icon"
+          >
+            <div className="absolute inset-[10.42%]" data-name="Union">
+              <svg
+                className="absolute block size-full"
+                fill="none"
+                preserveAspectRatio="none"
+                viewBox="0 0 12.6133 12.6133"
+              >
+                <path
+                  d={svgPaths.p35ba4800}
+                  fill="var(--fill-0, white)"
+                  id="Union"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TrustedContent() {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[26px] items-start relative shrink-0 w-[334px]"
+      data-name="Trusted Content"
+    >
+      <Dex />
+      <TrustedButtonContainer />
+    </div>
+  );
+}
+
+function TrustedSection() {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[32px] items-start relative shrink-0 w-[334px]"
+      data-name="Trusted Section"
+    >
+      <TrustedHeader />
+      <TrustedContent />
+    </div>
+  );
+}
+
+function HeroTextContainer1() {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[12px] items-center relative shrink-0 text-center text-white w-full"
+      data-name="Hero Text Container"
+    >
+      <p
+        className="font-['Atyp_BL:Display_-_Bold',sans-serif] font-bold leading-[1.2] relative shrink-0 text-[24px] uppercase w-full"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        The best time to launch was yesterday.
+      </p>
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] leading-[1.4] relative shrink-0 text-[14px] tracking-[0.294px] w-full"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        The second best time is now.
+        <br aria-hidden="true" />
+        Start earning from day one.
+      </p>
+    </div>
+  );
+}
+
+function Frame14() {
+  return (
+    <div className="content-stretch flex gap-[17px] items-start justify-center relative shrink-0 w-full">
+      <div
+        className="bg-[#6700ce] content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer hover:opacity-90 transition-opacity"
+        data-name="build with orderly"
+      >
+        <p
+          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+          style={{
+            fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
+          }}
+        >
+          Start Building
+        </p>
+      </div>
+      <div
+        className="content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer hover:bg-white/10 transition-colors"
+        data-name="Talk to Us"
+      >
+        <div
+          aria-hidden="true"
+          className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[24px]"
+        />
+        <p
+          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+          style={{
+            fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
+          }}
+        >
+          Talk to Us
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function Frame1() {
+  return (
+    <div
+      className="content-stretch flex flex-col gap-[30px] items-center py-[20px] relative shrink-0 w-[335px]"
+      data-name="Frame"
+    >
+      <HeroTextContainer1 />
+      <Frame14 />
+    </div>
+  );
+}
+
+function Frame25() {
+  return (
+    <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 text-white w-full whitespace-nowrap">
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-[1.3] relative shrink-0 text-[18px] tracking-[0.18px]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        AI Access
+      </p>
+      <p
+        className="font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] leading-[1.4] relative shrink-0 text-[16px] tracking-[0.176px]"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        Retrieve structured capabilities at:
+      </p>
+    </div>
+  );
+}
+
+const AI_SKILL_URL = "https://orderly.network/skill.md";
+
+function Frame44() {
+  return (
+    <div
+      className="bg-[#14151a] relative rounded-[10px] shrink-0 w-full"
+      data-name="ai-url"
+    >
+      <div className="flex flex-row items-center size-full overflow-hidden">
+        <div className="content-stretch flex items-center pl-[18px] py-[16px] relative w-full overflow-hidden">
+          <a
+            href="https://orderly.network/skill.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-['DM_Mono:Medium',sans-serif] leading-[1.4] not-italic opacity-70 relative shrink-0 text-[16px] text-white tracking-[0.336px] whitespace-nowrap overflow-hidden text-ellipsis hover:opacity-100 transition-opacity"
+          >
+            orderly.network/skill.md
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Frame12() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const textarea = document.createElement("textarea");
+    textarea.value = AI_SKILL_URL;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand("copy");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+    document.body.removeChild(textarea);
+  };
+
+  return (
+    <div className="content-stretch flex flex-col gap-[10px] items-center justify-center relative shrink-0 w-full">
+      <Frame44 />
+      <button
+        onClick={handleCopy}
+        className="bg-black relative rounded-[24px] shrink-0 w-full border-0 cursor-pointer hover:opacity-80 transition-opacity"
+        data-name="ai-copy"
+        style={{ padding: 0 }}
+      >
+        <div className="flex flex-row items-center justify-center w-full">
+          <div
+            className="content-stretch flex items-center justify-center px-[20px] relative w-full"
+            style={{ height: 44 }}
+          >
+            {copied ? (
+              <CheckSvg />
+            ) : (
+              <p
+                className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[16px] text-white tracking-[0.16px] whitespace-nowrap"
+                style={{ fontFeatureSettings: "'liga' 0" }}
+              >
+                Copy
+              </p>
+            )}
+          </div>
+        </div>
+      </button>
+    </div>
+  );
+}
+
+function Frame17() {
+  return (
+    <div className="content-stretch flex flex-col gap-[20px] items-start relative shrink-0 w-full">
+      <Frame25 />
+      <Frame12 />
+    </div>
+  );
+}
+
+function Frame19() {
+  return (
+    <div className="bg-[#1e2026] relative rounded-[30px] shrink-0 w-full">
+      <div className="flex flex-col justify-center size-full">
+        <div className="content-stretch flex flex-col items-start justify-center p-[30px] relative w-full">
+          <Frame17 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Frame27() {
+  return (
+    <div className="content-stretch flex flex-col items-start relative shrink-0 w-full">
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-[1.2] relative shrink-0 text-[18px] text-white tracking-[0.18px] w-full"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        Be the first to hear about launches, token listings, and builder
+        updates.
+      </p>
+    </div>
+  );
+}
+
+function Frame13() {
+  const [email, setEmail] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = (e?: React.MouseEvent | React.KeyboardEvent) => {
+    e?.stopPropagation();
+    if (email && email.includes("@")) {
+      console.log("Newsletter signup:", email);
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setEmail("");
+      }, 3000);
+    }
+  };
+
+  return (
+    <div className="content-stretch flex flex-col gap-[10px] items-center justify-center relative shrink-0 w-full">
+      {/* Email input */}
+      <div
+        className="bg-[#7800f0] relative rounded-[10px] shrink-0 w-full"
+        data-name="newsletter-email"
+      >
+        <div className="flex flex-row items-center size-full">
+          <div className="content-stretch flex items-center pl-[18px] py-[16px] relative w-full">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter")
+                  handleSubmit(e as unknown as React.KeyboardEvent);
+              }}
+              placeholder="satoshi@orderly.network"
+              className="w-full bg-transparent border-0 outline-none font-['Atyp_BL:Display_-_Medium',sans-serif] font-[507] leading-[1.4] text-[16px] text-white tracking-[0.336px] placeholder:opacity-70"
+              style={{
+                fontVariationSettings: "'ital' 0, 'opsz' 72",
+                fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+      {/* Sign Up button */}
+      <button
+        onClick={(e) => handleSubmit(e)}
+        className="bg-black relative rounded-[24px] shrink-0 w-full border-0 cursor-pointer hover:opacity-80 transition-opacity"
+        data-name="newsletter-signup"
+        style={{ padding: 0 }}
+      >
+        <div className="flex flex-row items-center justify-center w-full">
+          <div
+            className="content-stretch flex items-center justify-center px-[20px] relative w-full"
+            style={{ height: 44 }}
+          >
+            {isSubmitted ? (
+              <CheckSvg />
+            ) : (
+              <p
+                className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[16px] text-white tracking-[0.16px] whitespace-nowrap"
+                style={{ fontFeatureSettings: "'liga' 0" }}
+              >
+                Sign Up
+              </p>
+            )}
+          </div>
+        </div>
+      </button>
+    </div>
+  );
+}
+
+function Frame18() {
+  return (
+    <div className="content-stretch flex flex-col gap-[20px] items-start relative shrink-0 w-full">
+      <Frame27 />
+      <Frame13 />
+    </div>
+  );
+}
+
+function Frame26() {
+  return (
+    <div className="bg-[#6700ce] relative rounded-[30px] shrink-0 w-full">
+      <div className="flex flex-col justify-center size-full">
+        <div className="content-stretch flex flex-col items-start justify-center p-[30px] relative w-full">
+          <Frame18 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Brandmark1() {
+  return (
+    <div
+      className="col-1 h-[47.94px] ml-0 mt-0 relative row-1 w-[47.998px]"
+      data-name="Brandmark"
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 47.9978 47.9396"
+      >
+        <g id="Brandmark">
+          <path
+            clipRule="evenodd"
+            d={svgPaths.pdfa100}
+            fill="var(--fill-0, white)"
+            fillRule="evenodd"
+            id="Intersect"
+          />
+          <path
+            clipRule="evenodd"
+            d={svgPaths.p6be8000}
+            fill="var(--fill-0, white)"
+            fillRule="evenodd"
+            id="Subtract"
+          />
+          <path
+            clipRule="evenodd"
+            d={svgPaths.p3fa2a600}
+            fill="var(--fill-0, white)"
+            fillRule="evenodd"
+            id="Subtract_2"
+          />
+          <path
+            clipRule="evenodd"
+            d={svgPaths.p1ebf2d00}
+            fill="var(--fill-0, white)"
+            fillRule="evenodd"
+            id="Subtract_3"
+          />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function Logo() {
+  return (
+    <div
+      className="grid-cols-[max-content] grid-rows-[max-content] inline-grid place-items-start relative shrink-0"
+      data-name="Logo"
+    >
+      <Brandmark1 />
+    </div>
+  );
+}
+
+function Component1() {
+  return (
+    <div
+      className="bg-white col-1 content-stretch flex gap-[6px] items-center ml-0 mt-0 p-[12px] relative rounded-[63px] row-1 cursor-pointer hover:opacity-80 transition-opacity"
+      data-name="buy-order"
+    >
+      <div
+        className="flex flex-col font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] justify-center leading-[0] relative shrink-0 text-[14px] text-black tracking-[0.14px] whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        <p className="leading-[0.753]">Buy ORDER</p>
+      </div>
+      <div className="flex items-center justify-center relative shrink-0">
+        <div className="flex-none rotate-180">
+          <div className="relative size-[14.667px]" data-name="Icon">
+            <div className="absolute inset-[-8.52%]">
+              <svg
+                className="block size-full"
+                fill="none"
+                preserveAspectRatio="none"
+                viewBox="0 0 17.1667 17.1667"
+              >
+                <path
+                  d={svgPaths.p30a87c0}
+                  id="Icon"
+                  stroke="var(--stroke-0, black)"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2.5"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const ORDER_PRICE_CACHE_KEY = "order_price";
+const ORDER_PRICE_MAX_AGE = 60_000; // 1 minute
+
+function getCachedPrice(): string | null {
+  try {
+    const raw = localStorage.getItem(ORDER_PRICE_CACHE_KEY);
+    if (!raw) return null;
+    const { value, ts } = JSON.parse(raw);
+    if (Date.now() - ts < ORDER_PRICE_MAX_AGE) return value;
+  } catch {}
+  return null;
+}
+
+function setCachedPrice(value: string) {
+  localStorage.setItem(
+    ORDER_PRICE_CACHE_KEY,
+    JSON.stringify({ value, ts: Date.now() })
+  );
+}
+
+function formatUsd(usd: number): string {
+  return (
+    "$" +
+    usd.toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 3,
+    })
+  );
+}
+
+function FooterStatus1() {
+  return (
+    <div className="relative shrink-0" data-name="Footer Status">
+      <Component1 />
+    </div>
+  );
+}
+
+function FooterStatus() {
+  // Initialize as null to avoid hydration mismatch (localStorage is unavailable on server)
+  const [price, setPrice] = useState<string | null>(null);
+
+  useEffect(() => {
+    const cached = getCachedPrice();
+    if (cached) {
+      setPrice(cached);
+      return;
+    }
+    const fetchPrice = async () => {
+      try {
+        const res = await fetch(
+          "https://api.coingecko.com/api/v3/simple/price?ids=orderly-network&vs_currencies=usd"
+        );
+        const data = await res.json();
+        const usd = data?.["orderly-network"]?.usd;
+        if (usd !== undefined) {
+          const formatted = formatUsd(usd);
+          setPrice(formatted);
+          setCachedPrice(formatted);
+        }
+      } catch {
+        setPrice(getCachedPrice());
+      }
+    };
+    fetchPrice();
+  }, []);
+
+  return (
+    <div
+      className="flex items-center gap-[12px] relative shrink-0"
+      data-name="Footer Status"
+    >
+      {price && (
+        <div
+          className="flex flex-col font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] h-[38px] justify-center relative text-[16px] text-white tracking-[0.16px]"
+          style={{ fontVariationSettings: "'ital' 0, 'opsz' 72" }}
+        >
+          <p className="leading-[0.753] text-[20px]" data-name="order-price">
+            {price}
+          </p>
+        </div>
+      )}
+      <FooterStatus1 />
+    </div>
+  );
+}
+
+function StatusMessageContainer() {
+  return (
+    <div
+      className="bg-[rgba(156,117,255,0.1)] content-stretch flex gap-[9px] items-center leading-[0] p-[12px] relative rounded-[63px] shrink-0"
+      data-name="Status Message Container"
+    >
+      <Logo />
+      <FooterStatus />
+    </div>
+  );
+}
+
+function ExpandMore() {
+  return (
+    <div className="relative shrink-0 size-[24px]" data-name="expand_more">
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 24 24"
+      >
+        <g id="expand_more">
+          <mask
+            height="24"
+            id="mask0_78_895"
+            maskUnits="userSpaceOnUse"
+            style={{ maskType: "alpha" }}
+            width="24"
+            x="0"
+            y="0"
+          >
+            <rect
+              fill="var(--fill-0, #D9D9D9)"
+              height="24"
+              id="Bounding box"
+              width="24"
+            />
+          </mask>
+          <g mask="url(#mask0_78_895)">
+            <path
+              d={svgPaths.p2770b500}
+              fill="var(--fill-0, white)"
+              fillOpacity="0.8"
+              id="expand_more_2"
+            />
+          </g>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// Generic footer accordion component
+function FooterAccordion({
+  title,
+  links,
+  dataName,
+}: {
+  title: string;
+  links: FooterNavLink[];
+  dataName: string;
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="flex flex-col w-full">
+      {/* Header row — stopPropagation keeps MobileHomePage's FooterSheet from firing */}
+      <div
+        className="content-stretch flex items-center relative shrink-0 w-full cursor-pointer hover:opacity-80 transition-opacity"
+        data-name={dataName}
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpen((o) => !o);
+        }}
+      >
+        <p
+          className="capitalize flex-[1_0_0] font-['Atyp_BL:Bold',sans-serif] leading-[0.753] min-h-px min-w-px not-italic relative text-[14px] text-white tracking-[0.14px]"
+          style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
+        >
+          {title}
+        </p>
+        <div
+          className="relative shrink-0 size-[24px]"
+          data-name="expand_more"
+          style={{
+            transition: "transform 0.22s ease",
+            transform: open ? "rotate(180deg)" : "rotate(0deg)",
+          }}
+        >
+          <svg
+            className="absolute block size-full"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 24 24"
+          >
+            <g id={`expand_more_${dataName}`}>
+              <mask
+                height="24"
+                id={`mask0_${dataName}`}
+                maskUnits="userSpaceOnUse"
+                style={{ maskType: "alpha" }}
+                width="24"
+                x="0"
+                y="0"
+              >
+                <rect fill="#D9D9D9" height="24" width="24" />
+              </mask>
+              <g mask={`url(#mask0_${dataName})`}>
+                <path d={svgPaths.p2770b500} fill="white" fillOpacity="0.8" />
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      {/* Inline sub-links */}
+      {open && (
+        <div className="flex flex-col gap-[4px] pt-[12px] pb-[6px]">
+          {links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target={
+                link.external || link.target === "_blank" ? "_blank" : undefined
+              }
+              rel={
+                link.external || link.target === "_blank"
+                  ? "noopener noreferrer"
+                  : undefined
+              }
+              onClick={(e) => e.stopPropagation()}
+              className="no-underline capitalize px-[2px] py-[10px] font-['Atyp_BL:Medium',sans-serif] not-italic"
+              style={{
+                color: "#9c75ff",
+                fontSize: "14px",
+                fontFeatureSettings: "'ss03','ss02','ss05','ss06'",
+                letterSpacing: "0.14px",
+                lineHeight: "0.753",
+                transition: "opacity 0.15s",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.opacity = "0.75";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.opacity = "1";
+              }}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Builders accordion
+function Frame7() {
+  return (
+    <FooterAccordion
+      title="Builders"
+      links={FOOTER_NAV.Builders}
+      dataName="footer-nav-Builders"
+    />
+  );
+}
+
+function ExpandMore1() {
+  return (
+    <div className="relative shrink-0 size-[24px]" data-name="expand_more">
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 24 24"
+      >
+        <g id="expand_more">
+          <mask
+            height="24"
+            id="mask0_78_895"
+            maskUnits="userSpaceOnUse"
+            style={{ maskType: "alpha" }}
+            width="24"
+            x="0"
+            y="0"
+          >
+            <rect
+              fill="var(--fill-0, #D9D9D9)"
+              height="24"
+              id="Bounding box"
+              width="24"
+            />
+          </mask>
+          <g mask="url(#mask0_78_895)">
+            <path
+              d={svgPaths.p2770b500}
+              fill="var(--fill-0, white)"
+              fillOpacity="0.8"
+              id="expand_more_2"
+            />
+          </g>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// Ecosystem accordion
+function Frame9() {
+  return (
+    <FooterAccordion
+      title="Ecosystem"
+      links={FOOTER_NAV.Ecosystem}
+      dataName="footer-nav-Ecosystem"
+    />
+  );
+}
+
+function ExpandMore2() {
+  return (
+    <div className="relative shrink-0 size-[24px]" data-name="expand_more">
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 24 24"
+      >
+        <g id="expand_more">
+          <mask
+            height="24"
+            id="mask0_78_895"
+            maskUnits="userSpaceOnUse"
+            style={{ maskType: "alpha" }}
+            width="24"
+            x="0"
+            y="0"
+          >
+            <rect
+              fill="var(--fill-0, #D9D9D9)"
+              height="24"
+              id="Bounding box"
+              width="24"
+            />
+          </mask>
+          <g mask="url(#mask0_78_895)">
+            <path
+              d={svgPaths.p2770b500}
+              fill="var(--fill-0, white)"
+              fillOpacity="0.8"
+              id="expand_more_2"
+            />
+          </g>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// Traders accordion
+function Frame10() {
+  return (
+    <FooterAccordion
+      title="Traders"
+      links={FOOTER_NAV.Traders}
+      dataName="footer-nav-Traders"
+    />
+  );
+}
+
+function ExpandMore3() {
+  return (
+    <div className="relative shrink-0 size-[24px]" data-name="expand_more">
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 24 24"
+      >
+        <g id="expand_more">
+          <mask
+            height="24"
+            id="mask0_78_895"
+            maskUnits="userSpaceOnUse"
+            style={{ maskType: "alpha" }}
+            width="24"
+            x="0"
+            y="0"
+          >
+            <rect
+              fill="var(--fill-0, #D9D9D9)"
+              height="24"
+              id="Bounding box"
+              width="24"
+            />
+          </mask>
+          <g mask="url(#mask0_78_895)">
+            <path
+              d={svgPaths.p2770b500}
+              fill="var(--fill-0, white)"
+              fillOpacity="0.8"
+              id="expand_more_2"
+            />
+          </g>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// About accordion
+function Frame11() {
+  return (
+    <FooterAccordion
+      title="About"
+      links={FOOTER_NAV.About}
+      dataName="footer-nav-About"
+    />
+  );
+}
+
+function Frame8() {
+  return (
+    <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full">
+      <StatusMessageContainer />
+      <div className="h-0 relative shrink-0 w-full">
+        <div className="absolute inset-[-1px_0_0_0]">
+          <svg
+            className="block size-full"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 295 1"
+          >
+            <line
+              id="Line 1"
+              stroke="var(--stroke-0, white)"
+              strokeOpacity="0.08"
+              x2="295"
+              y1="0.5"
+              y2="0.5"
+            />
+          </svg>
+        </div>
+      </div>
+      <Frame7 />
+      <div className="h-0 relative shrink-0 w-full">
+        <div className="absolute inset-[-1px_0_0_0]">
+          <svg
+            className="block size-full"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 295 1"
+          >
+            <line
+              id="Line 1"
+              stroke="var(--stroke-0, white)"
+              strokeOpacity="0.08"
+              x2="295"
+              y1="0.5"
+              y2="0.5"
+            />
+          </svg>
+        </div>
+      </div>
+      <Frame9 />
+      <div className="h-0 relative shrink-0 w-full">
+        <div className="absolute inset-[-1px_0_0_0]">
+          <svg
+            className="block size-full"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 295 1"
+          >
+            <line
+              id="Line 1"
+              stroke="var(--stroke-0, white)"
+              strokeOpacity="0.08"
+              x2="295"
+              y1="0.5"
+              y2="0.5"
+            />
+          </svg>
+        </div>
+      </div>
+      <Frame10 />
+      <div className="h-0 relative shrink-0 w-full">
+        <div className="absolute inset-[-1px_0_0_0]">
+          <svg
+            className="block size-full"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 295 1"
+          >
+            <line
+              id="Line 1"
+              stroke="var(--stroke-0, white)"
+              strokeOpacity="0.08"
+              x2="295"
+              y1="0.5"
+              y2="0.5"
+            />
+          </svg>
+        </div>
+      </div>
+      <Frame11 />
+      <div className="h-0 relative shrink-0 w-full">
+        <div className="absolute inset-[-1px_0_0_0]">
+          <svg
+            className="block size-full"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 295 1"
+          >
+            <line
+              id="Line 1"
+              stroke="var(--stroke-0, white)"
+              strokeOpacity="0.08"
+              x2="295"
+              y1="0.5"
+              y2="0.5"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Frame2() {
+  return (
+    <div className="relative shrink-0 w-full">
+      <div className="content-stretch flex flex-col items-start p-[20px] relative w-full">
+        <Frame8 />
+      </div>
+    </div>
+  );
+}
+
+function StatusMessageContainer1() {
+  return (
+    <div
+      className="bg-[rgba(156,117,255,0.1)] content-stretch flex gap-[6px] items-center p-[12px] relative rounded-[63px] shrink-0"
+      data-name="Status Message Container"
+    >
+      <div className="relative shrink-0 size-[6px]">
+        <svg
+          className="absolute block size-full"
+          fill="none"
+          preserveAspectRatio="none"
+          viewBox="0 0 6 6"
+        >
+          <circle
+            cx="3"
+            cy="3"
+            fill="var(--fill-0, #24AD8F)"
+            id="Ellipse 308"
+            r="3"
+          />
+        </svg>
+      </div>
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] leading-[0.753] relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        All systems operational.
+      </p>
+    </div>
+  );
+}
+
+function Group7() {
+  return (
+    <div
+      className="absolute inset-[17.15%_0.72%_17.16%_0.72%]"
+      data-name="Group"
+    >
+      <svg
+        className="absolute block size-full"
+        fill="none"
+        preserveAspectRatio="none"
+        viewBox="0 0 16.7554 11.1677"
+      >
+        <g id="Group">
+          <g id="Group_2">
+            <path
+              d={svgPaths.pabdd780}
+              fill="var(--fill-0, white)"
+              id="Vector"
+            />
+          </g>
+          <g id="Vector_2" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function IcSocialYoutubeS() {
+  return (
+    <div
+      className="bg-[rgba(255,255,255,0)] overflow-clip relative shrink-0 size-[17px]"
+      data-name="ic/social-youtube-s24"
+    >
+      <Group7 />
+    </div>
+  );
+}
+
+// Social icon component based on URL
+function SocialIcon({ href }: { href: string }) {
+  const getLabel = () => {
+    if (href.includes("discord")) return "Discord";
+    if (href.includes("t.me")) return "Telegram";
+    if (href.includes("x.com")) return "X";
+    if (href.includes("youtube")) return "YouTube";
+    if (href.includes("linkedin")) return "LinkedIn";
+    return "Social";
+  };
+
+  const label = getLabel();
+
+  const iconSvg = () => {
+    switch (label) {
+      case "Discord":
+        return (
+          <div className="absolute inset-[11%_0_12.78%_0]" data-name="Vector">
+            <svg
+              className="absolute block size-full"
+              fill="none"
+              preserveAspectRatio="none"
+              viewBox="0 0 16 12.1955"
+            >
+              <path
+                d={svgPaths.p15bda300}
+                fill="var(--fill-0, white)"
+                id="Vector"
+              />
+            </svg>
+          </div>
+        );
+      case "Telegram":
+        return (
+          <svg
+            className="absolute block size-full"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d={svgPaths.p2a7b4dc0}
+              fill="var(--fill-0, white)"
+              id="Vector"
+            />
+          </svg>
+        );
+      case "X":
+        return (
+          <div
+            className="absolute inset-[7.93%_4.17%_9.21%_4.17%]"
+            data-name="Vector"
+          >
+            <svg
+              className="absolute block size-full"
+              fill="none"
+              preserveAspectRatio="none"
+              viewBox="0 0 14.6667 13.2573"
+            >
+              <path
+                d={svgPaths.p2746f000}
+                fill="var(--fill-0, white)"
+                id="Vector"
+              />
+            </svg>
+          </div>
+        );
+      case "YouTube":
+        return <IcSocialYoutubeS />;
+      case "LinkedIn":
+        return (
+          <svg
+            className="absolute block size-full"
+            fill="none"
+            preserveAspectRatio="none"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d={svgPaths.p114d3270}
+              fill="var(--fill-0, white)"
+              id="Vector"
+            />
+          </svg>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const sizeClass = label === "YouTube" ? "size-[17px]" : "size-[16px]";
+  const isOverflow = label === "Discord" || label === "X";
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`relative shrink-0 ${sizeClass} block hover:opacity-80 transition-opacity ${isOverflow ? "overflow-clip" : ""}`}
+      data-name={label}
+    >
+      {iconSvg()}
+    </a>
+  );
+}
+
+function SocialMediaIconsContainer() {
+  return (
+    <div
+      className="content-stretch flex gap-[16px] items-center justify-center relative shrink-0 w-full"
+      data-name="Social Media Icons Container"
+    >
+      {SOCIAL_LINKS.map((href) => (
+        <SocialIcon key={href} href={href} />
+      ))}
+    </div>
+  );
+}
+
+function Frame15() {
+  return (
+    <div className="relative shrink-0 w-full">
+      <div className="flex flex-col items-end size-full">
+        <div className="content-stretch flex flex-col items-end p-[8px] relative w-full">
+          <SocialMediaIconsContainer />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Frame16() {
+  return (
+    <div className="content-stretch flex flex-[1_0_0] flex-col gap-[10px] items-center justify-center min-h-px min-w-px relative">
+      <StatusMessageContainer1 />
+      <Frame15 />
+    </div>
+  );
+}
+
+function Frame6() {
+  return (
+    <div className="relative shrink-0 w-full">
+      <div className="flex flex-row items-center size-full">
+        <div className="content-stretch flex items-center pb-[30px] pt-[20px] px-[20px] relative w-full">
+          <Frame16 />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Frame5() {
+  return (
+    <div className="bg-[#6700ce] content-stretch flex flex-col items-center relative rounded-[30px] shrink-0 w-full">
+      <Frame2 />
+      <Frame6 />
+    </div>
+  );
+}
+
+function Frame29() {
+  return (
+    <div className="content-stretch flex font-['Atyp_BL:Display_-_Regular',sans-serif] font-normal gap-[20px] items-center justify-end relative shrink-0">
+      <a
+        href="https://orderly.network/docs/introduction/terms-of-service"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="relative shrink-0 text-white no-underline hover:opacity-80 transition-opacity"
+      >
+        <p
+          className="relative shrink-0"
+          style={{ fontVariationSettings: "'ital' 0, 'opsz' 72" }}
+        >
+          Terms
+        </p>
+      </a>
+      <a
+        href="https://orderly.network/docs/introduction/privacy-policy"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="relative shrink-0 text-white no-underline hover:opacity-80 transition-opacity"
+      >
+        <p
+          className="relative shrink-0"
+          style={{ fontVariationSettings: "'ital' 0, 'opsz' 72" }}
+        >
+          Privacy
+        </p>
+      </a>
+    </div>
+  );
+}
+
+function Frame28() {
+  return (
+    <div className="content-stretch flex h-[17px] items-center justify-between leading-[1.2] relative shrink-0 text-[14px] text-white tracking-[0.14px] w-full whitespace-nowrap">
+      <p
+        className="font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] relative shrink-0"
+        style={{
+          fontVariationSettings: "'ital' 0, 'opsz' 72",
+          fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
+        }}
+      >
+        © 2026 Orderly Network
+      </p>
+      <Frame29 />
+    </div>
+  );
+}
+
+function Frame50() {
+  return (
+    <div className="content-stretch flex flex-col gap-[10px] items-start relative shrink-0 w-full">
+      <Frame5 />
+      <Frame28 />
+    </div>
+  );
+}
+
+function Frame43() {
+  return (
+    <div className="content-stretch flex flex-col gap-[20px] items-start justify-center relative w-full pb-[32px]">
+      <Frame26 />
+      <Frame50 />
+    </div>
+  );
+}
+
+function Frame41({ hideFooter, hideNav }: { hideFooter?: boolean; hideNav?: boolean }) {
+  return (
+    <div className={`absolute content-stretch flex flex-col gap-[46px] items-start left-[20px] ${hideNav ? "top-[20px]" : "top-[82px]"} w-[335px]`}>
+      <Frame46 />
+      <FromZeroTo />
+      <WhySectionCarousel />
+      <BuildSectionCarousel />
+      <QuickStartSection />
+      <TrustedSection />
+      <Frame1 />
+      {!hideFooter && <Frame43 />}
+    </div>
+  );
+}
+
+const Frame40 = memo(function Frame40({
+  onMenuClick,
+  hideNav,
+  hideFooter,
+}: {
+  onMenuClick?: () => void;
+  hideNav?: boolean;
+  hideFooter?: boolean;
+}) {
+  return (
+    <div className="bg-black relative size-full">
+      <Frame3 onMenuClick={onMenuClick} hideNav={hideNav} />
+      <Frame41 hideFooter={hideFooter} hideNav={hideNav} />
+    </div>
+  );
+});
+
+export default Frame40;
+
+// ─── Named exports for reuse in other pages (e.g. FAQ mobile footer) ──────────
+export {
+  Frame19 as MobileAIAccessCard,
+  Frame26 as MobileNewsletterCard,
+  Frame50 as MobileFooterCard,
+  Frame43 as MobileFullFooter,
+};

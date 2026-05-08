@@ -1,0 +1,4 @@
+interface:
+  display_name: "Publish Blog Post"
+  short_description: "Publish Markdown drafts to the blog"
+  default_prompt: "Use $publish-blog-post to publish this Markdown draft folder to the Orderly website blog."

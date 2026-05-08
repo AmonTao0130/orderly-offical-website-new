@@ -1,0 +1,132 @@
+/* Why Icon Container */
+
+position: absolute;
+width: 155.27px;
+height: 201.33px;
+left: 205px;
+top: 228.92px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Why Icon Container */
+
+position: absolute;
+width: 155.27px;
+height: 201.33px;
+left: calc(50% - 155.27px/2 + 77.63px);
+top: calc(50% - 201.33px/2 + 88.08px);
+
+
+
+/* Why Icon Container */
+
+position: absolute;
+width: 155.27px;
+height: 201.33px;
+left: 205px;
+top: 228.92px;
+
+
+
+/* Union */
+
+position: absolute;
+width: 92px;
+height: 99.16px;
+left: 229.67px;
+top: 228.92px;
+
+background: #E9DEFF;
+
+
+/* Union */
+
+position: absolute;
+width: 92px;
+height: 99.16px;
+left: 229.67px;
+top: 228.92px;
+
+background: #E9DEFF;
+
+
+/* Why Icon Container */
+
+position: absolute;
+width: 155.27px;
+height: 130.62px;
+left: 205px;
+top: 299.63px;
+
+filter: drop-shadow(0px 7.40234px 12.9541px rgba(63, 0, 134, 0.2));
+
+
+/* Why Icon */
+
+position: absolute;
+width: 130.62px;
+height: 130.62px;
+left: 229.65px;
+top: 299.63px;
+
+background: #9C75FF;
+backdrop-filter: blur(10.0497px);
+/* Note: backdrop-filter has minimal browser support */
+border-radius: 24px;
+
+
+/* Why Icon */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 130.62px;
+height: 130.62px;
+left: 205px;
+top: 299.63px;
+
+background: linear-gradient(299.16deg, rgba(156, 117, 255, 0.6) 9.72%, rgba(156, 117, 255, 0) 98.02%);
+filter: drop-shadow(0px 6.60398px 10.7315px rgba(0, 0, 0, 0.1));
+backdrop-filter: blur(8.25497px);
+/* Note: backdrop-filter has minimal browser support */
+border-radius: 24px;
+
+
+/* Union */
+
+position: absolute;
+width: 44.88px;
+height: 62.72px;
+left: 250.5px;
+top: 333.24px;
+
+background: #000000;
+
+
+/* Polygon 6 */
+
+position: absolute;
+width: 53.27px;
+height: 46.13px;
+left: 246.3px;
+top: 349.83px;
+
+background: #000000;
+border-radius: 5.74137px;
+
+
+/* Ellipse 1248 */
+
+position: absolute;
+width: 33.17px;
+height: 33.17px;
+left: 256.11px;
+top: 333.24px;
+
+background: #000000;

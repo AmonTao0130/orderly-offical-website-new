@@ -1,0 +1,8621 @@
+/* Main Container */
+
+position: relative;
+width: 1440px;
+height: 6471px;
+
+background: #000000;
+
+
+/* Background Vector */
+
+position: absolute;
+width: 1786.77px;
+height: 882.9px;
+left: -143.68px;
+top: 409px;
+
+
+
+/* Union */
+
+position: absolute;
+width: 410.8px;
+height: 411.12px;
+left: 1061.9px;
+top: 686.86px;
+
+background: #3F0086;
+transform: rotate(45deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 95.14%;
+right: -13.22%;
+top: 11.44%;
+bottom: 87.78%;
+
+background: #3F0086;
+transform: rotate(45deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 74.13%;
+right: -1.56%;
+top: 13.52%;
+bottom: 84.11%;
+
+background: #3F0086;
+transform: rotate(45deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 87.48%;
+right: -14.45%;
+top: 11.53%;
+bottom: 87.39%;
+
+background: #3F0086;
+transform: rotate(45deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 82.36%;
+right: -10.89%;
+top: 12.42%;
+bottom: 86.49%;
+
+background: #3F0086;
+transform: rotate(45deg);
+
+
+/* Union */
+
+position: absolute;
+width: 268.65px;
+height: 268.86px;
+left: 56.27px;
+top: 490.89px;
+
+background: #9C75FF;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 6.86%;
+right: 81.31%;
+top: 7.97%;
+bottom: 91.52%;
+
+background: #9C75FF;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 10.08%;
+right: 71.98%;
+top: 9.89%;
+bottom: 88.57%;
+
+background: #9C75FF;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 6.01%;
+right: 76.36%;
+top: 8.28%;
+bottom: 91.02%;
+
+background: #9C75FF;
+transform: rotate(-30deg);
+
+
+/* Vector */
+
+position: absolute;
+left: 7.66%;
+right: 73.68%;
+top: 9.03%;
+bottom: 90.26%;
+
+background: #9C75FF;
+transform: rotate(-30deg);
+
+
+/* Ellipse 6007 */
+
+position: absolute;
+width: 520.86px;
+height: 239.24px;
+left: -143.68px;
+top: 858.06px;
+
+background: #3F0086;
+transform: rotate(24.52deg);
+
+
+/* Ellipse 6008 */
+
+position: absolute;
+width: 59.08px;
+height: 59.15px;
+left: 40.75px;
+top: 787.05px;
+
+background: #6700CE;
+transform: rotate(24.52deg);
+
+
+/* Vector 7 */
+
+position: absolute;
+width: 336.94px;
+height: 374.8px;
+left: 1019.16px;
+top: 409px;
+
+background: #9C75FF;
+
+
+/* Key Visual */
+
+position: absolute;
+width: 1125.4px;
+height: 837.7px;
+left: calc(50% - 1125.4px/2 - 0.1px);
+top: 611.56px;
+
+background: url(MacBook正-大.png);
+
+
+/* Default */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 40px;
+gap: 58px;
+
+position: absolute;
+width: 1278px;
+height: 100px;
+left: 81.9px;
+top: 50px;
+
+backdrop-filter: blur(8.65px);
+/* Note: backdrop-filter has minimal browser support */
+border-radius: 130px;
+
+
+/* Header Logo Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 10px;
+
+width: 110.96px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Header Logo */
+
+width: 110.96px;
+height: 30px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Header Logo Icon */
+
+position: absolute;
+width: 23.74px;
+height: 23.76px;
+left: 0px;
+top: 10px;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 3.92%;
+right: 82.52%;
+top: 20%;
+bottom: 74.15%;
+
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 0.41%;
+right: 79.01%;
+top: 49.84%;
+bottom: 32.47%;
+
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 0.59%;
+right: 79.19%;
+top: 28.44%;
+bottom: 63.53%;
+
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 0%;
+right: 78.6%;
+top: 39.1%;
+bottom: 52.75%;
+
+background: #FFFFFF;
+
+
+/* Orderly */
+
+position: absolute;
+width: 84.32px;
+height: 29.65px;
+left: calc(50% - 84.32px/2 + 13.32px);
+top: 10.35px;
+
+background: #FFFFFF;
+
+
+/* Header Menu */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+align-items: center;
+padding: 0px;
+gap: 48px;
+
+width: 1029.04px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 1;
+
+
+/* Menu cell */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: baseline;
+padding: 16px 0px 10px;
+gap: 2px;
+
+width: 74px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Header Menu Item */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 4px;
+
+width: 60px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Header Menu Item Text */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 2px;
+
+width: 60px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Header Menu Item Text */
+
+width: 60px;
+height: 16px;
+
+font-family: 'Atyp Text';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 100%;
+/* identical to box height, or 16px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Header Menu Item Icon */
+
+width: 12px;
+height: 12px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector 10 */
+
+position: absolute;
+height: 5.5px;
+left: 17.68%;
+right: 36.48%;
+top: calc(50% - 5.5px/2 - 2.76px);
+
+border: 1.5px solid #FFFFFF;
+transform: rotate(-45deg);
+
+
+/* Menu cell */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: baseline;
+padding: 16px 0px 10px;
+gap: 2px;
+
+width: 96px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Header Menu Item */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 4px;
+
+width: 82px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Header Menu Item Text */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 2px;
+
+width: 82px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Header Menu Item Text */
+
+width: 82px;
+height: 16px;
+
+font-family: 'Atyp Text';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 100%;
+/* identical to box height, or 16px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* interactive-button/Launch */
+
+display: none;
+width: 12px;
+height: 12px;
+
+opacity: 0.5;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Header Menu Item Icon */
+
+width: 12px;
+height: 12px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector 10 */
+
+position: absolute;
+height: 5.5px;
+left: 17.68%;
+right: 36.48%;
+top: calc(50% - 5.5px/2 - 2.76px);
+
+border: 1.5px solid #FFFFFF;
+transform: rotate(-45deg);
+
+
+/* Menu cell */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: baseline;
+padding: 16px 0px 10px;
+gap: 2px;
+
+width: 71px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Header Menu Item */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 4px;
+
+width: 57px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Header Menu Item Text */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 2px;
+
+width: 57px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Header Menu Item Text */
+
+width: 57px;
+height: 16px;
+
+font-family: 'Atyp Text';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 100%;
+/* identical to box height, or 16px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* interactive-button/Launch */
+
+display: none;
+width: 12px;
+height: 12px;
+
+opacity: 0.5;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Header Menu Item Icon */
+
+width: 12px;
+height: 12px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector 10 */
+
+position: absolute;
+height: 5.5px;
+left: 17.68%;
+right: 36.48%;
+top: calc(50% - 5.5px/2 - 2.76px);
+
+border: 1.5px solid #FFFFFF;
+transform: rotate(-45deg);
+
+
+/* Menu cell */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: baseline;
+padding: 16px 0px 10px;
+gap: 2px;
+
+width: 39px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Header Menu Item */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 4px;
+
+width: 39px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Header Menu Item Text */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 2px;
+
+width: 39px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Header Menu Item Text */
+
+width: 39px;
+height: 16px;
+
+font-family: 'Atyp Text';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 100%;
+/* identical to box height, or 16px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* interactive-button/Launch */
+
+display: none;
+width: 12px;
+height: 12px;
+
+opacity: 0.5;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Button */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 12px 20px;
+
+width: 139px;
+height: 40px;
+
+background: linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(270.23deg, #48BDFF 0.04%, #786CFF 47.76%, #BD00FF 99.64%);
+border-radius: 46px;
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Action */
+
+width: 99px;
+height: 16px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 16px;
+line-height: 100%;
+/* identical to box height, or 16px */
+letter-spacing: 0.01em;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on;
+
+color: #3F0086;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Header */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px 80px 0px 100px;
+gap: 40px;
+
+position: absolute;
+width: 1440px;
+height: 358px;
+left: calc(50% - 1440px/2 - 0.1px);
+top: 201.78px;
+
+
+
+/* Hero Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 12px;
+
+width: 1260px;
+height: 266px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Hero Title */
+
+width: 735px;
+height: 192px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 700;
+font-size: 96px;
+line-height: 100%;
+/* or 96px */
+text-align: center;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Hero Subtitle */
+
+width: 706px;
+height: 62px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 24px;
+line-height: 130%;
+/* or 31px */
+text-align: center;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Hero Buttons Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 16px;
+
+width: 380px;
+height: 52px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* build with orderly */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 12px 24px;
+gap: 4px;
+
+width: 158px;
+height: 52px;
+
+background: #6700CE;
+border-radius: 24px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Build with Orderly */
+
+width: 110px;
+height: 16px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 16px;
+line-height: 100%;
+/* identical to box height, or 16px */
+letter-spacing: 0.01em;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on, 'liga' off;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 21261 */
+
+display: none;
+width: 21.56px;
+height: 14px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 134.63%;
+right: -44.78%;
+top: 28.85%;
+bottom: 44.23%;
+
+background: #272627;
+
+
+/* Vector */
+
+position: absolute;
+left: 144.92%;
+right: -48.28%;
+top: 28.85%;
+bottom: 61.13%;
+
+background: #272627;
+
+
+/* Vector */
+
+position: absolute;
+left: 142.7%;
+right: -46.91%;
+top: 42.17%;
+bottom: 44.28%;
+
+background: #272627;
+
+
+/* Trade on Orderly */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 12px 20px 12px 24px;
+gap: 4px;
+
+width: 206px;
+height: 52px;
+
+border: 1px solid #FFFFFF;
+border-radius: 24px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Trade on Orderly */
+
+width: 162px;
+height: 16px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 16px;
+line-height: 100%;
+/* identical to box height, or 16px */
+letter-spacing: 0.01em;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on, 'liga' off;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 21261 */
+
+display: none;
+width: 21.56px;
+height: 14px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 103.26%;
+right: -11.04%;
+top: 28.85%;
+bottom: 44.23%;
+
+background: #272627;
+
+
+/* Vector */
+
+position: absolute;
+left: 111.15%;
+right: -13.73%;
+top: 28.85%;
+bottom: 61.13%;
+
+background: #272627;
+
+
+/* Vector */
+
+position: absolute;
+left: 109.45%;
+right: -12.67%;
+top: 42.17%;
+bottom: 44.28%;
+
+background: #272627;
+
+
+/* Feature Tag */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 30px 40px;
+gap: 16px;
+
+position: absolute;
+width: 320.42px;
+height: 90px;
+left: 1090.19px;
+top: 667.98px;
+
+background: linear-gradient(0deg, rgba(156, 117, 255, 0.6) -39.31%, rgba(156, 117, 255, 0) 100%);
+filter: drop-shadow(18px 23px 40px rgba(0, 0, 0, 0.1));
+backdrop-filter: blur(30px);
+/* Note: backdrop-filter has minimal browser support */
+border-radius: 124px;
+
+
+/* Ellipse 6009 */
+
+width: 14.42px;
+height: 14.42px;
+
+background: linear-gradient(0deg, #44DED3, #44DED3), #FF375B;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Feature Tag Text */
+
+width: 210px;
+height: 30px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 30px;
+line-height: 100%;
+/* identical to box height, or 30px */
+text-transform: capitalize;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Feature Tag */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 30px 40px;
+gap: 16px;
+
+position: absolute;
+width: 309.42px;
+height: 90px;
+left: 1060.56px;
+top: 1129.98px;
+
+background: linear-gradient(0deg, rgba(156, 117, 255, 0.6) -39.31%, rgba(156, 117, 255, 0) 100%);
+filter: drop-shadow(18px 23px 40px rgba(0, 0, 0, 0.1));
+backdrop-filter: blur(30px);
+/* Note: backdrop-filter has minimal browser support */
+border-radius: 124px;
+
+
+/* Ellipse 6009 */
+
+width: 14.42px;
+height: 14.42px;
+
+background: #44DED3;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Feature Tag Text */
+
+width: 199px;
+height: 30px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 30px;
+line-height: 100%;
+/* identical to box height, or 30px */
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Feature Tag */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 30px 40px;
+gap: 16px;
+
+position: absolute;
+width: 239.42px;
+height: 90px;
+left: 50.9px;
+top: 1068.7px;
+
+background: linear-gradient(0deg, rgba(156, 117, 255, 0.6) 0%, rgba(156, 117, 255, 0) 133%);
+filter: drop-shadow(18px 23px 40px rgba(0, 0, 0, 0.1));
+backdrop-filter: blur(30px);
+/* Note: backdrop-filter has minimal browser support */
+border-radius: 124px;
+
+
+/* Ellipse 6009 */
+
+width: 14.42px;
+height: 14.42px;
+
+background: #44DED3;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Feature Tag Text */
+
+width: 129px;
+height: 30px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 30px;
+line-height: 100%;
+/* identical to box height, or 30px */
+text-transform: capitalize;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Trusted Section */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 80px;
+
+position: absolute;
+width: 1302px;
+height: 477px;
+left: calc(50% - 1302px/2 - 0.11px);
+top: 4453px;
+
+
+
+/* Trusted Header */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 23px;
+
+width: 949px;
+height: 119px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Hero Title */
+
+width: 949px;
+height: 62px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 56px;
+line-height: 110%;
+/* identical to box height, or 62px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Hero Subtitle */
+
+width: 1305.97px;
+height: 34px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 24px;
+line-height: 140%;
+/* identical to box height, or 34px */
+letter-spacing: 0.021em;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Trusted Content */
+
+width: 1302px;
+height: 278px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Trusted List */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+padding: 0px;
+gap: 100px;
+
+position: absolute;
+width: 1302px;
+height: 232px;
+left: 0px;
+top: 199px;
+
+
+
+/* DEX */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
+align-items: flex-start;
+align-content: center;
+padding: 0px;
+gap: 24px;
+
+width: 1302px;
+height: 232px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* DEX Card */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 20px;
+gap: 16px;
+
+width: 307.5px;
+min-width: 280px;
+height: 104px;
+
+background: rgba(20, 21, 26, 0.7);
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Logo Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+
+width: 64px;
+height: 64px;
+
+background: #EDA320;
+border-radius: 60px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* logos */
+
+width: 50px;
+height: 50px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #EDA320;
+
+
+/* Mask group */
+
+position: absolute;
+left: 10.45%;
+right: 10.76%;
+top: 10.48%;
+bottom: 10.48%;
+
+
+
+/* Group */
+
+position: absolute;
+left: 10.45%;
+right: 10.76%;
+top: 10.48%;
+bottom: 10.48%;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 10.45%;
+right: 10.76%;
+top: 10.48%;
+bottom: 10.48%;
+
+background: #FFFFFF;
+
+
+/* Group */
+
+position: absolute;
+left: 22.72%;
+right: 20.97%;
+top: 15.28%;
+bottom: 17.5%;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 22.72%;
+right: 20.97%;
+top: 15.28%;
+bottom: 17.5%;
+
+background: #000000;
+
+
+/* Product Info */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: 62px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Title */
+
+width: 62px;
+height: 24px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 24px;
+line-height: 100%;
+/* identical to box height, or 24px */
+font-feature-settings: 'pnum' on, 'lnum' on, 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* URL */
+
+display: none;
+width: 156px;
+height: 21px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 75;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 21px */
+
+/* neutral/dark/white 02 */
+color: rgba(255, 255, 255, 0.8);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* DEX Card */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 20px;
+gap: 16px;
+
+width: 307.5px;
+min-width: 280px;
+height: 104px;
+
+background: rgba(20, 21, 26, 0.7);
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 1;
+
+
+/* Logo Container */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+
+width: 64px;
+height: 64px;
+
+background: #00A9DE;
+border-radius: 60px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* logos */
+
+width: 36px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Logo */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 0.77%;
+right: 25.05%;
+top: 0%;
+bottom: 0%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 60.21%;
+right: 9.01%;
+top: 40.38%;
+bottom: 0%;
+
+background: #000000;
+
+
+/* Vector */
+
+position: absolute;
+left: 77.55%;
+right: 0.78%;
+top: 0%;
+bottom: 75.96%;
+
+background: #000000;
+
+
+/* Product Info */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: 127px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Title */
+
+width: 127px;
+height: 24px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 24px;
+line-height: 100%;
+/* identical to box height, or 24px */
+font-feature-settings: 'pnum' on, 'lnum' on, 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* URL */
+
+display: none;
+width: 156px;
+height: 21px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 75;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 21px */
+
+/* neutral/dark/white 02 */
+color: rgba(255, 255, 255, 0.8);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* DEX Card */
+
+box-sizing: border-box;
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 20px;
+gap: 16px;
+
+width: 307.5px;
+min-width: 280px;
+height: 104px;
+
+background: rgba(20, 21, 26, 0.7);
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 1;
+
+
+/* Trusted Logo */
+
+width: 64px;
+height: 64px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 3023 */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #131A35;
+
+
+/* Group */
+
+position: absolute;
+left: 16.52%;
+right: 17.12%;
+top: 11.3%;
+bottom: 12.08%;
+
+
+
+/* Group */
+
+position: absolute;
+left: 36.48%;
+right: 35.93%;
+top: 33.12%;
+bottom: 33.21%;
+
+
+
+/* Group */
+
+position: absolute;
+left: 36.48%;
+right: 35.93%;
+top: 33.12%;
+bottom: 33.21%;
+
+
+
+/* Group */
+
+position: absolute;
+left: 36.48%;
+right: 35.93%;
+top: 33.12%;
+bottom: 33.21%;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 36.48%;
+right: 35.93%;
+top: 33.12%;
+bottom: 33.21%;
+
+background: linear-gradient(54.55deg, #4ECDC4 -42.61%, #3772FF 49.33%, #C200FB 143.28%);
+
+
+/* Group */
+
+position: absolute;
+left: 53.54%;
+right: 36.14%;
+top: 57.51%;
+bottom: 33.62%;
+
+
+
+/* Group */
+
+position: absolute;
+left: 53.54%;
+right: 36.14%;
+top: 57.51%;
+bottom: 33.62%;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 53.54%;
+right: 36.14%;
+top: 57.51%;
+bottom: 33.62%;
+
+background: linear-gradient(63.38deg, #4ECDC4 -241.62%, #3772FF 38.71%, #C200FB 325.15%);
+
+
+/* Group */
+
+position: absolute;
+left: 16.52%;
+right: 17.12%;
+top: 11.3%;
+bottom: 12.08%;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 16.52%;
+right: 17.12%;
+top: 11.3%;
+bottom: 12.08%;
+
+background: linear-gradient(56.03deg, #4ECDC4 10.95%, #3772FF 50.05%, #C200FB 90.01%);
+
+
+/* Group */
+
+position: absolute;
+left: 75.96%;
+right: 17.18%;
+top: 28.5%;
+bottom: 63.58%;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 75.96%;
+right: 17.18%;
+top: 28.5%;
+bottom: 63.58%;
+
+background: linear-gradient(56.03deg, #4ECDC4 -673.73%, #3772FF -295.37%, #C200FB 91.26%);
+
+
+/* Product Info */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: 101px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Title */
+
+width: 101px;
+height: 24px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 24px;
+line-height: 100%;
+/* identical to box height, or 24px */
+font-feature-settings: 'pnum' on, 'lnum' on, 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* URL */
+
+display: none;
+width: 156px;
+height: 21px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 75;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 21px */
+
+/* neutral/dark/white 02 */
+color: rgba(255, 255, 255, 0.8);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* DEX Card */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 20px;
+gap: 16px;
+
+width: 307.5px;
+min-width: 280px;
+height: 104px;
+
+background: rgba(20, 21, 26, 0.7);
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 1;
+
+
+/* Logo Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+
+width: 64px;
+height: 64px;
+
+background: #FFFFFF;
+border-radius: 60px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* logos */
+
+width: 63px;
+height: 63px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 25979 */
+
+position: absolute;
+height: 63px;
+left: -0.11%;
+right: -0.11%;
+top: calc(50% - 63px/2);
+
+
+
+/* Path 16214 */
+
+position: absolute;
+left: -0.11%;
+right: -0.11%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+
+
+/* Path 16215 */
+
+position: absolute;
+left: 8.52%;
+right: 8.51%;
+top: 8.6%;
+bottom: 25.36%;
+
+background: #2188C6;
+
+
+/* Path 16216 */
+
+position: absolute;
+left: 8.69%;
+right: 20.66%;
+top: 37.59%;
+bottom: 8.51%;
+
+background: #162B4E;
+
+
+/* Path 16217 */
+
+position: absolute;
+left: 22.02%;
+right: 20.69%;
+top: 37.57%;
+bottom: 8.5%;
+
+background: #21326F;
+
+
+/* Path 16218 */
+
+position: absolute;
+left: 50.96%;
+right: 30.46%;
+top: 3.61%;
+bottom: 69.88%;
+
+background: #162B4E;
+
+
+/* Path 16219 */
+
+position: absolute;
+left: 54.17%;
+right: 30.58%;
+top: 3.56%;
+bottom: 75.47%;
+
+background: #3F0086;
+
+
+/* Path 16220 */
+
+position: absolute;
+left: 21.91%;
+right: 74.55%;
+top: 38.98%;
+bottom: 58.5%;
+
+background: #3A9DD7;
+
+
+/* Path 16221 */
+
+position: absolute;
+left: 21.91%;
+right: 74.37%;
+top: 38.03%;
+bottom: 58.51%;
+
+background: #162B4E;
+
+
+/* Path 16222 */
+
+position: absolute;
+left: 39.77%;
+right: 50.7%;
+top: 23.44%;
+bottom: 69.65%;
+
+background: #162B4E;
+
+
+/* Path 16223 */
+
+position: absolute;
+left: 39.76%;
+right: 53.93%;
+top: 25.36%;
+bottom: 69.65%;
+
+background: #2797D2;
+
+
+/* Path 16224 */
+
+position: absolute;
+left: 60.58%;
+right: 12.68%;
+top: 30.41%;
+bottom: 58.63%;
+
+background: #162B4E;
+
+
+/* Product Info */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: 129px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Title */
+
+width: 129px;
+height: 24px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 24px;
+line-height: 100%;
+/* identical to box height, or 24px */
+font-feature-settings: 'pnum' on, 'lnum' on, 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* URL */
+
+display: none;
+width: 156px;
+height: 21px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 75;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 21px */
+
+/* neutral/dark/white 02 */
+color: rgba(255, 255, 255, 0.8);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* DEX Card */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 20px;
+gap: 16px;
+
+width: 307.5px;
+min-width: 280px;
+height: 104px;
+
+background: rgba(20, 21, 26, 0.7);
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 1;
+
+
+/* Logo Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+
+width: 64px;
+height: 64px;
+
+/* Black/800 */
+background: #1E2026;
+border-radius: 60px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* logos */
+
+width: 36px;
+height: 36px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* whatexchange 1 */
+
+position: absolute;
+visibility: hidden;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: url(whatexchange.png);
+
+
+/* Vector */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+
+
+/* Product Info */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: 186px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Title */
+
+width: 186px;
+height: 24px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 24px;
+line-height: 100%;
+/* identical to box height, or 24px */
+font-feature-settings: 'pnum' on, 'lnum' on, 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* URL */
+
+display: none;
+width: 156px;
+height: 21px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 75;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 21px */
+
+/* neutral/dark/white 02 */
+color: rgba(255, 255, 255, 0.8);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* DEX Card */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 20px;
+gap: 16px;
+
+width: 307.5px;
+min-width: 280px;
+height: 104px;
+
+background: rgba(20, 21, 26, 0.7);
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 5;
+flex-grow: 1;
+
+
+/* Logo Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+
+width: 64px;
+height: 64px;
+
+background: #000000;
+border-radius: 60px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* logos */
+
+width: 63px;
+height: 63px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+
+
+/* Product Info */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: 61px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Title */
+
+width: 61px;
+height: 24px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 24px;
+line-height: 100%;
+/* identical to box height, or 24px */
+font-feature-settings: 'pnum' on, 'lnum' on, 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* URL */
+
+display: none;
+width: 156px;
+height: 21px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 75;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 21px */
+
+/* neutral/dark/white 02 */
+color: rgba(255, 255, 255, 0.8);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* DEX Card */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 20px;
+gap: 16px;
+
+width: 307.5px;
+min-width: 280px;
+height: 104px;
+
+background: rgba(20, 21, 26, 0.7);
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 6;
+flex-grow: 1;
+
+
+/* Logo Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+
+width: 64px;
+height: 64px;
+
+background: #FFFFFF;
+border-radius: 60px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Trusted Logo */
+
+width: 34.96px;
+height: 36px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Rectangle 376715171 */
+
+position: absolute;
+width: 26.66px;
+height: 34.11px;
+left: 18.5px;
+top: 14.59px;
+
+background: #0A0B0D;
+
+
+/* Vector 8 */
+
+position: absolute;
+width: 25.02px;
+height: 30.68px;
+left: 24.46px;
+top: 14px;
+
+background: #D6F22B;
+
+
+/* Vector 9 */
+
+position: absolute;
+width: 26.53px;
+height: 30.1px;
+left: 14.52px;
+top: 19.89px;
+
+background: #D6F22B;
+
+
+/* Product Info */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: 70px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Title */
+
+width: 70px;
+height: 24px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 24px;
+line-height: 100%;
+/* identical to box height, or 24px */
+font-feature-settings: 'pnum' on, 'lnum' on, 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* URL */
+
+display: none;
+width: 156px;
+height: 21px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 75;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 21px */
+
+/* neutral/dark/white 02 */
+color: rgba(255, 255, 255, 0.8);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* DEX Card */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 20px;
+gap: 16px;
+
+width: 307.5px;
+min-width: 280px;
+height: 104px;
+
+background: rgba(20, 21, 26, 0.7);
+border-radius: 5px;
+
+/* Inside auto layout */
+flex: none;
+order: 7;
+flex-grow: 1;
+
+
+/* Logo Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+
+width: 64px;
+height: 64px;
+
+background: #000000;
+border-radius: 60px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* _隔离模式 */
+
+width: 79px;
+height: 78px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+height: 64px;
+left: 9.49%;
+right: 8.23%;
+top: calc(50% - 64px/2 - 0.09px);
+
+background: #FFFFFF;
+
+
+/* Product Info */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+width: 118px;
+height: 24px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Title */
+
+width: 118px;
+height: 24px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 24px;
+line-height: 100%;
+/* identical to box height, or 24px */
+font-feature-settings: 'pnum' on, 'lnum' on, 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* URL */
+
+display: none;
+width: 156px;
+height: 21px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 75;
+font-size: 14px;
+line-height: 150%;
+/* identical to box height, or 21px */
+
+/* neutral/dark/white 02 */
+color: rgba(255, 255, 255, 0.8);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Trusted Button Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+align-items: flex-start;
+padding: 0px;
+gap: 7px;
+
+position: absolute;
+width: 101.72px;
+height: 20px;
+left: 6.1px;
+top: 457px;
+
+
+
+/* Button Text */
+
+width: 77px;
+height: 20px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 20px;
+line-height: 100%;
+/* identical to box height, or 20px */
+letter-spacing: 0.01em;
+font-feature-settings: 'liga' off;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Trusted Button Icon */
+
+width: 16px;
+height: 16px;
+
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 12.61px;
+height: 12.61px;
+left: 1.69px;
+top: 1.69px;
+
+/* Black/0 */
+background: #FFFFFF;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 14.58%;
+right: 14.58%;
+top: 14.57%;
+bottom: 14.6%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 41.29%;
+right: 16.88%;
+top: 16.86%;
+bottom: 41.31%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 58.33%;
+right: 14.59%;
+top: 14.57%;
+bottom: 58.35%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Frame */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px 80px;
+gap: 60px;
+
+position: absolute;
+width: 1440px;
+height: 380px;
+left: calc(50% - 1440px/2 - 0.11px);
+top: 5131.63px;
+
+
+
+/* Hero Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+gap: 12px;
+
+width: 1280px;
+height: 268px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Hero Title */
+
+width: 1250.59px;
+height: 206px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 86px;
+line-height: 120%;
+/* or 103px */
+text-align: center;
+text-transform: uppercase;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Hero Subtitle */
+
+width: 1044px;
+height: 50px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 36px;
+line-height: 140%;
+/* or 50px */
+text-align: center;
+letter-spacing: 0.021em;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Call to Action Section */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 51px;
+
+width: 488px;
+height: 52px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Call to Action Button Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 16px 19px;
+gap: 8px;
+isolation: isolate;
+
+width: 197px;
+height: 52px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* build with orderly */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 12px 24px;
+gap: 4px;
+
+position: absolute;
+width: 196px;
+height: 52px;
+left: 0px;
+top: -0.08px;
+
+background: #6700CE;
+border-radius: 24px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Build with Orderly */
+
+display: none;
+width: 136px;
+height: 16px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 16px;
+line-height: 100%;
+/* identical to box height, or 16px */
+letter-spacing: 0.01em;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on, 'liga' off;
+
+color: #3F0086;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Group 21261 */
+
+display: none;
+width: 21.56px;
+height: 14px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 108.53%;
+right: -16.71%;
+top: 28.85%;
+bottom: 44.23%;
+
+background: #272627;
+
+
+/* Vector */
+
+position: absolute;
+left: 116.82%;
+right: -19.53%;
+top: 28.85%;
+bottom: 61.13%;
+
+background: #272627;
+
+
+/* Vector */
+
+position: absolute;
+left: 115.04%;
+right: -18.42%;
+top: 42.17%;
+bottom: 44.28%;
+
+background: #272627;
+
+
+/* Call to Action Button Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+align-items: flex-start;
+padding: 0px;
+gap: 7px;
+
+width: 159px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Button Text */
+
+width: 136px;
+height: 20px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 20px;
+line-height: 100%;
+/* identical to box height, or 20px */
+letter-spacing: 0.01em;
+font-feature-settings: 'liga' off;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Call to Action Button Icon */
+
+width: 16px;
+height: 16px;
+
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 12.61px;
+height: 12.61px;
+left: 1.69px;
+top: 1.69px;
+
+/* Black/0 */
+background: #FFFFFF;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 14.58%;
+right: 14.58%;
+top: 14.57%;
+bottom: 14.6%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 41.29%;
+right: 16.88%;
+top: 16.86%;
+bottom: 41.31%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 58.33%;
+right: 14.59%;
+top: 14.57%;
+bottom: 58.35%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Call to Action Button Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 16px 20px;
+gap: 8px;
+isolation: isolate;
+
+width: 174px;
+height: 52px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* build with orderly */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 12px 24px;
+gap: 4px;
+
+position: absolute;
+width: 240px;
+height: 52px;
+left: 0px;
+top: -0.08px;
+
+background: #6700CE;
+border-radius: 24px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Call to Action Button Text Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+align-items: flex-start;
+padding: 0px;
+gap: 7px;
+
+width: 203px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Button Text */
+
+width: 203px;
+height: 20px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 20px;
+line-height: 100%;
+/* identical to box height, or 20px */
+letter-spacing: 0.01em;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on, 'liga' off;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Newsletter Section */
+
+position: absolute;
+width: 1392px;
+height: 739px;
+left: calc(50% - 1392px/2 - 0.11px);
+top: 5681.58px;
+
+
+
+/* Footer Section */
+
+position: absolute;
+width: 1392px;
+height: 486.98px;
+left: calc(50% - 1392px/2 - 0.11px);
+top: 5896.58px;
+
+
+
+/* Footer */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+
+position: absolute;
+width: 1392px;
+height: 486.98px;
+left: calc(50% - 1392px/2 - 0.11px);
+top: 5896.58px;
+
+background: #6700CE;
+border-radius: 30px;
+
+
+/* Footer Links Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 60px 80px 80px 57px;
+
+width: 1392px;
+height: 381px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Status Message Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 12px;
+gap: 9px;
+
+width: 302.66px;
+height: 71.94px;
+
+background: linear-gradient(0deg, #9C75FF, #9C75FF);
+border-radius: 63px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+margin: 0px -9px;
+
+
+/* Logo */
+
+width: 48px;
+height: 47.94px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Brandmark */
+
+position: absolute;
+width: 48px;
+height: 47.94px;
+left: 12px;
+top: 12px;
+
+
+
+/* Intersect */
+
+position: absolute;
+width: 31.84px;
+height: 6.64px;
+left: 20.08px;
+top: 12px;
+
+background: #FFFFFF;
+
+
+/* Subtract */
+
+position: absolute;
+width: 46.08px;
+height: 17.84px;
+left: 12.96px;
+top: 42.1px;
+
+background: #FFFFFF;
+
+
+/* Subtract */
+
+position: absolute;
+width: 45.87px;
+height: 9.12px;
+left: 13.06px;
+top: 20.38px;
+
+background: #FFFFFF;
+
+
+/* Subtract */
+
+position: absolute;
+width: 48px;
+height: 9.12px;
+left: 12px;
+top: 31.24px;
+
+background: #FFFFFF;
+
+
+/* Footer Status */
+
+width: 221.67px;
+height: 38.67px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Footer Status Price */
+
+position: absolute;
+width: 82px;
+height: 38px;
+left: 69px;
+top: 16.64px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 24px;
+line-height: 75.3%;
+/* or 18px */
+display: flex;
+align-items: center;
+letter-spacing: 0.01em;
+
+color: #FFFFFF;
+
+
+
+/* Footer Status */
+
+position: absolute;
+width: 123.67px;
+height: 38.67px;
+left: 167px;
+top: 16.64px;
+
+
+
+/*     */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 12px;
+gap: 6px;
+
+position: absolute;
+width: 123.67px;
+height: 38.67px;
+left: 167px;
+top: 16.64px;
+
+background: #FFFFFF;
+border-radius: 63px;
+
+
+/* Status Message */
+
+width: 79px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+display: flex;
+align-items: center;
+letter-spacing: 0.01em;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #000000;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Icon */
+
+width: 14.67px;
+height: 14.67px;
+
+border: 2.5px solid #000000;
+transform: rotate(180deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Logo and Status Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 24px;
+
+width: 141px;
+height: 241px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+margin: 0px -9px;
+
+
+/* Logo Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 16px;
+
+width: 141px;
+height: 241px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Status Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 12px;
+gap: 10px;
+
+width: 141px;
+height: 241px;
+
+border-radius: 63px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 1;
+
+
+/* Logo and Status Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 24px;
+
+width: 141px;
+height: 293px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+margin: 0px -9px;
+
+
+/* Links Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px 0px 0px 88px;
+gap: 92px;
+
+width: 950px;
+height: 222px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Developers Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 24px;
+
+width: 106px;
+height: 151px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Developers Title */
+
+width: 56px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Developers Links Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 24px;
+
+width: 106px;
+height: 116px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Documentation Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 85px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Documentation Link */
+
+width: 85px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Orderly SDK Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 35px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Orderly SDK Link */
+
+width: 35px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Orderly SDK Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 106px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Orderly SDK Link */
+
+width: 106px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Orderly SDK Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 48px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Orderly SDK Link */
+
+width: 48px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ecosystem Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 24px;
+
+width: 83px;
+height: 222px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Ecosystem Title */
+
+width: 75px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ecosystem Links Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 24px;
+
+width: 83px;
+height: 187px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Ecosystem Partners Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 57px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ecosystem Partners Link */
+
+width: 57px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Radiance Ventures Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 45px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Radiance Ventures Link */
+
+width: 45px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Radiance Ventures Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 83px;
+height: 117px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Radiance Ventures Link */
+
+width: 83px;
+height: 117px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Developers Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 24px;
+
+width: 79px;
+height: 221px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Developers Title */
+
+width: 54px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Developers Links Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 24px;
+
+width: 79px;
+height: 186px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Documentation Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 66px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Documentation Link */
+
+width: 66px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* GitHub Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 76px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* GitHub Link */
+
+width: 76px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Orderly SDK Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 22px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Orderly SDK Link */
+
+width: 22px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Orderly SDK Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 56px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Orderly SDK Link */
+
+width: 56px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Orderly SDK Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 79px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Orderly SDK Link */
+
+width: 79px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Orderly SDK Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 42px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 5;
+flex-grow: 0;
+
+
+/* Orderly SDK Link */
+
+width: 42px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* About Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 24px;
+
+width: 62px;
+height: 186px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* About Title */
+
+width: 43px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* About Links Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 24px;
+
+width: 62px;
+height: 151px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Team Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 37px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Team Link */
+
+width: 37px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Careers Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 62px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Careers Link */
+
+width: 62px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Careers Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 53px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Careers Link */
+
+width: 53px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Contact Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 62px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Contact Link */
+
+width: 62px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Contact Link Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 60px;
+
+width: 28px;
+height: 11px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Contact Link */
+
+width: 28px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+text-transform: capitalize;
+
+color: #9C75FF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Footer Bottom Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 20px 721px 30px 58px;
+gap: 839px;
+
+width: 1392px;
+height: 85px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Status Message Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 12px;
+gap: 6px;
+
+width: 204px;
+height: 35px;
+
+background: linear-gradient(0deg, #9C75FF, #9C75FF);
+border-radius: 63px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Ellipse 308 */
+
+width: 6px;
+height: 6px;
+
+background: #24AD8F;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Status Message */
+
+width: 168px;
+height: 11px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 14px;
+line-height: 75.3%;
+/* identical to box height, or 11px */
+letter-spacing: 0.01em;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Social Media Icons Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 16px;
+
+width: 212px;
+height: 17px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Social Icons */
+
+width: 16px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 10.99%;
+bottom: 12.79%;
+
+background: #FFFFFF;
+
+
+/* Footer Social Icon */
+
+width: 16px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Ellipse 6237 */
+
+position: absolute;
+visibility: hidden;
+left: 11.46%;
+right: 10.42%;
+top: 11.45%;
+bottom: 10.42%;
+
+
+
+/* Vector */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+
+
+/* Social Icons */
+
+width: 16px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 4.17%;
+right: 4.17%;
+top: 7.93%;
+bottom: 9.21%;
+
+background: #FFFFFF;
+
+
+/* yt_icon_white_digital 1 */
+
+width: 20px;
+height: 17px;
+
+background: url(yt_icon_white_digital.png);
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Social Icons */
+
+width: 16px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 0%;
+
+background: #FFFFFF;
+
+
+/* Footer Social Icon */
+
+width: 16px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 5;
+flex-grow: 0;
+
+
+/* Icon */
+
+position: absolute;
+left: 8.33%;
+right: 10.42%;
+top: 4.05%;
+bottom: 8.34%;
+
+border: 1.6px solid #FFFFFF;
+
+
+/* Footer Social Icon */
+
+width: 16px;
+height: 16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 6;
+flex-grow: 0;
+
+
+/* Vector */
+
+position: absolute;
+left: 93.4%;
+right: 0%;
+top: 47.06%;
+bottom: 5.88%;
+
+background: #FFFFFF;
+
+
+/* Vector */
+
+position: absolute;
+left: 92.45%;
+right: 0%;
+top: 0%;
+bottom: 25.49%;
+
+background: #FFFFFF;
+
+
+/* Footer Terms */
+
+position: absolute;
+width: 44px;
+height: 14px;
+left: 1313.89px;
+top: 6406.58px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 75;
+font-size: 12px;
+line-height: 120%;
+/* or 14px */
+letter-spacing: 0.01em;
+
+color: #FFFFFF;
+
+
+
+/* Footer Privacy */
+
+position: absolute;
+width: 44px;
+height: 14px;
+left: 1371.89px;
+top: 6406.58px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 75;
+font-size: 12px;
+line-height: 120%;
+/* or 14px */
+letter-spacing: 0.01em;
+
+color: #FFFFFF;
+
+
+
+/* Copyright Text */
+
+position: absolute;
+width: 362px;
+height: 14px;
+left: 23.89px;
+top: 6406.58px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 12px;
+line-height: 120%;
+/* or 14px */
+letter-spacing: 0.01em;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+
+/* Newsletter Background */
+
+position: absolute;
+width: 698px;
+height: 189px;
+left: 717.89px;
+top: 5681.58px;
+
+background: #6700CE;
+border-radius: 30px;
+
+
+/* Newsletter Input Background */
+
+position: absolute;
+width: 493px;
+height: 69px;
+left: 742.89px;
+top: 5776.58px;
+
+background: #7800F0;
+border-radius: 20px 0px 0px 20px;
+
+
+/* Newsletter Button Background */
+
+position: absolute;
+width: 142px;
+height: 69px;
+left: 1251.89px;
+top: 5776.58px;
+
+background: #000000;
+border-radius: 20px 0px 0px 20px;
+transform: rotate(-180deg);
+
+
+/* Newsletter Button Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+align-items: flex-start;
+padding: 0px;
+gap: 7px;
+
+position: absolute;
+width: 100px;
+height: 20px;
+left: 1270.89px;
+top: 5801.58px;
+
+
+
+/* Button Text */
+
+width: 77px;
+height: 20px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 20px;
+line-height: 100%;
+/* identical to box height, or 20px */
+letter-spacing: 0.01em;
+font-feature-settings: 'liga' off;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Newsletter Button Icon */
+
+width: 16px;
+height: 16px;
+
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 12.61px;
+height: 12.61px;
+left: 1.69px;
+top: 1.69px;
+
+/* Black/0 */
+background: #FFFFFF;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 14.58%;
+right: 14.58%;
+top: 14.57%;
+bottom: 14.6%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 41.3%;
+right: 16.88%;
+top: 16.86%;
+bottom: 41.31%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 58.33%;
+right: 14.58%;
+top: 14.57%;
+bottom: 58.35%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Newsletter Placeholder */
+
+position: absolute;
+width: 308px;
+height: 40px;
+left: 743.89px;
+top: 5715.58px;
+
+font-family: 'Atyp Text';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+line-height: 100%;
+/* identical to box height, or 40px */
+
+color: #FFFFFF;
+
+
+
+/* Newsletter Email */
+
+position: absolute;
+width: 284px;
+height: 24px;
+left: 761.89px;
+top: 5799.58px;
+
+font-family: 'Atyp Text';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 100%;
+/* identical to box height, or 24px */
+
+color: #FFFFFF;
+
+
+
+/* Newsletter Text */
+
+position: absolute;
+width: 559px;
+height: 73px;
+left: 92.89px;
+top: 5741.58px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 32px;
+line-height: 75.3%;
+/* or 24px */
+letter-spacing: 0.01em;
+
+color: #FFFFFF;
+
+
+
+/* Stats Section */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 43px 0px;
+gap: 8px;
+
+position: absolute;
+width: 1302px;
+height: 247px;
+left: calc(50% - 1302px/2 - 0.11px);
+top: 1275.96px;
+
+background: #6700CE;
+border-radius: 30px;
+
+
+/* Stats Content */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 0px 36px;
+gap: 61px;
+
+width: 1302px;
+height: 160.09px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Open interest */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 72.76px;
+
+margin: 0 auto;
+width: 330px;
+height: 126.23px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* TVL */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 36.38px;
+
+width: 245px;
+height: 109.38px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Title */
+
+width: 43px;
+height: 31px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 24px;
+line-height: 130%;
+/* or 31px */
+text-align: center;
+letter-spacing: -0.3125px;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Value */
+
+width: 245px;
+height: 42px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 612;
+font-size: 60px;
+line-height: 100%;
+/* or 60px */
+/* leading-trim and text-edge are draft CSS properties.
+
+Read more: https://drafts.csswg.org/css-inline-3/#leading-trim
+*/
+leading-trim: both;
+text-edge: cap;
+display: flex;
+align-items: center;
+text-transform: capitalize;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Line 7 */
+
+margin: 0 auto;
+width: 160.09px;
+height: 0px;
+
+border: 2px solid #FFFFFF;
+transform: rotate(90deg);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Total trading volume */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 36.38px;
+
+margin: 0 auto;
+width: 330px;
+height: 119.49px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Title */
+
+width: 218px;
+height: 31px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 24px;
+line-height: 130%;
+/* or 31px */
+text-align: center;
+letter-spacing: -0.3125px;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Value */
+
+width: 254px;
+height: 42px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 612;
+font-size: 60px;
+line-height: 100%;
+/* or 60px */
+/* leading-trim and text-edge are draft CSS properties.
+
+Read more: https://drafts.csswg.org/css-inline-3/#leading-trim
+*/
+leading-trim: both;
+text-edge: cap;
+display: flex;
+align-items: center;
+text-transform: capitalize;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Line 8 */
+
+margin: 0 auto;
+width: 160.09px;
+height: 0px;
+
+border: 2px solid #FFFFFF;
+transform: rotate(90deg);
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Total traders */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 72.76px;
+
+margin: 0 auto;
+width: 285px;
+height: 126.23px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 1;
+
+
+/* Total builders */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 36.38px;
+
+width: 139px;
+height: 109.38px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Title */
+
+width: 139px;
+height: 31px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 24px;
+line-height: 130%;
+/* or 31px */
+text-align: center;
+letter-spacing: -0.3125px;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Value */
+
+width: 131px;
+height: 42px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 612;
+font-size: 60px;
+line-height: 100%;
+/* or 60px */
+/* leading-trim and text-edge are draft CSS properties.
+
+Read more: https://drafts.csswg.org/css-inline-3/#leading-trim
+*/
+leading-trim: both;
+text-edge: cap;
+display: flex;
+align-items: center;
+text-transform: capitalize;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Line 9 */
+
+margin: 0 auto;
+width: 160.09px;
+height: 0px;
+
+border: 2px solid #FFFFFF;
+transform: rotate(90deg);
+
+/* Inside auto layout */
+flex: none;
+order: 5;
+flex-grow: 0;
+
+
+/* Total traders */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 72.76px;
+
+margin: 0 auto;
+width: 285px;
+height: 126.23px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 6;
+flex-grow: 1;
+
+
+/* Total builders */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 0px;
+gap: 36.38px;
+
+width: 93px;
+height: 109.38px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Title */
+
+width: 79px;
+height: 31px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 24px;
+line-height: 130%;
+/* or 31px */
+text-align: center;
+letter-spacing: -0.3125px;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Value */
+
+width: 93px;
+height: 42px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 612;
+font-size: 60px;
+line-height: 100%;
+/* or 60px */
+/* leading-trim and text-edge are draft CSS properties.
+
+Read more: https://drafts.csswg.org/css-inline-3/#leading-trim
+*/
+leading-trim: both;
+text-edge: cap;
+display: flex;
+align-items: center;
+text-transform: capitalize;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Quick Start Section */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 68px;
+
+position: absolute;
+width: 1321.23px;
+height: 457.6px;
+left: 68.89px;
+top: 3876px;
+
+
+
+/* Quick Start Header */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 80px;
+
+width: 1302px;
+height: 119px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Quick Start Title Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 23px;
+
+width: 949px;
+height: 119px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Hero Title */
+
+width: 949px;
+height: 62px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 56px;
+line-height: 110%;
+/* identical to box height, or 62px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Hero Subtitle */
+
+width: 1305.97px;
+height: 34px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 24px;
+line-height: 140%;
+/* identical to box height, or 34px */
+letter-spacing: 0.021em;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Quick Start Content */
+
+width: 1302px;
+height: 270.6px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Quick Start Background */
+
+position: absolute;
+width: 1302px;
+height: 270.6px;
+left: 0px;
+top: 187px;
+
+/* Black/900 */
+background: #14151A;
+border-radius: 30px;
+
+
+/* Quick Start Background */
+
+position: absolute;
+width: 1302px;
+height: 172.14px;
+left: 0px;
+top: 285.46px;
+
+/* Black/800 */
+background: #1E2026;
+border-radius: 0px 0px 30px 30px;
+
+
+/* Quick Start Command */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 20px;
+
+position: absolute;
+width: 806px;
+height: 82px;
+left: 44.11px;
+top: 329.63px;
+
+
+
+/* Quick Start Command Text */
+
+width: 1100.5px;
+height: 31px;
+
+font-family: 'DM Mono';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 31px;
+
+/* Black/500 */
+color: #5E6673;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Quick Start Command Text */
+
+width: 806px;
+height: 31px;
+
+font-family: 'DM Mono';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 31px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Quick Start Clients */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 78px;
+
+position: absolute;
+width: 1032px;
+height: 47.3px;
+left: 44.11px;
+top: 218.19px;
+
+
+
+/* Quick Start Client */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding: 8px 17px;
+gap: 8px;
+
+width: 193px;
+height: 47.3px;
+
+background: #6700CE;
+border-radius: 8px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Quick Start Client Name */
+
+width: 159px;
+height: 31px;
+
+font-family: 'DM Mono';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 31px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Quick Start Client Name */
+
+width: 87px;
+height: 31px;
+
+font-family: 'DM Mono';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 31px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Quick Start Client Name */
+
+width: 87px;
+height: 31px;
+
+font-family: 'DM Mono';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 31px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Quick Start Client Name */
+
+width: 87px;
+height: 31px;
+
+font-family: 'DM Mono';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 31px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Quick Start Client Name */
+
+width: 72px;
+height: 31px;
+
+font-family: 'DM Mono';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 31px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Quick Start Client Name */
+
+width: 116px;
+height: 31px;
+
+font-family: 'DM Mono';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 31px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 5;
+flex-grow: 0;
+
+
+/* Quick Start Icon Container */
+
+position: absolute;
+width: 40px;
+height: 40px;
+left: 1217.29px;
+top: 376.13px;
+
+
+
+/* Quick Start Icon */
+
+position: absolute;
+width: 40px;
+height: 40px;
+left: 1217.29px;
+top: 376.13px;
+
+background: rgba(255, 255, 255, 0.1);
+border-radius: 8px;
+
+
+/* content_copy */
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 1225.29px;
+top: 384.13px;
+
+
+
+/* Bounding box */
+
+position: absolute;
+width: 24px;
+height: 24px;
+left: 1225.29px;
+top: 384.13px;
+
+background: #D9D9D9;
+
+
+/* content_copy */
+
+position: absolute;
+left: 92.97%;
+right: 5.75%;
+top: 84.38%;
+bottom: 11.25%;
+
+background: #FFFFFF;
+
+
+/* Why Section */
+
+position: absolute;
+width: 2585px;
+height: 617.98px;
+left: 69.15px;
+top: 2313.4px;
+
+
+
+/* Why Header */
+
+position: absolute;
+width: 1307px;
+height: 71px;
+left: 75.15px;
+top: 2313.4px;
+
+
+
+/* Why Header */
+
+position: absolute;
+width: 1307px;
+height: 71px;
+left: 75.15px;
+top: 2313.4px;
+
+
+
+/* Why Title Container */
+
+position: absolute;
+width: 876px;
+height: 62px;
+left: 75.15px;
+top: 2322.4px;
+
+
+
+/* Why Title Container */
+
+position: absolute;
+width: 876px;
+height: 62px;
+left: 75.15px;
+top: 2322.4px;
+
+
+
+/* Why Title Container */
+
+position: absolute;
+width: 876px;
+height: 62px;
+left: 75.15px;
+top: 2322.4px;
+
+
+
+/* Hero Title */
+
+position: absolute;
+width: 876px;
+height: 62px;
+left: 75.15px;
+top: 2322.4px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 56px;
+line-height: 110%;
+/* identical to box height, or 62px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+
+/* Arrow left-circle */
+
+position: absolute;
+width: 44px;
+height: 44px;
+left: 1338.15px;
+top: 2313.4px;
+
+transform: rotate(180deg);
+
+
+/* Icon */
+
+position: absolute;
+left: 8.33%;
+right: 8.34%;
+top: 8.34%;
+bottom: 8.33%;
+
+background: #3F0086;
+/* Purple/300 */
+border: 2.5px solid #3F0086;
+transform: rotate(180deg);
+
+
+/* Icon */
+
+position: absolute;
+left: 34.09%;
+right: 32.58%;
+top: 33.34%;
+bottom: 33.33%;
+
+/* Black/0 */
+border: 2.5px solid #FFFFFF;
+transform: rotate(180deg);
+
+
+/* Arrow left-circle */
+
+position: absolute;
+width: 44px;
+height: 44px;
+left: 1284.15px;
+top: 2313.4px;
+
+
+
+/* Icon */
+
+position: absolute;
+left: 8.33%;
+right: 8.33%;
+top: 8.33%;
+bottom: 8.34%;
+
+/* Black/800 */
+background: #1E2026;
+/* Black/800 */
+border: 2.5px solid #1E2026;
+
+
+/* Icon */
+
+position: absolute;
+left: 32.58%;
+right: 34.09%;
+top: 33.33%;
+bottom: 33.34%;
+
+/* Black/700 */
+border: 2.5px solid #2B2F36;
+
+
+/* Why Content */
+
+position: absolute;
+width: 2585px;
+height: 483px;
+left: 69.15px;
+top: 2448.38px;
+
+
+
+/* Why Content List */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 25px;
+
+position: absolute;
+width: 2585px;
+height: 483px;
+left: 69.15px;
+top: 2448.38px;
+
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 36px;
+gap: 20px;
+isolation: isolate;
+
+width: 410px;
+height: 483px;
+
+/* Purple/300 */
+background: #3F0086;
+border-radius: 30px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Category Title */
+
+width: 345px;
+height: 38px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 32px;
+line-height: 120%;
+/* or 38px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Category Title */
+
+width: 344.88px;
+height: 141.29px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 20px;
+line-height: 130%;
+/* or 26px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: rgba(255, 255, 255, 0.8);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Why Icon Container */
+
+position: absolute;
+width: 143.45px;
+height: 199px;
+left: 224.39px;
+top: 233.16px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Union */
+
+position: absolute;
+width: 67.95px;
+height: 97.58px;
+left: 244.49px;
+top: 334.58px;
+
+background: #9C75FF;
+
+
+/* Union */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 82.27px;
+height: 118.15px;
+left: 285.57px;
+top: 295.75px;
+
+background: linear-gradient(342.77deg, rgba(156, 117, 255, 0.63) -32.53%, rgba(156, 117, 255, 0) 120.03%);
+backdrop-filter: blur(13.6316px);
+/* Note: backdrop-filter has minimal browser support */
+
+
+/* Vector 7694 (Stroke) */
+
+position: absolute;
+width: 120.02px;
+height: 53.15px;
+left: 224.39px;
+top: 266.25px;
+
+background: #E9DEFF;
+border-radius: 5.23827px;
+
+
+/* Why Icon */
+
+position: absolute;
+width: 66.33px;
+height: 19.81px;
+left: 238.86px;
+top: 233.16px;
+
+background: #000000;
+border-radius: 135.147px;
+
+
+/* Why Icon */
+
+position: absolute;
+width: 12.88px;
+height: 31.79px;
+left: 265.58px;
+top: 237.07px;
+
+background: #000000;
+border-radius: 135.147px;
+
+
+/* Why Icon */
+
+position: absolute;
+width: 37.62px;
+height: 36.71px;
+left: 253.21px;
+top: 264.66px;
+
+background: #6700CE;
+border-radius: 5.23827px;
+
+
+/* Union */
+
+position: absolute;
+width: 29.61px;
+height: 51.92px;
+left: 311.9px;
+top: 342.54px;
+
+background: #E9DEFF;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 36px;
+gap: 20px;
+isolation: isolate;
+
+width: 410px;
+height: 483px;
+
+/* Purple/200 Orderly Purple */
+background: #6700CE;
+border-radius: 30px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Category Title */
+
+width: 341px;
+height: 38px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 32px;
+line-height: 120%;
+/* or 38px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Why Icon Container */
+
+position: absolute;
+width: 199.95px;
+height: 199.95px;
+left: 164.32px;
+top: 232.21px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Subtract */
+
+position: absolute;
+width: 99.98px;
+height: 99.98px;
+left: 264.3px;
+top: 332.18px;
+
+background: #9C75FF;
+
+
+/* Ellipse 1250 */
+
+position: absolute;
+width: 99.98px;
+height: 99.98px;
+left: 264.3px;
+top: 332.18px;
+
+background: #E9DEFF;
+
+
+/* Ellipse 1253 */
+
+position: absolute;
+width: 99.98px;
+height: 99.98px;
+left: 214.31px;
+top: 282.2px;
+
+background: #E9DEFF;
+
+
+/* Vector */
+
+position: absolute;
+width: 49.99px;
+height: 49.99px;
+left: 264.3px;
+top: 332.18px;
+
+background: #E9DEFF;
+
+
+/* Subtract */
+
+position: absolute;
+width: 99.98px;
+height: 99.98px;
+left: 264.3px;
+top: 232.21px;
+
+background: #000000;
+transform: rotate(-90deg);
+
+
+/* Ellipse 1250 */
+
+position: absolute;
+width: 99.98px;
+height: 99.98px;
+left: 264.3px;
+top: 232.21px;
+
+background: #E9DEFF;
+transform: rotate(-90deg);
+
+
+/* Ellipse 1253 */
+
+position: absolute;
+width: 99.98px;
+height: 99.98px;
+left: 214.31px;
+top: 282.2px;
+
+background: #E9DEFF;
+transform: rotate(-90deg);
+
+
+/* Vector */
+
+position: absolute;
+width: 49.99px;
+height: 49.99px;
+left: 264.3px;
+top: 282.2px;
+
+background: #3F0086;
+transform: rotate(-90deg);
+
+
+/* Subtract */
+
+position: absolute;
+width: 99.98px;
+height: 99.98px;
+left: 164.32px;
+top: 232.21px;
+
+background: #E9DEFF;
+transform: rotate(-180deg);
+
+
+/* Ellipse 1250 */
+
+position: absolute;
+width: 99.98px;
+height: 99.98px;
+left: 164.32px;
+top: 232.21px;
+
+background: #6700CE;
+transform: rotate(-180deg);
+
+
+/* Ellipse 1253 */
+
+position: absolute;
+width: 99.98px;
+height: 99.98px;
+left: 214.31px;
+top: 282.2px;
+
+background: #E9DEFF;
+transform: rotate(-180deg);
+
+
+/* Vector */
+
+position: absolute;
+width: 49.99px;
+height: 49.99px;
+left: 214.31px;
+top: 282.2px;
+
+background: #9C75FF;
+transform: rotate(-180deg);
+
+
+/* Subtract */
+
+position: absolute;
+width: 99.98px;
+height: 99.98px;
+left: 164.32px;
+top: 332.18px;
+
+background: #3F0086;
+transform: rotate(90deg);
+
+
+/* Ellipse 1250 */
+
+position: absolute;
+width: 99.98px;
+height: 99.98px;
+left: 164.32px;
+top: 332.18px;
+
+background: #3F0086;
+transform: rotate(90deg);
+
+
+/* Ellipse 1253 */
+
+position: absolute;
+width: 99.98px;
+height: 99.98px;
+left: 214.31px;
+top: 282.2px;
+
+background: #E9DEFF;
+transform: rotate(90deg);
+
+
+/* Vector */
+
+position: absolute;
+width: 49.99px;
+height: 49.99px;
+left: 214.31px;
+top: 332.18px;
+
+background: #000000;
+transform: rotate(90deg);
+
+
+/* Ellipse 5992 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 101.69px;
+height: 101.69px;
+left: 213.46px;
+top: 281.34px;
+
+background: linear-gradient(1.59deg, rgba(156, 117, 255, 0.6) 1.43%, rgba(156, 117, 255, 0) 104%);
+backdrop-filter: blur(6.16035px);
+/* Note: backdrop-filter has minimal browser support */
+
+
+/* Category Title */
+
+width: 344.88px;
+height: 141.29px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 20px;
+line-height: 130%;
+/* or 26px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: rgba(255, 255, 255, 0.8);
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 36px;
+gap: 20px;
+isolation: isolate;
+
+width: 410px;
+height: 483px;
+
+/* Purple/300 */
+background: #3F0086;
+border-radius: 30px;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Category Title */
+
+width: 356.01px;
+height: 76px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 32px;
+line-height: 120%;
+/* or 38px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Category Title */
+
+width: 344.88px;
+height: 141.29px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 20px;
+line-height: 130%;
+/* or 26px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: rgba(255, 255, 255, 0.8);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Why Icon Container */
+
+position: absolute;
+width: 227.44px;
+height: 207.52px;
+left: 153.43px;
+top: 228.92px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Why Icon Container */
+
+position: absolute;
+width: 227.44px;
+height: 207.52px;
+left: 153.43px;
+top: 228.92px;
+
+
+
+/* build */
+
+position: absolute;
+left: 37.42%;
+right: 25.55%;
+top: 58.93%;
+bottom: 9.64%;
+
+background: #9C75FF;
+
+
+/* Why Icon */
+
+position: absolute;
+width: 164.78px;
+height: 164.78px;
+left: 216.1px;
+top: 228.92px;
+
+
+
+/* Ellipse 5970 */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 164.78px;
+height: 164.78px;
+left: calc(50% - 164.78px/2 + 93.49px);
+top: calc(50% - 164.78px/2 + 69.81px);
+
+background: linear-gradient(299.16deg, rgba(156, 117, 255, 0.6) 9.72%, rgba(156, 117, 255, 0) 98.02%);
+filter: drop-shadow(0px 6.60398px 10.7315px rgba(0, 0, 0, 0.1));
+backdrop-filter: blur(8.25497px);
+/* Note: backdrop-filter has minimal browser support */
+
+
+/* % */
+
+position: absolute;
+width: 85.41px;
+height: 77.23px;
+left: 255.78px;
+top: 272.69px;
+
+background: #E9DEFF;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 36px;
+gap: 20px;
+isolation: isolate;
+
+width: 410px;
+height: 483px;
+
+/* Purple/200 Orderly Purple */
+background: #6700CE;
+border-radius: 30px;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Category Title */
+
+width: 144px;
+height: 38px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 32px;
+line-height: 120%;
+/* or 38px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Category Title */
+
+width: 344.18px;
+height: 141.29px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 20px;
+line-height: 130%;
+/* or 26px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: rgba(255, 255, 255, 0.8);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Why Icon Container */
+
+position: absolute;
+width: 221.67px;
+height: 267.44px;
+left: 152.85px;
+top: 179.7px;
+
+transform: rotate(8.1deg);
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Ellipse 1266 */
+
+position: absolute;
+width: 48.63px;
+height: 95.87px;
+left: 196.48px;
+top: 316.22px;
+
+background: #3F0086;
+transform: rotate(38.1deg);
+
+
+/* Union */
+
+position: absolute;
+width: 116.16px;
+height: 204.25px;
+left: 184.37px;
+top: 196.76px;
+
+background: #9C75FF;
+transform: rotate(38.1deg);
+
+
+/* Ellipse 1267 */
+
+position: absolute;
+width: 25.01px;
+height: 37.52px;
+left: 217.42px;
+top: 354.88px;
+
+background: #000000;
+transform: rotate(128.1deg);
+
+
+/* Ellipse 1264 */
+
+position: absolute;
+width: 48.63px;
+height: 95.87px;
+left: 167.03px;
+top: 269.41px;
+
+background: #E9DEFF;
+transform: rotate(38.1deg);
+
+
+/* Ellipse 1265 */
+
+position: absolute;
+width: 50.02px;
+height: 95.87px;
+left: 251.41px;
+top: 330.57px;
+
+background: #E9DEFF;
+transform: rotate(38.1deg);
+
+
+/* Union */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 58.45px;
+height: 80.38px;
+left: 170.21px;
+top: 354.16px;
+
+background: linear-gradient(1.59deg, rgba(156, 117, 255, 0.6) 1.43%, rgba(156, 117, 255, 0) 104%);
+backdrop-filter: blur(6.16035px);
+/* Note: backdrop-filter has minimal browser support */
+transform: rotate(38.1deg);
+
+
+/* Ellipse 1268 */
+
+position: absolute;
+width: 58.45px;
+height: 58.45px;
+left: 183.74px;
+top: 354.16px;
+
+background: #D9D9D9;
+transform: rotate(38.1deg);
+
+
+/* Polygon 6 */
+
+position: absolute;
+width: 52.61px;
+height: 48.22px;
+left: 172.51px;
+top: 381.27px;
+
+background: #3F0086;
+border-radius: 4.97512px;
+transform: rotate(-141.9deg);
+
+
+/* Subtract */
+
+position: absolute;
+width: 95.27px;
+height: 48.11px;
+left: 288.95px;
+top: 203.2px;
+
+background: #E9DEFF;
+transform: rotate(38.1deg);
+
+
+/* Union */
+
+position: absolute;
+width: 116.16px;
+height: 204.25px;
+left: 184.37px;
+top: 196.75px;
+
+background: #9C75FF;
+transform: rotate(38.1deg);
+
+
+/* Ellipse 6010 */
+
+position: absolute;
+width: 181.03px;
+height: 208.47px;
+left: 136.18px;
+top: 202.32px;
+
+background: #D9D9D9;
+transform: rotate(38.1deg);
+
+
+/* Ellipse 6011 */
+
+position: absolute;
+width: 42.37px;
+height: 42.37px;
+left: 278.64px;
+top: 263.71px;
+
+background: #000000;
+transform: rotate(38.1deg);
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 36px;
+gap: 20px;
+isolation: isolate;
+
+width: 410px;
+height: 483px;
+
+/* Purple/300 */
+background: #3F0086;
+border-radius: 30px;
+
+/* Inside auto layout */
+flex: none;
+order: 4;
+flex-grow: 0;
+
+
+/* Category Title */
+
+width: 201px;
+height: 38px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 32px;
+line-height: 120%;
+/* or 38px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Category Title */
+
+width: 344.88px;
+height: 141.29px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 20px;
+line-height: 130%;
+/* or 26px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: rgba(255, 255, 255, 0.8);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Why Icon Container */
+
+position: absolute;
+width: 155.27px;
+height: 201.33px;
+left: 205px;
+top: 228.92px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Why Icon Container */
+
+position: absolute;
+width: 155.27px;
+height: 201.33px;
+left: calc(50% - 155.27px/2 + 77.63px);
+top: calc(50% - 201.33px/2 + 88.08px);
+
+
+
+/* Why Icon Container */
+
+position: absolute;
+width: 155.27px;
+height: 201.33px;
+left: 205px;
+top: 228.92px;
+
+
+
+/* Union */
+
+position: absolute;
+width: 92px;
+height: 99.16px;
+left: 229.67px;
+top: 228.92px;
+
+background: #E9DEFF;
+
+
+/* Union */
+
+position: absolute;
+width: 92px;
+height: 99.16px;
+left: 229.67px;
+top: 228.92px;
+
+background: #E9DEFF;
+
+
+/* Why Icon Container */
+
+position: absolute;
+width: 155.27px;
+height: 130.62px;
+left: 205px;
+top: 299.63px;
+
+filter: drop-shadow(0px 7.40234px 12.9541px rgba(63, 0, 134, 0.2));
+
+
+/* Why Icon */
+
+position: absolute;
+width: 130.62px;
+height: 130.62px;
+left: 229.65px;
+top: 299.63px;
+
+background: #9C75FF;
+backdrop-filter: blur(10.0497px);
+/* Note: backdrop-filter has minimal browser support */
+border-radius: 24px;
+
+
+/* Why Icon */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 130.62px;
+height: 130.62px;
+left: 205px;
+top: 299.63px;
+
+background: linear-gradient(299.16deg, rgba(156, 117, 255, 0.6) 9.72%, rgba(156, 117, 255, 0) 98.02%);
+filter: drop-shadow(0px 6.60398px 10.7315px rgba(0, 0, 0, 0.1));
+backdrop-filter: blur(8.25497px);
+/* Note: backdrop-filter has minimal browser support */
+border-radius: 24px;
+
+
+/* Union */
+
+position: absolute;
+width: 44.88px;
+height: 62.72px;
+left: 250.5px;
+top: 333.24px;
+
+background: #000000;
+
+
+/* Polygon 6 */
+
+position: absolute;
+width: 53.27px;
+height: 46.13px;
+left: 246.3px;
+top: 349.83px;
+
+background: #000000;
+border-radius: 5.74137px;
+
+
+/* Ellipse 1248 */
+
+position: absolute;
+width: 33.17px;
+height: 33.17px;
+left: 256.11px;
+top: 333.24px;
+
+background: #000000;
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 36px;
+gap: 20px;
+isolation: isolate;
+
+width: 410px;
+height: 483px;
+
+background: #6700CE;
+border-radius: 30px;
+
+/* Inside auto layout */
+flex: none;
+order: 5;
+flex-grow: 0;
+
+
+/* Category Title */
+
+width: 206px;
+height: 38px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 32px;
+line-height: 120%;
+/* or 38px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+z-index: 0;
+
+
+/* Category Title */
+
+width: 344.88px;
+height: 141.29px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 20px;
+line-height: 130%;
+/* or 26px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: rgba(255, 255, 255, 0.8);
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+z-index: 1;
+
+
+/* Why Icon Container */
+
+position: absolute;
+width: 187.29px;
+height: 169.79px;
+left: 170.12px;
+top: 255.29px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+z-index: 2;
+
+
+/* Exclude */
+
+position: absolute;
+width: 134px;
+height: 169.79px;
+left: 223.41px;
+top: 255.29px;
+
+background: #3F0086;
+border-radius: 13px;
+
+
+/* Exclude */
+
+box-sizing: border-box;
+
+position: absolute;
+width: 134px;
+height: 169.79px;
+left: 170.12px;
+top: 255.29px;
+
+background: linear-gradient(299.16deg, rgba(156, 117, 255, 0.6) 9.72%, rgba(156, 117, 255, 0) 98.02%);
+box-shadow: 12px 6.60398px 10.7315px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(8.25497px);
+/* Note: backdrop-filter has minimal browser support */
+border-radius: 13px;
+
+
+/* Vector 7692 */
+
+position: absolute;
+width: 59.53px;
+height: 34.65px;
+left: 207.36px;
+top: 323.31px;
+
+border: 16px solid #E9DEFF;
+
+
+/* Build Section */
+
+position: absolute;
+width: 1715px;
+height: 613px;
+left: 69.15px;
+top: 3146.78px;
+
+
+
+/* Build Content */
+
+position: absolute;
+width: 1715px;
+height: 483px;
+left: 69.15px;
+top: 3276.78px;
+
+
+
+/* Build Content */
+
+position: absolute;
+width: 1715px;
+height: 483px;
+left: 69.15px;
+top: 3276.78px;
+
+
+
+/* Build Content List */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 0px;
+gap: 25px;
+
+position: absolute;
+width: 1715px;
+height: 483px;
+left: 69.15px;
+top: 3276.78px;
+
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 35px;
+gap: 217px;
+
+width: 410px;
+height: 483px;
+
+/* Purple/300 */
+background: #3F0086;
+border-radius: 30px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Category Title */
+
+width: 340px;
+height: 173px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 45px;
+line-height: 120%;
+/* or 54px */
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Build Button Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+align-items: flex-end;
+padding: 0px;
+gap: 7px;
+
+width: 340px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Button Text */
+
+width: 123px;
+height: 20px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 20px;
+line-height: 100%;
+/* identical to box height, or 20px */
+letter-spacing: 0.01em;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on, 'liga' off;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Build Button Icon */
+
+width: 16px;
+height: 16px;
+
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 12.61px;
+height: 12.61px;
+left: 1.69px;
+top: 1.69px;
+
+/* Black/0 */
+background: #FFFFFF;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 14.58%;
+right: 14.58%;
+top: 14.57%;
+bottom: 14.6%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 41.29%;
+right: 16.88%;
+top: 16.86%;
+bottom: 41.31%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 58.33%;
+right: 14.59%;
+top: 14.57%;
+bottom: 58.35%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 35px;
+gap: 217px;
+
+width: 410px;
+height: 483px;
+
+/* Purple/200 Orderly Purple */
+background: #6700CE;
+border-radius: 30px;
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Category Title */
+
+width: 340px;
+height: 173px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 45px;
+line-height: 120%;
+/* or 54px */
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Build Button Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+align-items: flex-end;
+padding: 0px;
+gap: 7px;
+
+width: 340px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Button Text */
+
+width: 102px;
+height: 20px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 20px;
+line-height: 100%;
+/* identical to box height, or 20px */
+letter-spacing: 0.01em;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on, 'liga' off;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Build Button Icon */
+
+width: 16px;
+height: 16px;
+
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 12.61px;
+height: 12.61px;
+left: 1.69px;
+top: 1.69px;
+
+/* Black/0 */
+background: #FFFFFF;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 14.58%;
+right: 14.58%;
+top: 14.57%;
+bottom: 14.6%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 41.29%;
+right: 16.88%;
+top: 16.86%;
+bottom: 41.31%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 58.33%;
+right: 14.59%;
+top: 14.57%;
+bottom: 58.35%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 35px;
+gap: 217px;
+
+width: 410px;
+height: 483px;
+
+/* Purple/300 */
+background: #3F0086;
+border-radius: 30px;
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Category Title */
+
+width: 340px;
+height: 173px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 45px;
+line-height: 120%;
+/* or 54px */
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Build Button Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+align-items: flex-end;
+padding: 0px;
+gap: 7px;
+
+width: 340px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Button Text */
+
+width: 77px;
+height: 20px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 20px;
+line-height: 100%;
+/* identical to box height, or 20px */
+letter-spacing: 0.01em;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on, 'liga' off;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Build Button Icon */
+
+width: 16px;
+height: 16px;
+
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 12.61px;
+height: 12.61px;
+left: 1.69px;
+top: 1.69px;
+
+/* Black/0 */
+background: #FFFFFF;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 14.58%;
+right: 14.58%;
+top: 14.57%;
+bottom: 14.6%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 41.3%;
+right: 16.88%;
+top: 16.86%;
+bottom: 41.31%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 58.33%;
+right: 14.58%;
+top: 14.57%;
+bottom: 58.35%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 35px;
+gap: 217px;
+
+width: 410px;
+height: 483px;
+
+/* Purple/200 Orderly Purple */
+background: #6700CE;
+border-radius: 30px;
+
+/* Inside auto layout */
+flex: none;
+order: 3;
+flex-grow: 0;
+
+
+/* Category Title */
+
+width: 340px;
+height: 173px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 45px;
+line-height: 120%;
+/* or 54px */
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Build Button Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+align-items: flex-end;
+padding: 0px;
+gap: 7px;
+
+width: 340px;
+height: 20px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Button Text */
+
+width: 136px;
+height: 20px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 20px;
+line-height: 100%;
+/* identical to box height, or 20px */
+letter-spacing: 0.01em;
+font-feature-settings: 'liga' off;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Build Button Icon */
+
+width: 16px;
+height: 16px;
+
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Union */
+
+position: absolute;
+width: 12.61px;
+height: 12.61px;
+left: 1.69px;
+top: 1.69px;
+
+/* Black/0 */
+background: #FFFFFF;
+transform: matrix(-1, 0, 0, 1, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 14.58%;
+right: 14.58%;
+top: 14.57%;
+bottom: 14.6%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 41.3%;
+right: 16.88%;
+top: 16.86%;
+bottom: 41.31%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Vector */
+
+position: absolute;
+left: 58.33%;
+right: 14.58%;
+top: 14.57%;
+bottom: 58.35%;
+
+border: 1.28px solid rgba(255, 255, 255, 0.98);
+transform: matrix(0, -1, -1, 0, 0, 0);
+
+
+/* Build Header */
+
+position: absolute;
+width: 1307px;
+height: 71px;
+left: 69.15px;
+top: 3146.78px;
+
+
+
+/* Build Title Container */
+
+position: absolute;
+width: 876px;
+height: 62px;
+left: 69.15px;
+top: 3155.78px;
+
+
+
+/* Build Title Container */
+
+position: absolute;
+width: 876px;
+height: 62px;
+left: 69.15px;
+top: 3155.78px;
+
+
+
+/* Build Title Container */
+
+position: absolute;
+width: 876px;
+height: 62px;
+left: 69.15px;
+top: 3155.78px;
+
+
+
+/* Hero Title */
+
+position: absolute;
+width: 876px;
+height: 62px;
+left: 69.15px;
+top: 3155.78px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 56px;
+line-height: 110%;
+/* identical to box height, or 62px */
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+
+/* Arrow left-circle */
+
+position: absolute;
+width: 44px;
+height: 44px;
+left: 1332.15px;
+top: 3146.78px;
+
+transform: rotate(180deg);
+
+
+/* Icon */
+
+position: absolute;
+left: 8.33%;
+right: 8.34%;
+top: 8.34%;
+bottom: 8.33%;
+
+background: #3F0086;
+/* Purple/300 */
+border: 2.5px solid #3F0086;
+transform: rotate(180deg);
+
+
+/* Icon */
+
+position: absolute;
+left: 34.09%;
+right: 32.58%;
+top: 33.34%;
+bottom: 33.33%;
+
+/* Black/0 */
+border: 2.5px solid #FFFFFF;
+transform: rotate(180deg);
+
+
+/* Arrow left-circle */
+
+position: absolute;
+width: 44px;
+height: 44px;
+left: 1278.15px;
+top: 3146.78px;
+
+
+
+/* Icon */
+
+position: absolute;
+left: 8.33%;
+right: 8.33%;
+top: 8.33%;
+bottom: 8.34%;
+
+/* Black/800 */
+background: #1E2026;
+/* Black/800 */
+border: 2.5px solid #1E2026;
+
+
+/* Icon */
+
+position: absolute;
+left: 32.58%;
+right: 34.09%;
+top: 33.33%;
+bottom: 33.34%;
+
+/* Black/700 */
+border: 2.5px solid #2B2F36;
+
+
+/* Hero Section */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+gap: 56px;
+
+position: absolute;
+width: 1305.01px;
+height: 428px;
+left: 69.63px;
+top: 1686.89px;
+
+
+
+/* Hero Title */
+
+width: 1305.01px;
+height: 70px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 160;
+font-size: 56px;
+line-height: 110%;
+/* or 62px */
+text-align: center;
+font-feature-settings: 'ss03' on, 'ss02' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Features Section */
+
+width: 1302.01px;
+height: 302px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Line 11 */
+
+position: absolute;
+width: 1016.03px;
+height: 0px;
+left: calc(50% - 1016.03px/2 - 1.48px);
+top: 166.02px;
+
+border: 2px dashed #6700CE;
+transform: rotate(0.1deg);
+
+
+/* Features Container */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 0px;
+
+position: absolute;
+width: 1302.01px;
+height: 302px;
+left: 0px;
+top: 126px;
+
+
+
+/* Features List */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: flex-start;
+padding: 0px;
+gap: 80px;
+
+width: 1302.01px;
+height: 302px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Feature Item */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+gap: 39px;
+
+margin: 0 auto;
+width: 313px;
+height: 298px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Feature Icon */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 5px 24px;
+gap: 8px;
+
+width: 80px;
+height: 80px;
+
+background: #6700CE;
+border-radius: 40px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Feature Number */
+
+width: 27px;
+height: 65px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 50px;
+line-height: 120%;
+/* or 60px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Category Title */
+
+width: 313px;
+height: 58px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 700;
+font-size: 48px;
+line-height: 120%;
+/* identical to box height, or 58px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Go live with your branded DEX. Start trading in mi */
+
+width: 313px;
+height: 67.58px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 24px;
+line-height: 130%;
+/* or 31px */
+text-align: center;
+letter-spacing: -0.3125px;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Feature Item */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+gap: 39px;
+
+margin: 0 auto;
+width: 312.73px;
+height: 302px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Feature Icon */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 5px 24px;
+gap: 8px;
+
+width: 80px;
+height: 80px;
+
+background: #6700CE;
+border-radius: 40px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Feature Number */
+
+width: 32px;
+height: 67px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 50px;
+line-height: 120%;
+/* or 60px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Category Title */
+
+width: 312.73px;
+height: 58px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 700;
+font-size: 48px;
+line-height: 120%;
+/* identical to box height, or 58px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Go live with your branded DEX. Start trading in mi */
+
+width: 312.73px;
+height: 86px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 24px;
+line-height: 130%;
+/* or 31px */
+text-align: center;
+letter-spacing: -0.3125px;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Feature Item */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 0px;
+gap: 39px;
+
+margin: 0 auto;
+width: 312.73px;
+height: 302px;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+flex-grow: 0;
+
+
+/* Feature Icon */
+
+/* Auto layout */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 5px 24px;
+gap: 8px;
+
+width: 80px;
+height: 80px;
+
+background: #6700CE;
+border-radius: 40px;
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Feature Number */
+
+width: 29px;
+height: 65px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 135;
+font-size: 50px;
+line-height: 120%;
+/* or 60px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* Category Title */
+
+width: 312.73px;
+height: 58px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 700;
+font-size: 48px;
+line-height: 120%;
+/* identical to box height, or 58px */
+text-align: center;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+align-self: stretch;
+flex-grow: 0;
+
+
+/* Go live with your branded DEX. Start trading in mi */
+
+width: 312.73px;
+height: 86px;
+
+font-family: 'Atyp BL';
+font-style: normal;
+font-weight: 105;
+font-size: 24px;
+line-height: 130%;
+/* or 31px */
+text-align: center;
+letter-spacing: -0.3125px;
+font-feature-settings: 'ss02' on, 'ss03' on, 'ss05' on, 'ss06' on;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 2;
+align-self: stretch;
+flex-grow: 0;
