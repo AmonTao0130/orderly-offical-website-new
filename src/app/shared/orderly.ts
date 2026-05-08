@@ -52,7 +52,7 @@ export const HEADER_NAV: Record<string, HeaderNavItem[]> = {
     { label: "GitHub", href: "https://github.com/OrderlyNetwork", external: true },
   ],
   Ecosystem: [
-    { label: "Partners", href: "/partners", external: false, target: "_blank" },
+    { label: "Partners", href: "/partners", external: false },
     { label: "Case Studies", href: "https://dex.orderly.network/case-studies", external: true },
     { label: "Governance", href: "https://snapshot.box/#/s:orderlygov.eth", external: true },
     { label: "Staking", href: ORDER_BUY_URL, external: true },
@@ -217,7 +217,7 @@ export const FOOTER_NAV: Record<string, FooterNavLink[]> = {
     },
   ],
   About: [
-    { label: "Team", href: "/team", external: true },
+    { label: "Team", href: "/team", external: false },
     { label: "FAQ", href: "/faq", external: false },
     { label: "Dune Dashboard", href: "https://dune.com/orderly_network/orderly-dashboard", external: true },
     { label: "Careers", href: "https://job-boards.greenhouse.io/orderly", external: true },
