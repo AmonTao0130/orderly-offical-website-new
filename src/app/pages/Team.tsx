@@ -126,7 +126,7 @@ const INVESTORS = [
   { name: "OKX Ventures", img: "/images/investors/okx ventures.png" },
   { name: "Laser Digital", img: "/images/investors/Laser_White.png" },
   { name: "Crypto.com Capital", img: "/images/investors/crypto.com_White.png", scale: 1.3 },
-  { name: "GSR", img: "/images/investors/GSR_White.png", scale: 0.75 },
+  { name: "Primitive", img: "/images/investors/Primitive_White.png" },
 ];
 
 // ── X (Twitter) icon ──────────────────────────────────────────────────────────
