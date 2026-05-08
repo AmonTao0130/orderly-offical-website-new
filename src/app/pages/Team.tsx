@@ -123,26 +123,10 @@ const INVESTORS = [
   { name: "Sequoia Capital", img: "/images/investors/Sequoia Capital_White.png" },
   { name: "Dragonfly Capital", img: "/images/investors/Dragonfly_White.png" },
   { name: "Jump", img: "/images/investors/jump_White.png" },
-  { name: "GSR", img: "/images/investors/GSR_White.png" },
   { name: "OKX Ventures", img: "/images/investors/okx ventures.png" },
   { name: "Laser Digital", img: "/images/investors/Laser_White.png" },
-  { name: "Crypto.com Capital", img: "/images/investors/crypto.com_White.png" },
-  { name: "Primitive", img: "/images/investors/Primitive_White.png" },
-  { name: "SevenX", img: "/images/investors/SevenX_White.png" },
-  { name: "CoinDCX", img: "/images/investors/CoinDCX_White.png" },
-  { name: "Kronos", img: "/images/investors/kronos_White.png" },
-  { name: "Raydium", img: "/images/investors/Raydium_White.png" },
-  { name: "Amber", img: "/images/investors/Amber_White.png" },
-  { name: "AG Build", img: "/images/investors/AGBuild_White.png" },
-  { name: "Cobo Ventures", img: "/images/investors/cobo_White.png" },
-  { name: "Gate Ventures", img: "/images/investors/Gate_White.png" },
-  { name: "Mirana", img: "/images/investors/Mirana_White.png" },
-  { name: "Puzzle Ventures", img: "/images/investors/Puzzle_White.png" },
-  { name: "IOSG", img: "/images/investors/IOSG_White.png" },
-  { name: "WOO", img: "/images/investors/WOOFi_White.png", scale: 0.75 },
-  { name: "Subzero", img: "/images/investors/Subzero_White.png" },
-  { name: "DI Ventures", img: "/images/investors/DI_White.png" },
-  { name: "Newman", img: "/images/investors/Newman_White.png", scale: 1.3 },
+  { name: "Crypto.com Capital", img: "/images/investors/crypto.com_White.png", scale: 1.3 },
+  { name: "GSR", img: "/images/investors/GSR_White.png", scale: 0.75 },
 ];
 
 // ── X (Twitter) icon ──────────────────────────────────────────────────────────
@@ -294,8 +278,8 @@ function InvestorBadge({ name, img, vp, scale = 1 }: { name: string; img: string
         src={img}
         alt={name}
         style={{
-          maxHeight: (isMobile ? 24 : 28) * scale,
-          maxWidth: (isMobile ? 100 : 130) * scale,
+          maxHeight: (isMobile ? 32 : 40) * scale,
+          maxWidth: (isMobile ? 130 : 170) * scale,
           objectFit: "contain",
           opacity: hovered ? 1 : 0.55,
           transition: "opacity 0.25s ease",
@@ -532,27 +516,44 @@ export default function Team() {
               letterSpacing: "0.02em",
             }}
           >
-            25+ world-class investors backing Orderly's vision
+            World-class investors backing Orderly's vision
           </p>
         </div>
 
-        {/* Investors grid */}
+        {/* Investors grid — 2 rows */}
         <motion.div
           variants={staggerGrid}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
+          style={{ display: "flex", flexDirection: "column", gap: isMobile ? "8px" : "12px", alignItems: "center" }}
+        >
+          {/* Row 1: first 4 */}
+          <div style={{ display: "flex", gap: isMobile ? "8px" : "12px", justifyContent: "center" }}>
+            {INVESTORS.slice(0, 4).map(({ name, img, scale }) => (
+              <InvestorBadge key={name} name={name} img={img} vp={vp} scale={scale} />
+            ))}
+          </div>
+          {/* Row 2: remaining 3 */}
+          <div style={{ display: "flex", gap: isMobile ? "8px" : "12px", justifyContent: "center" }}>
+            {INVESTORS.slice(4).map(({ name, img, scale }) => (
+              <InvestorBadge key={name} name={name} img={img} vp={vp} scale={scale} />
+            ))}
+          </div>
+        </motion.div>
+        <p
           style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: isMobile ? "8px" : "12px",
-            justifyContent: "center",
+            textAlign: "center",
+            marginTop: isMobile ? "16px" : "24px",
+            fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+            fontVariationSettings: "'wght' 400",
+            fontSize: isMobile ? "13px" : "15px",
+            color: "rgba(255,255,255,0.35)",
+            letterSpacing: "0.05em",
           }}
         >
-          {INVESTORS.map(({ name, img, scale }) => (
-            <InvestorBadge key={name} name={name} img={img} vp={vp} scale={scale} />
-          ))}
-        </motion.div>
+          and more
+        </p>
       </motion.div>
 
       {/* ── Join us CTA ── */}
