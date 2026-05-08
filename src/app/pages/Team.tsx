@@ -123,26 +123,10 @@ const INVESTORS = [
   { name: "Sequoia Capital", img: "/images/investors/Sequoia Capital_White.png" },
   { name: "Dragonfly Capital", img: "/images/investors/Dragonfly_White.png" },
   { name: "Jump", img: "/images/investors/jump_White.png" },
-  { name: "GSR", img: "/images/investors/GSR_White.png" },
   { name: "OKX Ventures", img: "/images/investors/okx ventures.png" },
   { name: "Laser Digital", img: "/images/investors/Laser_White.png" },
-  { name: "Crypto.com Capital", img: "/images/investors/crypto.com_White.png" },
+  { name: "Crypto.com Capital", img: "/images/investors/crypto.com_White.png", scale: 1.3 },
   { name: "Primitive", img: "/images/investors/Primitive_White.png" },
-  { name: "SevenX", img: "/images/investors/SevenX_White.png" },
-  { name: "CoinDCX", img: "/images/investors/CoinDCX_White.png" },
-  { name: "Kronos", img: "/images/investors/kronos_White.png" },
-  { name: "Raydium", img: "/images/investors/Raydium_White.png" },
-  { name: "Amber", img: "/images/investors/Amber_White.png" },
-  { name: "AG Build", img: "/images/investors/AGBuild_White.png" },
-  { name: "Cobo Ventures", img: "/images/investors/cobo_White.png" },
-  { name: "Gate Ventures", img: "/images/investors/Gate_White.png" },
-  { name: "Mirana", img: "/images/investors/Mirana_White.png" },
-  { name: "Puzzle Ventures", img: "/images/investors/Puzzle_White.png" },
-  { name: "IOSG", img: "/images/investors/IOSG_White.png" },
-  { name: "WOO", img: "/images/investors/WOOFi_White.png", scale: 0.75 },
-  { name: "Subzero", img: "/images/investors/Subzero_White.png" },
-  { name: "DI Ventures", img: "/images/investors/DI_White.png" },
-  { name: "Newman", img: "/images/investors/Newman_White.png", scale: 1.3 },
 ];
 
 // ── X (Twitter) icon ──────────────────────────────────────────────────────────
@@ -230,6 +214,7 @@ function FounderCard({
           letterSpacing: "0.02em",
           maxWidth: "280px",
           whiteSpace: "pre-line",
+          textWrap: "pretty",
         }}
       >
         {founder.bio}
@@ -293,8 +278,8 @@ function InvestorBadge({ name, img, vp, scale = 1 }: { name: string; img: string
         src={img}
         alt={name}
         style={{
-          maxHeight: (isMobile ? 24 : 28) * scale,
-          maxWidth: (isMobile ? 100 : 130) * scale,
+          maxHeight: (isMobile ? 32 : 40) * scale,
+          maxWidth: (isMobile ? 130 : 170) * scale,
           objectFit: "contain",
           opacity: hovered ? 1 : 0.55,
           transition: "opacity 0.25s ease",
@@ -347,15 +332,60 @@ export default function Team() {
       )}
 
       {/* ── Hero ── */}
-      <motion.div
+      <div style={{ position: "relative", width: "100%", overflow: "visible" }}>
+        {/* Left decoration */}
+        <img
+          src="/images/team-left.png"
+          alt=""
+          style={{
+            position: "absolute",
+            left: isMobile
+              ? "-50px"
+              : isTablet
+              ? "calc(-10px + (100vw - 1024px) * 0.08)"
+              : "calc(20px + (100vw - 1440px) * 0.33)",
+            top: isMobile ? "20px" : isTablet ? "40px" : "40px",
+            width: isMobile
+              ? "clamp(96px, 26vw, 130px)"
+              : isTablet
+              ? "clamp(140px, 22vw, 220px)"
+              : "clamp(260px, 27vw, 380px)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+        {/* Right decoration */}
+        <img
+          src="/images/team-right.png"
+          alt=""
+          style={{
+            position: "absolute",
+            right: isMobile
+              ? "-25px"
+              : isTablet
+              ? "calc(10px + (100vw - 1024px) * 0.08)"
+              : "calc(40px + (100vw - 1440px) * 0.33)",
+            top: isMobile ? "20px" : isTablet ? "40px" : "40px",
+            width: isMobile
+              ? "clamp(96px, 26vw, 130px)"
+              : isTablet
+              ? "clamp(140px, 22vw, 220px)"
+              : "clamp(260px, 27vw, 380px)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+        <motion.div
         variants={heroContainer}
         initial="hidden"
         animate="visible"
         style={{
           maxWidth: maxW,
           margin: "0 auto",
-          padding: isMobile ? "48px 20px 56px" : isTablet ? "56px 32px 72px" : "72px 24px 96px",
+          padding: isMobile ? "52px 20px 48px" : isTablet ? "60px 32px 56px" : "80px 24px 72px",
           textAlign: "center",
+          position: "relative",
+          zIndex: 1,
         }}
       >
         <motion.h1
@@ -364,78 +394,40 @@ export default function Team() {
             fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
             fontVariationSettings: "'wght' 700, 'opsz' 72",
             fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-            fontSize: isMobile ? "36px" : isTablet ? "52px" : "clamp(52px,6vw,80px)",
+            fontSize: isMobile ? "28px" : isTablet ? "36px" : "60px",
             color: "white",
             letterSpacing: "0.01em",
             lineHeight: 1.05,
-            margin: `0 0 ${isMobile ? "20px" : "28px"}`,
+            margin: `0 0 ${isMobile ? "16px" : "24px"}`,
           }}
         >
           The Visionaries
           <br />
-          <span
-            style={{
-              background: "linear-gradient(90deg, #9c75ff 0%, #6700ce 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
+          <span>
             Behind Orderly
           </span>
         </motion.h1>
 
+        <motion.p
+          variants={heroChild}
+          style={{
+            fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+            fontVariationSettings: "'wght' 400",
+            fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
+            fontSize: isMobile ? "15px" : "17px",
+            color: "rgba(255,255,255,0.65)",
+            lineHeight: 1.7,
+            margin: "0 auto",
+            letterSpacing: "0.02em",
+            maxWidth: "640px",
+          }}
+        >
+          Builders, traders, and protocol engineers united by one idea: great trading
+          infrastructure should be accessible to everyone — across every chain.
+        </motion.p>
 
       </motion.div>
-
-      {/* ── Mission strip ── */}
-      <motion.div
-        variants={revealOnScroll}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-        style={{
-          maxWidth: maxW,
-          margin: "0 auto",
-          padding: `0 ${px} ${isMobile ? "56px" : "80px"}`,
-        }}
-      >
-        <div style={{ textAlign: "center" }}>
-          <h2
-            style={{
-              fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-              fontVariationSettings: "'wght' 700",
-              fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-              fontSize: isMobile ? "28px" : "clamp(32px,4vw,48px)",
-              color: "white",
-              margin: `0 0 ${isMobile ? "20px" : "28px"}`,
-              letterSpacing: "0.01em",
-              lineHeight: 1.1,
-            }}
-          >
-            Who We Are
-          </h2>
-
-          <p
-            style={{
-              fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
-              fontVariationSettings: "'wght' 400",
-              fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-              fontSize: isMobile ? "15px" : "17px",
-              color: "rgba(255,255,255,0.75)",
-              lineHeight: 1.7,
-              margin: "0 auto",
-              letterSpacing: "0.02em",
-              maxWidth: "720px",
-            }}
-          >
-            Orderly Network provides the shared orderbook infrastructure that powers the next
-            generation of decentralized exchanges. By concentrating liquidity across chains and
-            protocols, we solve the liquidity paradox — giving every DEX access to deep,
-            institutional-grade order flow across 17+ blockchains simultaneously.
-          </p>
-        </div>
-      </motion.div>
+      </div>
 
       {/* ── Founders section ── */}
       <motion.div
@@ -456,7 +448,7 @@ export default function Team() {
               fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
               fontVariationSettings: "'wght' 700",
               fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-              fontSize: isMobile ? "28px" : "clamp(32px,4vw,48px)",
+              fontSize: isMobile ? "22px" : "36px",
               color: "white",
               margin: 0,
               letterSpacing: "0.01em",
@@ -504,7 +496,7 @@ export default function Team() {
               fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
               fontVariationSettings: "'wght' 700",
               fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-              fontSize: isMobile ? "28px" : "clamp(32px,4vw,48px)",
+              fontSize: isMobile ? "22px" : "36px",
               color: "white",
               margin: "0 0 12px",
               letterSpacing: "0.01em",
@@ -524,27 +516,44 @@ export default function Team() {
               letterSpacing: "0.02em",
             }}
           >
-            25+ world-class investors backing Orderly's vision
+            World-class investors backing Orderly's vision
           </p>
         </div>
 
-        {/* Investors grid */}
+        {/* Investors grid — 2 rows */}
         <motion.div
           variants={staggerGrid}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
+          style={{ display: "flex", flexDirection: "column", gap: isMobile ? "8px" : "12px", alignItems: "center" }}
+        >
+          {/* Row 1: first 4 */}
+          <div style={{ display: "flex", gap: isMobile ? "8px" : "12px", justifyContent: "center" }}>
+            {INVESTORS.slice(0, 4).map(({ name, img, scale }) => (
+              <InvestorBadge key={name} name={name} img={img} vp={vp} scale={scale} />
+            ))}
+          </div>
+          {/* Row 2: remaining 3 */}
+          <div style={{ display: "flex", gap: isMobile ? "8px" : "12px", justifyContent: "center" }}>
+            {INVESTORS.slice(4).map(({ name, img, scale }) => (
+              <InvestorBadge key={name} name={name} img={img} vp={vp} scale={scale} />
+            ))}
+          </div>
+        </motion.div>
+        <p
           style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: isMobile ? "8px" : "12px",
-            justifyContent: "center",
+            textAlign: "center",
+            marginTop: isMobile ? "16px" : "24px",
+            fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
+            fontVariationSettings: "'wght' 400",
+            fontSize: isMobile ? "13px" : "15px",
+            color: "rgba(255,255,255,0.35)",
+            letterSpacing: "0.05em",
           }}
         >
-          {INVESTORS.map(({ name, img, scale }) => (
-            <InvestorBadge key={name} name={name} img={img} vp={vp} scale={scale} />
-          ))}
-        </motion.div>
+          and more
+        </p>
       </motion.div>
 
       {/* ── Join us CTA ── */}
@@ -580,7 +589,7 @@ export default function Team() {
               fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
               fontVariationSettings: "'wght' 700",
               fontFeatureSettings: "'ss02' 1, 'ss03' 1, 'ss05' 1, 'ss06' 1",
-              fontSize: isMobile ? "26px" : "clamp(30px,4vw,44px)",
+              fontSize: isMobile ? "20px" : "32px",
               color: "white",
               margin: 0,
               letterSpacing: "0.01em",
