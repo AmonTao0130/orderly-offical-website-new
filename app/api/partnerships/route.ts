@@ -73,13 +73,14 @@ function formatTelegramMessage(data: PartnershipRequest): string {
 }
 
 async function sendTelegramMessage(message: string): Promise<{ success: boolean; error?: string }> {
-  const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
+  const botToken = process.env.PARTNERSHIPS_TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.PARTNERSHIPS_TELEGRAM_CHAT_ID;
 
   if (!botToken || !chatId) {
     return { 
       success: false, 
-      error: 'Telegram configuration missing. Please check TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID environment variables.' 
+      error:
+        'Telegram configuration missing. Please check PARTNERSHIPS_TELEGRAM_BOT_TOKEN and PARTNERSHIPS_TELEGRAM_CHAT_ID environment variables.' 
     };
   }
 

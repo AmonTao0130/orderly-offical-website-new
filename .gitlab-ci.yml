@@ -2,76 +2,21 @@ include:
   - project: 'orderlynetwork/orderly-devops/orderly-common/common-ci'
     ref: main
     file: '/common-orderly-network-dev-v2.yaml'
+  - project: 'orderlynetwork/orderly-fe/common-ci'
+    ref: main
+    file: '/frontend-ci.yaml'
+
 
 variables:
   SERVICE_NAME: official-website
   IMAGE_NAME: official-website
 
 
-stages:
-  - check_tag
-  - build_docker
-  - notify_slack
-  - deploy
-
 build_docker:
-  stage: build_docker
+  extends: .build_docker_base
   before_script:
-    - AUTH_B64=$(echo -n "${ACR_USER}:${ACR_PASSWORD}" | base64)
-    - echo -n "{\"auths\":{\"orderly-network-registry.ap-northeast-1.cr.aliyuncs.com\":{\"auth\":\"${AUTH_B64}\"}}}" > /kaniko/.docker/config.json
-  image:
-    name: asia-northeast1-docker.pkg.dev/woo-orderly/orderly-devops/executor:v1.9.0-debug
-    entrypoint: [""]
-  script:
-    - echo ${TAG_EXISTS}
-    - |
-      # IS_PROD_TAG: true when tag matches v\d+\.\d+\.\d+ (prod release)
-      if [[ "${CI_COMMIT_TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-        IS_PROD_TAG="true"
-        echo "Tag ${CI_COMMIT_TAG} matches prod release pattern (vX.Y.Z), IS_PROD_TAG=true"
-      else
-        IS_PROD_TAG="false"
-        echo "Tag ${CI_COMMIT_TAG} does not match prod release pattern, IS_PROD_TAG=false"
-      fi
-    - |
-      if [ "${TAG_EXISTS}" = false ]; then
-        /kaniko/executor --context "${DOCKER_CONTEXT}" --dockerfile "${DOCKER_FILE}" --build-arg CI_COMMIT_TAG="${CI_COMMIT_TAG}" --build-arg SENTRY_AUTH_TOKEN="${SENTRY_AUTH_TOKEN}" --build-arg IS_PROD_TAG="${IS_PROD_TAG}" --build-arg TELEGRAM_BOT_TOKEN="${TELEGRAM_BOT_TOKEN}" --build-arg TELEGRAM_CHAT_ID="${TELEGRAM_CHAT_ID}" --build-arg BEEHIIV_API_KEY="${BEEHIIV_API_KEY}" --destination "asia-northeast1-docker.pkg.dev/woo-orderly/orderly-network/${IMAGE_NAME}:${CI_COMMIT_TAG}" --destination "orderly-network-registry.ap-northeast-1.cr.aliyuncs.com/orderly-network/${IMAGE_NAME}:${CI_COMMIT_TAG}" --snapshotMode=redo --cache=true
-      else
-        echo "asia-northeast1-docker.pkg.dev/woo-orderly/orderly-network/${IMAGE_NAME}:${CI_COMMIT_TAG} exists, no need to build! Skip building docker image!"
-      fi
-  dependencies:
-    - check_tag
-  only:
-    - tags
-  tags:
-    - dev
-    - build
-
-notify_slack:
-  stage: notify_slack
-  image:
-    name: asia-northeast1-docker.pkg.dev/woo-orderly/orderly-devops/gcloud
-    entrypoint: [""]
-  script:
-    - echo ${CI_COMMIT_TAG}
-    - echo ${IMAGE_NAME}
-    - TAG_EXISTS=$(gcloud container images list-tags asia-northeast1-docker.pkg.dev/woo-orderly/orderly-network/${IMAGE_NAME} --filter="tags=${CI_COMMIT_TAG}" --format="value(tags)")
-    - echo ${TAG_EXISTS}
-    - |
-      if [ "${TAG_EXISTS}" ]; then
-        echo "done, send slack message"
-
-        USER_INFO=""
-        if [ -n "${GITLAB_USER_NAME}" ]; then
-          USER_INFO=" by ${GITLAB_USER_NAME}"
-        elif [ -n "${CI_COMMIT_AUTHOR}" ]; then
-          USER_INFO=" by ${CI_COMMIT_AUTHOR}"
-        fi
-
-        curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"${IMAGE_NAME} tag: <${CI_PROJECT_URL}/-/tags/${CI_COMMIT_TAG}|${CI_COMMIT_TAG}> done, ${USER_INFO}\"}" ${SLACK_WEBHOOK_URL}
-      fi
-  only:
-    - tags
-  tags:
-    - dev
-    - build
+    - !reference [.build_docker_base, before_script]   
+    - >-
+      export BUILD_ARGS_KV="PARTNERSHIPS_TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      PARTNERSHIPS_TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      BEEHIIV_API_KEY=${BEEHIIV_API_KEY}"
