@@ -9,7 +9,8 @@
     "generate:skills": "node scripts/generate-skills-index.mjs",
     "tag:dev": "node scripts/create-dev-tag.mjs",
     "tag:prod": "node scripts/create-prod-tag.mjs",
-    "start": "next start"
+    "start": "next start",
+    "prepare": "husky"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
@@ -79,6 +80,7 @@
     "@types/node": "25.3.3",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
+    "husky": "^9.1.7",
     "typescript": "5.9.3"
   }
 }
