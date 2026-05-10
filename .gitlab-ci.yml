@@ -6,7 +6,6 @@ include:
     ref: main
     file: '/frontend-ci.yaml'
 
-
 variables:
   SERVICE_NAME: official-website
   IMAGE_NAME: official-website
@@ -20,3 +19,8 @@ build_docker:
       export BUILD_ARGS_KV="PARTNERSHIPS_TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       PARTNERSHIPS_TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
       BEEHIIV_API_KEY=${BEEHIIV_API_KEY}"
+
+auto_deploy_dev:
+  extends: .auto_deploy_dev_base
+  variables:
+    DEPLOY_APP_URL: 'https://www.dev.orderly-i.network'

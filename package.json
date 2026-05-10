@@ -7,6 +7,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "generate:skills": "node scripts/generate-skills-index.mjs",
+    "tag:dev": "node scripts/create-dev-tag.mjs",
+    "tag:prod": "node scripts/create-prod-tag.mjs",
     "start": "next start"
   },
   "dependencies": {
