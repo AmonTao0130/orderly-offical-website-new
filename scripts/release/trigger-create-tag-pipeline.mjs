@@ -37,7 +37,7 @@ function loadEnvLocal(filePath = ".env.local") {
 function usageAndExit(code = 1) {
   console.log(
     `
-Trigger the GitLab pipeline that runs the "create_tag" job (CI_PIPELINE_SOURCE=trigger).
+Trigger the GitLab pipeline that runs the "release_tag" job (CI_PIPELINE_SOURCE=trigger).
 
 Usage:
   node scripts/release/trigger-create-tag-pipeline.mjs \\
@@ -50,7 +50,7 @@ Usage:
   (git rev-parse --abbrev-ref HEAD) is used.
 
 Token:
-  You must use a GitLab Pipeline Trigger Token; do not use CI_JOB_TOKEN, or the create_tag rules will not match a trigger pipeline.
+  You must use a GitLab Pipeline Trigger Token; do not use CI_JOB_TOKEN, or the release_tag rules will not match a trigger pipeline.
 
 Env vars:
   TRIGGER_PIPELINE_PROJECT_ID
