@@ -20,7 +20,7 @@
       "type": "skill-md",
       "description": "Agent onboarding for Orderly Network - omnichain perpetual futures infrastructure, MCP server, skills, and developer quickstart",
       "url": "/.well-known/agent-skills/orderly-onboarding/SKILL.md",
-      "digest": "sha256:50c285fe0d7aa67093cb2a9eab9b2c816f2def441c704b4eb1c377bae4c763d1"
+      "digest": "sha256:6fed023e9c800a28476c62788301ba7636ae813ab16c89cb297704f36c7c3cc9"
     },
     {
       "name": "orderly-one-dex",
