@@ -7,6 +7,8 @@ RUN npm install
 
 FROM base AS builder
 WORKDIR /app
+ARG NEXT_PUBLIC_POSTHOG_KEY
+ENV NEXT_PUBLIC_POSTHOG_KEY=$NEXT_PUBLIC_POSTHOG_KEY
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
