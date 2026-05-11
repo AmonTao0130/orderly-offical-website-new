@@ -10,14 +10,16 @@ variables:
   SERVICE_NAME: official-website
   IMAGE_NAME: official-website
 
+
 stages:
   - release_tag # trigger-only
   - check_tag
   - scan
   - build_docker
-  - deploy
-  - post-build-audit
+  - post-build-audit 
   - notify
+  - deploy
+
 
 build_docker:
   extends: .build_docker_base
