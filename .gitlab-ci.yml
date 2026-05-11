@@ -42,7 +42,7 @@ auto_deploy_dev:
 #   TRIGGER_PIPELINE_BRANCH=<branch> must equal ref (CI_COMMIT_REF_NAME)
 #   TRIGGER_PIPELINE_TAG_ENV=dev|prod         dev/prod -> node scripts/release/create-git-tag.mjs --env "$TRIGGER_PIPELINE_TAG_ENV" (prod only when TRIGGER_PIPELINE_BRANCH=main)
 release_tag:
-  stage: deploy
+  stage: release_tag
   image: node:22-alpine
   variables:
     GIT_DEPTH: "0"
