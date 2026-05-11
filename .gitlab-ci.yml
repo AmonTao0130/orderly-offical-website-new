@@ -53,7 +53,8 @@ release_tag:
     - apk add --no-cache git
     - git config user.email "gitlab-ci@orderly.network"
     - git config user.name "GitLab CI"
-    - git remote set-url origin "https://gitlab-ci-token:${CI_JOB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+    - test -n "$GIT_TOKEN"
+    - git remote set-url origin "https://oauth2:${GIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
     - git fetch origin --tags --force
     - git fetch origin "$TRIGGER_PIPELINE_BRANCH"
     - git checkout -B "$TRIGGER_PIPELINE_BRANCH" "origin/$TRIGGER_PIPELINE_BRANCH"
