@@ -11,13 +11,13 @@ variables:
   IMAGE_NAME: official-website
 
 stages:
+  - release_tag # trigger-only
   - check_tag
   - scan
   - build_docker
   - deploy
   - post-build-audit
   - notify
-  - release_tag # trigger-only
 
 build_docker:
   extends: .build_docker_base
