@@ -51,8 +51,6 @@ release_tag:
     - if: '$CI_PIPELINE_SOURCE == "trigger" && $TRIGGER_PIPELINE_BRANCH == $CI_COMMIT_REF_NAME && $TRIGGER_PIPELINE_TAG_ENV == "prod" && $TRIGGER_PIPELINE_BRANCH == "main"'
   before_script:
     - apk add --no-cache git
-    - git config user.email "gitlab-ci@orderly.network"
-    - git config user.name "GitLab CI"
     - test -n "$GIT_TOKEN"
     - git remote set-url origin "https://oauth2:${GIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
     - git fetch origin --tags --force
