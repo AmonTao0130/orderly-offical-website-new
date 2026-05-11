@@ -88,6 +88,23 @@ function readConfiguredProjectId() {
   return String(config.triggerPipelineProjectId || "").trim();
 }
 
+function runGit(args) {
+  const result = spawnSync("git", args, {
+    encoding: "utf8",
+    stdio: "pipe",
+  });
+
+  if (result.status !== 0) {
+    const command = `git ${args.join(" ")}`;
+    const stderr = result.stderr?.trim();
+    const stdout = result.stdout?.trim();
+    const output = [stderr, stdout].filter(Boolean).join("\n");
+    throw new Error(output ? `${command}\n${output}` : `${command} failed`);
+  }
+
+  return result.stdout?.trim() ?? "";
+}
+
 function run(command, args, { dryRun }) {
   const printable = [command, ...args].join(" ");
   if (dryRun) {
@@ -130,6 +147,43 @@ function resolveMode({ projectId, triggerToken }) {
   return projectId && triggerToken ? "trigger" : "local";
 }
 
+function getCurrentBranch() {
+  const branch = runGit(["rev-parse", "--abbrev-ref", "HEAD"]);
+  if (!branch || branch === "HEAD") {
+    throw new Error("Cannot release from detached HEAD. Please checkout a branch first.");
+  }
+  return branch;
+}
+
+function assertProdBranch(env, branch) {
+  if (env === "prod" && branch !== "main") {
+    throw new Error(
+      `Cannot create a prod release from branch "${branch}". Please checkout main first.`
+    );
+  }
+}
+
+function assertBranchMatchesOrigin(branch) {
+  console.log(`Fetching origin/${branch} for release validation...`);
+  runGit(["fetch", "origin", branch]);
+
+  const localSha = runGit(["rev-parse", "HEAD"]);
+  const remoteSha = runGit(["rev-parse", `origin/${branch}`]);
+
+  if (localSha !== remoteSha) {
+    throw new Error(
+      [
+        `Local HEAD does not match origin/${branch}.`,
+        `Local:  ${localSha}`,
+        `Remote: ${remoteSha}`,
+        "Push or pull the branch before triggering the release pipeline.",
+      ].join("\n")
+    );
+  }
+
+  console.log(`Validated branch tip: ${branch} @ ${localSha.slice(0, 12)}`);
+}
+
 function main() {
   loadEnvLocal();
 
@@ -138,21 +192,38 @@ function main() {
 
   const env = String(args.env || "").trim();
   if (env !== "dev" && env !== "prod") usageAndExit(1);
+  const dryRun = Boolean(args["dry-run"]);
 
   const projectId = String(
     process.env.TRIGGER_PIPELINE_PROJECT_ID || readConfiguredProjectId()
   ).trim();
   const triggerToken = String(process.env.TRIGGER_PIPELINE_TOKEN || "").trim();
   const mode = resolveMode({ projectId, triggerToken });
+  const currentBranch = getCurrentBranch();
+  assertProdBranch(env, currentBranch);
 
   console.log(`Release tag mode: ${mode}`);
 
   if (mode === "local") {
-    run(process.execPath, ["scripts/release/create-git-tag.mjs", "--env", env], {
-      dryRun: Boolean(args["dry-run"]),
-    });
+    const localArgs = ["scripts/release/create-git-tag.mjs", "--env", env];
+    if (dryRun) localArgs.push("--dry-run");
+    run(process.execPath, localArgs, { dryRun: false });
     return;
   }
+
+  const triggerBranch =
+    env === "prod"
+      ? "main"
+      : String(process.env.TRIGGER_PIPELINE_BRANCH || currentBranch).trim();
+  if (!triggerBranch) {
+    throw new Error("Could not resolve trigger branch.");
+  }
+  if (triggerBranch !== currentBranch) {
+    throw new Error(
+      `TRIGGER_PIPELINE_BRANCH (${triggerBranch}) must match the current branch (${currentBranch}).`
+    );
+  }
+  assertBranchMatchesOrigin(triggerBranch);
 
   const triggerArgs = [
     "scripts/release/trigger-create-tag-pipeline.mjs",
@@ -160,18 +231,16 @@ function main() {
     projectId,
     "--env",
     env,
+    "--branch",
+    triggerBranch,
   ];
 
-  if (env === "prod") {
-    triggerArgs.push("--branch", "main");
-  }
-
-  run(process.execPath, triggerArgs, { dryRun: Boolean(args["dry-run"]) });
+  run(process.execPath, triggerArgs, { dryRun });
 }
 
 try {
   main();
 } catch (error) {
-  console.error(error?.stack || String(error));
+  console.error(error?.message || String(error));
   process.exit(1);
 }

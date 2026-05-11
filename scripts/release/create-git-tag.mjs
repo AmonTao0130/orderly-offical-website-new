@@ -8,7 +8,7 @@ function usageAndExit(code = 1) {
 Create and push a release Git tag from the local machine.
 
 Usage:
-  node scripts/release/create-git-tag.mjs --env dev|prod
+  node scripts/release/create-git-tag.mjs --env dev|prod [--dry-run]
 `.trim()
   );
   process.exit(code);
@@ -165,6 +165,7 @@ function main() {
 
   const env = String(args.env || "").trim();
   if (env !== "dev" && env !== "prod") usageAndExit(1);
+  const dryRun = Boolean(args["dry-run"]);
 
   console.log("Fetching latest git tags...");
   runGit(["fetch", "--tags", "--force"], { inherit: true });
@@ -176,11 +177,26 @@ function main() {
       ? createDevTag({ branchName, tags })
       : createProdTag({ branchName, tags });
 
+  if (dryRun) {
+    console.log(`[dry-run] Would create and push tag: ${nextTag}`);
+    return;
+  }
+
   console.log(`Creating tag: ${nextTag}`);
   runGit(["tag", nextTag], { inherit: true });
 
   console.log(`Pushing tag to origin: ${nextTag}`);
-  runGit(["push", "origin", nextTag], { inherit: true });
+  try {
+    runGit(["push", "origin", nextTag], { inherit: true });
+  } catch (error) {
+    console.error(`Failed to push tag ${nextTag}; deleting local tag to keep retries deterministic.`);
+    try {
+      runGit(["tag", "-d", nextTag], { inherit: true });
+    } catch (cleanupError) {
+      console.error(`Failed to delete local tag ${nextTag}: ${cleanupError.message}`);
+    }
+    throw error;
+  }
 
   console.log(`Done: ${nextTag}`);
 }

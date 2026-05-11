@@ -37,7 +37,8 @@ auto_deploy_dev:
     DEPLOY_APP_URL: 'https://www.dev.orderly-i.network'
 
 
-# Trigger-only: create & push release tags via npm scripts (requires Job token push to repo in GitLab settings).
+# Trigger-only: create & push release tags via npm scripts.
+# Requires a masked GIT_TOKEN CI variable with permission to push tags to this repository.
 # Trigger API variables example:
 #   TRIGGER_PIPELINE_BRANCH=<branch> must equal ref (CI_COMMIT_REF_NAME)
 #   TRIGGER_PIPELINE_TAG_ENV=dev|prod         dev/prod -> node scripts/release/create-git-tag.mjs --env "$TRIGGER_PIPELINE_TAG_ENV" (prod only when TRIGGER_PIPELINE_BRANCH=main)
