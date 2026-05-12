@@ -1,63 +1,56 @@
 ---
 name: orderly-release-tag
-description: Use when asked to release, deploy, publish, or create dev/prod environment tags for the Orderly official website. Triggers on dev deploy, prod deploy, release tag, deployment tag, release:dev, or release:prod requests.
+description: Use when asked to release, deploy, publish, or create dev/qa/prod environment tags for the current project through its configured release scripts. Triggers on dev deploy, qa deploy, prod deploy, release tag, deployment tag, release:dev, release:qa, or release:prod requests.
 ---
 
 # Orderly Release Tag
 
-Use this skill to create deployment tags through the release tag wrapper script. Do not handwrite tag names or run `git tag` directly for release work.
+Use this skill to create deployment tags through the repository release scripts, which invoke the `orderly-release-tag` CLI. Do not handwrite tag names or run `git tag` directly for release work.
 
 ## Preflight
 
-1. Confirm the target environment is `dev` or `prod`. If the user did not specify it, ask before continuing.
-2. Understand the release tag mode. The skill must always run `scripts/release/release-tag.mjs`; that wrapper loads `.env.local`, reads the skill config, resolves `ORDERLY_RELEASE_TAG_MODE`, and chooses either direct Git tag creation or the GitLab trigger pipeline.
+1. Confirm the target environment is `dev`, `qa`, or `prod`. If the user did not specify it, ask before continuing.
+2. For `prod` only, resolve the DevOps service name by reading `.gitlab-ci.yml` only. Use the top-level `variables.SERVICE_NAME` value as `SERVICE_NAME`. Do not use job-level `variables.SERVICE_NAME`, `IMAGE_NAME`, `package.json` `name`, or any fallback config. If top-level `variables.SERVICE_NAME` is missing for a `prod` release, stop and ask the user for the service name before continuing. Do not require `SERVICE_NAME` for `dev` or `qa` releases.
+3. Understand the release tag mode. The skill must run releases through `npm run release:dev`, `npm run release:qa`, or `npm run release:prod`; those scripts invoke `orderly-release-tag`, which loads `.env.local`, resolves `RELEASE_TAG_MODE`, and chooses either direct Git tag creation or the GitLab trigger pipeline.
 
-`ORDERLY_RELEASE_TAG_MODE` supports these values inside the wrapper:
+`RELEASE_TAG_MODE` supports these values inside the wrapper:
 
-- `auto` (default): use trigger mode when a trigger project id is available and `TRIGGER_PIPELINE_TOKEN` is present; otherwise use local mode.
-- `trigger`: force trigger mode. If either the trigger project id or `TRIGGER_PIPELINE_TOKEN` is missing, stop and tell the user which required value is missing. Do not fall back to local mode.
+- `auto` (default): use trigger mode when a GitLab project id is available and `GITLAB_TRIGGER_TOKEN` is present; otherwise use local mode.
+- `trigger`: force trigger mode. If either the GitLab project id or `GITLAB_TRIGGER_TOKEN` is missing, stop and tell the user which required value is missing. Do not fall back to local mode.
 - `local`: force local mode, even if trigger environment variables are present.
 
-If `ORDERLY_RELEASE_TAG_MODE` is unset, treat it as `auto`. If it is set to any other value, stop and ask the user to set it to `auto`, `trigger`, or `local`.
+If `RELEASE_TAG_MODE` is unset, treat it as `auto`. If it is set to any other value, stop and ask the user to set it to `auto`, `trigger`, or `local`.
 
-Trigger mode reads the project id from `.claude/skills/orderly-release-tag/config.json`:
+Trigger mode reads the project id from `--project-id` first, then `GITLAB_PROJECT_ID`. This repository's `package.json` release scripts pass `--project-id 52443474`, so run the release through those npm scripts instead of repeating the CLI arguments manually.
 
-```json
-{
-  "triggerPipelineProjectId": "52443474"
-}
-```
-
-Use `TRIGGER_PIPELINE_PROJECT_ID` only as a local override or fallback if the config file is missing. Never commit `TRIGGER_PIPELINE_TOKEN`; put it in the local shell environment or in `.env.local`, which `scripts/release/release-tag.mjs` loads automatically when present.
-
-The wrapper resolves the trigger project id as:
-
-1. `TRIGGER_PIPELINE_PROJECT_ID` when it is set locally.
-2. Otherwise `.claude/skills/orderly-release-tag/config.json` `triggerPipelineProjectId`, currently `52443474`.
+Use `GITLAB_PROJECT_ID` only as a local override when running `orderly-release-tag` directly without `--project-id`. The normal workflow should use `npm run release:dev`, `npm run release:qa`, or `npm run release:prod`. Never commit `GITLAB_TRIGGER_TOKEN`; put it in the local shell environment or in `.env.local`, which `orderly-release-tag` loads automatically when present.
 
 Trigger mode uses these fixed environment variable names inside the wrapper and trigger script:
 
-- `TRIGGER_PIPELINE_PROJECT_ID`
-- `TRIGGER_PIPELINE_TOKEN`
-- `TRIGGER_PIPELINE_BRANCH` (optional; if unset, `scripts/release/trigger-create-tag-pipeline.mjs` uses the current Git branch)
+- `GITLAB_PROJECT_ID`
+- `GITLAB_TRIGGER_TOKEN`
+- `RELEASE_TAG_BRANCH` (optional; if unset, `orderly-release-tag` uses the current Git branch)
 
-Do not require the user to set `TRIGGER_PIPELINE_TAG_ENV`; the wrapper passes the target environment with `--env dev` or `--env prod`.
-3. Verify the project has the required release scripts by reading `package.json` only. Confirm both keys exist:
+Do not require the user to set `RELEASE_TAG_ENV`; the wrapper passes the target environment with `--env dev`, `--env qa`, or `--env prod`.
+
+Both local mode and trigger mode validate that the local `HEAD` matches `origin/<branch>` before creating a tag or triggering GitLab. If the wrapper reports that local and remote SHAs differ, stop and tell the user to push or fast-forward pull the branch first. Do not bypass the wrapper by running the trigger script or tag script directly.
+
+4. Verify the project has the required release scripts by reading `package.json` only. Confirm all required keys exist:
 
    - `scripts["release:dev"]`
+   - `scripts["release:qa"]`
    - `scripts["release:prod"]`
 
-Do not run `npm run release:dev` or `npm run release:prod` as a configuration check. If either script is missing, stop and tell the user the release tag scripts are not configured.
-4. Verify the wrapper and trigger scripts exist before continuing:
+Do not run `npm run release:dev`, `npm run release:qa`, or `npm run release:prod` as a configuration check. If any script is missing, stop and tell the user the release tag scripts are not configured.
 
-```text
-scripts/release/release-tag.mjs
-scripts/release/create-git-tag.mjs
-scripts/release/trigger-create-tag-pipeline.mjs
-```
+5. Verify the project depends on the release tag CLI by reading `package.json` only. Confirm this key exists in either `dependencies` or `devDependencies`:
 
-If either script is missing, stop and tell the user the release tag scripts are not configured.
-5. Check the worktree before any deployment command:
+- `dependencies["@orderly.network/release-tag"]`
+- `devDependencies["@orderly.network/release-tag"]`
+
+If the dependency is missing, stop and tell the user the release tag package is not configured.
+
+6. Check the worktree before any deployment command:
 
 ```bash
 git status --short
@@ -103,17 +96,61 @@ git commit -m "<generated message>"
 git push
 ```
 
-After the commit and push succeed, continue the original `dev` or `prod` deployment workflow using the selected release tag mode.
+If the branch has no upstream, use:
+
+```bash
+git push -u origin HEAD
+```
+
+After the commit and push succeed, continue the original `dev`, `qa`, or `prod` deployment workflow using the selected release tag mode.
 
 ## Dev Deployment
 
 For `dev`, tell the user this will create and push a real dev tag using the configured release tag mode, then run:
 
 ```bash
-node scripts/release/release-tag.mjs --env dev
+npm run release:dev
 ```
 
-Let `scripts/release/release-tag.mjs` decide whether to run `scripts/release/create-git-tag.mjs --env dev` or trigger the GitLab pipeline.
+Let `orderly-release-tag` decide whether to create the local tag or trigger the GitLab pipeline.
+
+Dev tag names intentionally use only the final branch path segment:
+
+- `feat/deploy` -> `deploy`
+- `feature/foo` -> `foo`
+
+Do not rewrite dev tag branch names to include the full branch path.
+
+## QA Deployment
+
+For `qa`, tell the user this will create and push a real QA tag using the configured release tag mode, then run:
+
+```bash
+npm run release:qa
+```
+
+Let `orderly-release-tag` decide whether to create the local tag or trigger the GitLab pipeline.
+
+QA follows the same branch rules as dev: it can be created from any branch, and trigger mode must pass the local `HEAD` versus `origin/<branch>` validation. Do not bypass the wrapper by running the trigger or tag scripts directly.
+
+QA tag names intentionally use only the final branch path segment:
+
+- `feat/deploy` -> `deploy`
+- `feature/foo` -> `foo`
+
+QA tags use the format `v<base>-<branchTail>-qa-<n>` for non-`main` branches, and `v<base>-qa-<n>` for `main`.
+
+## Dry Run
+
+Use dry run when the user wants to validate the release path before creating a tag or triggering GitLab:
+
+```bash
+npm run release:dev -- --dry-run
+npm run release:qa -- --dry-run
+npm run release:prod -- --dry-run
+```
+
+In local mode, dry run calculates and prints the tag that would be created, but does not create or push it. In trigger mode, dry run performs the same branch safety checks, including local `HEAD` versus `origin/<branch>`, but does not trigger the GitLab pipeline.
 
 ## Prod Deployment
 
@@ -128,8 +165,10 @@ git rev-parse --abbrev-ref HEAD
 If the current branch is `main`, tell the user this will create and push a real prod tag using the configured release tag mode, then run:
 
 ```bash
-node scripts/release/release-tag.mjs --env prod
+npm run release:prod
 ```
+
+The CLI also enforces this `main` branch rule. If the CLI rejects a prod release from a non-`main` branch, do not manually create tags or trigger GitLab to bypass it.
 
 If the current branch is not `main`, do not run the prod tag command immediately. Tell the user prod tags must be created from `main`, then offer two choices:
 
@@ -142,10 +181,10 @@ Only continue with the merge path after the user explicitly chooses it.
 
 When `npm run release:prod` completes successfully in local mode, the user must **manually** ask DevOps to deploy. There is no automated deploy step in this workflow.
 
-Use this exact message format (replace `<tag>` with the tag name from the script output, including the `v` prefix if present):
+Use this exact message format (replace `<SERVICE_NAME>` with the top-level `.gitlab-ci.yml` `variables.SERVICE_NAME` value, and replace `<tag>` with the tag name from the script output, including the `v` prefix if present):
 
 ```text
-official-website prod <tag>
+<SERVICE_NAME> prod <tag>
 ```
 
 Example:
@@ -158,12 +197,12 @@ After tagging, remind the user to send that request to DevOps if deployment is n
 
 ### After prod trigger pipeline succeeds
 
-When `node scripts/release/release-tag.mjs --env prod` completes successfully in trigger mode, report the pipeline id and URL from the script output. The actual prod tag is created later by the GitLab pipeline `release_tag` job, so do not invent or guess a tag name.
+When `npm run release:prod` completes successfully in trigger mode, report the pipeline id and URL from the script output. The actual prod tag is created later by the GitLab pipeline `release_tag` job, so do not invent or guess a tag name.
 
 Tell the user to wait for the pipeline to finish, then use the prod tag generated by that pipeline in the DevOps request:
 
 ```text
-official-website prod <pipeline-created-tag>
+<SERVICE_NAME> prod <pipeline-created-tag>
 ```
 
 ## Assisted Prod Merge
@@ -181,7 +220,7 @@ When the user chooses assisted merge:
 9. Do not run `npm run build` before the prod tag by default. Assume commit hooks already handled build verification unless the user explicitly asks for another build.
 10. Run `git push origin main`.
 11. Continue the prod deployment using the selected release tag mode:
-    - Run `node scripts/release/release-tag.mjs --env prod`.
+    - Run `npm run release:prod`.
 
 Before running commands that switch branches, merge, push `main`, create tags, or push tags, clearly tell the user these are real Git changes.
 
@@ -198,10 +237,10 @@ After the command finishes, summarize:
 - Whether the branch was pushed. In local mode, also report whether the tag was pushed.
 - Any failure reason and the next action.
 
-For **`prod`** only in local mode, when tagging succeeded, also include the DevOps request line the user should send:
+For **`prod`** only in local mode, when tagging succeeded, also include the DevOps request line the user should send. Build it from the top-level `.gitlab-ci.yml` `variables.SERVICE_NAME` value and the actual tag:
 
 ```text
-official-website prod <actual-tag>
+<SERVICE_NAME> prod <actual-tag>
 ```
 
 So they can copy-paste it (same format as under **After prod local tag succeeds** in Prod Deployment).
@@ -209,5 +248,5 @@ So they can copy-paste it (same format as under **After prod local tag succeeds*
 For **`prod`** only in trigger mode, when the pipeline was triggered successfully, remind the user to wait for the pipeline-created tag and then send:
 
 ```text
-official-website prod <pipeline-created-tag>
+<SERVICE_NAME> prod <pipeline-created-tag>
 ```

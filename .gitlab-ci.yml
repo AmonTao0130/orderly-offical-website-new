@@ -10,17 +10,6 @@ variables:
   SERVICE_NAME: official-website
   IMAGE_NAME: official-website
 
-
-stages:
-  - release_tag # trigger-only
-  - check_tag
-  - scan
-  - build_docker
-  - post-build-audit 
-  - notify
-  - deploy
-
-
 build_docker:
   extends: .build_docker_base
   before_script:
@@ -35,30 +24,3 @@ auto_deploy_dev:
   extends: .auto_deploy_dev_base
   variables:
     DEPLOY_APP_URL: 'https://www.dev.orderly-i.network'
-
-
-# Trigger-only: create & push release tags via npm scripts.
-# Requires a masked GIT_TOKEN CI variable with permission to push tags to this repository.
-# Trigger API variables example:
-#   TRIGGER_PIPELINE_BRANCH=<branch> must equal ref (CI_COMMIT_REF_NAME)
-#   TRIGGER_PIPELINE_TAG_ENV=dev|prod         dev/prod -> node scripts/release/create-git-tag.mjs --env "$TRIGGER_PIPELINE_TAG_ENV" (prod only when TRIGGER_PIPELINE_BRANCH=main)
-release_tag:
-  stage: release_tag
-  image: node:22-alpine
-  variables:
-    GIT_DEPTH: "0"
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "trigger" && $TRIGGER_PIPELINE_BRANCH == $CI_COMMIT_REF_NAME && $TRIGGER_PIPELINE_TAG_ENV == "dev"'
-    - if: '$CI_PIPELINE_SOURCE == "trigger" && $TRIGGER_PIPELINE_BRANCH == $CI_COMMIT_REF_NAME && $TRIGGER_PIPELINE_TAG_ENV == "prod" && $TRIGGER_PIPELINE_BRANCH == "main"'
-  before_script:
-    - apk add --no-cache git
-    - test -n "$GIT_TOKEN"
-    - git remote set-url origin "https://oauth2:${GIT_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
-    - git fetch origin --tags --force
-    - git fetch origin "$TRIGGER_PIPELINE_BRANCH"
-    - git checkout -B "$TRIGGER_PIPELINE_BRANCH" "origin/$TRIGGER_PIPELINE_BRANCH"
-  script:
-    - test -n "$TRIGGER_PIPELINE_BRANCH"
-    - test "$TRIGGER_PIPELINE_BRANCH" = "$CI_COMMIT_REF_NAME"
-    - test "$TRIGGER_PIPELINE_TAG_ENV" = "dev" -o "$TRIGGER_PIPELINE_TAG_ENV" = "prod"
-    - node scripts/release/create-git-tag.mjs --env "$TRIGGER_PIPELINE_TAG_ENV"
