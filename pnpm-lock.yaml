@@ -196,8 +196,8 @@ importers:
         version: 1.1.2(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@orderly.network/release-tag':
-        specifier: 0.0.2-dev.0
-        version: 0.0.2-dev.0
+        specifier: 1.0.0
+        version: 1.0.0
       '@types/node':
         specifier: 25.3.3
         version: 25.3.3
@@ -704,8 +704,8 @@ packages:
     resolution: {integrity: sha512-cifvXDhcqMwwTlTK04GBNeIe7yyo28Mfby85QXFe1Yk8nmi36Ab/5UQwptOx84SsoGNRg+EVSjwzfSZMy6pmlw==}
     engines: {node: '>=14'}
 
-  '@orderly.network/release-tag@0.0.2-dev.0':
-    resolution: {integrity: sha512-pWxG3gM9Lb7jBGCxpAmTJgjYV7wVsDOEXbFEOXD3rMfiaC8RODHkhvrK1ESgxUzdQ3jY2jPoe0v7+ACN6xHF6g==}
+  '@orderly.network/release-tag@1.0.0':
+    resolution: {integrity: sha512-eRprRgtYfHYEFfmfmqLasZSkSnCZ7B2mDtuqNp0Od3OSIs9LpTotuVS85vvp7MqaOajRARe2woFgDk7bZDiLxQ==}
     hasBin: true
 
   '@popperjs/core@2.11.8':
@@ -2711,7 +2711,7 @@ snapshots:
 
   '@opentelemetry/semantic-conventions@1.40.0': {}
 
-  '@orderly.network/release-tag@0.0.2-dev.0': {}
+  '@orderly.network/release-tag@1.0.0': {}
 
   '@popperjs/core@2.11.8': {}
 
