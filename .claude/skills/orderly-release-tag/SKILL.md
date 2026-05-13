@@ -35,13 +35,13 @@ Do not require the user to set `RELEASE_TAG_ENV`; the wrapper passes the target 
 
 Both local mode and trigger mode validate that the local `HEAD` matches `origin/<branch>` before creating a tag or triggering GitLab. If the wrapper reports that local and remote SHAs differ, stop and tell the user to push or fast-forward pull the branch first. Do not bypass the wrapper by running the trigger script or tag script directly.
 
-4. Verify the project has the required release scripts by reading `package.json` only. Confirm all required keys exist:
+4. Verify the project has the release script for the target environment by reading `package.json` only. Confirm only the key for the selected deployment exists:
 
-   - `scripts["release:dev"]`
-   - `scripts["release:qa"]`
-   - `scripts["release:prod"]`
+   - For `dev`: `scripts["release:dev"]`
+   - For `qa`: `scripts["release:qa"]`
+   - For `prod`: `scripts["release:prod"]`
 
-Do not run `npm run release:dev`, `npm run release:qa`, or `npm run release:prod` as a configuration check. If any script is missing, stop and tell the user the release tag scripts are not configured.
+Do not run `npm run release:dev`, `npm run release:qa`, or `npm run release:prod` as a configuration check. If the selected environment's script is missing, stop and tell the user that this environment is currently not supported for deployment. Do not require unrelated environment scripts to exist; for example, a `dev` deployment only needs `scripts["release:dev"]`.
 
 5. Verify the project depends on the release tag CLI by reading `package.json` only. Confirm this key exists in either `dependencies` or `devDependencies`:
 
