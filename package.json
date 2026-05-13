@@ -7,8 +7,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "generate:skills": "node scripts/generate-skills-index.mjs",
-    "tag:dev": "node scripts/create-dev-tag.mjs",
-    "tag:prod": "node scripts/create-prod-tag.mjs",
+    "release:dev": "orderly-release-tag --env dev --project-id 52443474 --config release-tag.config.mjs",
+    "release:prod": "orderly-release-tag --env prod --project-id 52443474 --config release-tag.config.mjs",
     "start": "next start",
     "prepare": "husky"
   },
@@ -77,6 +77,7 @@
     "vaul": "1.1.2"
   },
   "devDependencies": {
+    "@orderly.network/release-tag": "^1.0.0",
     "@types/node": "25.3.3",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
