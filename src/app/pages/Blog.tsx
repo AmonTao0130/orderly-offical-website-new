@@ -156,13 +156,10 @@ function PostCard({ post, vp }: { post: BlogPost; vp: Viewport }) {
         background: "#111114",
         borderRadius: "16px",
         overflow: "hidden",
-        border: hovered
-          ? "1px solid rgba(103,0,206,0.5)"
-          : "1px solid rgba(255,255,255,0.07)",
+        border: "1px solid rgba(255,255,255,0.07)",
         textDecoration: "none",
-        transition: "border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease",
+        transition: "transform 0.25s ease",
         transform: hovered ? "translateY(-4px)" : "translateY(0)",
-        boxShadow: hovered ? "0 12px 40px rgba(103,0,206,0.2)" : "none",
         cursor: "pointer",
       }}
     >
@@ -565,15 +562,6 @@ function FeaturedCarousel({ posts, vp }: { posts: BlogPost[]; vp: Viewport }) {
                   }}
                 >
                   Read article
-                  <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-                    <path
-                      d="M2.5 11.5L11.5 2.5M7 2.5h4.5V7"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
                 </span>
                 <span
                   style={{

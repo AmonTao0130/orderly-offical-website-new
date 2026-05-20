@@ -1,5 +1,50 @@
 @custom-variant dark (&:is(.dark *));
 
+/* Launch Now CTA: hover inverts to purple bg / white text */
+.launch-now-btn {
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.launch-now-btn:hover {
+  background-color: #3f0086 !important;
+  color: white !important;
+}
+.launch-now-btn:hover .launch-now-label {
+  color: white !important;
+}
+
+/* Start Building CTA: hover inverts to white bg / purple text */
+.start-building-btn {
+  transition: background-color 0.15s ease;
+}
+.start-building-btn:hover {
+  background-color: white !important;
+}
+.start-building-btn:hover .start-building-label {
+  color: #3F0086 !important;
+}
+
+/* Talk to Us CTA: hover fills white bg / purple text */
+.talk-to-us-btn {
+  transition: background-color 0.15s ease;
+}
+.talk-to-us-btn:hover {
+  background-color: white !important;
+}
+.talk-to-us-btn:hover .talk-to-us-label {
+  color: #3f0086 !important;
+}
+
+/* Sign Up CTA: hover inverts to white bg / black text */
+.sign-up-btn {
+  transition: background-color 0.15s ease;
+}
+.sign-up-btn:hover {
+  background-color: white !important;
+}
+.sign-up-btn:hover .sign-up-label {
+  color: black !important;
+}
+
 html {
   overscroll-behavior-y: auto;
   overflow-x: hidden;

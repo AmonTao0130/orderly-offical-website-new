@@ -82,7 +82,7 @@ export function TabletNav({ onMenuClick, bannerOffset = 0, variant = "default" }
           href="https://dex.orderly.network/dex/"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-['Atyp_BL:Bold',sans-serif] text-[14px] text-[#3f0086] leading-none no-underline whitespace-nowrap rounded-[46px] bg-white px-[18px] py-[8px]"
+          className="launch-now-btn font-['Atyp_BL:Bold',sans-serif] text-[14px] text-[#3f0086] leading-none no-underline whitespace-nowrap rounded-[46px] bg-white px-[18px] py-[8px] hover:text-white"
           onClick={() => {
             posthog.capture("homepage_cta_clicked", {
               cta_name: "launch_now",
@@ -371,7 +371,7 @@ function TabletHero({ onPartnership }: { onPartnership: () => void }) {
               href="https://dex.orderly.network/"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#6700ce] flex h-[44px] items-center justify-center px-[20px] relative rounded-[24px] shrink-0 no-underline hover:opacity-90 transition-opacity"
+              className="bg-[#6700ce] flex h-[44px] items-center justify-center px-[20px] relative rounded-[24px] shrink-0 no-underline start-building-btn"
               onClick={() => {
                 posthog.capture("homepage_cta_clicked", {
                   cta_name: "start_building",
@@ -381,7 +381,7 @@ function TabletHero({ onPartnership }: { onPartnership: () => void }) {
               }}
             >
               <p
-                className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[12px] text-white"
+                className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[12px] text-white start-building-label"
                 style={{
                   fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
                   letterSpacing: "0.01em",
@@ -401,14 +401,14 @@ function TabletHero({ onPartnership }: { onPartnership: () => void }) {
                 });
                 onPartnership();
               }}
-              className="flex h-[44px] items-center justify-center pl-[20px] pr-[16px] relative rounded-[24px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
+              className="flex h-[44px] items-center justify-center pl-[20px] pr-[16px] relative rounded-[24px] shrink-0 bg-transparent border-0 cursor-pointer talk-to-us-btn"
             >
               <div
                 aria-hidden="true"
                 className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[24px]"
               />
               <p
-                className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[12px] text-white"
+                className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[12px] text-white talk-to-us-label"
                 style={{
                   fontFeatureSettings:
                     "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
@@ -954,7 +954,7 @@ function TabletCTASection({ onPartnership }: { onPartnership: () => void }) {
           href="https://dex.orderly.network/"
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-[#6700ce] flex h-[44px] items-center justify-center px-[24px] relative rounded-[24px] no-underline hover:opacity-90 transition-opacity"
+          className="bg-[#6700ce] flex h-[44px] items-center justify-center px-[24px] relative rounded-[24px] no-underline start-building-btn"
           onClick={() => {
             posthog.capture("homepage_cta_clicked", {
               cta_name: "start_building",
@@ -964,7 +964,7 @@ function TabletCTASection({ onPartnership }: { onPartnership: () => void }) {
           }}
         >
           <p
-            className="font-['Atyp_BL:Bold',sans-serif] text-[14px] text-white leading-none"
+            className="font-['Atyp_BL:Bold',sans-serif] text-[14px] text-white leading-none start-building-label"
             style={{
               fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
             }}
@@ -981,14 +981,14 @@ function TabletCTASection({ onPartnership }: { onPartnership: () => void }) {
             });
             onPartnership();
           }}
-          className="flex h-[44px] items-center justify-center pl-[20px] pr-[16px] relative rounded-[24px] hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
+          className="flex h-[44px] items-center justify-center pl-[20px] pr-[16px] relative rounded-[24px] bg-transparent border-0 cursor-pointer talk-to-us-btn"
         >
           <div
             aria-hidden
             className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[24px]"
           />
           <p
-            className="font-['Atyp_BL:Bold',sans-serif] text-[14px] text-white leading-none"
+            className="font-['Atyp_BL:Bold',sans-serif] text-[14px] text-white leading-none talk-to-us-label"
             style={{
               fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
             }}
@@ -1057,10 +1057,10 @@ function TabletNewsletterSection() {
           </div>
           <button
             onClick={handleSubmit}
-            className="h-full px-[20px] bg-black border-0 cursor-pointer hover:opacity-80 transition-opacity rounded-[12px] shrink-0"
+            className="h-full px-[20px] bg-black border-0 cursor-pointer rounded-r-[12px] shrink-0 sign-up-btn"
           >
             <p
-              className="font-['Atyp_BL:Bold',sans-serif] text-[14px] text-white leading-none flex items-center justify-center"
+              className="font-['Atyp_BL:Bold',sans-serif] text-[14px] text-white leading-none flex items-center justify-center sign-up-label"
               style={{ fontFeatureSettings: "'liga' 0" }}
             >
               {isSubmitted ? (

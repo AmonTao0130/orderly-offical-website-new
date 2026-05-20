@@ -164,11 +164,11 @@ function HeroButtonsContainer() {
       data-name="Hero Buttons Container"
     >
       <div
-        className="bg-[#6700ce] content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer hover:opacity-90 transition-opacity"
+        className="bg-[#6700ce] content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer start-building-btn"
         data-name="build with orderly"
       >
         <p
-          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap start-building-label"
           style={{
             fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
           }}
@@ -177,7 +177,7 @@ function HeroButtonsContainer() {
         </p>
       </div>
       <div
-        className="content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer hover:bg-white/10 transition-colors"
+        className="content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer talk-to-us-btn"
         data-name="Talk to Us"
       >
         <div
@@ -185,7 +185,7 @@ function HeroButtonsContainer() {
           className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[24px]"
         />
         <p
-          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap talk-to-us-label"
           style={{
             fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
           }}
@@ -3806,11 +3806,11 @@ function Frame14() {
   return (
     <div className="content-stretch flex gap-[17px] items-start justify-center relative shrink-0 w-full">
       <div
-        className="bg-[#6700ce] content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer hover:opacity-90 transition-opacity"
+        className="bg-[#6700ce] content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer start-building-btn"
         data-name="build with orderly"
       >
         <p
-          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap start-building-label"
           style={{
             fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
           }}
@@ -3819,7 +3819,7 @@ function Frame14() {
         </p>
       </div>
       <div
-        className="content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer hover:bg-white/10 transition-colors"
+        className="content-stretch flex items-center justify-center px-[20px] py-[12px] relative rounded-[24px] shrink-0 cursor-pointer talk-to-us-btn"
         data-name="Talk to Us"
       >
         <div
@@ -3827,7 +3827,7 @@ function Frame14() {
           className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[24px]"
         />
         <p
-          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap"
+          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[14px] text-white tracking-[0.14px] whitespace-nowrap talk-to-us-label"
           style={{
             fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
           }}
@@ -3926,7 +3926,7 @@ function Frame12() {
       <Frame44 />
       <button
         onClick={handleCopy}
-        className="bg-black relative rounded-[24px] shrink-0 w-full border-0 cursor-pointer hover:opacity-80 transition-opacity"
+        className="group bg-black relative rounded-[24px] shrink-0 w-full border-0 cursor-pointer hover:bg-white transition-colors duration-200"
         data-name="ai-copy"
         style={{ padding: 0 }}
       >
@@ -3939,7 +3939,7 @@ function Frame12() {
               <CheckSvg />
             ) : (
               <p
-                className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[16px] text-white tracking-[0.16px] whitespace-nowrap"
+                className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[16px] text-white group-hover:text-black tracking-[0.16px] whitespace-nowrap transition-colors duration-200"
                 style={{ fontFeatureSettings: "'liga' 0" }}
               >
                 Copy
@@ -4036,7 +4036,7 @@ function Frame13() {
       {/* Sign Up button */}
       <button
         onClick={(e) => handleSubmit(e)}
-        className="bg-black relative rounded-[24px] shrink-0 w-full border-0 cursor-pointer hover:opacity-80 transition-opacity"
+        className="bg-black relative rounded-[24px] shrink-0 w-full border-0 cursor-pointer sign-up-btn"
         data-name="newsletter-signup"
         style={{ padding: 0 }}
       >
@@ -4049,7 +4049,7 @@ function Frame13() {
               <CheckSvg />
             ) : (
               <p
-                className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[16px] text-white tracking-[0.16px] whitespace-nowrap"
+                className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[16px] text-white tracking-[0.16px] whitespace-nowrap sign-up-label"
                 style={{ fontFeatureSettings: "'liga' 0" }}
               >
                 Sign Up
@@ -4144,11 +4144,11 @@ function Logo() {
 function Component1() {
   return (
     <div
-      className="bg-white col-1 content-stretch flex gap-[6px] items-center ml-0 mt-0 p-[12px] relative rounded-[63px] row-1 cursor-pointer hover:opacity-80 transition-opacity"
+      className="group bg-white col-1 content-stretch flex gap-[6px] items-center ml-0 mt-0 p-[12px] relative rounded-[63px] row-1 cursor-pointer hover:bg-[#6700ce] ring-2 ring-transparent hover:ring-white transition-all duration-200"
       data-name="buy-order"
     >
       <div
-        className="flex flex-col font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] justify-center leading-[0] relative shrink-0 text-[14px] text-black tracking-[0.14px] whitespace-nowrap"
+        className="flex flex-col font-['Atyp_BL:Display_-_SemiBold',sans-serif] font-[612] justify-center leading-[0] relative shrink-0 text-[14px] text-black group-hover:text-white tracking-[0.14px] whitespace-nowrap transition-colors duration-200"
         style={{
           fontVariationSettings: "'ital' 0, 'opsz' 72",
           fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'",
@@ -4156,7 +4156,7 @@ function Component1() {
       >
         <p className="leading-[0.753]">Buy ORDER</p>
       </div>
-      <div className="flex items-center justify-center relative shrink-0">
+      <div className="flex items-center justify-center relative shrink-0 text-black group-hover:text-white transition-colors duration-200">
         <div className="flex-none rotate-180">
           <div className="relative size-[14.667px]" data-name="Icon">
             <div className="absolute inset-[-8.52%]">
@@ -4169,7 +4169,7 @@ function Component1() {
                 <path
                   d={svgPaths.p30a87c0}
                   id="Icon"
-                  stroke="var(--stroke-0, black)"
+                  stroke="currentColor"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2.5"

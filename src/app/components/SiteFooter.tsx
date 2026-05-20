@@ -200,22 +200,21 @@ function formatUsd(usd: number): string {
 function BuyOrderButton({ onClick }: { onClick?: () => void }) {
   return (
     <div
-      className="bg-white col-1 content-stretch flex gap-[6px] items-center ml-0 mt-0 p-[12px] relative rounded-[63px] row-1 cursor-pointer hover:opacity-80 transition-opacity"
-      style={{ willChange: "opacity" }}
+      className="group bg-white col-1 content-stretch flex gap-[6px] items-center ml-0 mt-0 p-[12px] relative rounded-[63px] row-1 cursor-pointer hover:bg-[#6700ce] ring-2 ring-transparent hover:ring-white transition-all duration-200"
       onClick={onClick}
     >
       <div
-        className="flex flex-col font-['Atyp_BL:Semibold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-black tracking-[0.14px] whitespace-nowrap"
+        className="flex flex-col font-['Atyp_BL:Semibold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-black group-hover:text-white tracking-[0.14px] whitespace-nowrap transition-colors duration-200"
         style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
       >
         <p className="leading-[0.753]">Buy ORDER</p>
       </div>
-      <div className="flex items-center justify-center relative shrink-0">
+      <div className="flex items-center justify-center relative shrink-0 text-black group-hover:text-white transition-colors duration-200">
         <div className="flex-none rotate-180">
           <div className="relative size-[14.667px]">
             <div className="absolute inset-[-8.52%]">
               <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 17.1667 17.1667">
-                <path d={SVG.buyArrow} stroke="var(--stroke-0, black)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" />
+                <path d={SVG.buyArrow} stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" />
               </svg>
             </div>
           </div>

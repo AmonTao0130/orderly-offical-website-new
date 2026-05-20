@@ -1497,7 +1497,7 @@ function HeaderMenu() {
         href={HEADER_CTA.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="content-stretch flex h-[40px] items-center justify-center px-[20px] py-[12px] relative rounded-[46px] shrink-0 no-underline hover:opacity-90 transition-opacity"
+        className="launch-now-btn content-stretch flex h-[40px] items-center justify-center px-[20px] py-[12px] relative rounded-[46px] shrink-0 no-underline transition-opacity"
         data-name="Button"
         onClick={() => {
           posthog.capture("homepage_cta_clicked", {
@@ -1506,13 +1506,10 @@ function HeaderMenu() {
             device_layout: "desktop",
           });
         }}
-        style={{
-          backgroundImage:
-            "linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%), linear-gradient(-89.1975deg, rgb(72, 189, 255) 0%, rgb(120, 108, 255) 47.763%, rgb(189, 0, 255) 99.638%)",
-        }}
+        style={{ background: "white" }}
       >
         <p
-          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[#3f0086] text-[16px] tracking-[0.16px]"
+          className="launch-now-label font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[#3f0086] text-[16px] tracking-[0.16px]"
           style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05'" }}
         >
           {HEADER_CTA.label}
@@ -1677,7 +1674,7 @@ function HeroButtonsContainer({
         href="https://dex.orderly.network/"
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-[#6700ce] content-stretch flex h-[69px] items-center justify-center px-[32px] py-[16px] relative rounded-[32px] shrink-0 no-underline hover:opacity-90 transition-opacity"
+        className="bg-[#6700ce] content-stretch flex h-[69px] items-center justify-center px-[32px] py-[16px] relative rounded-[32px] shrink-0 no-underline start-building-btn"
         data-name="build with orderly"
         onClick={() => {
           posthog.capture("homepage_cta_clicked", {
@@ -1688,7 +1685,7 @@ function HeroButtonsContainer({
         }}
       >
         <p
-          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[21px] text-white"
+          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[21px] text-white start-building-label"
           style={{
             fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
             letterSpacing: "0.01em",
@@ -1707,7 +1704,7 @@ function HeroButtonsContainer({
           });
           onOpenPartnershipModal();
         }}
-        className="content-stretch flex h-[69px] items-center justify-center pl-[32px] pr-[27px] py-[16px] relative rounded-[32px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
+        className="content-stretch flex h-[69px] items-center justify-center pl-[32px] pr-[27px] py-[16px] relative rounded-[32px] shrink-0 bg-transparent border-0 cursor-pointer talk-to-us-btn"
         data-name="Talk to Us"
       >
         <div
@@ -1715,7 +1712,7 @@ function HeroButtonsContainer({
           className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[32px]"
         />
         <p
-          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[21px] text-white tracking-[0.21px]"
+          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[21px] text-white tracking-[0.21px] talk-to-us-label"
           style={{
             fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
           }}
@@ -2929,8 +2926,7 @@ function Frame4() {
       href="https://dex.orderly.network/"
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-[#6700ce] content-stretch flex h-[69px] items-center justify-center px-[32px] py-[16px] relative rounded-[32px] shrink-0 no-underline hover:opacity-90 transition-opacity"
-      style={{ willChange: "opacity" }}
+      className="bg-[#6700ce] content-stretch flex h-[69px] items-center justify-center px-[32px] py-[16px] relative rounded-[32px] shrink-0 no-underline start-building-btn"
       data-name="build with orderly"
       onClick={() => {
         posthog.capture("homepage_cta_clicked", {
@@ -2941,7 +2937,7 @@ function Frame4() {
       }}
     >
       <p
-        className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[21px] text-white"
+        className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[21px] text-white start-building-label"
         style={{
           fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
           letterSpacing: "0.01em",
@@ -2969,8 +2965,7 @@ function Frame5({
         });
         onOpenPartnershipModal();
       }}
-      className="content-stretch flex h-[69px] items-center justify-center pl-[32px] pr-[27px] py-[16px] relative rounded-[32px] shrink-0 hover:bg-white/10 transition-colors bg-transparent border-0 cursor-pointer"
-      style={{ willChange: "background-color" }}
+      className="content-stretch flex h-[69px] items-center justify-center pl-[32px] pr-[27px] py-[16px] relative rounded-[32px] shrink-0 bg-transparent border-0 cursor-pointer talk-to-us-btn"
       data-name="Talk to Us"
     >
       <div
@@ -2978,7 +2973,7 @@ function Frame5({
         className="absolute border border-solid border-white inset-0 pointer-events-none rounded-[32px]"
       />
       <p
-        className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[21px] text-white tracking-[0.21px]"
+        className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[21px] text-white tracking-[0.21px] talk-to-us-label"
         style={{
           fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06', 'liga' 0",
         }}
@@ -3079,18 +3074,17 @@ function Logo() {
 function Component1({ onClick }: { onClick?: () => void }) {
   return (
     <div
-      className="bg-white col-1 content-stretch flex gap-[6px] items-center ml-0 mt-0 p-[12px] relative rounded-[63px] row-1 cursor-pointer hover:opacity-80 transition-opacity"
-      style={{ willChange: "opacity" }}
+      className="group bg-white col-1 content-stretch flex gap-[6px] items-center ml-0 mt-0 p-[12px] relative rounded-[63px] row-1 cursor-pointer hover:bg-[#6700ce] ring-2 ring-transparent hover:ring-white transition-all duration-200"
       data-name
       onClick={onClick}
     >
       <div
-        className="flex flex-col font-['Atyp_BL:Semibold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-black tracking-[0.14px] whitespace-nowrap"
+        className="flex flex-col font-['Atyp_BL:Semibold',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[14px] text-black group-hover:text-white tracking-[0.14px] whitespace-nowrap transition-colors duration-200"
         style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05', 'ss06'" }}
       >
         <p className="leading-[0.753]">Buy ORDER</p>
       </div>
-      <div className="flex items-center justify-center relative shrink-0">
+      <div className="flex items-center justify-center relative shrink-0 text-black group-hover:text-white transition-colors duration-200">
         <div className="flex-none rotate-180">
           <div className="relative size-[14.667px]" data-name="Icon">
             <div className="absolute inset-[-8.52%]">
@@ -3103,7 +3097,7 @@ function Component1({ onClick }: { onClick?: () => void }) {
                 <path
                   d={svgPaths.p30a87c0}
                   id="Icon"
-                  stroke="var(--stroke-0, black)"
+                  stroke="currentColor"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2.5"
@@ -3552,12 +3546,11 @@ function Group9() {
       </div>
       <button
         onClick={handleSubmit}
-        className="h-full px-[28px] bg-black border-0 cursor-pointer hover:opacity-80 transition-opacity rounded-[14px] shrink-0"
-        style={{ willChange: "opacity" }}
+        className="h-full px-[28px] bg-black border-0 cursor-pointer rounded-r-[14px] shrink-0 sign-up-btn"
         data-name="Newsletter Button Container"
       >
         <p
-          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic text-[18px] text-white tracking-[0.2px] flex items-center justify-center"
+          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic text-[18px] text-white tracking-[0.2px] flex items-center justify-center sign-up-label"
           style={{ fontFeatureSettings: "'liga' 0" }}
         >
           {isSubmitted ? <CheckSvg /> : "Sign Up"}
@@ -3793,7 +3786,7 @@ function AIAgentCard({
         <button
           onClick={handleCopy}
           title={copied ? "Copied!" : "Copy to clipboard"}
-          className={`bg-black text-white font-['Atyp_BL:Bold',sans-serif] cursor-pointer transition-all hover:bg-[#1a1a1a] ${
+          className={`bg-black text-white font-['Atyp_BL:Bold',sans-serif] cursor-pointer transition-all duration-200 hover:bg-white hover:text-black ${
             compact
               ? "px-[14px] py-[10px] text-[12px]"
               : "px-[20px] py-[14px] text-[14px]"

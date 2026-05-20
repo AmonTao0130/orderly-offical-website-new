@@ -272,6 +272,9 @@ function InvestorBadge({ name, img, vp, scale = 1 }: { name: string; img: string
         alignItems: "center",
         justifyContent: "center",
         padding: isMobile ? "8px 12px" : "10px 16px",
+        width: isMobile ? "100%" : "auto",
+        boxSizing: "border-box",
+        minHeight: isMobile ? "52px" : "auto",
       }}
     >
       <img
@@ -296,6 +299,19 @@ export default function Team() {
   const isMobile = vp === "mobile";
   const isTablet = vp === "tablet";
   const [navOpen, setNavOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1440);
+  useEffect(() => {
+    const onResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  // Tablet: 4 badges × (170px image + 32px padding) + 3 × 12px gap ≈ 844px natural width
+  // Scale down the grid when available width (viewport - 2×32px padding) is less than that
+  const TABLET_GRID_NATURAL_W = 844;
+  const TABLET_GRID_NATURAL_H = 132; // 2 rows × 60px badge + 12px gap
+  const tabletAvailable = windowWidth - 64;
+  const tabletScale = isTablet ? Math.min(1, tabletAvailable / TABLET_GRID_NATURAL_W) : 1;
 
   const px = isMobile ? "20px" : isTablet ? "32px" : "24px";
   const maxW = "900px";
@@ -520,26 +536,48 @@ export default function Team() {
           </p>
         </div>
 
-        {/* Investors grid — 2 rows */}
+        {/* Investors grid */}
         <motion.div
           variants={staggerGrid}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-40px" }}
-          style={{ display: "flex", flexDirection: "column", gap: isMobile ? "8px" : "12px", alignItems: "center" }}
+          style={
+            isMobile
+              ? { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", width: "100%" }
+              : { display: "flex", flexDirection: "column", gap: "12px", alignItems: "center" }
+          }
         >
-          {/* Row 1: first 4 */}
-          <div style={{ display: "flex", gap: isMobile ? "8px" : "12px", justifyContent: "center" }}>
-            {INVESTORS.slice(0, 4).map(({ name, img, scale }) => (
+          {isMobile ? (
+            INVESTORS.map(({ name, img, scale }) => (
               <InvestorBadge key={name} name={name} img={img} vp={vp} scale={scale} />
-            ))}
-          </div>
-          {/* Row 2: remaining 3 */}
-          <div style={{ display: "flex", gap: isMobile ? "8px" : "12px", justifyContent: "center" }}>
-            {INVESTORS.slice(4).map(({ name, img, scale }) => (
-              <InvestorBadge key={name} name={name} img={img} vp={vp} scale={scale} />
-            ))}
-          </div>
+            ))
+          ) : (
+            <div
+              style={{
+                transform: isTablet ? `scale(${tabletScale})` : undefined,
+                transformOrigin: "center top",
+                marginBottom: isTablet ? `${(tabletScale - 1) * TABLET_GRID_NATURAL_H}px` : undefined,
+                display: "flex",
+                flexDirection: "column",
+                gap: "12px",
+                alignItems: "center",
+              }}
+            >
+              {/* Row 1: first 4 */}
+              <div style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
+                {INVESTORS.slice(0, 4).map(({ name, img, scale }) => (
+                  <InvestorBadge key={name} name={name} img={img} vp={vp} scale={scale} />
+                ))}
+              </div>
+              {/* Row 2: remaining 4 */}
+              <div style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
+                {INVESTORS.slice(4).map(({ name, img, scale }) => (
+                  <InvestorBadge key={name} name={name} img={img} vp={vp} scale={scale} />
+                ))}
+              </div>
+            </div>
+          )}
         </motion.div>
         <p
           style={{

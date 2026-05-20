@@ -484,7 +484,7 @@ function MobileNavDrawer({
           href={HEADER_CTA.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center rounded-[46px] py-[16px] no-underline"
+          className="launch-now-btn flex items-center justify-center rounded-[46px] py-[16px] no-underline"
           style={{ background: "white", minHeight: 52 }}
           onClick={() => {
             posthog.capture("homepage_cta_clicked", {
@@ -497,6 +497,7 @@ function MobileNavDrawer({
           }}
         >
           <span
+            className="launch-now-label"
             style={{
               color: "#3f0086",
               fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
@@ -700,10 +701,11 @@ function SignUpModal({ onClose }: { onClose: () => void }) {
               onClick={() => {
                 if (email.includes("@")) subscribe(email);
               }}
-              className="w-full rounded-[24px] py-[14px] border-0 cursor-pointer hover:opacity-90 transition-opacity"
+              className="w-full rounded-[24px] py-[14px] border-0 cursor-pointer sign-up-btn"
               style={{ background: "black" }}
             >
               <span
+                className="sign-up-label"
                 style={{
                   color: "white",
                   fontSize: "16px",

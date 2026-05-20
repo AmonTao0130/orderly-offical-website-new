@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { MorphingHeader, SiteFooter } from "../../imports/DesktopHomePage";
 import { MobileNavDrawer } from "../components/MobileHomePage";
@@ -110,31 +110,37 @@ const BENEFITS = [
     label: "Revenue",
     title: "Direct market economics",
     body: "Earn 50% fee revenue + 100% liquidation from the volume your listed markets generate.",
+    img: "/images/listing page/card1.png",
   },
   {
     label: "Speed",
     title: "Launch without listing bottlenecks",
     body: "List any token with a valid price feed, without waiting in a centralized manual review queue.",
+    img: "/images/listing page/card2.png?v=2",
   },
   {
     label: "Control",
     title: "Full market configuration control",
     body: "Set market parameters, choose index pricing sources, and manage market maker account setup.",
+    img: "/images/listing page/card3.png",
   },
   {
     label: "Coverage",
     title: "Long-tail + selected RWA support",
     body: "Support differentiated markets with session-aware configuration and custom pricing sources.",
+    img: "/images/listing page/card4.png",
   },
   {
     label: "Scale",
     title: "Scaleable listing",
     body: "Launch multiple markets in parallel as long as price feeds are available.",
+    img: "/images/listing page/card5.png",
   },
   {
     label: "Risk Isolation",
     title: "Builder-level market isolation",
     body: "Dedicated per-builder Insurance Fund and Isolated Margin for Community Listed markets help contain risk by market.",
+    img: "/images/listing page/card6.png",
   },
 ];
 
@@ -324,13 +330,71 @@ function AccordionItem({ item, vp }: { item: FAQItem; vp: Viewport }) {
   );
 }
 
+// ── Scroll arrow button ────────────────────────────────────────────────────────
+// Same circle+arrow-with-bar design as the homepage ArrowLeftCircle component.
+// Right arrow is achieved by rotating the left-arrow SVG 180°.
+const ARROW_CIRCLE_PATH = "M22.0013 40.3307C32.1265 40.3307 40.3346 32.1226 40.3346 21.9974C40.3346 11.8722 32.1265 3.66406 22.0013 3.66406C11.8761 3.66406 3.66797 11.8722 3.66797 21.9974C3.66797 32.1226 11.8761 40.3307 22.0013 40.3307Z";
+const ARROW_ICON_PATH = "M21.6673 14.6641L14.334 21.9974M14.334 21.9974L21.6673 29.3307M14.334 21.9974H29.0007";
+
+function BenefitScrollArrow({
+  direction,
+  enabled,
+  onClick,
+  size = 44,
+}: {
+  direction: "left" | "right";
+  enabled: boolean;
+  onClick: () => void;
+  size?: number;
+}) {
+  const fillColor = enabled ? "#3F0086" : "#1E2026";
+  const strokeColor = enabled ? "white" : "#2B2F36";
+  return (
+    <button
+      onClick={onClick}
+      disabled={!enabled}
+      style={{
+        width: size,
+        height: size,
+        background: "transparent",
+        border: 0,
+        padding: 0,
+        cursor: enabled ? "pointer" : "default",
+        flexShrink: 0,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        transition: "opacity 0.2s",
+      }}
+      aria-label={direction === "left" ? "Scroll left" : "Scroll right"}
+    >
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 44 44"
+        fill="none"
+        style={direction === "right" ? { transform: "rotate(180deg)" } : undefined}
+      >
+        <path d={ARROW_CIRCLE_PATH} fill={fillColor} />
+        <path
+          d={ARROW_ICON_PATH}
+          stroke={strokeColor}
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </button>
+  );
+}
+
 // ── CTA buttons ────────────────────────────────────────────────────────────────
 function CTAButtons({ isMobile, primaryColor = "#6700ce" }: { isMobile: boolean; primaryColor?: string }) {
   return (
     <div
       style={{
         display: "flex",
-        flexDirection: isMobile ? "column" : "row",
+        flexDirection: "row",
         gap: isMobile ? "10px" : "12px",
         width: isMobile ? "100%" : "auto",
         justifyContent: "center",
@@ -354,16 +418,13 @@ function CTAButtons({ isMobile, primaryColor = "#6700ce" }: { isMobile: boolean;
           fontVariationSettings: "'wght' 600",
           fontSize: "15px",
           letterSpacing: "0.02em",
-          width: isMobile ? "100%" : "auto",
+          width: "auto",
           transition: "opacity 0.2s",
         }}
         onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
         onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
       >
         Launch your market
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M2.5 11.5L11.5 2.5M7 2.5h4.5V7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
       </a>
       <a
         href="https://orderly.network/docs/introduction/trade-on-orderly/permissionless-listing"
@@ -383,7 +444,7 @@ function CTAButtons({ isMobile, primaryColor = "#6700ce" }: { isMobile: boolean;
           fontVariationSettings: "'wght' 600",
           fontSize: "15px",
           letterSpacing: "0.02em",
-          width: isMobile ? "100%" : "auto",
+          width: "auto",
         }}
         onMouseEnter={(e) => (e.currentTarget.style.borderColor = "white")}
         onMouseLeave={(e) => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)")}
@@ -401,8 +462,31 @@ export default function Listing() {
   const isTablet = vp === "tablet";
   const [navOpen, setNavOpen] = useState(false);
 
-  const px = isMobile ? "20px" : isTablet ? "32px" : "24px";
   const maxW = "1100px";
+
+  // Benefits carousel scroll state
+  const benefitsScrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const checkBenefitsScroll = useCallback(() => {
+    if (!benefitsScrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = benefitsScrollRef.current;
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+  }, []);
+  useEffect(() => { checkBenefitsScroll(); }, [checkBenefitsScroll]);
+
+  const cardW = isMobile ? 240 : isTablet ? 272 : 360;
+  const cardMinH = isMobile ? 300 : isTablet ? 400 : 500;
+  const cardPad = isMobile ? "22px 20px" : isTablet ? "26px 24px" : "36px";
+  const cardRadius = isMobile ? 15 : isTablet ? 18.143 : 26;
+  const cardGap = isMobile ? 10 : 14;
+  const benefitTitleSize = isMobile ? "15px" : isTablet ? "18px" : "24px";
+  const benefitBodySize = isMobile ? "13px" : isTablet ? "15px" : "16px";
+  const scrollStep = isMobile ? 257 : isTablet ? 286 : 377;
+  const cardImgH = isMobile ? 110 : isTablet ? 140 : 190;
+  const cardImgOffsetRight = isMobile ? 22 : isTablet ? 24 : 36;
+  const cardImgOffsetBottom = isMobile ? 20 : isTablet ? 22 : 32;
 
   return (
     <div
@@ -426,7 +510,32 @@ export default function Listing() {
       )}
 
       {/* ══ HERO ═══════════════════════════════════════════════════════════════ */}
-      <motion.div variants={heroContainer} initial="hidden" animate="visible">
+      <div style={{ position: "relative", width: "100%", overflow: "visible" }}>
+        <img
+          src="/images/listing page/left.png"
+          alt=""
+          style={{
+            position: "absolute",
+            left: isMobile ? "0px" : isTablet ? "calc(48px + (100vw - 1024px) * 0.08)" : "calc(140px + (100vw - 1440px) * 0.275)",
+            top: isMobile ? "30px" : isTablet ? "80px" : "70px",
+            width: isMobile ? "clamp(54px,15vw,72px)" : isTablet ? "clamp(96px,16vw,160px)" : "clamp(144px,15.84vw,228px)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+        <img
+          src="/images/listing page/right.png"
+          alt=""
+          style={{
+            position: "absolute",
+            right: isMobile ? "0px" : isTablet ? "calc(38px + (100vw - 1024px) * 0.08)" : "calc(130px + (100vw - 1440px) * 0.275)",
+            top: isMobile ? "30px" : isTablet ? "80px" : "70px",
+            width: isMobile ? "clamp(54px,15vw,72px)" : isTablet ? "clamp(96px,16vw,160px)" : "clamp(144px,15.84vw,228px)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+        <motion.div variants={heroContainer} initial="hidden" animate="visible" style={{ position: "relative", zIndex: 1 }}>
         <div
           style={{
             maxWidth: maxW,
@@ -439,33 +548,13 @@ export default function Listing() {
             gap: isMobile ? "20px" : "24px",
           }}
         >
-          {/* Eyebrow */}
-          <motion.div variants={heroChild}>
-            <span
-              style={{
-                display: "inline-block",
-                background: "#6700ce",
-                borderRadius: "100px",
-                padding: "6px 14px",
-                ...FONT,
-                fontVariationSettings: "'wght' 600",
-                fontSize: "12px",
-                color: "white",
-                letterSpacing: "0.06em",
-                textTransform: "uppercase",
-              }}
-            >
-              Permissionless Listing
-            </span>
-          </motion.div>
-
           {/* H1 */}
           <motion.h1
             variants={heroChild}
             style={{
               ...FONT,
               fontVariationSettings: "'wght' 700",
-              fontSize: isMobile ? "32px" : "60px",
+              fontSize: isMobile ? "32px" : isTablet ? "36px" : "60px",
               color: "white",
               letterSpacing: "0.01em",
               lineHeight: 1.08,
@@ -473,7 +562,7 @@ export default function Listing() {
               maxWidth: "820px",
             }}
           >
-            Permissionless listing for perpetual markets.
+            Permissionless Listing for Perpetual Markets
           </motion.h1>
 
           {/* Body */}
@@ -488,6 +577,7 @@ export default function Listing() {
               maxWidth: "580px",
               margin: 0,
               letterSpacing: "0.02em",
+              padding: isMobile ? "0 24px" : "0",
             }}
           >
             If it has a price feed, it can be traded. Launch and operate markets on Orderly's matching and liquidation infrastructure without waiting for centralized approval processes.
@@ -530,9 +620,10 @@ export default function Listing() {
             <CTAButtons isMobile={isMobile} />
           </motion.div>
         </div>
-      </motion.div>
+        </motion.div>
+      </div>
 
-      {/* ══ BENEFITS GRID ═══════════════════════════════════════════════════════ */}
+      {/* ══ BENEFITS CAROUSEL ══════════════════════════════════════════════════ */}
       <motion.div
         variants={revealOnScroll}
         initial="hidden"
@@ -546,76 +637,135 @@ export default function Listing() {
             padding: isMobile ? "0 20px 80px" : isTablet ? "0 32px 96px" : "0 24px 120px",
           }}
         >
-          <motion.div
-            variants={gridContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-40px" }}
+          {/* Section header */}
+          <div
             style={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr 1fr" : "repeat(3, 1fr)",
-              gap: isMobile ? "12px" : "14px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: isMobile ? "20px" : "28px",
             }}
           >
-            {BENEFITS.map((b, i) => (
-              <motion.div
-                key={i}
-                variants={gridChild}
-                style={{
-                  background: i % 2 === 0 ? "#3f0086" : "#6700ce",
-                  borderRadius: "24px",
-                  padding: isMobile ? "24px" : "28px 32px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "14px",
-                }}
-              >
-                <span
+            <h2
+              style={{
+                ...FONT,
+                fontVariationSettings: "'wght' 700",
+                fontSize: isMobile ? "26px" : isTablet ? "28px" : "40px",
+                color: "white",
+                margin: 0,
+                letterSpacing: "0.01em",
+                lineHeight: 1.1,
+              }}
+            >
+              Why list on Orderly?
+            </h2>
+            <div style={{ display: "flex", gap: "8px", flexShrink: 0 }}>
+              <BenefitScrollArrow
+                direction="left"
+                enabled={canScrollLeft}
+                size={isMobile ? 32 : 44}
+                onClick={() =>
+                  benefitsScrollRef.current?.scrollBy({ left: -scrollStep, behavior: "smooth" })
+                }
+              />
+              <BenefitScrollArrow
+                direction="right"
+                enabled={canScrollRight}
+                size={isMobile ? 32 : 44}
+                onClick={() =>
+                  benefitsScrollRef.current?.scrollBy({ left: scrollStep, behavior: "smooth" })
+                }
+              />
+            </div>
+          </div>
+
+          {/* Scrollable carousel */}
+          <div
+            ref={benefitsScrollRef}
+            onScroll={checkBenefitsScroll}
+            style={{
+              overflowX: "auto",
+              overflowY: "visible",
+              scrollbarWidth: "none",
+              WebkitOverflowScrolling: "touch",
+            } as React.CSSProperties}
+          >
+            <motion.div
+              variants={gridContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-40px" }}
+              style={{
+                display: "flex",
+                gap: `${cardGap}px`,
+                paddingBottom: "4px",
+              }}
+            >
+              {BENEFITS.map((b, i) => (
+                <motion.div
+                  key={i}
+                  variants={gridChild}
                   style={{
-                    display: "inline-block",
-                    alignSelf: "flex-start",
-                    background: "rgba(255,255,255,0.15)",
-                    borderRadius: "100px",
-                    padding: "4px 12px",
-                    ...FONT,
-                    fontVariationSettings: "'wght' 600",
-                    fontSize: "11px",
-                    color: "rgba(255,255,255,0.85)",
-                    letterSpacing: "0.06em",
-                    textTransform: "uppercase",
+                    background: i % 2 === 0 ? "#3f0086" : "#6700ce",
+                    borderRadius: `${cardRadius}px`,
+                    padding: cardPad,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: isMobile ? "12px" : isTablet ? "12.096px" : "16px",
+                    width: `${cardW}px`,
+                    minHeight: `${cardMinH}px`,
+                    flexShrink: 0,
+                    overflow: "hidden",
+                    position: "relative",
+                    boxSizing: "border-box",
                   }}
                 >
-                  {b.label}
-                </span>
-                <p
-                  style={{
-                    ...FONT,
-                    fontVariationSettings: "'wght' 600",
-                    fontSize: isMobile ? "17px" : "18px",
-                    color: "white",
-                    margin: 0,
-                    lineHeight: 1.35,
-                    letterSpacing: "0.01em",
-                  }}
-                >
-                  {b.title}
-                </p>
-                <p
-                  style={{
-                    ...FONT,
-                    fontVariationSettings: "'wght' 400",
-                    fontSize: "14px",
-                    color: "rgba(255,255,255,0.8)",
-                    margin: 0,
-                    lineHeight: 1.6,
-                    letterSpacing: "0.02em",
-                  }}
-                >
-                  {b.body}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
+                  <p
+                    style={{
+                      ...FONT,
+                      fontVariationSettings: "'wght' 600",
+                      fontSize: benefitTitleSize,
+                      color: "white",
+                      margin: 0,
+                      lineHeight: 1.2,
+                      letterSpacing: "0.01em",
+                    }}
+                  >
+                    {b.title}
+                  </p>
+                  <p
+                    style={{
+                      ...FONT,
+                      fontVariationSettings: "'wght' 500",
+                      fontSize: benefitBodySize,
+                      color: "rgba(255,255,255,0.8)",
+                      margin: 0,
+                      lineHeight: 1.35,
+                      letterSpacing: "0.01em",
+                    }}
+                  >
+                    {b.body}
+                  </p>
+                  <img
+                    alt=""
+                    src={b.img}
+                    style={{
+                      position: "absolute",
+                      bottom: `${i === 4 ? cardImgOffsetBottom - 10 : cardImgOffsetBottom}px`,
+                      right: `${cardImgOffsetRight}px`,
+                      height: `${i === 3 ? Math.round(cardImgH * 0.95) : i === 4 ? Math.round(cardImgH * 1.08) : cardImgH}px`,
+                      width: "auto",
+                      maxWidth: "100%",
+                      objectFit: "contain",
+                      objectPosition: "bottom right",
+                      pointerEvents: "none",
+                    }}
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+
         </div>
       </motion.div>
 

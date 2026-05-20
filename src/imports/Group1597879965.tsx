@@ -70,7 +70,7 @@ function MCPServerContent({ compact = false }: { compact?: boolean }) {
         <button
           onClick={() => copy("npx @orderly.network/mcp-server init --client <name>")}
           title={copied ? "Copied!" : "Copy to clipboard"}
-          className={`bg-black text-white font-['Atyp_BL:Bold',sans-serif] cursor-pointer transition-all hover:bg-[#1a1a1a] ${compact ? "px-[14px] py-[12px] text-[12px]" : "px-[20px] py-[16px] text-[14px]"}`}
+          className={`bg-black text-white font-['Atyp_BL:Bold',sans-serif] cursor-pointer transition-all duration-200 hover:bg-white hover:text-black ${compact ? "px-[14px] py-[12px] text-[12px]" : "px-[20px] py-[16px] text-[14px]"}`}
         >
           {copied ? "Copied!" : "Copy"}
         </button>
@@ -189,7 +189,7 @@ function CLIContent({ compact = false }: { compact?: boolean }) {
         <button
           onClick={() => copy(CLI_INSTALL_CMD)}
           title={copied ? "Copied!" : "Copy to clipboard"}
-          className={`bg-black text-white font-['Atyp_BL:Bold',sans-serif] cursor-pointer transition-all hover:bg-[#1a1a1a] ${compact ? "px-[14px] py-[12px] text-[12px]" : "px-[20px] py-[16px] text-[14px]"}`}
+          className={`bg-black text-white font-['Atyp_BL:Bold',sans-serif] cursor-pointer transition-all duration-200 hover:bg-white hover:text-black ${compact ? "px-[14px] py-[12px] text-[12px]" : "px-[20px] py-[16px] text-[14px]"}`}
         >
           {copied ? "Copied!" : "Copy"}
         </button>

@@ -403,7 +403,7 @@ function HeaderMenu() {
         href={HEADER_CTA.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="content-stretch flex h-[40px] items-center justify-center px-[20px] py-[12px] relative rounded-[46px] shrink-0 no-underline hover:opacity-90 transition-opacity"
+        className="launch-now-btn content-stretch flex h-[40px] items-center justify-center px-[20px] py-[12px] relative rounded-[46px] shrink-0 no-underline transition-opacity"
         onClick={() =>
           posthog.capture("homepage_cta_clicked", {
             cta_name: "launch_now",
@@ -411,13 +411,10 @@ function HeaderMenu() {
             device_layout: "desktop",
           })
         }
-        style={{
-          backgroundImage:
-            "linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%), linear-gradient(-89.1975deg, rgb(72, 189, 255) 0%, rgb(120, 108, 255) 47.763%, rgb(189, 0, 255) 99.638%)",
-        }}
+        style={{ background: "white" }}
       >
         <p
-          className="font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[#3f0086] text-[16px] tracking-[0.16px]"
+          className="launch-now-label font-['Atyp_BL:Bold',sans-serif] leading-none not-italic relative shrink-0 text-[#3f0086] text-[16px] tracking-[0.16px]"
           style={{ fontFeatureSettings: "'ss03', 'ss02', 'ss05'" }}
         >
           {HEADER_CTA.label}
@@ -830,7 +827,7 @@ export function MobileNavDrawer({
           href={HEADER_CTA.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center rounded-[46px] py-[16px] no-underline"
+          className="launch-now-btn flex items-center justify-center rounded-[46px] py-[16px] no-underline"
           style={{ background: "white", minHeight: 52 }}
           onClick={() => {
             posthog.capture("homepage_cta_clicked", {
@@ -842,6 +839,7 @@ export function MobileNavDrawer({
           }}
         >
           <span
+            className="launch-now-label"
             style={{
               color: "#3f0086",
               fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
@@ -980,7 +978,7 @@ export function TabletNav({
           href={HEADER_CTA.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="no-underline whitespace-nowrap rounded-[46px] bg-white px-[18px] py-[8px]"
+          className="launch-now-btn no-underline whitespace-nowrap rounded-[46px] bg-white px-[18px] py-[8px]"
           style={{
             fontFamily: "'atyp-bl-variable', 'atyp-bl', sans-serif",
             fontVariationSettings: "'wght' 700",
