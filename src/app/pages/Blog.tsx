@@ -335,6 +335,7 @@ function PostCard({ post, vp }: { post: BlogPost; vp: Viewport }) {
 function FeaturedCarousel({ posts, vp }: { posts: BlogPost[]; vp: Viewport }) {
   const [idx, setIdx] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [readHovered, setReadHovered] = useState(false);
   const isMobile = vp === "mobile";
   const isTablet = vp === "tablet";
   const isDesktop = vp === "desktop";
@@ -546,6 +547,8 @@ function FeaturedCarousel({ posts, vp }: { posts: BlogPost[]; vp: Viewport }) {
 
               <div style={{ display: "flex", alignItems: "center", gap: "14px", marginTop: "4px" }}>
                 <span
+                  onMouseEnter={() => setReadHovered(true)}
+                  onMouseLeave={() => setReadHovered(false)}
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
@@ -553,12 +556,13 @@ function FeaturedCarousel({ posts, vp }: { posts: BlogPost[]; vp: Viewport }) {
                     fontFamily: "'atyp-bl-variable','atyp-bl',sans-serif",
                     fontVariationSettings: "'wght' 600",
                     fontSize: "13px",
-                    color: "white",
+                    color: readHovered ? "#3f0086" : "white",
                     letterSpacing: "0.03em",
                     padding: "8px 18px",
                     borderRadius: "999px",
-                    background: "transparent",
+                    background: readHovered ? "white" : "transparent",
                     border: "1px solid rgba(255,255,255,0.5)",
+                    transition: "background-color 0.15s ease, color 0.15s ease",
                   }}
                 >
                   Read article

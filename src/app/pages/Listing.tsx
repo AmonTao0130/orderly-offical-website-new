@@ -109,7 +109,15 @@ const BENEFITS = [
   {
     label: "Revenue",
     title: "Direct market economics",
-    body: "Earn 50% fee revenue + 100% liquidation from the volume your listed markets generate.",
+    body: (
+      <>
+        Earn{" "}
+        <span style={{ fontSize: "1.25em", fontVariationSettings: "'wght' 700", color: "white" }}>50%</span>
+        {" "}fee revenue +{" "}
+        <span style={{ fontSize: "1.25em", fontVariationSettings: "'wght' 700", color: "white" }}>100%</span>
+        {" "}liquidation from the volume your listed markets generate.
+      </>
+    ),
     img: "/images/listing page/card1.png",
   },
   {
@@ -476,17 +484,17 @@ export default function Listing() {
   }, []);
   useEffect(() => { checkBenefitsScroll(); }, [checkBenefitsScroll]);
 
-  const cardW = isMobile ? 240 : isTablet ? 272 : 360;
-  const cardMinH = isMobile ? 300 : isTablet ? 400 : 500;
-  const cardPad = isMobile ? "22px 20px" : isTablet ? "26px 24px" : "36px";
+  const cardW = isMobile ? 240 : isTablet ? 272 : 300;
+  const cardMinH = isMobile ? 270 : isTablet ? 360 : 360;
+  const cardPad = isMobile ? "20px 18px" : isTablet ? "24px 22px" : "24px";
   const cardRadius = isMobile ? 15 : isTablet ? 18.143 : 26;
   const cardGap = isMobile ? 10 : 14;
-  const benefitTitleSize = isMobile ? "15px" : isTablet ? "18px" : "24px";
-  const benefitBodySize = isMobile ? "13px" : isTablet ? "15px" : "16px";
-  const scrollStep = isMobile ? 257 : isTablet ? 286 : 377;
-  const cardImgH = isMobile ? 110 : isTablet ? 140 : 190;
-  const cardImgOffsetRight = isMobile ? 22 : isTablet ? 24 : 36;
-  const cardImgOffsetBottom = isMobile ? 20 : isTablet ? 22 : 32;
+  const benefitTitleSize = isMobile ? "15px" : isTablet ? "18px" : "20px";
+  const benefitBodySize = isMobile ? "13px" : isTablet ? "15px" : "15px";
+  const scrollStep = isMobile ? 257 : isTablet ? 286 : 317;
+  const cardImgH = isMobile ? 95 : isTablet ? 120 : 130;
+  const cardImgOffsetRight = isMobile ? 18 : isTablet ? 22 : 24;
+  const cardImgOffsetBottom = isMobile ? 16 : isTablet ? 18 : 20;
 
   return (
     <div
@@ -517,7 +525,7 @@ export default function Listing() {
           style={{
             position: "absolute",
             left: isMobile ? "0px" : isTablet ? "calc(48px + (100vw - 1024px) * 0.08)" : "calc(140px + (100vw - 1440px) * 0.275)",
-            top: isMobile ? "30px" : isTablet ? "80px" : "70px",
+            top: isMobile ? "30px" : isTablet ? "80px" : "clamp(70px, calc(70px + (1440px - 100vw) * 0.14), 160px)",
             width: isMobile ? "clamp(54px,15vw,72px)" : isTablet ? "clamp(96px,16vw,160px)" : "clamp(144px,15.84vw,228px)",
             pointerEvents: "none",
             zIndex: 0,
@@ -529,7 +537,7 @@ export default function Listing() {
           style={{
             position: "absolute",
             right: isMobile ? "0px" : isTablet ? "calc(38px + (100vw - 1024px) * 0.08)" : "calc(130px + (100vw - 1440px) * 0.275)",
-            top: isMobile ? "30px" : isTablet ? "80px" : "70px",
+            top: isMobile ? "30px" : isTablet ? "80px" : "clamp(70px, calc(70px + (1440px - 100vw) * 0.14), 160px)",
             width: isMobile ? "clamp(54px,15vw,72px)" : isTablet ? "clamp(96px,16vw,160px)" : "clamp(144px,15.84vw,228px)",
             pointerEvents: "none",
             zIndex: 0,
@@ -562,8 +570,26 @@ export default function Listing() {
               maxWidth: "820px",
             }}
           >
-            Permissionless Listing for Perpetual Markets
+            Permissionless Listing
           </motion.h1>
+
+          {/* Subtitle */}
+          <motion.p
+            variants={heroChild}
+            style={{
+              ...FONT,
+              fontVariationSettings: "'wght' 500",
+              fontSize: isMobile ? "16px" : isTablet ? "18px" : "22px",
+              color: "rgba(255,255,255,0.85)",
+              lineHeight: 1.4,
+              maxWidth: "580px",
+              margin: 0,
+              letterSpacing: "0.01em",
+              padding: isMobile ? "0 24px" : "0",
+            }}
+          >
+            If it has a price feed, it can be traded.
+          </motion.p>
 
           {/* Body */}
           <motion.p
@@ -580,7 +606,7 @@ export default function Listing() {
               padding: isMobile ? "0 24px" : "0",
             }}
           >
-            If it has a price feed, it can be traded. Launch and operate markets on Orderly's matching and liquidation infrastructure without waiting for centralized approval processes.
+            Launch and operate markets on Orderly's matching and liquidation infrastructure without waiting for centralized approval processes.
           </motion.p>
 
           {/* Promo badge */}
@@ -843,7 +869,6 @@ export default function Listing() {
                 key={r.n}
                 style={{
                   background: "#1a1a1f",
-                  border: "1px solid rgba(255,255,255,0.08)",
                   borderRadius: "16px",
                   padding: isMobile ? "20px 20px" : "24px 28px",
                   display: "flex",
@@ -902,7 +927,6 @@ export default function Listing() {
                 style={{
                   background: "#1e2026",
                   borderRadius: "14px",
-                  borderLeft: "3px solid #6700ce",
                   padding: isMobile ? "16px 18px" : "20px 24px",
                 }}
               >
@@ -1195,7 +1219,7 @@ export default function Listing() {
               letterSpacing: "0.02em",
             }}
           >
-            Community Listed markets are created and operated by individual builders. Orderly does not vet, operate, or backstop these markets.
+            Community Listed markets are created and operated by individual builders.<br />Orderly does not vet, operate, or backstop these markets.
           </p>
         </div>
       </motion.div>
